@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModulePermissionsTable extends Migration
+class CreateAdminRolePermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateModulePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('module_permissions', function (Blueprint $table) {
+        Schema::create('admin_role_permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('code')->unique();
-            $table->unsignedBigInteger('display_order');
-            $table->foreign('parent_id')
+            $table->foreign('module_id')
                     ->references('id')->on('module_permissions')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('module_id');
+            $table->foreign('role_id')
+                    ->references('id')->on('admin_roles')
+                    ->onDelete('cascade');
+            $table->unsignedBigInteger('role_id');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class CreateModulePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('module_permissions');
+        Schema::dropIfExists('admin_role_permissions');
     }
 }
