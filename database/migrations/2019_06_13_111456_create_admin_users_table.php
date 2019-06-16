@@ -18,11 +18,12 @@ class CreateAdminUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->timestamps();
+            $table->enum('status', ['0', '1']);
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')
                     ->references('id')->on('admin_roles')
                     ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

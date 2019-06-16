@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminRolesTable extends Migration
+class CreateEmailSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateAdminRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin_roles', function (Blueprint $table) {
+        Schema::create('email_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('role_name');
-            $table->enum('status', ['0', '1']);	
+            $table->text('title');
+            $table->string('email_code', 100);
+            $table->string('subject', 100);
+            $table->longText('email_body');
+            $table->enum('display', ['Y', 'N']);
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateAdminRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_roles');
+        Schema::dropIfExists('email_settings');
     }
 }
