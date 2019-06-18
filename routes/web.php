@@ -23,6 +23,10 @@
 // Route::get('/logout', 'AdminController@logout');
 
 Auth::routes(['register' => false]);
+Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
+Route::get('/logout', 'AdminController@logout');
+Route::get('/create/helpcat','HelpCategoryController@create');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('admin')->group(funciton()
