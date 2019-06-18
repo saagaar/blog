@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends Controller
+class AdminLoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -17,6 +17,10 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
+    function __construct()
+    {
+    	$this->middleware('guest:admin');
+    }
 
     use AuthenticatesUsers;
 
@@ -25,15 +29,16 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/dashboard/';
 
     /**
-     * Create a new controller instance.
+     * Calling view for admin login
      *
      * @return void
      */
-    public function __construct()
-    {
-        // $this->middleware('guest')->except('logout');
-    }
+	
+  	public function ShowLoginForm()
+  	{
+  		return view('admin.admin_login');
+  	}
 }

@@ -22,6 +22,10 @@
 // Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
 // Route::get('/logout', 'AdminController@logout');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin/login', 'Auth\AdminLoginController@ShowLoginForm')->name('admin.login');
+Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+// Route::get('/test', 'HomeController@index')->name('home');
