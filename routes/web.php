@@ -25,7 +25,11 @@
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin/login', 'Auth\AdminLoginController@ShowLoginForm')->name('admin.login');
-Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+Route::prefix('admin')->group(funciton()
+{
+	Route::get('/login', 'Auth\AdminLoginController@ShowLoginForm')->name('admin.login');
+	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+})
+
 
 // Route::get('/test', 'HomeController@index')->name('home');
