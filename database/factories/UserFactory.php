@@ -22,7 +22,24 @@ $factory->define(User::class, function (Faker $faker) {
         'username' => $faker->unique()->username,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => '123456', // password
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->define(admin_users::class, function (Faker $faker) {
+    return [
+        'username' => $faker->unique()->username,
+        'email' => $faker->unique()->safeEmail,
+        'password' => '123456', // password
+        'role_id' => function () {
+            return factory(admin_roles::class)->create()->id;
+        },
+    ];
+});
+// $factory->define(admin_roles::class, function (Faker $faker) {
+//     return [
+//         'role_name' => $faker->unique()->username,
+        
+//     ];
+// });
