@@ -11,14 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::match(['get','post'],'/admin/login','AdminController@login');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// // Route::match(['get','post'],'/admin/login','AdminController@login');
 
-Auth::routes();
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
+// Route::get('/logout', 'AdminController@logout');
+
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
 Route::get('/logout', 'AdminController@logout');
 Route::get('/create/helpcat','HelpCategoryController@create');
+Route::get('/admin/login', 'Auth\AdminLoginController@ShowLoginForm')->name('admin.login');
+Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+// Route::get('/test', 'HomeController@index')->name('home');

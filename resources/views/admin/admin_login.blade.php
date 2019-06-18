@@ -33,7 +33,7 @@
 						<strong>Success! </strong>{!!session('flash_message_success')!!}
 				</div>
 				@endif
-                <form class="login100-form validate-form" method="POST" action="{{ url('admin/login') }}">
+                <form class="login100-form validate-form" method="POST" action="{{ route('admin.login.submit') }}">
                 @csrf
 					<span class="login100-form-title p-b-49">
 						Login

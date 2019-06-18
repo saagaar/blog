@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class module_permissions extends Model
+class AdminRoles extends Model
 {
     //
 }
