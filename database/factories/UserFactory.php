@@ -34,23 +34,27 @@ $factory->define(User::class, function (Faker $faker) {
 });
 
 $factory->define(AdminUsers::class, function (Faker $faker) {
+    $rolesid = \DB::table('admin_roles')->select('id')->get();
+    $role = $faker->randomElement($rolesid)->id;
     return [
         'username' => $faker->unique()->username,
         'email' => $faker->unique()->safeEmail,
         'password' =>  Hash::make('123456'),// password
-        'role_id' => function () {
-            return factory(AdminRoles::class)->create()->id;
-        },
+        'role_id' => $role
     ];
 });
 $factory->define(ModulePermission::class, function (Faker $faker) {
+    $moduleids = \DB::table('help_categorys')->select('id')->get();
+    $moduleid = $faker->randomElement($moduleids)->id;
     return [
         'name' => $faker->unique()->username,
         'code' => $faker->unique()->name,
-        'parent_id'=>$faker->id
+        'parent_id'=>$moduleid
     ];
 });
 $factory->define(SiteOptions::class, function (Faker $faker) {
+    $countryids = \DB::table('countrys')->select('id')->get();
+    $countryid = $faker->randomElement($countryids)->id;
     return [
         'site_name'         =>$faker->unique()->username,
         'contact_name'      =>$faker->name,
@@ -67,7 +71,7 @@ $factory->define(SiteOptions::class, function (Faker $faker) {
         'currency_code'     =>$faker->currencyCode,
         'address'           =>$faker->streetAddress,
         'state'             =>$faker->state ,
-        'country'           =>$faker->country,
+        'country'           =>$countryids,
         'city'              =>$faker->city 
     ];
 });
@@ -75,5 +79,59 @@ $factory->define(Countrys::class, function (Faker $faker) {
     return [
         'currency'     =>$faker->currencyCode,
         'country'           =>$faker->country,
+    ];
+});
+$factory->define(Cms::class, function (Faker $faker) {
+    return [
+        'heading'     =>$faker->text($maxNbChars = 20),
+        'content'           =>$faker->text,
+        'cms_slug'          =>$faker->slug,
+        'page_title'        =>$faker->text($maxNbChars = 20),
+        'meta_key'          =>$faker->text($maxNbChars = 20),
+        'meta_description'  =>$faker->text($maxNbChars = 20)
+    ];
+});
+$factory->define(HelpCategorys::class, function (Faker $faker) {
+    return [
+        'name'     =>$faker->text($maxNbChars = 20)
+    ];
+});
+$factory->define(Helps::class, function (Faker $faker) {
+    $categoryids = \DB::table('help_categorys')->select('id')->get();
+    $categoryid = $faker->randomElement($categoryids)->id;
+
+    return [
+        'category_id'     =>    $categoryid,
+        'title'        =>$faker->text($maxNbChars = 20),
+        'description'          =>$faker->text($maxNbChars = 20),
+    ];
+});
+$factory->define(EmailSettings::class, function (Faker $faker) {
+    return [
+        'title'        =>$faker->text($maxNbChars = 20),
+        'email_code'          =>$faker->unique()->text($maxNbChars = 20),
+        'subject'          =>$faker->text($maxNbChars = 20),
+        'email_body'          =>$faker->text,
+        'display'             =>$faker->randomElement(['Y' ,'N'])
+    ];
+});
+$factory->define(LogAdminActivitys::class, function (Faker $faker) {
+    $usersid = \DB::table('admin_users')->select('id')->get();
+    $userid = $faker->randomElement($usersid)->id;
+    return [
+        'log_time'              =>now(),
+        'log_userid'            =>$userid,
+        'log_usertype'          =>'1',
+        'module_name'           =>$faker->text($maxNbChars = 20),
+        'module_desc'           =>$faker->text($maxNbChars = 20),
+        'log_action'            =>$faker->text($maxNbChars = 20),
+        'log_ip'                =>$faker->text($maxNbChars = 20),
+        'log_browser'           =>$faker->text($maxNbChars = 100),
+        'log_platform'          =>$faker->text($maxNbChars = 100),
+        'log_agent'             =>$faker->text($maxNbChars = 100),
+        'log_referer'           =>$faker->text($maxNbChars = 100),
+        'log_extra_info'        =>$faker->text($maxNbChars = 10),
+        'updated_at'            =>now(),
+        `created_at`            =>now()
     ];
 });

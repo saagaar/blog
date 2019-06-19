@@ -27,6 +27,7 @@ class CreateLogAdminActivityTable extends Migration
             $table->text('log_agent');
             $table->text('log_referer');
             $table->text('log_extra_info');
+            $table->timestamps();
         });
     }
 
