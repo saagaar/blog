@@ -13,7 +13,7 @@ class CreateLogAdminActivityTable extends Migration
      */
     public function up()
     {
-        Schema::create('log_admin_activity', function (Blueprint $table) {
+        Schema::create('log_admin_activitys', function (Blueprint $table) {
             $table->bigIncrements('log_id');
             $table->dateTime('log_time');
             $table->integer('log_userid');

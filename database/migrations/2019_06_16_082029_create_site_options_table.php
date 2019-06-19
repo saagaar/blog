@@ -32,7 +32,7 @@ class CreateSiteOptionsTable extends Migration
             $table->string('timezone', 100);
             $table->string('currency_sign', 100);
             $table->string('currency_code', 100);
-            $table->string('google_analytics_code', 100);
+            $table->string('google_analytics_code', 100)->nullable();;
             $table->string('address', 100);
             $table->string('city', 100);
             $table->string('state', 100);
