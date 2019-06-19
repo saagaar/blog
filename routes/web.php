@@ -23,17 +23,19 @@
 // Route::get('/logout', 'AdminController@logout');
 
 Auth::routes(['register' => false]);
-Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
 Route::get('/logout', 'AdminController@logout');
 Route::get('/create/helpcat','HelpCategoryController@create');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::prefix('admin')->group(funciton()
+Route::prefix('admin')->group(function()
 {
 	Route::get('/login', 'Auth\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-})
+	Route::get('/dashboard', 'Auth\AdminLoginController@dashboard')->name('dashboard');
+	Route::get('/logout', 'Auth\AdminLoginController@logout')->name('logout');
+
+});
 
 
 // Route::get('/test', 'HomeController@index')->name('home');
