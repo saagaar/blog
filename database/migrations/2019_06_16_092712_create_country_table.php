@@ -13,7 +13,7 @@ class CreateCountryTable extends Migration
      */
     public function up()
     {
-        Schema::create('country', function (Blueprint $table) {
+        Schema::create('countrys', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('country', 100);
             $table->string('currency', 100);

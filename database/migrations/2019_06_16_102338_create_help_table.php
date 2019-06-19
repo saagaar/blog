@@ -13,7 +13,7 @@ class CreateHelpTable extends Migration
      */
     public function up()
     {
-        Schema::create('help', function (Blueprint $table) {
+        Schema::create('helps', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreign('category_id')
                     ->references('id')->on('help_categorys')
