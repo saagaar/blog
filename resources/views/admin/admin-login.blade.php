@@ -33,24 +33,29 @@
 						<strong>Success! </strong>{!!session('flash_message_success')!!}
 				</div>
 				@endif
+				
                 <form class="login100-form validate-form" method="POST" action="{{ route('admin.login.submit') }}">
-                @csrf
+				@csrf
+				<figure class="admin-fig">
+					<img src="{{ asset('adminlogin/images/logo.png') }}" class="img-responsive  admin-image" alt="I data" />
+				</figure>
+				
 					<span class="login100-form-title p-b-49">
-						Login
+						Admin Login
 					</span>
 
-					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
-						<span class="label-input100">Username</span>
-						<input class="input100" type="text" name="email" placeholder="Type your username">
+					<div class="wrap-input100 has-error  m-b-23">
+						<span class="label-input100">Email</span>
+						<input class="input100" type="text" name="email" placeholder="Type your email">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
-						  @if ($errors->has('username'))
+						  @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                          @endif
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
+					<div class="wrap-input100 has-error">
 						<span class="label-input100">Password</span>
 						<input class="input100" type="password" name="password" placeholder="Type your password">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
