@@ -2,21 +2,21 @@
 
 namespace App\Repository\User;
 
-use App\Models\AdminUsers;
+use App\Models\User;
 use App\Repository\UserInterface;
 
-Class  AdminUser implements UserInterface
+Class  Users implements UserInterface
 {
 	protected $user;
 
-	public function __construct(AdminUsers $adminUser)
+	public function __construct(User $user)
 	{
-		$this->user=$adminUser;
+		$this->user=$user;
 	}
 
      
-    public function getById($memberid){
-
+    public function getById($post_id){
+        return false;
     }
 
       /**
@@ -25,7 +25,7 @@ Class  AdminUser implements UserInterface
      * @return mixed
      */
     public function getAll(){
-   	 return	$this->user->first();
+   	 return	 $this->user->first();
     }
  	
  	  /**
@@ -53,7 +53,7 @@ Class  AdminUser implements UserInterface
      * @param int
      */
     public function delete($id){
-      
+
     }
 }
 ?>

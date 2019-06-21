@@ -1,14 +1,14 @@
 <?php 
-namespace App\Repositories;
+namespace App\Repository;
 
-interface UserRepositoryInterface
+interface UserInterface
 {
 	 /**
      * Get's a post by it's ID
      *
      * @param int
      */
-    public function getById($post_id);
+    public function getById($member_id);
 
       /**
      * Get's all posts.
