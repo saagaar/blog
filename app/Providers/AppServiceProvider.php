@@ -16,11 +16,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-         $this->app->singleton(UserInterface::class, Users::class);
         
          $this->app->singleton(UserInterface::class, AdminUser::class);
-
-
 
     }
 
