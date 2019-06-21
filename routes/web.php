@@ -23,8 +23,8 @@ Auth::routes();
 Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 
 Auth::routes(['register' => false]);
-Route::get('/create/helpcat','HelpCategoryController@create');
-		Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+Route::get('/create/helpcat','HelpCategoryController@create')->name('admin.helpcat');
+Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

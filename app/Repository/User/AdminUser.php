@@ -13,8 +13,10 @@ Class  AdminUser implements UserRepositoryInterface
 		$this->user=$adminUser;
 	}
 
-     */
-    public function getById($post_id);
+     
+    public function getById($post_id){
+
+    }
 
       /**
      * Get's all posts.
@@ -30,7 +32,9 @@ Class  AdminUser implements UserRepositoryInterface
      *
      * @return mixed
      */
-    public function create(array $data);
+    public function create(array $data){
+
+    }
      /**
      * Updates a post.
      *
@@ -38,13 +42,17 @@ Class  AdminUser implements UserRepositoryInterface
      * @param array
      */
 
-    public function update( $id,array $data);
+    public function update( $id,array $data){
+
+    }
 
       /**
      * Deletes a post.
      *
      * @param int
      */
-    public function delete($id);
+    public function delete($id){
+      
+    }
 }
 ?>
