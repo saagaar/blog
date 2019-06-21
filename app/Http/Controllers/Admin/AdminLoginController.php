@@ -20,7 +20,7 @@ class AdminLoginController extends Controller
     */
     function __construct()
     {
-      // $this->middleware('guest:admin')->except('logout');
+      $this->middleware('guest:admin')->except('logout');
     }
 
     use AuthenticatesUsers;
@@ -30,7 +30,7 @@ class AdminLoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/dashboard/';
+    protected $redirectTo = 'admin.login';
 
     /**
      * Calling view for admin login
