@@ -13,12 +13,11 @@ class AdminController extends Controller
     protected $user;
     protected $admin;
 
-     function __construct(UserInterface $admin)
+    function __construct()
     {
         $this->admin=$admin;
         $this->middleware('auth:admin')->except('logout');
     }
-
     public function dashboard()
     {
 
@@ -28,6 +27,7 @@ class AdminController extends Controller
         // dd($data->username);
         return view('admin.dashboard');
     }
+    
     
     
 }

@@ -47,16 +47,16 @@ class AdminLoginController extends Controller
     {	
 
         $this->validate($request,[
-        		'email'	=>	'required|email',
+        		'email'	=>	'required',
         		'password'=>'required|min:6'
         	]);
-
+          
      //Attempt for user login
     if(Auth::guard('admin')->attempt(['email'=>$request->email,'password'=>$request->password ],$request->remember))
     {
     	return redirect()->intended(route('admin.dashboard'));
 	}
-        return redirect()->back()->withInput($request->only('email','remember'));
+        return redirect()->back()->withInput($request->only('email','remember'))->with('flash_message_error','Invalid username or password');;
     }
     // public function dashboard()
     // {

@@ -141,7 +141,13 @@ iframe {
   line-height: 1.5;
   color: #666666;
 }
-
+.admin-fig{
+  padding-left: 10%;
+}
+img.admin-image {
+  width: 300px;
+  height: 70px;
+}
 .txt2 {
   font-family: Poppins-Regular;
   font-size: 14px;
