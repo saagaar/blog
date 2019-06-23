@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Services\Interface
+namespace App\Services\Interfaces;
 
 
 interface NotificationInterface
@@ -8,8 +8,6 @@ interface NotificationInterface
     
     public function setup();
 
-    public function send();
+    public function send($data);
 
-
-    
 }
