@@ -9,7 +9,7 @@ interface UserInterface
      * @param int
      */
     public function getById($member_id);
-
+      
       /**
      * Get's all posts.
      *

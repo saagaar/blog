@@ -9,7 +9,7 @@
       <img src="{{asset('admin/dist/img/avatar.png') }}" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
-      <p>Admin</p>
+      <p>{{$data->username}}</p>
       <!-- Status -->
       <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
     </div>
@@ -41,6 +41,17 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="{{url('create/helpcat')}}">Create Help Category</a></li>
+        <li><a href="#">Link in level 2</a></li>
+      </ul>
+    </li>
+    <li class="treeview">
+      <a href="#"><i class="fa fa-link"></i> <span>Help</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="{{url('create/help')}}">Create Help</a></li>
         <li><a href="#">Link in level 2</a></li>
       </ul>
     </li>
