@@ -16,7 +16,7 @@ Class  AdminUser implements UserInterface
 
      
     public function getById($memberid){
-
+      return	$this->user->where('id', $memberid)->first();
     }
 
       /**
