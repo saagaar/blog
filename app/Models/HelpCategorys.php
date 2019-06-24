@@ -30,6 +30,6 @@ class HelpCategorys extends Model
      * @var array
      */
     public function Helps(){
-        $this->hasMany(Helps::class);
+        $this->belongsTo(Helps::class);
     }
 }

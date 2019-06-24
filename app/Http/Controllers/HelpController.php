@@ -11,8 +11,7 @@ class HelpController extends AdminController
         $this->user = auth()->user();
        
         $data=$this->admin->getById($this->user->id);
-        $categories =  HelpCategorys::find(1);
-        dd($categories);
-       return view('help.createhelp',compact('data'));
+        $categories =  HelpCategorys::all();
+       return view('help.createhelp',compact('data','categories'));
     }
 }

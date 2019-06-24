@@ -24,6 +24,6 @@ class Helps extends Model
      */
 
     public function HelpCategorys(){
-        $this->belongsTo(HelpCategorys::class);
+        $this->hasOne(HelpCategorys::class);
     }
 }

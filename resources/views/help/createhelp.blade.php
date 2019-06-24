@@ -44,7 +44,17 @@
                 </div>
               </div>
               <!-- /.box-body -->
-
+              <div class="form-group">
+                  <label>Help Category</label>
+                  
+                 
+                  <select class="form-control">
+                  @foreach($categories as $category)
+                  <option value="{{$category->id}}">{{$category->name}}</option>
+                  @endforeach
+                  </select>
+                 
+                </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>

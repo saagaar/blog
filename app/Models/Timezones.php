@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cms extends Model
+class timezones extends Model
 {
-    protected $guarded='cms';
+    protected $guard='timezones';
 
     /**
      * The attributes that are mass assignable.
@@ -14,6 +14,10 @@ class Cms extends Model
      * @var array
      */
     protected $fillable = [
-        'heading','content','cms_slug','page_title','meta_key','meta_description','is_display','cms_type','delatable'
+        'utc_time_zone','gmt_time'
     ];
+    public function SiteOptions(){
+        $this->belongsTo(SiteOptions::class);
+    }
+
 }

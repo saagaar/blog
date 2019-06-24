@@ -39,6 +39,6 @@ class AdminUsers extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function AdminRoles(){
-        $this->belongsTo(AdminRoles::class);
+        $this->hasOne(AdminRoles::class);
     }
 }

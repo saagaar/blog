@@ -6,7 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdminRoles extends Model
 {
+    protected $guard='admin_roles';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name','display'
+    ];
+
     public function AdminUsers(){
-        $this->hasMany(AdminUsers::class);
+        $this->belongsTo(AdminUsers::class);
+    }
+    public function ModulePermissions()
+    {
+        return $this->belongsToMany(ModulePermissions::class, 'admin_role_permissions');
     }
 }
