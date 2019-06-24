@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Notifications\Notifiable;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers   ;
 
 class LoginController extends Controller
 {
+    Use Notifiable;
     /*
     |--------------------------------------------------------------------------
     | Login Controller
