@@ -22,4 +22,8 @@ class SiteOptions extends Model
     public function Country(){
         $this->hasOne(Country::class);
     }
+    public function logs()
+    {
+        return $this->morphMany(LogAdminActivitys::class, 'logable');
+    }
 }

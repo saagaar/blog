@@ -20,4 +20,8 @@ class ModulePermission extends Model
     {
         return $this->belongsToMany(AdminRoles::class, 'admin_role_permissions');
     }
+    public function logs()
+    {
+        return $this->morphMany(LogAdminActivitys::class, 'logable');
+    }
 }

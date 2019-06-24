@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class AdminRolePermission extends Model
 {
     protected $guard='admin_role_permissions';
+    public function logs()
+    {
+        return $this->morphMany(LogAdminActivitys::class, 'logable');
+    }
 }

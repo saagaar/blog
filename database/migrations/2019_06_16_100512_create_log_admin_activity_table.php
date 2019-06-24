@@ -16,10 +16,8 @@ class CreateLogAdminActivityTable extends Migration
         Schema::create('log_admin_activitys', function (Blueprint $table) {
             $table->bigIncrements('log_id');
             $table->dateTime('log_time');
-            $table->integer('log_userid');
-            $table->string('log_usertype', 100);
-            $table->string('module_name', 100);
-            $table->string('module_desc', 100);
+            $table->integer('logable_id');
+            $table->string('logable_type', 100);
             $table->string('log_action', 100);
             $table->string('log_ip', 100);
             $table->text('log_browser');

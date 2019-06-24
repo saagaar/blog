@@ -15,6 +15,10 @@ class Countrys extends Model
      */
    
     public function SiteOptions(){
-        $this->belongsTo(SiteOptionss::class);
+        $this->belongsTo(SiteOptions::class);
+    }
+    public function logs()
+    {
+        return $this->morphMany(LogAdminActivitys::class, 'logable');
     }
 }

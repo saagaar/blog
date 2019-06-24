@@ -26,10 +26,12 @@ Auth::routes(['register' => false]);
 
 
 Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
-
+//help category
 Route::get('/create/helpcat','HelpCategoryController@create')->name('admin.helpcat');
-Route::get('/create/help','HelpController@create')->name('admin.help');
-
+Route::post('/create/helpcat','HelpCategoryController@store')->name('helpcat.store');
+Route::get('/helpcat','HelpCategoryController@index')->name('helpcat');
+Route::delete('/delete/helpcat/{id}','HelpCategoryController@destroy');
+// help category
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('admin')->group(function()
@@ -45,6 +47,6 @@ Route::prefix('admin')->group(function()
 	// Route::get('/logout', 'Auth\AdminLoginController@logout')->name('logout');
 
 });
-
+Route::get('/adminrole','AdminRoleController@create')->name('admin.role');
 
 // Route::get('/test', 'HomeController@index')->name('home');

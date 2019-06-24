@@ -28,5 +28,14 @@
 <script src="{{ asset('admin/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('admin/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+	window.setTimeout(function() {
+		$(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+			$(this).remove(); 
+		});
+	}, 5000);
+	});
+	</script>
 </body>
 </html>

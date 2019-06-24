@@ -16,5 +16,8 @@ class EmailSettings extends Model
     protected $fillable = [
         'title','email_code','subject','email_body','display'
     ];
-    
+    public function logs()
+    {
+        return $this->morphMany(LogAdminActivitys::class, 'logable');
+    }
 }

@@ -27,20 +27,29 @@
               <h3 class="box-title">Create Help Category</h3>
             </div>
 
-
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div><br />
+@endif
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form role="form">
+            <form action="{{url('/create/helpcat')}}" method="POST">
+              @csrf
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Enter Help Category">
+                  <input type="text" class="form-control" name="name" id="name" placeholder="Enter Help Category">
                 </div>
                 <div class="form-group">
                   <label for="Display">Display: </label>
-                  <label><input type="radio" name="status" value="0">Yes</label>
-                  <label><input type="radio" name="status" value="1">No</label>
+                  <label><input type="radio" name="display" value="Y">Yes</label>
+                  <label><input type="radio" name="display" value="N">No</label>
                 </div>
               </div>
               <!-- /.box-body -->

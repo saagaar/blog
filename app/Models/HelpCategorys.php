@@ -32,4 +32,8 @@ class HelpCategorys extends Model
     public function Helps(){
         $this->belongsTo(Helps::class);
     }
+    public function logs()
+    {
+        return $this->morphMany(LogAdminActivitys::class, 'logable');
+    }
 }

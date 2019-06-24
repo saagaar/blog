@@ -41,4 +41,9 @@ class AdminUsers extends Authenticatable
     public function AdminRoles(){
         $this->hasOne(AdminRoles::class);
     }
+    public function logs()
+    {
+        return $this->morphMany(LogAdminActivitys::class, 'logable');
+    }
+    
 }

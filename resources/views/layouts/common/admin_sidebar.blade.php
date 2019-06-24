@@ -40,8 +40,8 @@
           </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="{{url('create/helpcat')}}">Create Help Category</a></li>
-        <li><a href="#">Link in level 2</a></li>
+      <li><a href="{{route('helpcat')}}">Help Category List</a></li>
+      <li><a href="{{url('create/helpcat')}}">Create Help Category</a></li>
       </ul>
     </li>
     <li class="treeview">

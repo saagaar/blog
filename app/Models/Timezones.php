@@ -19,5 +19,8 @@ class timezones extends Model
     public function SiteOptions(){
         $this->belongsTo(SiteOptions::class);
     }
-
+    public function logs()
+    {
+        return $this->morphMany(LogAdminActivitys::class, 'logable');
+    }
 }
