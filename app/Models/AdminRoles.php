@@ -14,7 +14,7 @@ class AdminRoles extends Model
      * @var array
      */
     protected $fillable = [
-        'name','display'
+        'role_name','status'
     ];
 
     public function AdminUsers(){

@@ -1,10 +1,9 @@
 @extends('layouts.common.main')
 @section('content') 
-
 <div class="content-wrapper">
 <section class="content-header">
       <h1>
-        Role
+        Admin User
         <small>Create</small>
       </h1>
       <ol class="breadcrumb">
@@ -13,19 +12,21 @@
         <li class="active">General Elements</li>
       </ol>
     </section>
+
 @if(Session::has('success'))
 <div class="alert alert-success alert-block">
 						<button type="button" class="close" data-dismiss="alert">x</button>
 						<strong>Success! </strong>{!!session('success')!!}
 				</div>
 				@endif
+
 <section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Help Category</h3>
-              <a href="{{route('helpcat.create')}}" class="btn btn-primary">Add Help Category</a>
+              <h3 class="box-title">All Admin Roles</h3>
+              <a href="{{route('adminrole.create')}}" class="btn btn-primary">Add Roles</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -34,7 +35,7 @@
                 <tr>
                   <th>id</th>
                   <th>Name</th>
-                  <th>Display</th>
+                  <th>Status</th>
                   <th>Created at</th>
                   <th>Updated at</th>
                   <th>Action</th>
@@ -42,18 +43,18 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @foreach ($categorys as $category)
+                @foreach ($adminroles as $adminrole)
                 
                 <tr>
                   <td>{{ ++$i }}</td>
-                  <td>{{ $category->name }}</td>
-                  <td>{{$category->display}}</td>
-                  <td>{{$category->created_at}}</td>
-                  <td>{{$category->updated_at}}</td>
+                  <td>{{ $adminrole->role_name }}</td>
+                  <td>{{$adminrole->status}}</td>
+                  <td>{{$adminrole->created_at}}</td>
+                  <td>{{$adminrole->updated_at}}</td>
                   <td>
                   <ul class="list-inline">
-                      <li><a href="{{action('HelpCategoryController@edit',$category->id)}}" class="btn btn-primary">Edit</a></li>
-                      <li><form action="{{action('HelpCategoryController@destroy', $category->id)}}" method="post">
+                      <li><a href="{{route('adminrole.edit', $adminrole->id)}}" class="btn btn-primary">Edit</a></li>
+                      <li><form action="{{route('adminrole.delete', $adminrole->id)}}" method="post">
                     {{csrf_field()}}
                     <input name="_method" type="hidden" value="DELETE">
                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -66,7 +67,7 @@
                 </tbody>
               </table>
             </div>
-            {!! $categorys->links() !!}
+            {!! $adminroles->links() !!}
             <!-- /.box-body -->
           </div>
         </div>

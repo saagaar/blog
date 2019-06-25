@@ -9,7 +9,7 @@
       <img src="{{asset('admin/dist/img/avatar.png') }}" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
-      <p>{{$data->username}}</p>
+      <p>Admin</p>
       <!-- Status -->
       <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
     </div>
@@ -31,30 +31,30 @@
   <ul class="sidebar-menu" data-widget="tree">
     <li class="header">Dashborad</li>
     <!-- Optionally, you can add icons to the links -->
-    <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Level</span></a></li>
-    <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-    <li class="treeview">
-      <a href="#"><i class="fa fa-link"></i> <span>Help Category</span>
+    <li><a href="{{route('helpcat')}}"><i class="fa fa-folder"></i> <span>Help Category</span></a></li>
+    <li><a href="{{route('adminroles')}}"><i class="fa fa-folder"></i> <span>Admin Roles</span></a></li>
+    <!-- <li class="treeview">
+      <a href="#"><i class="fa fa-folder"></i> <span>Help Category</span>
         <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
       </a>
       <ul class="treeview-menu">
-      <li><a href="{{route('helpcat')}}">Help Category List</a></li>
-      <li><a href="{{url('create/helpcat')}}">Create Help Category</a></li>
+      <li><a href="{{route('helpcat')}}"><i class="fa fa-circle-o"></i>Help Category List</a></li>
+      <li><a href="{{url('create/helpcat')}}"><i class="fa fa-circle-o"></i>Create Help Category</a></li>
       </ul>
-    </li>
-    <li class="treeview">
-      <a href="#"><i class="fa fa-link"></i> <span>Help</span>
+    </li> -->
+    <!-- <li class="treeview">
+      <a href="#"><i class="fa fa-folder"></i> <span>Admin Roles</span>
         <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="{{url('create/help')}}">Create Help</a></li>
-        <li><a href="#">Link in level 2</a></li>
+        <li><a href="{{url('adminrole')}}"><i class="fa fa-circle-o"></i>List All Admin Roles</a></li>
+        <li><a href="{{url('\create\adminrole')}}"><i class="fa fa-circle-o"></i>Create Roles</a></li>
       </ul>
-    </li>
+    </li> -->
   </ul>
   <!-- /.sidebar-menu -->
 </section>

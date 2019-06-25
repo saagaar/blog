@@ -27,12 +27,23 @@ Auth::routes(['register' => false]);
 
 Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 //help category
-Route::get('/create/helpcat','HelpCategoryController@create')->name('admin.helpcat');
+Route::get('/create/helpcat','HelpCategoryController@create')->name('helpcat.create');
 Route::post('/create/helpcat','HelpCategoryController@store')->name('helpcat.store');
 Route::get('/helpcat','HelpCategoryController@index')->name('helpcat');
+Route::get('/edit/helpcat/{id}','HelpCategoryController@edit')->name('helpcat.edit');
+Route::post('/edit/helpcat/{id}','HelpCategoryController@update')->name('helpcat.update');
 Route::delete('/delete/helpcat/{id}','HelpCategoryController@destroy');
 // help category
 
+//admin roles
+Route::get('/adminrole','AdminRoleController@index')->name('adminroles');
+Route::get('/create/adminrole','AdminRoleController@create')->name('adminrole.create');
+Route::post('/create/adminrole','AdminRoleController@store')->name('adminrole.store');
+Route::get('/edit/adminrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
+Route::post('/edit/adminrole/{id}','AdminRoleController@update')->name('adminrole.update');
+Route::delete('/delete/adminrole/{id}','AdminRoleController@destroy')->name('adminrole.delete');
+
+//admin roles
 Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('admin')->group(function()
 {
@@ -47,6 +58,3 @@ Route::prefix('admin')->group(function()
 	// Route::get('/logout', 'Auth\AdminLoginController@logout')->name('logout');
 
 });
-Route::get('/adminrole','AdminRoleController@create')->name('admin.role');
-
-// Route::get('/test', 'HomeController@index')->name('home');

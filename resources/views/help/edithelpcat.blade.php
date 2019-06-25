@@ -5,7 +5,7 @@
     <section class="content-header">
       <h1>
         Help Category
-        <small>Create</small>
+        <small>Edit Category</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -24,25 +24,36 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Create Help Category</h3>
+              <h3 class="box-title">Edit Help Category</h3>
             </div>
+
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div><br />
+@endif
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{url('/create/helpcat')}}" method="POST">
-              @csrf
+            <form action="{{action('HelpCategoryController@update',$category->id) }}" method="POST">
+            {{csrf_field()}}
               <div class="box-body">
                 <div class="form-group">
+                <input type="hidden" value="{{csrf_token()}}" name="_token" />
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" name="name" id="name" placeholder="Enter Help Category">
+                  <input type="text" class="form-control" name="name" id="name" value="{{$category->name}}" placeholder="Enter Help Category">
                   @if ($errors->has('name'))
                 <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="Display">Display: </label>
-                  <label><input type="radio" name="display" value="Y">Yes</label>
-                  <label><input type="radio" name="display" value="N">No</label>
+                  <label><input type="radio" name="display" value="Y" {{ $category->display == 'Y' ? 'checked' : ''}}>Yes</label>
+                  <label><input type="radio" name="display" value="N"  {{ $category->display == 'N' ? 'checked' : ''}}>No</label>
                   @if ($errors->has('display'))
                 <div class="alert alert-danger">{{ $errors->first('display') }}</div>
                 @endif
