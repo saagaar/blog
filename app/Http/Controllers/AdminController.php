@@ -21,6 +21,12 @@ class AdminController extends BaseController
     protected $data;
     protected $user;
 
+    /**
+    *Page limit Global
+    *@var int
+    */
+    protected $PerPage=10;
+
     function __construct()
     {
         $this->middleware('auth:admin')->except('logout');

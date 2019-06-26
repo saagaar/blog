@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         
          $this->app->singleton(UserInterface::class, AdminUser::class);
-         $this->app->singleton(HelpCatInterface::class, HelpCat::class);
+         $this->app->singleton(HelpcatInterface::class, HelpCat::class);
          $this->app->singleton(AdminRoleInterface::class, AdminRole::class);
 
     }
