@@ -33,6 +33,7 @@
     <!-- Optionally, you can add icons to the links -->
     <li><a href="{{route('helpcat')}}"><i class="fa fa-folder"></i> <span>Help Category</span></a></li>
     <li><a href="{{route('adminroles')}}"><i class="fa fa-folder"></i> <span>Admin Roles</span></a></li>
+    <li><a href="{{route('adminusers')}}"><i class="fa fa-folder"></i> <span>Admin Users</span></a></li>
     <!-- <li class="treeview">
       <a href="#"><i class="fa fa-folder"></i> <span>Help Category</span>
         <span class="pull-right-container">

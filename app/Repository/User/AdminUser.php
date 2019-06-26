@@ -25,7 +25,7 @@ Class  AdminUser implements UserInterface
      * @return mixed
      */
     public function getAll(){
-   	 return	$this->user->first();
+   	 return	$this->user->latest();
     }
  	
  	  /**
@@ -34,7 +34,7 @@ Class  AdminUser implements UserInterface
      * @return mixed
      */
     public function create(array $data){
-
+      return	$this->user->create($data);
     }
      /**
      * Updates a post.
