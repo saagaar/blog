@@ -4,30 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repository\UserInterface;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Services\NotificationCommander;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+
 use Auth;
 use Session;
-class AdminController extends Controller
+class AdminController extends BaseController
 {
+     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     protected $admin;
     protected $data;
     protected $user;
 
-    function __construct(UserInterface $admin)
+    function __construct()
     {
-        $this->admin=$admin;
-        
         $this->middleware('auth:admin')->except('logout');
-       
     }
     public function dashboard()
     {
-
-     
-        $this->user = auth()->user();
+        // $this->user = auth()->user();
        
-        $data=$this->admin->getById($this->user->id);
+        // $data=$this->admin->getById($this->user->id);
         // dd($data->username);
 
         // $data=($this->user->getAll());
@@ -35,11 +37,11 @@ class AdminController extends Controller
         return view('admin.dashboard',compact('data'));
     }
     
-    
-    public function checkmail(){
-        $notify=new NotificationCommander();
-        $notifytype=$notify::build('email');
-       $notifytype->setup();
-        // new \App\Services\EmailNotification();
+    public function logout()
+    {
+        Auth::logout();
+        Session::flush();
+        return (redirect()->route('admin.login'));
     }
+  
 }

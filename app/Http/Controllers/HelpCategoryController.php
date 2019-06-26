@@ -15,7 +15,6 @@ class HelpCategoryController extends AdminController
     {
         $this->category=$helpcat;
         
-        $this->middleware('auth:admin')->except('logout');
        
     }
     public function index()
