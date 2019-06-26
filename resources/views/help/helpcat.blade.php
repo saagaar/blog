@@ -25,7 +25,11 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">All Help Category</h3>
-              <a href="{{route('helpcat.create')}}" class="btn btn-primary">Add Help Category</a>
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <a href="{{route('helpcat.create')}}" class="btn btn-primary">Add Help Category</a>
+                </div>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -37,7 +41,7 @@
                   <th>Display</th>
                   <th>Created at</th>
                   <th>Updated at</th>
-                  <th>Action</th>
+                  <th colspan="2">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,26 +51,27 @@
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $category->name }}</td>
-                  <td>{{$category->display}}</td>
+                  <td>
+                      @if ($category->display == 'Y')
+                        <span class="label label-success">Yes</span>
+                      @else
+                        <span class="label label-danger">No</span>
+                      @endif
+                  </td>
                   <td>{{$category->created_at}}</td>
                   <td>{{$category->updated_at}}</td>
-                  <td>
-                  <ul class="list-inline">
-                      <li><a href="{{action('HelpCategoryController@edit',$category->id)}}" class="btn btn-primary">Edit</a></li>
-                      <li><form action="{{action('HelpCategoryController@destroy', $category->id)}}" method="post">
-                    {{csrf_field()}}
-                    <input name="_method" type="hidden" value="DELETE">
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                    </form></li>
-                  </ul>
-                  
-                  </td>
+                  <td><a href="{{route('helpcat.edit', $category->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('helpcat.delete', $category->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
                 </tbody>
               </table>
             </div>
-            {!! $categorys->links() !!}
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+              {!! $categorys->links() !!}
+              </ul>
+            </div>
             <!-- /.box-body -->
           </div>
         </div>

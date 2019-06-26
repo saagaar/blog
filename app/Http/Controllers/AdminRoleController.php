@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AdminController; 
 use App\Repository\AdminRoleInterface;
-use App\Models\AdminRoles;
 use App\Models\LogAdminActivitys;
 use App\Http\Requests\RoleRequest;
 class AdminRoleController extends AdminController
 {
-    protected $roles;
+    protected $adminrole;
 
     function __construct(AdminRoleInterface $adminrole)
     {
@@ -25,8 +24,7 @@ class AdminRoleController extends AdminController
     }
     public function create()
     {
-        $current_menu="create-roles";
-       return view('roles.createrole',compact('current_menu'));
+       return view('roles.createrole');
     }
     public function store(RoleRequest $request)
     {

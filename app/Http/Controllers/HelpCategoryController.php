@@ -26,7 +26,7 @@ class HelpCategoryController extends AdminController
     }
     public function create()
     {
-       return view('help.createhelpcat',compact('data'));
+       return view('help.createhelpcat');
     }
     public function store(Request $request)
     {
