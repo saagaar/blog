@@ -8,6 +8,6 @@ interface NotificationInterface
     
     public function setup();
 
-    public function send($data);
+    public function send();
 
 }

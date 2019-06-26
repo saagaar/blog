@@ -11,14 +11,17 @@ class AdminRoleController extends AdminController
 {
     protected $adminrole;
 
+
     function __construct(AdminRoleInterface $adminrole)
     {
+        parent::__construct();
         $this->roles=$adminrole;
-        $this->middleware('auth:admin')->except('logout');
+        // $this->middleware('auth:admin')->except('logout');
        
     }
     public function index()
     {
+
         $adminroles = $this->roles->getAll()->paginate(5);
         return view('roles.adminrole',compact('adminroles'));
     }

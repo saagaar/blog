@@ -20,7 +20,7 @@ class AdminUserController extends AdminController
     }
     public function index()
     {
-        $adminusers = $this->admin->getAll()->paginate(5);
+        $adminusers = $this->admin->getAll()->paginate($this->PerPage);
         return view('admin_users.listadmin',compact('adminusers'));
     }
     public function create()
