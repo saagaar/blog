@@ -22,19 +22,17 @@ class AdminRoleController extends AdminController
         $adminroles = $this->roles->getAll()->paginate(5);
         return view('roles.adminrole',compact('adminroles'));
     }
-    public function create()
+    public function create(RoleRequest $request)
     {
-       return view('roles.createrole');
-    }
-    public function store(RoleRequest $request)
-    {
-        $validatedData = $request->validated();
+        if ($request->isMethod('post')) {
+            $validatedData = $request->validated();
         
         $this->roles->create($validatedData);
         return redirect()->route('adminroles')
                         ->with('success','Roles created successfully.');
-        
-        
+        }
+
+       return view('roles.createrole');
     }
     public function destroy($id)
     {
@@ -43,20 +41,19 @@ class AdminRoleController extends AdminController
         return redirect()->route('adminroles')
         ->with('success', 'Role has been deleted!!');
     }
-    public function edit($id)
+    public function edit(RoleRequest $request,$id)
     {
-
         $adminrole =$this->roles->getroleById($id);
+        if ($request->isMethod('post')) {
+            $validatedData = $request->validated();
+
+            $adminrole->update($validatedData);
+            return redirect()->route('adminroles')
+                             ->with('success','Role updated successfully.');
+        }
+        
+
         return view('roles.editrole',compact('adminrole'));
     }
   
-    public function update(RoleRequest $request,$id)
-    {
-        $adminroles =$this->roles->getroleById($id);
-        $validatedData = $request->validated();
-
-        $adminroles->update($validatedData);
-        return redirect()->route('adminroles')
-                         ->with('success','Role updated successfully.');
-    }
 }

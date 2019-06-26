@@ -48,7 +48,7 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{action('HelpCategoryController@update',$category->id) }}" method="POST">
+            <form action="{{ route('helpcat.edit' , $category->id) }}" method="POST">
             {{csrf_field()}}
               <div class="box-body">
                 <div class="form-group">

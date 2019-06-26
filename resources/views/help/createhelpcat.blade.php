@@ -47,7 +47,7 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{url('/create/helpcat')}}" method="POST">
+            <form action="{{route('helpcat.create')}}" method="POST">
               @csrf
               <div class="box-body">
                 <div class="form-group">

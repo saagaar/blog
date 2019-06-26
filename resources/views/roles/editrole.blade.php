@@ -50,7 +50,7 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{route('adminrole.update',$adminrole->id) }}" method="POST">
+            <form action="{{route('adminrole.edit',$adminrole->id) }}" method="POST">
             {{csrf_field()}}
               <div class="box-body">
                 <div class="form-group">

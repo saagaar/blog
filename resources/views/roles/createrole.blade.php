@@ -50,7 +50,7 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{route('adminrole.store')}}" method="POST">
+            <form action="{{route('adminrole.create')}}" method="POST">
               @csrf
               <div class="box-body">
                 <div class="form-group">
