@@ -11,30 +11,28 @@ class AdminRoleController extends AdminController
 {
     protected $adminrole;
 
-
     function __construct(AdminRoleInterface $adminrole)
     {
-        parent::__construct();
         $this->roles=$adminrole;
-        // $this->middleware('auth:admin')->except('logout');
+        $this->middleware('auth:admin')->except('logout');
        
     }
     public function index()
     {
-
-        $adminroles = $this->roles->getAll()->paginate(5);
+        $adminroles = $this->roles->getAll()->paginate($this->PerPage);
         return view('roles.adminrole',compact('adminroles'));
     }
-    public function create(RoleRequest $request)
+    public function create(Request $request ,RoleRequest $RoleRequest)
     {
-        if ($request->isMethod('post')) {
-            $validatedData = $request->validated();
+      
+        if ($request->method()=='post') {
+            // $abc=App::rolerequest;
+            // $validatedData = $abc->validated();
         
-        $this->roles->create($validatedData);
-        return redirect()->route('adminroles')
-                        ->with('success','Roles created successfully.');
+        // $this->roles->create($validatedData);
+        // return redirect()->route('adminroles')
+        //                 ->with('success','Roles created successfully.');
         }
-
        return view('roles.createrole');
     }
     public function destroy($id)
@@ -44,19 +42,20 @@ class AdminRoleController extends AdminController
         return redirect()->route('adminroles')
         ->with('success', 'Role has been deleted!!');
     }
-    public function edit(RoleRequest $request,$id)
+    public function edit($id)
     {
+
         $adminrole =$this->roles->getroleById($id);
-        if ($request->isMethod('post')) {
-            $validatedData = $request->validated();
-
-            $adminrole->update($validatedData);
-            return redirect()->route('adminroles')
-                             ->with('success','Role updated successfully.');
-        }
-        
-
         return view('roles.editrole',compact('adminrole'));
     }
   
+    public function update(RoleRequest $request,$id)
+    {
+        $adminroles =$this->roles->getroleById($id);
+        $validatedData = $request->validated();
+
+        $adminroles->update($validatedData);
+        return redirect()->route('adminroles')
+                         ->with('success','Role updated successfully.');
+    }
 }

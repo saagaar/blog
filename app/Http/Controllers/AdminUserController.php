@@ -20,7 +20,7 @@ class AdminUserController extends AdminController
     }
     public function index()
     {
-        $adminusers = $this->admin->getAll()->paginate($this->PerPage);
+        $adminusers = $this->admin->getAll()->paginate(5);
         return view('admin_users.listadmin',compact('adminusers'));
     }
     public function create()
@@ -37,5 +37,21 @@ class AdminUserController extends AdminController
                         ->with('success','Roles created successfully.');
         
         
+    }
+    public function edit($id)
+    {
+
+        $adminroles = $this->roles->getAll()->get();
+        return view('admin_users.edituser',compact('adminroles'));
+    }
+  
+    public function update(AdminuserRequest $request,$id)
+    {
+        $adminusers =$this->admin->getById($id);
+        $validatedData = $request->validated();
+
+        $adminroles->update($validatedData);
+        return redirect()->route('adminusers')
+                         ->with('success','Role updated successfully.');
     }
 }

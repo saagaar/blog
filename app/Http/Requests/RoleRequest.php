@@ -11,11 +11,11 @@ class RoleRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return true;
-    }
-
+    // public function authorize()
+    // {
+    //     return true;
+    // }
+    // $redirectRoute=false;
     /**
      * Get the validation rules that apply to the request.
      *

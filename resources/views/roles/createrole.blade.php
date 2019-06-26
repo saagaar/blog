@@ -28,6 +28,7 @@
                 </button>
               </div> -->
             </div>
+        
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
                 <li><a href="{{route('adminroles')}}"><span class="glyphicon glyphicon-minus"></span> List All Admin Roles</a></li>
@@ -46,7 +47,8 @@
             <div class="box-header with-border">
               <h3 class="box-title">Create Role</h3>
             </div>
-          
+              
+            {{ $errors->first('role_name') }}
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">

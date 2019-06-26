@@ -24,22 +24,6 @@ Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 
 Auth::routes(['register' => false]);
 
-// Route::get('/test',function(){
-// 	$controllers = [];
-// foreach (Route::getRoutes() as $route)
-// {
-//     $action = $route->getAction();
-
-//     if (array_key_exists('controller', $action))
-//     {
-//         // You can also use explode('@', $action['controller']); here
-//         // to separate the class name from the method
-//         $controllers[] = $action['controller'];
-//     }
-// }
-// echo '<pre>';
-// print_r($controllers);exit;
-// });
 
 Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 //help category
@@ -51,11 +35,15 @@ Route::get('/delete/helpcategory/{id}','HelpCategoryController@destroy')->name('
 
 //admin roles
 Route::get('/admin/roles','AdminRoleController@index')->name('adminroles');
+// Route::get('/admin/createrole','AdminRoleController@create')->name('adminrole.create');
+// Route::post('/admin/createrole','AdminRoleController@store')->name('adminrole.store');
 
 Route::match(['get','post'],'/admin/createrole','AdminRoleController@create')->name('adminrole.create');
 
-Route::match(['get','post'],'/admin/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
+// Route::match(['get','post'],'/admin/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
 
+Route::get('/admin/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
+Route::post('/admin/editrole/{id}','AdminRoleController@update')->name('adminrole.update');
 Route::get('/admin/deleterole/{id}','AdminRoleController@destroy')->name('adminrole.delete');
 
 //admin roles
