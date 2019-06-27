@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
 
-use App\Repository\User\Users;
+use App\Http\Middleware\CheckUserPermission;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,8 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
-      
+        $this->app->singleton(CheckUserPermission::class, AdminUser::class);
     }
 
     /**

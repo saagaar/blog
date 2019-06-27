@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Repository\AdminRoleInterface;
 use App\Models\LogAdminActivitys;
 use App\Http\Requests\RoleRequest;
+use App;
 class AdminRoleController extends AdminController
 {
     protected $adminrole;
@@ -22,12 +23,13 @@ class AdminRoleController extends AdminController
         $adminroles = $this->roles->getAll()->paginate($this->PerPage);
         return view('roles.adminrole',compact('adminroles'));
     }
-    public function create(Request $request ,RoleRequest $RoleRequest)
+    public function create(Request $request )
     {
-      
-        if ($request->method()=='post') {
-            // $abc=App::rolerequest;
-            // $validatedData = $abc->validated();
+        if ($request->method()=='POST') {
+
+            // $request=::class;
+            $requestobj=app(RoleRequest::class);
+            $validatedData = $requestobj->validated();
         
         // $this->roles->create($validatedData);
         // return redirect()->route('adminroles')
