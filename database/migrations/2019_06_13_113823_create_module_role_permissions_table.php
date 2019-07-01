@@ -1,10 +1,10 @@
-<?php
+4<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminRolePermissionsTable extends Migration
+class CreateModuleRolePermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAdminRolePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin_role_permissions', function (Blueprint $table) {
+        Schema::create('module_role_permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreign('module_id')
                     ->references('id')->on('module_permissions')

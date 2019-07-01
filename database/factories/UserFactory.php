@@ -44,11 +44,17 @@ $factory->define(AdminUsers::class, function (Faker $faker) {
     ];
 });
 $factory->define(ModulePermission::class, function (Faker $faker) {
-    $moduleids = \DB::table('help_categorys')->select('id')->get();
-    $moduleid = $faker->randomElement($moduleids)->id;
+    $moduleids = \DB::table('module_permissions')->select('id')->get();
+    if($moduleids){
+        $moduleid = $faker->randomElement($moduleids)->id;
+    }
+    else{
+        $moduleid = '0';
+    }
     return [
         'name' => $faker->unique()->username,
         'code' => $faker->unique()->name,
+        'display_order'=> 0,
         'parent_id'=>$moduleid
     ];
 });

@@ -44,7 +44,7 @@ Class  AdminUser implements UserInterface
      */
 
     public function update( $id,array $data){
-
+         return $this->user->find($id)->update($data);
     }
 
       /**
@@ -53,7 +53,7 @@ Class  AdminUser implements UserInterface
      * @param int
      */
     public function delete($id){
-      
+      return    $this->cat->find($id)->delete();
     }
 }
 ?>
