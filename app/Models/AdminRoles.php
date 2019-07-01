@@ -22,7 +22,7 @@ class AdminRoles extends Model
     }
     public function ModulePermissions()
     {
-        return $this->belongsToMany(ModulePermissions::class, 'admin_role_permissions');
+        return $this->belongsToMany(ModulePermissions::class, 'module_role_permissions');
     }
     public function logs()
     {

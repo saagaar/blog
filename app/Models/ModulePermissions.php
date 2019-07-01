@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ModulePermission extends Model
+class ModulePermissions extends Model
 {
     protected $guarded='module_permissions';
 
@@ -18,7 +18,7 @@ class ModulePermission extends Model
     ];
     public function AdminRoles()
     {
-        return $this->belongsToMany(AdminRoles::class, 'admin_role_permissions');
+        return $this->belongsToMany(AdminRoles::class, 'module_role_permissions');
     }
     public function logs()
     {
