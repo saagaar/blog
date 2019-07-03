@@ -54,22 +54,22 @@ Route::post('/admin/createuser','AdminUserController@store')->name('adminuser.st
 Route::get('/admin/edituser/{id}','AdminUserController@edit')->name('adminuser.edit');
 Route::post('/admin/edituser/{id}','AdminUserController@update')->name('adminuser.update');
 Route::get('/admin/deleteuser/{id}','AdminUserController@destroy')->name('adminuser.delete');
+Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
+	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 //admin users
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::prefix('admin')->group(function()
 {
-	Route::get('/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
-	Route::post('/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
-	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+	
 	Route::get('/mail', 'AdminController@checkmail')->name('admin.checkmail');
 	Route::get('/users','AdminUserController@index')->name('adminuser.list');
 
 
-	Route::prefix('admin')->group(function()
-	{
-		
-	});
+
 	// Route::get('/logout', 'Auth\AdminLoginController@logout')->name('logout');
 
 });
+Route::get('/users','AdminUserController@index')->name('adminuser.list');
+Route::get('/admin/importmodules','AdminUserController@ImportModules')->name('adminuser.importmodules');

@@ -44,25 +44,10 @@ class AdminController extends BaseController
     {
         // print_r(Auth::user()->id);exit;
        
-       echo '<pre>';
-        $routes= Route::getRoutes()->getByName('admin.dashboard');
-             // print_r($routes->getAction()['prefix']);exit;
-       $controllers = [];
-
-        foreach (Route::getRoutes()->getRoutes() as $route)
-        {
-            $actions=$route->getAction();
-            $actionprefix =$actions['prefix'];
-
-            if ($actionprefix=='/admin')
-            {
-                // You can also use explode('@', $action['controller']); here
-                // to separate the class name from the method
-                $controllers[] = $actions;
-            }
-        }
-       print_r($controllers);
-    
+       // echo '<pre>';
+       //  $routes= Route::getRoutes()->getByName('checkpermission');
+       //       print_r($routes->getAction());exit;
+       
       
         // $role=$rolepermission->getModuleByRoleId($this->User->role_id);
         // print_r($this->User);exit;
@@ -77,6 +62,36 @@ class AdminController extends BaseController
         Auth::logout();
         Session::flush();
         return (redirect()->route('admin.login'));
+    }
+
+    public function ImportModules()
+    {
+        $controllers = [];
+
+        foreach (Route::getRoutes()->getRoutes() as $route)
+        {
+            $actions=$route->getAction();
+            $actionprefix =$actions['prefix'];
+
+            if ($actionprefix=='/admin')
+            {
+                // You can also use explode('@', $action['controller']); here
+                // to separate the class name from the method
+                $url=$actions['controller'];
+                $parseurl=explode('@',$url);
+                $method=$parseurl['0'];
+                $controllers['namespace'] = $actions['namespace'];
+                $controllers['controller']=$actions['controller'];
+                $controllers['route_name']=$actions['as'];
+                $controllers['method']=$method;
+
+
+            }
+        }
+        echo '<pre>';
+       print_r($controllers);
+    
+
     }
   
 }
