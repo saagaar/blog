@@ -30,7 +30,7 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="{{route('adminusers')}}"><span class="glyphicon glyphicon-minus"></span> List All Admin user</a></li>
+                <li><a href="{{route('adminuser.list')}}"><span class="glyphicon glyphicon-minus"></span> List All Admin user</a></li>
                 <li class="{{ (request()->is('admin/createuser')) ? 'active' : '' }}"><a href="{{route('adminuser.create')}}"><span class="glyphicon glyphicon-minus"></span> Create Admin user</a></li>
                 
               </ul>
@@ -50,7 +50,7 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{route('adminuser.store')}}" method="POST">
+            <form action="{{route('adminuser.create')}}" method="POST">
               @csrf
               <div class="box-body">
                 <div class="form-group">

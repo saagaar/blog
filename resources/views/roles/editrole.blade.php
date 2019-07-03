@@ -30,7 +30,7 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="{{route('adminroles')}}"><span class="glyphicon glyphicon-minus"></span> List All Admin Roles</a></li>
+                <li><a href="{{route('adminrole.list')}}"><span class="glyphicon glyphicon-minus"></span> List All Admin Roles</a></li>
                 <li class="{{ (request()->is('create/adminrole')) ? 'active' : '' }}"><a href="{{route('adminrole.create')}}"><span class="glyphicon glyphicon-minus"></span> Create Admin Roles</a></li>
                 
               </ul>

@@ -31,7 +31,7 @@
         
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="{{route('adminroles')}}"><span class="glyphicon glyphicon-minus"></span> List All Admin Roles</a></li>
+                <li><a href="{{route('adminrole.list')}}"><span class="glyphicon glyphicon-minus"></span> List All Admin Roles</a></li>
                 <li class="{{ (request()->is('admin/createrole')) ? 'active' : '' }}"><a href="{{route('adminrole.create')}}"><span class="glyphicon glyphicon-minus"></span> Create Admin Roles</a></li>
                 
               </ul>
@@ -48,7 +48,6 @@
               <h3 class="box-title">Create Role</h3>
             </div>
               
-            {{ $errors->first('role_name') }}
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">

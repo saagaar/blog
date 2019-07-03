@@ -17,7 +17,7 @@ class HelpCategoryController extends AdminController
         
        
     }
-    public function index()
+    public function list()
     {
 
         $categorys = $this->category->getAll()->paginate(5);
@@ -41,13 +41,13 @@ class HelpCategoryController extends AdminController
             $log->log_agent = "oss";
             $log->log_referer = "http://127.0.0.1:8000/helpcategorys";
             $helpcategorys->logs()->save($log);
-            return redirect()->route('helpcat')
+            return redirect()->route('helpcat.list')
                             ->with('success','Help Category created successfully.');
             
         }
        return view('help.createhelpcat');
     }
-    public function destroy($id)
+    public function delete($id)
     {
         $category =$this->category->getcatById($id);
         $category->delete();
@@ -59,7 +59,7 @@ class HelpCategoryController extends AdminController
         $log->log_agent = "oss";
         $log->log_referer = "http://127.0.0.1:8000/helpcategorys";
         $category->logs()->save($log);
-        return redirect()->route('helpcat')
+        return redirect()->route('helpcat.list')
         ->with('success', 'category has been deleted!!');
     }
     public function edit(Request $request, $id)
@@ -80,7 +80,7 @@ class HelpCategoryController extends AdminController
             $log->log_agent = "oss";
             $log->log_referer = "http://127.0.0.1:8000/helpcategorys";
             $logcat->logs()->save($log);
-            return redirect()->route('helpcat')
+            return redirect()->route('helpcat.list')
                              ->with('success','Help Category updated successfully.');
         }
         return view('help.edithelpcat',compact('category','data'));

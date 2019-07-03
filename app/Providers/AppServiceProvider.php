@@ -4,9 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Http\Middleware\CheckUserPermission;
 
-
-// use App\Http\Middleware\CheckUserPermission;
 class AppServiceProvider extends ServiceProvider
 {
     /**
