@@ -43,7 +43,27 @@ class AdminController extends BaseController
     public function dashboard()
     {
         // print_r(Auth::user()->id);exit;
-      print_r( Route::getroutes('middleware','admin')->group(array('admin')));exit;
+       
+       echo '<pre>';
+        $routes= Route::getRoutes()->getByName('admin.dashboard');
+             // print_r($routes->getAction()['prefix']);exit;
+       $controllers = [];
+
+        foreach (Route::getRoutes()->getRoutes() as $route)
+        {
+            $actions=$route->getAction();
+            $actionprefix =$actions['prefix'];
+
+            if ($actionprefix=='/admin')
+            {
+                // You can also use explode('@', $action['controller']); here
+                // to separate the class name from the method
+                $controllers[] = $actions;
+            }
+        }
+       print_r($controllers);
+    
+      
         // $role=$rolepermission->getModuleByRoleId($this->User->role_id);
         // print_r($this->User);exit;
         // print_r($this->user);
