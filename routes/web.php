@@ -34,7 +34,7 @@ Route::get('/delete/helpcategory/{id}','HelpCategoryController@destroy')->name('
 // help category
 
 
-<<<<<<< HEAD
+
 Route::match(['get','post'],'/admin/createrole','AdminRoleController@create')->name('adminrole.create');
 
 // Route::match(['get','post'],'/admin/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
@@ -54,29 +54,23 @@ Route::get('/admin/deleteuser/{id}','AdminUserController@destroy')->name('adminu
 Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 //admin users
-=======
-	Route::get('/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
-	Route::post('/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
->>>>>>> 009c8dd19c3896f0a617ca0ac38306ac94cfa7e3
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function()
 {
-<<<<<<< HEAD
-	
-=======
+
 
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
->>>>>>> 009c8dd19c3896f0a617ca0ac38306ac94cfa7e3
+
 	Route::get('/mail', 'AdminController@checkmail')->name('admin.checkmail');
 	Route::get('/users','AdminUserController@index')->name('adminuser.list');
 
 
-<<<<<<< HEAD
 
 	// Route::get('/logout', 'Auth\AdminLoginController@logout')->name('logout');
-=======
+
 	//admin users
 	Route::get('/list/users','AdminUserController@list')->name('adminuser.list');
 	Route::match(['get','post'],'/create/user','AdminUserController@create')->name('adminuser.create');
@@ -88,7 +82,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/createrole','AdminRoleController@create')->name('adminrole.create');
 	Route::match(['get','post'],'/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
 	Route::get('/deleterole/{id}','AdminRoleController@destroy')->name('adminrole.delete');
->>>>>>> 009c8dd19c3896f0a617ca0ac38306ac94cfa7e3
+
 
 	//admin roles
 });

@@ -80,17 +80,17 @@ class AdminController extends BaseController
                 // to separate the class name from the method
                 $url=$actions['controller'];
                 $parseurl=explode('@',$url);
-                $method=$parseurl['0'];
-                $controllers['namespace'] = $actions['namespace'];
+                $method=$parseurl['1'];
+                $controllers['namespace']= $actions['namespace'];
                 $controllers['controller']=$actions['controller'];
                 $controllers['route_name']=$actions['as'];
                 $controllers['method']=$method;
-
+                $modules[]=$controllers;
 
             }
         }
         echo '<pre>';
-       print_r($controllers);
+       print_r($modules);
     
 
     }
