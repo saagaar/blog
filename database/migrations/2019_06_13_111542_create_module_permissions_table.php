@@ -16,13 +16,12 @@ class CreateModulePermissionsTable extends Migration
         Schema::create('module_permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('code')->unique();
-            $table->enum('status', ['0', '1']);
-            $table->unsignedBigInteger('display_order');
-            $table->foreign('parent_id')
-                    ->references('id')->on('module_permissions')
-                    ->onDelete('cascade');
-            $table->unsignedBigInteger('parent_id');
+            $table->string('controller');
+            $table->string('namespace');
+            $table->string('method');
+            $table->string('route_name');
+            $table->enum('status', ['0', '1'])->default(0);
+            $table->unsignedBigInteger('display_order')->default(0);
             $table->timestamps();
         });
     }

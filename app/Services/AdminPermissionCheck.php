@@ -1,8 +1,10 @@
 <?php
 namespace App\Services;
-
-use App\Repository\Admin\AdminRole;
-use App\Repository\User\AdminUser;
+use Illuminate\Support\Facades\Route;
+// use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use App\Repository\ModuleRolePermissionInterface;
+// use App\Repository\User\AdminUser;
+use Illuminate\Support\Facades\Auth;
 
 
 /**
@@ -11,41 +13,37 @@ use App\Repository\User\AdminUser;
  */
 class AdminPermissionCheck
 {
+    // use AuthorizesRequests;
      /**
      * Object of admin user repository
      *
-     * @var AdminUser object
+     * @var ModuleRolePermission object
      */
-     protected $adminuser;
+     protected $RoleModule;
 
 
       /**
-     * Object of Role repository
+     * Object of ModuleRolePermission repository
      *
-     * @var AdminUser object
+     * @var RoleModule object
      */
-     protected $adminrole;
+     // protected $RoleModule;
 
     /**
      * @param User $user
      * @param AdminRole $role
      * @return bool
      */
-    public function __construct()
-    public function check(AdminUser $user,  AdminRole $role)
+    public function __construct(ModuleRolePermissionInterface $RoleModule)
     {
-        // Admin has everything
-        if ($user->hasRole(UserRole::ROLE_ADMIN)) {
-            return true;
-        }
-        else if($user->hasRole(UserRole::ROLE_MANAGEMENT)) {
-            $managementRoles = UserRole::getAllowedRoles(UserRole::ROLE_MANAGEMENT);
 
-            if (in_array($role, $managementRoles)) {
-                return true;
-            }
-        }
-
-        return $user->hasRole($role);
+        $this->RoleModule=$RoleModule;
+    }
+    
+    public function check()
+    {
+        // print_r(Route::getRoutes());exit;
+        $this->User = \Auth::user();         
+        // print_r ($this->RoleModule->getModuleByRoleId($this->User->role_id));exit;
     }
 }
