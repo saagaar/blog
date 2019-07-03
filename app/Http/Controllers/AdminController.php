@@ -9,7 +9,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Services\NotificationCommander;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
+use App\Repository\ModuleRolePermissionInterface;
+use Illuminate\Support\Facades\Route;
 
 use Auth;
 use Session;
@@ -18,26 +19,34 @@ class AdminController extends BaseController
      use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     protected $admin;
-    protected $data;
-    protected $user;
-
+   
+    protected $RolePermission;
+     
+     /**
+    *User object Global
+    *@var obj
+    */
+    protected $User;
     /**
     *Page limit Global
     *@var int
     */
     protected $PerPage=10;
 
-    function __construct()
+    public function __construct(ModuleRolePermissionInterface $RolePermission)
     {
         $this->middleware('auth:admin')->except('logout');
+        $this->middleware('check_user_permission');
+        $this->RolePermission=$RolePermission;
+        
     }
     public function dashboard()
     {
-        // $this->user = auth()->user();
-       
-        // $data=$this->admin->getById($this->user->id);
-        // dd($data->username);
-
+        // print_r(Auth::user()->id);exit;
+      print_r( Route::getroutes('middleware','admin')->group(array('admin')));exit;
+        // $role=$rolepermission->getModuleByRoleId($this->User->role_id);
+        // print_r($this->User);exit;
+        // print_r($this->user);
         // $data=($this->user->getAll());
         // dd($data->username);
         return view('admin.dashboard',compact('data'));

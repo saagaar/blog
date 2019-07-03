@@ -7,6 +7,8 @@ use App\Repository\HelpCatInterface;
 use App\Repository\Helpcat\HelpCat;
 use App\Repository\AdminRoleInterface;
 use App\Repository\Admin\AdminRole;
+use App\Repository\ModuleRolePermissionInterface;
+use App\Repository\ModuleRole\ModuleRolePermission;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -31,6 +33,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(UserInterface::class, AdminUser::class);
         $this->app->singleton(HelpcatInterface::class, HelpCat::class);
         $this->app->singleton(AdminRoleInterface::class, AdminRole::class);
+        $this->app->singleton(ModuleRolePermissionInterface::class, ModuleRolePermission::class);
 
     }
 }

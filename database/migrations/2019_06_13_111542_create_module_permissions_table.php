@@ -19,10 +19,10 @@ class CreateModulePermissionsTable extends Migration
             $table->string('code')->unique();
             $table->enum('status', ['0', '1']);
             $table->unsignedBigInteger('display_order');
-            $table->foreign('parent_id')
-                    ->references('id')->on('module_permissions')
-                    ->onDelete('cascade');
-            $table->unsignedBigInteger('parent_id');
+            // $table->foreign('parent_id')
+            //         ->references('id')->on('module_permissions')
+            //         ->onDelete('cascade');
+            // $table->unsignedBigInteger('parent_id')->default(null);
             $table->timestamps();
         });
     }
