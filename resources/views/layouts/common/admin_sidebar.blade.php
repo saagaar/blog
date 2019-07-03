@@ -31,31 +31,9 @@
   <ul class="sidebar-menu" data-widget="tree">
     <li class="header">Dashborad</li>
     <!-- Optionally, you can add icons to the links -->
-    <li><a href="{{route('helpcat')}}"><i class="fa fa-folder"></i> <span>Help Category</span></a></li>
-    <li><a href="{{route('adminroles')}}"><i class="fa fa-folder"></i> <span>Admin Roles</span></a></li>
-    <li><a href="{{route('adminusers')}}"><i class="fa fa-folder"></i> <span>Admin Users</span></a></li>
-    <!-- <li class="treeview">
-      <a href="#"><i class="fa fa-folder"></i> <span>Help Category</span>
-        <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-      </a>
-      <ul class="treeview-menu">
-      <li><a href="{{route('helpcat')}}"><i class="fa fa-circle-o"></i>Help Category List</a></li>
-      <li><a href="{{url('create/helpcat')}}"><i class="fa fa-circle-o"></i>Create Help Category</a></li>
-      </ul>
-    </li> -->
-    <!-- <li class="treeview">
-      <a href="#"><i class="fa fa-folder"></i> <span>Admin Roles</span>
-        <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="{{url('adminrole')}}"><i class="fa fa-circle-o"></i>List All Admin Roles</a></li>
-        <li><a href="{{url('\create\adminrole')}}"><i class="fa fa-circle-o"></i>Create Roles</a></li>
-      </ul>
-    </li> -->
+    <li><a href="{{route('helpcat.list')}}"><i class="fa fa-folder"></i> <span>Help Category</span></a></li>
+    <li><a href="{{route('adminrole.list')}}"><i class="fa fa-folder"></i> <span>Admin Roles</span></a></li>
+    <li><a href="{{route('adminuser.list')}}"><i class="fa fa-folder"></i> <span>Admin Users</span></a></li>
   </ul>
   <!-- /.sidebar-menu -->
 </section>

@@ -27,34 +27,27 @@ Auth::routes(['register' => false]);
 
 Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 //help category
+
 Route::match(['get','post'],'/create/helpcategory','HelpCategoryController@create')->name('helpcat.create');
-Route::get('/admin/helpcategory','HelpCategoryController@index')->name('helpcat');
+Route::get('/admin/listhelpcategory','HelpCategoryController@list')->name('helpcat.list');
 Route::match(['get','post'],'/edit/helpcategory/{id}','HelpCategoryController@edit')->name('helpcat.edit');
-Route::get('/delete/helpcategory/{id}','HelpCategoryController@destroy')->name('helpcat.delete');
+Route::get('/delete/helpcategory/{id}','HelpCategoryController@delete')->name('helpcat.delete');
 // help category
 
 //admin roles
-Route::get('/admin/roles','AdminRoleController@index')->name('adminroles');
-// Route::get('/admin/createrole','AdminRoleController@create')->name('adminrole.create');
-// Route::post('/admin/createrole','AdminRoleController@store')->name('adminrole.store');
-
+Route::get('/admin/listroles','AdminRoleController@list')->name('adminrole.list');
 Route::match(['get','post'],'/admin/createrole','AdminRoleController@create')->name('adminrole.create');
-
-// Route::match(['get','post'],'/admin/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
-
-Route::get('/admin/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
-Route::post('/admin/editrole/{id}','AdminRoleController@update')->name('adminrole.update');
-Route::get('/admin/deleterole/{id}','AdminRoleController@destroy')->name('adminrole.delete');
+Route::match(['get','post'],'/admin/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
+Route::get('/admin/deleterole/{id}','AdminRoleController@delete')->name('adminrole.delete');
 
 //admin roles
 
 //admin users
-Route::get('/admin/users','AdminUserController@index')->name('adminusers');
-Route::get('/admin/createuser','AdminUserController@create')->name('adminuser.create');
-Route::post('/admin/createuser','AdminUserController@store')->name('adminuser.store');
+Route::get('/admin/listusers','AdminUserController@list')->name('adminuser.list');
+Route::match(['get','post'],'/admin/createuser','AdminUserController@create')->name('adminuser.create');
 Route::get('/admin/edituser/{id}','AdminUserController@edit')->name('adminuser.edit');
 Route::post('/admin/edituser/{id}','AdminUserController@update')->name('adminuser.update');
-Route::get('/admin/deleteuser/{id}','AdminUserController@destroy')->name('adminuser.delete');
+Route::get('/admin/deleteuser/{id}','AdminUserController@delete')->name('adminuser.delete');
 //admin users
 
 Route::get('/home', 'HomeController@index')->name('home');

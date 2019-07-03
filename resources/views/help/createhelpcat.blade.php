@@ -29,7 +29,7 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="{{route('helpcat')}}"><span class="glyphicon glyphicon-minus"></span> List All Help Category</a></li>
+                <li><a href="{{route('helpcat.list')}}"><span class="glyphicon glyphicon-minus"></span> List All Help Category</a></li>
                 <li class="{{ (request()->is('create/helpcategory')) ? 'active' : '' }}"><a href="{{route('helpcat.create')}}"><span class="glyphicon glyphicon-minus"></span> Create Help Category</a></li>
                 
               </ul>
