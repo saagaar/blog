@@ -14,7 +14,7 @@ class ModulePermissions extends Model
      * @var array
      */
     protected $fillable = [
-        'name','code','status','display_order','parent_id'
+        'name','controller','namespace','status','display_order','method','route_name'
     ];
     public function AdminRoles()
     {
