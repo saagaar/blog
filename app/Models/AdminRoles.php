@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\AdminUsers;
 use Illuminate\Database\Eloquent\Model;
 
 class AdminRoles extends Model

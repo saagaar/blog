@@ -20,7 +20,7 @@ class HelpCategoryController extends AdminController
     public function list()
     {
 
-        $categorys = $this->category->getAll()->paginate(5);
+        $categorys = $this->category->getAll()->paginate($this->PerPage);
         return view('help.helpcat',compact('categorys','data'));
     }
     public function create(Request $request)
@@ -32,15 +32,6 @@ class HelpCategoryController extends AdminController
             ]);
       
            $insert =  $this->category->create($request->all());
-            $helpcategorys =$this->category->getcatById($insert->id);
-            $log = new LogAdminActivitys;
-            $log->log_action = "add";
-            $log->log_ip = "01";
-            $log->log_browser= "opera";
-            $log->log_platform="windows";
-            $log->log_agent = "oss";
-            $log->log_referer = "http://127.0.0.1:8000/helpcategorys";
-            $helpcategorys->logs()->save($log);
             return redirect()->route('helpcat.list')
                             ->with('success','Help Category created successfully.');
             
@@ -51,14 +42,6 @@ class HelpCategoryController extends AdminController
     {
         $category =$this->category->getcatById($id);
         $category->delete();
-        $log = new LogAdminActivitys;
-        $log->log_action = "delete";
-        $log->log_ip = "01";
-        $log->log_browser= "opera";
-        $log->log_platform="windows";
-        $log->log_agent = "oss";
-        $log->log_referer = "http://127.0.0.1:8000/helpcategorys";
-        $category->logs()->save($log);
         return redirect()->route('helpcat.list')
         ->with('success', 'category has been deleted!!');
     }
@@ -72,14 +55,6 @@ class HelpCategoryController extends AdminController
             ]);
             $category->update($request->all());
             $logcat =$this->category->getcatById($id);
-            $log = new LogAdminActivitys;
-            $log->log_action = "update";
-            $log->log_ip = "01";
-            $log->log_browser= "opera";
-            $log->log_platform="windows";
-            $log->log_agent = "oss";
-            $log->log_referer = "http://127.0.0.1:8000/helpcategorys";
-            $logcat->logs()->save($log);
             return redirect()->route('helpcat.list')
                              ->with('success','Help Category updated successfully.');
         }

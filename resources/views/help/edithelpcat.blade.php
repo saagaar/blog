@@ -7,11 +7,11 @@
         Help Category
         <small>Edit Category</small>
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
-      </ol>
+      @include('includes.breadcrumbs', ['breadcrumbs' => [
+    'Dashboard' => route('admin.dashboard'),
+    'Help Category' => route('helpcat.list'),
+    'Edit',
+      ]])
     </section>
 
     <!-- Main content -->

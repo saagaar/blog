@@ -32,9 +32,9 @@
     <li class="header">Dashborad</li>
     <!-- Optionally, you can add icons to the links -->
     <li><a href="{{route('helpcat.list')}}"><i class="fa fa-folder"></i> <span>Help Category</span></a></li>
-    <li><a href="{{route('adminrole.list')}}"><i class="fa fa-folder"></i> <span>Admin Roles</span></a></li>
-    <li><a href="{{route('adminuser.list')}}"><i class="fa fa-folder"></i> <span>Admin Users</span></a></li>
-  </ul>
+    <!-- <li><a href="{{route('adminrole.list')}}"><i class="fa fa-folder"></i> <span>Admin Roles</span></a></li> -->
+<!--     <li><a href="{{route('adminuser.list')}}"><i class="fa fa-folder"></i> <span>Admin Users</span></a></li>
+ -->  </ul>
   <!-- /.sidebar-menu -->
 </section>
 <!-- /.sidebar -->

@@ -5,7 +5,7 @@
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; <?php echo date('Y'); ?> <a href="{{route('home')}}">Company</a>.</strong> All rights reserved.
   </footer>
 
   <aside class="control-sidebar control-sidebar-dark">
@@ -60,21 +60,18 @@
       <!-- /.tab-pane -->
       <!-- Settings tab content -->
       <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
           <h3 class="control-sidebar-heading">General Settings</h3>
 
           <div class="form-group">
             <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
+              <ul class="sidebar-menu" data-widget="tree">
+             <li><a href="{{route('adminrole.list')}}"><i class="fa fa-folder"></i> <span>Admin Roles</span></a></li>
+             <li><a href="{{route('adminuser.list')}}"><i class="fa fa-folder"></i> <span>Admin Users</span></a></li>
+           </ul>
             </label>
 
-            <p>
-              Some information about this general settings option
-            </p>
           </div>
           <!-- /.form-group -->
-        </form>
       </div>
       <!-- /.tab-pane -->
     </div>

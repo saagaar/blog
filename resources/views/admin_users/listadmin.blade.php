@@ -4,13 +4,11 @@
 <section class="content-header">
       <h1>
         Admin User
-        <small>Create</small>
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
-      </ol>
+      @include('includes.breadcrumbs', ['breadcrumbs' => [
+    'Dashboard' => route('admin.dashboard'),
+    'Admin Users List',
+      ]])
     </section>
 
 @if(Session::has('success'))
@@ -50,6 +48,7 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
+                @if(!$adminusers->isEmpty())
                 @foreach ($adminusers as $adminuser)
                 
                 <tr>
@@ -73,6 +72,11 @@
                      </td>
                 </tr>
                 @endforeach
+                @else
+                    <tr>
+                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No Admin Users Found </td>
+                  </tr>
+                  @endif
                 </tbody>
               </table>
             </div>

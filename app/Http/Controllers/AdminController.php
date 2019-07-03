@@ -44,11 +44,12 @@ class AdminController extends BaseController
     {
         // print_r(Auth::user()->id);exit;
        
+
        // echo '<pre>';
        //  $routes= Route::getRoutes()->getByName('checkpermission');
        //       print_r($routes->getAction());exit;
        
-      
+
         // $role=$rolepermission->getModuleByRoleId($this->User->role_id);
         // print_r($this->User);exit;
         // print_r($this->user);
