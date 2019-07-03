@@ -34,18 +34,21 @@ Route::get('/delete/helpcategory/{id}','HelpCategoryController@destroy')->name('
 // help category
 
 
+
 	Route::get('/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 
-Route::get('/home', 'HomeController@list')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::prefix('admin')->group(function()
 {
-
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 	Route::get('/mail', 'AdminController@checkmail')->name('admin.checkmail');
 	Route::get('/users','AdminUserController@list')->name('adminuser.list');
 
 
+
+	// Route::get('/logout', 'Auth\AdminLoginController@logout')->name('logout');
 	//admin users
 	Route::get('/list/users','AdminUserController@list')->name('adminuser.list');
 	Route::match(['get','post'],'/create/user','AdminUserController@create')->name('adminuser.create');
@@ -60,3 +63,5 @@ Route::prefix('admin')->group(function()
 
 	//admin roles
 });
+Route::get('/users','AdminUserController@index')->name('adminuser.list');
+Route::get('/admin/importmodules','AdminUserController@ImportModules')->name('adminuser.importmodules');
