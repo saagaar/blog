@@ -23,12 +23,24 @@ class AdminuserRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->method() == 'POST')
+          {
+            // Update operation, exclude the record with id from the validation:
+            $email_rule = 'required|email|unique:admin_users,email,' . $this->id;
+            $username = 'required|unique:admin_users,username,'. $this->id;
+          }
+          else
+          {
+            $username = 'required|unique:admin_users,username';
+            $email_rule = 'required|email|unique:admin_users,email';
+          }
         return [
-            'username' => 'required|unique:admin_users|max:255',
-            'email' => 'required|email|max:255|unique:admin_users',
-            'role_id'=>'required',
-            'status' =>'required',
-            'password' => 'required|min:6|confirmed',
+            'username'              => $username,
+            'email'                 => $email_rule,
+            'role_id'               =>'required',
+            'status'                =>'required',
+            'password'              => 'required|min:6',
+            'password_confirmation' => 'required|min:6|same:password',
         ];
     }
 }

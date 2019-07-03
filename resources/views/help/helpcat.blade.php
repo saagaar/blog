@@ -4,14 +4,12 @@
 <div class="content-wrapper">
 <section class="content-header">
       <h1>
-        Role
-        <small>Create</small>
+        Help Category
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
-      </ol>
+      @include('includes.breadcrumbs', ['breadcrumbs' => [
+    'Dashboard' => route('admin.dashboard'),
+    'Help Category',
+      ]])
     </section>
 @if(Session::has('success'))
 <div class="alert alert-success alert-block">
@@ -46,6 +44,7 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
+                @if (!$categorys->isEmpty())
                 @foreach ($categorys as $category)
                 
                 <tr>
@@ -64,6 +63,11 @@
                   <td><a href="{{route('helpcat.delete', $category->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
+                @else
+                    <tr>
+                    <td colspan="6" align="center" style="background-color: #d2d6de;"> No Help Category Found </td>
+                  </tr>
+                  @endif
                 </tbody>
               </table>
             </div>

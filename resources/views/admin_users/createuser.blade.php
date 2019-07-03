@@ -7,11 +7,11 @@
         Admin Users
         <small>Create</small>
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
-      </ol>
+      @include('includes.breadcrumbs', ['breadcrumbs' => [
+    'Dashboard' => route('admin.dashboard'),
+    'Admin Users' => route('adminuser.list'),
+    'Create',
+      ]])
     </section>
 
     <!-- Main content -->
@@ -77,6 +77,9 @@
                 <div class="form-group">
                   <label for="password_confirmation">Password Confirmation</label>
                   <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Enter password again">
+                  @if ($errors->has('password_confirmation'))
+                <div class="alert alert-danger">{{ $errors->first('password_confirmation') }}</div>
+                @endif
                 </div>
                 <div class="form-group">
                   <label>Role</label>

@@ -7,11 +7,10 @@
         Role
         <small>Create</small>
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
-      </ol>
+     @include('includes.breadcrumbs', ['breadcrumbs' => [
+    'Dashboard' => route('admin.dashboard'),
+    'Admin roles',
+      ]])
     </section>
 
 @if(Session::has('success'))
@@ -48,28 +47,34 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php  $i = 0; ?>
-                @foreach ($adminroles as $adminrole)
-                
-                <tr>
-                  <td>{{ ++$i }}</td>
-                  <td>{{ $adminrole->role_name }}</td>
-                  <td>
-                      @if ($adminrole->status == 0)
-                        <span class="label label-success">Active</span>
-                      @else
-                        <span class="label label-danger">Inactive</span>
-                      @endif
-                  </td>
-                  <td>{{$adminrole->created_at}}</td>
-                  <td>{{$adminrole->updated_at}}</td>
+                <?php  $i = 0; ?> 
+                @if (!$adminroles->isEmpty())
+                  @foreach ($adminroles as $adminrole)
                   
-                 
-                      <td><a href="{{route('adminrole.edit', $adminrole->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                      <td><a href="{{route('adminrole.delete', $adminrole->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                     </td>
-                </tr>
-                @endforeach
+                  <tr>
+                    <td>{{ ++$i }}</td>
+                    <td>{{ $adminrole->role_name }}</td>
+                    <td>
+                        @if ($adminrole->status == 0)
+                          <span class="label label-success">Active</span>
+                        @else
+                          <span class="label label-danger">Inactive</span>
+                        @endif
+                    </td>
+                    <td>{{$adminrole->created_at}}</td>
+                    <td>{{$adminrole->updated_at}}</td>
+                    
+                   
+                        <td><a href="{{route('adminrole.edit', $adminrole->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                        <td><a href="{{route('adminrole.delete', $adminrole->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                       </td>
+                  </tr>
+                  @endforeach
+                  @else
+                    <tr>
+                    <td colspan="6" align="center" style="background-color: #d2d6de;">{ No Admin Role Found }</td>
+                  </tr>
+                  @endif
                 </tbody>
               </table>
             </div>

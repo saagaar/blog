@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\AdminController;
 use App\Repository\UserInterface;
 use App\Repository\AdminRoleInterface;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminuserRequest;
 use App;
@@ -20,7 +21,7 @@ class AdminUserController extends AdminController
     }
     public function list()
     {
-        $adminusers = $this->admin->getAll()->paginate(5);
+        $adminusers = $this->admin->getAll()->paginate($this->PerPage);
         return view('admin_users.listadmin',compact('adminusers'));
     }
     public function create(Request $request)
@@ -30,7 +31,7 @@ class AdminUserController extends AdminController
             // $request=::class;
             $requestobj=app(AdminuserRequest::class);
             $validatedData = $requestobj->validated();
-        
+       $validatedData['password']= (Hash::make($requestobj->password));
         $this->admin->create($validatedData);
         return redirect()->route('adminuser.list')
                         ->with('success','User created successfully.');
@@ -39,29 +40,29 @@ class AdminUserController extends AdminController
         // dd($adminroles);
        return view('admin_users.createuser',compact('adminroles'));
     }
-    // public function store(AdminuserRequest $request)
-    // {
-    //     $validatedData = $request->validated();
-    //     $this->admin->create($validatedData);
-    //     return redirect()->route('adminusers')
-    //                     ->with('success','Roles created successfully.');
-        
-        
-    // }
-    public function edit($id)
-    {
-
-        $adminroles = $this->roles->getAll()->get();
-        return view('admin_users.edituser',compact('adminroles'));
-    }
-  
-    public function update(AdminuserRequest $request,$id)
+    public function edit(Request $request,$id)
     {
         $adminusers =$this->admin->getById($id);
-        $validatedData = $request->validated();
+        if ($request->method()=='POST') {
 
-        $adminroles->update($validatedData);
-        return redirect()->route('adminusers')
-                         ->with('success','Role updated successfully.');
+            // $request=::class;
+            $requestobj=app(AdminuserRequest::class);
+            
+            $validatedData = $requestobj->validated();
+         $validatedData['password']= (Hash::make($requestobj->password));
+        $this->admin->update($id,$validatedData);
+        return redirect()->route('adminuser.list')
+                        ->with('success','User updated successfully.');
+        }
+        $adminroles = $this->roles->getAll()->get();
+        return view('admin_users.edituser',compact('adminroles','adminusers'));
     }
+    public function delete($id)
+    {
+        $adminrole =$this->admin->getById($id);
+        $adminrole->delete();
+        return redirect()->route('adminuser.list')
+        ->with('success', 'User has been deleted!!');
+    }
+  
 }

@@ -42,13 +42,7 @@ Route::get('/admin/deleterole/{id}','AdminRoleController@delete')->name('adminro
 
 //admin roles
 
-//admin users
-Route::get('/admin/listusers','AdminUserController@list')->name('adminuser.list');
-Route::match(['get','post'],'/admin/createuser','AdminUserController@create')->name('adminuser.create');
-Route::get('/admin/edituser/{id}','AdminUserController@edit')->name('adminuser.edit');
-Route::post('/admin/edituser/{id}','AdminUserController@update')->name('adminuser.update');
-Route::get('/admin/deleteuser/{id}','AdminUserController@delete')->name('adminuser.delete');
-//admin users
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('admin')->group(function()
@@ -63,4 +57,11 @@ Route::prefix('admin')->group(function()
 	// });
 	// Route::get('/logout', 'Auth\AdminLoginController@logout')->name('logout');
 
+
+	//admin users
+	Route::get('/listusers','AdminUserController@list')->name('adminuser.list');
+	Route::match(['get','post'],'/createuser','AdminUserController@create')->name('adminuser.create');
+	Route::match(['get','post'],'/edituser/{id}','AdminUserController@edit')->name('adminuser.edit');
+	Route::get('/deleteuser/{id}','AdminUserController@delete')->name('adminuser.delete');
+	//admin users
 });
