@@ -34,7 +34,17 @@ Class  Module implements ModuleInterface
      * @return mixed
      */
     public function create(array $data){
-      return	$this->module->create($data);
+      foreach ($data as $value) {
+        $all =  $this->module->create([
+          'name' => $value['name'],
+          'namespace' => $value['namespace'],
+          'controller' => $value['controller'],
+          'route_name' => $value['route_name'],
+          'method' => $value['method'],
+        ]);
+      }
+      return $all;
+     
     }
      /**
      * Updates a post.

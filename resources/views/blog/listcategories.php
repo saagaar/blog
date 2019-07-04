@@ -37,6 +37,7 @@
                   <th>id</th>
                   <th>Name</th>
                   <th>Display</th>
+                  <th>slug</th>
                   <th>Created at</th>
                   <th>Updated at</th>
                   <th colspan="2">Action</th>
@@ -57,6 +58,7 @@
                         <span class="label label-danger">No</span>
                       @endif
                   </td>
+                  <td>{{$category->slug}}</td>
                   <td>{{$category->created_at}}</td>
                   <td>{{$category->updated_at}}</td>
                   <td><a href="{{route('Blogcat.edit', $category->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>

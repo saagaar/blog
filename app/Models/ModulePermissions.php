@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Modulepermissions extends Model
 {
-     protected $guarded='module_permissions';
+     protected $table='module_permissions';
 
     /**
      * The attributes that are mass assignable.

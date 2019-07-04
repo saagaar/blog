@@ -96,8 +96,9 @@ class AdminController extends BaseController
                 $i++;
             }
         }
-           
-        // $module->create($modules);
+        // echo "<pre>";
+        //    print_r($modules);
+        $module->create($modules);
     }
   
 }
