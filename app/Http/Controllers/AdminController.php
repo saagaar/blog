@@ -11,6 +11,7 @@ use App\Services\NotificationCommander;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Repository\ModuleRolePermissionInterface;
 use Illuminate\Support\Facades\Route;
+use App\Repository\ModuleInterface;
 
 use Auth;
 use Session;
@@ -42,7 +43,6 @@ class AdminController extends BaseController
     }
     public function dashboard()
     {
-        // print_r(Auth::user()->id);exit;
        
 
        // echo '<pre>';
@@ -65,10 +65,10 @@ class AdminController extends BaseController
         return (redirect()->route('admin.login'));
     }
 
-    public function ImportModules()
+    public function ImportModules(ModuleInterface $module)
     {
         $controllers = [];
-
+        $i=1;
         foreach (Route::getRoutes()->getRoutes() as $route)
         {
             $actions=$route->getAction();
@@ -80,19 +80,24 @@ class AdminController extends BaseController
                 // to separate the class name from the method
                 $url=$actions['controller'];
                 $parseurl=explode('@',$url);
-                $method=$parseurl['0'];
-                $controllers['namespace'] = $actions['namespace'];
-                $controllers['controller']=$actions['controller'];
+                $precontroller= str_replace($actions['namespace'], '', $actions['controller']);
+                $postcontroller=explode('@',$precontroller);
+                $finalcontroller=trim(trim($postcontroller['0'],'\\'));
+                $method=$parseurl['1'];
+                $controllers['namespace']= $actions['namespace'];
+                $controllers['name']= str_replace('Controller','',$finalcontroller);
+                $controllers['controller']=$finalcontroller;
+                $controllers['full_path']=$actions['controller'];
                 $controllers['route_name']=$actions['as'];
                 $controllers['method']=$method;
+                $controllers['display_order']=$i;
+                $modules[]=$controllers;
 
-
+                $i++;
             }
         }
-        echo '<pre>';
-       print_r($controllers);
-    
-
+           
+        // $module->create($modules);
     }
   
 }
