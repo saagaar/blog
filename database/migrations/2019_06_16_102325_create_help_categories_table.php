@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHelpCategorysTable extends Migration
+class CreateHelpCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateHelpCategorysTable extends Migration
      */
     public function up()
     {
-        Schema::create('help_categorys', function (Blueprint $table) {
+        Schema::create('help_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->enum('display',['Y','N']);

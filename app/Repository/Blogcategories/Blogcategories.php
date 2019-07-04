@@ -1,22 +1,22 @@
 <?php 
 
-namespace App\Repository\Helpcat;
+namespace App\Repository\Blogcategoriescat;
 
-use App\Models\HelpCategories;
-use App\Repository\HelpCatInterface;
+use App\Models\BlogcategoriesCategories;
+use App\Repository\BlogcategoriesCatInterface;
 
-Class  HelpCat implements HelpCatInterface
+Class  Blogcategories implements BlogcategoriesCatInterface
 {
 	protected $cat;
 
-	public function __construct(HelpCategories $helpcat)
+	public function __construct(BlogcategoriesCategories $blogcat)
 	{
-		$this->cat=$helpcat;
+		$this->cat=$blogcat;
 	}
 
      
-  public function getcatById($helpcat_id){
-      return	$this->cat->where('id', $helpcat_id)->first();
+  public function getcatById($blogcat_id){
+      return	$this->cat->where('id', $blogcat_id)->first();
     }
 
       /**

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HelpCategorys extends Model
+class BlogCategories extends Model
 {
-    protected $table='help_categorys';
+     protected $table='blog_categories';
 
     /**
      * The attributes that are mass assignable.
@@ -14,7 +14,7 @@ class HelpCategorys extends Model
      * @var array
      */
     protected $fillable = [
-        'name','display'
+        'name','display','slug'
     ];
 
     /**
@@ -29,9 +29,9 @@ class HelpCategorys extends Model
      *
      * @var array
      */
-    public function Helps(){
-        $this->belongsTo(Helps::class);
-    }
+    // public function Blogs(){
+    //     $this->belongsTo(Blogs::class);
+    // }
     public function logs()
     {
         return $this->morphMany(LogAdminActivitys::class, 'logable');

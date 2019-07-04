@@ -23,7 +23,7 @@ class Helps extends Model
      * @var array
      */
 
-    public function HelpCategorys(){
-        $this->hasOne(HelpCategorys::class);
+    public function HelpCategories(){
+        $this->hasOne(HelpCategories::class);
     }
 }

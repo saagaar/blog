@@ -16,7 +16,7 @@ class CreateHelpTable extends Migration
         Schema::create('helps', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreign('category_id')
-                    ->references('id')->on('help_categorys')
+                    ->references('id')->on('help_categories')
                     ->onDelete('cascade');
             $table->unsignedBigInteger('category_id');
             $table->string('title',100);
