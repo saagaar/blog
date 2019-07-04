@@ -17,10 +17,11 @@ class CreateModulePermissionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('controller');
+            $table->string('full_path');
             $table->string('namespace');
             $table->string('method');
             $table->string('route_name');
-            $table->enum('status', ['0', '1'])->default(0);
+            $table->enum('status', ['1', '0'])->default('1');
             $table->unsignedBigInteger('display_order')->default(0);
             $table->timestamps();
         });
