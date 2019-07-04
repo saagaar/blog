@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ModulePermissions extends Model
+class Modulepermissions extends Model
 {
-    protected $guarded='module_permissions';
+     protected $guarded='module_permissions';
 
     /**
      * The attributes that are mass assignable.

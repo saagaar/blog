@@ -2,16 +2,16 @@
 
 namespace App\Repository\Module;
 
-use App\Models\ModulePermissionsss;
+use App\Models\Modulepermissions;
 use App\Repository\ModuleInterface;
 
 Class  Module implements ModuleInterface
 {
 	protected $module;
 
-	public function __construct(ModulePermissionsss $Module)
+	public function __construct(Modulepermissions $module)
 	{
-		$this->module=$Module;
+		$this->module=$module;
 	}
 
      
