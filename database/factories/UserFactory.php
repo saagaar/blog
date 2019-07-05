@@ -77,7 +77,7 @@ $factory->define(SiteOptions::class, function (Faker $faker) {
         'currency_code'     =>$faker->currencyCode,
         'address'           =>$faker->streetAddress,
         'state'             =>$faker->state ,
-        'country'           =>$countryids,
+        'country'           =>$countryid,
         'city'              =>$faker->city 
     ];
 });

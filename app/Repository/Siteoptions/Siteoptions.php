@@ -2,14 +2,14 @@
 
 namespace App\Repository\Siteoptions;
 
-use App\Models\SiteOptions;
+use App\Models\SiteOption;
 use App\Repository\SiteoptionsInterface;
 
 Class  Siteoptions implements SiteoptionsInterface
 {
 	protected $siteoptions;
 
-	public function __construct(SiteOptions $siteoptions)
+	public function __construct(SiteOption $siteoptions)
 	{
 		$this->siteoptions=$siteoptions;
 	}
