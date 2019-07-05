@@ -6,7 +6,6 @@ use App\Repository\ModuleRolePermissionInterface;
 // use App\Repository\User\AdminUser;
 use Illuminate\Support\Facades\Auth;
 
-
 /**
  * Class AdminPermissionCheck
  * @package App\Services
@@ -20,7 +19,6 @@ class AdminPermissionCheck
      * @var ModuleRolePermission object
      */
      protected $RoleModule;
-
 
       /**
      * Object of ModuleRolePermission repository
@@ -36,12 +34,13 @@ class AdminPermissionCheck
      */
     public function __construct(ModuleRolePermissionInterface $RoleModule)
     {
-
         $this->RoleModule=$RoleModule;
     }
     
     public function check()
     {
+        $currentroute=Route::getCurrentRoute()->getAction();
+        print_r($currentroute);
         // print_r(Route::getRoutes());exit;
         $this->User = \Auth::user();         
         // print_r ($this->RoleModule->getModuleByRoleId($this->User->role_id));exit;

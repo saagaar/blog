@@ -2,14 +2,14 @@
 
 namespace App\Repository\Module;
 
-use App\Models\Modulepermissions;
+use App\Models\ModulePermissions;
 use App\Repository\ModuleInterface;
 
 Class  Module implements ModuleInterface
 {
 	protected $module;
 
-	public function __construct(Modulepermissions $module)
+	public function __construct(ModulePermissions $module)
 	{
 		$this->module=$module;
 	}
@@ -34,16 +34,8 @@ Class  Module implements ModuleInterface
      * @return mixed
      */
     public function create(array $data){
-      foreach ($data as $value) {
-        $all =  $this->module->create([
-          'name' => $value['name'],
-          'namespace' => $value['namespace'],
-          'controller' => $value['controller'],
-          'route_name' => $value['route_name'],
-          'method' => $value['method'],
-        ]);
-      }
-      return $all;
+        $all =  $this->module->insert($data);
+      // return $all;
      
     }
      /**
@@ -64,6 +56,11 @@ Class  Module implements ModuleInterface
      */
     public function delete($id){
       return	$this->module->find($id)->delete();
+    }
+
+    public function deleteAll()
+    {
+      return $this->module->getQuery()->delete();
     }
 }
 ?>

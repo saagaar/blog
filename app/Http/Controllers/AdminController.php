@@ -44,7 +44,7 @@ class AdminController extends BaseController
     public function dashboard()
     {
        
-
+        // print_r();
        // echo '<pre>';
        //  $routes= Route::getRoutes()->getByName('checkpermission');
        //       print_r($routes->getAction());exit;
@@ -76,8 +76,6 @@ class AdminController extends BaseController
 
             if ($actionprefix=='/admin')
             {
-                // You can also use explode('@', $action['controller']); here
-                // to separate the class name from the method
                 $url=$actions['controller'];
                 $parseurl=explode('@',$url);
                 $precontroller= str_replace($actions['namespace'], '', $actions['controller']);
@@ -96,9 +94,10 @@ class AdminController extends BaseController
                 $i++;
             }
         }
-        // echo "<pre>";
-        //    print_r($modules);
+        $module->deleteAll();
         $module->create($modules);
+        echo 'Import Successfull';
+
     }
   
 }
