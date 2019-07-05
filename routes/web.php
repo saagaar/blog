@@ -30,26 +30,10 @@ Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboa
 Route::match(['get','post'],'/create/helpcategory','HelpCategoryController@create')->name('helpcat.create');
 Route::get('/admin/helpcategory','HelpCategoryController@list')->name('helpcat.list');
 Route::match(['get','post'],'/edit/helpcategory/{id}','HelpCategoryController@edit')->name('helpcat.edit');
-Route::get('/delete/helpcategory/{id}','HelpCategoryController@destroy')->name('helpcat.delete');
+Route::get('/delete/helpcategory/{id}','HelpCategoryController@delete')->name('helpcat.delete');
 // help category
 
 
-Route::match(['get','post'],'/admin/createrole','AdminRoleController@create')->name('adminrole.create');
-
-// Route::match(['get','post'],'/admin/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
-
-Route::get('/admin/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
-Route::post('/admin/editrole/{id}','AdminRoleController@update')->name('adminrole.update');
-Route::get('/admin/deleterole/{id}','AdminRoleController@destroy')->name('adminrole.delete');
-
-//admin roles
-
-//admin users
-Route::get('/admin/createuser','AdminUserController@create')->name('adminuser.create');
-Route::post('/admin/createuser','AdminUserController@store')->name('adminuser.store');
-Route::get('/admin/edituser/{id}','AdminUserController@edit')->name('adminuser.edit');
-Route::post('/admin/edituser/{id}','AdminUserController@update')->name('adminuser.update');
-Route::get('/admin/deleteuser/{id}','AdminUserController@destroy')->name('adminuser.delete');
 Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 //admin users
@@ -82,13 +66,16 @@ Route::prefix('admin')->group(function()
 	Route::get('/roles','AdminRoleController@list')->name('adminrole.list');
 	Route::match(['get','post'],'/createrole','AdminRoleController@create')->name('adminrole.create');
 	Route::match(['get','post'],'/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
-	Route::get('/deleterole/{id}','AdminRoleController@destroy')->name('adminrole.delete');
+	Route::get('/deleterole/{id}','AdminRoleController@delete')->name('adminrole.delete');
 
 
 	//admin roles
 
 	//blog category
-	
+	Route::get('/list/blogcategory','BlogcategoriesController@list')->name('adminblogcategory.list');
+	Route::match(['get','post'],'/create/blogcategory','BlogcategoriesController@create')->name('adminblogcategory.create');
+	Route::match(['get','post'],'/edit/blogcategory/{id}','BlogcategoriesController@edit')->name('adminblogcategory.edit');
+	Route::get('/delete/blogcategory/{id}','BlogcategoriesController@delete')->name('adminblogcategory.delete');
 	//blog category
 });
 Route::get('/admin/importmodules','AdminUserController@ImportModules')->name('adminuser.importmodules');

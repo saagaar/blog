@@ -56,7 +56,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" name="role_name" id="name" placeholder="Enter Role">
+                  <input type="text" class="form-control" name="role_name" id="name" value="{{ old('role_name') }}" placeholder="Enter Role">
                 @if ($errors->has('role_name'))
                 <div class="alert alert-danger">{{ $errors->first('role_name') }}</div>
                 @endif
