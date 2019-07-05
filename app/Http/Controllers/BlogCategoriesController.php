@@ -6,8 +6,9 @@ use App\Repository\BlogcategoriesInterface;
 // use App\Models\blogcategoriesegorys;
 use App\Models\LogAdminActivitys;
 use Illuminate\Http\Request;
-
-class blogcategoriesegoryController extends AdminController
+use App\Http\Requests\BlogcategoryRequest;
+use App;
+class BlogcategoriesController extends AdminController
 {
     protected $category;
 
@@ -19,45 +20,44 @@ class blogcategoriesegoryController extends AdminController
     }
     public function list()
     {
-
         $categorys = $this->category->getAll()->paginate($this->PerPage);
         return view('blog.listcategories',compact('categorys'));
     }
     public function create(Request $request)
     {
-        if ($request->isMethod('post')) {
-            $request->validate([
-                'name' => 'required',
-                'display' => 'required',
-            ]);
-      
-           $insert =  $this->category->create($request->all());
-            return redirect()->route('blogcategories.list')
-                            ->with('success','Help Category created successfully.');
-            
+        if ($request->method()=='POST') {
+
+            // $request=::class;
+            $requestobj=app(BlogcategoryRequest::class);
+            $validatedData = $requestobj->validated();
+        
+        $this->category->create($validatedData);
+       return redirect()->route('adminblogcategory.list')
+                            ->with('success','blog Category created successfully.');
         }
-       return view('help.createblogcategories');
+       return view('blog.createcategories');
     }
     public function delete($id)
     {
         $category =$this->category->getcatById($id);
         $category->delete();
-        return redirect()->route('blogcategories.list')
-        ->with('success', 'category has been deleted!!');
+        return redirect()->route('adminblogcategory.list')
+        ->with('success', 'Blog category has been deleted!!');
     }
     public function edit(Request $request, $id)
     {
         $category =$this->category->getcatById($id);
-        if ($request->isMethod('post')) {
-            $request->validate([
-                'name' => 'required',
-                'display' => 'required',
-            ]);
-            $category->update($request->all());
-            $logcat =$this->category->getcatById($id);
-            return redirect()->route('blogcategories.list')
-                             ->with('success','Help Category updated successfully.');
+        if ($request->method()=='POST') {
+
+            // $request=::class;
+            $requestobj=app(BlogcategoryRequest::class);
+            $validatedData = $requestobj->validated();
+        
+        $this->category->update($id,$validatedData);
+        return redirect()->route('adminblogcategory.list')
+                        ->with('success','Blog category updated successfully.');
         }
-        return view('help.editblogcategories',compact('category','data'));
+        
+        return view('blog.editcategories',compact('category'));
     }
 }

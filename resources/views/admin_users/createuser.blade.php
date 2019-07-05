@@ -55,14 +55,14 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" name="username" id="name" placeholder="Enter username">
+                  <input type="text" class="form-control" name="username" id="name" value="{{ old('name') }}" placeholder="Enter username">
                 @if ($errors->has('username'))
                 <div class="alert alert-danger">{{ $errors->first('username') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="text" class="form-control" name="email" id="email" placeholder="Enter email">
+                  <input type="text" class="form-control" name="email" id="email" value="{{ old('email') }}" placeholder="Enter email">
                 @if ($errors->has('email'))
                 <div class="alert alert-danger">{{ $errors->first('email') }}</div>
                 @endif
@@ -88,7 +88,7 @@
                   <option value="">--Select--</option>
                   @foreach ($adminroles as $role)
                   
-                    <option value="{{$role->id}}">{{$role->role_name}}</option>
+                    <option value="{{$role->id}}" value="{{ old('name') }}">{{$role->role_name}}</option>
                     @endforeach
                   </select>
                  

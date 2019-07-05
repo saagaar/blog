@@ -1,7 +1,7 @@
 <?php 
 namespace App\Repository;
 
-interface BlogcategoriesatInterface
+interface BlogcategoriesInterface
 {
 	 /**
      * Get's a post by it's ID

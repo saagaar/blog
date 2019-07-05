@@ -1,15 +1,15 @@
 <?php 
 
-namespace App\Repository\Blogcategoriescat;
+namespace App\Repository\Blogcategories;
 
-use App\Models\BlogcategoriesCategories;
-use App\Repository\BlogcategoriesCatInterface;
+use App\Models\BlogCategory;
+use App\Repository\BlogcategoriesInterface;
 
-Class  Blogcategories implements BlogcategoriesCatInterface
+Class  Blogcategories implements BlogcategoriesInterface
 {
 	protected $cat;
 
-	public function __construct(BlogcategoriesCategories $blogcat)
+	public function __construct(BlogCategory $blogcat)
 	{
 		$this->cat=$blogcat;
 	}

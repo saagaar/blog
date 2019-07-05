@@ -97,7 +97,7 @@ $factory->define(Cms::class, function (Faker $faker) {
         'meta_description'  =>$faker->text($maxNbChars = 20)
     ];
 });
-$factory->define(HelpCategorys::class, function (Faker $faker) {
+$factory->define(HelpCategories::class, function (Faker $faker) {
     return [
         'name'     =>$faker->text($maxNbChars = 20)
     ];
@@ -139,5 +139,12 @@ $factory->define(LogAdminActivitys::class, function (Faker $faker) {
         'log_extra_info'        =>$faker->text($maxNbChars = 10),
         'updated_at'            =>now(),
         `created_at`            =>now()
+    ];
+});
+$factory->define(Blogcategory::class, function (Faker $faker) {
+    return [
+        'name'                =>$faker->text($maxNbChars = 20),
+        'slug'          =>$faker->unique()->text($maxNbChars = 20),
+        'display'             =>$faker->randomElement(['Y' ,'N'])
     ];
 });

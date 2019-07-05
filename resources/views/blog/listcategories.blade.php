@@ -25,7 +25,7 @@
               <h3 class="box-title">All Blog Category</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <a href="{{route('helpcat.create')}}" class="btn btn-primary">Add Blog Category</a>
+                  <a href="{{route('adminblogcategory.create')}}" class="btn btn-primary">Add Blog Category</a>
                 </div>
               </div>
             </div>
@@ -61,13 +61,13 @@
                   <td>{{$category->slug}}</td>
                   <td>{{$category->created_at}}</td>
                   <td>{{$category->updated_at}}</td>
-                  <td><a href="{{route('Blogcat.edit', $category->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('helpcat.delete', $category->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('adminblogcategory.edit', $category->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('adminblogcategory.delete', $category->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="6" align="center" style="background-color: #d2d6de;"> No Blog Category Found </td>
+                    <td colspan="7" align="center" style="background-color: #d2d6de;"> No Blog Category Found </td>
                   </tr>
                   @endif
                 </tbody>
