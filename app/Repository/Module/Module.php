@@ -20,14 +20,21 @@ Class  Module implements ModuleInterface
     }
 
       /**
-     * Get's all posts.
+     * Get's all Modules.
      *
      * @return mixed
      */
     public function getAll(){
    	 return	$this->module->latest();
     }
- 	
+ 	   /**
+     * Get's all Mdules by route name.
+     *@var Route Name string
+     * @return mixed
+     */ 
+    public function getModuleByRouteName($routename){
+     return $this->module->where('route_name', $routename)->first();
+    }
  	  /**
      * create a 
      *

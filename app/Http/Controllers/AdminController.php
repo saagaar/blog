@@ -9,7 +9,6 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Services\NotificationCommander;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Repository\ModuleRolePermissionInterface;
 use Illuminate\Support\Facades\Route;
 use App\Repository\ModuleInterface;
 
@@ -34,11 +33,10 @@ class AdminController extends BaseController
     */
     protected $PerPage=10;
 
-    public function __construct(ModuleRolePermissionInterface $RolePermission)
+    public function __construct()
     {
         $this->middleware('auth:admin')->except('logout');
-        $this->middleware('check_user_permission');
-        $this->RolePermission=$RolePermission;
+        $this->middleware('check_user_permission')->except('logout');
         
     }
     public function dashboard()

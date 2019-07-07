@@ -27,10 +27,7 @@ Auth::routes(['register' => false]);
 
 Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 //help category
-Route::match(['get','post'],'/create/helpcategory','HelpCategoryController@create')->name('helpcat.create');
-Route::get('/admin/helpcategory','HelpCategoryController@list')->name('helpcat.list');
-Route::match(['get','post'],'/edit/helpcategory/{id}','HelpCategoryController@edit')->name('helpcat.edit');
-Route::get('/delete/helpcategory/{id}','HelpCategoryController@delete')->name('helpcat.delete');
+
 // help category
 
 
@@ -52,7 +49,10 @@ Route::prefix('admin')->group(function()
 
 	Route::get('/mail', 'AdminController@checkmail')->name('admin.checkmail');
 
-
+	Route::match(['get','post'],'/create/helpcategory','HelpCategoryController@create')->name('helpcat.create');
+	Route::get('/helpcategory','HelpCategoryController@list')->name('helpcat.list');
+	Route::match(['get','post'],'/edit/helpcategory/{id}','HelpCategoryController@edit')->name('helpcat.edit');
+	Route::get('/delete/helpcategory/{id}','HelpCategoryController@delete')->name('helpcat.delete');
 
 	// Route::get('/logout', 'Auth\AdminLoginController@logout')->name('logout');
 

@@ -13,6 +13,7 @@ class HelpCategoryController extends AdminController
 
     function __construct(HelpCatInterface $helpcat)
     {
+        parent::__construct();
         $this->category=$helpcat;
         
        

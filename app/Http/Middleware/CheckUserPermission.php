@@ -36,8 +36,26 @@ class CheckUserPermission
 
     public function handle($request, Closure $next)
     {
-        
-        $this->AdminPermission->check();
-        return $next($request);
+
+         /**
+         *Check the route request to find permission
+         *
+         * @return boolean
+         */
+        $previous=(url()->previous());
+        $getpermission=$this->AdminPermission->checkAdminPermission();
+        if($getpermission)
+        {
+            return $next($request);
+        }
+        else if($previous)
+        {
+            return redirect($previous)->withError('You are not Authorized to enter to this url!!');
+        }
+        else
+        {
+            //Redirect to where it came from
+             return redirect('/admin/dashboard');
+        }
     }
 }

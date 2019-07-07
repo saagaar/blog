@@ -57,9 +57,27 @@ Class  ModuleRolePermission implements ModuleRolePermissionInterface
     public function delete($id){
       return	$this->ModulePermission->find($id)->delete();
     }
-
-     public function getModulePermissionListByUserId($user_id){
+     /**
+     * Get Permission list by userid.
+     *
+     * @param User object
+     * @return object
+     */
+    public function getModulePermissionListByUserId($user_id){
       return  $this->ModulePermission->where('user_id', $user_id)->all();
+    }
+
+    /**
+     * Get userHasPersmissionByRouteName list by Role id and Module Id.
+     *
+     * @var role_id
+     * @var module_id
+     * @return object
+     */
+
+    public function userHasPersmissionByRouteName($role_id,$module_id)
+    {
+      return   $this->ModulePermission->where(['role_id'=> $role_id,'module_id'=>$module_id])->first();
     }
 }
 ?>

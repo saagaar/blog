@@ -3,6 +3,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Route;
 // use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Repository\ModuleRolePermissionInterface;
+use App\Repository\ModuleInterface;
 // use App\Repository\User\AdminUser;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,13 +13,20 @@ use Illuminate\Support\Facades\Auth;
  */
 class AdminPermissionCheck
 {
-    // use AuthorizesRequests;
+    
      /**
-     * Object of admin user repository
+     * Object of Role  repository
      *
      * @var ModuleRolePermission object
      */
      protected $RoleModule;
+
+          /**
+     * Object of Module  repository
+     *
+     * @var Moduleobject
+     */
+     protected $Module;
 
       /**
      * Object of ModuleRolePermission repository
@@ -32,17 +40,30 @@ class AdminPermissionCheck
      * @param AdminRole $role
      * @return bool
      */
-    public function __construct(ModuleRolePermissionInterface $RoleModule)
+    public function __construct(ModuleRolePermissionInterface $RoleModule,ModuleInterface $module)
     {
         $this->RoleModule=$RoleModule;
-    }
+        $this->Module=$module;
+    } 
     
-    public function check()
+    public function checkAdminPermission()
     {
+         /**
+        * check current Route
+        * @return array
+        */
         $currentroute=Route::getCurrentRoute()->getAction();
-        print_r($currentroute);
-        // print_r(Route::getRoutes());exit;
-        $this->User = \Auth::user();         
-        // print_r ($this->RoleModule->getModuleByRoleId($this->User->role_id));exit;
+        $currentRouteName=($currentroute['as']);
+        $module=$this->Module->getModuleByRouteName($currentRouteName);
+        
+        $this->User = \Auth::user(); 
+        /**
+        * check user permission
+        * @var Roleid ,Module Id
+        * @return mixed
+        */
+        $permission=$this->RoleModule->userHasPersmissionByRouteName($this->User->role_id,$module->id);
+        return $permission;
+       
     }
 }
