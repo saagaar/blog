@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94d4bf9ac7f4a933030e46a346ee2917",
+    "content-hash": "aa7f11b9e6fd5617ba8de63cb18384f8",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -676,6 +676,53 @@
             "time": "2018-10-12T19:39:35+00:00"
         },
         {
+            "name": "laravelista/lumen-vendor-publish",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravelista/lumen-vendor-publish.git",
+                "reference": "7684f731187277ac2ca7747558ec2ce3835bfc91"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravelista/lumen-vendor-publish/zipball/7684f731187277ac2ca7747558ec2ce3835bfc91",
+                "reference": "7684f731187277ac2ca7747558ec2ce3835bfc91",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^5.0",
+                "illuminate/filesystem": "^5.0",
+                "illuminate/support": "^5.0",
+                "league/flysystem": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laravelista\\LumenVendorPublish\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mario Bašić",
+                    "email": "mario.basic@outlook.com"
+                }
+            ],
+            "description": "vendor:publish for Lumen framework.",
+            "keywords": [
+                "command",
+                "console",
+                "lumen",
+                "publish",
+                "vendor"
+            ],
+            "abandoned": true,
+            "time": "2017-09-26T12:43:31+00:00"
+        },
+        {
             "name": "league/flysystem",
             "version": "1.0.53",
             "source": {
@@ -1010,6 +1057,88 @@
             "time": "2019-05-31T20:04:32+00:00"
         },
         {
+            "name": "owen-it/laravel-auditing",
+            "version": "v9.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/owen-it/laravel-auditing.git",
+                "reference": "0379d973c34e00138eb8ac7196c6661980564f72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/0379d973c34e00138eb8ac7196c6661980564f72",
+                "reference": "0379d973c34e00138eb8ac7196c6661980564f72",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^5.8",
+                "illuminate/database": "^5.8",
+                "illuminate/filesystem": "^5.8",
+                "php": ">=7.1.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^3.8",
+                "phpunit/phpunit": "^7.5"
+            },
+            "suggest": {
+                "laravelista/lumen-vendor-publish": "Needed to publish the package configuration in Lumen"
+            },
+            "type": "package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "9.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "OwenIt\\Auditing\\AuditingServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OwenIt\\Auditing\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Quetzy Garcia",
+                    "email": "quetzyg@altek.org"
+                },
+                {
+                    "name": "Antério Vieira",
+                    "email": "anteriovieira@gmail.com"
+                },
+                {
+                    "name": "Raphael França",
+                    "email": "raphaelfrancabsb@gmail.com"
+                }
+            ],
+            "description": "Audit changes of your Eloquent models in Laravel/Lumen",
+            "homepage": "http://laravel-auditing.com",
+            "keywords": [
+                "Accountability",
+                "Audit",
+                "auditing",
+                "changes",
+                "eloquent",
+                "history",
+                "laravel",
+                "log",
+                "logging",
+                "lumen",
+                "observer",
+                "record",
+                "revision",
+                "tracking"
+            ],
+            "time": "2019-04-11T22:21:58+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v9.99.99",
             "source": {
@@ -1152,6 +1281,52 @@
                 "psr"
             ],
             "time": "2017-02-14T16:28:37+00:00"
+        },
+        {
+            "name": "psr/event-dispatcher",
+            "version": "0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/event-dispatcher.git",
+                "reference": "14a25ea9045cfc34c9edc31ad468a5cc6e914a8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/event-dispatcher/zipball/14a25ea9045cfc34c9edc31ad468a5cc6e914a8c",
+                "reference": "14a25ea9045cfc34c9edc31ad468a5cc6e914a8c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\EventDispatcher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Standard interfaces for event handling.",
+            "keywords": [
+                "events",
+                "psr",
+                "psr-14"
+            ],
+            "time": "2018-09-27T17:52:39+00:00"
         },
         {
             "name": "psr/log",

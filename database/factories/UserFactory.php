@@ -58,6 +58,16 @@ $factory->define(ModulePermission::class, function (Faker $faker) {
         'parent_id'=>$moduleid
     ];
 });
+
+$factory->define(ModuleRolePermissions::class, function (Faker $faker) {
+    $moduleids = \DB::table('module_permissions')->select('id')->get();
+    $module=[];
+   foreach($moduleids as $eachids)
+   {
+     $module[]=array('module_id'=>$eachids,'role_id'=>1);
+   }
+    return  $module;
+});
 $factory->define(SiteOptions::class, function (Faker $faker) {
     $countryids = \DB::table('countrys')->select('id')->get();
     $countryid = $faker->randomElement($countryids)->id;

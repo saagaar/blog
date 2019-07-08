@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\User;
+use App\Models\AdminRoles;
 use App\ModuleRolePermission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -17,9 +17,9 @@ class ModuleRolePermissionsPolicy
      * @param  \App\ModuleRolePermission  $moduleRolePermission
      * @return mixed
      */
-    public function view(User $user, ModuleRolePermission $moduleRolePermission)
+    public function view(AdminRoles $AdminRole, ModuleRolePermission $moduleRolePermission)
     {
-        //
+        return $user->id == $moduleRolePermission;
     }
 
     /**
@@ -28,7 +28,7 @@ class ModuleRolePermissionsPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(AdminRoles $AdminRole)
     {
         //
     }
@@ -40,7 +40,7 @@ class ModuleRolePermissionsPolicy
      * @param  \App\ModuleRolePermission  $moduleRolePermission
      * @return mixed
      */
-    public function update(User $user, ModuleRolePermission $moduleRolePermission)
+    public function update(AdminRoles $AdminRole, ModuleRolePermission $moduleRolePermission)
     {
         
     }
@@ -52,7 +52,7 @@ class ModuleRolePermissionsPolicy
      * @param  \App\ModuleRolePermission  $moduleRolePermission
      * @return mixed
      */
-    public function delete(User $user, ModuleRolePermission $moduleRolePermission)
+    public function delete(AdminRoles $AdminRole, ModuleRolePermission $moduleRolePermission)
     {
         //
     }
@@ -64,7 +64,7 @@ class ModuleRolePermissionsPolicy
      * @param  \App\ModuleRolePermission  $moduleRolePermission
      * @return mixed
      */
-    public function restore(User $user, ModuleRolePermission $moduleRolePermission)
+    public function restore(AdminRoles $AdminRole, ModuleRolePermission $moduleRolePermission)
     {
         //
     }
@@ -76,7 +76,7 @@ class ModuleRolePermissionsPolicy
      * @param  \App\ModuleRolePermission  $moduleRolePermission
      * @return mixed
      */
-    public function forceDelete(User $user, ModuleRolePermission $moduleRolePermission)
+    public function forceDelete(AdminRoles $AdminRole, ModuleRolePermission $moduleRolePermission)
     {
         //
     }

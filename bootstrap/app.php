@@ -41,6 +41,11 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+//For Activity log
+$app->register(OwenIt\Auditing\AuditingServiceProvider::class);
+// $app->configure('audit');
+// $app->withFacades();
+// $app->withEloquent();
 /*
 |--------------------------------------------------------------------------
 | Return The Application

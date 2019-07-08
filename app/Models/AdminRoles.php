@@ -3,9 +3,14 @@
 namespace App\Models;
 use App\Models\AdminUsers;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as Auditables;
 
-class AdminRoles extends Model
+
+class AdminRoles extends Model implements Auditable
 {
+    use Auditables;
+
     protected $guard='admin_roles';
 
     /**
