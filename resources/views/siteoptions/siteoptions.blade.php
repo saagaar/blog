@@ -13,7 +13,11 @@
     'Create',
       ]])
     </section>
+{{$site}}
+<?php 
 
+  print_r($site);
+exit;?>
     <!-- Main content -->
     <section class="content">
       <div class="row">

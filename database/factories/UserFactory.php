@@ -64,9 +64,12 @@ $factory->define(ModuleRolePermissions::class, function (Faker $faker) {
     $module=[];
    foreach($moduleids as $eachids)
    {
-     $module[]=array('module_id'=>$eachids,'role_id'=>1);
+     return [
+                 'module_id'=>$eachids->id,
+                 'role_id'=>1
+            ];
    }
-    return  $module;
+    // return  $module;
 });
 $factory->define(SiteOptions::class, function (Faker $faker) {
     $countryids = \DB::table('countrys')->select('id')->get();
