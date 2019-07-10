@@ -6,27 +6,30 @@ use App\Repository\SiteoptionsInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\SiteoptionsRequest;
 use App;
-class SiteoptionsController extends Controller
+class SiteOptionsController extends AdminController
 {
+    /**
+    *@var $siteoptions
+    * object of instance siteoption interface
+    *
+    */
     protected $siteoptions;
     function __construct(SiteoptionsInterface $siteoptions)
     {
         $this->site=$siteoptions;
-        $this->middleware('auth:admin')->except('logout');
     }
     public function edit(Request $request)
     {   
-        $id = 1;
-        $site =$this->site->getsiteinfoById($id);
-        if ($request->method()=='POST') {
-
-            // $request=::class;
+        
+        $site =$this->site->GetSiteInfo();
+        if ($request->method()=='POST') 
+        {
             $requestobj=app(SiteoptionsRequest::class);
             $validatedData = $requestobj->validated();
         
-        $this->site->update($id,$validatedData);
+        $this->site->update($validatedData);
         return redirect()->route('admin.dashboard')
-                        ->with('success','site setting created successfully.');
+                        ->with('success','Site setting created successfully.');
         }
         
         return view('siteoptions.siteoptions',compact('site'));

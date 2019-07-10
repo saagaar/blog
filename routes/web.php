@@ -70,7 +70,7 @@ Route::prefix('admin')->group(function()
 
 
 	//admin roles
-	Route::match(['get','post'],'/sitesetting','SiteoptionsController@edit')->name('sitesetting.edit');
+	Route::match(['get','post'],'/sitesetting','SiteOptionsController@edit')->name('sitesetting.edit');
 	//blog category
 	Route::get('/list/blogcategory','BlogcategoriesController@list')->name('adminblogcategory.list');
 	Route::match(['get','post'],'/create/blogcategory','BlogcategoriesController@create')->name('adminblogcategory.create');
