@@ -17,6 +17,109 @@
 // print_r($site);exit;
 ?>
 
+  <section class="content">
+  <form action="{{route('sitesetting.edit')}}" method="POST">
+              @csrf
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Basic Setting
+                <small>All basic default settings</small>
+              </h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                  <i class="fa fa-minus"></i></button>
+               <!--  <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button> -->
+              </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body pad">
+               <div class="form-group col-md-4">
+                        <label for="site_name">Site Name</label>
+                        <input type="text" class="form-control" name="site_name" id="site_name" value="{{ $site->site_name}}" placeholder="Enter Help Category">
+                        @if ($errors->has('site_name'))
+                        <div class="alert alert-danger">{{ $errors->first('site_name') }}</div>
+                        @endif
+                        </div>
+                         <div class="form-group col-md-4">
+                          <label for="mode">Mode: </label>
+                          <input type="radio"  name="mode" value="1" {{ $site->mode == '1' ? 'checked' : ''}}>live<input type="radio"  name="mode" value="2"  {{ $site->mode == '2' ? 'checked' : ''}}>down<input type="radio"  name="mode" value="3"  {{ $site->mode == '3' ? 'checked' : ''}}>Maintenance
+                          @if ($errors->has('mode'))
+                        <div class="alert alert-danger">{{ $errors->first('mode') }}</div>
+                        @endif
+                        </div>
+                        <div class="form-group  col-md-4">
+                          <label for="user_activation">user_activation: </label>
+                          <label><input type="radio" name="user_activation" value="1" {{ $site->user_activation == 'Y' ? 'checked' : ''}}>Yes</label>
+                          <label><input type="radio" name="user_activation" value="2"  {{ $site->user_activation == 'N' ? 'checked' : ''}}>No</label>
+                          @if ($errors->has('user_activation'))
+                        <div class="alert alert-danger">{{ $errors->first('user_activation') }}</div>
+                        @endif
+                        </div>
+            </div>
+          </div>
+          <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Bootstrap WYSIHTML5
+                <small>Simple and fast</small>
+              </h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                  <i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body pad">
+              <form>
+                <textarea class="textarea" placeholder="Place some text here"
+                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- /.col-->
+      </div>
+      </form>
+      <!-- ./row -->
+    </section>
+
+  <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Bootstrap WYSIHTML5
+                <small>Simple and fast</small>
+              </h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                  <i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body pad">
+              <form>
+                <textarea class="textarea" placeholder="Place some text here"
+                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+              </form>
+            </div>
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -33,10 +136,36 @@
             <div class="box-body">
             <form action="{{route('sitesetting.edit')}}" method="POST">
               @csrf
+            <section class="content">
+
+      <!-- Default box -->
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Website Settings</h3>
+
+                  <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                      <i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                      <i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <div class="box-body">
+                  Start creating your amazing application!
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                  Footer
+                </div>
+                <!-- /.box-footer-->
+              </div>
+              <!-- /.box -->
+            </section>
+
             <div class="box-body">
               <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Website Settings</h3>
+                    <h3 class="box-title"></h3>
                 </div>
                   <div class="box-body">
                     <div class="form-group col-md-4">
@@ -47,7 +176,7 @@
                         @endif
                         </div>
                          <div class="form-group col-md-4">
-                          <label for="mode">mode: </label>
+                          <label for="mode">Mode: </label>
                           <label><input type="radio" name="mode" value="1" {{ $site->mode == '1' ? 'checked' : ''}}>live</label>
                           <label><input type="radio" name="mode" value="2"  {{ $site->mode == '2' ? 'checked' : ''}}>down</label>
                           <label><input type="radio" name="mode" value="3"  {{ $site->mode == '3' ? 'checked' : ''}}>Maintenance</label>
