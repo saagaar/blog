@@ -14,17 +14,27 @@ class AdminRoleController extends AdminController
 
     function __construct(AdminRoleInterface $adminrole)
     {
+        parent::__construct();
         $this->roles=$adminrole;
         $this->middleware('auth:admin')->except('logout');
        
     }
     public function list()
     {
+        $breadcrumbs=['breadcrumbs' => [
+                        'Dashboard' => route('admin.dashboard'),
+                        'current_menu'=>'Admin roles',
+                     ]];
         $adminroles = $this->roles->getAll()->paginate($this->PerPage);
-        return view('roles.adminrole',compact('adminroles'));
+        return view('roles.adminrole')->with(array('adminroles'=>$adminroles,'breadcrumb'=>$breadcrumbs));
     }
     public function create(Request $request)
     {
+        $breadcrumb=['breadcrumbs' => [
+                    'Dashboard' => route('admin.dashboard'),
+                    'Admin Roles' => route('adminrole.list'),
+                    'current_menu'=>'Create',
+                      ]];
         if ($request->method()=='POST') {
 
             // $request=::class;
@@ -35,7 +45,7 @@ class AdminRoleController extends AdminController
         return redirect()->route('adminrole.list')
                         ->with('success','Roles created successfully.');
         }
-       return view('roles.createrole');
+       return view('roles.createrole')->with(array('breadcrumb'=>$breadcrumb));
     }
     public function delete($id)
     {
@@ -46,6 +56,10 @@ class AdminRoleController extends AdminController
     }
     public function edit(Request $request,$id)
     {
+    $breadcrumb=['breadcrumbs' => [
+                'Dashboard' => route('admin.dashboard'),
+                'Admin roles' => route('adminrole.list'),
+                'current_menu'=>'Edit']];
         $adminrole =$this->roles->getroleById($id);
         if ($request->method()=='POST') {
 
@@ -55,10 +69,10 @@ class AdminRoleController extends AdminController
         
         $this->roles->update($id,$validatedData);
         return redirect()->route('adminrole.list')
-                        ->with('success','Roles created successfully.');
+                        ->with('success','Role Updated successfully.');
         }
         
-        return view('roles.editrole',compact('adminrole'));
+        return view('roles.editrole',compact('adminrole'))->with(array('adminrole'=>$adminrole,'breadcrumb'=>$breadcrumb));
     }
   
 }

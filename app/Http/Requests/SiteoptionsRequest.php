@@ -31,8 +31,6 @@ class SiteoptionsRequest extends FormRequest
             'contact_name'               =>'required',
             'contact_number'             =>'required',
             'mode'                       =>'required',
-            'maintainence'               =>'required',
-            'user_activation'            =>'required',
             'facebook_id'                =>'required',
             'linkedin_id'                =>'required',
             'twitter_id'                 =>'required',

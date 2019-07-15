@@ -1,9 +1,8 @@
 @if (! empty($breadcrumbs))
 <ol class="breadcrumb">
-  
   @foreach ($breadcrumbs as $label => $link)
   <li  class="active">
-    @if (is_int($label) && ! is_int($link))
+    @if (($label=='current_menu'))
     <a>
       {{ $link }}
     </a>

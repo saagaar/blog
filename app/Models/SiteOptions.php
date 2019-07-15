@@ -3,11 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as Auditables;
 
-class SiteOptions extends Model
+class SiteOptions extends Model implements Auditable
 {
-    protected $guarded='site_options';
 
+    use Auditables;
+
+    protected $guarded='site_options';
+    
     /**
      * The attributes that are mass assignable.
      *

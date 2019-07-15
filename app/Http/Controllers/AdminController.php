@@ -42,6 +42,10 @@ class AdminController extends BaseController
     public function dashboard()
     {
        
+        $breadcrumb=['breadcrumbs' => [
+                    'current_menu' => 'Dashboard',
+                    
+                      ]];
         // print_r();
        // echo '<pre>';
        //  $routes= Route::getRoutes()->getByName('checkpermission');
@@ -53,7 +57,7 @@ class AdminController extends BaseController
         // print_r($this->user);
         // $data=($this->user->getAll());
         // dd($data->username);
-        return view('admin.dashboard',compact('data'));
+        return view('admin.dashboard',compact('breadcrumb'));
     }
     
     public function logout()

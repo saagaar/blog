@@ -1,22 +1,5 @@
 @extends('layouts.common.main')
 @section('content') 
-
-<div class="content-wrapper">
-<section class="content-header">
-      <h1>
-        Help Category
-      </h1>
-      @include('includes.breadcrumbs', ['breadcrumbs' => [
-    'Dashboard' => route('admin.dashboard'),
-    'Blog Category',
-      ]])
-    </section>
-@if(Session::has('success'))
-<div class="alert alert-success alert-block">
-						<button type="button" class="close" data-dismiss="alert">x</button>
-						<strong>Success! </strong>{!!session('success')!!}
-				</div>
-				@endif
 <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -83,5 +66,5 @@
         </div>
     </div>
 </section>
-</div>
+
 @endsection

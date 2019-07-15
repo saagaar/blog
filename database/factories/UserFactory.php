@@ -65,7 +65,7 @@ $factory->define(ModuleRolePermissions::class, function (Faker $faker) use ($fac
    // foreach($moduleids as $eachids)
    // {
      return [
-                 'module_id'=>$moduleids->random(),
+                 'module_id'=>$moduleids->pull(),
                  'role_id'=>1
             ];
    // }

@@ -21,11 +21,21 @@ class AdminUserController extends AdminController
     }
     public function list()
     {
+       $breadcrumb=['breadcrumbs' => [
+                'Dashboard' => route('admin.dashboard'),
+                'Admin Users' => route('adminuser.list'),
+                'current_menu'=> 'Edit User',
+                  ]];
         $adminusers = $this->admin->getAll()->paginate($this->PerPage);
-        return view('admin_users.listadmin',compact('adminusers'));
+        return view('admin_users.listadmin')->with(array('adminusers'=>$adminusers,'breadcrumb'=>$breadcrumb));
     }
     public function create(Request $request)
     {
+      $breadcrumb=['breadcrumbs' => [
+                'Dashboard' => route('admin.dashboard'),
+                'Admin Users' => route('adminuser.list'),
+                'current_menu'=>'Add Users',
+                  ]];
         if ($request->method()=='POST') {
 
             // $request=::class;
@@ -38,10 +48,15 @@ class AdminUserController extends AdminController
         }
         $adminroles = $this->roles->getAll()->get();
         // dd($adminroles);
-       return view('admin_users.createuser',compact('adminroles'));
+       return view('admin_users.createuser',compact('adminroles','breadcrumb'));
     }
     public function edit(Request $request,$id)
     {
+        $breadcrumb=['breadcrumbs' => [
+                    'Dashboard' => route('admin.dashboard'),
+                    'Admin Users' => route('adminuser.list'),
+                    'current_menu'=>'Edit Users',
+                      ]];
         $adminusers =$this->admin->getById($id);
         if ($request->method()=='POST') {
 
@@ -55,7 +70,7 @@ class AdminUserController extends AdminController
                         ->with('success','User updated successfully.');
         }
         $adminroles = $this->roles->getAll()->get();
-        return view('admin_users.edituser',compact('adminroles','adminusers'));
+        return view('admin_users.edituser',compact('adminroles','adminusers','breadcrumb'));
     }
     public function delete($id)
     {
