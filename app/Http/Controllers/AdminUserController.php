@@ -36,19 +36,19 @@ class AdminUserController extends AdminController
                 'Admin Users' => route('adminuser.list'),
                 'current_menu'=>'Add Users',
                   ]];
-        if ($request->method()=='POST') {
+        if ($request->method()=='POST') 
+        {
 
             // $request=::class;
             $requestobj=app(AdminuserRequest::class);
             $validatedData = $requestobj->validated();
-       $validatedData['password']= (Hash::make($requestobj->password));
-        $this->admin->create($validatedData);
-        return redirect()->route('adminuser.list')
+            $validatedData['password']= (Hash::make($requestobj->password));
+            $this->admin->create($validatedData);
+            return redirect()->route('adminuser.list')
                         ->with('success','User created successfully.');
         }
         $adminroles = $this->roles->getAll()->get();
-        // dd($adminroles);
-       return view('admin_users.createuser',compact('adminroles','breadcrumb'));
+        return view('admin_users.createuser',compact('adminroles','breadcrumb'));
     }
     public function edit(Request $request,$id)
     {

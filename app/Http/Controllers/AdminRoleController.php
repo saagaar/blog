@@ -56,7 +56,7 @@ class AdminRoleController extends AdminController
     }
     public function edit(Request $request,$id)
     {
-    $breadcrumb=['breadcrumbs' => [
+         $breadcrumb=['breadcrumbs' => [
                 'Dashboard' => route('admin.dashboard'),
                 'Admin roles' => route('adminrole.list'),
                 'current_menu'=>'Edit']];
@@ -74,5 +74,5 @@ class AdminRoleController extends AdminController
         
         return view('roles.editrole',compact('adminrole'))->with(array('adminrole'=>$adminrole,'breadcrumb'=>$breadcrumb));
     }
-  
+    
 }

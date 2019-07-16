@@ -18,11 +18,10 @@ class SiteOptionsController extends AdminController
     function __construct(SiteoptionsInterface $siteoptions)
     {
          parent::__construct();
-        $this->site=$siteoptions;
+         $this->site=$siteoptions;
     }
-    public function edit(Request $request,$id=1)
+    public function edit(Request $request)
     {   
-        
         $site =$this->site->GetSiteInfo();
         $breadcrumb=array('breadcrumbs'=>array('Dashboard'     => route('admin.dashboard'),
                           'current_menu' => 'Site Settings',

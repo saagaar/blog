@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+use OwenIt\Auditing\Auditable;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
-use OwenIt\Auditing\Auditable as Auditables;
 
-class SiteOptions extends Model implements Auditable
+class SiteOptions extends Model implements AuditableContract
 {
 
-    use Auditables;
+    use Auditable;
 
     protected $guarded='site_options';
     
