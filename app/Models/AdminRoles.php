@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Models;
-use App\Models\AdminUsers;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as Auditables;
@@ -27,7 +25,7 @@ class AdminRoles extends Model implements Auditable
     }
     public function ModulePermissions()
     {
-        return $this->belongsToMany(ModulePermissions::class, 'module_role_permissions');
+        return $this->belongsToMany(ModulePermissions::class)->using(ModuleRolePermissions::class);
     }
     public function logs()
     {

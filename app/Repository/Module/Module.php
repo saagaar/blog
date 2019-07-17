@@ -24,8 +24,9 @@ Class  Module implements ModuleInterface
      *
      * @return mixed
      */
-    public function getAll(){
-   	 return	$this->module->latest();
+    public function getAll()
+    {
+   	 return	$this->module->all();
     }
  	   /**
      * Get's all Mdules by route name.

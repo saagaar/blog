@@ -37,7 +37,6 @@ class AdminController extends BaseController
     {
         $this->middleware('auth:admin')->except('logout');
         $this->middleware('check_user_permission')->except('logout');
-        
     }
     public function dashboard()
     {

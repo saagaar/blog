@@ -63,8 +63,8 @@ Class  ModuleRolePermission implements ModuleRolePermissionInterface
      * @param User object
      * @return object
      */
-    public function getModulePermissionListByUserId($user_id){
-      return  $this->ModulePermission->where('user_id', $user_id)->all();
+    public function getModulePermissionListByUserId($role_id){
+      return  $this->ModulePermission->where('role_id', $role_id)->get();
     }
 
     /**

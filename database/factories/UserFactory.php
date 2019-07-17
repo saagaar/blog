@@ -48,7 +48,8 @@ $factory->define(ModulePermission::class, function (Faker $faker) {
     if($moduleids){
         $moduleid = $faker->randomElement($moduleids)->id;
     }
-    else{
+    else
+    {
         $moduleid = '0';
     }
     return [
@@ -65,7 +66,7 @@ $factory->define(ModuleRolePermissions::class, function (Faker $faker) use ($fac
    // foreach($moduleids as $eachids)
    // {
      return [
-                 'module_id'=>$moduleids->pull(),
+                 'module_id'=>$moduleids->random(),
                  'role_id'=>1
             ];
    // }

@@ -23,7 +23,7 @@
                   <th>Status</th>
                   <th>Created at</th>
                   <th>Updated at</th>
-                  <th colspan="2">Action</th>
+                  <th colspan="3">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,7 +44,7 @@
                     <td>{{$adminrole->created_at}}</td>
                     <td>{{$adminrole->updated_at}}</td>
                     
-                   
+                         <td><a href="{{route('adminrole.managepermission', $adminrole->id)}}"><i class="fa fa-gears"  aria-hidden="true"></i></a></td>
                         <td><a href="{{route('adminrole.edit', $adminrole->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                         <td><a href="{{route('adminrole.delete', $adminrole->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                        </td>

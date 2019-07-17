@@ -67,10 +67,13 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/createrole','AdminRoleController@create')->name('adminrole.create');
 	Route::match(['get','post'],'/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
 	Route::get('/deleterole/{id}','AdminRoleController@delete')->name('adminrole.delete');
+	Route::get('/managerole/{roleid}','ModuleController@manage')->name('adminrole.managepermission');
+
 
 
 	//admin roles
 	Route::match(['get','post'],'/sitesetting','SiteOptionsController@edit')->name('sitesetting');
+
 	//blog category
 	Route::get('/list/blogcategory','BlogcategoriesController@list')->name('adminblogcategory.list');
 	Route::match(['get','post'],'/create/blogcategory','BlogcategoriesController@create')->name('adminblogcategory.create');
