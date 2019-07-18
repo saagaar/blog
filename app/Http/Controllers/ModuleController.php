@@ -20,7 +20,7 @@ class ModuleController extends AdminController
     public function Manage(ModuleRolePermissionInterface $permissioninterface)
     {
        $this->User = \Auth::user();
-       $allmodules= $this->modulelist->getAll();
+       $allmodules= $this->modulelist->getAll()->groupBy('name')->toArray();
        $allpermisionbyrole =  $permissioninterface->getModulePermissionListByUserId($this->User->role_id);
       
         $breadcrumb=   [
