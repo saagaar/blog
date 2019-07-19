@@ -62,7 +62,7 @@ class AdminPermissionCheck
         * @var Roleid ,Module Id
         * @return mixed
         */
-        $permission=$this->RoleModule->userHasPersmissionByRouteName($this->User->role_id,$module->id);
+         $permission=$this->RoleModule->userHasPersmissionByRouteName($this->User->role_id,$module->id);
         return $permission;
        
     }

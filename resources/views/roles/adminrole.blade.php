@@ -27,7 +27,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{  $i = 0 }}
+                @php  $i = 0 @endphp    
                 @if (!$adminroles->isEmpty())
                   @foreach ($adminroles as $adminrole)
                   

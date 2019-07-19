@@ -24,11 +24,13 @@ $(function(){
                 if (clicks) {
                   //Uncheck all checkboxes
                   $(".permission-table input[type='checkbox']").iCheck("uncheck");
-                  $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+                  $(".fa").removeClass("fa-check-square-o").addClass('fa-square-o');
+                  
                 } else {
                   //Check all checkboxes
                   $(".permission-table input[type='checkbox']").iCheck("check");
-                  $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+                  $(".fa").removeClass("fa-square-o").addClass('fa-check-square-o');
+                  $(".checkbox-toggle").iCheck("check")
                 }
                 $(this).data("clicks", !clicks);
               });

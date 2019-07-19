@@ -58,15 +58,13 @@ class AdminUserController extends AdminController
                     'current_menu'=>'Edit Users',
                       ]];
         $adminusers =$this->admin->getById($id);
-        if ($request->method()=='POST') {
-
-            // $request=::class;
+        if ($request->method()=='POST') 
+        {
             $requestobj=app(AdminuserRequest::class);
-            
             $validatedData = $requestobj->validated();
-         $validatedData['password']= (Hash::make($requestobj->password));
-        $this->admin->update($id,$validatedData);
-        return redirect()->route('adminuser.list')
+            $validatedData['password']= (Hash::make($requestobj->password));
+            $this->admin->update($id,$validatedData);
+            return redirect()->route('adminuser.list')
                         ->with('success','User updated successfully.');
         }
         $adminroles = $this->roles->getAll()->get();

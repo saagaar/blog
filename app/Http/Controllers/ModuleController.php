@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repository\ModuleInterface;
 use App\Repository\ModuleRolePermissionInterface;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ModuleController extends AdminController
 {
@@ -17,11 +18,38 @@ class ModuleController extends AdminController
         $this->modulelist=$modules;
     }
 
-    public function Manage(ModuleRolePermissionInterface $permissioninterface)
+    public function Manage($roleid=false,ModuleRolePermissionInterface $permissioninterface,Request $request)
     {
+    	
        $this->User = \Auth::user();
+       if(!$roleid) $roleid=$this->User->role_id;
+       /**
+       * Handle post form submision for setting permission to role
+       **/
+       if ($request->method()=='POST') 
+        {
+        	$validated =$request->validate([
+										    	'module_id' => 'required|min:1'
+									   	   ]);
+        	$data=array();
+        	foreach ($validated['module_id'] as $key => $value) 
+        	{
+        		$data['module_id']=$value;
+        		$data['role_id']=$roleid;
+        		$finalarr[]=$data;
+        	}
+         
+        	/***
+        	*before inserting all new permission array 
+        		 delete all that were set previous
+        	*/
+			$permissioninterface->RemovePermission($roleid) ;
+			$permissioninterface->create($finalarr);
+              return redirect()->route('adminrole.managepermission',$roleid)
+                            ->with('success','Permission set successfully.');
+        }
        $allmodules= $this->modulelist->getAll()->groupBy('name')->toArray();
-       $allpermisionbyrole =  $permissioninterface->getModulePermissionListByUserId($this->User->role_id);
+       $allpermisionbyrole =  $permissioninterface->getModulePermissionListByUserId($roleid)->pluck('module_id')->toArray();
       
         $breadcrumb=   [
                             'breadcrumbs'   => [
@@ -30,7 +58,6 @@ class ModuleController extends AdminController
                             'current_menu'  =>  'Manage Roles'
                                                ]
                         ];
-            $adminrole ='';
             // if ($request->method()=='POST') 
             // {
             //     $requestobj=app(RoleRequest::class);
@@ -39,6 +66,6 @@ class ModuleController extends AdminController
             //     return redirect()->route('adminrole.list')
             //                     ->with('success','Role Updated successfully.');
             // }    
-        return view('permissions.managerolepermision',compact('allmodules','allpermisionbyrole'))->with(array('breadcrumb'=>$breadcrumb));
+        return view('permissions.managerolepermision',compact('allmodules','allpermisionbyrole','roleid'))->with(array('breadcrumb'=>$breadcrumb));
     }
 }

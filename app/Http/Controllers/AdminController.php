@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -19,7 +18,6 @@ class AdminController extends BaseController
      use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     protected $admin;
-   
     protected $RolePermission;
      
      /**
