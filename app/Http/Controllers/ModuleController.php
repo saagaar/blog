@@ -38,12 +38,13 @@ class ModuleController extends AdminController
         		$data['role_id']=$roleid;
         		$finalarr[]=$data;
         	}
-         
+            
         	/***
         	*before inserting all new permission array 
         		 delete all that were set previous
         	*/
 			$permissioninterface->RemovePermission($roleid) ;
+
 			$permissioninterface->create($finalarr);
               return redirect()->route('adminrole.managepermission',$roleid)
                             ->with('success','Permission set successfully.');
@@ -58,14 +59,7 @@ class ModuleController extends AdminController
                             'current_menu'  =>  'Manage Roles'
                                                ]
                         ];
-            // if ($request->method()=='POST') 
-            // {
-            //     $requestobj=app(RoleRequest::class);
-            //     $validatedData = $requestobj->validated();
-            //     $this->roles->update($id,$validatedData);
-            //     return redirect()->route('adminrole.list')
-            //                     ->with('success','Role Updated successfully.');
-            // }    
+             
         return view('permissions.managerolepermision',compact('allmodules','allpermisionbyrole','roleid'))->with(array('breadcrumb'=>$breadcrumb));
     }
 }

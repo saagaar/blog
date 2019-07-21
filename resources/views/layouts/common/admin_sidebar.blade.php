@@ -31,9 +31,32 @@
   <ul class="sidebar-menu" data-widget="tree">
     <li class="header">Dashborad</li>
     <!-- Optionally, you can add icons to the links -->
-    <li><a href="{{route('helpcat.list')}}"><i class="fa fa-folder"></i> <span>Help Category</span></a></li>
-    <li><a href="{{route('adminblogcategory.list')}}"><i class="fa fa-folder"></i> <span>Blog category</span></a></li>
-    <li><a href="{{route('sitesetting')}}"><i class="fa fa-folder"></i> <span>Site setting</span></a></li>
+     <li><a href="{{route('sitesetting')}}"><i class="fa  fa-gear"></i> <span>Site setting</span></a>
+       
+    </li>
+    <li class="treeview">
+      <a href=""><i class="fa  fa-pencil-square"></i> <span>Blog</span>
+      <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+      </span>
+      </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('adminblogcategory.list')}}"><i class="fa  fa-paint-brush"></i> Blog Category</a></li>
+            <li><a href="{{route('adminblogcategory.list')}}"><i class="fa fa-info-circle"></i> Blog</a></li>
+         
+          </ul>
+      </li>
+  
+     <li class="treeview">
+    <a href="#"><i class="fa  fa-question-circle"></i>Help <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span></a>
+      <ul class="treeview-menu">
+            <li><a href="{{route('helpcat.list')}}"><i class="fa fa-info-circle"></i> Help Category</a></li>
+            <li><a href="#"><i class="fa  fa-question "></i> Help Story</a></li>
+         
+          </ul>
+    </li>
   </ul>
   <!-- /.sidebar-menu -->
 </section>

@@ -54,6 +54,7 @@
                               <div class="timeline-body permission-table comment-text clearfix"  style="background: #fff">
                                   @forelse ($eachmodule as $key=>$eachmoduleitems)
                                    <?php 
+                                   $checked="";
                                     if(in_array($eachmoduleitems['id'],$usermodulecollecion))
                                     {
                                       $checked="checked";
