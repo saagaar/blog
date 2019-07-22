@@ -16,6 +16,7 @@ class CreateAdminRolesTable extends Migration
         Schema::create('admin_roles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('role_name');
+            $table->string('slug')->uniqid();
             $table->enum('status', ['0', '1']);	
             $table->timestamps();
         });

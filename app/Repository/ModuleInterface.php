@@ -3,12 +3,7 @@ namespace App\Repository;
 
 interface ModuleInterface
 {
-	 /**
-     * Get's a post by it's ID
-     *
-     * @param int
-     */
-    public function getmoduleById($module_id);
+	 
       
       /**
      * Get's all posts.
@@ -38,6 +33,14 @@ interface ModuleInterface
      * @param int
      */
     public function delete($id);
+
+      /**
+     * gets Modulelist by moduleid
+     *
+     * @param int
+     */
+    public function getModuleByRouteName($Routename);
+
 
     
 }

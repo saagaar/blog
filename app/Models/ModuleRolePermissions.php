@@ -2,13 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class ModuleRolePermissions extends Model
+use Illuminate\Database\Eloquent\Relations\Pivot;
+class ModuleRolePermissions extends Pivot
 {
-    protected $guard='module_role_permissions';
-    public function logs()
-    {
-        return $this->morphMany(LogAdminActivitys::class, 'logable');
-    }
+    protected $table='module_role_permissions';
+   
+   
+  //   /**
+	 // * 	Get the ModuleRolePermission of user.
+	 // */
+    // public function AdminUsers()
+    // {
+    // 	return $this->belongsToMany('App\AdminUsers');
+    // }
+    // public function AdminRoles()
+    // {
+    //   return $this->belongsToMany('App\AdminRoles');
+    // }
+  //   *
+	 // * 	Get the ModuleRolePermission of Module.
+	 
+    // public function ModulePermissions()
+    // {
+    // 	return $this->belongsToMany('App\ModulePermissions');
+    // }
 }
+ 

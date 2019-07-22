@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as Auditables;
 
-class HelpCategories extends Model
+class HelpCategories extends Model implements Auditable
 {
+    use Auditables;
+
     protected $table='help_categories';
 
     /**

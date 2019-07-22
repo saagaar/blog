@@ -24,9 +24,8 @@ Class  ModuleRolePermission implements ModuleRolePermissionInterface
      *
      * @return mixed
      */
-    public function getAll(){
-      
-
+    public function getAll()
+    {
    	 return	$this->ModulePermission->latest();
     }
  	
@@ -36,7 +35,8 @@ Class  ModuleRolePermission implements ModuleRolePermissionInterface
      * @return mixed
    */  
     public function create(array $data){
-      return	$this->ModulePermission->create($data);
+
+      return $this->ModulePermission->insert($data);
     }
      /**
      * Updates a post.
@@ -46,20 +46,38 @@ Class  ModuleRolePermission implements ModuleRolePermissionInterface
      */
 
     public function update( $id,array $data){
-      return	$this->ModulePermission->find($id)->update($data);
+      return $this->ModulePermission->find($id)->update($data);
     }
 
       /**
-     * Deletes a post.
+     * Removes permission for specific role
      *
      * @param int
      */
-    public function delete($id){
-      return	$this->ModulePermission->find($id)->delete();
+    public function RemovePermission($role_id){
+      return	$this->ModulePermission->where('role_id',$role_id)->delete();
+    }
+     /**
+     * Get Permission list by userid.
+     *
+     * @param User object
+     * @return object
+     */
+    public function getModulePermissionListByUserId($role_id){
+      return  $this->ModulePermission->where('role_id', $role_id)->get();
     }
 
-     public function getModulePermissionListByUserId($user_id){
-      return  $this->ModulePermission->where('user_id', $user_id)->all();
+    /**
+     * Get userHasPersmissionByRouteName list by Role id and Module Id.
+     *
+     * @var role_id
+     * @var module_id
+     * @return object
+     */
+
+    public function userHasPersmissionByRouteName($role_id,$module_id)
+    {
+      return   $this->ModulePermission->where(['role_id'=> $role_id,'module_id'=>$module_id])->first();
     }
 }
 ?>

@@ -5,11 +5,14 @@ namespace App\Models;
 use App\Models\AdminRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as Auditables;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AdminUsers extends Authenticatable
+class AdminUsers extends Authenticatable implements Auditable
 {
     use Notifiable;
+    use Auditables;
 
     protected $guard='admin';
 
@@ -41,6 +44,11 @@ class AdminUsers extends Authenticatable
     ];
     public function AdminRoles(){
         $this->hasOne(AdminRoles::class);
+    }
+
+    public function ModulePermissions()
+    {
+        return $this->hasMany('App\ModuleRolePermissions','module_role_permissions');
     }
     public function logs()
     {

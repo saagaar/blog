@@ -27,12 +27,13 @@ interface ModuleRolePermissionInterface
 
     public function update( $id,array $data);
 
-      /**
-     * Deletes a post.
+     /**
+     * Deletes all Permision for a specifc role.
      *
      * @param int
      */
-    public function delete($id);
+    public function RemovePermission($role_id);
 
+    
     
 }

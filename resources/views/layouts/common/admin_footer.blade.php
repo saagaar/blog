@@ -65,8 +65,8 @@
           <div class="form-group">
             <label class="control-sidebar-subheading">
               <ul class="sidebar-menu" data-widget="tree">
-             <li><a href="{{route('adminrole.list')}}"><i class="fa fa-folder"></i> <span>Admin Roles</span></a></li>
-             <li><a href="{{route('adminuser.list')}}"><i class="fa fa-folder"></i> <span>Admin Users</span></a></li>
+             <li><a href="{{route('adminrole.list')}}"><i class="fa  fa-group"></i> <span>Admin Roles</span></a></li>
+             <li><a href="{{route('adminuser.list')}}"><i class="fa fa-user-plus"></i> <span>Admin Users</span></a></li>
            </ul>
             </label>
 

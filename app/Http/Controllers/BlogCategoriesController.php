@@ -14,17 +14,27 @@ class BlogcategoriesController extends AdminController
 
     function __construct(BlogcategoriesInterface $blogcategories)
     {
+        parent::__construct();
         $this->category=$blogcategories;
         
        
     }
     public function list()
     {
+        $breadcrumb=['breadcrumbs' => [
+                    'Dashboard' => route('admin.dashboard'),
+                    'current_menu'=>'Blog Category',
+                      ]];
         $categorys = $this->category->getAll()->paginate($this->PerPage);
-        return view('blog.listcategories',compact('categorys'));
+        return view('blog.listcategories')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb,'menu'=>'Blog Category'));
     }
     public function create(Request $request)
     {
+        $breadcrumb=['breadcrumbs' => [
+                    'Dashboard' => route('admin.dashboard'),
+                    'blog Category' => route('adminblogcategory.list'),
+                    'current_menu'=>'Create Blog Category',
+                      ]];
         if ($request->method()=='POST') {
 
             // $request=::class;
@@ -33,9 +43,9 @@ class BlogcategoriesController extends AdminController
         
         $this->category->create($validatedData);
        return redirect()->route('adminblogcategory.list')
-                            ->with('success','blog Category created successfully.');
+                            ->with(array('success'=>'blog Category created successfully.','breadcrumb'=>$breadcrumb));
         }
-       return view('blog.createcategories');
+       return view('blog.createcategories')->with(array('breadcrumb'=>$breadcrumb));;
     }
     public function delete($id)
     {
@@ -46,18 +56,21 @@ class BlogcategoriesController extends AdminController
     }
     public function edit(Request $request, $id)
     {
+        $breadcrumb=['breadcrumbs' => [
+                    'Dashboard' => route('admin.dashboard'),
+                    'blog Category' => route('adminblogcategory.list'),
+                    'current_menu'=>'Edit Blog Category',
+                      ]];
         $category =$this->category->getcatById($id);
-        if ($request->method()=='POST') {
-
-            // $request=::class;
+        if ($request->method()=='POST') 
+        {
             $requestobj=app(BlogcategoryRequest::class);
             $validatedData = $requestobj->validated();
-        
-        $this->category->update($id,$validatedData);
-        return redirect()->route('adminblogcategory.list')
+            $this->category->update($id,$validatedData);
+            return redirect()->route('adminblogcategory.list')
                         ->with('success','Blog category updated successfully.');
         }
         
-        return view('blog.editcategories',compact('category'));
+        return view('blog.editcategories',compact('category'))->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));
     }
 }

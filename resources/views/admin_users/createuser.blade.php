@@ -1,18 +1,6 @@
 @extends('layouts.common.main')
 @section('content') 
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Admin Users
-        <small>Create</small>
-      </h1>
-      @include('includes.breadcrumbs', ['breadcrumbs' => [
-    'Dashboard' => route('admin.dashboard'),
-    'Admin Users' => route('adminuser.list'),
-    'Create',
-      ]])
-    </section>
+
 
     <!-- Main content -->
     <section class="content">
@@ -120,5 +108,4 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
-  </div>
           @endsection

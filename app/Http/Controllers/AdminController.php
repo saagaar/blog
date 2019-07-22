@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,7 +8,6 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Services\NotificationCommander;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Repository\ModuleRolePermissionInterface;
 use Illuminate\Support\Facades\Route;
 use App\Repository\ModuleInterface;
 
@@ -20,7 +18,6 @@ class AdminController extends BaseController
      use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     protected $admin;
-   
     protected $RolePermission;
      
      /**
@@ -34,16 +31,18 @@ class AdminController extends BaseController
     */
     protected $PerPage=10;
 
-    public function __construct(ModuleRolePermissionInterface $RolePermission)
+    public function __construct()
     {
         $this->middleware('auth:admin')->except('logout');
-        $this->middleware('check_user_permission');
-        $this->RolePermission=$RolePermission;
-        
+        $this->middleware('check_user_permission')->except('logout');
     }
     public function dashboard()
     {
        
+        $breadcrumb=['breadcrumbs' => [
+                    'current_menu' => 'Dashboard',
+                    
+                      ]];
         // print_r();
        // echo '<pre>';
        //  $routes= Route::getRoutes()->getByName('checkpermission');
@@ -55,7 +54,7 @@ class AdminController extends BaseController
         // print_r($this->user);
         // $data=($this->user->getAll());
         // dd($data->username);
-        return view('admin.dashboard',compact('data'));
+        return view('admin.dashboard',compact('breadcrumb'));
     }
     
     public function logout()

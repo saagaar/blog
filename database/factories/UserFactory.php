@@ -48,7 +48,8 @@ $factory->define(ModulePermission::class, function (Faker $faker) {
     if($moduleids){
         $moduleid = $faker->randomElement($moduleids)->id;
     }
-    else{
+    else
+    {
         $moduleid = '0';
     }
     return [
@@ -58,6 +59,28 @@ $factory->define(ModulePermission::class, function (Faker $faker) {
         'parent_id'=>$moduleid
     ];
 });
+
+$factory->define(ModuleRolePermissions::class, function (Faker $faker) use ($factory){
+    $moduleids = App\Models\ModulePermissions::pluck('id');
+    $module=[];
+   // foreach($moduleids as $eachids)
+   // {
+     return [
+                 'module_id'=>$moduleids->random(),
+                 'role_id'=>1
+            ];
+   // }
+    // return  $module;
+});
+
+
+
+// factory(ModulePermissions::class, 20)->create()->each(
+//     function($modulerole) {
+//         factory(App\Models\ModuleRolePermissions::class)->create(['module_id' => $modulerole->id,'role_id'=>1]);
+//     }
+// );
+
 $factory->define(SiteOptions::class, function (Faker $faker) {
     $countryids = \DB::table('countrys')->select('id')->get();
     $countryid = $faker->randomElement($countryids)->id;

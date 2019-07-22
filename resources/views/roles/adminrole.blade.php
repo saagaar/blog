@@ -1,25 +1,5 @@
 @extends('layouts.common.main')
 @section('content') 
-
-<div class="content-wrapper">
-<section class="content-header">
-      <h1>
-        Role
-        <small>Create</small>
-      </h1>
-     @include('includes.breadcrumbs', ['breadcrumbs' => [
-    'Dashboard' => route('admin.dashboard'),
-    'Admin roles',
-      ]])
-    </section>
-
-@if(Session::has('success'))
-<div class="alert alert-success alert-block">
-						<button type="button" class="close" data-dismiss="alert">x</button>
-						<strong>Success! </strong>{!!session('success')!!}
-				</div>
-				@endif
-
 <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -43,11 +23,11 @@
                   <th>Status</th>
                   <th>Created at</th>
                   <th>Updated at</th>
-                  <th colspan="2">Action</th>
+                  <th colspan="3">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php  $i = 0; ?> 
+                @php  $i = 0 @endphp    
                 @if (!$adminroles->isEmpty())
                   @foreach ($adminroles as $adminrole)
                   
@@ -64,7 +44,7 @@
                     <td>{{$adminrole->created_at}}</td>
                     <td>{{$adminrole->updated_at}}</td>
                     
-                   
+                         <td><a href="{{route('adminrole.managepermission', $adminrole->id)}}"><i class="fa fa-gears"  aria-hidden="true"></i></a></td>
                         <td><a href="{{route('adminrole.edit', $adminrole->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                         <td><a href="{{route('adminrole.delete', $adminrole->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                        </td>
@@ -89,5 +69,4 @@
         </div>
     </div>
 </section>
-</div>
 @endsection
