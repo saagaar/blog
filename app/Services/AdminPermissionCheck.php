@@ -55,15 +55,19 @@ class AdminPermissionCheck
         $currentroute=Route::getCurrentRoute()->getAction();
         $currentRouteName=($currentroute['as']);
         $module=$this->Module->getModuleByRouteName($currentRouteName);
-        
         $this->User = \Auth::user(); 
         /**
         * check user permission
         * @var Roleid ,Module Id
         * @return mixed
         */
-         $permission=$this->RoleModule->userHasPersmissionByRouteName($this->User->role_id,$module->id);
-        return $permission;
+        if(!blank($module))
+        {
+             $permission=$this->RoleModule->userHasPersmissionByRouteName($this->User->role_id,$module->id);
+             return $permission;
+        }
+        return false;
+        
        
     }
 }

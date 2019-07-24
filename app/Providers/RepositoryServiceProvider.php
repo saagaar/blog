@@ -11,10 +11,12 @@ use App\Repository\ModuleRolePermissionInterface;
 use App\Repository\ModuleRole\ModuleRolePermission;
 use App\Repository\ModuleInterface;
 use App\Repository\Module\Module;
-use App\Repository\BlogcategoriesInterface;
-use App\Repository\Blogcategories\Blogcategories;
+use App\Repository\CategoryInterface;
+use App\Repository\category\Category;
 use App\Repository\SiteoptionsInterface;
 use App\Repository\Siteoptions\SiteOption;
+use App\Repository\BlogInterface;
+use App\Repository\blog\Blog;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -41,8 +43,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(ModuleInterface::class, Module::class);
         $this->app->singleton(AdminRoleInterface::class, AdminRole::class);
         $this->app->singleton(ModuleRolePermissionInterface::class, ModuleRolePermission::class);
-        $this->app->singleton(BlogcategoriesInterface::class, Blogcategories::class);
+        $this->app->singleton(CategoryInterface::class, Category::class);
         $this->app->singleton(SiteoptionsInterface::class, SiteOption::class);
+        $this->app->singleton(BlogInterface::class, Blog::class);
 
     }
 }

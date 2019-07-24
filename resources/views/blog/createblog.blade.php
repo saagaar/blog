@@ -4,14 +4,14 @@
     <section class="content">
       <div class="row">
       <div class="col-md-3">
-          <div class="box box-solid">
+          <div class="box box-solid box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">blog Category</h3>
+              <h3 class="box-title">Blog</h3>
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
                 <li><a href="{{route('adminblogcategory.list')}}"><span class="glyphicon glyphicon-minus"></span> List All blog Category</a></li>
-                <li class="{{ (request()->is('create/blogcategory')) ? 'active' : '' }}"><a href="{{route('adminblogcategory.create')}}"><span class="glyphicon glyphicon-minus"></span> Create blog Category</a></li>
+                <li class="{{ (request()->is('create/blogcategory')) ? 'active' : '' }}"><a href="{{route('adminblogcategory.create')}}"><span class="glyphicon glyphicon-plus"></span> Create Blog</a></li>
               </ul>
             </div>
           <!-- /.box-body -->
@@ -20,19 +20,19 @@
         <!-- left column -->
         <div class="col-md-9">
           <!-- general form elements -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Create blog Category</h3>
+          <div class="box ">
+            <div class="box-header">
+              <h3 class="box-title">Create Blog</h3>
             </div>
           <!-- Form Element sizes -->
-          <div class="box box-success">
+          <div class="box ">
             <div class="box-body">
-            <form action="{{route('adminblogcategory.create')}}" method="POST">
+            <form action="{{route('blog.create')}}" method="POST">
               @csrf
               <div class="box-body">
                 <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Enter blog Category">
+                  <label for="name">Title</label>
+                  <input type="text" class="form-control" name="title" id="name" value="{{ old('title') }}" placeholder="Enter Title">
                   @if ($errors->has('name'))
                 <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                 @endif

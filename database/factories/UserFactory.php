@@ -16,8 +16,11 @@ use Faker\Generator as Faker;
 |
 */
 $factory->define(AdminRoles::class, function (Faker $faker) {
+    $name=$faker->unique()->name;
+    $slug=str_replace(' ','-', $name);
     return [
-        'role_name' => $faker->unique()->name,
+        'role_name' =>$name ,
+        'slug'=>$slug
         
     ];
 });
@@ -35,7 +38,7 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->define(AdminUsers::class, function (Faker $faker) {
     $rolesid = \DB::table('admin_roles')->select('id')->get();
-    $role = $faker->randomElement($rolesid)->id;
+    $role =1;// $faker->randomElement($rolesid)->id;
     return [
         'username' => $faker->unique()->username,
         'email' => $faker->unique()->safeEmail,
@@ -121,19 +124,21 @@ $factory->define(Cms::class, function (Faker $faker) {
     ];
 });
 $factory->define(HelpCategories::class, function (Faker $faker) {
-    return [
-        'name'     =>$faker->text($maxNbChars = 20)
+    return 
+    [
+             'name'     =>$faker->text($maxNbChars = 20)
     ];
 });
 $factory->define(Helps::class, function (Faker $faker) {
     $categoryids = \DB::table('help_categorys')->select('id')->get();
     $categoryid = $faker->randomElement($categoryids)->id;
 
-    return [
-        'category_id'     =>    $categoryid,
-        'title'        =>$faker->text($maxNbChars = 20),
-        'description'          =>$faker->text($maxNbChars = 20),
-    ];
+    return 
+        [
+            'category_id'     =>    $categoryid,
+            'title'        =>$faker->text($maxNbChars = 20),
+            'description'          =>$faker->text($maxNbChars = 20),
+        ];
 });
 $factory->define(EmailSettings::class, function (Faker $faker) {
     return [
@@ -164,7 +169,7 @@ $factory->define(LogAdminActivitys::class, function (Faker $faker) {
         `created_at`            =>now()
     ];
 });
-$factory->define(Blogcategory::class, function (Faker $faker) {
+$factory->define(Categories::class, function (Faker $faker) {
     return [
         'name'                =>$faker->text($maxNbChars = 20),
         'slug'          =>$faker->unique()->text($maxNbChars = 20),

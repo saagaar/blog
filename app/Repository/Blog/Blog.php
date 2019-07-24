@@ -2,14 +2,14 @@
 
 namespace App\Repository\Blog;
 
-use App\Models\Blog;
+use App\Models\Blogs;
 use App\Repository\BlogInterface;
 
 Class Blog implements BlogInterface
 {
 	protected $blog;
 
-	public function __construct(Blog $blog)
+	public function __construct(Blogs $blog)
 	{
 		$this->blog=$blog;
 	}
