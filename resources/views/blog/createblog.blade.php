@@ -10,8 +10,8 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="{{route('adminblogcategory.list')}}"><span class="glyphicon glyphicon-minus"></span> List All blog Category</a></li>
-                <li class="{{ (request()->is('create/blogcategory')) ? 'active' : '' }}"><a href="{{route('adminblogcategory.create')}}"><span class="glyphicon glyphicon-plus"></span> Create Blog</a></li>
+                <li><a href="{{route('blog.list')}}"><span class="glyphicon glyphicon-minus"></span> All blogs</a></li>
+                <li class="{{ (request()->is('create/blog')) ? 'active' : '' }}"><a href="{{route('blog.create')}}"><span class="glyphicon glyphicon-plus"></span> Create Blog</a></li>
               </ul>
             </div>
           <!-- /.box-body -->
@@ -33,23 +33,43 @@
                 <div class="form-group">
                   <label for="name">Title</label>
                   <input type="text" class="form-control" name="title" id="name" value="{{ old('title') }}" placeholder="Enter Title">
-                  @if ($errors->has('name'))
-                <div class="alert alert-danger">{{ $errors->first('name') }}</div>
+                  @if ($errors->has('title'))
+                <div class="alert alert-danger">{{ $errors->first('title') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
-                  <label for="slug">Slug</label>
-                  <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}" placeholder="Enter Slug">
-                  @if ($errors->has('slug'))
-                <div class="alert alert-danger">{{ $errors->first('slug') }}</div>
+                  <label for="slug">Language</label>
+                  <select class="form-control" name="locale_id">
+                    @if(!empty($localelist))
+                      @foreach($localelist as  $eachlocale)
+                      <option value="{{$eachlocale['id']}}">{{$eachlocale['lang_name']}}</option>
+                      @endforeach
+                    @endif
+
+                  </select>
+                  @if ($errors->has('locale_id')) 
+                <div class="alert alert-danger">{{ $errors->first('locale_id') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
-                  <label for="Display">Display: </label>
-                  <label><input type="radio" name="display" value="Y">Yes</label>
-                  <label><input type="radio" name="display" value="N">No</label>
-                  @if ($errors->has('display'))
-                <div class="alert alert-danger">{{ $errors->first('display') }}</div>
+                  <label for="Save Method">Save Method: </label>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="1" checked>
+                        <label class="custom-control-label" for="defaultChecked">Save to Draft</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="2" >
+                        <label class="custom-control-label" for="defaultChecked">Publish</label>
+                      </div>
+                  @if ($errors->has('save_method'))
+                <div class="alert alert-danger">{{ $errors->first('save_methods') }}</div>
+                @endif
+                </div>
+                <div class="form-group">
+                  <label for="Content">Content: </label>
+                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
+                  @if ($errors->has('content'))
+                <div class="alert alert-danger">{{ $errors->first('content') }}</div>
                 @endif
                 </div>
               </div>
@@ -68,3 +88,4 @@
     </section>
     <!-- /.content -->
           @endsection
+      

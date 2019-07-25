@@ -5,10 +5,10 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Blog Category</h3>
+              <h3 class="box-title">All Blogs</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <a href="{{route('adminblogcategory.create')}}" class="btn btn-primary">Add Blog Category</a>
+                  <a href="{{route('blog.create')}}" class="btn btn-primary">Add Blogs</a>
                 </div>
               </div>
             </div>
@@ -20,9 +20,9 @@
                 <thead>
                 <tr>
                   <th>id</th>
-                  <th>Name</th>
-                  <th>Display</th>
-                  <th>slug</th>
+                  <th>Title</th>
+                  <th>Content</th>
+                  <th>Save/Publish</th>
                   <th>Created at</th>
                   <th>Updated at</th>
                   <th colspan="2">Action</th>
@@ -30,29 +30,29 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if (!$categorys->isEmpty())
-                @foreach ($categorys as $category)
-                
+                @if (!$blogs->isEmpty())
+                @foreach ($blogs as $eachblog)
                 <tr>
                   <td>{{ ++$i }}</td>
-                  <td>{{ $category->name }}</td>
+                  <td>{{ $eachblog->title }}</td>
+                   <td>{{strip_tags($eachblog->content) }}</td>
                   <td>
-                      @if ($category->display == 'Y')
-                        <span class="label label-success">Yes</span>
+                      @if ($eachblog->save_method == '1')
+                        <span class="label label-danger">Draft</span>
                       @else
-                        <span class="label label-danger">No</span>
+                        <span class="label label-success">Published</span>
                       @endif
                   </td>
-                  <td>{{$category->slug}}</td>
-                  <td>{{$category->created_at}}</td>
-                  <td>{{$category->updated_at}}</td>
-                  <td><a href="{{route('adminblogcategory.edit', $category->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('adminblogcategory.delete', $category->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td>{{$eachblog->lang_name}}</td>
+                  <td>{{$eachblog->created_at}}</td>
+                  <td>{{$eachblog->updated_at}}</td>
+                  <td><a href="{{route('blog.edit',[ $eachblog->id,str_slug($eachblog->title)])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('blog.delete', $eachblog->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="7" align="center" style="background-color: #d2d6de;"> No Blog Category Found </td>
+                    <td colspan="7" align="center" style="background-color: #d2d6de;"> No Blogs Found </td>
                   </tr>
                   @endif
                 </tbody>
@@ -60,7 +60,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $categorys->links() !!}
+              {!! $blogs->links() !!}
               </ul>
             </div>
             <!-- /.box-body -->

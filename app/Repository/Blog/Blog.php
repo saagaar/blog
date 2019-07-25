@@ -14,10 +14,18 @@ Class Blog implements BlogInterface
 		$this->blog=$blog;
 	}
 
+  /**
+   * Get  Blog by id
+   *
+   * @param int
+   */
+  public function GetBlogById($blogid){
+    return  $this->blog->where('id', $blogid)->first();
+  }
      
   public function GetAssociatedCategoryOfBlog($bloid){
       return	$this->blog->where('id', $bloid)->first();
-    }
+  }
 
       /**
      * Get's all posts.

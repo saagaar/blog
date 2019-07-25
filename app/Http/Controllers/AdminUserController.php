@@ -38,8 +38,6 @@ class AdminUserController extends AdminController
                   ]];
         if ($request->method()=='POST') 
         {
-
-            // $request=::class;
             $requestobj=app(AdminuserRequest::class);
             $validatedData = $requestobj->validated();
             $validatedData['password']= (Hash::make($requestobj->password));

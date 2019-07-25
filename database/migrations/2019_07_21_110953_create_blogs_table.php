@@ -22,7 +22,7 @@ class CreateBlogsTable extends Migration
                     ->references('id')->on('locales')
                     ->onDelete('cascade');
             $table->unsignedBigInteger('locale_id');
-            $table->enum('save_method',['1','2'])->comment('1=Save to draft,1-Publish')->default('1');
+            $table->enum('save_method',['1','2'])->comment('1=Save to draft,2-Publish')->default('1');
             $table->string('image');
         });
     }

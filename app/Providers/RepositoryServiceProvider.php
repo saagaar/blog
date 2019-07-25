@@ -17,6 +17,8 @@ use App\Repository\SiteoptionsInterface;
 use App\Repository\Siteoptions\SiteOption;
 use App\Repository\BlogInterface;
 use App\Repository\blog\Blog;
+use App\Repository\LocaleInterface;
+use App\Repository\locale\Locale;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -46,6 +48,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(CategoryInterface::class, Category::class);
         $this->app->singleton(SiteoptionsInterface::class, SiteOption::class);
         $this->app->singleton(BlogInterface::class, Blog::class);
-
+        $this->app->singleton(LocaleInterface::class, Locale::class);
     }
 }
