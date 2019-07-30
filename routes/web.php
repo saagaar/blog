@@ -72,13 +72,21 @@ Route::prefix('admin')->group(function()
 
 
 	//admin roles
-	Route::match(['get','post'],'/sitesetting','SiteOptionsController@edit')->name('sitesetting');
+	Route::match(['get','post'],'/sitesetting','SiteOptionController@edit')->name('sitesetting');
 
 	//blog category
-	Route::get('/list/blogcategory','BlogcategoriesController@list')->name('adminblogcategory.list');
-	Route::match(['get','post'],'/create/blogcategory','BlogcategoriesController@create')->name('adminblogcategory.create');
-	Route::match(['get','post'],'/edit/blogcategory/{id}','BlogcategoriesController@edit')->name('adminblogcategory.edit');
-	Route::get('/delete/blogcategory/{id}','BlogcategoriesController@delete')->name('adminblogcategory.delete');
+	Route::get('/list/blogcategory','CategoryController@list')->name('adminblogcategory.list');
+	Route::match(['get','post'],'/create/blogcategory','CategoryController@create')->name('adminblogcategory.create');
+	Route::match(['get','post'],'/edit/blogcategory/{id}','CategoryController@edit')->name('adminblogcategory.edit');
+	Route::get('/delete/blogcategory/{id}','CategoryController@delete')->name('adminblogcategory.delete');
 	//blog category
+
+	/**
+	*Routes for Creating Blog
+	**/
+	Route::get('/list/blog','BlogController@list')->name('blog.list');
+	Route::match(['get','post'],'/create/blog','BlogController@create')->name('blog.create');
+	Route::match(['get','post'],'/edit/blog/{id}/{slug}','BlogController@edit')->name('blog.edit');
+	Route::get('/delete/blog/{id}','BlogController@delete')->name('blog.delete');
 });
 Route::get('/admin/importmodules','AdminUserController@ImportModules')->name('adminuser.importmodules');

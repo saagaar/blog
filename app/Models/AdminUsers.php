@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\AdminRoles;
+// use App\Models\AdminRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use OwenIt\Auditing\Contracts\Auditable;

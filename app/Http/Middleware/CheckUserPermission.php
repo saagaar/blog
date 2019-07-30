@@ -42,14 +42,14 @@ class CheckUserPermission
          *
          * @return boolean
          */
-         $this->User = \Auth::user(); 
-         $role_id=$this->User->role_id;
+        $this->User = \Auth::user(); 
+        $role_id=$this->User->role_id;
         $getpermission=$this->AdminPermission->checkAdminPermission();
         if($getpermission || $role_id==1)
         {
             return $next($request);
         }
-        else if($previous && $previous!=$current)
+        else if(isset($previous) && $previous!=$current)
         {
             return redirect($previous)->withError('You are not Authorized to enter to this url!!');
         }

@@ -2,22 +2,30 @@
 
 namespace App\Repository\Blog;
 
-use App\Models\Blog;
+use App\Models\Blogs;
 use App\Repository\BlogInterface;
 
 Class Blog implements BlogInterface
 {
 	protected $blog;
 
-	public function __construct(Blog $blog)
+	public function __construct(Blogs $blog)
 	{
 		$this->blog=$blog;
 	}
 
+  /**
+   * Get  Blog by id
+   *
+   * @param int
+   */
+  public function GetBlogById($blogid){
+    return  $this->blog->where('id', $blogid)->first();
+  }
      
   public function GetAssociatedCategoryOfBlog($bloid){
       return	$this->blog->where('id', $bloid)->first();
-    }
+  }
 
       /**
      * Get's all posts.

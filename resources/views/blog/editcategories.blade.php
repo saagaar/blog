@@ -35,7 +35,7 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{ route('adminblogcategory.edit' , $category->id) }}" method="POST">
+            <form action="{{ route('adminblogcategory.edit' , $category->id) .'/'.str_slug($category->title)}}" method="POST">
             {{csrf_field()}}
               <div class="box-body">
                 <div class="form-group">

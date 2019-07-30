@@ -3,8 +3,14 @@ namespace App\Repository;
 
 interface BlogInterface
 {
+     /**
+     * Get  Blog by id
+     *
+     * @param int
+     */
+    public function GetBlogById($blogid);
 	 /**
-     * Get's a post by it's ID
+     * Get all category  by it's ID
      *
      * @param int
      */
