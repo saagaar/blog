@@ -11,6 +11,9 @@
     box-shadow: 3px 2px 3px #000;
     border-radius: 100px
 }
+.searchbar{
+  padding-top: 10px;
+}
 /*.main-sidebar{
   background: #6a7e87 !important;
 }*/

@@ -14,6 +14,8 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+               @component('layouts.components.search' )
+             @endcomponent
              <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>

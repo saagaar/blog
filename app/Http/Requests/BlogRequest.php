@@ -23,11 +23,21 @@ class BlogRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->method() == 'POST')
+          {
+            // Update operation, exclude the record with id from the validation:
+            $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+          }
+          else
+          {
+            $image = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+          }
         return [
                 'title'      => 'required|min:5|max:255',
                 'content'    =>'required|min:5',
                 'locale_id'  => 'required',
-                'save_method'=> 'required'
+                'save_method'=> 'required',
+                'image' => $image
         ];
     }
 }

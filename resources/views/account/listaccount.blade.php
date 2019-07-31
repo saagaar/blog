@@ -5,10 +5,10 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header  with-border">
-              <h3 class="box-title">All Admin users</h3>
+              <h3 class="box-title">All users Account</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <a href="{{route('adminuser.create')}}" class="btn btn-primary">Add users</a>
+                  <a href="{{route('account.create')}}" class="btn btn-primary">Add users account</a>
                 </div>
               </div>
               
@@ -21,10 +21,8 @@
                 <thead>
                 <tr>
                   <th>id</th>
-                  <th>Username</th>
+                  <th>Name</th>
                   <th>Email</th>
-                  <th>Status</th>
-                  <th>Role</th>
                   <th>Created at</th>
                   <th>Updated at</th>
                   <th colspan="2">Action</th>
@@ -32,33 +30,23 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if(!$adminusers->isEmpty())
-                @foreach ($adminusers as $adminuser)
+                @if(!$account->isEmpty())
+                @foreach ($account as $user)
                 
                 <tr>
                   <td>{{ ++$i }}</td>
-                  <td>{{ $adminuser->username }}</td>
-                  <td>{{ $adminuser->email }}</td>
-                  <td>
-                      @if ($adminuser->status == 0)
-                        <span class="label label-success">Active</span>
-                      @else
-                        <span class="label label-danger">Inactive</span>
-                      @endif
-                  </td>
-                  <td>{{$adminuser->role_id}}</td>
-                  <td>{{$adminuser->created_at}}</td>
-                  <td>{{$adminuser->updated_at}}</td>
-                  
+                  <td>{{ $user->name }}</td>
+                  <td>{{ $user->email }}</td>
+                  <td>{{$user->created_at}}</td>
+                  <td>{{$user->updated_at}}</td>
+                   <td><a href="{{route('account.edit',$user->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                  
-                      <td><a href="{{route('adminuser.edit', $adminuser->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                      <td><a href="{{route('adminuser.delete', $adminuser->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                     </td>
+                      
                 </tr>
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No Admin Users Found </td>
+                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No Users Found </td>
                   </tr>
                   @endif
                 </tbody>
@@ -66,7 +54,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $adminusers->links() !!}
+              {!! $account->links() !!}
               </ul>
             </div>
             

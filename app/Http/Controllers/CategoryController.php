@@ -16,13 +16,19 @@ class CategoryController extends AdminController
         $this->categories=$categories;
        
     }
-    public function list()
+    public function list(Request $request)
     {
         $breadcrumb=['breadcrumbs' => [
                     'Dashboard' => route('admin.dashboard'),
                     'current_menu'=>'Blog Category',
                       ]];
-        $categorys = $this->categories->getAll()->paginate($this->PerPage);
+        $search = $request->get('search');
+        if($search){
+            $categorys = $this->categories->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+        }else{
+            $categorys = $this->categories->getAll()->paginate($this->PerPage);
+        }
+        
         return view('blog.listcategories')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb,'menu'=>'Blog Category'));
     }
     public function create(Request $request)

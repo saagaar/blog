@@ -7,6 +7,7 @@ use App\Repository\LocaleInterface;
 // use App\Models\blogcategoriesegorys;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
+use Illuminate\Support\Facades\File;
 use App;
 class BlogController extends AdminController
 {
@@ -17,13 +18,18 @@ class BlogController extends AdminController
         parent::__construct();
         $this->blog=$blog;
     }
-    public function list()
+    public function list(Request $request)
     {
         $breadcrumb=['breadcrumbs' => [
                     'Dashboard' => route('admin.dashboard'),
                     'current_menu'=>'All Blogs',
                       ]];
-        $blogs = $this->blog->getAll()->paginate($this->PerPage);
+        $search = $request->get('search');
+        if($search){
+            $blogs = $this->blog->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+        }else{
+            $blogs = $this->blog->getAll()->paginate($this->PerPage);
+        }
         return view('blog.listblog')->with(array('blogs'=>$blogs,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
     }
     public function create(Request $request,LocaleInterface $Locale)
@@ -39,7 +45,11 @@ class BlogController extends AdminController
         {
             $requestobj=app(BlogRequest::class);
             $validatedData = $requestobj->validated();
+            $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('images/blogimages'), $imageName);
+            $validatedData['image'] = $imageName;
             $this->blog->create($validatedData);
+
             return redirect()->route('blog.list')
                              ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
         }
@@ -58,6 +68,17 @@ class BlogController extends AdminController
             {
                 $requestobj=app(BlogRequest::class);
                 $validatedData = $requestobj->validated();
+                if ($request->hasFile('image')) {
+                    $dir = 'images/blogimages/';
+                    if ($blog->image != '' && File::exists($dir . $blog->image))
+                    File::delete($dir . $blog->image);
+
+                    $imageName = time().'.'.request()->image->getClientOriginalExtension();
+                    request()->image->move(public_path('images/blogimages'), $imageName);
+                    $validatedData['image'] = $imageName;
+                }else {
+                    $validatedData['image'] = $blog->image;
+                }
                 $this->blog->update($id,$validatedData);
                 return redirect()->route('blog.list')
                             ->with('success','Blog Updated Successfully.');
@@ -67,9 +88,16 @@ class BlogController extends AdminController
     }
     public function delete($id)
     {
-        // $category =$this->blog->getcatById($id);
-        // $category->delete();
-        // return redirect()->route('adminblogcategory.list')
-        // ->with('success', 'Blog category has been deleted!!');
+       $blog =$this->blog->GetBlogById($id);
+
+        $result = $blog->delete();
+        if($result=='true'){
+            $dir = 'images/blogimages/';
+            if ($blog->image != '' && File::exists($dir . $blog->image)){
+                File::delete($dir . $blog->image);
+            }
+        }
+        return redirect()->route('blog.list')
+        ->with('success', 'Blog has been deleted!!');
     }
 }

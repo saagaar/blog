@@ -88,5 +88,10 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/blog','BlogController@create')->name('blog.create');
 	Route::match(['get','post'],'/edit/blog/{id}/{slug}','BlogController@edit')->name('blog.edit');
 	Route::get('/delete/blog/{id}','BlogController@delete')->name('blog.delete');
+	// route for user account
+	Route::get('/list/account','AccountController@list')->name('account.list');
+	Route::match(['get','post'],'/create/account','AccountController@create')->name('account.create');
+	Route::match(['get','post'],'/edit/account/{id}','AccountController@edit')->name('account.edit');
+	Route::get('/delete/account/{id}','AccountController@delete')->name('account.delete');
 });
 Route::get('/admin/importmodules','AdminUserController@ImportModules')->name('adminuser.importmodules');
