@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Http\Request;
 class AccountRequest extends FormRequest
 {
     /**
@@ -21,14 +21,20 @@ class AccountRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
        if ($this->method() == 'POST')
           {
+            if ($request->password) {
+                $password              = 'min:6';
+                $password_confirmation = 'min:6|same:password';
+            }else{
+                $password              = '';
+                $password_confirmation = '';
+            }
             // Update operation, exclude the record with id from the validation:
-            $email_rule = 'required|email|unique:users,email,' . $this->id;
-            $password              = 'required|min:6';
-            $password_confirmation = 'required|min:6|same:password';
+            $email_rule            = 'required|email|unique:users,email,' . $this->id;
+            
           }
           else
           {

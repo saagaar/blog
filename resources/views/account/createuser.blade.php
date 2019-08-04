@@ -69,6 +69,41 @@
                 <div class="alert alert-danger">{{ $errors->first('password_confirmation') }}</div>
                 @endif
                 </div>
+                <div class="form-group">
+                    <label for="phone">Phone number</label>
+                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone Number">
+                    @if ($errors->has('phone'))
+                  <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
+                  @endif
+                  </div>
+                   <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="address" id="address"  placeholder="Enter Address">
+                    @if ($errors->has('address'))
+                  <div class="alert alert-danger">{{ $errors->first('address') }}</div>
+                  @endif
+                  </div>
+                   <div class="form-group">
+                     <label for="Country">Country</label>
+                    <select name="country" class="form-control">
+                    <option value="">--Select--</option>
+                    @foreach ($countries as $country)
+                    
+                      <option value="{{$country->id}}">{{$country->country}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group">
+                <label>Date Of Birth:</label>
+
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="datepicker">
+                </div>
+                <!-- /.input group -->
+              </div>
               </div>
               <div class="form-group">
                   <label for="status">Status: </label>

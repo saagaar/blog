@@ -23,6 +23,7 @@
                   <th>id</th>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>Status</th>
                   <th>Created at</th>
                   <th>Updated at</th>
                   <th colspan="2">Action</th>
@@ -37,10 +38,22 @@
                   <td>{{ ++$i }}</td>
                   <td>{{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
+                  <td>
+                    @if($user->status=='0')
+                    <span class="label label-success">Active</span>
+                    @elseif ($user->status=='1')
+                    <span class="label label-danger">Inactive</span>
+                    @elseif ($user->status=='2')
+                    <span class="label label-warning">Closed</span>
+                    @elseif ($user->status=='3')
+                    <span class="label label-default">Suspended</span>
+                    @endif
+                  </td>
                   <td>{{$user->created_at}}</td>
                   <td>{{$user->updated_at}}</td>
                    <td><a href="{{route('account.edit',$user->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                 
+                    <td><a href="{{route('account.delete', $user->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                     </td>
                       
                 </tr>
                 @endforeach

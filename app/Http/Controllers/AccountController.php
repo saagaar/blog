@@ -6,6 +6,7 @@ use App\Repository\AccountInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
+use App\Models\Countrys;
 use App;
 class AccountController extends AdminController{
     protected $account;
@@ -54,8 +55,9 @@ class AccountController extends AdminController{
             return redirect()->route('account.list')
                         ->with('success','account created successfully.');
         }
+        $countries = Countrys::All();
         // $adminroles = $this->roles->getAll()->get();
-        return view('account.createuser',compact('breadcrumb'));
+        return view('account.createuser',compact('breadcrumb','countries'));
     }
     public function edit(Request $request,$id)
     {
@@ -76,5 +78,12 @@ class AccountController extends AdminController{
         }
         // $adminroles = $this->roles->getAll()->get();
         return view('account.edituser',compact('breadcrumb','accounts'));
+    }
+    public function delete($id)
+    {
+        $accounts =$this->account->getById($id);
+        $accounts->delete();
+        return redirect()->route('account.list')
+        ->with('success', 'User has been deleted!!');
     }
 }
