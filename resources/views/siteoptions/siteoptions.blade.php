@@ -80,6 +80,15 @@
                   <div class="alert alert-danger">{{ $errors->first('country') }}</div>
                   @endif
                   </div>
+                  <div class="form-group col-md-4">
+                      <br><br>
+                          <label for="user_activation">User Activation: </label>
+                            <input type="radio"  class="flat-red user_activation" name="user_activation"  value="Y" {{ $site->user_activation == 'Y' ? 'checked' : ''}}>Yes 
+                          <label><input type="radio" class="flat-red"  name="user_activation" value="N"  {{ $site->user_activation == 'N' ? 'checked' : ''}}>No</label>
+                          @if ($errors->has('user_activation'))
+                        <div class="alert alert-danger">{{ $errors->first('user_activation') }}</div>
+                        @endif
+                     </div> 
                       <div class="form-group col-md-4">
                           <label for="mode">Mode: </label>
                           <div class="custom-control custom-radio">
@@ -98,7 +107,15 @@
                           @if ($errors->has('mode'))
                           <div class="alert alert-danger">{{ $errors->first('mode') }}</div>
                         @endif
-                        </div>   
+                        </div>
+                        <div class="form-group col-md-4">
+                      <label for="maintainence">Maintainence</label>
+                      <input type="text" class="form-control" name="maintainence" id="maintainence" value="{{ $site->maintainence}}" placeholder="Enter Google Analytics">
+                      @if ($errors->has('maintainence'))
+                    <div class="alert alert-danger">{{ $errors->first('maintainence') }}</div>
+                    @endif
+                    </div>   
+
             </div>
 
           </div>

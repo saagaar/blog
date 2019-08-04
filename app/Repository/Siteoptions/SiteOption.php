@@ -21,8 +21,6 @@ Class  SiteOption implements SiteoptionsInterface
   public function update( array $data)
   {
       $id=1;
-      // $data=$this->sitesettings->latest()->first();
-      // print_r($data); exit;
       return	$this->sitesettings->find($id)->update($data);
   }
 }

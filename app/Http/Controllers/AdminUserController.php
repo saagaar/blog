@@ -19,14 +19,25 @@ class AdminUserController extends AdminController
         $this->middleware('auth:admin')->except('logout');
        
     }
-    public function list()
+    public function list(Request $request)
     {
        $breadcrumb=['breadcrumbs' => [
                 'Dashboard' => route('admin.dashboard'),
                 'Admin Users' => route('adminuser.list'),
                 'current_menu'=> 'Edit User',
                   ]];
-        $adminusers = $this->admin->getAll()->paginate($this->PerPage);
+
+         $search = $request->get('search');
+        if($search){
+            $adminusers = $this->admin->getAll()
+                    ->where('username', 'like', '%' . $search . '%')
+                     ->orWhere('email', 'like', '%' . $search . '%')
+                    ->paginate($this->PerPage)
+                    ->withPath('?search=' . $search);
+        }else{
+            $adminusers = $this->admin->getAll()->paginate($this->PerPage);
+        }         
+        
         return view('admin_users.listadmin')->with(array('adminusers'=>$adminusers,'breadcrumb'=>$breadcrumb));
     }
     public function create(Request $request)

@@ -23,6 +23,8 @@
                   <th>Title</th>
                   <th>Content</th>
                   <th>Save/Publish</th>
+                  <th>Image</th>
+                  <th>Language Name</th>
                   <th>Created at</th>
                   <th>Updated at</th>
                   <th colspan="2">Action</th>
@@ -43,6 +45,7 @@
                         <span class="label label-success">Published</span>
                       @endif
                   </td>
+                  <td><img src="{{ asset('images/blogimages/'.$eachblog['image']) }}" alt="Blog Image" height="42" width="42"></td>
                   <td>{{$eachblog->lang_name}}</td>
                   <td>{{$eachblog->created_at}}</td>
                   <td>{{$eachblog->updated_at}}</td>
@@ -52,7 +55,7 @@
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="7" align="center" style="background-color: #d2d6de;"> No Blogs Found </td>
+                    <td colspan="9" align="center" style="background-color: #d2d6de;"> No Blogs Found </td>
                   </tr>
                   @endif
                 </tbody>

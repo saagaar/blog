@@ -17,16 +17,24 @@ class AdminRoleController extends AdminController
         $this->roles=$adminrole;
         $this->middleware('auth:admin')->except('logout');
     }
-    public function list()
+    public function list(Request $request)
     {
         $breadcrumbs=['breadcrumbs' => [
                         'Dashboard' => route('admin.dashboard'),
                         'current_menu'=>'Admin roles',
                      ]];
-        $adminroles = $this->roles->getAll()->paginate($this->PerPage);
+        $search = $request->get('search');
+        if($search){
+            $adminroles = $this->roles->getAll()
+                ->where('role_name', 'like', '%' . $search . '%')
+                ->paginate($this->PerPage)
+                ->withPath('?search=' . $search);
+        }else{
+           $adminroles = $this->roles->getAll()->paginate($this->PerPage);
+        }
         return view('roles.adminrole')->with(array('adminroles'=>$adminroles,'breadcrumb'=>$breadcrumbs));
     }
-    public function create(Request $request)
+    public function create()
     {
         $breadcrumb=['breadcrumbs'  => [
                      'Dashboard'     => route('admin.dashboard'),

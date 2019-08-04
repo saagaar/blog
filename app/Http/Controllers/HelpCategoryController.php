@@ -18,14 +18,22 @@ class HelpCategoryController extends AdminController
         
        
     }
-    public function list()
+    public function list(Request $request)
     {
         $breadcrumb=['breadcrumbs' => [
                     'Dashboard' => route('admin.dashboard'),
                     'current_menu'=>'Help Category',
                     ]];
-
-        $categorys = $this->category->getAll()->paginate($this->PerPage);
+        $search = $request->get('search');
+        if($search){
+            $categorys = $this->category->getAll()
+            ->where('name', 'like', '%' . $search . '%')
+            ->paginate($this->PerPage)
+            ->withPath('?search=' . $search);
+        }else{
+            $categorys = $this->category->getAll()->paginate($this->PerPage);
+        }
+        
         return view('help.helpcat')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb));
     }
     public function create(Request $request)

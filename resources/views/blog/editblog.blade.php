@@ -27,7 +27,7 @@
           <!-- Form Element sizes -->
           <div class="box ">
             <div class="box-body">
-            <form action="{{route('blog.edit',[$blog->id,str_slug($blog->title)])}}" method="POST">
+            <form action="{{route('blog.edit',[$blog->id,str_slug($blog->title)])}}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="box-body">
                 <div class="form-group">
@@ -52,7 +52,7 @@
                 @endif
                 </div>
                 <div class="form-group">
-                  <label for="Save Method">Save Method: </label>
+                  <label for="save_method">Save Method: </label>
                     <div class="custom-control custom-radio">
                         <input type="radio" class="custom-control-input flat-red" name="save_method"  value="1" @if($blog->save_method==1) checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Save to Draft</label>
@@ -70,6 +70,14 @@
                     <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here..">{{$blog->content}}</textarea>
                   @if ($errors->has('content'))
                 <div class="alert alert-danger">{{ $errors->first('content') }}</div>
+                @endif
+                </div>
+                <div class="form-group">
+                  <label for="image">Image Upload</label>
+                  <img src="{{ asset('images/blogimages/'.$blog['image']) }}" alt="Blog Image" height="42" width="42">
+                  <input type="file" class="form-control" name="image" id="image">
+                  @if ($errors->has('image'))
+                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                 @endif
                 </div>
               </div>

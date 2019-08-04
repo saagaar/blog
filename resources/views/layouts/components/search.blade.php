@@ -1,9 +1,18 @@
-<form action="#" method="get" class="">
-    <div class="input-group">
-      <input type="text" name="q" class="form-control" placeholder="Search...">
-      <span class="input-group-btn">
-            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-            </button>
-          </span>
-    </div>
-</form>
+<div class="searchbar">
+	<form action="#" method="get" class="">
+	    <div class="col-sm-5 form-group">
+	        <div class="input-group">
+	            <input class="form-control" id="search"
+	                   value="{{ request('search') }}"
+	                   placeholder="Search" name="search"
+	                   type="text" id="search"/>
+	            <div class="input-group-btn">
+	                <button type="submit" class="btn btn-flat"
+	                >
+	                    Search
+	                </button>
+	            </div>
+	        </div>
+	    </div>
+	</form>
+</div>

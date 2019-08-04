@@ -35,6 +35,18 @@
        
     </li>
     <li class="treeview">
+      <a href=""><i class="fa fa-user-plus"></i> <span>User Account</span>
+      <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+      </span>
+      </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('account.list')}}"><i class="fa  fa-paint-brush"></i>Account</a></li>
+            <li><a href="#"><i class="fa fa-info-circle"></i> User Roles</a></li>
+         
+          </ul>
+      </li>
+    <li class="treeview">
       <a href=""><i class="fa  fa-pencil-square"></i> <span>Blog</span>
       <span class="pull-right-container">
       <i class="fa fa-angle-left pull-right"></i>
@@ -57,6 +69,7 @@
          
           </ul>
     </li>
+
   </ul>
   <!-- /.sidebar-menu -->
 </section>
