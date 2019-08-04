@@ -43,6 +43,10 @@ $app->singleton(
 
 //For Activity log
 $app->register(OwenIt\Auditing\AuditingServiceProvider::class);
+
+
+$app->alias('cache', \Illuminate\Cache\CacheManager::class); 
+
 // $app->configure('audit');
 // $app->withFacades();
 // $app->withEloquent();
