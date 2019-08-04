@@ -2,19 +2,19 @@
 
 namespace App\Repository\Role;
 
-use App\Models\AdminRoles;
-use App\Repository\AdminRoleInterface;
+use App\Models\Roles;
+use App\Repository\RoleInterface;
 
-Class  AdminRole implements AdminRoleInterface
+Class Role implements RoleInterface
 {
 	protected $role;
-	public function __construct(AdminRoles $AdminRole)
+	public function __construct(Roles $role)
 	{
-		$this->role=$AdminRole;
+		$this->userrole=$role;
 	}
 
-  public function getroleById($AdminRole_id){
-      return	$this->role->where('id', $AdminRole_id)->first();
+  public function getroleById($role_id){
+      return	$this->userrole->where('id', $role_id)->first();
     }
 
       /**
@@ -23,7 +23,7 @@ Class  AdminRole implements AdminRoleInterface
      * @return mixed
      */
     public function getAll(){
-   	 return	$this->role->latest();
+   	 return	$this->userrole->latest();
     }
  	
  	  /**
@@ -32,7 +32,7 @@ Class  AdminRole implements AdminRoleInterface
      * @return mixed
      */
     public function create(array $data){
-      return	$this->role->create($data);
+      return	$this->userrole->create($data);
     }
      /**
      * Updates a post.
@@ -42,7 +42,7 @@ Class  AdminRole implements AdminRoleInterface
      */
 
     public function update( $id,array $data){
-      return	$this->role->find($id)->update($data);
+      return	$this->userrole->find($id)->update($data);
     }
 
       /**
@@ -51,7 +51,7 @@ Class  AdminRole implements AdminRoleInterface
      * @param int
      */
     public function delete($id){
-      return	$this->role->find($id)->delete();
+      return	$this->userrole->find($id)->delete();
     }
 }
 ?>

@@ -22,6 +22,8 @@ use App\Repository\locale\Locale;
 use Illuminate\Support\ServiceProvider;
 use App\Repository\AccountInterface;
 use App\Repository\Account\Accounts;
+use App\Repository\RoleInterface;
+use App\Repository\Role\Role;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -51,5 +53,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(BlogInterface::class, Blog::class);
         $this->app->singleton(LocaleInterface::class, Locale::class);
         $this->app->singleton(AccountInterface::class, Accounts::class);
+        $this->app->singleton(RoleInterface::class, Role::class);
     }
 }

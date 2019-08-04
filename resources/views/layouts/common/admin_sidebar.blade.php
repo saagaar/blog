@@ -42,7 +42,7 @@
       </a>
           <ul class="treeview-menu">
             <li><a href="{{route('account.list')}}"><i class="fa  fa-paint-brush"></i>Account</a></li>
-            <li><a href="#"><i class="fa fa-info-circle"></i> User Roles</a></li>
+            <li><a href="{{route('roles.list')}}"><i class="fa fa-info-circle"></i> User Roles</a></li>
          
           </ul>
       </li>

@@ -63,11 +63,11 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/user/{id}','AdminUserController@delete')->name('adminuser.delete');
 	//admin users
 	//admin roles
-	Route::get('/roles','AdminRoleController@list')->name('adminrole.list');
-	Route::match(['get','post'],'/createrole','AdminRoleController@create')->name('adminrole.create');
-	Route::match(['get','post'],'/editrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
-	Route::get('/deleterole/{id}','AdminRoleController@delete')->name('adminrole.delete');
-	Route::match(['get','post'],'/managerole/{roleid}','ModuleController@manage')->name('adminrole.managepermission');
+	Route::get('/list/adminrole','AdminRoleController@list')->name('adminrole.list');
+	Route::match(['get','post'],'/create/adminrole','AdminRoleController@create')->name('adminrole.create');
+	Route::match(['get','post'],'/edit/adminrole/{id}','AdminRoleController@edit')->name('adminrole.edit');
+	Route::get('/delete/adminrole/{id}','AdminRoleController@delete')->name('adminrole.delete');
+	Route::match(['get','post'],'/manage/adminrole/{roleid}','ModuleController@manage')->name('adminrole.managepermission');
 
 
 
@@ -93,5 +93,11 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/account','AccountController@create')->name('account.create');
 	Route::match(['get','post'],'/edit/account/{id}','AccountController@edit')->name('account.edit');
 	Route::get('/delete/account/{id}','AccountController@delete')->name('account.delete');
+
+	//Route for user Account roles
+	Route::get('/list/roles','RolesController@list')->name('roles.list');
+	Route::match(['get','post'],'/create/roles','RolesController@create')->name('roles.create');
+	Route::match(['get','post'],'/edit/roles/{id}/{slug}','RolesController@edit')->name('roles.edit');
+	Route::get('/delete/roles/{id}','RolesController@delete')->name('roles.delete');
 });
 Route::get('/admin/importmodules','AdminUserController@ImportModules')->name('adminuser.importmodules');

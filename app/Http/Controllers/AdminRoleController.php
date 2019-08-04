@@ -34,7 +34,7 @@ class AdminRoleController extends AdminController
         }
         return view('roles.adminrole')->with(array('adminroles'=>$adminroles,'breadcrumb'=>$breadcrumbs));
     }
-    public function create()
+    public function create(Request $request)
     {
         $breadcrumb=['breadcrumbs'  => [
                      'Dashboard'     => route('admin.dashboard'),
