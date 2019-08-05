@@ -7,8 +7,8 @@ use Illuminate\Support\Collection;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\PermissionRegistrar;
-// use OwenIt\Auditing\Contracts\Auditable;
-// use OwenIt\Auditing\Auditable as Auditables;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as Auditables;
 use Spatie\Permission\Traits\RefreshesPermissionCache;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Permission\Exceptions\PermissionDoesNotExist;
@@ -16,11 +16,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Permission\Exceptions\PermissionAlreadyExists;
 use Spatie\Permission\Contracts\Permission as PermissionContract;
 
-class Permission extends Model implements PermissionContract//,Auditables
+class Permission extends Model implements PermissionContract,Auditable
 {
     use HasRoles;
     use RefreshesPermissionCache;
-    // use Auditables;
+    use Auditables;
     protected $guarded = ['id'];
 
     public function __construct(array $attributes = [])
