@@ -48,13 +48,13 @@
                 <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                 @endif
                 </div>
-                <div class="form-group">
+             <!--    <div class="form-group">
                   <label for="guard_name">Guard Name:</label>
                   <input type="text" class="form-control" name="guard_name" id="guard_name" value="{{ old('guard_name') }}" placeholder="Enter guard name">
                 @if ($errors->has('guard_name'))
                 <div class="alert alert-danger">{{ $errors->first('guard_name') }}</div>
                 @endif
-                </div>
+                </div> -->
                
               </div>
               <!-- /.box-body -->

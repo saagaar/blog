@@ -8,10 +8,9 @@
               <h3 class="box-title">All permissions users</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <a href="{{route('permission.create')}}" class="btn btn-primary">Add users</a>
+                  <a href="{{route('permission.create')}}" class="btn btn-primary">Add Users Permission</a>
                 </div>
               </div>
-              
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -23,7 +22,6 @@
                   <th>id</th>
                   <th>Name</th>
                   <th>GuardName</th>
-                  
                   <th>Created at</th>
                   <th>Updated at</th>
                   <th colspan="2">Action</th>
@@ -42,15 +40,14 @@
                   <td>{{$permission->created_at}}</td>
                   <td>{{$permission->updated_at}}</td>
                   
-                 
-                      <td><a href="{{route('adminuser.edit', $permission->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                      <td><a href="{{route('adminuser.delete', $permission->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      <td><a href="{{route('permission.edit',$permission->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                      <td><a href="{{route('permission.delete', $permission->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                      </td>
                 </tr>
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No Admin Users Found </td>
+                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No permission Users Found </td>
                   </tr>
                   @endif
                 </tbody>

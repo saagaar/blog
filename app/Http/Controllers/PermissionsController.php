@@ -66,6 +66,7 @@ class PermissionsController extends AdminController{
         $permissions =$this->permission->getById($id);
         if ($request->method()=='POST') 
         {
+   
             $requestobj=app(PermissionsRequest::class);
             $validatedData = $requestobj->validated();
            $this->permission->update($id,$validatedData);
