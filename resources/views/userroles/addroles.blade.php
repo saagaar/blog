@@ -47,17 +47,20 @@
                 <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                 @endif
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="guard_name">Guard Name</label>
                   <input type="text" class="form-control" name="guard_name" id="guard_name" value="{{ old('guard_name') }}" placeholder="Enter Guard name">
                 @if ($errors->has('guard_name'))
                 <div class="alert alert-danger">{{ $errors->first('guard_name') }}</div>
                 @endif
-                </div>
+                </div> -->
                 <div class="form-group">
                   <label for="permissions">permissions</label>
-                  <input type="text" class="form-control" name="permissions" id="permissions" value="{{ old('permissions') }}" placeholder="Enter Guard name">
-                    <select multiple="multiple" class="form-control select2" name="permission[]" id="permission">
+                  <!-- value="{{ $permissions }}" -->
+                    <select multiple="multiple" class="form-control select2"  name="permission[]" id="permission">
+                      @foreach ($permissions as $values)
+                      <option value="{{ $values->name }}"> {{ $values->name }}  </option>
+                      @endforeach
                     </select>
                     <p class="help-block"></p>
                     @if($errors->has('permission'))

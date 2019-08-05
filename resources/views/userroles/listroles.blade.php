@@ -40,8 +40,8 @@
                     <td>{{$role->created_at}}</td>
                     <td>{{$role->updated_at}}</td>
                     
-                        <td><a href="{{route('adminrole.edit', $adminrole->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                        <td><a href="{{route('adminrole.delete', $adminrole->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <td><a href="{{route('roles.edit', $role->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                        <td><a href="{{route('roles.delete', $role->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                        </td>
                   </tr>
                   @endforeach
