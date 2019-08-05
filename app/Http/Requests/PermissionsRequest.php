@@ -24,7 +24,8 @@ class PermissionsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'              =>'required',
+            'guard_name'        =>'required'
         ];
     }
 }

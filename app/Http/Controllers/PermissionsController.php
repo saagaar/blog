@@ -48,6 +48,7 @@ class PermissionsController extends AdminController{
         {
             $requestobj=app(PermissionsRequest::class);
             $validatedData = $requestobj->validated();
+            // dd($validatedData);
             $this->permission->create($validatedData);
             return redirect()->route('permission.list')
                         ->with('success','permission created successfully.');

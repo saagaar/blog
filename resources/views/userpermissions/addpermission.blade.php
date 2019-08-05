@@ -9,20 +9,20 @@
 
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Admin user</h3>
+              <h3 class="box-title">User Permission</h3>
 
               <!-- <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
               </div> -->
             </div>
-            <!-- <div class="box-body no-padding">
+            <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="{{route('adminuser.list')}}"><span class="glyphicon glyphicon-minus"></span> List All Admin user</a></li>
-                <li class="{{ (request()->is('admin/createuser')) ? 'active' : '' }}"><a href="{{route('adminuser.create')}}"><span class="glyphicon glyphicon-minus"></span> Create Admin user</a></li>
+                <li><a href="{{route('permission.list')}}"><span class="glyphicon glyphicon-minus"></span> List All user permission</a></li>
+                <li class="{{ (request()->is('create/Permission')) ? 'active' : '' }}"><a href="{{route('permission.create')}}"><span class="glyphicon glyphicon-minus"></span> Create permission users</a></li>
                 
               </ul>
-            </div> -->
+            </div>
             <!-- /.box-body -->
           </div>
           <!-- /. box -->
@@ -38,21 +38,21 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{route('adminuser.create')}}" method="POST">
+            <form action="{{route('permission.create')}}" method="POST">
               @csrf
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" name="username" id="name" value="{{ old('username') }}" placeholder="Enter username">
-                @if ($errors->has('username'))
-                <div class="alert alert-danger">{{ $errors->first('username') }}</div>
+                  <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Enter name">
+                @if ($errors->has('name'))
+                <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
-                  <label for="email">Guard Name:</label>
-                  <input type="text" class="form-control" name="guardname" id="guardname" value="{{ old('guardname') }}" placeholder="Enter guardname">
-                @if ($errors->has('email'))
-                <div class="alert alert-danger">{{ $errors->first('guardname') }}</div>
+                  <label for="guard_name">Guard Name:</label>
+                  <input type="text" class="form-control" name="guard_name" id="guard_name" value="{{ old('guard_name') }}" placeholder="Enter guard name">
+                @if ($errors->has('guard_name'))
+                <div class="alert alert-danger">{{ $errors->first('guard_name') }}</div>
                 @endif
                 </div>
                
