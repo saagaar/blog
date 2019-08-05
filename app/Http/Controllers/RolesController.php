@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Roles;
 use App\Http\Controllers\AdminController; 
 use App\Repository\RoleInterface;
 use App\Repository\PermissionInterface;
@@ -10,10 +11,12 @@ use App\Http\Requests\UserRoleRequest;
 class RolesController extends AdminController
 {
    protected $role;
+   protected $permission;
     function __construct(RoleInterface $role,PermissionInterface $permission)
     {
         parent::__construct();
         $this->roles=$role;
+        $this->userpermissions=$permission;
         $this->middleware('auth:admin')->except('logout');
     }
     public function list(Request $request)
@@ -33,32 +36,35 @@ class RolesController extends AdminController
         }
         return view('userroles.listroles')->with(array('roles'=>$roles,'breadcrumb'=>$breadcrumbs));
     }
-    public function create()
+    public function create(Request $request)
     {
         $breadcrumb=['breadcrumbs'  => [
                      'Dashboard'     => route('admin.dashboard'),
-                     'Admin Roles'   => route('role.list'),
+                     'Admin Roles'   => route('roles.list'),
                      'current_menu'  =>'Create Account roles',
                     ]];
+        $userpermission = $this->userpermissions->getAll()->get();
+        // dd($userpermission);
         if ($request->method()=='POST') 
         {
             // $request=::class;
             $requestobj=app(UserRoleRequest::class);
+            // dd($requestobj);
             $validatedData = $requestobj->validated();
-            $this->roles->create($validatedData->except('permission'));
-            $permissions = $request->input('permission') ? $request->input('permission') : [];
-            $this->roles->givePermissionTo($permissions);
+            $rr = Roles::create($requestobj->except('permission'));
+            $permissions = $requestobj->input('permission') ? $requestobj->input('permission') : [];
+            $rr->givePermissionTo($permissions);
 
-            return redirect()->route('role.list')
+            return redirect()->route('roles.list')
                         ->with('success','Roles created successfully.');
         }
-       return view('userroles.createrole')->with(array('breadcrumb'=>$breadcrumb));
+       return view('userroles.addroles')->with(array('breadcrumb'=>$breadcrumb,'permissions'=>$userpermission));
     }
     public function edit(Request $request,$id)
     {
       $breadcrumb=['breadcrumbs' => [
                 'Dashboard' => route('admin.dashboard'),
-                'Users Roles' => route('role.list'),
+                'Users Roles' => route('roles.list'),
                 'current_menu'=>'Edit Users Roles',
                   ]];
         $role =$this->roles->getById($id);
