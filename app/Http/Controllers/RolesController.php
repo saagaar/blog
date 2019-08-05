@@ -10,10 +10,12 @@ use App\Http\Requests\UserRoleRequest;
 class RolesController extends AdminController
 {
    protected $role;
+   protected $permission;
     function __construct(RoleInterface $role,PermissionInterface $permission)
     {
         parent::__construct();
         $this->roles=$role;
+        $this->userpermissions=$permission;
         $this->middleware('auth:admin')->except('logout');
     }
     public function list(Request $request)
@@ -33,13 +35,14 @@ class RolesController extends AdminController
         }
         return view('userroles.listroles')->with(array('roles'=>$roles,'breadcrumb'=>$breadcrumbs));
     }
-    public function create()
+    public function create(Request $request)
     {
         $breadcrumb=['breadcrumbs'  => [
                      'Dashboard'     => route('admin.dashboard'),
-                     'Admin Roles'   => route('role.list'),
+                     'Admin Roles'   => route('roles.list'),
                      'current_menu'  =>'Create Account roles',
                     ]];
+        $userpermission = $this->userpermissions->getAll()->pluck('name', 'name');
         if ($request->method()=='POST') 
         {
             // $request=::class;
@@ -52,7 +55,7 @@ class RolesController extends AdminController
             return redirect()->route('role.list')
                         ->with('success','Roles created successfully.');
         }
-       return view('userroles.createrole')->with(array('breadcrumb'=>$breadcrumb));
+       return view('userroles.addroles')->with(array('breadcrumb'=>$breadcrumb,'permissions'=>$userpermission));
     }
     public function edit(Request $request,$id)
     {
