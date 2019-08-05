@@ -107,3 +107,7 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/permission/{id}','PermissionsController@delete')->name('permission.delete');
 });
 Route::get('/admin/importmodules','AdminUserController@ImportModules')->name('adminuser.importmodules');
+
+
+		//Route for permission//
+		Route::match(['get','post'],'/create/permission','PermissionsController@create')->name('permission.create');

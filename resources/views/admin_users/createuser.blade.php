@@ -43,7 +43,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" name="username" id="name" value="{{ old('name') }}" placeholder="Enter username">
+                  <input type="text" class="form-control" name="username" id="name" value="{{ old('username') }}" placeholder="Enter username">
                 @if ($errors->has('username'))
                 <div class="alert alert-danger">{{ $errors->first('username') }}</div>
                 @endif
