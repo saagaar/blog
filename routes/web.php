@@ -97,7 +97,13 @@ Route::prefix('admin')->group(function()
 	//Route for user Account roles
 	Route::get('/list/roles','RolesController@list')->name('roles.list');
 	Route::match(['get','post'],'/create/roles','RolesController@create')->name('roles.create');
-	Route::match(['get','post'],'/edit/roles/{id}/{slug}','RolesController@edit')->name('roles.edit');
+	Route::match(['get','post'],'/edit/roles/{id}','RolesController@edit')->name('roles.edit');
 	Route::get('/delete/roles/{id}','RolesController@delete')->name('roles.delete');
+
+	//Route for Account Permission
+	Route::get('/list/permission','PermissionsController@list')->name('permission.list');
+	Route::match(['get','post'],'/create/permission','PermissionsController@create')->name('permission.create');
+	Route::match(['get','post'],'/edit/permission/{id}','PermissionsController@edit')->name('permission.edit');
+	Route::get('/delete/permission/{id}','PermissionsController@delete')->name('permission.delete');
 });
 Route::get('/admin/importmodules','AdminUserController@ImportModules')->name('adminuser.importmodules');

@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AdminController; 
 use App\Repository\RoleInterface;
+use App\Repository\PermissionInterface;
 
 class RolesController extends AdminController
 {
    protected $role;
-    function __construct(RoleInterface $role)
+    function __construct(RoleInterface $role,PermissionInterface $permission)
     {
         parent::__construct();
         $this->roles=$role;
@@ -44,7 +45,10 @@ class RolesController extends AdminController
             // $request=::class;
             $requestobj=app(RoleRequest::class);
             $validatedData = $requestobj->validated();
-            $this->roles->create($validatedData);
+            $this->roles->create($validatedData->except('permission'));
+            $permissions = $request->input('permission') ? $request->input('permission') : [];
+            $this->roles->givePermissionTo($permissions);
+
             return redirect()->route('role.list')
                         ->with('success','Roles created successfully.');
         }

@@ -34,11 +34,13 @@ class AccountRequest extends FormRequest
             }
             // Update operation, exclude the record with id from the validation:
             $email_rule            = 'required|email|unique:users,email,' . $this->id;
+            $phone                 = 'required|unique:users,phone,' . $this->id;
             
           }
           else
           {
             $email_rule            = 'required|email|unique:users,email';
+            $phone                 = 'required|unique:users,phone';
             $password              = 'required|min:6';
             $password_confirmation = 'required|min:6|same:password';
 
@@ -49,6 +51,7 @@ class AccountRequest extends FormRequest
             'status'                =>'required',
             'password'              => $password,
             'password_confirmation' => $password_confirmation,
+            'phone'                 =>  $phone,
         ];
     }
 }

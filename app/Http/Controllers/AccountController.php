@@ -50,6 +50,7 @@ class AccountController extends AdminController{
         {
             $requestobj=app(AccountRequest::class);
             $validatedData = $requestobj->validated();
+            $validatedData['dob'] = date("Y-m-d", strtotime($requestobj->dob));
             $validatedData['password']= (Hash::make($requestobj->password));
             $this->account->create($validatedData);
             return redirect()->route('account.list')
@@ -71,6 +72,7 @@ class AccountController extends AdminController{
         {
             $requestobj=app(AccountRequest::class);
             $validatedData = $requestobj->validated();
+            $validatedData['dob'] = date("Y-m-d", strtotime($requestobj->dob));
             $validatedData['password']= (Hash::make($requestobj->password));
            $this->account->update($id,$validatedData);
             return redirect()->route('account.list')
