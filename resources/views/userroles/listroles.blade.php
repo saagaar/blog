@@ -23,6 +23,7 @@
                   <th>id</th>
                   <th>Name</th>
                   <th>Guard Name</th>
+                  <th>Roles</th>
                   <th>Created at</th>
                   <th>Updated at</th>
                   <th colspan="3">Action</th>
@@ -37,6 +38,11 @@
                     <td>{{ ++$i }}</td>
                     <td>{{ $role->name }}</td>
                     <td>{{$role->guard_name}}</td>
+                    <td>
+                       @foreach ($role->permissions()->pluck('name') as $permission)
+                                        <span class="label label-info label-many">{{ $permission }}</span>
+                                    @endforeach
+                    </td>
                     <td>{{$role->created_at}}</td>
                     <td>{{$role->updated_at}}</td>
                     

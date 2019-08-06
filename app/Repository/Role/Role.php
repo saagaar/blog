@@ -4,7 +4,10 @@ namespace App\Repository\Role;
 
 use App\Models\Roles;
 use App\Repository\RoleInterface;
-
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Exceptions\RoleDoesNotExist;
+use Spatie\Permission\Exceptions\GuardDoesNotMatch;
+use Spatie\Permission\Exceptions\RoleAlreadyExists;
 Class Role implements RoleInterface
 {
 	protected $role;
@@ -13,8 +16,9 @@ Class Role implements RoleInterface
 		$this->userrole=$role;
 	}
 
-  public function getroleById($role_id){
-      return	$this->userrole->where('id', $role_id)->first();
+  public function getroleById($id){
+    // dd($role_id);
+      return	$this->userrole->where('id', $id)->first();
     }
 
       /**

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Roles;
+// use App\Models\Roles;
 use App\Http\Controllers\AdminController; 
 use App\Repository\RoleInterface;
 use App\Repository\PermissionInterface;
@@ -51,7 +51,7 @@ class RolesController extends AdminController
             $requestobj=app(UserRoleRequest::class);
             // dd($requestobj);
             $validatedData = $requestobj->validated();
-            $rr = Roles::create($requestobj->except('permission'));
+            $rr = $this->roles->create($requestobj->except('permission'));
             $permissions = $requestobj->input('permission') ? $requestobj->input('permission') : [];
             $rr->givePermissionTo($permissions);
 
@@ -67,24 +67,27 @@ class RolesController extends AdminController
                 'Users Roles' => route('roles.list'),
                 'current_menu'=>'Edit Users Roles',
                   ]];
-        $role =$this->roles->getById($id);
+        $userpermission = $this->userpermissions->getAll()->get();
+        $role =$this->roles->getroleById($id);
         if ($request->method()=='POST') 
         {
             $requestobj=app(UserRoleRequest::class);
             $validatedData = $requestobj->validated();
-            $this->roles->update($id,$validatedData->except('permission'));
+            $role->update($requestobj->except('permission'));
             $permissions = $request->input('permission') ? $request->input('permission') : [];
-            $this->roles->syncPermissions($permissions);
-            return redirect()->route('role.list')
+            // dd($permissions);
+            $role->syncPermissions($permissions);
+            return redirect()->route('roles.list')
                         ->with('success','Roles edited successfully.');
         }
-        return view('account.edituser',compact('breadcrumb','role'));
+        return view('userroles.editrole')->with(array('breadcrumb'=>$breadcrumb,'role'=>$role,'permissions'=>$userpermission));;
     }
     public function delete($id)
     {
-        $role =$this->roles->getById($id);
-        $role->delete();
-        return redirect()->route('role.list')
+        $del = $this->roles->getroleById($id);
+        // dd($del);
+        $del->delete();
+        return redirect()->route('roles.list')
         ->with('success', 'Roles has been deleted!!');
     }
 }
