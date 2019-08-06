@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\AdminController;
 use App\Repository\AccountInterface;
+use App\Repository\RoleInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
@@ -10,11 +11,11 @@ use App\Models\Countrys;
 use App;
 class AccountController extends AdminController{
     protected $account;
-    // protected $adminrole;
-    function __construct(AccountInterface $account)//,AdminRoleInterface $adminrole)
+    protected $roles;
+    function __construct(AccountInterface $account,RoleInterface $roles)
     {
         $this->account=$account;
-        // $this->roles=$adminrole;
+        $this->roles=$roles;
         $this->middleware('auth:admin')->except('logout');
        
     }
@@ -46,19 +47,23 @@ class AccountController extends AdminController{
                 'Users Account' => route('account.list'),
                 'current_menu'=>'Add Users Account',
                   ]];
+        $roles = $this->roles->getAll()->get();
         if ($request->method()=='POST') 
         {
             $requestobj=app(AccountRequest::class);
             $validatedData = $requestobj->validated();
             $validatedData['dob'] = date("Y-m-d", strtotime($requestobj->dob));
             $validatedData['password']= (Hash::make($requestobj->password));
-            $this->account->create($validatedData);
+            $user = $this->account->create($validatedData);
+            
+            $rr = $request->input('roles') ? $request->input('roles') : [];
+            $user->assignRole($rr);  
             return redirect()->route('account.list')
                         ->with('success','account created successfully.');
         }
         $countries = Countrys::All();
         // $adminroles = $this->roles->getAll()->get();
-        return view('account.createuser',compact('breadcrumb','countries'));
+        return view('account.createuser')->with(array('countries'=>$countries,'roles'=>$roles,'breadcrumb'=>$breadcrumb));
     }
     public function edit(Request $request,$id)
     {

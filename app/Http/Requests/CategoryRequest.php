@@ -26,14 +26,14 @@ class CategoryRequest extends FormRequest
         if ($this->method() == 'POST')
           {
             // Update operation, exclude the record with id from the validation:
-            $slug = 'required|min:5|max:255|unique:categories,slug,'. $this->id;
+            $slug = 'required|min:2|max:255|unique:categories,slug,'. $this->id;
           }
           else
           {
-            $slug = 'required|min:5|max:255|unique:categories,slug';
+            $slug = 'required|min:2|max:255|unique:categories,slug';
           }
         return [
-                'name'      => 'required|min:5|max:255',
+                'name'      => 'required|min:2|max:255',
                 'display'   => 'required',
                 'slug'      => $slug
         ];

@@ -4,7 +4,7 @@ namespace App\Repository\Account;
 
 use App\Models\User;
 use App\Repository\AccountInterface;
-
+use Spatie\Permission\Traits\HasRoles;
 Class  Accounts implements AccountInterface
 {
 	protected $user;

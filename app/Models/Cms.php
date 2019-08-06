@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Cms extends Model
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as Auditables;
+class Cms extends Model implements Auditable
 {
-    protected $guarded='cms';
-
+    use Auditables;
+    protected $guard='cms';
     /**
      * The attributes that are mass assignable.
      *

@@ -7,11 +7,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as Auditables;
+use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements Auditable
 {
     use Notifiable;
     use Auditables;
-
+    use HasRoles;
     /**
      * The attributes that are mass assignable.
      *
@@ -38,4 +39,8 @@ class User extends Authenticatable implements Auditable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function role()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
 }

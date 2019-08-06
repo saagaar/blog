@@ -52,6 +52,8 @@ class AccountRequest extends FormRequest
             'password'              => $password,
             'password_confirmation' => $password_confirmation,
             'phone'                 =>  $phone,
+            'address'               =>'',
+            'country'               =>''
         ];
     }
 }

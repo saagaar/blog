@@ -23,6 +23,7 @@
                   <th>id</th>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>Roles</th>
                   <th>Status</th>
                   <th>Created at</th>
                   <th>Updated at</th>
@@ -38,6 +39,11 @@
                   <td>{{ ++$i }}</td>
                   <td>{{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
+                  <td>
+                                    @foreach ($user->roles()->pluck('name') as $role)
+                                        <span class="label label-info label-many">{{ $role }}</span>
+                                    @endforeach
+                                </td>
                   <td>
                     @if($user->status=='0')
                     <span class="label label-success">Active</span>

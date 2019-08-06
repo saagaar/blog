@@ -70,6 +70,21 @@
                 @endif
                 </div>
                 <div class="form-group">
+                  <label for="roles" class="control-label">Roles</label>
+                  <!-- value="{{ $roles }}" -->
+                    <select multiple="multiple" class="form-control select2"  name="roles[]" id="roles">
+                      @foreach ($roles as $values)
+                      <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                      @endforeach
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('roles'))
+                        <p class="help-block">
+                            {{ $errors->first('roles') }}
+                        </p>
+                    @endif
+                </div>
+                <div class="form-group">
                     <label for="phone">Phone number</label>
                     <input type="text" class="form-control" name="phone" value="{{ old('phone') }}" id="phone" placeholder="Phone Number">
                     @if ($errors->has('phone'))

@@ -5,7 +5,7 @@ namespace App\Repository\Cms;
 use App\Models\Cms;
 use App\Repository\CmsInterface;
 
-Class  Cms implements CmsInterface
+Class  Cmss implements CmsInterface
 {
 	protected $cms;
 

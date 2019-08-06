@@ -79,7 +79,7 @@ class BlogController extends AdminController
                 }else {
                     $validatedData['image'] = $blog->image;
                 }
-                $this->blog->update($id,$validatedData);
+                $blog->update($validatedData);
                 return redirect()->route('blog.list')
                             ->with('success','Blog Updated Successfully.');
             }

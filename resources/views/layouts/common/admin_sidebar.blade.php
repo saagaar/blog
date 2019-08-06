@@ -41,11 +41,12 @@
       </span>
       </a>
           <ul class="treeview-menu">
-            <li><a href="{{route('account.list')}}"><i class="fa  fa-paint-brush"></i>Account</a></li>
-            <li><a href="{{route('roles.list')}}"><i class="fa fa-info-circle"></i> User Roles</a></li>
-            <li><a href="{{route('permission.list')}}"><i class="fa fa-info-circle"></i> User Permissions</a></li>
+            <li><a href="{{route('account.list')}}"><i class="fa  fa-paint-brush"></i>Accounts</a></li>
+            <li><a href="{{route('roles.list')}}"><i class="fa fa-group"></i> User Roles</a></li>
+            <li><a href="{{route('permission.list')}}"><i class="glyphicon glyphicon-lock"></i> User Permissions</a></li>
           </ul>
       </li>
+      <li><a href="{{route('cms.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>CMS</span></a>
     <li class="treeview">
       <a href=""><i class="fa  fa-pencil-square"></i> <span>Blog</span>
       <span class="pull-right-container">

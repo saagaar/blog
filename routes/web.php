@@ -105,6 +105,12 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/permission','PermissionsController@create')->name('permission.create');
 	Route::match(['get','post'],'/edit/permission/{id}','PermissionsController@edit')->name('permission.edit');
 	Route::get('/delete/permission/{id}','PermissionsController@delete')->name('permission.delete');
+
+	//Route for Cms
+	Route::get('/list/cms','CmsController@list')->name('cms.list');
+	Route::match(['get','post'],'/create/cms','CmsController@create')->name('cms.create');
+	Route::match(['get','post'],'/edit/cms/{id}','CmsController@edit')->name('cms.edit');
+	Route::get('/delete/cms/{id}','CmsController@delete')->name('cms.delete');
 });
 Route::get('/admin/importmodules','AdminUserController@ImportModules')->name('adminuser.importmodules');
 

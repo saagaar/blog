@@ -26,6 +26,8 @@ use App\Repository\RoleInterface;
 use App\Repository\Role\Role;
 use App\Repository\PermissionInterface;
 use App\Repository\Userpermission\Permissions;
+use App\Repository\CmsInterface;
+use App\Repository\Cms\Cmss;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -57,5 +59,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(AccountInterface::class, Accounts::class);
         $this->app->singleton(RoleInterface::class, Role::class);
         $this->app->singleton(PermissionInterface::class, Permissions::class);
+        $this->app->singleton(CmsInterface::class, Cmss::class);
     }
 }
