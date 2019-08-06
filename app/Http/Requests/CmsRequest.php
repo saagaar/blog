@@ -13,7 +13,7 @@ class CmsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class CmsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'heading' => 'required',
+            'content'=>'required',
+            'cms_slug'=>'required',
+            'page_title'=>'required',
+            'meta_key'=>'required',
+            'meta_description'=>'required',
+            'is_display'=>'required',
+            'cms_type'=>'required',
+            'deletable'=>'required'
         ];
     }
 }

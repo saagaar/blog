@@ -1,1 +1,82 @@
-listcms.blade.php
+@extends('layouts.common.main')
+@section('content') 
+<section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header  with-border">
+              <h3 class="box-title">All CMS</h3>
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <a href="{{route('cms.create')}}" class="btn btn-primary">Add CMS </a>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              @component('layouts.components.search' )
+             @endcomponent  
+              <table id="example2" class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                   <th>id</th>
+                  <th>Heading</th>
+                  <th>Content</th>
+                  <th>CMS slug</th>
+                  <th>Page Title</th>
+                  <th>Meta Keywords</th>
+                  <th>Meta Description</th>
+                  <th>Is Display</th>
+                  <th>CMS type</th>
+                  <th>Is Deletable</th>
+                  <th>Created at</th>
+                  <th>Updated at</th>
+                  <th colspan="2">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php  $i = 0; ?>
+                @if(!$cms->isEmpty())
+                @foreach ($cms as $eachcms)
+                
+                <tr>
+                  <td>{{ ++$i }}</td>
+                  <td>{{ $eachcms->heading }}</td>
+                  <td>{{ $eachcms->content }}</td>
+                   <td>{{ $eachcms->cms_slug }}</td>
+                    <td>{{ $eachcms->page_title }}</td>
+                  <td>{{ $eachcms->meta_key }}</td>
+                  <td>{{ $eachcms->meta_description }}</td>
+                  <td>{{ $eachcms->is_display }}</td>
+                    <td>{{ $eachcms->cms_type }}</td>
+                      <td>{{ $eachcms->deletable }}</td>
+                 
+                 
+                  <td>{{$eachcms->created_at}}</td>
+                  <td>{{$eachcms->updated_at}}</td>
+                  
+                      <td><a href="{{route('cms.edit',$eachcms->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                      <td><a href="{{route('cms.delete', $eachcms->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                     </td>
+                </tr>
+                @endforeach
+                @else
+                    <tr>
+                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No CMS Found </td>
+                  </tr>
+                  @endif
+                </tbody>
+              </table>
+            </div>
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+              {!! $cms->links() !!}
+              </ul>
+            </div>
+            
+            <!-- /.box-body -->
+          </div>
+        </div>
+    </div>
+</section>
+@endsection
