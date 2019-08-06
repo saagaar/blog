@@ -47,7 +47,7 @@ class AccountController extends AdminController{
                 'Users Account' => route('account.list'),
                 'current_menu'=>'Add Users Account',
                   ]];
-        $roles = $this->roles->getAll()->get();
+        $allroles = $this->roles->getAll()->get();
         if ($request->method()=='POST') 
         {
             $requestobj=app(AccountRequest::class);
@@ -56,14 +56,15 @@ class AccountController extends AdminController{
             $validatedData['password']= (Hash::make($requestobj->password));
             $user = $this->account->create($validatedData);
             
-            $rr = $request->input('roles') ? $request->input('roles') : [];
-            $user->assignRole($rr);  
+            $roles = $request->input('roles') ? $request->input('roles') : [];
+            // dd($roles);
+            $user->assignRole($roles);  
             return redirect()->route('account.list')
                         ->with('success','account created successfully.');
         }
         $countries = Countrys::All();
         // $adminroles = $this->roles->getAll()->get();
-        return view('account.createuser')->with(array('countries'=>$countries,'roles'=>$roles,'breadcrumb'=>$breadcrumb));
+        return view('account.createuser')->with(array('countries'=>$countries,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
     }
     public function edit(Request $request,$id)
     {
@@ -72,6 +73,7 @@ class AccountController extends AdminController{
                 'Users Account' => route('account.list'),
                 'current_menu'=>'Edit Users Account',
                   ]];
+                  $allroles = $this->roles->getAll()->get();
         $accounts =$this->account->getById($id);
         if ($request->method()=='POST') 
         {
@@ -79,12 +81,16 @@ class AccountController extends AdminController{
             $validatedData = $requestobj->validated();
             $validatedData['dob'] = date("Y-m-d", strtotime($requestobj->dob));
             $validatedData['password']= (Hash::make($requestobj->password));
-           $this->account->update($id,$validatedData);
+            $accounts->update($validatedData);
+            $roles = $request->input('roles') ? $request->input('roles') : [];
+            // dd($roles);
+            $accounts->syncRoles($roles);  
             return redirect()->route('account.list')
                         ->with('success','account edited successfully.');
         }
+        $countries = Countrys::All();
         // $adminroles = $this->roles->getAll()->get();
-        return view('account.edituser',compact('breadcrumb','accounts'));
+        return view('account.edituser')->with(array('countries'=>$countries,'accounts'=>$accounts,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
     }
     public function delete($id)
     {

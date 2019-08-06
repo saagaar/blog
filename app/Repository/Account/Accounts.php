@@ -3,12 +3,13 @@
 namespace App\Repository\Account;
 
 use App\Models\User;
-use App\Repository\AccountInterface;
 use Spatie\Permission\Traits\HasRoles;
+use App\Repository\AccountInterface;
+
 Class  Accounts implements AccountInterface
 {
 	protected $user;
-
+    use HasRoles;
 	public function __construct(User $user)
 	{
 		$this->account=$user;
