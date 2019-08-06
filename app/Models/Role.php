@@ -14,14 +14,14 @@ use Spatie\Permission\Traits\RefreshesPermissionCache;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Roles extends Model implements Auditable,RoleContract
+class Role extends Model implements Auditable,RoleContract
 {
     use Auditables;
      use HasPermissions;
     use RefreshesPermissionCache;
 
-    protected $guard='roles';
-    protected $table='roles';
+    protected $guarded = ['id'];
+    // protected $table='roles';
     /**
      * The attributes that are mass assignable.
      *
@@ -31,7 +31,7 @@ class Roles extends Model implements Auditable,RoleContract
         'name','guard_name'
     ];
 
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
 
     public function __construct(array $attributes = [])
     {

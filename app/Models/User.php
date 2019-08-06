@@ -31,14 +31,19 @@ class User extends Authenticatable implements Auditable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+    // *
+    //  * The attributes that should be cast to native types.
+    //  *
+    //  * @var array
+     
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+     public function setPasswordAttribute($input)
+    {
+        if ($input)
+            $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
+    }
     public function role()
     {
         return $this->belongsToMany(Role::class, 'role_user');

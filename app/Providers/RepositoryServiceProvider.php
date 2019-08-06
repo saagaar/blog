@@ -23,7 +23,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Repository\AccountInterface;
 use App\Repository\Account\Accounts;
 use App\Repository\RoleInterface;
-use App\Repository\Role\Role;
+use App\Repository\Role\Roles;
 use App\Repository\PermissionInterface;
 use App\Repository\Userpermission\Permissions;
 use App\Repository\CmsInterface;
@@ -57,7 +57,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(BlogInterface::class, Blog::class);
         $this->app->singleton(LocaleInterface::class, Locale::class);
         $this->app->singleton(AccountInterface::class, Accounts::class);
-        $this->app->singleton(RoleInterface::class, Role::class);
+        $this->app->singleton(RoleInterface::class, Roles::class);
         $this->app->singleton(PermissionInterface::class, Permissions::class);
         $this->app->singleton(CmsInterface::class, Cmss::class);
     }

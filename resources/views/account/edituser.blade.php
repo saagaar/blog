@@ -64,6 +64,28 @@
                   <label for="password_confirmation">Password Confirmation</label>
                   <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Enter password again">
                 </div>
+                <div class="form-group">
+                  <label for="roles" class="control-label">Roles</label>
+                  <!-- value="{{ $roles }}" -->
+                    <select multiple="multiple" class="form-control select2"  name="roles[]" id="roles">
+                      @foreach ($roles as $values)
+                      <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                      @endforeach
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('roles'))
+                        <p class="help-block">
+                            {{ $errors->first('roles') }}
+                        </p>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone number</label>
+                    <input type="text" class="form-control" name="phone" value="{{$accounts->email}}" id="phone" placeholder="Phone Number">
+                    @if ($errors->has('phone'))
+                  <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
+                  @endif
+                  </div>
               </div>
               <div class="form-group">
                   <label for="status">Status: </label>

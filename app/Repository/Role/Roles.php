@@ -2,16 +2,16 @@
 
 namespace App\Repository\Role;
 
-use App\Models\Roles;
+use App\Models\Role;
 use App\Repository\RoleInterface;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Exceptions\RoleDoesNotExist;
 use Spatie\Permission\Exceptions\GuardDoesNotMatch;
 use Spatie\Permission\Exceptions\RoleAlreadyExists;
-Class Role implements RoleInterface
+Class Roles implements RoleInterface
 {
 	protected $role;
-	public function __construct(Roles $role)
+	public function __construct(Role $role)
 	{
 		$this->userrole=$role;
 	}
