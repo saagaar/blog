@@ -44,11 +44,11 @@ class cmsController extends AdminController
 
         if ($request->method()=='POST') 
         {
-            $requestobj=app(CmsRequest::class);
+            $requestobj=app(CmsRequest::class); 
             $validatedData = $requestobj->validated();
             $this->cms->create($validatedData);
 
-            return redirect()->route('cms.list')
+            return redirect()->route('cms.list') 
                              ->with(array('success'=>'cms created successfully.','breadcrumb'=>$breadcrumb));
         }
         return view('cms.createcms')->with(array('breadcrumb'=>$breadcrumb));
