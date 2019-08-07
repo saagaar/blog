@@ -40,6 +40,6 @@ class Blogs extends Model implements Auditable
     }
 
     public function Locales(){
-       return $this->belongsTo(Locales::class);
+       return $this->belongsTo(Locales::class,'locale_id');
     }
 }
