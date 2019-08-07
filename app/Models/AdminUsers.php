@@ -43,7 +43,7 @@ class AdminUsers extends Authenticatable implements Auditable
         'email_verified_at' => 'datetime',
     ];
     public function AdminRoles(){
-        $this->hasOne(AdminRoles::class);
+        return $this->hasOne(AdminRoles::class);
     }
 
     public function ModulePermissions()

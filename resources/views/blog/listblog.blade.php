@@ -46,7 +46,11 @@
                       @endif
                   </td>
                   <td><img src="{{ asset('images/blogimages/'.$eachblog['image']) }}" alt="Blog Image" height="42" width="42"></td>
-                  <td>{{$eachblog->lang_name}}</td>
+                  <td>
+                     @foreach ($eachblog->Locales()->pluck('lang_name') as $role)
+                                        <span class="label label-info label-many">{{ $role }}</span>
+                                    @endforeach
+                  </td>
                   <td>{{$eachblog->created_at}}</td>
                   <td>{{$eachblog->updated_at}}</td>
                   <td><a href="{{route('blog.edit',[ $eachblog->id,str_slug($eachblog->title)])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>

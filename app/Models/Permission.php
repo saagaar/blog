@@ -22,7 +22,7 @@ class Permission extends Model implements PermissionContract,Auditable
     use RefreshesPermissionCache;
     use Auditables;
     protected $guarded = ['id'];
-
+    protected $guard_name = 'web';
     public function __construct(array $attributes = [])
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? config('auth.defaults.guard');
@@ -35,7 +35,7 @@ class Permission extends Model implements PermissionContract,Auditable
     public static function create(array $attributes = [])
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? Guard::getDefaultName(static::class);
-
+        // dd($attributes['guard_name']);
         $permission = static::getPermissions(['name' => $attributes['name'], 'guard_name' => $attributes['guard_name']])->first();
 
         if ($permission) {
