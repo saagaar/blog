@@ -22,13 +22,8 @@
                    <th>id</th>
                   <th>Heading</th>
                   <th>Content</th>
-                  <th>CMS slug</th>
-                  <th>Page Title</th>
-                  <th>Meta Keywords</th>
-                  <th>Meta Description</th>
                   <th>Is Display</th>
                   <th>CMS type</th>
-                  <th>Is Deletable</th>
                   <th>Created at</th>
                   <th>Updated at</th>
                   <th colspan="2">Action</th>
@@ -43,20 +38,29 @@
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachcms->heading }}</td>
                   <td>{{ $eachcms->content }}</td>
-                   <td>{{ $eachcms->cms_slug }}</td>
-                    <td>{{ $eachcms->page_title }}</td>
-                  <td>{{ $eachcms->meta_key }}</td>
-                  <td>{{ $eachcms->meta_description }}</td>
-                  <td>{{ $eachcms->is_display }}</td>
-                    <td>{{ $eachcms->cms_type }}</td>
-                      <td>{{ $eachcms->deletable }}</td>
-                 
-                 
+                  <td>
+                      @if($eachcms->is_display=='Y')
+                       <span class="label label-success">Active</span>
+                       @else
+                       <span class="label label-danger">Inactive</span>
+                       @endif
+                  </td>
+                  <td>
+                     @if($eachcms->cms_type=='website')
+                       <span class="label label-success">Active</span>
+                       @else
+                       <span class="label label-danger">Inactive</span>
+                       @endif
+                  </td>
                   <td>{{$eachcms->created_at}}</td>
                   <td>{{$eachcms->updated_at}}</td>
                   
                       <td><a href="{{route('cms.edit',$eachcms->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                      <td><a href="{{route('cms.delete', $eachcms->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+
+                      <td>
+                      @if($eachcms->deletable=='Y')
+                       <a href="{{route('cms.delete',$eachcms->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      @endif  
                      </td>
                 </tr>
                 @endforeach

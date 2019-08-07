@@ -65,18 +65,25 @@ class cmsController extends AdminController
             {
                 $requestobj=app(CmsRequest::class);
                 $validatedData = $requestobj->validated();
+                // dd($validatedData);
                 $this->cms->update($id,$validatedData);
                 return redirect()->route('cms.list')
-                            ->with('success','cms Updated Successfully.');
+                            ->with('success','CMS Updated Successfully.');
             }
             return view('cms.editcms',compact('cms','breadcrumb'));
     }
     public function delete($id)
     {
        $cms =$this->cms->getcmsById($id);
-
+       if ($cms->deletable=='N'){
+           return redirect()->route('cms.list')
+        ->with('error', 'cms is undeletable');
+       }else{
         $cms->delete();
         return redirect()->route('cms.list')
         ->with('success', 'cms has been deleted!!');
+       }
+       
+        
     }
 }
