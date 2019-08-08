@@ -25,10 +25,12 @@ class TestimonialController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
+
             $Testimonial = $this->testimony->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
             $Testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }
+
         return view('testimonial.list')->with(array('testimony'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
     }
     public function create(Request $request,LocaleInterface $Locale)
@@ -50,7 +52,11 @@ class TestimonialController extends AdminController
             $this->testimony->create($validatedData);
 
             return redirect()->route('testimonial.list')
+<<<<<<< HEAD
                              ->with(array('success'=>'testimonials created successfully.','breadcrumb'=>$breadcrumb));
+=======
+                             ->with(array('success'=>'testimonial created successfully.','breadcrumb'=>$breadcrumb));
+>>>>>>> 07856ab1e6e65179829bda81fdf117fea8a4487d
         }
         // $LocaleList=$Locale->getActiveLocale()->toArray();
         return view('testimonial.list')->with(array('breadcrumb'=>$breadcrumb,'localelist'=>$LocaleList));

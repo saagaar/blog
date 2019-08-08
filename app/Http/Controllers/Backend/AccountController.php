@@ -7,6 +7,7 @@ use App\Repository\RoleInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
+use Illuminate\Support\Facades\File;
 use App\Models\Countrys;
 use App;
 class AccountController extends AdminController{
@@ -54,6 +55,10 @@ class AccountController extends AdminController{
             $validatedData = $requestobj->validated();
             $validatedData['dob'] = date("Y-m-d", strtotime($requestobj->dob));
             $validatedData['password']= (Hash::make($requestobj->password));
+            $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            // dd($imageName);
+            request()->image->move(public_path('images/userimages'), $imageName);
+            $validatedData['image'] = $imageName;
             $user = $this->account->create($validatedData);
             
             $roles = $request->input('roles') ? $request->input('roles') : [];
@@ -81,6 +86,17 @@ class AccountController extends AdminController{
             $validatedData = $requestobj->validated();
             $validatedData['dob'] = date("Y-m-d", strtotime($requestobj->dob));
             $validatedData['password']= (Hash::make($requestobj->password));
+            if ($request->hasFile('image')) {
+                    $dir = 'images/userimages/';
+                    if ($accounts->image != '' && File::exists($dir . $accounts->image))
+                    File::delete($dir . $accounts->image);
+
+                    $imageName = time().'.'.request()->image->getClientOriginalExtension();
+                    request()->image->move(public_path('images/userimages'), $imageName);
+                    $validatedData['image'] = $imageName;
+                }else {
+                    $validatedData['image'] = $accounts->image;
+                }
             $accounts->update($validatedData);
             $roles = $request->input('roles') ? $request->input('roles') : [];
             // dd($roles);
@@ -92,10 +108,28 @@ class AccountController extends AdminController{
         // $adminroles = $this->roles->getAll()->get();
         return view('account.edituser')->with(array('countries'=>$countries,'accounts'=>$accounts,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
     }
+    public function View($id)
+    {
+       $breadcrumb=['breadcrumbs' => [
+                'Dashboard' => route('admin.dashboard'),
+                'All Accounts' => route('account.list'),
+                'current_menu'=> 'Members Details',
+                  ]];
+
+        $accounts =$this->account->getById($id);
+        
+        return view('account.detail')->with(array('account'=>$accounts,'breadcrumb'=>$breadcrumb));
+    }
     public function delete($id)
     {
         $accounts =$this->account->getById($id);
-        $accounts->delete();
+        $results = $accounts->delete();
+        if($result=='true'){
+            $dir = 'images/userimages/';
+            if ($accounts->image != '' && File::exists($dir . $accounts->image)){
+                File::delete($dir . $accounts->image);
+            }
+        }
         return redirect()->route('account.list')
         ->with('success', 'User has been deleted!!');
     }
