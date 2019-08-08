@@ -38,7 +38,7 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{route('account.create')}}" method="POST">
+            <form action="{{route('account.create')}}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="box-body">
                 <div class="form-group">
@@ -126,6 +126,13 @@
                   @endif
                 <!-- /.input group -->
               </div>
+              <div class="form-group">
+                  <label for="image">Profile Picture Upload</label>
+                  <input type="file" class="form-control" name="image" id="image">
+                  @if ($errors->has('image'))
+                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                @endif
+                </div>
               </div>
               <div class="form-group">
                   <label for="status">Status: </label>
