@@ -8,7 +8,7 @@
               <h3 class="box-title">All Blogs</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <a href="{{route('testimonial.create')}}" class="btn btn-primary">Add Blogs</a>
+                  <a href="{{route('testimonial.create')}}" class="btn btn-primary">Add Testimonials</a>
                 </div>
               </div>
             </div>
@@ -39,19 +39,20 @@
                   <td>{{$testimonial->name}}</td>
                    <td>{{$testimonial->position }}</td>
                    <td>{{$testimonial->description }}</td>
-                   <td><img src="{{'images/blogimages/'.$testimonial['image'] }}" alt="Blog Image" height="42" width="42"></td>
+                   <td><img src="{{'images/testimonial-images/'.$testimonial['image'] }}" alt="testimonial Image" height="42" width="42"></td>
                   <td>
                       @if ($testimonial->status== '1')
-                        <span class="label label-danger">Active</span>
+                        <span class="label label-success">Active</span>
                       @else
-                        <span class="label label-success">Inactive</span>
+                        <span class="label label-danger">Inactive</span>
                       @endif
                   
                   <td>{{$testimonial->created_at}}</td>
                   <td>{{$testimonial->updated_at}}</td>
                   <td><a href="{{route('testimonial.edit',$testimonial->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                   <td><a href="{{route('testimonial.delete', $testimonial->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                </tr>
+                </tr> 
+
                 @endforeach
                 @else
                     <tr>
