@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Http\Controllers\AdminController; 
+namespace App\Http\Controllers\Backend;
+use App\Http\Controllers\Backend\AdminController; 
 use App\Repository\CmsInterface; 
 use Illuminate\Http\Request;
 use App\Http\Requests\CmsRequest;
-// use Illuminate\Support\Facades\File;
 use App;
 class cmsController extends AdminController
 {
@@ -18,10 +17,11 @@ class cmsController extends AdminController
     }
     public function list(Request $request)
     {
-        $breadcrumb=['breadcrumbs' => [
+        $breadcrumb=[
+                    'breadcrumbs' => [
                     'Dashboard' => route('admin.dashboard'),
                     'current_menu'=>'All Cms',
-                      ]];
+                    ]];
         $search = $request->get('search');
         if($search){
             $cms = $this->cms->getAll()
@@ -59,7 +59,7 @@ class cmsController extends AdminController
                         'Dashboard' => route('admin.dashboard'),
                         'All cms' => route('cms.list'),
                         'current_menu'=>'Edit Cms',
-                          ]];
+                         ]];
             $cms =$this->cms->getcmsById($id);
             if ($request->method()=='POST') 
             {

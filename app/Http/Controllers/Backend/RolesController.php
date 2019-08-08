@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 // use App\Models\Roles;
-use App\Http\Controllers\AdminController; 
+use App\Http\Controllers\Backend\AdminController; 
 use App\Repository\RoleInterface;
 use App\Repository\PermissionInterface;
 use App\Http\Requests\UserRoleRequest;

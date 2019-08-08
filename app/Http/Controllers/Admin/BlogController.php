@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminController; 
 use App\Repository\BlogInterface; 
 use App\Repository\LocaleInterface;

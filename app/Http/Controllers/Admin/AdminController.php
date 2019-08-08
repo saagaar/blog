@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Repository\UserInterface;
@@ -15,9 +15,10 @@ use Auth;
 use Session;
 class AdminController extends BaseController
 {
-     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     protected $admin;
+    
     protected $RolePermission;
      
      /**
@@ -38,22 +39,10 @@ class AdminController extends BaseController
     }
     public function dashboard()
     {
-       
-        $breadcrumb=['breadcrumbs' => [
-                    'current_menu' => 'Dashboard',
-                    
-                      ]];
-        // print_r();
-       // echo '<pre>';
-       //  $routes= Route::getRoutes()->getByName('checkpermission');
-       //       print_r($routes->getAction());exit;
-       
-
-        // $role=$rolepermission->getModuleByRoleId($this->User->role_id);
-        // print_r($this->User);exit;
-        // print_r($this->user);
-        // $data=($this->user->getAll());
-        // dd($data->username);
+        $breadcrumb=[   'breadcrumbs' => 
+                    [
+                        'current_menu' => 'Dashboard',
+                    ]];
         return view('admin.dashboard',compact('breadcrumb'));
     }
     
