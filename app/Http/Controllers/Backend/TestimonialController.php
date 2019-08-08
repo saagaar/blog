@@ -29,7 +29,7 @@ class TestimonialController extends AdminController
         }else{
             $Testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }
-        return view('blog.listblog')->with(array('Testimonial'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
+        return view('testimonial.list')->with(array('testimony'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
     }
     public function create(Request $request,LocaleInterface $Locale)
     {
@@ -45,15 +45,15 @@ class TestimonialController extends AdminController
             $requestobj=app(TestimonialRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/blogimages'), $imageName);
+            request()->image->move(public_path('images/testimonial_images'), $imageName);
             $validatedData['image'] = $imageName;
             $this->testimony->create($validatedData);
 
             return redirect()->route('testimonial.list')
-                             ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
+                             ->with(array('success'=>'testimonials created successfully.','breadcrumb'=>$breadcrumb));
         }
-        $LocaleList=$Locale->getActiveLocale()->toArray();
-        return view('blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'localelist'=>$LocaleList));
+        // $LocaleList=$Locale->getActiveLocale()->toArray();
+        return view('testimonial.list')->with(array('breadcrumb'=>$breadcrumb,'localelist'=>$LocaleList));
     }
     public function edit(Request $request, $id,$slug,LocaleInterface $Locale)
     {
