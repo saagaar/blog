@@ -93,6 +93,7 @@ Route::prefix('admin')->group(function()
 	Route::get('/list/account','Backend\AccountController@list')->name('account.list');
 	Route::match(['get','post'],'/create/account','Backend\AccountController@create')->name('account.create');
 	Route::match(['get','post'],'/edit/account/{id}','Backend\AccountController@edit')->name('account.edit');
+	Route::get('/view/account/{id}','Backend\AccountController@view')->name('account.view');
 	Route::get('/delete/account/{id}','Backend\AccountController@delete')->name('account.delete');
 
 	//Route for user Account roles

@@ -21,12 +21,13 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('status',['0','1','2','3'])->comment('0=active,1=inactive,2-closed,3=suspended')->default('1');
             $table->string('phone')->unique();
-            $table->string('address');
-            $table->unsignedBigInteger('country');
+            $table->string('address')->nullable();
+            $table->unsignedBigInteger('country')->nullable();
             $table->foreign('country')
                     ->references('id')->on('countrys')
                     ->onDelete('cascade');
-            $table->date('dob');
+            $table->date('dob')->nullable();
+            $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -35,6 +35,7 @@ class AccountRequest extends FormRequest
             // Update operation, exclude the record with id from the validation:
             $email_rule            = 'required|email|unique:users,email,' . $this->id;
             $phone                 = 'required|unique:users,phone,' . $this->id;
+             $image                ='';
             
           }
           else
@@ -43,7 +44,7 @@ class AccountRequest extends FormRequest
             $phone                 = 'required|unique:users,phone';
             $password              = 'required|min:6';
             $password_confirmation = 'required|min:6|same:password';
-
+            $image                 = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
           }
         return [
             'name'                  =>'required|min:6',
@@ -54,7 +55,8 @@ class AccountRequest extends FormRequest
             'phone'                 =>  $phone,
             'address'               =>'',
             'country'               =>'',
-            'dob'                   =>''
+            'dob'                   =>'',
+            'image'                 => $image
         ];
     }
 }
