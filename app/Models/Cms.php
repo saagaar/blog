@@ -15,7 +15,7 @@ class Cms extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'heading','content','cms_slug','page_title','meta_key','meta_description','is_display','cms_type','delatable'
+        'heading','content','cms_slug','page_title','meta_key','meta_description','is_display','cms_type','deletable'
     ];
     public function logs()
     {
