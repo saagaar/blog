@@ -35,9 +35,9 @@ class TestimonialController extends AdminController
     }
     public function create(Request $request,LocaleInterface $Locale)
     {
-        $breadcrumb=['breadcrumbs'    => 
+        $breadcrumb=['breadcrumbs' => 
                     [
-                      'Dashboard'     => route('admin.dashboard'),
+                      'Dashboard'  => route('admin.dashboard'),
                       'All Testimonials' => route('testimonial.list'),
                       'current_menu'  =>'Create Testimonial',
                     ]];
