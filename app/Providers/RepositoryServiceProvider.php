@@ -47,7 +47,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(UserInterface::class, AdminUser::class);
+        $this->app->singleton(UserInterface::class, AdminUser::class,User::class);
         $this->app->singleton(HelpcatInterface::class, HelpCat::class);
         $this->app->singleton(ModuleInterface::class, Module::class);
         $this->app->singleton(AdminRoleInterface::class, AdminRole::class);
