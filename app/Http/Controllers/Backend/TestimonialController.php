@@ -25,11 +25,13 @@ class TestimonialController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $testimony = $this->testimony->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+
+            $Testimonial = $this->testimony->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $testimony = $this->testimony->getAll()->paginate($this->PerPage);
+            $Testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }
-        return view('testimonial.list')->with(array('testimony'=>$testimony,'breadcrumb'=>$breadcrumb,'menu'=>'testimonial List'));
+        return view('blog.listblog')->with(array('Testimonial'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
+
     }
     public function create(Request $request,LocaleInterface $Locale)
     {
@@ -37,9 +39,9 @@ class TestimonialController extends AdminController
                     [
                       'Dashboard'     => route('admin.dashboard'),
                       'All Testimonials' => route('testimonial.list'),
-                      'current_menu'  =>'Create Blog',
+                      'current_menu'  =>'Create Testimonial',
                     ]];
-
+                    
         if ($request->method()=='POST') 
         {
             $requestobj=app(TestimonialRequest::class);
