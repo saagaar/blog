@@ -2,13 +2,13 @@
 
 namespace App\Repository\testimonial;
 
-use App\Models\Testimonial;
+use App\Models\Testimonials;
 use App\Repository\TestimonialInterface;
 
-Class  Accounts implements TestimonialInterface
+Class  Testimonial implements TestimonialInterface
 {
 	protected $member;
-	public function __construct(Testimonial $member)
+	public function __construct(Testimonials $member)
 	{
 		$this->testimonial=$member;
 	}

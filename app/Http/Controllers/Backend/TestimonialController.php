@@ -25,11 +25,11 @@ class TestimonialController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $blogs = $this->testimony->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $testimony = $this->testimony->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $blogs = $this->testimony->getAll()->paginate($this->PerPage);
+            $testimony = $this->testimony->getAll()->paginate($this->PerPage);
         }
-        return view('blog.listblog')->with(array('blogs'=>$blogs,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
+        return view('testimonial.list')->with(array('testimony'=>$testimony,'breadcrumb'=>$breadcrumb,'menu'=>'testimonial List'));
     }
     public function create(Request $request,LocaleInterface $Locale)
     {
@@ -45,12 +45,12 @@ class TestimonialController extends AdminController
             $requestobj=app(TestimonialRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/blogimages'), $imageName);
+            request()->image->move(public_path('images/testimonial_images'), $imageName);
             $validatedData['image'] = $imageName;
             $this->testimony->create($validatedData);
 
             return redirect()->route('testimonial.list')
-                             ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
+                             ->with(array('success'=>'testimonial created successfully.','breadcrumb'=>$breadcrumb));
         }
         $LocaleList=$Locale->getActiveLocale()->toArray();
         return view('blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'localelist'=>$LocaleList));
