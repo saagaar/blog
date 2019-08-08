@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Http\Controllers\AdminController; 
+namespace App\Http\Controllers\Backend;
+use App\Http\Controllers\Backend\AdminController; 
 use App\Repository\CmsInterface; 
 use Illuminate\Http\Request;
 use App\Http\Requests\CmsRequest;
