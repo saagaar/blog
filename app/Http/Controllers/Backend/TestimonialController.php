@@ -39,7 +39,6 @@ class TestimonialController extends AdminController
                       'All Testimonials' => route('testimonial.list'),
                       'current_menu'  =>'Create Blog',
                     ]];
-
         if ($request->method()=='POST') 
         {
             $requestobj=app(TestimonialRequest::class);
