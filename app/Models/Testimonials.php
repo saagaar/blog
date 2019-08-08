@@ -17,6 +17,6 @@ class Testimonials extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'title','content','save_method','image','locale_id'
+        'name','position','description','image','status'
     ];
 }
