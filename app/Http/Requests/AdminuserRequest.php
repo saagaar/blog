@@ -25,6 +25,13 @@ class AdminuserRequest extends FormRequest
     {
         if ($this->method() == 'POST')
           {
+            if ($request->password) {
+                $password              = 'min:6';
+                $password_confirmation = 'min:6|same:password';
+            }else{
+                $password              = '';
+                $password_confirmation = '';
+            }
             // Update operation, exclude the record with id from the validation:
             $email_rule = 'required|email|unique:admin_users,email,' . $this->id;
             $username = 'required|unique:admin_users,username,'. $this->id;
@@ -39,8 +46,8 @@ class AdminuserRequest extends FormRequest
             'email'                 => $email_rule,
             'role_id'               =>'required',
             'status'                =>'required',
-            'password'              => 'required|min:6',
-            'password_confirmation' => 'required|min:6|same:password',
+            'password'              => $password,
+            'password_confirmation' => $password_confirmation,
         ];
     }
 }

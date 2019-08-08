@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as Auditables;
-class Cms extends Model implements Auditable
+class Testimonials extends Model implements Auditable
 {
     use Auditables;
-    protected $guard='cms';
+
+     protected $table='testimonials';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'heading','content','cms_slug','page_title','meta_key','meta_description','is_display','cms_type','deletable'
+        'title','content','save_method','image','locale_id'
     ];
-    public function logs()
-    {
-        return $this->morphMany(LogAdminActivitys::class, 'logable');
-    }
 }

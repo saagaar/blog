@@ -19,7 +19,7 @@ class Blogs extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'title','content','image','locale_id'
+        'title','content','save_method','image','locale_id'
     ];
 
     /**
@@ -40,6 +40,6 @@ class Blogs extends Model implements Auditable
     }
 
     public function Locales(){
-        $this->hasOne(Locales::class);
+       return $this->belongsTo(Locales::class,'locale_id');
     }
 }

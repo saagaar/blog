@@ -28,6 +28,8 @@ use App\Repository\PermissionInterface;
 use App\Repository\Userpermission\Permissions;
 use App\Repository\CmsInterface;
 use App\Repository\Cms\Cmss;
+use App\Repository\TestimonialInterface;
+use App\Repository\Testimonial\Testimonial;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -60,5 +62,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(RoleInterface::class, Roles::class);
         $this->app->singleton(PermissionInterface::class, Permissions::class);
         $this->app->singleton(CmsInterface::class, Cmss::class);
+        $this->app->singleton(TestimonialInterface::class, Testimonial::class);
     }
 }
