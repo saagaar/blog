@@ -1,57 +1,58 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
-use App\Http\Controllers\Backend\AdminController; 
-use App\Repository\BlogInterface; 
-use App\Repository\LocaleInterface;
-// use App\Models\blogcategoriesegorys;
+namespace App\Http\Controllers\Backend\Admin;
+use App\Http\Controllers\Backend\Admin\AdminController; 
+use App\Repository\TestimonialInterface;
 use Illuminate\Http\Request;
-use App\Http\Requests\BlogRequest;
+use App\Http\Requests\TestimonialRequest;
 use Illuminate\Support\Facades\File;
 use App;
-class BlogController extends AdminController
-{
-    protected $blog;
 
-    function __construct(BlogInterface $blog)
+class TestimonialController extends AdminController
+{
+     protected $testimony;
+
+    function __construct(TestimonialInterface $testimony)
     {
-        parent::__construct();
-        $this->blog=$blog;
+         parent::__construct();
+         $this->testimony=$testimony;
     }
     public function list(Request $request)
     {
         $breadcrumb=['breadcrumbs' => [
                     'Dashboard' => route('admin.dashboard'),
-                    'current_menu'=>'All Blogs',
+                    'current_menu'=>'All Testimonials',
                       ]];
         $search = $request->get('search');
         if($search){
-            $blogs = $this->blog->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+
+            $Testimonial = $this->testimony->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $blogs = $this->blog->getAll()->paginate($this->PerPage);
+            $Testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }
-        return view('blog.listblog')->with(array('blogs'=>$blogs,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
+        return view('blog.listblog')->with(array('Testimonial'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
+
     }
     public function create(Request $request,LocaleInterface $Locale)
     {
         $breadcrumb=['breadcrumbs'    => 
                     [
                       'Dashboard'     => route('admin.dashboard'),
-                      'All Blogs' => route('blog.list'),
-                      'current_menu'  =>'Create Blog',
+                      'All Testimonials' => route('testimonial.list'),
+                      'current_menu'  =>'Create Testimonial',
                     ]];
-
+                    
         if ($request->method()=='POST') 
         {
-            $requestobj=app(BlogRequest::class);
+            $requestobj=app(TestimonialRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/blogimages'), $imageName);
+            request()->image->move(public_path('images/testimonialimages'), $imageName);
             $validatedData['image'] = $imageName;
-            $this->blog->create($validatedData);
+            $this->testimony->create($validatedData);
 
-            return redirect()->route('blog.list')
-                             ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
+            return redirect()->route('testimonial.list')
+                             ->with(array('success'=>'testimonial created successfully.','breadcrumb'=>$breadcrumb));
         }
         $LocaleList=$Locale->getActiveLocale()->toArray();
         return view('blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'localelist'=>$LocaleList));
@@ -60,27 +61,27 @@ class BlogController extends AdminController
     {
             $breadcrumb=['breadcrumbs' => [
                         'Dashboard' => route('admin.dashboard'),
-                        'All Blogs' => route('blog.list'),
+                        'All Blogs' => route('testimonial.list'),
                         'current_menu'=>'Edit Blog',
                           ]];
-            $blog =$this->blog->GetBlogById($id);
+            $testimony =$this->testimony->GetBlogById($id);
             if ($request->method()=='POST') 
             {
-                $requestobj=app(BlogRequest::class);
+                $requestobj=app(TestimonialRequest::class);
                 $validatedData = $requestobj->validated();
                 if ($request->hasFile('image')) {
                     $dir = 'images/blogimages/';
-                    if ($blog->image != '' && File::exists($dir . $blog->image))
-                    File::delete($dir . $blog->image);
+                    if ($testimony->image != '' && File::exists($dir . $testimony->image))
+                    File::delete($dir . $testimony->image);
 
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
                     request()->image->move(public_path('images/blogimages'), $imageName);
                     $validatedData['image'] = $imageName;
                 }else {
-                    $validatedData['image'] = $blog->image;
+                    $validatedData['image'] = $testimony->image;
                 }
-                $blog->update($validatedData);
-                return redirect()->route('blog.list')
+                $testimony->update($validatedData);
+                return redirect()->route('testimonial.list')
                             ->with('success','Blog Updated Successfully.');
             }
             $localelist=$Locale->getActiveLocale()->toArray();
@@ -88,16 +89,16 @@ class BlogController extends AdminController
     }
     public function delete($id)
     {
-       $blog =$this->blog->GetBlogById($id);
+       $testimony =$this->testimony->GetBlogById($id);
 
-        $result = $blog->delete();
+        $result = $testimony->delete();
         if($result=='true'){
             $dir = 'images/blogimages/';
-            if ($blog->image != '' && File::exists($dir . $blog->image)){
-                File::delete($dir . $blog->image);
+            if ($testimony->image != '' && File::exists($dir . $testimony->image)){
+                File::delete($dir . $testimony->image);
             }
         }
-        return redirect()->route('blog.list')
+        return redirect()->route('testimonial.list')
         ->with('success', 'Blog has been deleted!!');
     }
 }
