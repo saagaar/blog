@@ -53,8 +53,8 @@ class AccountController extends AdminController{
         {
             $requestobj=app(AccountRequest::class);
             $validatedData = $requestobj->validated();
-            $validatedData['dob'] = date("Y-m-d", strtotime($requestobj->dob));
-            $validatedData['password']= (Hash::make($requestobj->password));
+            $validatedData['dob'] = date("m/d/Y", strtotime($validatedData['dob']));
+            $validatedData['password']= (Hash::make($validatedData['password']));
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             // dd($imageName);
             request()->image->move(public_path('images/userimages'), $imageName);
@@ -84,8 +84,9 @@ class AccountController extends AdminController{
         {
             $requestobj=app(AccountRequest::class);
             $validatedData = $requestobj->validated();
-            $validatedData['dob'] = date("Y-m-d", strtotime($requestobj->dob));
-            $validatedData['password']= (Hash::make($requestobj->password));
+            // dd($validatedData);
+            $validatedData['dob'] = date("m/d/Y", strtotime($validatedData['dob']));
+            $validatedData['password']= (Hash::make($validatedData['password']));
             if ($request->hasFile('image')) {
                     $dir = 'images/userimages/';
                     if ($accounts->image != '' && File::exists($dir . $accounts->image))

@@ -29,7 +29,7 @@
 
           <!-- Profile Image -->
           <div class="box box-body">
-            <div class="box-body box-profile col-md-3">
+            <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="{{ asset('images/userimages/'.$account['image']) }}" alt="User profile picture">
 
               <h3 class="profile-username text-center">{{$account->name}}</h3>
@@ -39,6 +39,9 @@
 	                <span class="label label-info label-many">{{ $role }}</span>
 	            @endforeach
 	          </p>
+            <p class="text-muted text-center">
+                 <a href="{{route('account.edit',$account->id)}}"> <span class="label label-default label-many">Edit Profile</span></a>
+            </p>
 
             </div>
             <!-- /.box-body -->
@@ -52,35 +55,39 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+              <strong><i class="fa fa-birthday-cake margin-r-5"></i> Date Of Birth</strong>
 
               <p class="text-muted">
-                B.S. in Computer Science from the University of Tennessee at Knoxville
+                <?php echo date('F j, Y', strtotime($account->dob)); ?>
               </p>
 
               <hr>
 
-              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Address</strong>
 
-              <p class="text-muted">Malibu, California</p>
-
-              <hr>
-
-              <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-              <p>
-                <span class="label label-danger">UI Design</span>
-                <span class="label label-success">Coding</span>
-                <span class="label label-info">Javascript</span>
-                <span class="label label-warning">PHP</span>
-                <span class="label label-primary">Node.js</span>
-              </p>
+              <p class="text-muted">{{$account->address }},@foreach ($account->country()->pluck('country') as $country)
+                  {{ $country }}
+              @endforeach</p>
 
               <hr>
 
-              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+              <strong><i class="fa fa-phone margin-r-5"></i> Phone</strong>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+              <p class="text-muted">{{$account->phone }}</p>
+
+              <hr>
+              <strong><i class="fa fa-info-circle margin-r-5"></i> Status</strong>
+              <p class="text-muted">
+                    @if($account->status=='0')
+                    <span class="label label-success">Active</span>
+                    @elseif ($account->status=='1')
+                    <span class="label label-danger">Inactive</span>
+                    @elseif ($account->status=='2')
+                    <span class="label label-warning">Closed</span>
+                    @elseif ($account->status=='3')
+                    <span class="label label-default">Suspended</span>
+                    @endif</p>
+                    
             </div>
             <!-- /.box-body -->
           </div>
