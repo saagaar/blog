@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Admin;
-use App\Http\Controllers\Backend\Admin\AdminController; 
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Admin\AdminController; 
 use App\Repository\HelpCatInterface;  
 // use App\Models\HelpCategorys;
 // use App\Models\LogAdminActivitys;
