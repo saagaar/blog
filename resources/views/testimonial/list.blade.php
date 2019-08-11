@@ -32,14 +32,14 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if (!$testimonials->isEmpty())
-                @foreach ($testimonials as $testimonial)
+                @if (!$testimony->isEmpty())
+                @foreach ($testimony as $testimonial)
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{$testimonial->name}}</td>
-                   <td>{{$testimonial->position)}}</td>
-                   <td>{{$testimonial->description)}}</td>
-                   <td><img src="{{'images/blogimages/'.$testimonial['image']) }}" alt="Blog Image" height="42" width="42"></td>
+                   <td>{{$testimonial->position }}</td>
+                   <td>{{$testimonial->description }}</td>
+                   <td><img src="{{'images/blogimages/'.$testimonial['image'] }}" alt="Blog Image" height="42" width="42"></td>
                   <td>
                       @if ($testimonial->status== '1')
                         <span class="label label-danger">Active</span>
@@ -63,7 +63,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $testimonials->links() !!}
+              {!! $testimony->links() !!}
               </ul>
             </div>
             <!-- /.box-body -->

@@ -30,14 +30,14 @@ class TestimonialController extends AdminController
         }else{
             $Testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }
-        return view('blog.listblog')->with(array('Testimonial'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
 
+        return view('testimonial.list')->with(array('testimony'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
     }
     public function create(Request $request,LocaleInterface $Locale)
     {
-        $breadcrumb=['breadcrumbs'    => 
+        $breadcrumb=['breadcrumbs' => 
                     [
-                      'Dashboard'     => route('admin.dashboard'),
+                      'Dashboard'  => route('admin.dashboard'),
                       'All Testimonials' => route('testimonial.list'),
                       'current_menu'  =>'Create Testimonial',
                     ]];
@@ -52,10 +52,12 @@ class TestimonialController extends AdminController
             $this->testimony->create($validatedData);
 
             return redirect()->route('testimonial.list')
-                             ->with(array('success'=>'testimonial created successfully.','breadcrumb'=>$breadcrumb));
+
+                             ->with(array('success'=>'testimonials created successfully.','breadcrumb'=>$breadcrumb));
+
         }
-        $LocaleList=$Locale->getActiveLocale()->toArray();
-        return view('blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'localelist'=>$LocaleList));
+        // $LocaleList=$Locale->getActiveLocale()->toArray();
+        return view('testimonial.list')->with(array('breadcrumb'=>$breadcrumb,'localelist'=>$LocaleList));
     }
     public function edit(Request $request, $id,$slug,LocaleInterface $Locale)
     {
