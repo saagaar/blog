@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.welcome');
 });
 // Route::match(['get','post'],'/admin/login','AdminController@login');
 
@@ -40,7 +40,7 @@ Route::get('admin/login', 'Backend\Admin\AdminLoginController@ShowLoginForm')->n
 	Route::get('admin/login', 'Backend\Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('admin/login', 'Backend\Admin\AdminLoginController@login')->name('admin.login.submit');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'Frontend\HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function()
 {
