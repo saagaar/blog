@@ -3,7 +3,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-      <div class="col-md-3">
+        <div class="col-md-3">
           <div class="box box-solid box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Cms</h3>
@@ -33,117 +33,106 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                  <label for="heading">Heading</label>
-                  <input type="text" class="form-control" name="heading" id="heading" value="{{ old('title') }}" placeholder="Enter Heading">
-                  @if ($errors->has('heading'))
-                <div class="alert alert-danger">{{ $errors->first('heading') }}</div>
-                @endif
-                </div>
+                       <label for="heading">Heading</label>
+                       <input type="text" class="form-control" name="heading" id="heading" value="{{ old('title') }}" placeholder="Enter Heading">
+                       @if ($errors->has('heading'))
+                       <div class="alert alert-danger">{{ $errors->first('heading') }}</div>
+                       @endif
+                    </div>
                 <div class="form-group">
                   <label for="cms_slug">CMS Slug</label>
                   <input type="text" class="form-control" name="cms_slug" id="cms_slug" placeholder="Enter Cms Slug">
                   @if ($errors->has('cms_slug'))
-                <div class="alert alert-danger">{{ $errors->first('cms_slug') }}</div>
-                @endif
+                  <div class="alert alert-danger">{{ $errors->first('cms_slug') }}</div>
+                  @endif
                 </div>
-                
-
-                <div class="form-group">
+                 <div class="form-group">
                   <label for="is_display">Is Display</label>
-                    <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="is_display"  value="Y" checked>
-                        <label class="custom-control-label" for="defaultChecked">Yes</label>
-                    </div>
+                  <div class="custom-control custom-radio radio-inline">
+                    <input type="radio" class="custom-control-input flat-red" name="is_display"  value="Y" checked>
+                    <label class="custom-control-label" for="defaultChecked">Yes</label>
+                  </div>
                     <div class="custom-control custom-radio radio-inline">
                         <input type="radio" class="custom-control-input flat-red" name="is_display"  value="N" >
                         <label class="custom-control-label" for="defaultChecked">No</label>
+                    </div>
+                         @if ($errors->has('is_display'))
+                        <div class="alert alert-danger">{{ $errors->first('is_display') }}</div>
+                         @endif
                       </div>
-                  @if ($errors->has('is_display'))
-                <div class="alert alert-danger">{{ $errors->first('is_display') }}</div>
-                @endif
-                </div>
-
                  <div class="form-group">
-                  <label for="cms_type">CMS Type</label>
+                    <label for="cms_type">CMS Type</label>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="website" checked>
-                        <label class="custom-control-label" for="defaultChecked">Website</label>
+                      <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="website" checked>
+                      <label class="custom-control-label" for="defaultChecked">Website</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
                         <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="system" >
                         <label class="custom-control-label" for="defaultChecked">System</label>
-                      </div>
-                  @if ($errors->has('cms_type'))
-                <div class="alert alert-danger">{{ $errors->first('cms_type') }}</div>
-                @endif
+                    </div>
+                      @if ($errors->has('cms_type'))
+                      <div class="alert alert-danger">{{ $errors->first('cms_type') }}</div>
+                      @endif
+                 </div>
                 </div>
-                  </div>
-                </div>
-                
-
-
-                
+              </div>                
                 <div class="row"> 
                   <div class="form-group">
                     <label for="Content">Content: </label>
-                      <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
+                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
                     @if ($errors->has('content'))
-                  <div class="alert alert-danger">{{ $errors->first('content') }}</div>
-                  @endif
+                    <div class="alert alert-danger">{{ $errors->first('content') }}</div>
+                    @endif
                   </div>  
                  </div>
-                 <div class="row">
-                   
 
-               <div class="form-group">
+              <div class="row">
+                <div class="form-group">
                   <label for="page_title">Page Title</label>
                   <textarea class="form-control rounded-0" name="page_title" placeholder="Enter page title" rows="6">
                   {{old('page_title')}}
                   </textarea>
-                  <!-- <input type="text" class="form-control" name="page_title" id="page_title"> -->
                   @if ($errors->has('page_title'))
-                <div class="alert alert-danger">{{ $errors->first('page_title') }}</div>
-                @endif
+                  <div class="alert alert-danger">{{ $errors->first('page_title') }}</div>
+                  @endif
                 </div>
               
-                 <div class="form-group">
+                <div class="form-group">
                   <label for="meta_key">Meta Keywords</label>
                   <textarea class="form-control rounded-0" name="meta_key" rows="6" placeholder="Enter meta key">
                   {{old('meta_key')}}
                   </textarea>
                   @if ($errors->has('meta_key'))
-                <div class="alert alert-danger">{{ $errors->first('meta_key') }}</div>
-                @endif
+                  <div class="alert alert-danger">{{ $errors->first('meta_key') }}</div>
+                  @endif
                 </div>
 
-                   <div class="form-group">
+               <div class="form-group">
                   <label for="meta_description">Meta Description</label>
                   <textarea class="form-control rounded-0" name="meta_description" placeholder="Enter description" rows="6">
                   {{old('meta_description')}}
                   </textarea>
                   @if ($errors->has('meta_description'))
-                <div class="alert alert-danger">{{ $errors->first('meta_description') }}</div>
-                @endif
+                  <div class="alert alert-danger">{{ $errors->first('meta_description') }}</div>
+                  @endif
                 </div>
-
 
                 <div class="form-group">
                   <label for="deletable">Is Deletable</label>
                     <div class="custom-control custom-radio radio-inline">
-                          <input type="radio" class="custom-control-input flat-red" name="deletable"  value="Y" checked>
+                        <input type="radio" class="custom-control-input flat-red" name="deletable"  value="Y" checked>
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
                         <input type="radio" class="custom-control-input flat-red" name="deletable"  value="N" >
                         <label class="custom-control-label" for="defaultChecked">No</label>
                       </div>
-                  @if ($errors->has('deletable'))
-                <div class="alert alert-danger">{{ $errors->first('deletable') }}</div>
-                @endif
-                </div>
-                </div>
+                       @if ($errors->has('deletable'))
+                       <div class="alert alert-danger">{{ $errors->first('deletable') }}</div>
+                       @endif
+                 </div>
+              </div>
               <!-- /.box-body -->
-
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>

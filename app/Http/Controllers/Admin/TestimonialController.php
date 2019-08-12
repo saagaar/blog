@@ -10,8 +10,7 @@ use App;
 
 class TestimonialController extends AdminController
 {
-     protected $testimony;
-
+    protected $testimony;
     function __construct(TestimonialInterface $testimony)
     {
          parent::__construct();
@@ -25,82 +24,73 @@ class TestimonialController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-
-            $Testimonial = $this->testimony->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $Testimonial = $this->testimony->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
             $Testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }
-
-        return view('testimonial.list')->with(array('testimony'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
+        return view('testimonial.list')->with(array('testimony'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'testimonial List'));
     }
-    public function create(Request $request,LocaleInterface $Locale)
+    public function create(Request $request)
     {
-        $breadcrumb=['breadcrumbs' => 
+        $breadcrumb=['breadcrumbs'=> 
                     [
                       'Dashboard'  => route('admin.dashboard'),
                       'All Testimonials' => route('testimonial.list'),
                       'current_menu'  =>'Create Testimonial',
                     ]];
-                    
         if ($request->method()=='POST') 
         {
             $requestobj=app(TestimonialRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/testimonialimages'), $imageName);
+
+            request()->image->move(public_path('images/testimonial-images'), $imageName);
             $validatedData['image'] = $imageName;
             $this->testimony->create($validatedData);
-
-            return redirect()->route('testimonial.list')
-
+            return redirect()->route('testimonial.list')    
                              ->with(array('success'=>'testimonials created successfully.','breadcrumb'=>$breadcrumb));
-
         }
-        // $LocaleList=$Locale->getActiveLocale()->toArray();
-        return view('testimonial.list')->with(array('breadcrumb'=>$breadcrumb,'localelist'=>$LocaleList));
+        return view('testimonial.create')->with(array('breadcrumb'=>$breadcrumb));
     }
-    public function edit(Request $request, $id,$slug,LocaleInterface $Locale)
+    public function edit(Request $request, $id)
     {
             $breadcrumb=['breadcrumbs' => [
                         'Dashboard' => route('admin.dashboard'),
-                        'All Blogs' => route('testimonial.list'),
-                        'current_menu'=>'Edit Blog',
+                        'All Testimonial' => route('testimonial.list'),
+                        'current_menu'=>'Edit Testimonial',
                           ]];
-            $testimony =$this->testimony->GetBlogById($id);
-            if ($request->method()=='POST') 
+            $testimony =$this->testimony->getById($id);    
+            if ($request->method()=='POST')
             {
                 $requestobj=app(TestimonialRequest::class);
                 $validatedData = $requestobj->validated();
                 if ($request->hasFile('image')) {
-                    $dir = 'images/blogimages/';
+                    $dir = 'images/testimonial-images/';
                     if ($testimony->image != '' && File::exists($dir . $testimony->image))
                     File::delete($dir . $testimony->image);
-
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/blogimages'), $imageName);
+                    request()->image->move(public_path('images/testimonial-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }else {
                     $validatedData['image'] = $testimony->image;
                 }
-                $testimony->update($validatedData);
+                $this->testimony->update($id,$validatedData);
                 return redirect()->route('testimonial.list')
-                            ->with('success','Blog Updated Successfully.');
+                            ->with('success','testimonial Updated Successfully.');
             }
-            $localelist=$Locale->getActiveLocale()->toArray();
-            return view('blog.editblog',compact('blog','breadcrumb','localelist'));
+            return view('testimonial.edit',compact('testimony','breadcrumb'));
     }
     public function delete($id)
     {
-       $testimony =$this->testimony->GetBlogById($id);
-
+       $testimony =$this->testimony->getById($id);
         $result = $testimony->delete();
         if($result=='true'){
-            $dir = 'images/blogimages/';
+            $dir = 'images/testimonialimages/';
             if ($testimony->image != '' && File::exists($dir . $testimony->image)){
                 File::delete($dir . $testimony->image);
             }
         }
         return redirect()->route('testimonial.list')
-        ->with('success', 'Blog has been deleted!!');
+        ->with('success', '');
     }
 }
