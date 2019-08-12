@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
-use App\Http\Controllers\Backend\AdminController; 
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Admin\AdminController; 
 use App\Repository\TestimonialInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\TestimonialRequest;
@@ -47,7 +47,7 @@ class TestimonialController extends AdminController
             $requestobj=app(TestimonialRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/testimonial_images'), $imageName);
+            request()->image->move(public_path('images/testimonialimages'), $imageName);
             $validatedData['image'] = $imageName;
             $this->testimony->create($validatedData);
 

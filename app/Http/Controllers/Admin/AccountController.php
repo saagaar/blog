@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
-use App\Http\Controllers\Backend\AdminController;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Admin\AdminController;
 use App\Repository\AccountInterface;
 use App\Repository\RoleInterface;
 use Illuminate\Support\Facades\Hash;

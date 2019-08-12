@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-namespace App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Repository\PermissionInterface;
 use App\Http\Requests\PermissionsRequest;
 use App;

@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
-use App\Http\Controllers\Backend\AdminController; 
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Admin\AdminController; 
 use App\Repository\CategoryInterface;  
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;

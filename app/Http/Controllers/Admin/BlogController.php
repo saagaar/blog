@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\AdminController; 
+use App\Http\Controllers\Admin\AdminController; 
 use App\Repository\BlogInterface; 
 use App\Repository\LocaleInterface;
 // use App\Models\blogcategoriesegorys;
