@@ -11,7 +11,6 @@ use App;
 class TestimonialController extends AdminController
 {
     protected $testimony;
-
     function __construct(TestimonialInterface $testimony)
     {
          parent::__construct();
