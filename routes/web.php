@@ -114,14 +114,23 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/edit/cms/{id}','Admin\CmsController@edit')->name('cms.edit');
 	Route::get('/delete/cms/{id}','Admin\CmsController@delete')->name('cms.delete');
 
-	//ROute for Testimonial
-
+	//Route for Testimonial
 	Route::get('/list/testimonial','Admin\TestimonialController@list')->name('testimonial.list');
 	Route::match(['get','post'],'/create/testimonial','Admin\TestimonialController@create')->name('testimonial.create');
 	Route::match(['get','post'],'/edit/testimonial/{id}','Admin\TestimonialController@edit')->name('testimonial.edit');
 	Route::get('/delete/testimonial/{id}','Admin\TestimonialController@delete')->name('testimonial.delete');
+
+
+
+//Route for Services
+	Route::get('/list/services','Admin\ServicesController@list')->name('services.list');
+	Route::match(['get','post'],'/create/services','Admin\ServicesController@create')->name('services.create');
+	Route::match(['get','post'],'/edit/services/{id}','Admin\ServicesController@edit')->name('services.edit');
+	Route::get('/delete/services/{id}','Admin\ServicesController@delete')->name('services.delete');
+
 });
 Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
+
 
 
 		
