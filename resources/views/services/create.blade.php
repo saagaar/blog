@@ -32,9 +32,9 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="text" class="form-control" name="title" id="title value="{{ old('title') }}" placeholder="Enter title">
-                  @if ($errors->has('name'))
-                  <div class="alert alert-danger">{{ $errors->first('name') }}</div>
+                  <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" placeholder="Enter title">
+                  @if ($errors->has('title'))
+                  <div class="alert alert-danger">{{ $errors->first('title') }}</div>
                   @endif
                 </div>
 
@@ -56,7 +56,7 @@
                 </div>
 
                  <div class="form-group">
-                  <label for="deletable">Status</label>
+                  <label for="status">Status</label>
                     <div class="custom-control custom-radio radio-inline">
                         <input type="radio" class="custom-control-input flat-red" name="status" value="1" checked>
                         <label class="custom-control-label" for="defaultChecked">Yes</label>

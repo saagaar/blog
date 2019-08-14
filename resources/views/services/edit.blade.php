@@ -52,7 +52,7 @@
                   <label for="icon">Icon Upload</label>
                   
                   <input type="file" class="form-control" name="icon" id="icon" >
-                  <img src='/images/services-images/{{$service->icon}}'width="30">
+                  <img src='/images/services-images/{{$service->icon}}'width="50">
 
                   @if ($errors->has('icon'))
                   <div class="alert alert-danger">{{ $errors->first('icon') }}</div>

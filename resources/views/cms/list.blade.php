@@ -11,7 +11,7 @@
                   <a href="{{route('cms.create')}}" class="btn btn-primary">Add CMS </a>
                 </div>
               </div>
-            </div>
+            </div>  
             <!-- /.box-header -->
             <div class="box-body no-padding">
               @component('layouts.components.search' )
@@ -33,11 +33,10 @@
                 <?php  $i = 0; ?>
                 @if(!$cms->isEmpty())
                 @foreach ($cms as $eachcms)
-                
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachcms->heading }}</td>
-                  <td>{{ $eachcms->content }}</td>
+                  <td>{{ strip_tags($eachcms->content)}}</td>
                   <td>
                       @if($eachcms->is_display=='Y')
                        <span class="label label-success">Active</span>
@@ -56,7 +55,6 @@
                   <td>{{$eachcms->updated_at}}</td>
                   
                       <td><a href="{{route('cms.edit',$eachcms->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-
                       <td>
                       @if($eachcms->deletable=='Y')
                        <a href="{{route('cms.delete',$eachcms->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
@@ -76,8 +74,7 @@
               <ul class="pagination pagination-sm no-margin pull-right">
               {!! $cms->links() !!}
               </ul>
-            </div>
-            
+            </div>           
             <!-- /.box-body -->
           </div>
         </div>

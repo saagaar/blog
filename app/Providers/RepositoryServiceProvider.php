@@ -34,6 +34,9 @@ use App\Repository\ServiceInterface;
 use App\Repository\Service\Service;
 use App\Repository\TeamInterface;
 use App\Repository\Team\Team;
+use App\Repository\ClientInterface;
+use App\Repository\Client\Client;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -69,5 +72,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(TestimonialInterface::class, Testimonial::class);
         $this->app->singleton(ServiceInterface::class, Service::class);
         $this->app->singleton(TeamInterface::class, Team::class);
+        $this->app->singleton(ClientInterface::class, Client::class);
     }
 }

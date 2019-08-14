@@ -4,23 +4,13 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ServicesRequest extends FormRequest
+class ClientRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    
     public function rules()
     {
          if ($this->method() == 'POST')
@@ -32,14 +22,12 @@ class ServicesRequest extends FormRequest
           {
             $image = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
           }
-        return 
-        [
+        return[ 
+
             'title'=>'required',
-            'description'=>'required',            
+            'url'=>'required',
+            'logo'=>$image,
             'status'=>'required',
-            'icon'=>$image,
-            
-            
         ];
     }
 }

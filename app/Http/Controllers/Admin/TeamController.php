@@ -81,12 +81,12 @@ class TeamController extends AdminController
     public function delete($id)
     {
        $team =$this->Team->getById($id);
-        $result = $team->delete();
-        if($result=='true'){
+        if($team){
             $dir = 'images/team-images/';
             if ($team->image != '' && File::exists($dir . $team->image)){
                 File::delete($dir . $team->image);
             }
+            $team->delete();
         }
         return redirect()->route('team.list')
         ->with('success', '');

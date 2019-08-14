@@ -83,12 +83,12 @@ class TestimonialController extends AdminController
     public function delete($id)
     {
        $testimony =$this->testimony->getById($id);
-        $result = $testimony->delete();
-        if($result=='true'){
-            $dir = 'images/testimonialimages/';
+        if($testimony){
+            $dir = 'images/testimonial-images/';
             if ($testimony->image != '' && File::exists($dir . $testimony->image)){
                 File::delete($dir . $testimony->image);
             }
+            $testimony->delete();
         }
         return redirect()->route('testimonial.list')
         ->with('success', '');

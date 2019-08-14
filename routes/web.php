@@ -134,6 +134,13 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/edit/team/{id}','Admin\TeamController@edit')->name('team.edit');
 	Route::get('/delete/team/{id}','Admin\TeamController@delete')->name('team.delete');
 
+	// Route for clients
+
+	Route::get('/list/client','Admin\ClientController@list')->name('client.list');
+	Route::match(['get','post'],'/create/client','Admin\ClientController@create')->name('client.create');
+	Route::match(['get','post'],'/edit/client/{id}','Admin\ClientController@edit')->name('client.edit');
+	Route::get('/delete/client/{id}','Admin\ClientController@delete')->name('client.delete');
+
 Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
 
 });

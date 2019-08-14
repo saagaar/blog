@@ -43,7 +43,6 @@ class ServicesController extends AdminController
             $requestobj=app(ServicesRequest::class);
             $validatedData = $requestobj->validated();
             $iconName = time().'.'.request()->icon->getClientOriginalExtension();
-
             request()->icon->move(public_path('images/services-images'), $iconName);
             $validatedData['icon'] = $iconName;
             $this->Service->create($validatedData);
@@ -82,13 +81,13 @@ class ServicesController extends AdminController
     }
     public function delete($id)
     {
-       $services =$this->Service->getById($id);
-        $result = $services->delete();
-        if($result=='true'){
-            $dir = 'images/icon-images/';
+       $services=$this->Service->getById($id);
+        if($services){
+            $dir = 'images/services-images/';
             if ($services->icon != '' && File::exists($dir . $services->icon)){
                 File::delete($dir . $services->icon);
-            }
+            }   
+            $services->delete();
         }
         return redirect()->route('services.list')
         ->with('success', '');
