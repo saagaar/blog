@@ -6,12 +6,12 @@
       <div class="col-md-3">
           <div class="box box-solid box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title"> Edit Cms</h3>
+              <h3 class="box-title">Cms</h3>
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="{{route('cms.list')}}"><span class="glyphicon glyphicon-minus"></span> All Edited Cms</a></li>
-                <li class="{{ (request()->is('create/cms')) ? 'active' : '' }}"><a href="{{route('cms.create')}}"><span class="glyphicon glyphicon-plus"></span> Edit CMS</a></li>
+                <li><a href="{{route('cms.list')}}"><span class="glyphicon glyphicon-minus"></span> All Cms</a></li>
+                <li class="{{ (request()->is('create/cms')) ? 'active' : '' }}"><a href="{{route('cms.create')}}"><span class="glyphicon glyphicon-plus"></span> Create CMS</a></li>
               </ul>
             </div>
           <!-- /.box-body -->

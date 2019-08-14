@@ -121,15 +121,23 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/testimonial/{id}','Admin\TestimonialController@delete')->name('testimonial.delete');
 
 
-
 //Route for Services
 	Route::get('/list/services','Admin\ServicesController@list')->name('services.list');
 	Route::match(['get','post'],'/create/services','Admin\ServicesController@create')->name('services.create');
 	Route::match(['get','post'],'/edit/services/{id}','Admin\ServicesController@edit')->name('services.edit');
 	Route::get('/delete/services/{id}','Admin\ServicesController@delete')->name('services.delete');
 
-});
+
+//Route for team
+	Route::get('/list/team','Admin\TeamController@list')->name('team.list');
+	Route::match(['get','post'],'/create/team','Admin\TeamController@create')->name('team.create');
+	Route::match(['get','post'],'/edit/team/{id}','Admin\TeamController@edit')->name('team.edit');
+	Route::get('/delete/team/{id}','Admin\TeamController@delete')->name('team.delete');
+
 Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
+
+});
+
 
 
 

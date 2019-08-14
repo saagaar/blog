@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as Auditables;
-class Services extends Model implements Auditable
+class Teams extends Model implements Auditable
 {
     use Auditables;
 
-     protected $table='services';
+     protected $table='team';
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +17,6 @@ class Services extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'title','description','icon','status'
+        'name','position','description','linkedin_url','facebook_url','twitter_url','github_url','image','status'
     ];
 }

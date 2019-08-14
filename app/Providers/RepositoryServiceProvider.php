@@ -32,6 +32,8 @@ use App\Repository\TestimonialInterface;
 use App\Repository\Testimonial\Testimonial;
 use App\Repository\ServiceInterface;
 use App\Repository\Service\Service;
+use App\Repository\TeamInterface;
+use App\Repository\Team\Team;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -66,5 +68,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(CmsInterface::class, Cmss::class);
         $this->app->singleton(TestimonialInterface::class, Testimonial::class);
         $this->app->singleton(ServiceInterface::class, Service::class);
+        $this->app->singleton(TeamInterface::class, Team::class);
     }
 }

@@ -6,12 +6,12 @@
       <div class="col-md-3">
           <div class="box box-solid box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Testimonials</h3>
+              <h3 class="box-title">Our Team</h3>
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="{{route('testimonial.list')}}"><span class="glyphicon glyphicon-minus"></span> All testimonials list</a></li>
-                <li class="{{ (request()->is('create/testimonial')) ? 'active' : '' }}"><a href="{{route('testimonial.create')}}"><span class="glyphicon glyphicon-plus"></span> Create testimonials</a></li>
+                <li><a href="{{route('team.list')}}"><span class="glyphicon glyphicon-minus"></span> All team lists</a></li>
+                <li class="{{ (request()->is('create/team')) ? 'active' : '' }}"><a href="{{route('team.create')}}"><span class="glyphicon glyphicon-plus"></span> Create team</a></li>
               </ul>
             </div>
           <!-- /.box-body -->
@@ -22,17 +22,17 @@
           <!-- general form elements -->
           <div class="box ">
             <div class="box-header">
-              <h3 class="box-title">Create Testimonials</h3>
+              <h3 class="box-title">Create Team</h3>
             </div>
           <!-- Form Element sizes -->
         <div class="box ">
           <div class="box-body">
-            <form action="{{route('testimonial.create')}}" method="POST" enctype="multipart/form-data"> 
+            <form action="{{route('team.create')}}" method="POST" enctype="multipart/form-data"> 
               @csrf            
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Enter Name">
+                  <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" value="{{old('name')}}">
                   @if ($errors->has('name'))
                   <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                   @endif
@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                   <label for="position">Position</label>
-                  <input type="text" class="form-control" name="position" id="position" value="{{ old('position') }}" placeholder="Enter Position">
+                  <input type="text" class="form-control" name="position" id="position"placeholder="Enter Position" value="{{old('position')}}">
                   @if ($errors->has('position'))
                   <div class="alert alert-danger">{{ $errors->first('position') }}</div>
                   @endif
@@ -49,12 +49,45 @@
                  <div class="form-group">
                   <label for="description">Description</label>
                   <textarea class="form-control rounded-0" name="description" placeholder="Enter description" rows="6">
-                  {{old('description')}}
+                    {{old('description')}}
                   </textarea>
                   @if ($errors->has('description'))
                   <div class="alert alert-danger">{{ $errors->first('description') }}</div>
                    @endif
-                 </div>              
+                 </div> 
+
+                 <div class="form-group">
+                  <label for="linkedin_url">Your Linkedin URL</label>
+                  <input type="text" class="form-control" name="linkedin_url" id="linkedin_url"  placeholder="Enter Your Linkedin URL" value="{{old('linkedin_url')}}">
+                  @if ($errors->has('linkedin_url'))
+                  <div class="alert alert-danger">{{ $errors->first('linkedin_url') }}</div>
+                  @endif
+                </div>
+
+                   <div class="form-group">
+                  <label for="facebook_url">Your Facebook URL</label>
+                  <input type="text" class="form-control" name="facebook_url" id="facebook_url" placeholder="Enter Your Facebook URL" value="{{old('facebook_url')}}">
+                  @if ($errors->has('facebook_url'))
+                  <div class="alert alert-danger">{{ $errors->first('facebook_url') }}</div>
+                  @endif
+                </div>
+
+                 <div class="form-group">
+                  <label for="twitter_url">Your Twitter URL</label>
+                  <input type="text" class="form-control" name="twitter_url" id="twitter_url" placeholder="Enter Your Twitter URL" value="{{old('twitter_url')}}">
+                  @if ($errors->has('twitter_url'))
+                  <div class="alert alert-danger">{{ $errors->first('twitter_url') }}</div>
+                  @endif
+                </div>
+
+                <div class="form-group">
+                  <label for="github_url">Your Github URL</label>
+                  <input type="text" class="form-control" name="github_url" id="github_url" placeholder="Enter Github URL" value="{{old('github_url')}}">
+                  @if ($errors->has('github_url'))
+                  <div class="alert alert-danger">{{ $errors->first('github_url') }}</div>
+                  @endif
+                </div>
+                 
                 <div class="form-group">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
@@ -65,11 +98,11 @@
                 <div class="form-group">
                   <label for="status">Status</label>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="1" checked>
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="1">
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="0" >
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="0">
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
                          @if ($errors->has('status'))
