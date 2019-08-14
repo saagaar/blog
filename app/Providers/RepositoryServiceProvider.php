@@ -32,6 +32,12 @@ use App\Repository\TestimonialInterface;
 use App\Repository\Testimonial\Testimonial;
 use App\Repository\ServiceInterface;
 use App\Repository\Service\Service;
+use App\Repository\ContactInterface;
+use App\Repository\Contacts\Contacts;
+use App\Repository\GallerycatInterface;
+use App\Repository\GalleryCategory\GalleryCategory;
+use App\Repository\GalleryInterface;
+use App\Repository\Gallery\Gallery;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -66,5 +72,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(CmsInterface::class, Cmss::class);
         $this->app->singleton(TestimonialInterface::class, Testimonial::class);
         $this->app->singleton(ServiceInterface::class, Service::class);
+        $this->app->singleton(ContactInterface::class, Contacts::class);
+        $this->app->singleton(GallerycatInterface::class, GalleryCategory::class);
+        $this->app->singleton(GalleryInterface::class, Gallery::class);
     }
 }

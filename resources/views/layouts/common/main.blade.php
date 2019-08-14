@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="{{ asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/bower_components/font-awesome/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/bower_components/Ionicons/css/ionicons.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+  <!-- <link rel="stylesheet" href="{{ asset('admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}"> -->
+  <link rel="stylesheet" href="{{ asset('admin/bower_components/datetime/css/bootstrap-datetimepicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/dist/css/AdminLTE.min.css') }}">
    <link rel="stylesheet" href="{{ asset('admin/dist/plugins/iCheck/all.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/dist/css/skins/skin-blue.min.css') }}">
@@ -58,17 +59,27 @@
 <script src="{{ asset('admin/dist/plugins/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('admin/dist/plugins/wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script src="{{ asset('admin/dist/plugins/iCheck/icheck.min.js') }}"></script>
-<script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<!-- <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script> -->
 <script src="{{ asset('admin/dist/js/pages/siteoptions.js') }}"></script>
 <script src="{{ asset('admin/dist/js/app.js') }}"></script>
-<script>
+<script src="{{ asset('admin/bower_components/datetime/js/bootstrap-datetimepicker.min.js') }}"></script>
+<!-- <script>
   $(function () {
     //Date picker
     $('#datepicker').datepicker({
-      autoclose: true
+      autoclose: true,
+      timePicker:true
     })
     
   })
+</script> -->
+<script type="text/javascript">
+  $('#datetimepicker').datetimepicker({
+    format: 'yyyy-mm-dd hh:ii'
+});
+  $('#datepicker').datetimepicker({
+    format: 'yyyy-mm-dd'
+});
 </script>
 </body>
 </html>

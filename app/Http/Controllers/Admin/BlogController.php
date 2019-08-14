@@ -90,12 +90,12 @@ class BlogController extends AdminController
     {
        $blog =$this->blog->GetBlogById($id);
 
-        $result = $blog->delete();
-        if($result=='true'){
+        if( $blog){
             $dir = 'images/blogimages/';
             if ($blog->image != '' && File::exists($dir . $blog->image)){
                 File::delete($dir . $blog->image);
             }
+            $blog->delete();
         }
         return redirect()->route('blog.list')
         ->with('success', 'Blog has been deleted!!');

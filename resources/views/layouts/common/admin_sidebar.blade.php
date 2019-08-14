@@ -47,6 +47,8 @@
           </ul>
       </li>
       <li><a href="{{route('cms.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>CMS</span></a>
+        <li><a href="{{route('testimonial.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Testimonial</span></a>
+          <li><a href="{{route('services.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Services</span></a>
     <li class="treeview">
       <a href=""><i class="fa  fa-pencil-square"></i> <span>Blog</span>
       <span class="pull-right-container">
@@ -59,7 +61,18 @@
          
           </ul>
       </li>
-  
+   <li class="treeview">
+      <a href=""><i class="fa  fa-pencil-square"></i> <span>Gallery</span>
+      <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+      </span>
+      </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('gallerycategory.list')}}"><i class="fa  fa-paint-brush"></i> Gallery Category</a></li>
+            <li><a href="{{route('gallery.list')}}"><i class="fa fa-info-circle"></i> Gallery</a></li>
+         
+          </ul>
+      </li>
      <li class="treeview">
     <a href="#"><i class="fa  fa-question-circle"></i>Help <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -70,6 +83,8 @@
          
           </ul>
     </li>
+     <li><a href="{{route('contact.list')}}"><i class="fa  fa-gear"></i> <span>Contact Us</span></a>
+       
 
   </ul>
   <!-- /.sidebar-menu -->

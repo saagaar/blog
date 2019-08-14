@@ -128,6 +128,21 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/edit/services/{id}','Admin\ServicesController@edit')->name('services.edit');
 	Route::get('/delete/services/{id}','Admin\ServicesController@delete')->name('services.delete');
 
+	//route for contact
+	Route::get('/list/contact','Admin\ContactController@list')->name('contact.list');
+	Route::match(['get','post'],'/edit/contact/{id}','Admin\ContactController@edit')->name('contact.edit');
+
+	//route for galery category
+	Route::get('/list/gallery/category','Admin\GalleryCategoryController@list')->name('gallerycategory.list');
+	Route::match(['get','post'],'/create/gallery/category','Admin\GalleryCategoryController@create')->name('gallerycategory.create');
+	Route::match(['get','post'],'/edit/gallery/category/{id}','Admin\GalleryCategoryController@edit')->name('gallerycategory.edit');
+	Route::get('/delete/gallery/category/{id}','Admin\GalleryCategoryController@delete')->name('gallerycategory.delete');
+
+	//route for Gallery
+	Route::get('/list/gallery','Admin\GalleryController@list')->name('gallery.list');
+	Route::match(['get','post'],'/create/gallery','Admin\GalleryController@create')->name('gallery.create');
+	Route::match(['get','post'],'/edit/gallery/{id}','Admin\GalleryController@edit')->name('gallery.edit');
+	Route::get('/delete/gallery/{id}','Admin\GalleryController@delete')->name('gallery.delete');
 });
 Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
 
