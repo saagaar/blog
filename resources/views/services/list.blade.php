@@ -5,10 +5,10 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Testimonials</h3>
+              <h3 class="box-title">All services</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <a href="{{route('testimonial.create')}}" class="btn btn-primary">Add Testimonials</a>
+                  <a href="{{route('services.create')}}" class="btn btn-primary">Add Services</a>
                 </div>
               </div>
             </div>
@@ -20,10 +20,9 @@
                 <thead>
                 <tr>
                   <th>id</th>
-                  <th>Name</th>
-                  <th>Position</th>
+                  <th>Title</th>
                   <th>Description</th>
-                  <th>Image</th>
+                  <th>Icon</th>
                   <th>Status</th>
                   <th>Created at</th>
                   <th>Updated at</th>
@@ -32,30 +31,29 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if (!$testimony->isEmpty())
-                @foreach ($testimony as $testimonial)
+                @if (!$Service->isEmpty())
+                @foreach ($Service as $member)
                 <tr>
                   <td>{{ ++$i }}</td>
-                  <td>{{$testimonial->name}}</td>
-                   <td>{{$testimonial->position }}</td>
-                   <td>{{$testimonial->description }}</td>
-                   <td><img src="{{asset('images/testimonial-images/'.$testimonial->image) }}" alt="testimonial Image" height="42" width="42"></td>
-                  <td>
-                      @if ($testimonial->status== '1')
+                  <td>{{$member->title}}</td>
+                   <td>{{$member->description }}</td>
+                   <td><img src="{{asset('images/services-images/'.$member->icon) }}" alt="services Image" height="42" width="42"></td> 
+                    <td>
+                      @if ($member->status== '1')
                         <span class="label label-success">Active</span>
                       @else
                         <span class="label label-danger">Inactive</span>
                       @endif
-                      </td>             
-                  <td>{{$testimonial->created_at}}</td>
-                  <td>{{$testimonial->updated_at}}</td>
-                  <td><a href="{{route('testimonial.edit',$testimonial->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('testimonial.delete', $testimonial->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                      </td>              
+                  <td>{{$member->created_at}}</td>
+                  <td>{{$member->updated_at}}</td>
+                  <td><a href="{{route('services.edit',$member->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('services.delete', $member->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr> 
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="9" align="center" style="background-color: #d2d6de;"> No Testimonials Found </td>
+                    <td colspan="9" align="center" style="background-color: #d2d6de;"> No Services Found </td>
                   </tr>
                   @endif
                 </tbody>
@@ -63,7 +61,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $testimony->links() !!}
+              {!! $Service->links()!!}
               </ul>
             </div>
             <!-- /.box-body -->

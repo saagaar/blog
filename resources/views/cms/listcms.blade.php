@@ -46,10 +46,10 @@
                        @endif
                   </td>
                   <td>
-                     @if($eachcms->cms_type=='website')
-                       <span class="label label-success">Active</span>
+                     @if($eachcms->cms_type=='website')  
+                       <span class="label label-success">Website</span>
                        @else
-                       <span class="label label-danger">Inactive</span>
+                       <span class="label label-danger">System</span>
                        @endif
                   </td>
                   <td>{{$eachcms->created_at}}</td>

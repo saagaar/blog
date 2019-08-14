@@ -1,7 +1,9 @@
-@extends('layouts.app')
 
+@extends('layouts.app')
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 @section('content')
 <div class="container">
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -21,3 +23,4 @@
     </div>
 </div>
 @endsection
+

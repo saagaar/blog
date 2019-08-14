@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TestimonialRequest extends FormRequest
+class ServicesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,10 @@ class TestimonialRequest extends FormRequest
     {
         return 
         [
-            'name'=>'required',
-            'description'=>'required',
-            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'title'=>'required',
+            'description'=>'required',            
             'status'=>'required',
-            'position'=>'required',
+            
         ];
     }
 }
