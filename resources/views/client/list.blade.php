@@ -19,7 +19,7 @@
              <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>id</th>
+                  <th>ID</th>
                   <th>Title</th>
                   <th>URL</th>
                   <th>Logo</th>

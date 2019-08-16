@@ -37,7 +37,7 @@ class cmsController extends AdminController
     {
         $breadcrumb=['breadcrumbs'    => 
                     [
-                      'Dashboard'     => route('admin.dashboard'),
+                      'Dashboard'=> route('admin.dashboard'),
                       'All Cms' => route('cms.list'),
                       'current_menu'  =>'Create Cms',
                     ]];
@@ -65,7 +65,6 @@ class cmsController extends AdminController
             {
                 $requestobj=app(CmsRequest::class);
                 $validatedData = $requestobj->validated();
-                // dd($validatedData);
                 $this->cms->update($id,$validatedData);
                 return redirect()->route('cms.list')
                             ->with('success','CMS Updated Successfully.');

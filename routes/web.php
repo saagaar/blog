@@ -135,11 +135,17 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/team/{id}','Admin\TeamController@delete')->name('team.delete');
 
 	// Route for clients
-
 	Route::get('/list/client','Admin\ClientController@list')->name('client.list');
 	Route::match(['get','post'],'/create/client','Admin\ClientController@create')->name('client.create');
 	Route::match(['get','post'],'/edit/client/{id}','Admin\ClientController@edit')->name('client.edit');
 	Route::get('/delete/client/{id}','Admin\ClientController@delete')->name('client.delete');
+
+
+	// Route for banners
+	Route::get('/list/banner','Admin\BannerController@list')->name('banner.list');
+	Route::match(['get','post'],'/create/banner','Admin\BannerController@create')->name('banner.create');
+	Route::match(['get','post'],'/edit/banner/{id}','Admin\BannerController@edit')->name('banner.edit');
+	Route::get('/delete/banner/{id}','Admin\BannerController@delete')->name('banner.delete');
 
 Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
 

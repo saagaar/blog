@@ -36,6 +36,8 @@ use App\Repository\TeamInterface;
 use App\Repository\Team\Team;
 use App\Repository\ClientInterface;
 use App\Repository\Client\Client;
+use App\Repository\BannerInterface;
+use App\Repository\Banner\Banner;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -73,5 +75,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(ServiceInterface::class, Service::class);
         $this->app->singleton(TeamInterface::class, Team::class);
         $this->app->singleton(ClientInterface::class, Client::class);
+        $this->app->singleton(BannerInterface::class, Banner::class);
     }
 }

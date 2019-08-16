@@ -43,7 +43,6 @@ class TestimonialController extends AdminController
             $requestobj=app(TestimonialRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-
             request()->image->move(public_path('images/testimonial-images'), $imageName);
             $validatedData['image'] = $imageName;
             $this->testimony->create($validatedData);
