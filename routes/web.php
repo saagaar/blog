@@ -147,6 +147,13 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/edit/banner/{id}','Admin\BannerController@edit')->name('banner.edit');
 	Route::get('/delete/banner/{id}','Admin\BannerController@delete')->name('banner.delete');
 
+
+	// Route for payment gateway
+	Route::get('/list/paymentgateway','Admin\paymentgatewayController@list')->name('paymentgateway.list');
+	Route::match(['get','post'],'/create/paymentgateway','Admin\paymentgatewayController@create')->name('paymentgateway.create');
+	Route::match(['get','post'],'/edit/paymentgateway/{id}','Admin\paymentgatewayController@edit')->name('paymentgateway.edit');
+	Route::get('/delete/paymentgateway/{id}','Admin\paymentgatewayController@delete')->name('paymentgateway.delete');
+
 Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
 
 });

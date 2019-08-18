@@ -38,6 +38,8 @@ use App\Repository\ClientInterface;
 use App\Repository\Client\Client;
 use App\Repository\BannerInterface;
 use App\Repository\Banner\Banner;
+use App\Repository\PaymentGatewayInterface;
+use App\Repository\Paymentgateway\PaymentGateway;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -76,5 +78,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(TeamInterface::class, Team::class);
         $this->app->singleton(ClientInterface::class, Client::class);
         $this->app->singleton(BannerInterface::class, Banner::class);
+        $this->app->singleton(PaymentGatewayInterface::class, PaymentGateway::class);
     }
 }
