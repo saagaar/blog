@@ -47,6 +47,7 @@
                   <td>{{$eachcat->created_at}}</td>
                   <td>{{$eachcat->updated_at}}</td>
                   <td><a href="{{route('gallerycategory.edit',[ $eachcat->id])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('gallerycategory.view',$eachcat->id)}}"><i class="fa fa-eye"  aria-hidden="true"></i></a></td>
                   <td><a href="{{route('gallerycategory.delete', $eachcat->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach

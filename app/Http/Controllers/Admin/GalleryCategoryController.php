@@ -99,4 +99,16 @@ class GalleryCategoryController extends AdminController
         return redirect()->route('gallerycategory.list')
         ->with('success', 'gallery category has been deleted!!');
     }
+    public function view($id)
+    {
+        $breadcrumb=['breadcrumbs' => [
+                    'Dashboard' => route('admin.dashboard'),
+                    'Gallery Category' => route('gallerycategory.list'),
+                    'current_menu'=>'View gallery Images',
+                      ]];
+        $category =$this->categories->getByCatId($id);
+        $gallery = $category->galleries()->get();
+        // dd($gallery);
+        return view('gallery.category.viewgallery')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
+    }
 }

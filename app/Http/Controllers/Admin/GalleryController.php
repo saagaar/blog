@@ -22,7 +22,7 @@ class GalleryController extends AdminController
     {
         $breadcrumb=['breadcrumbs' => [
                     'Dashboard' => route('admin.dashboard'),
-                    'current_menu'=>'Gallery Category',
+                    'current_menu'=>'Gallery',
                       ]];
         $search = $request->get('search');
         if($search){
@@ -44,20 +44,29 @@ class GalleryController extends AdminController
         if ($request->method()=='POST') {
             $requestobj=app(GalleryRequest::class);
             $validatedData = $requestobj->validated();
-            // dd($validatedData);
-           if ($images = $request->file('image')) {
-           		foreach ($images as $item) {
-           			// dd($item);
+            $allowedfileExtension=['jpg','png','jpeg','gif','svg'];
+           if ($request->file('image')) {
+           		foreach ($request->image as $item) {
+           			$filename = $item->getClientOriginalName();
+                    $extension = $item->getClientOriginalExtension();
+                    $check=in_array($extension,$allowedfileExtension);
+                        if($check)
+                        {
            			$dir = 'images/gallery-images/';
-                    $imageName = time().'.'.$item->getClientOriginalExtension();
+                    $imageName = uniqid().'.'.$item->getClientOriginalExtension();
+                    // echo($imageName);
                     $item->move(public_path($dir), $imageName);
-                    $data[] = $imageName;
-                    $validatedData['image'][] = $data;
-                    // dd($validatedData);
+                    // $data[] = $imageName;
+                    $current_date_time = date('Y-m-d H:i:s');
+                    $gallerydata[] = array('title'=>$validatedData['title'],'gallery_categories_id'=>$validatedData['gallery_categories_id'],'image'=>$imageName,"created_at"=>$current_date_time,"updated_at"=>$current_date_time);
+                    }else {
+                        return redirect()->route('gallery.list')
+                            ->with(array('error'=>'Sorry Only Upload png , jpg , doc','breadcrumb'=>$breadcrumb));
+                    }
+
            		}
             }
-            // dd($data);
-        $this->gallery->create($validatedData);
+        $this->gallery->create($gallerydata);
        return redirect()->route('gallery.list')
                             ->with(array('success'=>'Gallery created successfully','breadcrumb'=>$breadcrumb));
         }
@@ -72,18 +81,29 @@ class GalleryController extends AdminController
                     'current_menu'=>'Edit Gallery',
                       ]];
         $gallery =$this->gallery->getByImgId($id);
+        $category = $this->category->GetAll()->get();
         if ($request->method()=='POST') 
         {
             $requestobj=app(GalleryRequest::class);
             $validatedData = $requestobj->validated();
+            $allowedfileExtension=['jpg','png','jpeg','gif','svg'];
                 if ($request->hasFile('image')) {
+                    $filename = $item->getClientOriginalName();
+                    $extension = $item->getClientOriginalExtension();
+                    $check=in_array($extension,$allowedfileExtension);
+                    if($check)
+                    {
                     $dir = 'images/gallery-images/';
                     if ($gallery->image != '' && File::exists($dir . $gallery->image))
                     File::delete($dir . $gallery->image);
 
-                    $imageName = time().'.'.request()->image->getClientOriginalExtension();
+                    $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
                     request()->image->move(public_path('images/gallery-images'), $imageName);
                     $validatedData['image'] = $imageName;
+                    }else{
+                        return redirect()->route('gallery.list')
+                            ->with(array('error'=>'Sorry Only Upload png , jpg , doc','breadcrumb'=>$breadcrumb));
+                    }
                 }else {
                     $validatedData['image'] = $gallery->image;
                 }
@@ -92,7 +112,7 @@ class GalleryController extends AdminController
                         ->with('success','Gallery updated successfully.');
         }
         
-        return view('gallery.gallery.edit')->with(array('gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
+        return view('gallery.gallery.edit')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
     }
 
 

@@ -17,6 +17,7 @@
           <!-- /.box-body -->
           </div>
         </div>
+        <!-- <?php  print_r($errors->all()); ?> -->
         <!-- left column -->
         <div class="col-md-9">
           <!-- general form elements -->
@@ -59,6 +60,7 @@
                   <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                   @endif
                 </div>
+
               </div>
               <!-- /.box-body -->
              <div class="box-footer">

@@ -21,5 +21,8 @@ class GalleryCategories extends Model implements Auditable
     protected $fillable = [
         'title','banner_image','status'
     ];
-
+    public function galleries()
+    {
+        return $this->hasMany(Gallerys::class);
+    }
 }

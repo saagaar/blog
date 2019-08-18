@@ -137,6 +137,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/gallery/category','Admin\GalleryCategoryController@create')->name('gallerycategory.create');
 	Route::match(['get','post'],'/edit/gallery/category/{id}','Admin\GalleryCategoryController@edit')->name('gallerycategory.edit');
 	Route::get('/delete/gallery/category/{id}','Admin\GalleryCategoryController@delete')->name('gallerycategory.delete');
+	Route::get('/view/gallery/category/{id}','Admin\GalleryCategoryController@view')->name('gallerycategory.view');
 
 	//route for Gallery
 	Route::get('/list/gallery','Admin\GalleryController@list')->name('gallery.list');
