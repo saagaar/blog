@@ -40,6 +40,8 @@ use App\Repository\BannerInterface;
 use App\Repository\Banner\Banner;
 use App\Repository\PaymentGatewayInterface;
 use App\Repository\Paymentgateway\PaymentGateway;
+use App\Repository\SubscriptionManagerInterface;
+use App\Repository\Subscriptionmanager\SubscriptionManager;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -79,5 +81,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(ClientInterface::class, Client::class);
         $this->app->singleton(BannerInterface::class, Banner::class);
         $this->app->singleton(PaymentGatewayInterface::class, PaymentGateway::class);
+        $this->app->singleton(SubscriptionManagerInterface::class, SubscriptionManager::class);
     }
 }

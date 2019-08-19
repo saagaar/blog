@@ -149,11 +149,17 @@ Route::prefix('admin')->group(function()
 
 
 	// Route for payment gateway
-	Route::get('/list/paymentgateway','Admin\paymentgatewayController@list')->name('paymentgateway.list');
-	Route::match(['get','post'],'/create/paymentgateway','Admin\paymentgatewayController@create')->name('paymentgateway.create');
-	Route::match(['get','post'],'/edit/paymentgateway/{id}','Admin\paymentgatewayController@edit')->name('paymentgateway.edit');
-	Route::get('/delete/paymentgateway/{id}','Admin\paymentgatewayController@delete')->name('paymentgateway.delete');
+	Route::get('/list/subscriptionmanager','Admin\PaymentGatewayController@list')->name('paymentgateway.list');
+	Route::match(['get','post'],'/create/paymentgateway','Admin\PaymentGatewayController@create')->name('paymentgateway.create');
+	Route::match(['get','post'],'/edit/paymentgateway/{id}','Admin\PaymentGatewayController@edit')->name('paymentgateway.edit');
+	Route::get('/delete/paymentgateway/{id}','Admin\PaymentGatewayController@delete')->name('paymentgateway.delete');
 
+
+		// Route for Subscription Manager
+	Route::get('/list/subscriptionmanager','Admin\SubscriptionController@list')->name('subscription.list');
+	
+	Route::match(['get','post'],'/edit/subscriptionmanager/{id}','Admin\SubscriptionController@edit')->name('subscription.edit');
+	
 Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
 
 });

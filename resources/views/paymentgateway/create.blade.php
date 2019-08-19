@@ -57,7 +57,7 @@
 
                 <div class="form-group">
                   <label for="image">Image Upload</label>
-                  <input type="file" class="form-control" name="image" id="image" required>  
+                  <input type="file" class="form-control" name="image" id="image">  
                   @if ($errors->has('image'))
                   <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                   @endif
