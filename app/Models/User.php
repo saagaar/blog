@@ -48,4 +48,8 @@ class User extends Authenticatable implements Auditable
     {
         return $this->belongsToMany(Role::class, 'role_user');
     }
+    public function country()
+    {
+        return $this->belongsTo(Countrys::class,'country');
+    }
 }

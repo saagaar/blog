@@ -85,7 +85,7 @@ class TestimonialController extends AdminController
        $testimony =$this->testimony->getById($id);
         $result = $testimony->delete();
         if($result=='true'){
-            $dir = 'images/testimonialimages/';
+            $dir = 'images/testimonial-images/';
             if ($testimony->image != '' && File::exists($dir . $testimony->image)){
                 File::delete($dir . $testimony->image);
             }

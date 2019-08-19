@@ -68,9 +68,15 @@
                   <label for="roles" class="control-label">Roles</label>
                   <!-- value="{{ $roles }}" -->
                     <select multiple="multiple" class="form-control select2"  name="roles[]" id="roles">
+                      @if($accounts->roles()->pluck('name'))
+                           @foreach ($accounts->roles()->get() as $rol)
+                                        <option value="{{ $rol->id }}"selected>{{ $rol->name }}</option>
+                                    @endforeach
+                    @endif
                       @foreach ($roles as $values)
                       <option value="{{ $values->id }}"> {{ $values->name }}  </option>
                       @endforeach
+                      
                     </select>
                     <p class="help-block"></p>
                     @if($errors->has('roles'))
@@ -87,9 +93,55 @@
                   @endif
                   </div>
                   <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="address" value="{{$accounts->address}}" id="address"  placeholder="Enter Address">
+                    @if ($errors->has('address'))
+                  <div class="alert alert-danger">{{ $errors->first('address') }}</div>
+                  @endif
+                  </div>
+                   <div class="form-group">
+                     <label for="Country">Country</label>
+                    <select name="country" class="form-control">
+                      @if($accounts->country)
+                       @foreach ($accounts->country()->get() as $country)
+                                        <option value="{{ $country->id }}">{{ $country->country }}</option>
+                                    @endforeach
+                        @else
+                    <option value="">--Select--</option>
+                    @endif
+                    @foreach ($countries as $country)
+                    
+                      <option value="{{$country->id}}">{{$country->country}}</option>
+                      @endforeach
+                    </select>
+                    @if ($errors->has('country'))
+                  <div class="alert alert-danger">{{ $errors->first('country') }}</div>
+                  @endif
+                  </div>
+                  <div class="form-group">
+                <label>Date Of Birth:</label>
+
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" value="{{$accounts->dob}}" name="dob" class="form-control pull-right" id="datepicker">
+
+                </div>
+                @if ($errors->has('dob'))
+                  <div class="alert alert-danger">{{ $errors->first('dob') }}</div>
+                  @endif
+                <!-- /.input group -->
+              </div>
+                  <div class="form-group">
                   <label for="image">Profile Picture</label>
-                  <img src="{{ asset('images/userimages/'.$accounts['image']) }}" alt="Profile Picture" height="42" width="42">
-                  <input type="file" class="form-control" name="image" id="image">
+                    <div class="text-left">
+                      <img src="{{ asset('images/userimages/'.$accounts['image']) }}" class="avatar img-circle" alt="Profile Picture" height="42" width="42">
+                  
+                      <h6>Upload a different photo...</h6>
+                      <input type="file" class="form-control" name="image" id="image">
+                    </div>
+                  
                   @if ($errors->has('image'))
                 <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                 @endif
