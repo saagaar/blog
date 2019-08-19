@@ -11,6 +11,7 @@ use App;
 class ServicesController extends AdminController
 {
     protected $Service;
+    
     function __construct(ServiceInterface $services)
     {
          parent::__construct();
