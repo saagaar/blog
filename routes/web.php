@@ -176,7 +176,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/gallery','Admin\GalleryController@create')->name('gallery.create');
 	Route::match(['get','post'],'/edit/gallery/{id}','Admin\GalleryController@edit')->name('gallery.edit');
 	Route::get('/delete/gallery/{id}','Admin\GalleryController@delete')->name('gallery.delete');
-});
+	
 Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
 
 });
