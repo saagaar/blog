@@ -18,8 +18,8 @@ class CreateServicesTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('icon');
-            $table->enum('status',['0', '1']);
-            $table->timestamps();
+            $table->enum('status', ['0', '1']);
+             $table->timestamps();
         });
     }
 

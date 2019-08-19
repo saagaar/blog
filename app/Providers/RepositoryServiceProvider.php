@@ -42,7 +42,12 @@ use App\Repository\PaymentGatewayInterface;
 use App\Repository\Paymentgateway\PaymentGateway;
 use App\Repository\SubscriptionManagerInterface;
 use App\Repository\Subscriptionmanager\SubscriptionManager;
-
+use App\Repository\ContactInterface;
+use App\Repository\Contacts\Contacts;
+use App\Repository\GallerycatInterface;
+use App\Repository\GalleryCategory\GalleryCategory;
+use App\Repository\GalleryInterface;
+use App\Repository\Gallery\Gallery;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -82,5 +87,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(BannerInterface::class, Banner::class);
         $this->app->singleton(PaymentGatewayInterface::class, PaymentGateway::class);
         $this->app->singleton(SubscriptionManagerInterface::class, SubscriptionManager::class);
+        $this->app->singleton(ContactInterface::class, Contacts::class);
+        $this->app->singleton(GallerycatInterface::class, GalleryCategory::class);
+        $this->app->singleton(GalleryInterface::class, Gallery::class);
     }
 }
