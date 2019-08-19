@@ -4,18 +4,18 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequest extends FormRequest
+class BlocklistRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    // public function authorize()
-    // {
-    //     return true;
-    // }
-    // $redirectRoute=false;
+    public function authorize()
+    {
+        return true;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,8 +24,10 @@ class RoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_name' => 'required|unique:admin_roles,role_name',
-            'slug'      =>'required|unique:admin_roles,slug'
+            'ip_address'        => 'required',
+            'status'            => 'required',
+            'message'           => 'required',
+            'admin_id'          => 'required'
         ];
     }
 }

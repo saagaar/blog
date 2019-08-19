@@ -47,6 +47,13 @@
                 <div class="alert alert-danger">{{ $errors->first('role_name') }}</div>
                 @endif
                 </div>
+                 <div class="form-group">
+                  <label for="slug">Slug</label>
+                  <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}" placeholder="Enter Slug">
+                @if ($errors->has('slug'))
+                <div class="alert alert-danger">{{ $errors->first('slug') }}</div>
+                @endif
+                </div>
                 <div class="form-group">
                   <label for="status">Status: </label>
                   <label><input type="radio" name="status" value="0">Active</label>

@@ -24,9 +24,13 @@
             		<h1 class="align-center">{{$category->title}}</h1>
             		<br>
 					<div class="gallery">
+            @if($gallery)
 						@foreach($gallery as $data)
 									<a href="{{ asset('images/gallery-images/'.$data['image']) }}" class="big"><img src="{{ asset('images/gallery-images/'.$data['image']) }}" alt="" title="{{$data['title']}}" /></a>
 									@endforeach
+            @else
+            <p> No Images Found</p>
+            @endif
 						<div class="clear"></div>
 
 					</div>

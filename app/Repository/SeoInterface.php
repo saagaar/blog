@@ -1,17 +1,15 @@
 <?php 
 namespace App\Repository;
 
-interface UserInterface
+interface SeoInterface
 {
 	 /**
      * Get's a post by it's ID
      *
      * @param int
      */
-    public function getById($member_id);
-
-
-    public function getByEmail($email);
+    public function GetSeoById($seo_id);
+      
       /**
      * Get's all posts.
      *

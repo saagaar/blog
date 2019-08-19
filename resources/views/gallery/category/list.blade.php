@@ -25,7 +25,7 @@
                   <th>Status</th>
                   <th>Created at</th>
                   <th>Updated at</th>
-                  <th colspan="2">Action</th>
+                  <th colspan="3">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,7 +47,7 @@
                   <td>{{$eachcat->created_at}}</td>
                   <td>{{$eachcat->updated_at}}</td>
                   <td><a href="{{route('gallerycategory.edit',[ $eachcat->id])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('gallerycategory.view',$eachcat->id)}}"><i class="fa fa-eye"  aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('gallerycategory.view',$eachcat->id)}}"><i class="glyphicon glyphicon-picture"  aria-hidden="true"></i></a></td>
                   <td><a href="{{route('gallerycategory.delete', $eachcat->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach

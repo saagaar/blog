@@ -17,7 +17,7 @@ class AdminRoles extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'role_name','status'
+        'role_name','slug','status'
     ];
 
     public function AdminUsers(){

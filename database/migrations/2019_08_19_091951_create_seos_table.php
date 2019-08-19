@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCountryTable extends Migration
+class CreateSeosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateCountryTable extends Migration
      */
     public function up()
     {
-        Schema::create('countrys', function (Blueprint $table) {
+        Schema::create('seos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('country', 100);
-            $table->string('code', 100);
+            $table->integer('pageid');
+            $table->string('page_slug');
+            $table->string('meta_key');
+            $table->string('meta_description');
+            $table->string('schema1');
+            $table->string('schema2');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateCountryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('country');
+        Schema::dropIfExists('seos');
     }
 }
