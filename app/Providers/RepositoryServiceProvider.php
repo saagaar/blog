@@ -38,6 +38,12 @@ use App\Repository\GallerycatInterface;
 use App\Repository\GalleryCategory\GalleryCategory;
 use App\Repository\GalleryInterface;
 use App\Repository\Gallery\Gallery;
+use App\Repository\WebsitelogInterface;
+use App\Repository\Websitelog\Websitelog;
+use App\Repository\BlocklistInterface;
+use App\Repository\Blocklist\Blocklist;
+use App\Repository\SeoInterface;
+use App\Repository\Seo\Seo;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -75,5 +81,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(ContactInterface::class, Contacts::class);
         $this->app->singleton(GallerycatInterface::class, GalleryCategory::class);
         $this->app->singleton(GalleryInterface::class, Gallery::class);
+        $this->app->singleton(WebsitelogInterface::class, Websitelog::class);
+        $this->app->singleton(BlocklistInterface::class, Blocklist::class);
+        $this->app->singleton(SeoInterface::class, Seo::class);
     }
 }

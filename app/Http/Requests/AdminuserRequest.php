@@ -25,7 +25,8 @@ class AdminuserRequest extends FormRequest
     {
         if ($this->method() == 'POST')
           {
-            if ($request->password) {
+            // dd(request()->password);
+            if (request()->password) {
                 $password              = 'min:6';
                 $password_confirmation = 'min:6|same:password';
             }else{

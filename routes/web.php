@@ -144,6 +144,25 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/gallery','Admin\GalleryController@create')->name('gallery.create');
 	Route::match(['get','post'],'/edit/gallery/{id}','Admin\GalleryController@edit')->name('gallery.edit');
 	Route::get('/delete/gallery/{id}','Admin\GalleryController@delete')->name('gallery.delete');
+
+	//Route for Websitelog
+	Route::get('/list/websitelog','Admin\WebsitelogController@list')->name('websitelog.list');
+	Route::get('/view/websitelog/{id}','Admin\WebsitelogController@view')->name('websitelog.view');
+	Route::get('/block/websitelog/{id}','Admin\WebsitelogController@block')->name('websitelog.block');
+
+	//Route for IP Block List
+	Route::get('/list/blocklist','Admin\BlocklistController@list')->name('blocklist.list');
+	Route::match(['get','post'],'/create/blocklist','Admin\BlocklistController@create')->name('blocklist.create');
+	Route::match(['get','post'],'/edit/blocklist/{id}','Admin\BlocklistController@edit')->name('blocklist.edit');
+	Route::get('/delete/blocklist/{id}','Admin\BlocklistController@delete')->name('blocklist.delete');
+
+	//route for SEO
+	Route::get('/list/seo','Admin\SeoController@list')->name('seo.list');
+	Route::match(['get','post'],'/create/seo','Admin\SeoController@create')->name('seo.create');
+	Route::match(['get','post'],'/edit/seo/{id}','Admin\SeoController@edit')->name('seo.edit');
+	Route::get('/delete/seo/{id}','Admin\SeoController@delete')->name('seo.delete');
+	
+
 });
 Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
 

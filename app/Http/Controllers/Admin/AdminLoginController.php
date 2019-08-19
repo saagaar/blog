@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repository\UserInterface;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
@@ -18,9 +19,11 @@ class AdminLoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-    function __construct()
+    protected $admin;
+    function __construct(UserInterface $admin)
     {
       $this->middleware('guest:admin')->except('logout');
+      $this->admin = $admin;
     }
 
     use AuthenticatesUsers;
@@ -50,19 +53,27 @@ class AdminLoginController extends Controller
         		'email'	=>	'required',
         		'password'=>'required|min:6'
         	]);
-          
+         $data = $this->admin->getByEmail($request->email); 
      //Attempt for user login
-    if(Auth::guard('admin')->attempt(['email'=>$request->email,'password'=>$request->password ],$request->remember))
+    if(Auth::guard('admin')->attempt(['email'=>$request->email,'password'=>$request->password,'status'=>'0'],$request->remember))
     {
+      $data->where('email',$request->email)->update(array('invalid_login'=>'0'));
     	return redirect()->intended(route('admin.dashboard'));
-	}
-        return redirect()->back()->withInput($request->only('email','remember'))->with('flash_message_error','Invalid username or password');;
+	 }
+    if($data->status=='0'){
+      if($data->invalid_login<4){
+            $count = $data->invalid_login;
+            $count = $count + 1;
+             $data->where('email',$request->email)->update(array('invalid_login'=>$count));
+          }else{
+            $data->where('email',$request->email)->update(array('status'=>'1'));
+            return redirect()->back()->withInput($request->only('email','remember'))->with('flash_message_error','Your account has been disabled');
+          }
+        return redirect()->back()->withInput($request->only('email','remember'))->with('flash_message_error','Invalid username or password');
+      }else{
+        return redirect()->back()->withInput($request->only('email','remember'))->with('flash_message_error','Your account has been disabled');
+      }    
     }
-    // public function dashboard()
-    // {
-    // 	return view('admin.dashboard');
-    // }
-   
     protected function guard()
     {
         return Auth::guard('auth:admin');

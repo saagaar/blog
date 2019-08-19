@@ -31,9 +31,7 @@
   <ul class="sidebar-menu" data-widget="tree">
     <li class="header">Dashborad</li>
     <!-- Optionally, you can add icons to the links -->
-     <li><a href="{{route('sitesetting')}}"><i class="fa  fa-gear"></i> <span>Site setting</span></a>
-       
-    </li>
+     <li><a href="{{route('sitesetting')}}"><i class="fa  fa-gear"></i> <span>Site setting</span></a></li>
     <li class="treeview">
       <a href=""><i class="fa fa-user-plus"></i> <span>User Account</span>
       <span class="pull-right-container">
@@ -84,7 +82,11 @@
           </ul>
     </li>
      <li><a href="{{route('contact.list')}}"><i class="fa  fa-gear"></i> <span>Contact Us</span></a>
-       
+    <li><a href="{{route('websitelog.list')}}"><i class="fa fa-history"></i> <span>Website Logs</span></a>
+    <li><a href="{{route('blocklist.list')}}"><i class="fa fa-server"></i> <span>IP Block List</span></a>   
+    </li>
+     <li><a href="{{route('seo.list')}}"><i class="fa fa-search"></i> <span>Seo Management</span></a>   
+    </li>
 
   </ul>
   <!-- /.sidebar-menu -->

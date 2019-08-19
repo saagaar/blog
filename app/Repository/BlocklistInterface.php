@@ -1,17 +1,17 @@
 <?php 
 namespace App\Repository;
 
-interface UserInterface
+interface BlocklistInterface
 {
 	 /**
      * Get's a post by it's ID
      *
      * @param int
      */
-    public function getById($member_id);
+    public function GetIpById($ip_id);
+      
 
-
-    public function getByEmail($email);
+      public function GetByIp($ip_ad);
       /**
      * Get's all posts.
      *

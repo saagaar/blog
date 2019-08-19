@@ -19,6 +19,11 @@ Class  AdminUser implements UserInterface
       return $this->user->where('id', $memberid)->first();
     }
 
+    
+    public function getByEmail($email){
+      return $this->user->where('email', $email)->first();
+    }
+
       /**
      * Get's all posts.
      *
@@ -53,7 +58,7 @@ Class  AdminUser implements UserInterface
      * @param int
      */
     public function delete($id){
-      return    $this->cat->find($id)->delete();
+      return    $this->user->find($id)->delete();
     }
 }
 ?>

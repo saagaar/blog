@@ -47,6 +47,13 @@
                 @endif
                 </div>
                 <div class="form-group">
+                  <label for="slug">Slug</label>
+                  <input type="text" class="form-control" name="slug" id="slug" value="{{$adminrole->slug}}">
+                  @if ($errors->has('slug'))
+                <div class="alert alert-danger">{{ $errors->first('slug') }}</div>
+                @endif
+                </div>
+                <div class="form-group">
                   <label for="status">Status: &nbsp &nbsp &nbsp </label>
                   <label><input type="radio" name="status" value="0" {{ $adminrole->status == '0' ? 'checked' : ''}}>  Active</label>&nbsp
                   <label><input type="radio" name="status" value="1"  {{ $adminrole->status == '1' ? 'checked' : ''}}>  Inactive</label>

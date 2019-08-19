@@ -109,7 +109,7 @@ $factory->define(SiteOptions::class, function (Faker $faker) {
 });
 $factory->define(Countrys::class, function (Faker $faker) {
     return [
-        'currency'     =>$faker->currencyCode,
+        'code'     =>$faker->currencyCode,
         'country'           =>$faker->country,
     ];
 });
