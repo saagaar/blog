@@ -17,7 +17,7 @@ class CreateSubscriptionManagersTable extends Migration
             $table->bigIncrements('id');
             $table->String('email');
             $table->String('comment');
-            $table->enum('status',['Y', 'N']);
+            $table->enum('status',['1', '0']);
             $table->timestamps();
         });
     }

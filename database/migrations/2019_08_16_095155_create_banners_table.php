@@ -19,7 +19,7 @@ class CreateBannersTable extends Migration
             $table->String('content');
             $table->String('image');
             $table->integer('display_order')->default(0);
-            $table->enum('status',['Y', 'N']);
+            $table->enum('status',['1', '0']);
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@ class CreateHelpTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('title',100);
             $table->text('description');
-            $table->enum('display',['Y','N']);
+            $table->enum('display',['1','0']);
             $table->timestamps();
         });
     }

@@ -61,6 +61,9 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/user','Admin\AdminUserController@create')->name('adminuser.create');
 	Route::match(['get','post'],'/edit/user/{id}','Admin\AdminUserController@edit')->name('adminuser.edit');
 	Route::get('/delete/user/{id}','Admin\AdminUserController@delete')->name('adminuser.delete');
+
+	//route for Change Password
+	Route::match(['get','post'],'/change/password/{id}','Admin\AdminUserController@password')->name('adminuser.change');
 	//admin users
 	//admin roles
 	Route::get('/list/adminrole','Admin\AdminRoleController@list')->name('adminrole.list');
@@ -193,6 +196,14 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/seo','Admin\SeoController@create')->name('seo.create');
 	Route::match(['get','post'],'/edit/seo/{id}','Admin\SeoController@edit')->name('seo.edit');
 	Route::get('/delete/seo/{id}','Admin\SeoController@delete')->name('seo.delete');
+	
+
+	//route for languages
+	Route::get('/list/language','Admin\LanguageController@list')->name('language.list');
+	Route::match(['get','post'],'/create/language','Admin\LanguageController@create')->name('language.create');
+	Route::match(['get','post'],'/edit/language/{id}','Admin\LanguageController@edit')->name('language.edit');
+	Route::get('/delete/language/{id}','Admin\LanguageController@delete')->name('language.delete');
+	
 	
 
 Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');

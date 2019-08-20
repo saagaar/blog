@@ -8,6 +8,7 @@
               <h3 class="box-title">All Admin users</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
+                  
                   <a href="{{route('adminuser.create')}}" class="btn btn-primary">Add users</a>
                 </div>
               </div>

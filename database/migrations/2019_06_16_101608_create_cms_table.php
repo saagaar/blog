@@ -21,7 +21,7 @@ class CreateCmsTable extends Migration
             $table->string('page_title', 100);
             $table->string('meta_key', 100);
             $table->string('meta_description', 100);
-            $table->enum('is_display', ['Y', 'N']);
+            $table->enum('status', ['1', '0']);
             $table->enum('cms_type', ['website', 'system']);
             $table->enum('deletable', ['Y', 'N']);
             $table->timestamps();

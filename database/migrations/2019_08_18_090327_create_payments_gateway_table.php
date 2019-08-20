@@ -16,13 +16,13 @@ class CreatePaymentsGatewayTable extends Migration
         Schema::create('payments_gateway', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('email');
-            $table->enum('mode',['Y', 'N']);
+            $table->enum('mode',['1', '0']);
             $table->String('image');            
             $table->String('api_merchant_key');
             $table->String('api_merchant_password');
             $table->String('api_merchant_signature');
             $table->String('api_version');
-            $table->enum('status',['Y', 'N']);
+            $table->enum('status',['1', '0']);
             $table->timestamps();
         });
     }

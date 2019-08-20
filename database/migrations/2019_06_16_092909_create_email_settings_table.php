@@ -19,7 +19,7 @@ class CreateEmailSettingsTable extends Migration
             $table->string('email_code', 100);
             $table->string('subject', 100);
             $table->longText('email_body');
-            $table->enum('display', ['Y', 'N']);
+            $table->enum('display', ['1', '0']);
             $table->timestamps();
         });
     }

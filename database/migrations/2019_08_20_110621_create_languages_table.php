@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHelpCategoriesTable extends Migration
+class CreateLanguagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateHelpCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('help_categories', function (Blueprint $table) {
+        Schema::create('languages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->enum('display',['1','0']);
+            $table->String('short_code');
+            $table->String('lang_name');
+            $table->enum('status',['1','0']);
+            $table->String('currency_code');
+            $table->String('currency_sign');
+            $table->integer('priority')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateHelpCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('help_categorys');
+        Schema::dropIfExists('languages');
     }
 }

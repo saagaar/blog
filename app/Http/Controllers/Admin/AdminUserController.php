@@ -86,5 +86,35 @@ class AdminUserController extends AdminController
         return redirect()->route('adminuser.list')
         ->with('success', 'User has been deleted!!');
     }
+    public function password(Request $request,$id)
+    {
+        $breadcrumb=['breadcrumbs' => [
+                    'Dashboard' => route('admin.dashboard'),
+                    'Admin Users' => route('adminuser.list'),
+                    'current_menu'=>'Change Password',
+                      ]];
+        $userid = Auth()->user()->id;
+        $adminusers =$this->admin->getById($userid);
+        if ($request->method()=='POST') 
+        {
+            $this->validate($request, [
+            'old_password' => 'required',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required_with:password|same:password|min:6'
+        ]);
+             $validatedData = $request->all();
+             if (!Hash::check($validatedData['old_password'], $adminusers->password)) {
+            return back()->with('error', 'The specified password does not match the database password');
+            } 
+            else {
+                $data['password']= (Hash::make($request->password));
+
+                $this->admin->update($id,array('password'=>$data['password']));
+                return redirect()->route('adminuser.list')
+                            ->with('success','Password Changed successfully.');
+                }
+        }
+        return view('admin_users.changepassword',compact('userid','breadcrumb'));
+    }
   
 }

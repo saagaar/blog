@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration
             $table->String('title');
             $table->String('logo');
             $table->String('url');
-            $table->enum('status',['Y', 'N']);
+            $table->enum('status',['1', '0']);
             $table->timestamps();
         });
     }

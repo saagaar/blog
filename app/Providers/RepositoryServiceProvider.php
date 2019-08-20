@@ -54,6 +54,8 @@ use App\Repository\BlocklistInterface;
 use App\Repository\Blocklist\Blocklist;
 use App\Repository\SeoInterface;
 use App\Repository\Seo\Seo;
+use App\Repository\LanguageInterface;
+use App\Repository\Language\Language;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -99,5 +101,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(WebsitelogInterface::class, Websitelog::class);
         $this->app->singleton(BlocklistInterface::class, Blocklist::class);
         $this->app->singleton(SeoInterface::class, Seo::class);
+        $this->app->singleton(LanguageInterface::class, Language::class);
     }
 }
