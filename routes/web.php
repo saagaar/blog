@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('frontend.welcome');
 });
+Route::get('/blog', function () {
+    return view('frontend.home.index');
+});
 // Route::match(['get','post'],'/admin/login','AdminController@login');
 
 Auth::routes();
