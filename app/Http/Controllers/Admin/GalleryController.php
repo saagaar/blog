@@ -31,7 +31,7 @@ class GalleryController extends AdminController
             $gallerys = $this->gallery->getAll()->paginate($this->PerPage);
         }
         
-        return view('gallery.gallery.list')->with(array('gallerys'=>$gallerys,'breadcrumb'=>$breadcrumb,'menu'=>'gallery'));
+        return view('admin.gallery.gallery.list')->with(array('gallerys'=>$gallerys,'breadcrumb'=>$breadcrumb,'menu'=>'gallery'));
     }
     public function create(Request $request)
     {
@@ -70,7 +70,7 @@ class GalleryController extends AdminController
        return redirect()->route('gallery.list')
                             ->with(array('success'=>'Gallery created successfully','breadcrumb'=>$breadcrumb));
         }
-       return view('gallery.gallery.create')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));;
+       return view('admin.gallery.gallery.create')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));;
     }
    
     public function edit(Request $request, $id)
@@ -112,7 +112,7 @@ class GalleryController extends AdminController
                         ->with('success','Gallery updated successfully.');
         }
         
-        return view('gallery.gallery.edit')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
+        return view('admin.gallery.gallery.edit')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
     }
 
 

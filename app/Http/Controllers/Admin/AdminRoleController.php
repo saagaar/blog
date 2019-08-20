@@ -32,7 +32,7 @@ class AdminRoleController extends AdminController
         }else{
            $adminroles = $this->roles->getAll()->paginate($this->PerPage);
         }
-        return view('roles.adminrole')->with(array('adminroles'=>$adminroles,'breadcrumb'=>$breadcrumbs));
+        return view('admin.roles.adminrole')->with(array('adminroles'=>$adminroles,'breadcrumb'=>$breadcrumbs));
     }
     public function create(Request $request)
     {
@@ -50,7 +50,7 @@ class AdminRoleController extends AdminController
             return redirect()->route('adminrole.list')
                         ->with('success','Roles created successfully.');
         }
-       return view('roles.createrole')->with(array('breadcrumb'=>$breadcrumb));
+       return view('admin.roles.createrole')->with(array('breadcrumb'=>$breadcrumb));
     }
     public function delete($id)
     {
@@ -77,7 +77,7 @@ class AdminRoleController extends AdminController
             return redirect()->route('adminrole.list')
                             ->with('success','Role Updated successfully.');
         }
-        return view('roles.editrole',compact('adminrole'))->with(array('adminrole'=>$adminrole,'breadcrumb'=>$breadcrumb));
+        return view('admin.roles.editrole',compact('adminrole'))->with(array('adminrole'=>$adminrole,'breadcrumb'=>$breadcrumb));
     }
 
     

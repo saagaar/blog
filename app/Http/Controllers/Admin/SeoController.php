@@ -29,7 +29,7 @@ class SeoController extends AdminController
             $seo = $this->seo->getAll()->paginate($this->PerPage);
         }
         
-        return view('seo.list')->with(array('seo'=>$seo,'breadcrumb'=>$breadcrumb,'menu'=>'Seo List'));
+        return view('admin.seo.list')->with(array('seo'=>$seo,'breadcrumb'=>$breadcrumb,'menu'=>'Seo List'));
     }
     public function create(Request $request)
     {
@@ -47,7 +47,7 @@ class SeoController extends AdminController
        return redirect()->route('seo.list')
                             ->with(array('success'=>'Seo List created successfully.','breadcrumb'=>$breadcrumb));
         }
-       return view('seo.create')->with(array('breadcrumb'=>$breadcrumb));;
+       return view('admin.seo.create')->with(array('breadcrumb'=>$breadcrumb));;
     }
     public function delete($id)
     {
@@ -74,7 +74,7 @@ class SeoController extends AdminController
                         ->with('success','Seo List updated successfully.');
         }
         
-        return view('seo.edit',compact('seo'))->with(array('seodata'=>$seo,'breadcrumb'=>$breadcrumb));
+        return view('admin.seo.edit',compact('seo'))->with(array('seodata'=>$seo,'breadcrumb'=>$breadcrumb));
     }
      
 }

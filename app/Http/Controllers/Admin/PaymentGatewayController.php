@@ -27,7 +27,7 @@ class PaymentGatewayController extends AdminController
         }else{
             $PaymentGateway = $this->PaymentGateway->getAll()->paginate($this->PerPage);
         }
-        return view('paymentgateway.list')->with(array('PaymentGateway'=>$PaymentGateway,'breadcrumb'=>$breadcrumb,'menu'=>'PaymentGateway List'));
+        return view('admin.paymentgateway.list')->with(array('PaymentGateway'=>$PaymentGateway,'breadcrumb'=>$breadcrumb,'menu'=>'PaymentGateway List'));
     }
     public function create(Request $request)
     {
@@ -48,7 +48,7 @@ class PaymentGatewayController extends AdminController
             return redirect()->route('paymentgateway.list')    
                              ->with(array('success'=>'PaymentGateway created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('paymentgateway.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.paymentgateway.create')->with(array('breadcrumb'=>$breadcrumb));
     }
    public function edit(Request $request, $id)
     {
@@ -76,7 +76,7 @@ class PaymentGatewayController extends AdminController
                 return redirect()->route('paymentgateway.list')
                             ->with('success','Payment gateway Updated Successfully.');
             }
-            return view('paymentgateway.edit',compact('paymentgateway','breadcrumb'));
+            return view('admin.paymentgateway.edit',compact('paymentgateway','breadcrumb'));
     }
     public function delete($id)
     {

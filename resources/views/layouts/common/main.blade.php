@@ -45,7 +45,7 @@
         
       </h1>
       <!-- Breadcrumb -->
-    @include('includes.breadcrumbs',$breadcrumb)
+    @include('layouts.components.breadcrumbs',$breadcrumb)
     </section>
  <!-- Main content partial view loading-->
  @yield('content')

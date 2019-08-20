@@ -34,7 +34,7 @@ class HelpCategoryController extends AdminController
             $categorys = $this->category->getAll()->paginate($this->PerPage);
         }
         
-        return view('help.helpcat')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb));
+        return view('admin.help.helpcat')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb));
     }
     public function create(Request $request)
     {
@@ -54,7 +54,7 @@ class HelpCategoryController extends AdminController
                             ->with('success','Help Category created successfully.');
             
         }
-       return view('help.createhelpcat')->with(array('breadcrumb'=>$breadcrumb));
+       return view('admin.help.createhelpcat')->with(array('breadcrumb'=>$breadcrumb));
     }
     public function delete($id)
     {
@@ -81,6 +81,6 @@ class HelpCategoryController extends AdminController
             return redirect()->route('helpcat.list')
                              ->with('success','Help Category updated successfully.');
         }
-        return view('help.edithelpcat')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));;
+        return view('admin.help.edithelpcat')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));;
     }
 }

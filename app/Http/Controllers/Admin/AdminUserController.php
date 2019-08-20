@@ -38,7 +38,7 @@ class AdminUserController extends AdminController
             $adminusers = $this->admin->getAll()->paginate($this->PerPage);
         }         
         
-        return view('admin_users.listadmin')->with(array('adminusers'=>$adminusers,'breadcrumb'=>$breadcrumb));
+        return view('admin.admin_users.listadmin')->with(array('adminusers'=>$adminusers,'breadcrumb'=>$breadcrumb));
     }
     public function create(Request $request)
     {
@@ -57,7 +57,7 @@ class AdminUserController extends AdminController
                         ->with('success','User created successfully.');
         }
         $adminroles = $this->roles->getAll()->get();
-        return view('admin_users.createuser',compact('adminroles','breadcrumb'));
+        return view('admin.admin_users.createuser',compact('adminroles','breadcrumb'));
     }
     public function edit(Request $request,$id)
     {
@@ -77,7 +77,7 @@ class AdminUserController extends AdminController
                         ->with('success','User updated successfully.');
         }
         $adminroles = $this->roles->getAll()->get();
-        return view('admin_users.edituser',compact('adminroles','adminusers','breadcrumb'));
+        return view('admin.admin_users.edituser',compact('adminroles','adminusers','breadcrumb'));
     }
     public function delete($id)
     {

@@ -39,7 +39,7 @@ class AccountController extends AdminController{
             $account = $this->account->getAll()->paginate($this->PerPage);
         }         
         
-        return view('account.listaccount')->with(array('account'=>$account,'breadcrumb'=>$breadcrumb));
+        return view('admin.account.listaccount')->with(array('account'=>$account,'breadcrumb'=>$breadcrumb));
     }
     public function create(Request $request)
     {
@@ -69,7 +69,7 @@ class AccountController extends AdminController{
         }
         $countries = Countrys::All();
         // $adminroles = $this->roles->getAll()->get();
-        return view('account.createuser')->with(array('countries'=>$countries,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
+        return view('admin.account.createuser')->with(array('countries'=>$countries,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
     }
     public function edit(Request $request,$id)
     {
@@ -107,7 +107,7 @@ class AccountController extends AdminController{
         }
         $countries = Countrys::All();
         // $adminroles = $this->roles->getAll()->get();
-        return view('account.edituser')->with(array('countries'=>$countries,'accounts'=>$accounts,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
+        return view('admin.account.edituser')->with(array('countries'=>$countries,'accounts'=>$accounts,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
     }
     public function View($id)
     {
@@ -119,7 +119,7 @@ class AccountController extends AdminController{
 
         $accounts =$this->account->getById($id);
         
-        return view('account.detail')->with(array('account'=>$accounts,'breadcrumb'=>$breadcrumb));
+        return view('admin.account.detail')->with(array('account'=>$accounts,'breadcrumb'=>$breadcrumb));
     }
     public function delete($id)
     {

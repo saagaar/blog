@@ -31,7 +31,7 @@ class ContactController extends AdminController
         }else{
             $contact = $this->contact->GetAll()->paginate($this->PerPage);
         }
-        return view('contact.list')->with(array('contact'=>$contact,'breadcrumb'=>$breadcrumb,'menu'=>'contact List'));
+        return view('admin.contact.list')->with(array('contact'=>$contact,'breadcrumb'=>$breadcrumb,'menu'=>'contact List'));
     }
     // public function create(Request $request)
     // {
@@ -71,6 +71,6 @@ class ContactController extends AdminController
                             ->with('success','contact Updated Successfully.');
             }
             // dd($contact);
-            return view('contact.edit',compact('contact','breadcrumb'));
+            return view('admin.contact.edit',compact('contact','breadcrumb'));
     }
 }

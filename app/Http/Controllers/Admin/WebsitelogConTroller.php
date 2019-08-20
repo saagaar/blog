@@ -29,7 +29,7 @@ class WebsitelogController extends AdminController
         }else{
             $logs = $this->websitelog->getAll()->paginate($this->PerPage);
         }
-        return view('websitelog.list')->with(array('websitelog'=>$logs,'breadcrumb'=>$breadcrumb,'menu'=>'logs List'));
+        return view('admin.websitelog.list')->with(array('websitelog'=>$logs,'breadcrumb'=>$breadcrumb,'menu'=>'logs List'));
     }
     public function View($id)
     {

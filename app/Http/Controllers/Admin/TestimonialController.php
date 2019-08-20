@@ -28,7 +28,7 @@ class TestimonialController extends AdminController
         }else{
             $Testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }
-        return view('testimonial.list')->with(array('testimony'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'testimonial List'));
+        return view('admin.testimonial.list')->with(array('testimony'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'testimonial List'));
     }
     public function create(Request $request)
     {
@@ -49,7 +49,7 @@ class TestimonialController extends AdminController
             return redirect()->route('testimonial.list')    
                              ->with(array('success'=>'testimonials created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('testimonial.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.testimonial.create')->with(array('breadcrumb'=>$breadcrumb));
     }
     public function edit(Request $request, $id)
     {
@@ -77,7 +77,7 @@ class TestimonialController extends AdminController
                 return redirect()->route('testimonial.list')
                             ->with('success','testimonial Updated Successfully.');
             }
-            return view('testimonial.edit',compact('testimony','breadcrumb'));
+            return view('admin.testimonial.edit',compact('testimony','breadcrumb'));
     }
     public function delete($id)
     {

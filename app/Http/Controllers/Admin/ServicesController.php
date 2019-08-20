@@ -29,7 +29,7 @@ class ServicesController extends AdminController
         }else{
             $services = $this->Service->getAll()->paginate($this->PerPage);
         }
-        return view('services.list')->with(array('Service'=>$services,'breadcrumb'=>$breadcrumb,'menu'=>'services List'));
+        return view('admin.services.list')->with(array('Service'=>$services,'breadcrumb'=>$breadcrumb,'menu'=>'services List'));
     }
     public function create(Request $request)
     {
@@ -50,7 +50,7 @@ class ServicesController extends AdminController
             return redirect()->route('services.list')    
                              ->with(array('success'=>'Services created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('services.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.services.create')->with(array('breadcrumb'=>$breadcrumb));
     }
     public function edit(Request $request, $id)
     {
@@ -78,7 +78,7 @@ class ServicesController extends AdminController
                 return redirect()->route('services.list')
                             ->with('success','Services Updated Successfully.');
             }
-            return view('services.edit',compact('service','breadcrumb'));
+            return view('admin.services.edit',compact('service','breadcrumb'));
     }
     public function delete($id)
     {

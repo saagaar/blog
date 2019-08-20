@@ -34,7 +34,7 @@ class RolesController extends AdminController
         }else{
            $roles = $this->roles->getAll()->paginate($this->PerPage);
         }
-        return view('userroles.listroles')->with(array('roles'=>$roles,'breadcrumb'=>$breadcrumbs));
+        return view('admin.userroles.listroles')->with(array('roles'=>$roles,'breadcrumb'=>$breadcrumbs));
     }
     public function create(Request $request)
     {
@@ -58,7 +58,7 @@ class RolesController extends AdminController
             return redirect()->route('roles.list')
                         ->with('success','Roles created successfully.');
         }
-       return view('userroles.addroles')->with(array('breadcrumb'=>$breadcrumb,'permissions'=>$userpermission));
+       return view('admin.userroles.addroles')->with(array('breadcrumb'=>$breadcrumb,'permissions'=>$userpermission));
     }
     public function edit(Request $request,$id)
     {
@@ -80,7 +80,7 @@ class RolesController extends AdminController
             return redirect()->route('roles.list')
                         ->with('success','Roles edited successfully.');
         }
-        return view('userroles.editrole')->with(array('breadcrumb'=>$breadcrumb,'role'=>$role,'permissions'=>$userpermission));;
+        return view('admin.userroles.editrole')->with(array('breadcrumb'=>$breadcrumb,'role'=>$role,'permissions'=>$userpermission));;
     }
     public function delete($id)
     {

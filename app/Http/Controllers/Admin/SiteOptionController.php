@@ -34,6 +34,6 @@ class SiteOptionController extends AdminController
             return redirect()->route('sitesetting')
                             ->with('success','Site Settings Updated Successfully.');
         }
-        return view('siteoptions.siteoptions')->with(array('site'=>$site,'breadcrumb'=>$breadcrumb));
+        return view('admin.siteoptions.siteoptions')->with(array('site'=>$site,'breadcrumb'=>$breadcrumb));
     }
 }

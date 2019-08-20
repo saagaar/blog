@@ -60,6 +60,6 @@ class ModuleController extends AdminController
                                                ]
                         ];
              
-        return view('permissions.managerolepermision',compact('allmodules','allpermisionbyrole','roleid'))->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.permissions.managerolepermision',compact('allmodules','allpermisionbyrole','roleid'))->with(array('breadcrumb'=>$breadcrumb));
     }
 }

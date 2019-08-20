@@ -26,6 +26,24 @@
   padding: 5px;
   margin: 20px;
 }
+.block{
+  color: red;
+}
+.modal-body{
+  background-color: #ecf0f5;
+}
+.btnview{
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-size: 20px;
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}
 .clear {
   clear: both;
   float: none;

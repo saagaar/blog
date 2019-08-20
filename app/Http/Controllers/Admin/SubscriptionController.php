@@ -29,7 +29,7 @@ class SubscriptionController extends AdminController
         }else{
             $Subscription = $this->SubscriptionManager->getAll()->paginate($this->PerPage);
         }
-        return view('subscriptionmanager.list')->with(array('Subscription'=>$Subscription,'breadcrumb'=>$breadcrumb,'menu'=>'Subscription List'));
+        return view('admin.subscriptionmanager.list')->with(array('Subscription'=>$Subscription,'breadcrumb'=>$breadcrumb,'menu'=>'Subscription List'));
     }
  
     public function edit(Request $request, $id)
@@ -48,7 +48,7 @@ class SubscriptionController extends AdminController
                 return redirect()->route('subscription.list')
                             ->with('success','Subscription Updated Successfully.');
             }
-            return view('subscriptionmanager.edit',compact('subscription','breadcrumb'));
+            return view('admin.subscriptionmanager.edit',compact('subscription','breadcrumb'));
 
     }
    

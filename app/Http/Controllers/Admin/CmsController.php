@@ -31,7 +31,7 @@ class cmsController extends AdminController
         }else{
             $cms = $this->cms->getAll()->paginate($this->PerPage);
         }
-        return view('cms.list')->with(array('cms'=>$cms,'breadcrumb'=>$breadcrumb,'menu'=>'cms List'));
+        return view('admin.cms.list')->with(array('cms'=>$cms,'breadcrumb'=>$breadcrumb,'menu'=>'cms List'));
     }
     public function create(Request $request)
     {
@@ -51,7 +51,7 @@ class cmsController extends AdminController
             return redirect()->route('cms.list') 
                              ->with(array('success'=>'CMS created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('cms.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.cms.create')->with(array('breadcrumb'=>$breadcrumb));
     }
     public function edit(Request $request, $id)
     {
@@ -69,7 +69,7 @@ class cmsController extends AdminController
                 return redirect()->route('cms.list')
                             ->with('success','CMS Updated Successfully.');
             }
-            return view('cms.edit',compact('cms','breadcrumb'));
+            return view('admin.cms.edit',compact('cms','breadcrumb'));
     }
     public function delete($id)
     {

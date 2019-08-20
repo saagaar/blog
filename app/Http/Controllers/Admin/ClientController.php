@@ -27,7 +27,7 @@ class ClientController extends AdminController
         }else{
             $Client = $this->Client->getAll()->paginate($this->PerPage);
         }
-        return view('client.list')->with(array('Client'=>$Client,'breadcrumb'=>$breadcrumb,'menu'=>'Client List'));
+        return view('admin.client.list')->with(array('Client'=>$Client,'breadcrumb'=>$breadcrumb,'menu'=>'Client List'));
     }
     public function create(Request $request)
     {
@@ -48,7 +48,7 @@ class ClientController extends AdminController
             return redirect()->route('client.list')    
                              ->with(array('success'=>'Client created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('client.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.client.create')->with(array('breadcrumb'=>$breadcrumb));
     }
     public function edit(Request $request, $id)
     {
@@ -77,7 +77,7 @@ class ClientController extends AdminController
                 return redirect()->route('client.list')
                             ->with('success','Client Updated Successfully.');
             }
-            return view('client.edit',compact('client','breadcrumb'));
+            return view('admin.client.edit',compact('client','breadcrumb'));
     }
 
     public function delete($id)
