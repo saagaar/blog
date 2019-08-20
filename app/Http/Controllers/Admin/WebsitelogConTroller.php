@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repository\BlocklistInterface; 
 use App\Http\Controllers\Admin\AdminController; 
 use App\Repository\WebsitelogInterface;
-class WebsitelogConTroller extends AdminController
+class WebsitelogController extends AdminController
 {
      protected $websitelog;
       protected $blocklist;
