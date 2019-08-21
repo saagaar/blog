@@ -27,7 +27,7 @@ class TeamController extends AdminController
         }else{
             $Team = $this->Team->getAll()->paginate($this->PerPage);
         }
-        return view('team.list')->with(array('Team'=>$Team,'breadcrumb'=>$breadcrumb,'menu'=>'Team List'));
+        return view('admin.team.list')->with(array('Team'=>$Team,'breadcrumb'=>$breadcrumb,'menu'=>'Team List'));
     }
     public function create(Request $request)
     {
@@ -48,7 +48,7 @@ class TeamController extends AdminController
             return redirect()->route('team.list')    
                              ->with(array('success'=>'Team created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('team.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.team.create')->with(array('breadcrumb'=>$breadcrumb));
     }
     public function edit(Request $request, $id)
     {
@@ -76,7 +76,7 @@ class TeamController extends AdminController
                 return redirect()->route('team.list')
                             ->with('success','Team Updated Successfully.');
             }
-            return view('team.edit',compact('team','breadcrumb'));
+            return view('admin.team.edit',compact('team','breadcrumb'));
     }
     public function delete($id)
     {

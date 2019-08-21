@@ -30,7 +30,7 @@ class GalleryCategoryController extends AdminController
             $categorys = $this->categories->getAll()->paginate($this->PerPage);
         }
         
-        return view('gallery.category.list')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb,'menu'=>'gallery Category'));
+        return view('admin.gallery.category.list')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb,'menu'=>'gallery Category'));
     }
     public function create(Request $request)
     {
@@ -51,7 +51,7 @@ class GalleryCategoryController extends AdminController
        return redirect()->route('gallerycategory.list')
                             ->with(array('success'=>'gallery Category created successfully.','breadcrumb'=>$breadcrumb));
         }
-       return view('gallery.category.create')->with(array('breadcrumb'=>$breadcrumb));;
+       return view('admin.gallery.category.create')->with(array('breadcrumb'=>$breadcrumb));;
     }
    
     public function edit(Request $request, $id)
@@ -82,7 +82,7 @@ class GalleryCategoryController extends AdminController
                         ->with('success','gallery category updated successfully.');
         }
         
-        return view('gallery.category.edit')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));
+        return view('admin.gallery.category.edit')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));
     }
 
 
@@ -109,6 +109,6 @@ class GalleryCategoryController extends AdminController
         $category =$this->categories->getByCatId($id);
         $gallery = $category->galleries()->get();
         // dd($gallery);
-        return view('gallery.category.viewgallery')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
+        return view('admin.gallery.category.viewgallery')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
     }
 }

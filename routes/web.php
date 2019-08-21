@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('frontend.welcome');
 });
+Route::get('/blog', function () {
+    return view('frontend.home.index');
+});
 // Route::match(['get','post'],'/admin/login','AdminController@login');
 
 Auth::routes();
@@ -64,6 +67,8 @@ Route::prefix('admin')->group(function()
 
 	//route for Change Password
 	Route::match(['get','post'],'/change/password/{id}','Admin\AdminUserController@password')->name('adminuser.change');
+
+	Route::get('changestatus/user', 'Admin\AdminUserController@changeStatus');
 	//admin users
 	//admin roles
 	Route::get('/list/adminrole','Admin\AdminRoleController@list')->name('adminrole.list');

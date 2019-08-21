@@ -27,7 +27,7 @@ class BannerController extends AdminController
         }else{
             $Banner = $this->Banner->getAll()->paginate($this->PerPage);
         }
-        return view('banner.list')->with(array('Banner'=>$Banner,'breadcrumb'=>$breadcrumb,'menu'=>'Banner List'));
+        return view('admin.banner.list')->with(array('Banner'=>$Banner,'breadcrumb'=>$breadcrumb,'menu'=>'Banner List'));
     }
     public function create(Request $request)
     {
@@ -48,7 +48,7 @@ class BannerController extends AdminController
             return redirect()->route('banner.list')    
                              ->with(array('success'=>'Banner created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('banner.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.banner.create')->with(array('breadcrumb'=>$breadcrumb));
     }
     public function edit(Request $request, $id)
     {
@@ -77,7 +77,7 @@ class BannerController extends AdminController
                 return redirect()->route('banner.list')
                             ->with('success','Banner Updated Successfully.');
             }
-            return view('banner.edit',compact('banner','breadcrumb'));
+            return view('admin.banner.edit',compact('banner','breadcrumb'));
     }
 
     public function delete($id)

@@ -29,7 +29,7 @@ class BlocklistController extends AdminController
             $ipdata = $this->blocklist->getAll()->paginate($this->PerPage);
         }
         
-        return view('ipblocklist.list')->with(array('ipdata'=>$ipdata,'breadcrumb'=>$breadcrumb,'menu'=>'Block List'));
+        return view('admin.ipblocklist.list')->with(array('ipdata'=>$ipdata,'breadcrumb'=>$breadcrumb,'menu'=>'Block List'));
     }
     public function create(Request $request)
     {
@@ -48,7 +48,7 @@ class BlocklistController extends AdminController
        return redirect()->route('blocklist.list')
                             ->with(array('success'=>'Block List created successfully.','breadcrumb'=>$breadcrumb));
         }
-       return view('ipblocklist.create')->with(array('admin_id'=>$admin_id,'breadcrumb'=>$breadcrumb));;
+       return view('admin.ipblocklist.create')->with(array('admin_id'=>$admin_id,'breadcrumb'=>$breadcrumb));;
     }
     public function delete($id)
     {
@@ -76,7 +76,7 @@ class BlocklistController extends AdminController
                         ->with('success','Block List updated successfully.');
         }
         
-        return view('ipblocklist.edit',compact('ipdata'))->with(array('admin_id'=>$admin_id,'ipdata'=>$ipdata,'breadcrumb'=>$breadcrumb));
+        return view('admin.ipblocklist.edit',compact('ipdata'))->with(array('admin_id'=>$admin_id,'ipdata'=>$ipdata,'breadcrumb'=>$breadcrumb));
     }
      
 }

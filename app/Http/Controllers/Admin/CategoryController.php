@@ -29,7 +29,7 @@ class CategoryController extends AdminController
             $categorys = $this->categories->getAll()->paginate($this->PerPage);
         }
         
-        return view('blog.listcategories')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb,'menu'=>'Blog Category'));
+        return view('admin.blog.listcategories')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb,'menu'=>'Blog Category'));
     }
     public function create(Request $request)
     {
@@ -47,7 +47,7 @@ class CategoryController extends AdminController
        return redirect()->route('adminblogcategory.list')
                             ->with(array('success'=>'blog Category created successfully.','breadcrumb'=>$breadcrumb));
         }
-       return view('blog.createcategories')->with(array('breadcrumb'=>$breadcrumb));;
+       return view('admin.blog.createcategories')->with(array('breadcrumb'=>$breadcrumb));;
     }
     public function delete($id)
     {
@@ -73,6 +73,6 @@ class CategoryController extends AdminController
                         ->with('success','Blog category updated successfully.');
         }
         
-        return view('blog.editcategories',compact('category'))->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));
+        return view('admin.blog.editcategories',compact('category'))->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));
     }
 }

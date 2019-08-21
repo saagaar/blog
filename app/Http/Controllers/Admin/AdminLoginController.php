@@ -55,18 +55,18 @@ class AdminLoginController extends Controller
         	]);
          $data = $this->admin->getByEmail($request->email); 
      //Attempt for user login
-    if(Auth::guard('admin')->attempt(['email'=>$request->email,'password'=>$request->password,'status'=>'0'],$request->remember))
+    if(Auth::guard('admin')->attempt(['email'=>$request->email,'password'=>$request->password,'status'=>'1'],$request->remember))
     {
       $data->where('email',$request->email)->update(array('invalid_login'=>'0'));
     	return redirect()->intended(route('admin.dashboard'));
 	 }
-    if($data->status=='0'){
+    if($data->status=='1'){
       if($data->invalid_login<4){
             $count = $data->invalid_login;
             $count = $count + 1;
              $data->where('email',$request->email)->update(array('invalid_login'=>$count));
           }else{
-            $data->where('email',$request->email)->update(array('status'=>'1'));
+            $data->where('email',$request->email)->update(array('status'=>'0'));
             return redirect()->back()->withInput($request->only('email','remember'))->with('flash_message_error','Your account has been disabled');
           }
         return redirect()->back()->withInput($request->only('email','remember'))->with('flash_message_error','Invalid username or password');
