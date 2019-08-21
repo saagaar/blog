@@ -32,8 +32,7 @@
                 <tbody>
                 @php  $i = 0 @endphp    
                 @if (!$adminroles->isEmpty())
-                  @foreach ($adminroles as $adminrole)
-                  
+                  @foreach ($adminroles as $adminrole)                 
                   <tr>
                     <td>{{ ++$i }}</td>
                     <td>{{ $adminrole->role_name }}</td>
