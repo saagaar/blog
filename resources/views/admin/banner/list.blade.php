@@ -41,11 +41,7 @@
                    <td><img src="{{asset('images/banner-images/'.$data->image) }}" alt="banner Image" height="42" width="42"></td>
                    <td>{{$data->display_order }}</td>
                   <td>
-                      @if ($data->status== '1')
-                        <span class="label label-success">Published</span>
-                      @else
-                        <span class="label label-danger">Unpublished</span>
-                      @endif
+                       <input data-id="{{$data->id}}" data-url="{{route('banner.changestatus')}}" style="size: 12px;"  data-width="100" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Published" data-off="Unpublished"{{ $data->status ? 'checked' : '' }}>
                       </td>             
                   <td>{{$data->created_at}}</td>
                   <td>{{$data->updated_at}}</td>

@@ -64,20 +64,19 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/user','Admin\AdminUserController@create')->name('adminuser.create');
 	Route::match(['get','post'],'/edit/user/{id}','Admin\AdminUserController@edit')->name('adminuser.edit');
 	Route::get('/delete/user/{id}','Admin\AdminUserController@delete')->name('adminuser.delete');
+	Route::get('changestatus/user', 'Admin\AdminUserController@changeStatus')->name('adminuser.changestatus');
+
 
 	//route for Change Password
 	Route::match(['get','post'],'/change/password/{id}','Admin\AdminUserController@password')->name('adminuser.change');
-
-	Route::get('changestatus/user', 'Admin\AdminUserController@changeStatus');
-	//admin users
+	
 	//admin roles
 	Route::get('/list/adminrole','Admin\AdminRoleController@list')->name('adminrole.list');
 	Route::match(['get','post'],'/create/adminrole','Admin\AdminRoleController@create')->name('adminrole.create');
 	Route::match(['get','post'],'/edit/adminrole/{id}','Admin\AdminRoleController@edit')->name('adminrole.edit');
 	Route::get('/delete/adminrole/{id}','Admin\AdminRoleController@delete')->name('adminrole.delete');
 	Route::match(['get','post'],'/manage/adminrole/{roleid}','Admin\ModuleController@manage')->name('adminrole.managepermission');
-
-
+	Route::get('changestatus/role', 'Admin\AdminRoleController@changeStatus')->name('adminrole.change');
 
 	//admin roles
 	Route::match(['get','post'],'/sitesetting','Admin\SiteOptionController@edit')->name('sitesetting');
@@ -147,6 +146,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/client','Admin\ClientController@create')->name('client.create');
 	Route::match(['get','post'],'/edit/client/{id}','Admin\ClientController@edit')->name('client.edit');
 	Route::get('/delete/client/{id}','Admin\ClientController@delete')->name('client.delete');
+	Route::get('changestatus/client', 'Admin\ClientController@changeStatus')->name('client.changestatus');
 
 
 	// Route for banners
@@ -154,6 +154,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/banner','Admin\BannerController@create')->name('banner.create');
 	Route::match(['get','post'],'/edit/banner/{id}','Admin\BannerController@edit')->name('banner.edit');
 	Route::get('/delete/banner/{id}','Admin\BannerController@delete')->name('banner.delete');
+	Route::get('changestatus/banner', 'Admin\BannerController@changeStatus')->name('banner.changestatus');
 
 
 	// Route for payment gateway
@@ -211,7 +212,7 @@ Route::prefix('admin')->group(function()
 	
 	
 
-Route::get('/admin/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
+Route::get('/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
 
 });
 

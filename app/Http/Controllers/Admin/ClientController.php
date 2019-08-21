@@ -93,4 +93,13 @@ class ClientController extends AdminController
         return redirect()->route('client.list')
         ->with('success', '');
     }
+
+     public function changeStatus(Request $request)
+    {
+        $client = $this->Client->getById($request->id);
+        $status = $request->status;
+        $client->update(array('status'=>$status));  
+       return redirect()->route('client.list')
+                        ->with('success','Status change successfully.');
+    }
 }

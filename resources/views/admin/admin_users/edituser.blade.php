@@ -82,8 +82,8 @@
               </div>
               <div class="form-group">
                   <label for="status">Status: </label>
-                  <label><input type="radio" name="status" value="0" {{ $adminusers->status == '0' ? 'checked' : ''}}>Active</label>
-                  <label><input type="radio" name="status" value="1" {{ $adminusers->status == '1' ? 'checked' : ''}}>Inactive</label>
+                  <label><input type="radio" name="status" value="1" {{ $adminusers->status == '1' ? 'checked' : ''}}>Active</label>
+                  <label><input type="radio" name="status" value="0" {{ $adminusers->status == '0' ? 'checked' : ''}}>Inactive</label>
                 </div>
                 @if ($errors->has('status'))
                 <div class="active">{{ $errors->first('status') }}</div>

@@ -35,14 +35,10 @@
                   @foreach ($adminroles as $adminrole)                 
                   <tr>
                     <td>{{ ++$i }}</td>
-                    <td>{{ $adminrole->role_name }}</td>
+                    <td>{{$adminrole->role_name }}</td>
                     <td>{{$adminrole->slug}}</td>
                     <td>
-                        @if ($adminrole->status == 1)
-                          <span class="label label-success">Active</span>
-                        @else
-                          <span class="label label-danger">Inactive</span>
-                        @endif
+                         <input data-id="{{$adminrole->id}}" data-url="{{route('adminrole.change')}}" style="size: 12px;" data-width="50" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No" {{ $adminrole->status ? 'checked' : '' }}>
                     </td>
 
                     <td>{{$adminrole->created_at}}</td>

@@ -93,4 +93,15 @@ class BannerController extends AdminController
         return redirect()->route('banner.list')
         ->with('success', '');
     }
+
+      public function changeStatus(Request $request)
+    {
+        $banner = $this->Banner->getById($request->id);
+        $status = $request->status;
+        $banner->update(array('status'=>$status));  
+       return redirect()->route('banner.list')
+                        ->with('success','Status change successfully.');
+    }
+
+    
 }

@@ -80,5 +80,14 @@ class AdminRoleController extends AdminController
         return view('admin.roles.editrole',compact('adminrole'))->with(array('adminrole'=>$adminrole,'breadcrumb'=>$breadcrumb));
     }
 
+    public function changeStatus(Request $request)
+    {
+        $role = $this->roles->getroleById($request->id);
+        $status = $request->status;
+        $role->update(array('status'=>$status));  
+       return redirect()->route('adminrole.list')
+                        ->with('success','Status change successfully.');
+    }
+
     
 }

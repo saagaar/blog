@@ -42,7 +42,9 @@
                 
                   <div class="form-group">
                     <label for="content">Content:</label>
-                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Banner Content here.."></textarea>
+                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Banner Content here..">
+                     {{ old('content')}}  
+                    </textarea>
                     @if ($errors->has('content'))
                     <div class="alert alert-danger">{{ $errors->first('content') }}</div>
                     @endif

@@ -86,8 +86,8 @@ class AdminController extends BaseController
                 $controllers['name']= str_replace('Controller','',$finalcontroller);
                 $controllers['controller']=$finalcontroller;
                 $controllers['full_path']=$actions['controller'];
-                $controllers['route_name']=$actions['as'];
-                $controllers['method']=$method;
+                $controllers['route_name']=isset($actions['as'])?$actions['as']:'';
+                $controllers['method']=isset($method)?$method:'';;
                 $controllers['display_order']=$i;
                 $modules[]=$controllers;
 

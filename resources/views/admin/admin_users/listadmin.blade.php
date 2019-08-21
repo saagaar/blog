@@ -41,13 +41,11 @@
                   <td>{{ $adminuser->username }}</td>
                   <td>{{ $adminuser->email }}</td>
                   <td>
-                      <input data-id="{{$adminuser->id}}" style="size: 12px;" data-width="50" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No" {{ $adminuser->status ? 'checked' : '' }}>
+                       <input data-id="{{$adminuser->id}}" data-url="{{route('adminuser.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $adminuser->status ? 'checked' : '' }}>
                   </td>
                   <td>{{$adminuser->role_id}}</td>
                   <td>{{$adminuser->created_at}}</td>
-                  <td>{{$adminuser->updated_at}}</td>
-                  
-                 
+                  <td>{{$adminuser->updated_at}}</td>                
                       <td><a href="{{route('adminuser.edit', $adminuser->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                       <td><a href="{{route('adminuser.delete', $adminuser->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                      </td>

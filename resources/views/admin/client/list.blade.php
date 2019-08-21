@@ -39,11 +39,7 @@
                    <td>{{$member->url }}</td>
                    <td><img src="{{asset('images/client-images/'.$member->logo) }}" alt="client Image" height="42" width="42"></td>
                   <td>
-                      @if ($member->status== '1')
-                        <span class="label label-success">Active</span>
-                      @else
-                        <span class="label label-danger">Inactive</span>
-                      @endif
+                     <input data-id="{{$member->id}}" data-url="{{route('client.changestatus')}}" style="size: 12px;"  data-width="90" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Publish" data-off="Unpublish"{{$member->status ? 'checked' : '' }}>
                       </td>             
                   <td>{{$member->created_at}}</td>
                   <td>{{$member->updated_at}}</td>
