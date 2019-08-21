@@ -36,7 +36,7 @@
                   <td>{{$member->email}}</td>
                    <td>{{$member->comment }}</td>
                    <td>
-                      @if ($member->status== 'Y')
+                      @if ($member->status== '1')
                         <span class="label label-success">Subscribed</span>
                       @else
                         <span class="label label-danger">Unsubscribed</span>

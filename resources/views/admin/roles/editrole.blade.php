@@ -55,8 +55,8 @@
                 </div>
                 <div class="form-group">
                   <label for="status">Status: &nbsp &nbsp &nbsp </label>
-                  <label><input type="radio" name="status" value="0" {{ $adminrole->status == '0' ? 'checked' : ''}}>  Active</label>&nbsp
-                  <label><input type="radio" name="status" value="1"  {{ $adminrole->status == '1' ? 'checked' : ''}}>  Inactive</label>
+                  <label><input type="radio" name="status" value="1" {{ $adminrole->status == '1' ? 'checked' : ''}}>  Active</label>&nbsp
+                  <label><input type="radio" name="status" value="0"  {{ $adminrole->status == '0' ? 'checked' : ''}}>  Inactive</label>
                 </div>
                 @if ($errors->has('status'))
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>

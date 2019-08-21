@@ -49,11 +49,11 @@
                  <div class="form-group">
                   <label for="is_display">Is Display</label>
                   <div class="custom-control custom-radio radio-inline">
-                    <input type="radio" class="custom-control-input flat-red" name="is_display"  value="Y" checked>
+                    <input type="radio" class="custom-control-input flat-red" name="is_display"  value="1" checked>
                     <label class="custom-control-label" for="defaultChecked">Yes</label>
                   </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="is_display"  value="N" >
+                        <input type="radio" class="custom-control-input flat-red" name="is_display"  value="0" >
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
                          @if ($errors->has('is_display'))

@@ -43,11 +43,11 @@
                 <div class="form-group">
                   <label for="mode">Payment Mode</label>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="mode" value="Y" @if($paymentgateway->mode=='Y') checked @endif>
+                        <input type="radio" class="custom-control-input flat-red" name="mode" value="1" @if($paymentgateway->mode=='1') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Live</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="mode" value="N"  @if($paymentgateway->mode=='N') checked @endif>
+                        <input type="radio" class="custom-control-input flat-red" name="mode" value="0"  @if($paymentgateway->mode=='0') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Test</label>
                     </div>
                          @if ($errors->has('mode'))

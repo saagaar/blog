@@ -39,7 +39,7 @@
                   <td>{{$data->email}}</td>
                   <td><img src="{{asset('images/paymentgateway-images/'.$data->image) }}" alt="paymentgateway Image" height="42" width="42"></td>   
                    <td>
-                      @if ($data->status== 'Y')
+                      @if ($data->status== '1')
                         <span class="label label-success">Active</span>
                       @else
                         <span class="label label-danger ">Inactive</span>

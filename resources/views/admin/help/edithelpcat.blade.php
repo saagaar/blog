@@ -47,8 +47,8 @@
                 </div>
                 <div class="form-group">
                   <label for="Display">Display: </label>
-                  <label><input type="radio" name="display" value="Y" {{ $category->display == 'Y' ? 'checked' : ''}}>Yes</label>
-                  <label><input type="radio" name="display" value="N"  {{ $category->display == 'N' ? 'checked' : ''}}>No</label>
+                  <label><input type="radio" name="display" value="1" {{ $category->display == '1' ? 'checked' : ''}}>Yes</label>
+                  <label><input type="radio" name="display" value="0"  {{ $category->display == '0' ? 'checked' : ''}}>No</label>
                   @if ($errors->has('display'))
                 <div class="alert alert-danger">{{ $errors->first('display') }}</div>
                 @endif

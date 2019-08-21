@@ -86,5 +86,13 @@ class AdminUserController extends AdminController
         return redirect()->route('adminuser.list')
         ->with('success', 'User has been deleted!!');
     }
+  public function changeStatus(Request $request)
+    {
+        $user = $this->admin->getById($request->id);
+        $status = $request->status;
+        $user->update(array('status'=>$status));
   
+       return redirect()->route('adminuser.list')
+                        ->with('success','Status change successfully.');
+    }
 }

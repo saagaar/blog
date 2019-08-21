@@ -54,11 +54,11 @@
                 <div class="form-group">
                   <label for="Save Method">Save Method: </label>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="1" checked>
+                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="0" checked>
                         <label class="custom-control-label" for="defaultChecked">Save to Draft</label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="2" >
+                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="1" >
                         <label class="custom-control-label" for="defaultChecked">Publish</label>
                       </div>
                   @if ($errors->has('save_method'))

@@ -48,11 +48,11 @@
                 <div class="form-group">
                   <label for="status">Status</label>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="0" checked>
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="1" checked>
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="1" >
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="0" >
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
                          @if ($errors->has('status'))

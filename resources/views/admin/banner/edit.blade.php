@@ -72,11 +72,11 @@
                <div class="form-group">
                   <label for="status">Status</label>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="Y" @if($banner->status=='Y')checked @endif>
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="1" @if($banner->status=='1')checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Publish</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="N" @if($banner->status=='N')checked @endif >
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="0" @if($banner->status=='0')checked @endif >
                         <label class="custom-control-label" for="defaultChecked">Unpublish</label>
                     </div>
                          @if ($errors->has('status'))

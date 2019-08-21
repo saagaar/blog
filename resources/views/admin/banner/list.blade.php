@@ -41,7 +41,7 @@
                    <td><img src="{{asset('images/banner-images/'.$data->image) }}" alt="banner Image" height="42" width="42"></td>
                    <td>{{$data->display_order }}</td>
                   <td>
-                      @if ($data->status== 'Y')
+                      @if ($data->status== '1')
                         <span class="label label-success">Published</span>
                       @else
                         <span class="label label-danger">Unpublished</span>

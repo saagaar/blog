@@ -61,6 +61,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/user','Admin\AdminUserController@create')->name('adminuser.create');
 	Route::match(['get','post'],'/edit/user/{id}','Admin\AdminUserController@edit')->name('adminuser.edit');
 	Route::get('/delete/user/{id}','Admin\AdminUserController@delete')->name('adminuser.delete');
+	Route::get('changestatus/user', 'Admin\AdminUserController@changeStatus');
 	//admin users
 	//admin roles
 	Route::get('/list/adminrole','Admin\AdminRoleController@list')->name('adminrole.list');

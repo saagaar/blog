@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ asset('admin/bower_components/Ionicons/css/ionicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/dist/css/simplelightbox.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/dist/css/demo.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/dist/css/bootstrap2-toggle.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/bower_components/datetime/css/bootstrap-datetimepicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/dist/css/AdminLTE.min.css') }}">
    <link rel="stylesheet" href="{{ asset('admin/dist/plugins/iCheck/all.css') }}">
@@ -63,6 +64,7 @@
 <!-- <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script> -->
 <script src="{{ asset('admin/dist/js/pages/siteoptions.js') }}"></script>
 <script src="{{ asset('admin/dist/js/app.js') }}"></script>
+<script src="{{ asset('admin/dist/js/bootstrap2-toggle.min.js') }}"></script>
 <script src="{{ asset('admin/bower_components/datetime/js/bootstrap-datetimepicker.min.js') }}"></script>
 <script src="{{ asset('admin/dist/js/simple-lightbox.min.js') }}"></script>
 <!-- <script>
@@ -95,6 +97,26 @@ window.setTimeout(function() {
  
 });
 
+</script>
+<script>
+  $(function() {
+    $('.toggle-class').change(function() {
+        var status = $(this).prop('checked') == true ? 1 : 0;
+        var id = $(this).data('id'); 
+         
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/admin/changestatus/user',
+
+            data: {'status': status, 'id': id},
+            success: function(data){
+              console.log(data.success)
+            }
+            
+        });
+    })
+  })
 </script>
 <script>
   $(function(){

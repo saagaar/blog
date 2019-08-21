@@ -56,8 +56,8 @@
                 </div>
                 <div class="form-group">
                   <label for="status">Status: </label>
-                  <label><input type="radio" name="status" value="0">Active</label>
-                  <label><input type="radio" name="status" value="1">Inactive</label>
+                  <label><input type="radio" name="status" value="1">Active</label>
+                  <label><input type="radio" name="status" value="0">Inactive</label>
                 </div>
                 @if ($errors->has('status'))
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>

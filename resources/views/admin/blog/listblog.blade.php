@@ -39,7 +39,7 @@
                   <td>{{ $eachblog->title }}</td>
                    <td>{{strip_tags($eachblog->content) }}</td>
                   <td>
-                      @if ($eachblog->save_method == '1')
+                      @if ($eachblog->save_method == '0')
                         <span class="label label-danger">Draft</span>
                       @else
                         <span class="label label-success">Published</span>

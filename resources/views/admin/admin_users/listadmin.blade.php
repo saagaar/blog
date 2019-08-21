@@ -40,11 +40,7 @@
                   <td>{{ $adminuser->username }}</td>
                   <td>{{ $adminuser->email }}</td>
                   <td>
-                      @if ($adminuser->status == 0)
-                        <span class="label label-success">Active</span>
-                      @else
-                        <span class="label label-danger">Inactive</span>
-                      @endif
+                      <input data-id="{{$adminuser->id}}" style="size: 12px;" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No" {{ $adminuser->status ? 'checked' : '' }}>
                   </td>
                   <td>{{$adminuser->role_id}}</td>
                   <td>{{$adminuser->created_at}}</td>
@@ -75,4 +71,5 @@
         </div>
     </div>
 </section>
+
 @endsection

@@ -39,7 +39,7 @@
                     <td>{{ $adminrole->role_name }}</td>
                     <td>{{$adminrole->slug}}</td>
                     <td>
-                        @if ($adminrole->status == 0)
+                        @if ($adminrole->status == 1)
                           <span class="label label-success">Active</span>
                         @else
                           <span class="label label-danger">Inactive</span>

@@ -37,7 +37,7 @@
                   <td>{{ ++$i }}</td>
                   <td>{{ $category->name }}</td>
                   <td>
-                      @if ($category->display == 'Y')
+                      @if ($category->display == '1')
                         <span class="label label-success">Yes</span>
                       @else
                         <span class="label label-danger">No</span>

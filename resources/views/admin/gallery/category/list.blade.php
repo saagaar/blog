@@ -38,7 +38,7 @@
                    <td>
                    	<img src="{{ asset('images/gallerycat-images/'.$eachcat['banner_image']) }}" alt="Image" height="42" width="42"></td>
                   <td>
-                      @if ($eachcat->status == '0')
+                      @if ($eachcat->status == '1')
                         <span class="label label-success">Active</span>
                       @else
                         <span class="label label-danger">Inactive</span>

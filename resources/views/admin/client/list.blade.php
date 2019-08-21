@@ -39,7 +39,7 @@
                    <td>{{$member->url }}</td>
                    <td><img src="{{asset('images/client-images/'.$member->logo) }}" alt="client Image" height="42" width="42"></td>
                   <td>
-                      @if ($member->status== 'Y')
+                      @if ($member->status== '1')
                         <span class="label label-success">Active</span>
                       @else
                         <span class="label label-danger">Inactive</span>

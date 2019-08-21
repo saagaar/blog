@@ -38,7 +38,7 @@
                   <td>{{ $eachcms->heading }}</td>
                   <td>{{ strip_tags($eachcms->content)}}</td>
                   <td>
-                      @if($eachcms->is_display=='Y')
+                      @if($eachcms->is_display=='1')
                        <span class="label label-success">Active</span>
                        @else
                        <span class="label label-danger">Inactive</span>
