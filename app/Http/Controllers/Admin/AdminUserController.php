@@ -23,8 +23,7 @@ class AdminUserController extends AdminController
     {
        $breadcrumb=['breadcrumbs' => [
                 'Dashboard' => route('admin.dashboard'),
-                'Admin Users' => route('adminuser.list'),
-                'current_menu'=> 'Edit User',
+                'current_menu'=> 'All Admin Users',
                   ]];
 
          $search = $request->get('search');
@@ -64,7 +63,7 @@ class AdminUserController extends AdminController
         $breadcrumb=['breadcrumbs' => [
                     'Dashboard' => route('admin.dashboard'),
                     'Admin Users' => route('adminuser.list'),
-                    'current_menu'=>'Edit Users',
+                    'current_menu'=>'All Admin Users',
                       ]];
         $adminusers =$this->admin->getById($id);
         if ($request->method()=='POST') 
@@ -110,7 +109,7 @@ class AdminUserController extends AdminController
                 $data['password']= (Hash::make($request->password));
 
                 $this->admin->update($id,array('password'=>$data['password']));
-                return redirect()->route('adminuser.list')
+                return redirect()->route('admin.logout')
                             ->with('success','Password Changed successfully.');
                 }
         }

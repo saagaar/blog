@@ -4,23 +4,27 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <div class="box box-solid box-primary">
+
+          <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Change Password</h3>
+              <h3 class="box-title">Admin user</h3>
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
+                <li><a href="{{route('adminuser.list')}}"><span class="glyphicon glyphicon-minus"></span> List All Admin user</a></li>
+                
               </ul>
             </div>
-          <!-- /.box-body -->
+            <!-- /.box-body -->
           </div>
+          <!-- /. box -->
         </div>
         <!-- left column -->
         <div class="col-md-9">
           <!-- general form elements -->
           <div class="box ">
             <div class="box-header">
-              <h3 class="box-title">Edit Password</h3>
+              <h3 class="box-title">Change Password</h3>
             </div>
           <!-- Form Element sizes -->
           <div class="box ">
