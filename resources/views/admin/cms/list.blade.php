@@ -31,18 +31,14 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if(!$cms->isEmpty())
-                @foreach ($cms as $eachcms)
+                @if(!$CMS->isEmpty())
+                @foreach ($CMS as $eachcms)
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachcms->heading }}</td>
                   <td>{{ strip_tags($eachcms->content)}}</td>
                   <td>
-                      @if($eachcms->is_display=='1')
-                       <span class="label label-success">Active</span>
-                       @else
-                       <span class="label label-danger">Inactive</span>
-                       @endif
+                     <input data-id="{{$eachcms->id}}" data-url="{{route('cms.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachcms->status ? 'checked' : '' }}>
                   </td>
                   <td>
                      @if($eachcms->cms_type=='website')  
@@ -72,7 +68,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $cms->links() !!}
+              {!! $CMS->links() !!}
               </ul>
             </div>           
             <!-- /.box-body -->

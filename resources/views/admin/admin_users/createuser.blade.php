@@ -70,16 +70,13 @@
                 @endif
                 </div>
                 <div class="form-group">
-                  <label>Role</label>
-                 
+                  <label>Role</label>                 
                   <select name="role_id" class="form-control">
                   <option value="">--Select--</option>
-                  @foreach ($adminroles as $role)
-                  
-                    <option value="{{$role->id}}" value="{{ old('name') }}">{{$role->role_name}}</option>
+                  @foreach ($adminroles as $role)                 
+                    <option value="{{$role->id}}" value="{{ old('name') }}">{{$role->role_name}}</optio n>
                     @endforeach
-                  </select>
-                 
+                  </select>                
                 </div>
                 @if ($errors->has('role_id'))
                 <div class="alert alert-danger">{{ $errors->first('role_id') }}</div>

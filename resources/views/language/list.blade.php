@@ -39,11 +39,7 @@
                   <td>{{$lang->short_code }}</td>
                   <td>{{$lang->priority }}</td>      
                  <td>
-                  @if ($lang->status== 'Y')
-                    <span class="label label-success">Active</span>
-                  @else
-                    <span class="label label-danger">Inactive</span>
-                  @endif
+                 <input data-id="{{$lang->id}}" data-url="{{route('language.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$lang->status ? 'checked' : '' }}>
                   </td>                                         
                   <td>{{$lang->created_at}}</td>
                   <td>{{$lang->updated_at}}</td>

@@ -101,11 +101,11 @@
                <div class="form-group">
                   <label for="status">Status</label>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="Y" @if($paymentgateway->status=='Y') checked @endif>
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="1" @if($paymentgateway->status=='1') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="N"  @if($paymentgateway->status=='N') checked @endif >
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="1"  @if($paymentgateway->status=='0') checked @endif >
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
                          @if ($errors->has('status'))

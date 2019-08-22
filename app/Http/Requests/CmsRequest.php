@@ -30,7 +30,7 @@ class CmsRequest extends FormRequest
             'page_title'=>'required',
             'meta_key'=>'required',
             'meta_description'=>'required',
-            'is_display'=>'required',
+            'status'=>'required',
             'cms_type'=>'required',
             'deletable'=>'required'
         ];

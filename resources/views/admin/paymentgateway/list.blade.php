@@ -39,19 +39,11 @@
                   <td>{{$data->email}}</td>
                   <td><img src="{{asset('images/paymentgateway-images/'.$data->image) }}" alt="paymentgateway Image" height="42" width="42"></td>   
                    <td>
-                      @if ($data->status== '1')
-                        <span class="label label-success">Active</span>
-                      @else
-                        <span class="label label-danger ">Inactive</span>
-                      @endif
+                         <input data-id="{{$data->id}}" data-url="{{route('paymentgateway.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$data->status ? 'checked' : '' }}>
                       </td>                      
                    
                       <td>  
-                      @if ($data->mode== 'Y')
-                        <span class="label label-success">Live</span>
-                      @else
-                        <span class="label label-warning">Test</span>
-                      @endif
+                      <input data-id="{{$data->id}}" data-url="{{route('paymentgateway.changemode')}}" style="size: 12px;"  data-width="70" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="warning" data-toggle="toggle" data-on="live" data-off="Test"{{$data->mode ? 'checked' : '' }}>
                       </td>         
 
                   <td>{{$data->created_at}}</td>

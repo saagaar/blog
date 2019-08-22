@@ -72,4 +72,15 @@ class LanguageController extends AdminController
         return redirect()->route('language.list')
         ->with('success', 'Language deleted Successfully');
     }
+
+       public function changeStatus(Request $request)
+    {
+        $language = $this->Language->getById($request->id);
+        $status = $request->status;
+        $language->update(array('status'=>$status));  
+        return redirect()->route('language.list')
+                        ->with('success','Status change successfully.');
+    }
+
+
 }

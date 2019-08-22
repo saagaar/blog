@@ -120,6 +120,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/cms','Admin\CmsController@create')->name('cms.create');
 	Route::match(['get','post'],'/edit/cms/{id}','Admin\CmsController@edit')->name('cms.edit');
 	Route::get('/delete/cms/{id}','Admin\CmsController@delete')->name('cms.delete');
+	Route::get('changestatus/cms', 'Admin\CmsController@changeStatus')->name('cms.changestatus');
 
 	//Route for Testimonial
 	Route::get('/list/testimonial','Admin\TestimonialController@list')->name('testimonial.list');
@@ -133,6 +134,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/services','Admin\ServicesController@create')->name('services.create');
 	Route::match(['get','post'],'/edit/services/{id}','Admin\ServicesController@edit')->name('services.edit');
 	Route::get('/delete/services/{id}','Admin\ServicesController@delete')->name('services.delete');
+	Route::get('changestatus/services', 'Admin\ServicesController@changeStatus')->name('services.changestatus');
 
 
 //Route for team
@@ -158,10 +160,13 @@ Route::prefix('admin')->group(function()
 
 
 	// Route for payment gateway
-	Route::get('/list/subscriptionmanager','Admin\PaymentGatewayController@list')->name('paymentgateway.list');
+	Route::get('/list/paymentgateway','Admin\PaymentGatewayController@list')->name('paymentgateway.list');
 	Route::match(['get','post'],'/create/paymentgateway','Admin\PaymentGatewayController@create')->name('paymentgateway.create');
 	Route::match(['get','post'],'/edit/paymentgateway/{id}','Admin\PaymentGatewayController@edit')->name('paymentgateway.edit');
 	Route::get('/delete/paymentgateway/{id}','Admin\PaymentGatewayController@delete')->name('paymentgateway.delete');
+	Route::get('changestatus/paymentgateway', 'Admin\PaymentGatewayController@changeStatus')->name('paymentgateway.changestatus');
+		Route::get('changemode/paymentgateway', 'Admin\PaymentGatewayController@changeMode')->name('paymentgateway.changemode');
+
 
 
 		// Route for Subscription Manager
@@ -209,7 +214,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/language','Admin\LanguageController@create')->name('language.create');
 	Route::match(['get','post'],'/edit/language/{id}','Admin\LanguageController@edit')->name('language.edit');
 	Route::get('/delete/language/{id}','Admin\LanguageController@delete')->name('language.delete');
-	
+	Route::get('changestatus/language', 'Admin\LanguageController@changeStatus')->name('language.changestatus');
 	
 
 Route::get('/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');

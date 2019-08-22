@@ -93,4 +93,13 @@ class ServicesController extends AdminController
         return redirect()->route('services.list')
         ->with('success', '');
     }
+
+     public function changeMode(Request $request)
+    {
+        $changemode = $this->Service->getById($request->id);
+        $mode = $request->mode;
+        $changemode->update(array('mode'=>$mode));  
+        return redirect()->route('services.list')
+                        ->with('success','Status change successfully.');
+    }
 }
