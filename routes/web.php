@@ -67,7 +67,7 @@ Route::prefix('admin')->group(function()
 	Route::get('changestatus/user', 'Admin\AdminUserController@changeStatus')->name('adminuser.changestatus');
 
 
-	//route for Change Password
+	//route for changing admin passwords 
 	Route::match(['get','post'],'/change/password/{id}','Admin\AdminUserController@password')->name('adminuser.change');
 	
 	//admin roles
@@ -114,7 +114,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/permission','Admin\PermissionsController@create')->name('permission.create');
 	Route::match(['get','post'],'/edit/permission/{id}','Admin\PermissionsController@edit')->name('permission.edit');
 	Route::get('/delete/permission/{id}','Admin\PermissionsController@delete')->name('permission.delete');
-
+	
 	//Route for Cms
 	Route::get('/list/cms','Admin\CmsController@list')->name('cms.list');
 	Route::match(['get','post'],'/create/cms','Admin\CmsController@create')->name('cms.create');
@@ -127,6 +127,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/testimonial','Admin\TestimonialController@create')->name('testimonial.create');
 	Route::match(['get','post'],'/edit/testimonial/{id}','Admin\TestimonialController@edit')->name('testimonial.edit');
 	Route::get('/delete/testimonial/{id}','Admin\TestimonialController@delete')->name('testimonial.delete');
+	Route::get('changestatus/testimonial', 'Admin\TestimonialController@changeStatus')->name('testimonial.changestatus');
 
 
 //Route for Services
@@ -142,6 +143,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/team','Admin\TeamController@create')->name('team.create');
 	Route::match(['get','post'],'/edit/team/{id}','Admin\TeamController@edit')->name('team.edit');
 	Route::get('/delete/team/{id}','Admin\TeamController@delete')->name('team.delete');
+	Route::get('changestatus/team', 'Admin\TeamController@changeStatus')->name('team.changestatus');
 
 	// Route for clients
 	Route::get('/list/client','Admin\ClientController@list')->name('client.list');
@@ -165,14 +167,11 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/edit/paymentgateway/{id}','Admin\PaymentGatewayController@edit')->name('paymentgateway.edit');
 	Route::get('/delete/paymentgateway/{id}','Admin\PaymentGatewayController@delete')->name('paymentgateway.delete');
 	Route::get('changestatus/paymentgateway', 'Admin\PaymentGatewayController@changeStatus')->name('paymentgateway.changestatus');
-		Route::get('changemode/paymentgateway', 'Admin\PaymentGatewayController@changeMode')->name('paymentgateway.changemode');
-
-
 
 		// Route for Subscription Manager
 	Route::get('/list/subscriptionmanager','Admin\SubscriptionController@list')->name('subscription.list');
-	
 	Route::match(['get','post'],'/edit/subscriptionmanager/{id}','Admin\SubscriptionController@edit')->name('subscription.edit');
+	Route::get('changestatus/subscriptionmanager', 'Admin\SubscriptionController@changeStatus')->name('subscription.changestatus');
 	
 	//route for contact
 	Route::get('/list/contact','Admin\ContactController@list')->name('contact.list');
@@ -184,6 +183,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/edit/gallery/category/{id}','Admin\GalleryCategoryController@edit')->name('gallerycategory.edit');
 	Route::get('/delete/gallery/category/{id}','Admin\GalleryCategoryController@delete')->name('gallerycategory.delete');
 	Route::get('/view/gallery/category/{id}','Admin\GalleryCategoryController@view')->name('gallerycategory.view');
+	Route::get('changestatus/category', 'Admin\GalleryCategoryController@changeStatus')->name('gallerycategory.changestatus');
 
 	//route for Gallery
 	Route::get('/list/gallery','Admin\GalleryController@list')->name('gallery.list');

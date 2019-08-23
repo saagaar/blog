@@ -94,11 +94,11 @@ class ServicesController extends AdminController
         ->with('success', '');
     }
 
-     public function changeMode(Request $request)
+     public function changeStatus(Request $request)
     {
-        $changemode = $this->Service->getById($request->id);
-        $mode = $request->mode;
-        $changemode->update(array('mode'=>$mode));  
+        $changetatus = $this->Service->getById($request->id);
+        $status = $request->status;
+        $changetatus->update(array('status'=>$status)); 
         return redirect()->route('services.list')
                         ->with('success','Status change successfully.');
     }

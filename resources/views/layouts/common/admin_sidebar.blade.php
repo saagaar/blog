@@ -29,7 +29,7 @@
 
   <!-- Sidebar Menu -->
   <ul class="sidebar-menu" data-widget="tree">
-    <li class="header">Dashborad</li>
+    <li class="header">Dashboard</li>
     <!-- Optionally, you can add icons to the links -->
      <li><a href="{{route('sitesetting')}}"><i class="fa  fa-gear"></i> <span>Site setting</span></a></li>
     <li class="treeview">
@@ -46,7 +46,14 @@
       </li>
       <li><a href="{{route('cms.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>CMS</span></a>
         <li><a href="{{route('testimonial.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Testimonial</span></a>
-          <li><a href="{{route('services.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Services</span></a>
+        <li><a href="{{route('services.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Services</span></a>
+        <li><a href="{{route('banner.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Banner</span></a>
+        <li><a href="{{route('team.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Team</span></a>   
+         <li><a href="{{route('subscription.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Subscription Manager</span></a>   
+        <li><a href="{{route('paymentgateway.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Payment Gateway</span></a> 
+        <li><a href="{{route('client.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Client</span></a>   
+         <li><a href="{{route('seo.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>SEO</span></a>   
+    
     <li class="treeview">
       <a href=""><i class="fa  fa-pencil-square"></i> <span>Blog</span>
       <span class="pull-right-container">

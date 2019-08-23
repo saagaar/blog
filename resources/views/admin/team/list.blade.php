@@ -41,11 +41,7 @@
                    <td>{{$member->description }}</td>
                    <td><img src="{{asset('images/team-images/'.$member->image) }}" alt="team Image" height="42" width="42"></td>
                   <td>
-                      @if ($member->status== '1')
-                        <span class="label label-success">Active</span>
-                      @else
-                        <span class="label label-danger">Inactive</span>
-                      @endif
+                      <input data-id="{{$member->id}}" data-url="{{route('team.changestatus')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$member->status ? 'checked' : ''}}>
                       </td>             
                   <td>{{$member->created_at}}</td>
                   <td>{{$member->updated_at}}</td>

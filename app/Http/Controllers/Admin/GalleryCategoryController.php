@@ -111,4 +111,13 @@ class GalleryCategoryController extends AdminController
         // dd($gallery);
         return view('admin.gallery.category.viewgallery')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
     }
+
+     public function changeStatus(Request $request)
+    {
+        $categories = $this->categories->getByCatId($request->id);
+        $status =$request->status;
+        $categories->update(array('status'=>$status)); 
+        return redirect()->route('categories.list')
+                        ->with('success','Status change successfully.');
+    } 
 }

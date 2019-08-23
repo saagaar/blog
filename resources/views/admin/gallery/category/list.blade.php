@@ -5,7 +5,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Gallery Caterories</h3>
+              <h3 class="box-title">All Gallery Categories</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <a href="{{route('gallerycategory.create')}}" class="btn btn-primary">Add Gallery Category</a>
@@ -36,13 +36,9 @@
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachcat->title }}</td>
                    <td>
-                   	<img src="{{ asset('images/gallerycat-images/'.$eachcat['banner_image']) }}" alt="Image" height="42" width="42"></td>
+                   	<img src="{{asset('images/gallerycat-images/'.$eachcat['banner_image']) }}" alt="Image" height="42" width="42"></td>
                   <td>
-                      @if ($eachcat->status == '1')
-                        <span class="label label-success">Active</span>
-                      @else
-                        <span class="label label-danger">Inactive</span>
-                      @endif
+                     <input data-id="{{$eachcat->id}}" data-url="{{route('gallerycategory.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachcat->status ? 'checked' : '' }}>
                   </td>
                   <td>{{$eachcat->created_at}}</td>
                   <td>{{$eachcat->updated_at}}</td>

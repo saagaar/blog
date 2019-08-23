@@ -91,4 +91,12 @@ class TeamController extends AdminController
         return redirect()->route('team.list')
         ->with('success', '');
     }
+     public function changeStatus(Request $request)
+    {
+        $team = $this->Team->getById($request->id);
+        $status =$request->status;
+        $team->update(array('status'=>$status)); 
+        return redirect()->route('team.list')
+                        ->with('success','Status change successfully.');
+    } 
 }

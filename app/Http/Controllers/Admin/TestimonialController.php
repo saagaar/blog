@@ -92,4 +92,13 @@ class TestimonialController extends AdminController
         return redirect()->route('testimonial.list')
         ->with('success', '');
     }
+
+     public function changeStatus(Request $request)
+    {
+        $testimony = $this->testimony->getById($request->id);
+        $status =$request->status;
+        $testimony->update(array('status'=>$status)); 
+        return redirect()->route('testimony.list')
+                        ->with('success','Status change successfully.');
+    } 
 }

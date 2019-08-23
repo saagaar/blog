@@ -41,11 +41,7 @@
                    <td>{{$testimonial->description }}</td>
                    <td><img src="{{asset('images/testimonial-images/'.$testimonial->image) }}" alt="testimonial Image" height="42" width="42"></td>
                   <td>
-                      @if ($testimonial->status== '1')
-                        <span class="label label-success">Active</span>
-                      @else
-                        <span class="label label-danger">Inactive</span>
-                      @endif
+                    <input data-id="{{$testimonial->id}}" data-url="{{route('testimonial.changestatus')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$testimonial->status ? 'checked' : ''}}>
                       </td>             
                   <td>{{$testimonial->created_at}}</td>
                   <td>{{$testimonial->updated_at}}</td>

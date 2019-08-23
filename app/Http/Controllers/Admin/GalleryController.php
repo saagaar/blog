@@ -129,4 +129,5 @@ class GalleryController extends AdminController
         return redirect()->route('gallery.list')
         ->with('success', 'Gallery has been deleted!!');
     }
+    
 }

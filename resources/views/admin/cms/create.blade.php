@@ -47,17 +47,17 @@
                   @endif
                 </div>
                  <div class="form-group">
-                  <label for="is_display">Is Display</label>
+                  <label for="status">Is Display</label>
                   <div class="custom-control custom-radio radio-inline">
-                    <input type="radio" class="custom-control-input flat-red" name="is_display"  value="1" checked>
+                    <input type="radio" class="custom-control-input flat-red" name="status"  value="1" checked>
                     <label class="custom-control-label" for="defaultChecked">Yes</label>
                   </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="is_display"  value="0" >
+                        <input type="radio" class="custom-control-input flat-red" name="status"  value="0" >
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
-                         @if ($errors->has('is_display'))
-                        <div class="alert alert-danger">{{ $errors->first('is_display') }}</div>
+                         @if ($errors->has('status'))
+                        <div class="alert alert-danger">{{ $errors->first('status') }}</div>
                          @endif
                       </div>
                  <div class="form-group">
@@ -89,9 +89,9 @@
               <div class="row">
                 <div class="form-group">
                   <label for="page_title">Page Title</label>
-                  <textarea class="form-control rounded-0" name="page_title" placeholder="Enter page title" rows="6">
-                  {{old('page_title')}}
-                  </textarea>
+                    <textarea name="page_title" class="form-control" rows="5" placeholder="Page title here..">
+                        {{old('page_title')}}
+                    </textarea>
                   @if ($errors->has('page_title'))
                   <div class="alert alert-danger">{{ $errors->first('page_title') }}</div>
                   @endif
@@ -99,7 +99,7 @@
               
                 <div class="form-group">
                   <label for="meta_key">Meta Keywords</label>
-                  <textarea class="form-control rounded-0" name="meta_key" rows="6" placeholder="Enter meta key">
+                   <textarea name="page_title" class="form-control" rows="5" placeholder="Meta Keywords here..">
                   {{old('meta_key')}}
                   </textarea>
                   @if ($errors->has('meta_key'))
@@ -109,7 +109,7 @@
 
                <div class="form-group">
                   <label for="meta_description">Meta Description</label>
-                  <textarea class="form-control rounded-0" name="meta_description" placeholder="Enter description" rows="6">
+                  <textarea name="meta_description" class="form-control" rows="5" placeholder="Meta Description here..">
                   {{old('meta_description')}}
                   </textarea>
                   @if ($errors->has('meta_description'))

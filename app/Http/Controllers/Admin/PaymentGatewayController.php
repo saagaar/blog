@@ -99,14 +99,5 @@ class PaymentGatewayController extends AdminController
         $paymentgateway->update(array('status'=>$status));  
         return redirect()->route('paymentgateway.list')
                         ->with('success','Status change successfully.');
-    }
-     public function changeMode(Request $request)
-    {
-        $changemode = $this->PaymentGateway->getById($request->id);
-        $mode = $request->mode;
-        $changemode->update(array('mode'=>$mode));  
-        return redirect()->route('paymentgateway.list')
-                        ->with('success','Status change successfully.');
-    }
-
+    }    
 }

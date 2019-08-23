@@ -36,11 +36,7 @@
                   <td>{{$member->email}}</td>
                    <td>{{$member->comment }}</td>
                    <td>
-                      @if ($member->status== '1')
-                        <span class="label label-success">Subscribed</span>
-                      @else
-                        <span class="label label-danger">Unsubscribed</span>
-                      @endif
+                      <input data-id="{{$member->id}}" data-url="{{route('subscription.changestatus')}}" style="font-size:5px;padding:0px;"  data-width="100" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Subscribe" data-off="Unsubscribe"{{$member->status ? 'checked' : '' }}>
                       </td>              
                   <td>{{$member->created_at}}</td>
                   <td>{{$member->updated_at}}</td>

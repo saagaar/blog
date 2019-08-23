@@ -49,17 +49,17 @@
                 
 
                 <div class="form-group">
-                  <label for="is_display">Is Display</label>
+                  <label for="status">Is Display</label>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="is_display"  value="1" checked>
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="1" @if($cms->status=='1') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="is_display"  value="0" >
+                        <input type="radio" class="custom-control-input flat-red" name="status"  value="0" @if($cms->status=='0') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">No</label>
                       </div>
-                  @if ($errors->has('is_display'))
-                <div class="alert alert-danger">{{ $errors->first('is_display') }}</div>
+                  @if ($errors->has('status'))
+                <div class="alert alert-danger">{{ $errors->first('status') }}</div>
                 @endif
                 </div>
 

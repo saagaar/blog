@@ -93,7 +93,7 @@ class AdminUserController extends AdminController
                     'Admin Users' => route('adminuser.list'),
                     'current_menu'=>'Change Password',
                       ]];
-        $userid = Auth()->user()->id;
+        $userid = Auth()->user()->id;//current user 
         $adminusers =$this->admin->getById($userid);
         if ($request->method()=='POST') 
         {
@@ -108,13 +108,12 @@ class AdminUserController extends AdminController
             } 
             else {
                 $data['password']= (Hash::make($request->password));
-
                 $this->admin->update($id,array('password'=>$data['password']));
                 return redirect()->route('admin.logout')
                             ->with('success','Password Changed successfully.');
                 }
         }
-        return view('admin_users.changepassword',compact('userid','breadcrumb'));
+        return view('admin_password.changepassword',compact('userid','breadcrumb'));
     }
 
   public function changeStatus(Request $request)

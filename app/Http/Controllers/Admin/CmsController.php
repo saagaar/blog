@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Repository\CmsInterface; 
 use Illuminate\Http\Request;
 use App\Http\Requests\CmsRequest;
+use Illuminate\Support\Facades\File;
 use App;
 class CmsController extends AdminController
 {
@@ -41,14 +42,13 @@ class CmsController extends AdminController
                       'All Cms' => route('cms.list'),
                       'current_menu'  =>'Create Cms',
                     ]];
-
         if ($request->method()=='POST') 
         {
-            $requestobj=app(CmsRequest::class); 
+            $requestobj=app(CmsRequest::class);
             $validatedData = $requestobj->validated();
             $this->CMS->create($validatedData);
             return redirect()->route('cms.list') 
-                             ->with(array('success'=>'CMS created successfully.','breadcrumb'=>$breadcrumb));
+                             ->with('success','CMS created successfully.');
         }
         return view('admin.cms.create')->with(array('breadcrumb'=>$breadcrumb));
     }
@@ -80,8 +80,7 @@ class CmsController extends AdminController
         $cms->delete();
         return redirect()->route('cms.list')
         ->with('success', 'CMS deleted Successfully');
-       }      
-        
+       }             
     }
      public function changeStatus(Request $request)
     {

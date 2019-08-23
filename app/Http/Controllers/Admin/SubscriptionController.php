@@ -49,7 +49,15 @@ class SubscriptionController extends AdminController
                             ->with('success','Subscription Updated Successfully.');
             }
             return view('admin.subscriptionmanager.edit',compact('subscription','breadcrumb'));
-
     }
-   
+
+    public function changeStatus(Request $request)
+    {
+        $subscription = $this->SubscriptionManager->getById($request->id);
+        $status = $request->status;
+        $subscription->update(array('status'=>$status)); 
+        return redirect()->route('subscription.list')
+                        ->with('success','Status change successfully.');
+    } 
+           
 }

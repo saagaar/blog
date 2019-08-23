@@ -40,10 +40,13 @@
                   <td><img src="{{asset('images/paymentgateway-images/'.$data->image) }}" alt="paymentgateway Image" height="42" width="42"></td>   
                    <td>
                          <input data-id="{{$data->id}}" data-url="{{route('paymentgateway.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$data->status ? 'checked' : '' }}>
-                      </td>                      
-                   
+                      </td>                                        
                       <td>  
-                      <input data-id="{{$data->id}}" data-url="{{route('paymentgateway.changemode')}}" style="size: 12px;"  data-width="70" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="warning" data-toggle="toggle" data-on="live" data-off="Test"{{$data->mode ? 'checked' : '' }}>
+                       @if($data->mode=='1')
+                        <span class="label label-success">Live</span>
+                      @else
+                        <span class="label label-warning">Test</span>
+                      @endif
                       </td>         
 
                   <td>{{$data->created_at}}</td>
