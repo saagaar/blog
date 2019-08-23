@@ -66,7 +66,6 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/user/{id}','Admin\AdminUserController@delete')->name('adminuser.delete');
 	Route::get('changestatus/user', 'Admin\AdminUserController@changeStatus')->name('adminuser.changestatus');
 
-
 	//route for changing admin passwords 
 	Route::match(['get','post'],'/change/password/{id}','Admin\AdminUserController@password')->name('adminuser.change');
 	
