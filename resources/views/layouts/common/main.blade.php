@@ -102,14 +102,18 @@ window.setTimeout(function() {
   $(function(){
     $('.toggle-class').change(function() {
         var status = $(this).prop('checked') == true ? 1 : 0;
+        var cmstype = $(this).prop('checked') == true ? 1 : 0;
+        var paymentmode = $(this).prop('checked') == true ? 1 : 0;
         var id = $(this).data('id');
         var url = $(this).data('url');  
         $.ajax({
             type: "GET",
             dataType: "json",
             url: url,
-            data: {'status': status, 'id': id},
-            success: function(data){
+            data: {'status': status,'id': id},
+            data: {'cms_type': cmstype,'id': id},
+            data: {'mode': paymentmode,'id': id},
+             success: function(data){
               console.log(data.success)
             }
             

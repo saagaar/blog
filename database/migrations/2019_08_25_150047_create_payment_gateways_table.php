@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaymentsGatewayTable extends Migration
+class CreatePaymentGatewaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreatePaymentsGatewayTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments_gateway', function (Blueprint $table) {
+        Schema::create('payment_gateways', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('email');
+            $table->enum('payment_gateway',['paypal', 'ipay']);
             $table->enum('mode',['1', '0']);
             $table->String('image');            
             $table->String('api_merchant_key');
@@ -34,6 +35,6 @@ class CreatePaymentsGatewayTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments_gateway');
+        Schema::dropIfExists('payment_gateways');
     }
 }

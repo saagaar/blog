@@ -41,11 +41,7 @@
                       <input data-id="{{$eachcms->id}}" data-url="{{route('cms.changestatus')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachcms->status ? 'checked' : ''}}>
                   </td>
                   <td>
-                     @if($eachcms->cms_type=='website')  
-                       <span class="label label-success">Website</span>
-                       @else
-                       <span class="label label-danger">System</span>
-                       @endif
+                    <input data-id="{{$eachcms->id}}" data-url="{{route('cms.cmstype')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Website" data-off="System"{{$eachcms->cms_type ? 'checked' : ''}}>
                   </td>
                   <td>{{$eachcms->created_at}}</td>
                   <td>{{$eachcms->updated_at}}</td>

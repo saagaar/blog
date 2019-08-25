@@ -65,14 +65,22 @@ class CategoryController extends AdminController
                       ]];
         $category =$this->categories->getcatById($id);
         if ($request->method()=='POST') 
-        {
-            $requestobj=app(CategoryRequest::class);
-            $validatedData = $requestobj->validated();
-            $this->categories->update($id,$validatedData);
-            return redirect()->route('adminblogcategory.list')
-                        ->with('success','Blog category updated successfully.');
-        }
+        {           
+                $requestobj=app(CategoryRequest::class);
+                $validatedData = $requestobj->validated();
+                $this->categories->update($id,$validatedData);
+                return redirect()->route('adminblogcategory.list')
+                            ->with('success','Blog Category Updated Successfully.');
+            }
         
-        return view('admin.blog.editcategories',compact('category'))->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));
+        return view('admin.blog.editcategories',compact('category','breadcrumb'));
+    }
+     public function changeStatus(Request $request)
+    {
+        $category = $this->categories->getcatById($request->id);
+        $status = $request->status;
+        $category->update(array('status'=>$status));  
+       return redirect()->route('adminblogcategory.list')
+                        ->with('success','Status change successfully.');
     }
 }

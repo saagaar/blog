@@ -53,11 +53,11 @@
                 @endif
                 </div>
                 <div class="form-group">
-                  <label for="Display">Display: </label>
-                  <label><input type="radio" name="display" value="1">Yes</label>
-                  <label><input type="radio" name="display" value="0">No</label>
-                  @if ($errors->has('display'))
-                <div class="alert alert-danger">{{ $errors->first('display') }}</div>
+                  <label for="status">Display: </label>
+                  <label><input type="radio" name="status" value="1">Active</label>
+                  <label><input type="radio" name="status" value="0">Inactive</label>
+                  @if ($errors->has('status'))
+                <div class="alert alert-danger">{{ $errors->first('status') }}</div>
                 @endif
                 </div>
               </div>

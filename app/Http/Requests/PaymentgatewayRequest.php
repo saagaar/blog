@@ -32,6 +32,7 @@ class PaymentgatewayRequest extends FormRequest
             'api_merchant_signature'=>'required',
             'api_version'=>'required',
             'status'=>'required',
+            'payment_gateway'=>'required'
         ];
     }
 }

@@ -90,4 +90,14 @@ class CmsController extends AdminController
        return redirect()->route('cms.list')
                         ->with('success','Status change successfully.');
     }
+
+     public function changeCmstype(Request $request)
+    {
+        $Cmstype = $this->CMS->getcmsById($request->id);
+        $Cmstype = $request->cmstype;
+        $Cmstype->update(array('cms_type'=>$Cmstype));  
+       return redirect()->route('Cms.list')
+                        ->with('success','Status change successfully.');
+    }
+
 }

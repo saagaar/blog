@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug')->unique();
-            $table->enum('display',['1','0']);
+            $table->enum('status',['1','0']);
             $table->timestamps();
         });
     }

@@ -1,4 +1,4 @@
-  @extends('layouts.common.main')
+    @extends('layouts.common.main')
 @section('content') 
     <!-- Main content -->
     <section class="content">
@@ -57,7 +57,9 @@
                 </div>              
                 <div class="form-group">
                   <label for="image">Image Upload</label>
-                  <input type="file" class="form-control" name="image" id="image" value="{{$testimony->image}}">
+                  <input type="file" class="form-control" name="image" id="image"/>
+                  <img src='/images/testimonial-images/{{$testimony->image}}' width="50">
+
                   @if ($errors->has('image'))
                 <div class="alert alert-danger">{{$errors->first('image') }}</div>
                 @endif

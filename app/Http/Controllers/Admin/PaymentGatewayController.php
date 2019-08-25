@@ -19,7 +19,7 @@ class PaymentGatewayController extends AdminController
     {
         $breadcrumb=['breadcrumbs' => [
                     'Dashboard' => route('admin.dashboard'),
-                    'current_menu'=>'All PaymentGateways',
+                    'current_menu'=>'All Payment Gateways',
                       ]];
         $search = $request->get('search');
         if($search){
@@ -99,5 +99,14 @@ class PaymentGatewayController extends AdminController
         $paymentgateway->update(array('status'=>$status));  
         return redirect()->route('paymentgateway.list')
                         ->with('success','Status change successfully.');
-    }    
+    } 
+
+    public function changeMode(Request $request)
+    {
+        $paymentgateway = $this->PaymentGateway->getById($request->id);
+        $mode = $request->mode;
+        $paymentgateway->update(array('mode'=>$mode));  
+        return redirect()->route('paymentgateway.list')
+                        ->with('success','Status change successfully.');
+    }       
 }

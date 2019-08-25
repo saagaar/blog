@@ -43,7 +43,7 @@
                        @elseif(($ipvalue->status=='white'))
                        <span class="label label-success">Active</span>
                        @else
-                       <span class="label label-primary">Grey</span>
+                       <span class="label label-primary">Inactive</span>
                        @endif
                   </td>
                   <td>{{$ipvalue->created_at}}</td>

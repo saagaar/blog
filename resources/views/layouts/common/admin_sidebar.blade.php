@@ -45,14 +45,15 @@
           </ul>
       </li>
       <li><a href="{{route('cms.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>CMS</span></a>
-        <li><a href="{{route('testimonial.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Testimonial</span></a>
-        <li><a href="{{route('services.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Services</span></a>
-        <li><a href="{{route('banner.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Banner</span></a>
-        <li><a href="{{route('team.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Team</span></a>   
-         <li><a href="{{route('subscription.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Subscription Manager</span></a>   
-        <li><a href="{{route('paymentgateway.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Payment Gateway</span></a> 
-        <li><a href="{{route('client.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>Client</span></a>   
-         <li><a href="{{route('seo.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>SEO</span></a>   
+        <li><a href="{{route('testimonial.list')}}"><i class="fa  fa-users"  aria-hidden="true"></i> <span>Testimonial</span></a>
+        <li><a href="{{route('services.list')}}"><i class=" fa fa-phone-square"  aria-hidden="true"></i> <span>Services</span></a>
+        <li><a href="{{route('banner.list')}}"><i class="fa fa-bookmark-o "  aria-hidden="true"></i> <span>Banner</span></a>
+        <li><a href="{{route('team.list')}}"><i class="fa fa-group"  aria-hidden="true"></i> <span>Team</span></a>   
+         <li><a href="{{route('subscription.list')}}"><i class="fa fa-flag-checkered"  aria-hidden="true"></i> <span>Subscription Manager</span></a>   
+        <li><a href="{{route('paymentgateway.list')}}"><i class="fa  fa-credit-card"  aria-hidden="true"></i> <span>Payment Gateway</span></a> 
+        <li><a href="{{route('client.list')}}"><i class="fa fa-user"  aria-hidden="true"></i> <span>Client</span></a>   
+         <li><a href="{{route('seo.list')}}"><i class="fa fa-eye"  aria-hidden="true"></i> <span>SEO</span></a> 
+          <li><a href="{{route('language.list')}}"><i class="fa fa-globe"  aria-hidden="true"></i> <span>Language</span></a>     
     
     <li class="treeview">
       <a href=""><i class="fa  fa-pencil-square"></i> <span>Blog</span>
@@ -67,7 +68,7 @@
           </ul>
       </li>
    <li class="treeview">
-      <a href=""><i class="fa  fa-pencil-square"></i> <span>Gallery</span>
+      <a href=""><i class="fa  fa-image"></i> <span>Gallery</span>
       <span class="pull-right-container">
       <i class="fa fa-angle-left pull-right"></i>
       </span>
@@ -88,7 +89,7 @@
          
           </ul>
     </li>
-     <li><a href="{{route('contact.list')}}"><i class="fa  fa-gear"></i> <span>Contact Us</span></a>
+     <li><a href="{{route('contact.list')}}"><i class="fa fa-phone"></i> <span>Contact Us</span></a>
     <li><a href="{{route('websitelog.list')}}"><i class="fa fa-history"></i> <span>Website Logs</span></a>
     <li><a href="{{route('blocklist.list')}}"><i class="fa fa-server"></i> <span>IP Block List</span></a>   
     </li>

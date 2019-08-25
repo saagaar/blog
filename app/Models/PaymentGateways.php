@@ -9,7 +9,7 @@ class PaymentGateways extends Model implements Auditable
 {
     use Auditables;
 
-     protected $table='payments_gateway';
+     protected $table='payment_gateways';
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +17,6 @@ class PaymentGateways extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'email','mode','image','api_merchant_key','api_merchant_password','api_merchant_signature','api_version','status',
+        'email','mode','image','api_merchant_key','api_merchant_password','api_merchant_signature','api_version','status','payment_gateway',
     ];
 }

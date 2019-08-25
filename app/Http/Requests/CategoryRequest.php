@@ -34,7 +34,7 @@ class CategoryRequest extends FormRequest
           }
         return [
                 'name'      => 'required|min:2|max:255',
-                'display'   => 'required',
+                'status'   => 'required',
                 'slug'      => $slug
         ];
     }

@@ -35,7 +35,7 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{ route('adminblogcategory.edit' , $category->id) .'/'.str_slug($category->title)}}" method="POST">
+            <form action="{{route('adminblogcategory.edit',$category->id)}}" method="POST">
             {{csrf_field()}}
               <div class="box-body">
                 <div class="form-group">
@@ -54,18 +54,18 @@
                 @endif
                 </div>
                 <div class="form-group">
-                  <label for="Display">Display: </label>
-                  <label><input type="radio" name="display" value="1" {{ $category->display == '1' ? 'checked' : ''}}>Yes</label>
-                  <label><input type="radio" name="display" value="0"  {{ $category->display == '0' ? 'checked' : ''}}>No</label>
-                  @if ($errors->has('display'))
-                <div class="alert alert-danger">{{ $errors->first('display') }}</div>
+                  <label for="status">Display:</label>
+                  <label><input type="radio" name="status" value="1" @if($category->status=='1') checked @endif >Active</label>
+                  <label><input type="radio" name="status" value="0" @if($category->status=='0') checked @endif >Inactive</label>
+                  @if ($errors->has('status'))
+                <div class="alert alert-danger">{{ $errors->first('status') }}</div>
                 @endif
                 </div>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
               </div>
             </form>
             </div>

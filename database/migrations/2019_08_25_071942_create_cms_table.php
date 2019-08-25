@@ -22,7 +22,7 @@ class CreateCmsTable extends Migration
             $table->string('meta_key', 100);
             $table->string('meta_description', 100);
             $table->enum('status', ['1', '0']);
-            $table->enum('cms_type', ['website', 'system']);
+            $table->enum('cms_type', ['1', '0']);
             $table->enum('deletable', ['Y', 'N']);
             $table->timestamps();
         });

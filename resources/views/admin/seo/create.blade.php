@@ -53,21 +53,22 @@
                 </div>
                 <div class="form-group">
                   <label for="meta_description">Meta Description: </label>
-                    <textarea name="meta_description" class="form-control" rows="5" placeholder="Meta Description here.."></textarea>
+                    <textarea name="meta_description" class="form-control" rows="5" placeholder="Meta Description here..">{{old('meta_description')}}</textarea>
                   @if ($errors->has('meta_description'))
                 <div class="alert alert-danger">{{ $errors->first('meta_description') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="schema1">schema1</label>
-                  <textarea name="schema1" class="form-control" rows="8" placeholder="Schema1 here.."></textarea>
+                  <textarea name="schema1" class="form-control" rows="8" placeholder="Schema1 here..">{{old('schema1')}}</textarea>
+                                      
                   @if ($errors->has('schema1'))
                 <div class="alert alert-danger">{{ $errors->first('schema1') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="schema2">schema2</label>
-                  <textarea name="schema2" class="form-control" rows="8" placeholder="Schema2 here.."></textarea>
+                  <textarea name="schema2" class="form-control" rows="8" placeholder="Schema2 here..">{{old('schema2')}}</textarea>                 
                   @if ($errors->has('schema2'))
                 <div class="alert alert-danger">{{ $errors->first('schema2') }}</div>
                 @endif

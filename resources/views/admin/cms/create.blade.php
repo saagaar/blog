@@ -56,30 +56,30 @@
                         <input type="radio" class="custom-control-input flat-red" name="status"  value="0" >
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
-                         @if ($errors->has('status'))
+                        @if ($errors->has('status'))
                         <div class="alert alert-danger">{{ $errors->first('status') }}</div>
                          @endif
                       </div>
-                 <div class="form-group">
-                    <label for="cms_type">CMS Type</label>
+                  <div class="form-group">
+                  <label for="cms_type">Cms Type</label>
+                  <div class="custom-control custom-radio radio-inline">
+                    <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="1" checked>
+                    <label class="custom-control-label" for="defaultChecked">Website</label>
+                  </div>
                     <div class="custom-control custom-radio radio-inline">
-                      <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="website" checked>
-                      <label class="custom-control-label" for="defaultChecked">Website</label>
-                    </div>
-                    <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="system" >
+                        <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="0" >
                         <label class="custom-control-label" for="defaultChecked">System</label>
                     </div>
-                      @if ($errors->has('cms_type'))
-                      <div class="alert alert-danger">{{ $errors->first('cms_type') }}</div>
-                      @endif
-                 </div>
+                        @if ($errors->has('cms_type'))
+                        <div class="alert alert-danger">{{ $errors->first('cms_type') }}</div>
+                         @endif
+                      </div>
                 </div>
               </div>                
                 <div class="row"> 
                   <div class="form-group">
                     <label for="Content">Content: </label>
-                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
+                    <textarea name="content" class="form-control" id="content" placeholder="CMS Content here..">{{old('content')}}</textarea>
                     @if ($errors->has('content'))
                     <div class="alert alert-danger">{{ $errors->first('content') }}</div>
                     @endif
@@ -89,9 +89,8 @@
               <div class="row">
                 <div class="form-group">
                   <label for="page_title">Page Title</label>
-                    <textarea name="page_title" class="form-control" rows="5" placeholder="Page title here..">
-                        {{old('page_title')}}
-                    </textarea>
+                     <textarea name="page_title" class="form-control" rows="5" placeholder="Page title here..">{{old('page_title')}}</textarea>
+                       
                   @if ($errors->has('page_title'))
                   <div class="alert alert-danger">{{ $errors->first('page_title') }}</div>
                   @endif
@@ -99,9 +98,7 @@
               
                 <div class="form-group">
                   <label for="meta_key">Meta Keywords</label>
-                   <textarea name="page_title" class="form-control" rows="5" placeholder="Meta Keywords here..">
-                  {{old('meta_key')}}
-                  </textarea>
+                   <textarea name="meta_key" class="form-control" rows="5" placeholder="Meta Keywords here..">{{old('meta_key')}}</textarea>              
                   @if ($errors->has('meta_key'))
                   <div class="alert alert-danger">{{ $errors->first('meta_key') }}</div>
                   @endif
@@ -109,10 +106,7 @@
 
                <div class="form-group">
                   <label for="meta_description">Meta Description</label>
-                  <textarea name="meta_description" class="form-control" rows="5" placeholder="Meta Description here..">
-                  {{old('meta_description')}}
-                  </textarea>
-                  @if ($errors->has('meta_description'))
+                  <textarea name="meta_description" class="form-control" rows="5" placeholder="Meta Description here..">{{old('meta_description')}}</textarea>           @if ($errors->has('meta_description'))
                   <div class="alert alert-danger">{{ $errors->first('meta_description') }}</div>
                   @endif
                 </div>
@@ -124,7 +118,7 @@
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="deletable"  value="N" >
+                        <input type="radio" class="custom-control-input flat-red" name="deletable" value="N" >
                         <label class="custom-control-label" for="defaultChecked">No</label>
                       </div>
                        @if ($errors->has('deletable'))

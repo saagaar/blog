@@ -66,6 +66,7 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/user/{id}','Admin\AdminUserController@delete')->name('adminuser.delete');
 	Route::get('changestatus/user', 'Admin\AdminUserController@changeStatus')->name('adminuser.changestatus');
 
+
 	//route for changing admin passwords 
 	Route::match(['get','post'],'/change/password/{id}','Admin\AdminUserController@password')->name('adminuser.change');
 	
@@ -85,6 +86,8 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/blogcategory','Admin\CategoryController@create')->name('adminblogcategory.create');
 	Route::match(['get','post'],'/edit/blogcategory/{id}','Admin\CategoryController@edit')->name('adminblogcategory.edit');
 	Route::get('/delete/blogcategory/{id}','Admin\CategoryController@delete')->name('adminblogcategory.delete');
+	Route::get('changestatus/blogcategory', 'Admin\CategoryController@changeStatus')->name('adminblogcategory.changestatus');
+
 	//blog category
 
 	/**
@@ -120,6 +123,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/edit/cms/{id}','Admin\CmsController@edit')->name('cms.edit');
 	Route::get('/delete/cms/{id}','Admin\CmsController@delete')->name('cms.delete');
 	Route::get('changestatus/cms', 'Admin\CmsController@changeStatus')->name('cms.changestatus');
+	Route::get('changecmstype/cms', 'Admin\CmsController@changeCmstype')->name('cms.cmstype');
 
 	//Route for Testimonial
 	Route::get('/list/testimonial','Admin\TestimonialController@list')->name('testimonial.list');
@@ -166,6 +170,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/edit/paymentgateway/{id}','Admin\PaymentGatewayController@edit')->name('paymentgateway.edit');
 	Route::get('/delete/paymentgateway/{id}','Admin\PaymentGatewayController@delete')->name('paymentgateway.delete');
 	Route::get('changestatus/paymentgateway', 'Admin\PaymentGatewayController@changeStatus')->name('paymentgateway.changestatus');
+	Route::get('changemode/paymentgateway', 'Admin\PaymentGatewayController@changeMode')->name('paymentgateway.changemode');
 
 		// Route for Subscription Manager
 	Route::get('/list/subscriptionmanager','Admin\SubscriptionController@list')->name('subscription.list');

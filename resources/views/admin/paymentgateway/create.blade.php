@@ -40,6 +40,22 @@
                        @endif
                     </div>
 
+                     <div class="form-group">
+                  <label for="payment_gateway">Payment Gateway</label>
+                    <div class="custom-control custom-radio radio-inline">
+                        <input type="radio" class="custom-control-input flat-red" name="payment_gateway" value="paypal" checked>
+                        <label class="custom-control-label" for="defaultChecked">Paypal</label>
+                    </div>
+                    <div class="custom-control custom-radio radio-inline">
+                        <input type="radio" class="custom-control-input flat-red" name="payment_gateway" value="ipay" >
+                        <label class="custom-control-label" for="defaultChecked">iPay88</label>
+                    </div>
+                         @if ($errors->has('payment_gateway'))
+                         <div class="alert alert-danger">{{ $errors->first('payment_gateway') }}</div>
+                         @endif
+                  </div>
+
+
                 <div class="form-group">
                   <label for="mode">Payment Mode</label>
                     <div class="custom-control custom-radio radio-inline">

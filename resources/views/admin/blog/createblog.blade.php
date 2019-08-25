@@ -38,11 +38,12 @@
                 @endif
                 </div>
                 <div class="form-group">
-                  <label for="slug">Language</label>
+                  <label for="language">Language</label>
                   <select class="form-control" name="locale_id">
                     @if(!empty($localelist))
-                      @foreach($localelist as  $eachlocale)
-                      <option value="{{$eachlocale['id']}}">{{$eachlocale['lang_name']}}</option>
+                      @foreach($localelist as $eachlocale)
+                      <option value="{{$eachlocale['id']}}">{{$eachlocale['lang_name']}}
+                      </option>
                       @endforeach
                     @endif
 

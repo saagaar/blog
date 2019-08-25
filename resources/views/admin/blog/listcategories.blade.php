@@ -37,11 +37,7 @@
                   <td>{{ ++$i }}</td>
                   <td>{{ $category->name }}</td>
                   <td>
-                      @if ($category->display == '1')
-                        <span class="label label-success">Yes</span>
-                      @else
-                        <span class="label label-danger">No</span>
-                      @endif
+                   <input data-id="{{$category->id}}" data-url="{{route('adminblogcategory.changestatus')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$category->status ? 'checked' : '' }}>
                   </td>
                   <td>{{$category->slug}}</td>
                   <td>{{$category->created_at}}</td>

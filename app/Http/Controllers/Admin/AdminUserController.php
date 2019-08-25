@@ -95,16 +95,18 @@ class AdminUserController extends AdminController
                       ]];
         $userid = Auth()->user()->id;//current user 
         $adminusers =$this->admin->getById($userid);
-        if ($request->method()=='POST') 
+        echo $adminusers;                                                                                   
+       if ($request->method()=='POST') 
         {
-            $this->validate($request, [
+            $this->validate($request,[
             'old_password' => 'required',
             'password' => 'required|min:6',
-            'confirm_password' => 'required_with:password|same:password|min:6'
+            'confirm_password' =>'required_with:password|same:password|min:6'
+
         ]);
-             $validatedData = $request->all();
+             $validatedData = $request->all();// all data will be here  
              if (!Hash::check($validatedData['old_password'], $adminusers->password)) {
-            return back()->with('error', 'The specified password does not match the database password');
+             return back()->with('error', 'The specified password does not match the database password');
             } 
             else {
                 $data['password']= (Hash::make($request->password));
