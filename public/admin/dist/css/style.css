@@ -102,10 +102,7 @@
   font-style: italic;
 }
 
-
-/*.main-sidebar{
-  background: #6a7e87 !important;
-}*/
-/*.skin-darkblue, .main-header, .navbar{
-  background: #3d667f
-}*/
+.label-large {
+  vertical-align: super;
+  font-size: small;
+}

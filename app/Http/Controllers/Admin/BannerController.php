@@ -39,14 +39,17 @@ class BannerController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-            $requestobj=app(BannerRequest::class);
-            $validatedData = $requestobj->validated();
-            $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/banner-images'), $imageName);
-            $validatedData['image'] = $imageName;
-            $this->Banner->create($validatedData);
-            return redirect()->route('banner.list')    
-                             ->with(array('success'=>'Banner created successfully.','breadcrumb'=>$breadcrumb));
+           $request->validate([
+           'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           ]); 
+        $requestobj=app(BannerRequest::class);
+        $validatedData = $requestobj->validated();
+        $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('images/banner-images'), $imageName);
+        $validatedData['image'] = $imageName;
+        $this->Banner->create($validatedData);
+        return redirect()->route('banner.list')    
+                         ->with(array('success'=>'Banner created successfully.','breadcrumb'=>$breadcrumb));
         }
         return view('admin.banner.create')->with(array('breadcrumb'=>$breadcrumb));
     }
@@ -60,6 +63,9 @@ class BannerController extends AdminController
             $banner =$this->Banner->getById($id);    
             if ($request->method()=='POST')
             {
+                $request->validate([
+               'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+               ]);   
                 $requestobj=app(BannerRequest::class);
                 $validatedData = $requestobj->validated();
                 if($request->hasFile('image')){

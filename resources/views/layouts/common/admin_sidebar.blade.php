@@ -45,15 +45,15 @@
           </ul>
       </li>
       <li><a href="{{route('cms.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>CMS</span></a>
-        <li><a href="{{route('testimonial.list')}}"><i class="fa  fa-users"  aria-hidden="true"></i> <span>Testimonial</span></a>
-        <li><a href="{{route('services.list')}}"><i class=" fa fa-phone-square"  aria-hidden="true"></i> <span>Services</span></a>
+        <li><a href="{{route('testimonial.list')}}"><i class="fa fa-users"  aria-hidden="true"></i> <span>Testimonial</span></a>
+        <li><a href="{{route('services.list')}}"><i class=" fa fa-wrench"  aria-hidden="true"></i> <span>Services</span></a>
         <li><a href="{{route('banner.list')}}"><i class="fa fa-bookmark-o "  aria-hidden="true"></i> <span>Banner</span></a>
         <li><a href="{{route('team.list')}}"><i class="fa fa-group"  aria-hidden="true"></i> <span>Team</span></a>   
          <li><a href="{{route('subscription.list')}}"><i class="fa fa-flag-checkered"  aria-hidden="true"></i> <span>Subscription Manager</span></a>   
         <li><a href="{{route('paymentgateway.list')}}"><i class="fa  fa-credit-card"  aria-hidden="true"></i> <span>Payment Gateway</span></a> 
         <li><a href="{{route('client.list')}}"><i class="fa fa-user"  aria-hidden="true"></i> <span>Client</span></a>   
          <li><a href="{{route('seo.list')}}"><i class="fa fa-eye"  aria-hidden="true"></i> <span>SEO</span></a> 
-          <li><a href="{{route('language.list')}}"><i class="fa fa-globe"  aria-hidden="true"></i> <span>Language</span></a>     
+          <li><a href="{{route('language.list')}}"><i class="fa fa-language"  aria-hidden="true"></i> <span>Language</span></a>     
     
     <li class="treeview">
       <a href=""><i class="fa  fa-pencil-square"></i> <span>Blog</span>
@@ -74,8 +74,8 @@
       </span>
       </a>
           <ul class="treeview-menu">
-            <li><a href="{{route('gallerycategory.list')}}"><i class="fa  fa-paint-brush"></i> Gallery Category</a></li>
-            <li><a href="{{route('gallery.list')}}"><i class="fa fa-info-circle"></i> Gallery</a></li>
+            <li><a href="{{route('gallerycategory.list')}}"><i class="fa fa-folder"></i> Gallery Category</a></li>
+            <li><a href="{{route('gallery.list')}}"><i class="fa fa-image"></i> Gallery</a></li>
          
           </ul>
       </li>

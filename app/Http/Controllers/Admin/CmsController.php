@@ -33,6 +33,7 @@ class CmsController extends AdminController
             $cms = $this->CMS->getAll()->paginate($this->PerPage);
         }
         return view('admin.cms.list')->with(array('CMS'=>$cms,'breadcrumb'=>$breadcrumb,'menu'=>'CMS List'));
+
     }
     public function create(Request $request)
     {

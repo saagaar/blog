@@ -39,7 +39,10 @@ class TeamController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-            $requestobj=app(TeamRequest::class);
+             $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);  
+           $requestobj=app(TeamRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             request()->image->move(public_path('images/team-images'), $imageName);
@@ -60,7 +63,10 @@ class TeamController extends AdminController
             $team =$this->Team->getById($id);    
             if ($request->method()=='POST')
             {
-                $requestobj=app(TeamRequest::class);
+            $request->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              ]);
+               $requestobj=app(TeamRequest::class);
                 $validatedData = $requestobj->validated();
                 if ($request->hasFile('image')) {
                     $dir = 'images/team-images/';

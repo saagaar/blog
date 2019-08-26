@@ -39,8 +39,11 @@ class ServicesController extends AdminController
                       'All services' => route('services.list'),
                       'current_menu'  =>'Create services',
                     ]];
-        if ($request->method()=='POST') 
+        if ($request->method()=='POST')
         {
+               $request->validate([
+               'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+               ]);   
             $requestobj=app(ServicesRequest::class);
             $validatedData = $requestobj->validated();
             $iconName = time().'.'.request()->icon->getClientOriginalExtension();
@@ -62,6 +65,9 @@ class ServicesController extends AdminController
             $service =$this->Service->getById($id);    
             if ($request->method()=='POST')
             {
+                 $request->validate([
+                'icon' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);  
                 $requestobj=app(servicesRequest::class);
                 $validatedData = $requestobj->validated();
                 if ($request->hasFile('icon')) {

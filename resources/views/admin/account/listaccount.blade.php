@@ -46,13 +46,13 @@
                                 </td>
                   <td>
                     @if($user->status=='0')
-                    <span class="label label-success">Active</span>
+                    <span class="label label-success label-large">Active</span>
                     @elseif ($user->status=='1')
-                    <span class="label label-danger">Inactive</span>
+                    <span class="label label-danger label-large">Inactive</span>
                     @elseif ($user->status=='2')
-                    <span class="label label-warning">Closed</span>
+                    <span class="label label-warning label-large">Closed</span>
                     @elseif ($user->status=='3')
-                    <span class="label label-default">Suspended</span>
+                    <span class="label label-default label-large">Suspended</span>
                     @endif
                   </td>
                   <td>{{$user->created_at}}</td>

@@ -40,6 +40,9 @@ class TestimonialController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
+             $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);  
             $requestobj=app(TestimonialRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
@@ -61,6 +64,9 @@ class TestimonialController extends AdminController
             $testimony =$this->testimony->getById($id);    
             if ($request->method()=='POST')
             {
+               $request->validate([
+               'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              ]);  
                 $requestobj=app(TestimonialRequest::class);
                 $validatedData = $requestobj->validated();
                 if ($request->hasFile('image')) {

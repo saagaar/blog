@@ -43,6 +43,9 @@ class BlogController extends AdminController
 
         if ($request->method()=='POST') 
         {
+             $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);  
             $requestobj=app(BlogRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
@@ -53,7 +56,7 @@ class BlogController extends AdminController
             return redirect()->route('blog.list')
                              ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
         }
-        $LocaleList=$Locale->getActiveLocale()->toArray();
+        $LocaleList=$Locale->getall()->all();
         return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'localelist'=>$LocaleList));
     }
     public function edit(Request $request, $id,$slug,LocaleInterface $Locale)
@@ -66,6 +69,9 @@ class BlogController extends AdminController
             $blog =$this->blog->GetBlogById($id);
             if ($request->method()=='POST') 
             {
+                 $request->validate([
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);  
                 $requestobj=app(BlogRequest::class);
                 $validatedData = $requestobj->validated();
                 if ($request->hasFile('image')) {
@@ -83,7 +89,7 @@ class BlogController extends AdminController
                 return redirect()->route('blog.list')
                             ->with('success','Blog Updated Successfully.');
             }
-            $localelist=$Locale->getActiveLocale()->toArray();
+            $localelist=$Locale->getall()->all();
             return view('admin.blog.editblog',compact('blog','breadcrumb','localelist'));
     }
     public function delete($id)

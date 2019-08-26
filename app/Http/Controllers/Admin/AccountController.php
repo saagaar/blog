@@ -56,7 +56,6 @@ class AccountController extends AdminController{
             $validatedData['dob'] = date("m/d/Y", strtotime($validatedData['dob']));
             $validatedData['password']= (Hash::make($validatedData['password']));
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            // dd($imageName);
             request()->image->move(public_path('images/userimages'), $imageName);
             $validatedData['image'] = $imageName;
             $user = $this->account->create($validatedData);
