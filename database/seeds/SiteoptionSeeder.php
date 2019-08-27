@@ -10,9 +10,7 @@ class SiteoptionSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-    	 DB::table('site_options')->truncate();
-    	 
+    {    	 
         DB::table('site_options')->insert([
         'site_name'         =>'idata solution',
         'contact_name'      =>'abhishek',

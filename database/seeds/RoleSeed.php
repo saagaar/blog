@@ -15,7 +15,7 @@ class RoleSeed extends Seeder
          DB::table('admin_roles')->insert([
             'role_name' => 'superadmin',
             'slug' => 'superadmin',
-            'status' =>'0',
+            'status' =>'1',
             'created_at' => date("Y-m-d H:i:s")
         ]);
     }

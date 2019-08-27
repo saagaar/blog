@@ -15,433 +15,433 @@ class LocalesSeeder extends Seeder
             array(
                 "lang" => "Afrikans",
                 "lang_name" => "Afrikanns",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Albanés",
                 "lang_name" => "Albanian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Árabe",
                 "lang_name" => "Arabic",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Armenio",
                 "lang_name" => "Armenian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Vasco",
                 "lang_name" => "Basque",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Bengalí",
                 "lang_name" => "Bengali",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Búlgaro",
                 "lang_name" => "Bulgarian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Catalán",
                 "lang_name" => "Catalan",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Camboyano",
                 "lang_name" => "Cambodian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Chino (Mandarín)",
                 "lang_name" => "Chinese (Mandarin)",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Croata",
                 "lang_name" => "Croation",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Checo",
                 "lang_name" => "Czech",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Danés",
                 "lang_name" => "Danish",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Holandés",
                 "lang_name" => "Dutch",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Inglés",
                 "lang_name" => "English",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Estonio",
                 "lang_name" => "Estonian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Fiji",
                 "lang_name" => "Fiji",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Finlandés",
                 "lang_name" => "Finnish",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Francés",
                 "lang_name" => "French",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Georgiano",
                 "lang_name" => "Georgian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Alemán",
                 "lang_name" => "German",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Griego",
                 "lang_name" => "Greek",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Gujarati",
                 "lang_name" => "Gujarati",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Hebreo",
                 "lang_name" => "Hebrew",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Hindi",
                 "lang_name" => "Hindi",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Húngaro",
                 "lang_name" => "Hungarian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Islandés",
                 "lang_name" => "Icelandic",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Indonesio",
                 "lang_name" => "Indonesian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Irlandés",
                 "lang_name" => "Irish",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Italiano",
                 "lang_name" => "Italian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Japonés",
                 "lang_name" => "Japanese",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Javanés",
                 "lang_name" => "Javanese",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Coreano",
                 "lang_name" => "Korean",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Latino",
                 "lang_name" => "Latin",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Letón",
                 "lang_name" => "Latvian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Lituano",
                 "lang_name" => "Lithuanian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Macedonio",
                 "lang_name" => "Macedonian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Malayo",
                 "lang_name" => "Malay",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Malayalam",
                 "lang_name" => "Malayalam",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Maltés",
                 "lang_name" => "Maltese",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Maorí",
                 "lang_name" => "Maori",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Marathi",
                 "lang_name" => "Marathi",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Mongol",
                 "lang_name" => "Mongolian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Nepalí",
                 "lang_name" => "Nepali",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Noruego",
                 "lang_name" => "Norwegian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Persa",
                 "lang_name" => "Persian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Polaco",
                 "lang_name" => "Polish",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Portugués",
                 "lang_name" => "Portuguese",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Punjabi",
                 "lang_name" => "Punjabi",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Quechua",
                 "lang_name" => "Quechua",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Romanian",
                 "lang_name" => "Rumano",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Ruso",
                 "lang_name" => "Russian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Samoano",
                 "lang_name" => "Samoan",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Serbio",
                 "lang_name" => "Serbian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Eslovaco",
                 "lang_name" => "Slovak",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Esloveno",
                 "lang_name" => "Slovenian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Español",
                 "lang_name" => "Spanish",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Swahili",
                 "lang_name" => "Swahili",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Sueco ",
                 "lang_name" => "Swedish ",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Tamil",
                 "lang_name" => "Tamil",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Tártaro",
                 "lang_name" => "Tatar",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Telugu",
                 "lang_name" => "Telugu",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Tailandés",
                 "lang_name" => "Thai",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Tibetano",
                 "lang_name" => "Tibetan",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Tonga",
                 "lang_name" => "Tonga",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Turco",
                 "lang_name" => "Turkish",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Ucraniano",
                 "lang_name" => "Ukranian",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Urdu",
                 "lang_name" => "Urdu",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Uzbek",
                 "lang_name" => "Uzbek",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Vietnamita",
                 "lang_name" => "Vietnamese",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Galés",
                 "lang_name" => "Welsh",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
             array(
                 "lang" => "Xhosa",
                 "lang_name" => "Xhosa",
-                "display" =>"Y",
+                "display" =>"1",
             	"created_at" => date("Y-m-d H:i:s")
             ),
 

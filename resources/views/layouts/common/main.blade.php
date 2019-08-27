@@ -104,15 +104,14 @@ window.setTimeout(function() {
         var status = $(this).prop('checked') == true ? 1 : 0;
         var cmstype = $(this).prop('checked') == true ? 1 : 0;
         var paymentmode = $(this).prop('checked') == true ? 1 : 0;
+        // alert(paymentmode);
         var id = $(this).data('id');
         var url = $(this).data('url');  
         $.ajax({
             type: "GET",
             dataType: "json",
             url: url,
-            data: {'status': status,'id': id},
-            data: {'cms_type': cmstype,'id': id},
-            data: {'mode': paymentmode,'id': id},
+            data: {'status': status,'cms_type':cmstype,'mode':paymentmode,'id': id},
              success: function(data){
               console.log(data.success)
             }

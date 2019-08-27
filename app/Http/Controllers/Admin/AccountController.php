@@ -53,7 +53,7 @@ class AccountController extends AdminController{
         {
             $requestobj=app(AccountRequest::class);
             $validatedData = $requestobj->validated();
-            $validatedData['dob'] = date("m/d/Y", strtotime($validatedData['dob']));
+            $validatedData['dob'] = date("Y-m-d", strtotime($validatedData['dob']));
             $validatedData['password']= (Hash::make($validatedData['password']));
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             // dd($imageName);
@@ -85,7 +85,7 @@ class AccountController extends AdminController{
             $requestobj=app(AccountRequest::class);
             $validatedData = $requestobj->validated();
             // dd($validatedData);
-            $validatedData['dob'] = date("m/d/Y", strtotime($validatedData['dob']));
+            $validatedData['dob'] = date("Y-m-d", strtotime($validatedData['dob']));
             $validatedData['password']= (Hash::make($validatedData['password']));
             if ($request->hasFile('image')) {
                     $dir = 'images/userimages/';
@@ -124,12 +124,13 @@ class AccountController extends AdminController{
     public function delete($id)
     {
         $accounts =$this->account->getById($id);
-        $results = $accounts->delete();
-        if($result=='true'){
+        
+        if($accounts){
             $dir = 'images/userimages/';
             if ($accounts->image != '' && File::exists($dir . $accounts->image)){
                 File::delete($dir . $accounts->image);
             }
+            $accounts->delete();
         }
         return redirect()->route('account.list')
         ->with('success', 'User has been deleted!!');
