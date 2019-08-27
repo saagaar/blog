@@ -46,8 +46,8 @@
                 </div>
                 <div class="form-group">
                   <label for="Display">Display: </label>
-                  <label><input type="radio" name="display" value="1">Yes</label>
-                  <label><input type="radio" name="display" value="0">No</label>
+                  <label><input type="radio" name="display" value="1" checked>Active</label>
+                  <label><input type="radio" name="display" value="0">Inactive</label>
                   @if ($errors->has('display'))
                 <div class="alert alert-danger">{{ $errors->first('display') }}</div>
                 @endif

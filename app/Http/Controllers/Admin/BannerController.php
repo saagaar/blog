@@ -97,7 +97,7 @@ class BannerController extends AdminController
             $banner->delete();
         }
         return redirect()->route('banner.list')
-        ->with('success', '');
+        ->with('success', 'Banner has been deleted!');
     }
 
       public function changeStatus(Request $request)

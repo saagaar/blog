@@ -44,7 +44,7 @@
             <li><a href="{{route('permission.list')}}"><i class="glyphicon glyphicon-lock"></i> User Permissions</a></li>
           </ul>
       </li>
-      <li><a href="{{route('cms.list')}}"><i class="fa fa-font-awesome"  aria-hidden="true"></i> <span>CMS</span></a>
+      <li><a href="{{route('cms.list')}}"><i class="fa fa-chain"  aria-hidden="true"></i> <span>CMS</span></a>
         <li><a href="{{route('testimonial.list')}}"><i class="fa fa-users"  aria-hidden="true"></i> <span>Testimonial</span></a>
         <li><a href="{{route('services.list')}}"><i class=" fa fa-wrench"  aria-hidden="true"></i> <span>Services</span></a>
         <li><a href="{{route('banner.list')}}"><i class="fa fa-bookmark-o "  aria-hidden="true"></i> <span>Banner</span></a>

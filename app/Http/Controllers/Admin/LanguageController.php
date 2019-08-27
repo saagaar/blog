@@ -70,7 +70,7 @@ class LanguageController extends AdminController
        $language =$this->Language->getById($id);       
         $language->delete();        
         return redirect()->route('language.list')
-        ->with('success', 'Language deleted Successfully');
+        ->with('success', 'Language has been deleted!');
     }
 
        public function changeStatus(Request $request)

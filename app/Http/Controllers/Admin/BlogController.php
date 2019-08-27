@@ -12,7 +12,6 @@ use App;
 class BlogController extends AdminController
 {
     protected $blog;
-
     function __construct(BlogInterface $blog)
     {
         parent::__construct();
@@ -95,7 +94,6 @@ class BlogController extends AdminController
     public function delete($id)
     {
        $blog =$this->blog->GetBlogById($id);
-
         if( $blog){
             $dir = 'images/blogimages/';
             if ($blog->image != '' && File::exists($dir . $blog->image)){
@@ -105,5 +103,14 @@ class BlogController extends AdminController
         }
         return redirect()->route('blog.list')
         ->with('success', 'Blog has been deleted!!');
+    }
+
+     public function changeSaveMethod(Request $request)
+    {
+        $blog = $this->blog->GetBlogById($request->id);
+        $changemethod= $request->save_method;  
+        $blog->update(array('save_method'=>$changemethod));  
+        return redirect()->route('blog.list')
+                        ->with('success','Status change successfully.');
     }
 }

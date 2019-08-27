@@ -58,7 +58,7 @@
                         <label class="custom-control-label" for="defaultChecked">Save to Draft</label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="1" @if($blog->save_method==1) checked @endif >
+                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="1" @if($blog->save_method==1) checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Publish</label>
                       </div>
                   @if ($errors->has('save_method'))

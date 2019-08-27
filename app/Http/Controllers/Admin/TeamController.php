@@ -95,7 +95,7 @@ class TeamController extends AdminController
             $team->delete();
         }
         return redirect()->route('team.list')
-        ->with('success', '');
+        ->with('success', 'Team has been deleted!');
     }
      public function changeStatus(Request $request)
     {

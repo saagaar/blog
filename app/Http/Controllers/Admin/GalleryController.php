@@ -46,7 +46,7 @@ class GalleryController extends AdminController
             $validatedData = $requestobj->validated();
             $allowedfileExtension=['jpg','png','jpeg','gif','svg'];
            if ($request->file('image')) {
-           		foreach ($request->image as $item) {
+           		foreach ($request->image as $item){
            			$filename = $item->getClientOriginalName();
                     $extension = $item->getClientOriginalExtension();
                     $check=in_array($extension,$allowedfileExtension);

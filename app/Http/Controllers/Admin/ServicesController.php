@@ -97,7 +97,7 @@ class ServicesController extends AdminController
             $services->delete();
         }
         return redirect()->route('services.list')
-        ->with('success', '');
+        ->with('success', 'Services has been deleted!');
     }
 
      public function changeStatus(Request $request)

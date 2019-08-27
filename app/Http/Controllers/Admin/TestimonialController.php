@@ -96,7 +96,7 @@ class TestimonialController extends AdminController
             $testimony->delete();
         }
         return redirect()->route('testimonial.list')
-        ->with('success', '');
+        ->with('success', 'Testimonial has been deleted!!');
     }
 
      public function changeStatus(Request $request)

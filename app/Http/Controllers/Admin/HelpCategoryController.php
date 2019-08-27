@@ -83,4 +83,14 @@ class HelpCategoryController extends AdminController
         }
         return view('admin.help.edithelpcat')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));;
     }
+
+    public function changeDisplay(Request $request)
+    {
+        $category = $this->category->getcatById($request->id);
+        $displayvalue= $request->display;
+        $category->update(array('display'=>$displayvalue));  
+        return redirect()->route('helpcat.list')
+                        ->with('success','Status change successfully.');
+    }
+
 }

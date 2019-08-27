@@ -37,7 +37,7 @@ class PaymentGatewayController extends AdminController
                       'All PaymentGateways' => route('paymentgateway.list'),
                       'current_menu'  =>'Create Payment Gateway',
                     ]];
-        if ($request->method()=='POST') 
+        if ($request->method()=='POST')
         {
             $request->validate([
            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -95,7 +95,7 @@ class PaymentGatewayController extends AdminController
             $paymentgateway->delete();
         }
         return redirect()->route('paymentgateway.list')
-        ->with('success', '');
+        ->with('success', 'Payment Gateway has been deleted');
     }
 
      public function changeStatus(Request $request)

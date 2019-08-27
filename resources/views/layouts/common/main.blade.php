@@ -103,13 +103,14 @@ window.setTimeout(function() {
     $('.toggle-class').change(function() {
         var status = $(this).prop('checked') == true ? 1 : 0;
         var paymentmode = $(this).prop('checked') == true ? 1 : 0;
+        var savemethod = $(this).prop('checked') == true ? 1 : 0;
         var id = $(this).data('id');
         var url = $(this).data('url');  
         $.ajax({
             type: "GET",
             dataType: "json",
             url: url,
-            data: {'status': status,'mode': paymentmode,'id': id},
+            data: {'status': status,'mode': paymentmode,'save_method':savemethod,'display':status,'id': id},
              success: function(data){
               console.log(data.success)
             }

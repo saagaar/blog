@@ -97,7 +97,7 @@ class ClientController extends AdminController
             $client->delete();
         }
         return redirect()->route('client.list')
-        ->with('success', '');
+        ->with('success', 'Client had been deleted!');
     }
 
      public function changeStatus(Request $request)

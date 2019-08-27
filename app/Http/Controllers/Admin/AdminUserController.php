@@ -94,8 +94,7 @@ class AdminUserController extends AdminController
                     'current_menu'=>'Change Password',
                       ]];
         $userid = Auth()->user()->id;//current user 
-        $adminusers =$this->admin->getById($userid);
-        echo $adminusers;                                                                                   
+        $adminusers =$this->admin->getById($userid);                                                                                   
        if ($request->method()=='POST') 
         {
             $this->validate($request,[
@@ -104,7 +103,7 @@ class AdminUserController extends AdminController
             'confirm_password' =>'required_with:password|same:password|min:6'
 
         ]);
-             $validatedData = $request->all();// all data will be here  
+             $validatedData = $request->all();// all data will be here 
              if (!Hash::check($validatedData['old_password'], $adminusers->password)) {
              return back()->with('error', 'The specified password does not match the database password');
             } 

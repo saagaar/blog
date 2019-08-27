@@ -29,33 +29,33 @@ Auth::routes(['register' => false]);
 
 
 Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.dashboard');
-//help category
-
-// help category
 
 
-Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
+    Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
-//admin users
+    //admin users
 
 
 
 	Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 
-Route::get('/home', 'Frontend\HomeController@index')->name('home');
+    Route::get('/home', 'Frontend\HomeController@index')->name('home');
 
-Route::prefix('admin')->group(function()
-{
+    Route::prefix('admin')->group(function()
+    {
 
 	Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('admin.dashboard');
 
 	Route::get('/mail', 'Admin\AdminController@checkmail')->name('admin.checkmail');
 
+	//help category
 	Route::match(['get','post'],'/create/helpcategory','Admin\HelpCategoryController@create')->name('helpcat.create');
 	Route::get('/helpcategory','Admin\HelpCategoryController@list')->name('helpcat.list');
 	Route::match(['get','post'],'/edit/helpcategory/{id}','Admin\HelpCategoryController@edit')->name('helpcat.edit');
 	Route::get('/delete/helpcategory/{id}','Admin\HelpCategoryController@delete')->name('helpcat.delete');
+	Route::get('changedisplay/helpcategory', 'Admin\HelpCategoryController@changeDisplay')->name('helpcat.changedisplay');
+	//**end help category
 
 	// Route::get('/logout', 'Auth\AdminLoginController@logout')->name('logout');
 
@@ -88,6 +88,7 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/blogcategory/{id}','Admin\CategoryController@delete')->name('adminblogcategory.delete');
 	Route::get('changestatus/blogcategory', 'Admin\CategoryController@changeStatus')->name('adminblogcategory.changestatus');
 
+
 	//blog category
 
 	/**
@@ -97,6 +98,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/blog','Admin\BlogController@create')->name('blog.create');
 	Route::match(['get','post'],'/edit/blog/{id}/{slug}','Admin\BlogController@edit')->name('blog.edit');
 	Route::get('/delete/blog/{id}','Admin\BlogController@delete')->name('blog.delete');
+	Route::get('blog/changesavemethod', 'Admin\BlogController@changeSaveMethod')->name('blog.changemethod');
 
 	// route for user account
 	Route::get('/list/account','Admin\AccountController@list')->name('account.list');
