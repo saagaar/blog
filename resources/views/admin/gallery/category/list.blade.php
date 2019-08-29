@@ -36,7 +36,7 @@
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachcat->title }}</td>
                    <td>
-                   	<img src="{{asset('images/gallerycat-images/'.$eachcat['banner_image']) }}" alt="Image" height="42" width="42"></td>
+                   	<img src="{{asset('frontend/images/gallerycat-images/'.$eachcat['banner_image']) }}" alt="Image" height="42" width="42"></td>
                   <td>
                      <input data-id="{{$eachcat->id}}" data-url="{{route('gallerycategory.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachcat->status ? 'checked' : '' }}>
                   </td>

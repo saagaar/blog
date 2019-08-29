@@ -52,7 +52,7 @@ class GalleryController extends AdminController
                     $check=in_array($extension,$allowedfileExtension);
                         if($check)
                         {
-           			$dir = 'images/gallery-images/';
+           			$dir = 'frontend/images/gallery/';
                     $imageName = uniqid().'.'.$item->getClientOriginalExtension();
                     // echo($imageName);
                     $item->move(public_path($dir), $imageName);
@@ -93,12 +93,12 @@ class GalleryController extends AdminController
                     $check=in_array($extension,$allowedfileExtension);
                     if($check)
                     {
-                    $dir = 'images/gallery-images/';
+                    $dir = 'frontend/images/gallery/';
                     if ($gallery->image != '' && File::exists($dir . $gallery->image))
                     File::delete($dir . $gallery->image);
 
                     $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/gallery-images'), $imageName);
+                    request()->image->move(public_path('frontend/images/gallery'), $imageName);
                     $validatedData['image'] = $imageName;
                     }else{
                         return redirect()->route('gallery.list')
@@ -120,7 +120,7 @@ class GalleryController extends AdminController
     {
         $gallery =$this->gallery->getByImgId($id);
         if( $gallery){
-            $dir = 'images/gallery-images/';
+            $dir = 'frontend/images/gallery/';
             if ($gallery->image != '' && File::exists($dir . $gallery->image)){
                 File::delete($dir . $gallery->image);
             }

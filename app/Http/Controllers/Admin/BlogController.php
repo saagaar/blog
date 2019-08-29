@@ -46,7 +46,7 @@ class BlogController extends AdminController
             $requestobj=app(BlogRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/blogimages'), $imageName);
+            request()->image->move(public_path('frontend/images/blog'), $imageName);
             $validatedData['image'] = $imageName;
             $this->blog->create($validatedData);
 
@@ -74,7 +74,7 @@ class BlogController extends AdminController
                     File::delete($dir . $blog->image);
 
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/blogimages'), $imageName);
+                    request()->image->move(public_path('frontend/images/blog'), $imageName);
                     $validatedData['image'] = $imageName;
                 }else {
                     $validatedData['image'] = $blog->image;
@@ -91,7 +91,7 @@ class BlogController extends AdminController
        $blog =$this->blog->GetBlogById($id);
 
         if( $blog){
-            $dir = 'images/blogimages/';
+            $dir = 'frontend/images/blog';
             if ($blog->image != '' && File::exists($dir . $blog->image)){
                 File::delete($dir . $blog->image);
             }

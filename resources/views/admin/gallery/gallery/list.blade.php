@@ -36,7 +36,7 @@
                   <td>{{ ++$i }}</td>
                   <td>{{ $item->title }}</td>
                    <td>
-                   	<img src="{{ asset('images/gallery-images/'.$item['image']) }}" alt="Image" height="42" width="42"></td>
+                   	<img src="{{ asset('frontend/images/gallery/'.$item['image']) }}" alt="Image" height="42" width="42"></td>
                    	<td>
                        @foreach ($item->categories()->pluck('title') as $category)
                                         <span class="label label-info label-many">{{ $category }}</span>

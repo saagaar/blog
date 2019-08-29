@@ -44,7 +44,7 @@ class ServicesController extends AdminController
             $requestobj=app(ServicesRequest::class);
             $validatedData = $requestobj->validated();
             $iconName = time().'.'.request()->icon->getClientOriginalExtension();
-            request()->icon->move(public_path('images/services-images'), $iconName);
+            request()->icon->move(public_path('frontend/images/services-icon'), $iconName);
             $validatedData['icon'] = $iconName;
             $this->Service->create($validatedData);
             return redirect()->route('services.list')    
@@ -65,11 +65,11 @@ class ServicesController extends AdminController
                 $requestobj=app(servicesRequest::class);
                 $validatedData = $requestobj->validated();
                 if ($request->hasFile('icon')) {
-                    $dir = 'images/services-images/';
+                    $dir = 'frontend/images/services-icon/';
                     if ($service->icon != '' && File::exists($dir . $service->icon))
                     File::delete($dir . $service->icon);
                     $iconName = time().'.'.request()->icon->getClientOriginalExtension();
-                    request()->icon->move(public_path('images/services-images'), $iconName);
+                    request()->icon->move(public_path('frontend/images/services-icon'), $iconName);
                     $validatedData['icon'] = $iconName;
                 }else {
                     $validatedData['icon'] = $service->icon;
@@ -84,7 +84,7 @@ class ServicesController extends AdminController
     {
        $services=$this->Service->getById($id);
         if($services){
-            $dir = 'images/services-images/';
+            $dir = 'frontend/images/services-icon/';
             if ($services->icon != '' && File::exists($dir . $services->icon)){
                 File::delete($dir . $services->icon);
             }   

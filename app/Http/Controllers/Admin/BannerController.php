@@ -42,7 +42,7 @@ class BannerController extends AdminController
             $requestobj=app(BannerRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/banner-images'), $imageName);
+            request()->image->move(public_path('frontend/images/banner'), $imageName);
             $validatedData['image'] = $imageName;
             $this->Banner->create($validatedData);
             return redirect()->route('banner.list')    
@@ -63,10 +63,10 @@ class BannerController extends AdminController
                 $requestobj=app(BannerRequest::class);
                 $validatedData = $requestobj->validated();
                 if($request->hasFile('image')){
-                    $dir = 'images/banner-images/';
+                    $dir = 'frontend/images/banner/';
                 if ($banner->image != '' && File::exists($dir . $banner->image)){           File::delete($dir . $banner->image);}
                     $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/banner-images'), $imageName);
+                    request()->image->move(public_path('frontend/images/banner'), $imageName);
                     $validatedData['image'] = $imageName;
                 }
                 else 
@@ -84,7 +84,7 @@ class BannerController extends AdminController
     {
        $banner =$this->Banner->getById($id);       
         if($banner){
-            $dir = 'images/banner-images/';
+            $dir = 'frontend/images/banner/';
             if ($banner->image != '' && File::exists($dir . $banner->image)){
                 File::delete($dir . $banner->image);
             }

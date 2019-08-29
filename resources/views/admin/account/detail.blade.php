@@ -30,7 +30,7 @@
           <!-- Profile Image -->
           <div class="box box-body">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="{{ asset('images/userimages/'.$account['image']) }}" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="{{ asset('frontend/images/userimages/'.$account['image']) }}" alt="User profile picture">
 
               <h3 class="profile-username text-center">{{$account->name}}</h3>
 

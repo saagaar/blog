@@ -91,7 +91,7 @@
                 <div class="form-group">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
-                  <img src='/images/team-images/{{$team->image}}' width="50">
+                  <img src='frontend//images/team-images/{{$team->image}}' width="50">
                   @if ($errors->has('image'))
                   <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                   @endif

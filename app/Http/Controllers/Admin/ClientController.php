@@ -42,7 +42,7 @@ class ClientController extends AdminController
             $requestobj=app(ClientRequest::class);
             $validatedData = $requestobj->validated();
             $logoName = time().'.'.request()->logo->getClientOriginalExtension();
-            request()->logo->move(public_path('images/client-images'), $logoName);
+            request()->logo->move(public_path('frontend/images/client'), $logoName);
             $validatedData['logo'] = $logoName;
             $this->Client->create($validatedData);
             return redirect()->route('client.list')    
@@ -63,10 +63,10 @@ class ClientController extends AdminController
                 $requestobj=app(ClientRequest::class);
                 $validatedData = $requestobj->validated();
                 if($request->hasFile('logo')) {
-                    $dir = 'images/client-images/';
+                    $dir = 'frontend/images/client/';
                 if ($client->logo != '' && File::exists($dir . $client->logo))             File::delete($dir . $client->logo);
                     $logoName = time().'.'.request()->logo->getClientOriginalExtension();
-                    request()->logo->move(public_path('images/client-images'), $logoName);
+                    request()->logo->move(public_path('frontend/images/client'), $logoName);
                     $validatedData['logo'] = $logoName;
                 }
                 else 
@@ -84,7 +84,7 @@ class ClientController extends AdminController
     {
        $client =$this->Client->getById($id);       
         if($client){
-            $dir = 'images/client-images/';
+            $dir = 'frontend/images/client/';
             if ($client->logo != '' && File::exists($dir . $client->logo)){
                 File::delete($dir . $client->logo);
             }

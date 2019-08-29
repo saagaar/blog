@@ -43,7 +43,7 @@ class TestimonialController extends AdminController
             $requestobj=app(TestimonialRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/testimonial-images'), $imageName);
+            request()->image->move(public_path('frontend/images/testimonial-images'), $imageName);
             $validatedData['image'] = $imageName;
             $this->testimony->create($validatedData);
             return redirect()->route('testimonial.list')    
@@ -64,11 +64,11 @@ class TestimonialController extends AdminController
                 $requestobj=app(TestimonialRequest::class);
                 $validatedData = $requestobj->validated();
                 if ($request->hasFile('image')) {
-                    $dir = 'images/testimonial-images/';
+                    $dir = 'frontend/images/testimonial-images/';
                     if ($testimony->image != '' && File::exists($dir . $testimony->image))
                     File::delete($dir . $testimony->image);
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/testimonial-images'), $imageName);
+                    request()->image->move(public_path('frontend/images/testimonial-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }else {
                     $validatedData['image'] = $testimony->image;
@@ -83,7 +83,7 @@ class TestimonialController extends AdminController
     {
        $testimony =$this->testimony->getById($id);
         if($testimony){
-            $dir = 'images/testimonial-images/';
+            $dir = 'frontend/images/testimonial-images/';
             if ($testimony->image != '' && File::exists($dir . $testimony->image)){
                 File::delete($dir . $testimony->image);
             }

@@ -45,7 +45,7 @@ class GalleryCategoryController extends AdminController
             $requestobj=app(GallerycatRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-            request()->banner_image->move(public_path('images/gallerycat-images'), $imageName);
+            request()->banner_image->move(public_path('frontend/images/gallerycat-images'), $imageName);
             $validatedData['banner_image'] = $imageName;
         $this->categories->create($validatedData);
        return redirect()->route('gallerycategory.list')
@@ -67,12 +67,12 @@ class GalleryCategoryController extends AdminController
             $requestobj=app(GallerycatRequest::class);
             $validatedData = $requestobj->validated();
                 if ($request->hasFile('banner_image')) {
-                    $dir = 'images/gallerycat-images/';
+                    $dir = 'frontend/images/gallerycat-images/';
                     if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
                     File::delete($dir . $category->banner_image);
 
                     $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-                    request()->banner_image->move(public_path('images/gallerycat-images'), $imageName);
+                    request()->banner_image->move(public_path('frontend/images/gallerycat-images'), $imageName);
                     $validatedData['banner_image'] = $imageName;
                 }else {
                     $validatedData['banner_image'] = $category->banner_image;
@@ -90,7 +90,7 @@ class GalleryCategoryController extends AdminController
     {
         $category =$this->categories->getByCatId($id);
         if( $category){
-            $dir = 'images/gallerycat-images/';
+            $dir = 'frontend/images/gallerycat-images/';
             if ($category->image != '' && File::exists($dir . $category->image)){
                 File::delete($dir . $category->image);
             }
