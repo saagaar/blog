@@ -8,7 +8,7 @@
 
 <div class="wrapper" id="app">
 <!--================ Start header Top Area =================-->
-   @include('frontend.common.top-menu')
+   <top-nav></top-nav>
 <!--================ End header top Area =================-->
 
 <!-- Start header Menu Area -->

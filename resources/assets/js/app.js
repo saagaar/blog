@@ -5,10 +5,12 @@
  */
 import '@fortawesome/fontawesome-free/js/all.js';
 
-  
 require('./bootstrap');
 window.Vue = require('vue');
 
+/**
+Custom Imports goes here
+*/
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -21,6 +23,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('login', require('./components/Login.vue').default);
+Vue.component('top-nav', require('./components/TopNav/TopNav.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -32,11 +35,7 @@ const app = new Vue({
     el: '#app',
     methods:
     {
-    	openLoginModal:function(){
-    		$('#loginModal').modal()
-    	},
-    	openSignUpModal:function(){
-    		$('#loginModal').modal()
-    	}
-    }
+    	
+    },
+
 });
