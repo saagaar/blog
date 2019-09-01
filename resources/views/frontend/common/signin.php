@@ -1,4 +1,4 @@
-<div class="modal log-modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal log-modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
     <div class="modal-box">
@@ -9,8 +9,8 @@
       </div>
       <div class="modal-body">
         <div class="form-title text-center">
-          <h3>Welcome back</h3>
-          <p>Sign in to get personalized story recommendations, follow authors and topics you love.</p>
+          <h3>Welcome </h3>
+          <p>Sign in to get personalized view your choices,recommendations, follow the topics you love.</p>
         </div>
         <div class="d-flex flex-column text-center">
           <form>

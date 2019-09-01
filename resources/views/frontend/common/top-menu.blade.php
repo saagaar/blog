@@ -11,8 +11,8 @@
                     <div class="right-button">
                         <ul>
                             <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
-                            <li><a href="" data-toggle="modal" data-target="#loginModal"> <i class="fas fa-user-circle">&nbsp;</i> Sign In</a></li>
-                            <li><a href="" data-toggle="modal" data-target="#regModal"> <i class="fas fa-sign-in-alt">&nbsp;</i> Get Started</a></li>
+                            <li><a href="#" @click="openLoginModal"> <i class="fas fa-user-circle">&nbsp;</i> Sign In</a></li>
+                            <li><a href="#" @click="openSignUpModal"> <i class="fas fa-sign-in-alt">&nbsp;</i> Get Started</a></li>
                         </ul>
                     </div>
                 </div>

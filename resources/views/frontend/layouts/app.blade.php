@@ -1,3 +1,5 @@
+<!doctype html>
+<html lang="en">
 <!--================ Start Meta Elements and includes=================-->
 @include('frontend.common.header')
 <!--================ End of Meta Elements and includes=================-->
@@ -35,9 +37,6 @@
         @include('frontend.common.signup')
 
     <!-- ================ End footer Area ================= -->
-
-
-
 </div>
 
 
@@ -46,9 +45,9 @@
 
 
 <script type="text/javascript">
-    // $(document).ready(function(){
-    // // $('[data-toggle="tooltip"]').tooltip()
-    // });
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip()
+    });
 </script>
 </body>
 </html>
