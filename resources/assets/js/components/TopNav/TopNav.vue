@@ -1,5 +1,6 @@
- <!--================ Start header Top Area =================-->
-    <section class="header-top">
+<template>
+<div>
+ <section class="header-top">
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
@@ -11,9 +12,11 @@
                     <div class="right-button">
                         <ul>
                             <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
-                            <li><a href="#" @click="openLoginModal"> <i class="fas fa-user-circle">&nbsp;</i> Sign In</a></li>
-                            <li><a href="#" @click="openSignUpModal"> <i class="fas fa-sign-in-alt">&nbsp;</i> Get Started</a></li>
+                            <li><LoginButton></LoginButton></li>
+                            <li><SignUpButton></SignUpButton></li>
+                            
                         </ul>
+
                     </div>
                 </div>
             </div>
@@ -27,5 +30,36 @@
                 </form>
             </div>
         </div>
+
     </section>
-    <!--================ End header top Area =================-->
+      <LoginSignupModal></LoginSignupModal>
+      </div>
+    
+
+
+</template>
+
+<script>
+
+
+import LoginButton from './Login.vue';
+import SignUpButton from './SignUp.vue';
+
+import LoginSignupModal from './LoginSignupModal';
+
+    export default {
+       
+        data() {
+           return {}
+        },
+        components:{
+
+            SignUpButton,
+            LoginButton,
+            LoginSignupModal
+        },
+       
+        
+      
+    }
+</script>

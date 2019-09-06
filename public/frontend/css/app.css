@@ -17879,9 +17879,9 @@ font-size: 18px;}
 .all-link a:hover, .area-heading h3 span a:hover, 
 .area-heading h3 span a.genric-btn.link-border:hover{color: #4cb748;}
 
-#loginModal .modal-dialog .modal-content{background-image: url(../img/background/banner-bg.png); background-repeat: no-repeat;
+#loginModal .modal-dialog .modal-content{background-image: url(../images/background/banner-bg.png); background-repeat: no-repeat;
 background-size: cover;}
-#regModal .modal-dialog .modal-content{background-image: url(../img/background/banner-bg-2.png); background-repeat: no-repeat;
+#SignUpModal .modal-dialog .modal-content{background-image: url(../images/background/banner-bg-2.png); background-repeat: no-repeat;
 background-size: cover;}
 .log-modal{padding-top: 32px;}
 .log-modal .btn-primary{min-width: 100px;}

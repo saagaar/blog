@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Models\Blogs;
-class HomeController extends BaseController
+use Socialite;
+
+
+class LoginController extends BaseController
 {
     /**
      * Create a new controller instance.
@@ -25,20 +27,20 @@ class HomeController extends BaseController
         // print_r($request->server('HTTP_USER_AGENT'));
         return view('frontend.home.index');
     }
-    public function test()
+    public function socialLogin($provider)
     {
-        // Blogs::all()->latest();
-        return view('frontend.home.test');
-    }
-    public function blog()
-    {
-        $blog = Blogs::all()->latest();
-        return response($blog->jsonSerialize(), Response::HTTP_OK);
-  
-    public function dashboard(){
-       $user = Socialite::driver('facebook')->user();
-      
-        // return view('frontend.user.dashboard');
+        return Socialite::driver($provider)->redirect();
 
     }
+    public function dashboard($provider){
+       $user = Socialite::driver($provider)->user();
+       $this->getUserInfoFromFacebook();
+       print_r($user);
+        // return view('frontend.user.dashboard');
+    }
+    
+    public function getUserInfoFromFacebook()
+    {
+
+    }   
 }

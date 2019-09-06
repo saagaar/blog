@@ -175,7 +175,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class
+        Spatie\Permission\PermissionServiceProvider::class,
+        \SocialiteProviders\Manager\ServiceProvider::class,
 
     ],
 
@@ -228,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Helper' => App\Helper::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
        
     ],
 

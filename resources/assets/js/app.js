@@ -4,11 +4,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import '@fortawesome/fontawesome-free/js/all.js';
-
-  
 require('./bootstrap');
 window.Vue = require('vue');
+import Vuelidate from 'vuelidate'
+import router from './routes.js'
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+Vue.use(Vuelidate);
 
+/**
+Custom Imports goes here
+*/
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -20,7 +26,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('articles', require('./components/Articles.vue').default);
+Vue.component('top-nav', require('./components/TopNav/TopNav.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,4 +36,10 @@ Vue.component('articles', require('./components/Articles.vue').default);
 
 const app = new Vue({
     el: '#app',
+    router,
+    methods:
+    {
+    	
+    },
+
 });

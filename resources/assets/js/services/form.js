@@ -1,0 +1,11 @@
+Class Form{
+	constructor()
+	{
+		
+	}
+
+	onSubmit()
+	{
+		
+	}
+}
