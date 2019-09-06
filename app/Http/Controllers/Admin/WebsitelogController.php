@@ -34,6 +34,7 @@ class WebsitelogController extends AdminController
     public function View($id)
     {
         $websitelog =$this->websitelog->GetLogById($id);
+        
         return $websitelog;
     }
     public function block($id)
