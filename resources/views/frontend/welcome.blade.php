@@ -65,6 +65,7 @@
     </head>
     <body>
     <div id="app">
+ 
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -72,6 +73,7 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
+                         <a href="{{ url('/blog') }}">blog</a>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
@@ -81,11 +83,12 @@
             @endif
 
             <div class="content">
-                <articles></articles>
+                  <router-link to="/" exact>Home</router-link>
+                 <router-link to="/contact">Contact</router-link>
+                 <router-view></router-view>
             </div>
         </div>
         </div>
     </body>
 </html>
-<script src="{{ asset('js/app.js')}}"></script>
-
+<script src="{{ asset('frontend/js/app.js') }}"></script>

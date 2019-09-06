@@ -4,9 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import '@fortawesome/fontawesome-free/js/all.js';
-
 require('./bootstrap');
 window.Vue = require('vue');
+import Vuelidate from 'vuelidate'
+import router from './routes.js'
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+Vue.use(Vuelidate);
 
 /**
 Custom Imports goes here
@@ -22,7 +26,6 @@ Custom Imports goes here
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('login', require('./components/Login.vue').default);
 Vue.component('top-nav', require('./components/TopNav/TopNav.vue').default);
 
 /**
@@ -33,6 +36,7 @@ Vue.component('top-nav', require('./components/TopNav/TopNav.vue').default);
 
 const app = new Vue({
     el: '#app',
+    router,
     methods:
     {
     	

@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('frontend.welcome');
 });
 Route::get('/blog','Frontend\HomeController@index')->name('home');
+Route::get('/dashboard/{provider}','Frontend\LoginController@dashboard')->name('dashboard');
+Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->name('social.login');
 // Route::match(['get','post'],'/admin/login','AdminController@login');
 
 Auth::routes();

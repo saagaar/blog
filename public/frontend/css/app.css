@@ -17881,7 +17881,7 @@ font-size: 18px;}
 
 #loginModal .modal-dialog .modal-content{background-image: url(../images/background/banner-bg.png); background-repeat: no-repeat;
 background-size: cover;}
-#regModal .modal-dialog .modal-content{background-image: url(../images/background/banner-bg-2.png); background-repeat: no-repeat;
+#SignUpModal .modal-dialog .modal-content{background-image: url(../images/background/banner-bg-2.png); background-repeat: no-repeat;
 background-size: cover;}
 .log-modal{padding-top: 32px;}
 .log-modal .btn-primary{min-width: 100px;}
