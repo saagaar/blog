@@ -11,6 +11,7 @@ import router from './routes.js'
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
+import store from './store'
 
 /**
 Custom Imports goes here
@@ -37,9 +38,5 @@ Vue.component('top-nav', require('./components/TopNav/TopNav.vue').default);
 const app = new Vue({
     el: '#app',
     router,
-    methods:
-    {
-    	
-    },
-
+    store,
 });

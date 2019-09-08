@@ -38,6 +38,13 @@ class HomeController extends BaseController
     {
         $blog = Blogs::all()->latest();
         return response($blog->jsonSerialize(), Response::HTTP_OK);
+  
+    public function dashboard()
+    {
+       $user = Socialite::driver('facebook')->user();
+      
+        // return view('frontend.user.dashboard');
+
     }
 
     function get_client_ip() {
