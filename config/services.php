@@ -16,9 +16,8 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_KEY'),
         'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect' => env('FACEBOOK_REDIRECT_URI')
+        'redirect' => 'http://localhost:8000/dashboard/facebook'
     ],
-
     'linkedin' => [
         'client_id' => env('LINKEDIN_KEY'),
         'client_secret' => env('LINKEDIN_SECRET'),

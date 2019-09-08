@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use Socialite;
 
+ use Validator,Redirect,Response,File;
+use Socialite;
+use App\Repository\AccountInterface;
 
 class LoginController extends BaseController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $account;
+    public function __construct(AccountInterface $account)
     {
+        $this->account=$account;
     }   
 
     /**
@@ -24,6 +23,9 @@ class LoginController extends BaseController
      */
     public function index(Request $request)
     {
+
+   
+
         // print_r($request->server('HTTP_USER_AGENT'));
         return view('frontend.home.index');
     }
@@ -33,14 +35,28 @@ class LoginController extends BaseController
 
     }
     public function dashboard($provider){
-       $user = Socialite::driver($provider)->user();
-       $this->getUserInfoFromFacebook();
-       print_r($user);
-        // return view('frontend.user.dashboard');
+    $getInfo = Socialite::driver($provider)->user(); 
+    // dd($getInfo);
+    $userdata = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
+        if (!$userdata) {
+        $user = $this->createuser($getInfo,$provider); 
+        }
+        auth()->login($user); 
+        return redirect()->to('/home');
     }
     
-    public function getUserInfoFromFacebook()
+    public function createuser($getInfo,$provider)
     {
-
+    
+          $userdata = $this->account->create([
+             'name'     => $getInfo->name,
+             'email'    => $getInfo->email,
+             'status'        =>'0',
+             'provider'     =>$provider,
+             'provider_id'  => $getInfo->id,
+             'image'        =>$getInfo->avatar_original,
+             'token'        =>$getInfo->token,
+         ]);
+        return $userdata;
     }   
 }
