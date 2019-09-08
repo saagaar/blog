@@ -3,18 +3,21 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use App\Repository\SiteoptionsInterface;
 
 
-
-class HomeController extends BaseController
+class FrontendController extends BaseController
 {
+    Protected $globals;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(SiteoptionsInterface $SiteOptions)
     {
+        $globals=$SiteOptions->getAll();
+        $WebSiteName=$globals->site_name;
     }   
 
     /**
@@ -28,8 +31,7 @@ class HomeController extends BaseController
         return view('frontend.home.index');
     }
   
-    public function dashboard()
-    {
+    public function dashboard(){
        $user = Socialite::driver('facebook')->user();
       
         // return view('frontend.user.dashboard');
