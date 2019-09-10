@@ -1,7 +1,7 @@
 <?php 
 namespace App\Repository;
 
-interface WebsitelogInterface
+interface UserlogInterface
 {
 	 /**
      * Get's sitesettings by it's ID

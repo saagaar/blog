@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWebsitelogsTable extends Migration
+class CreateUserlogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateWebsitelogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('websitelogs', function (Blueprint $table) {
+        Schema::create('userlogs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ip_address');
-            $table->string('referer_url');
-            $table->string('user_agent');
-            $table->string('device');
-            $table->string('redirected_to');
-            $table->datetime('visit_date');
             $table->string('continent');
             $table->string('country');
             $table->string('country_code');
@@ -37,6 +32,6 @@ class CreateWebsitelogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('websitelogs');
+        Schema::dropIfExists('userlogs');
     }
 }
