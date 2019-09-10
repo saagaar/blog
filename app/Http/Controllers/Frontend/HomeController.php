@@ -33,14 +33,19 @@ class HomeController extends BaseController
     }
     public function test(VisitorInfo $info)
     {
-        $dataa = $info->visitorsIp();
-        $logdata = $this->websitelog->getall()->where('ip_address','27.34.25.94')->first();
-        $start = date_create($logdata->visit_date);
+        $serverdata = $info->visitorsIp();
+        $dblogdata = $this->websitelog->getall()->where('ip_address','27.34.25.94')->first();
+        $start = date_create($dblogdata->visit_date);
         $end = date_create(date("Y-m-d H:i:s"));
         $diff=date_diff($end,$start);
-        if($logdata->ip_address==$dataa['ip_address'])){
-       if(((($logdata->referer_url!=$dataa['refererurl']) || ($logdata->redirected_to!=$dataa['path']) ) || ($logdata->ip_address==$dataa['ip_address']) && ($logdata->referer_url==$dataa['refererurl']) && ($logdata->redirected_to==$dataa['path']) && ($diff->i>10)){
-                // $logdata->logdetailscreate();
+        if($dblogdata->ip_address==$serverdata['ip_address']){
+        if((($dblogdata->referer_url!=$serverdata['refererurl']) || ($dblogdata->redirected_to!=$serverdata['path']) ) || ($dblogdata->ip_address==$serverdata['ip_address']) && ($dblogdata->referer_url==$serverdata['refererurl']) && ($dblogdata->redirected_to==$serverdata['path']) && ($diff->i>10)){
+                $dblogdata->logdetails->create(array(
+                    'referer_url'   =>$serverdata['refererurl'],
+                    'user_agent'    =>$serverdata['useragent'],
+                    'redirected_to' =>$serverdata['refererurl'],
+                    'visit_date'   =>date("Y-m-d H:i:s"),
+                ));
             }
         }
         return view('frontend.home.test');

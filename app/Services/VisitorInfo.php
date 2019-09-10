@@ -10,9 +10,7 @@ Class VisitorInfo
 		// $ip ='27.34.25.94'; //$_SERVER['REMOTE_ADDR'];
 		if($serverinfo['clientip']){
 			$ip_api = json_decode(file_get_contents("http://ip-api.io/json/{$serverinfo['clientip']}"));
-			// print_r($ip_api);exit;
 			if($ip_api && !$ip_api->status_message){
-				// echo "string";exit;
 				$data = array(
 						'ip_address' 			=>$serverinfo['clientip'],
 						'country_code' 			=>$ip_api->country_code,
@@ -20,8 +18,9 @@ Class VisitorInfo
 						'region'				=>$ip_api->region_name,
 						'region_code' 			=>$ip_api->region_code,
 						'city'					=>$ip_api->city,
-						'device'				=>$serverinfo['useragent'],
+						'useragent'				=>$serverinfo['useragent'],
 						'refererurl'			=>$serverinfo['refererurl'],
+						'path'              	=>$serverinfo['path'],
 						'time_zone'				=>$ip_api->time_zone,
 						'latitude' 				=>$ip_api->latitude,
 						'longitude'				=>$ip_api->longitude,
@@ -42,6 +41,9 @@ Class VisitorInfo
 						'region'				=>$plugin->geoplugin_regionName,
 						'region_code' 			=>$plugin->geoplugin_regionCode,
 						'city'					=>$plugin->geoplugin_city,
+						'useragent'				=>$serverinfo['useragent'],
+						'refererurl'			=>$serverinfo['refererurl'],
+						'path'              	=>$serverinfo['path'],
 						'time_zone'				=>$plugin->geoplugin_timezone,
 						'latitude' 				=>$plugin->geoplugin_latitude,
 						'longitude'				=>$plugin->geoplugin_longitude,
