@@ -19,13 +19,11 @@ Class  Userlog implements UserlogInterface
       return $this->log->where('id', $log_id)->first();
     }
 
-    
-
-      /**
+    /**
      * Get's all log.
      *
      * @return mixed
-     */
+    */
     public function getAll(){
    	 return	$this->log->latest();
     }
