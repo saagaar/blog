@@ -12,7 +12,7 @@
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
-                                <a href="#">Tours & Travel</a>
+                                <a href="/test">Tours & Travel</a>
                             </div>
                             <a class="d-block" href="single-blog.html">
                                 <h4>The TV Subscriptions You’ll Need to Watch Your Favorite Shows</h4>

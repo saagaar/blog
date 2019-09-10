@@ -10,16 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('frontend.welcome');
 });
+
 Route::get('/logincheck', function () {
     return response()->json([
    'status'=>true
 ]);
 });
 
+Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 Route::get('/profile','Frontend\HomeController@dashboard')->name('dashboard');
 Route::get('/dashboard/{provider}','Frontend\LoginController@dashboard')->name('dashboard');

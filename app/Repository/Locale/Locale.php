@@ -49,7 +49,7 @@ class Locale implements LocaleInterface
     }
 
     public function GetActiveLocale(){
-      return  $this->Locales->where('display','Y')->get();
+      return  $this->Locales->where('display','1')->get();
     }
     
 }

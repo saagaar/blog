@@ -1,15 +1,15 @@
 <?php 
 
-namespace App\Repository\Websitelog;
+namespace App\Repository\Userlog;
 
-use App\Models\Websitelogs;
-use App\Repository\WebsitelogInterface;
+use App\Models\Userlogs;
+use App\Repository\UserlogInterface;
 
-Class  Websitelog implements WebsitelogInterface
+Class  Userlog implements UserlogInterface
 {
 	protected $log;
 
-	public function __construct(Websitelogs $websitelog)
+	public function __construct(Userlogs $websitelog)
 	{
 		$this->log=$websitelog;
 	}

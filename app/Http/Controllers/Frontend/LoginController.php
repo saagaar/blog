@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+ use Validator,Redirect,Response,File;
 use Socialite;
-
+use App\Repository\AccountInterface;
 
 class LoginController extends BaseController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $account;
+    public $successStatus = 200;
+    public function __construct(AccountInterface $account)
     {
+        $this->account=$account;
     }   
 
     /**
@@ -24,6 +24,9 @@ class LoginController extends BaseController
      */
     public function index(Request $request)
     {
+
+   
+
         // print_r($request->server('HTTP_USER_AGENT'));
         return view('frontend.home.index');
     }
@@ -33,14 +36,62 @@ class LoginController extends BaseController
 
     }
     public function dashboard($provider){
-       $user = Socialite::driver($provider)->user();
-       $this->getUserInfoFromFacebook();
-       print_r($user);
-        // return view('frontend.user.dashboard');
+    $getInfo = Socialite::driver($provider)->user(); 
+    // dd($getInfo);
+    $userdata = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
+        if (!$userdata) {
+        $user = $this->createuser($getInfo,$provider); 
+        }
+        auth()->login($user); 
+        return redirect()->to('/home');
     }
     
-    public function getUserInfoFromFacebook()
+    public function createuser($getInfo,$provider)
     {
-
-    }   
+    
+          $userdata = $this->account->create([
+             'name'     => $getInfo->name,
+             'email'    => $getInfo->email,
+             'status'        =>'0',
+             'provider'     =>$provider,
+             'provider_id'  => $getInfo->id,
+             'image'        =>$getInfo->avatar_original,
+             'token'        =>$getInfo->token,
+         ]);
+        return $userdata;
+    } 
+    public function login(){ 
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password'),'status' => '0'])){ 
+            $userid = Auth()->user()->id;
+            $user = $this->account->getById($userid);
+            $success['token'] =  $user->createToken('MyApp')->accessToken; 
+            return response()->json(['success' => $success], $this->successStatus); 
+        } 
+        else{ 
+            return response()->json(['error'=>'Unauthorised'], 401); 
+        } 
+    }
+    public function register(Request $request) 
+    { 
+        $validator = Validator::make($request->all(), [ 
+            'name' => 'required', 
+            'email' => 'required|email', 
+            'password' => 'required', 
+            'confirm_password' => 'required|same:password', 
+        ]);
+    if ($validator->fails()) { 
+                return response()->json(['error'=>$validator->errors()], 401);            
+            }
+    $input = $request->all(); 
+            $input['password'] = bcrypt($input['password']); 
+            $user = $this->account->create($input); 
+            $success['token'] =  $user->createToken('MyApp')->accessToken; 
+            $success['name'] =  $user->name;
+    return response()->json(['success'=>$success], $this->successStatus); 
+    }
+    public function user(){
+        $userid = Auth()->user()->id;
+        $user = $this->account->getById($userid);
+         return response()->json(['success' => $user], $this->successStatus); 
+    }  
 }
