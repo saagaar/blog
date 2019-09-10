@@ -1,13 +1,25 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-import state from './state'
-import * as getters from './getters'
-import * as mutations from './mutations'
-import * as actions from './actions'
-
-Vue.use(Vuex)
-
-const store = new Vuex.Store({ state, getters, mutations, actions})
-
-export default store
+const state = {
+    me: {},
+    user:{
+        isLoggedIn:false
+    },
+    feed: [],
+    profilePage: {
+        profile: {
+            bio: ''
+        },
+        avatar: '',
+        username: '',
+        tweets: [],
+        is_following: false
+    },
+    tweetDetail: {
+        user: {},
+        replies: []
+    },
+    openTweetDetails: null,
+    followSuggestions: [],
+    isLoading: false,
+    appName: 'TheBloggersClub.com'
+}
+export default state

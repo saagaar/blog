@@ -30,9 +30,9 @@ class HomeController extends BaseController
   
     public function dashboard()
     {
-       $user = Socialite::driver('facebook')->user();
+       // $user = Socialite::driver('facebook')->user();
       
-        // return view('frontend.user.dashboard');
+        return view('frontend.layouts.dashboard');
 
     }
 }

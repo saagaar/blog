@@ -1,13 +1,26 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+// Get authenticated user
+export const me = state => state.me
 
-import state from './state'
-import * as getters from './getters'
-import * as mutations from './mutations'
-import * as actions from './actions'
+//Get Loggedin info
+export const user = state => state.user
 
-Vue.use(Vuex)
+// Get user feed
+export const feed = state => state.feed
 
-const store = new Vuex.Store({ state, getters, mutations, actions})
+// Get user profile page
+export const profilePage = state => state.profilePage
 
-export default store
+// Get tweet detail
+export const tweetDetail = state => state.tweetDetail
+
+// Get suggest follower
+export const followerSuggestions = state => state.followSuggestions
+
+// Get open tweet details
+export const openTweetDetails = state => state.openTweetDetails
+
+// Get toggle status of loading
+export const isLoading = state => state.isLoading
+
+// Get the app name
+export const appName = state => state.appName

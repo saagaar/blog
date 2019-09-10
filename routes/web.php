@@ -14,7 +14,14 @@
 Route::get('/', function () {
     return view('frontend.welcome');
 });
+Route::get('/logincheck', function () {
+    return response()->json([
+   'status'=>true
+]);
+});
+
 Route::get('/blog','Frontend\HomeController@index')->name('home');
+Route::get('/profile','Frontend\HomeController@dashboard')->name('dashboard');
 Route::get('/dashboard/{provider}','Frontend\LoginController@dashboard')->name('dashboard');
 Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->name('social.login');
 // Route::match(['get','post'],'/admin/login','AdminController@login');

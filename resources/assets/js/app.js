@@ -11,7 +11,8 @@ import router from './routes.js'
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
-import store from './store'
+
+import store from './store/index'
 
 /**
 Custom Imports goes here
@@ -39,4 +40,7 @@ const app = new Vue({
     el: '#app',
     router,
     store,
+    created() {
+            this.$store.dispatch('checkLoginUser');
+        },
 });

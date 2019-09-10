@@ -10,12 +10,77 @@
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
                     <div class="right-button">
-                        <ul>
+
+                        <ul v-if="!isUserloggedIn" >
                             <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
                             <li><LoginButton></LoginButton></li>
                             <li><SignUpButton></SignUpButton></li>
                             
                         </ul>
+                         <ul v-else>
+                        <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                        <li class="nitify dropdown">
+                            <a  href="javascript:void(0)" class="dropdown-toggle top_icon" data-toggle="dropdown" role="button" aria-haspopup="true" 
+                            aria-expanded="false"  title="Messaging"><i class="fas fa-envelope"></i> <span>Messaging</span> <em>28</em></a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="#">My Profile</a></li>
+                                <li><a href="#">New Stories</a></li>
+                                <li><a href="#">Stories</a></li>
+                                <hr>
+                                <li><a href="#">BlogSagar Partner Program</a></li>
+                                <li><a href="#">Bookmarks</a></li>
+                                <li><a href="#">Publications</a></li>
+                                <li><a href="#">Customize your interest</a></li>
+                                <hr>
+                                <li><a href="#">Settings</a></li>
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Change Password</a></li>
+                                <li><a href="index.html">Log Out</a></li>
+                            </ul>
+                        </li>
+                        <li class="nitify dropdown">
+                            <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
+                            data-toggle="dropdown" role="button" aria-haspopup="true" 
+                            aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>14</em></a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="#">My Profile</a></li>
+                                <li><a href="#">New Stories</a></li>
+                                <li><a href="#">Stories</a></li>
+                                <hr>
+                                <li><a href="#">BlogSagar Partner Program</a></li>
+                                <li><a href="#">Bookmarks</a></li>
+                                <li><a href="#">Publications</a></li>
+                                <li><a href="#">Customize your interest</a></li>
+                                <hr>
+                                <li><a href="#">Settings</a></li>
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Change Password</a></li>
+                                <li><a href="index.html">Log Out</a></li>
+                            </ul>
+
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <small>Welcome !</small>
+                            <figure><img src="img/p_image.png"></figure> Shanvi Bhandari</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">My Profile</a></li>
+                                <li><a href="#">New Stories</a></li>
+                                <li><a href="#">Stories</a></li>
+                                <hr>
+                                <li><a href="#">BlogSagar Partner Program</a></li>
+                                <li><a href="#">Bookmarks</a></li>
+                                <li><a href="#">Publications</a></li>
+                                <li><a href="#">Customize your interest</a></li>
+                                <hr>
+                                <li><a href="#">Settings</a></li>
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Change Password</a></li>
+                                <li><a href="index.html">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
 
                     </div>
                 </div>
@@ -51,6 +116,11 @@ import LoginSignupModal from './LoginSignupModal';
        
         data() {
            return {}
+        },
+        computed:{
+            isUserloggedIn:function(){
+              return   this.$store.getters.user.isLoggedIn;
+            }
         },
         components:{
 

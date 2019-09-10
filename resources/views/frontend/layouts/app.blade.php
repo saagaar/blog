@@ -12,16 +12,11 @@
   
 <!-- Start header Menu Area -->
   @include('frontend.common.main-nav')
-
 <!-- End header MEnu Area -->
-
     <!--================Fullwidth block Area =================-->
-
     @yield('content')
 
-
     <!--================ three-block section end =================-->  
-
 
     <!-- ================ start footer Area ================= -->
         @include('frontend.common.footer')
