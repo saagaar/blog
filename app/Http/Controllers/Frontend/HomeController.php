@@ -21,7 +21,6 @@ class HomeController extends FrontendController
     {
 
          parent::__construct();
-         $this->websitelog=$websitelog;
     }
 
     /**
@@ -48,12 +47,12 @@ class HomeController extends FrontendController
 
         return view('frontend.home.index');
     }
-    public function test(VisitorInfo $info)
-    {
-        // $this->savelog($info);
+    // public function test(VisitorInfo $info)
+    // {
+    //     // $this->savelog($info);
 
-        return view('frontend.home.test');
-    }
+    //     return view('frontend.home.test');
+    // }
     public function blog()
     {
         $blog = Blogs::all()->latest();

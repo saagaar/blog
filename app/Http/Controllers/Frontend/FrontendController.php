@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 
-=======
 use App\Repository\SiteoptionsInterface;
 use App\Services\VisitorInfo;
 use Illuminate\Support\Facades\Route;
 use App\Models\Userlogs;
 use App\Repository\UserlogInterface;
->>>>>>> d42a2427011241e18b044817541f1d1d8ef9ef13
 
 class FrontendController extends BaseController
 {
@@ -20,27 +17,15 @@ class FrontendController extends BaseController
      * Create a new controller instance.
      *
      * @return void
-<<<<<<< HEAD
      */
     public function __construct()
     {
         $SiteOptions = app()->make('App\Repository\SiteoptionsInterface');
-
         $globals=$SiteOptions->GetSiteInfo();
-=======
-     */protected $userlog;
-    protected $info;
-    public function __construct(SiteoptionsInterface $SiteOptions,UserlogInterface $userlog)
-    {
-         $this->userlog=$userlog;
-        $globals=$SiteOptions->getAll();
->>>>>>> d42a2427011241e18b044817541f1d1d8ef9ef13
-        $WebSiteName=$globals->site_name;
-    }   
-
+    }
     /**
      * Show the application dashboard.
-     *p
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
