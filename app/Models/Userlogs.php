@@ -12,7 +12,7 @@ class Userlogs extends Model implements Auditable
 
 
     protected $fillable = [
-        'ip_address','continent','country','country_code','city','state'
+        'ip_address','region_code','country','country_code','city','time_zone','latitude','isp','flagurl','currencysymbol','currency','callingcode','countrycapital','longitude','region'
     ];
     public function countries()
     {

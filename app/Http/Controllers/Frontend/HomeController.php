@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Models\Blogs;
 use App\Services\VisitorInfo;
 use Illuminate\Support\Facades\Route;
-use App\Models\Logdetails;
+use App\Models\Userlogs;
 use App\Repository\UserlogInterface;
 class HomeController extends FrontendController
 {
@@ -15,10 +16,11 @@ class HomeController extends FrontendController
      *
      * @return void
      */
-   protected $websitelog;
-    function __construct(UserlogInterface $websitelog)
+   
+    function __construct()
     {
-        parent::__construct();
+
+         parent::__construct();
          $this->websitelog=$websitelog;
     }
 
@@ -29,7 +31,6 @@ class HomeController extends FrontendController
      */
     public function index(Request $request)
     {
-        // print_r($request->server('HTTP_USER_AGENT'));
         return view('frontend.layouts.app');
     }
     public function test(VisitorInfo $info)
@@ -44,6 +45,13 @@ class HomeController extends FrontendController
                 // $logdata->logdetailscreate();
             }
         }
+
+        return view('frontend.home.index');
+    }
+    public function test(VisitorInfo $info)
+    {
+        // $this->savelog($info);
+
         return view('frontend.home.test');
     }
     public function blog()
