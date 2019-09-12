@@ -14,7 +14,7 @@
   @include('frontend.common.main-nav')
 <!-- End header MEnu Area -->
     <!--================Fullwidth block Area =================-->
-    @yield('content')
+ <!-- /   @yield('content') -->
 
     <!--================ three-block section end =================-->  
 

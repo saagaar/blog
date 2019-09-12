@@ -16,7 +16,7 @@ Route::get('/', function () {
 
 Route::get('/logincheck', function () {
     return response()->json([
-   'status'=>true
+   'status'=>false
 ]);
 });
 

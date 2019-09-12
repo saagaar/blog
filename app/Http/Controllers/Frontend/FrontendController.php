@@ -20,8 +20,9 @@ class FrontendController extends BaseController
     protected $userlog;
     public function __construct()
     {
-         // $this->userlog=$userlog;
-        $this->globals=SiteoptionsInterface->GetSiteInfo();
+        $SiteOptions = app()->make('App\Repository\SiteoptionsInterface');
+
+        $globals=$SiteOptions->GetSiteInfo();
         $WebSiteName=$globals->site_name;
     }   
 
@@ -48,7 +49,7 @@ class FrontendController extends BaseController
         // print_r($serverdata['path']);exit;
         date_default_timezone_set('Asia/Kathmandu');
         $dblogdata=$this->userlog->getLogbyIpAddressAndURL($serverdata['ip_address'],$serverdata['path']);
-        print_r($dblogdata);exit;
+        // print_r($dblogdata);exit;
         if($dblogdata){
             $start = date_create($dblogdata['details']->visit_date);
         $end = date_create(date("Y-m-d H:i:s"));

@@ -1,6 +1,7 @@
 
 <template>
 <div>
+<TopNav></TopNav>
 <section class="fullwidth-block area-padding-bottom">
         <div class="container-fluid">
             <div class="row">
@@ -568,7 +569,7 @@
                 <div class="col-lg-4">
                     <div class="single-blog style-five">
                         <div class="thumb">
-                            <img class="img-fluid" src="$this->ci->db->magazine/17.jpg" alt="">
+                            <img class="img-fluid" src="images/magazine/17.jpg" alt="">
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
@@ -595,9 +596,13 @@
 </template>
 
 <script>
+import TopNav from './TopNav/TopNav';
     export default {
         mounted() {
-            console.log('Component mounted.')
-        }
+            // console.log('Component mounted.')
+        },
+        components:{
+            TopNav,
+        },
     }
 </script>

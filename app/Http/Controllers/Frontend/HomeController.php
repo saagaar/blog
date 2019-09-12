@@ -19,7 +19,8 @@ class HomeController extends FrontendController
    
     function __construct()
     {
-        parent::__construct();
+
+         parent::__construct();
     }
 
     /**
@@ -29,12 +30,13 @@ class HomeController extends FrontendController
      */
     public function index(Request $request)
     {
-        return view('frontend.home.index');
+        return view('frontend.layouts.app');
     }
-    public function test(VisitorInfo $info)
+
+    public function test()
     {
         // $this->savelog($info);
-        print_r($this->globals);exit;
+        print_r($globals);exit;
         return view('frontend.home.test');
     }
     public function blog()

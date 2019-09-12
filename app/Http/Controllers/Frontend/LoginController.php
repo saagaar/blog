@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Socialite;
 use App\Repository\AccountInterface;
 
-class LoginController extends BaseController
+class LoginController extends HomeController
 {
     protected $account;
     public $successStatus = 200;
     public function __construct(AccountInterface $account)
     {
+        parent::__construct();
         $this->account=$account;
     }   
 
@@ -24,10 +25,6 @@ class LoginController extends BaseController
      */
     public function index(Request $request)
     {
-
-   
-
-        // print_r($request->server('HTTP_USER_AGENT'));
         return view('frontend.home.index');
     }
     public function socialLogin($provider)
