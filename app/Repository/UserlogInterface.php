@@ -19,6 +19,7 @@ interface UserlogInterface
 
     public function GetAll();
 
-     
+    public function create(array $data);
     
+    public function getLogbyIpAddressAndURL($userip,$urlpath);
 }

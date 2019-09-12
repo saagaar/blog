@@ -16,11 +16,20 @@ class CreateUserlogsTable extends Migration
         Schema::create('userlogs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ip_address');
-            $table->string('continent');
-            $table->string('country');
-            $table->string('country_code');
-            $table->string('city');
-            $table->string('state');
+            $table->string('country')->nullable();
+            $table->string('country_code')->nullable();
+            $table->string('region')->nullable();
+            $table->string('city')->nullable();
+            $table->string('region_code')->nullable();
+            $table->string('time_zone')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('isp')->nullable();
+            $table->string('flagurl')->nullable();
+            $table->string('currencysymbol')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('callingcode')->nullable();
+            $table->string('countrycapital')->nullable();
             $table->timestamps();
         });
     }

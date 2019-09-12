@@ -10,7 +10,8 @@ Class VisitorInfo
 		// $ip ='27.34.25.94'; //$_SERVER['REMOTE_ADDR'];
 		if($serverinfo['clientip']){
 			$ip_api = json_decode(file_get_contents("http://ip-api.io/json/{$serverinfo['clientip']}"));
-			if($ip_api && !$ip_api->status_message){
+
+			if($ip_api && !array_key_exists('status_message', $ip_api)){
 				$data = array(
 						'ip_address' 			=>$serverinfo['clientip'],
 						'country_code' 			=>$ip_api->country_code,
@@ -26,7 +27,6 @@ Class VisitorInfo
 						'longitude'				=>$ip_api->longitude,
 						'organisation'			=>$ip_api->organisation,
 						'flagurl' 				=>$ip_api->flagUrl,
-						'emojiflag'				=>$ip_api->emojiFlag,
 						'currencysymbol'		=>$ip_api->currencySymbol,
 						'currency'				=>$ip_api->currency,
 						'callingcode'			=>$ip_api->callingCode,
@@ -43,13 +43,12 @@ Class VisitorInfo
 						'city'					=>$plugin->geoplugin_city,
 						'useragent'				=>$serverinfo['useragent'],
 						'refererurl'			=>$serverinfo['refererurl'],
-						'path'              	=>$serverinfo['path'],
+						'path'					=>$serverinfo['path'],
 						'time_zone'				=>$plugin->geoplugin_timezone,
 						'latitude' 				=>$plugin->geoplugin_latitude,
 						'longitude'				=>$plugin->geoplugin_longitude,
 						'organisation'			=>'',
 						'flagurl' 				=>'',
-						'emojiflag'				=>'',
 						'currencysymbol'		=>$plugin->geoplugin_currencySymbol,
 						'currency'				=>$plugin->geoplugin_currencyCode,
 						'callingcode'			=>$plugin->geoplugin_areaCode,
@@ -85,13 +84,13 @@ Class VisitorInfo
         }else if($windows){
             $device = 'Windows';
         }
-	    if ($_SERVER==='HTTP_REFERER') {
+	    if (array_key_exists('HTTP_REFERER',$_SERVER)) {
 	    	$reff = $_SERVER['HTTP_REFERER'];
 	    }else{
 	    	$reff = '';
 		}
         $server = array(
-                    'clientip'          =>$_SERVER['REMOTE_ADDR'],
+                    'clientip'          => '27.34.25.94',//$_SERVER['REMOTE_ADDR'],
                     'servername'        =>$_SERVER['SERVER_NAME'],
                     'method'            =>$_SERVER['REQUEST_METHOD'],
                     'path'              =>$_SERVER['PATH_INFO'],
