@@ -18,7 +18,7 @@
                             
                         </ul>
                          <ul v-else>
-                        <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                        <li><a id="search" @click="OpenSearchBox" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
                         <li class="nitify dropdown">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" data-toggle="dropdown" role="button" aria-haspopup="true" 
                             aria-expanded="false"  title="Messaging"><i class="fas fa-envelope"></i> <span>Messaging</span> <em>28</em></a>
@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <div class="search_input" id="search_input_box">
+        <div class="search_input" id="search_input_box" ref="search_input_box" >
             <div class="container ">
                 <form class="d-flex justify-content-between search-inner">
                     <input type="text" class="form-control" id="search_input" placeholder="Search Here">
@@ -117,11 +117,22 @@ import LoginSignupModal from './LoginSignupModal';
         data() {
            return {}
         },
+
         computed:{
             isUserloggedIn:function(){
-              return   this.$store.getters.user.isLoggedIn;
+              return   this.$store.getters.user.isLoggedIn
             }
+           
         },
+
+        methods:{
+             OpenSearchBox:function()
+            {
+                $("#search_input_box").slideToggle();
+                $("#search_input").focus();
+                // this.$refs.search_input_box.slideToggle()
+            }
+         },
         components:{
 
             SignUpButton,
@@ -133,3 +144,10 @@ import LoginSignupModal from './LoginSignupModal';
       
     }
 </script>
+
+<style type="text/css">
+    #search_input_box{
+        display: none
+    }
+
+</style>

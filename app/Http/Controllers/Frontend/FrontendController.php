@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Repository\SiteoptionsInterface;
 
 
 class FrontendController extends BaseController
@@ -14,9 +13,11 @@ class FrontendController extends BaseController
      *
      * @return void
      */
-    public function __construct(SiteoptionsInterface $SiteOptions)
+    public function __construct()
     {
-        $globals=$SiteOptions->getAll();
+        $SiteOptions = app()->make('App\Repository\SiteoptionsInterface');
+
+        $globals=$SiteOptions->GetSiteInfo();
         $WebSiteName=$globals->site_name;
     }   
 

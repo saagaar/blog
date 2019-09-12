@@ -8,7 +8,7 @@ use App\Services\VisitorInfo;
 use Illuminate\Support\Facades\Route;
 use App\Models\Logdetails;
 use App\Repository\UserlogInterface;
-class HomeController extends BaseController
+class HomeController extends FrontendController
 {
     /**
      * Create a new controller instance.
@@ -18,6 +18,7 @@ class HomeController extends BaseController
    protected $websitelog;
     function __construct(UserlogInterface $websitelog)
     {
+        parent::__construct();
          $this->websitelog=$websitelog;
     }
 
@@ -29,7 +30,7 @@ class HomeController extends BaseController
     public function index(Request $request)
     {
         // print_r($request->server('HTTP_USER_AGENT'));
-        return view('frontend.home.index');
+        return view('frontend.layouts.app');
     }
     public function test(VisitorInfo $info)
     {
@@ -38,8 +39,8 @@ class HomeController extends BaseController
         $start = date_create($logdata->visit_date);
         $end = date_create(date("Y-m-d H:i:s"));
         $diff=date_diff($end,$start);
-        if($logdata->ip_address==$dataa['ip_address'])){
-       if(((($logdata->referer_url!=$dataa['refererurl']) || ($logdata->redirected_to!=$dataa['path']) ) || ($logdata->ip_address==$dataa['ip_address']) && ($logdata->referer_url==$dataa['refererurl']) && ($logdata->redirected_to==$dataa['path']) && ($diff->i>10)){
+        if($logdata->ip_address==$dataa['ip_address']){
+       if((($logdata->referer_url!=$dataa['refererurl']) || ($logdata->redirected_to!=$dataa['path']) ) || ($logdata->ip_address==$dataa['ip_address']) && ($logdata->referer_url==$dataa['refererurl']) && ($logdata->redirected_to==$dataa['path']) && ($diff->i>10)){
                 // $logdata->logdetailscreate();
             }
         }

@@ -55,8 +55,9 @@ $('.play-video').magnificPopup({
     });
 
 // Search Toggle
-$("#search_input_box").hide();
+
 $("#search").on("click", function () {
+    alert('here');
     $("#search_input_box").slideToggle();
     $("#search_input").focus();
 });
