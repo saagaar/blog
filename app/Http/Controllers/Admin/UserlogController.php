@@ -6,16 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repository\BlocklistInterface; 
 use App\Http\Controllers\Admin\AdminController; 
-use App\Repository\WebsitelogInterface;
-class WebsitelogController extends AdminController
+use App\Repository\UserlogInterface;
+class UserlogController extends AdminController
 {
      protected $websitelog;
       protected $blocklist;
-    function __construct(WebsitelogInterface $websitelog,BlocklistInterface $blocklist)
+    function __construct(UserlogInterface $websitelog,BlocklistInterface $blocklist)
     {
          parent::__construct();
          $this->blocklist=$blocklist;
-         $this->websitelog=$websitelog;
+         $this->userlog=$websitelog;
     }
     public function list(Request $request)
     {
@@ -25,22 +25,22 @@ class WebsitelogController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $logs = $this->websitelog->getAll()->where('ip_address', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $logs = $this->userlog->getAll()->where('ip_address', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $logs = $this->websitelog->getAll()->paginate($this->PerPage);
+            $logs = $this->userlog->getAll()->paginate($this->PerPage);
         }
-        return view('websitelog.list')->with(array('websitelog'=>$logs,'breadcrumb'=>$breadcrumb,'menu'=>'logs List'));
+        return view('admin.websitelog.list')->with(array('websitelog'=>$logs,'breadcrumb'=>$breadcrumb,'menu'=>'logs List'));
     }
     public function View($id)
     {
-        $websitelog =$this->websitelog->GetLogById($id);
-        
+        $websitelog =$this->userlog->GetLogById($id);
+        $websitelog['details'] = $websitelog->logdetails->sortByDesc('created_at')->first();
         return $websitelog;
     }
     public function block($id)
     {
         $admin_id = auth()->user()->id;
-        $ipdata =$this->websitelog->GetLogById($id);
+        $ipdata =$this->userlog->GetLogById($id);
         
         if ($ipdata) 
         {

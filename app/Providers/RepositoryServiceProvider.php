@@ -14,7 +14,7 @@ use App\Repository\Module\Module;
 use App\Repository\CategoryInterface;
 use App\Repository\category\Category;
 use App\Repository\SiteoptionsInterface;
-use App\Repository\Siteoptions\SiteOption;
+use App\Repository\Siteoption\SiteOption;
 use App\Repository\BlogInterface;
 use App\Repository\blog\Blog;
 use App\Repository\LocaleInterface;

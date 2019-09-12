@@ -28,9 +28,9 @@
                     // $('#pop-display_name').val(data[0].display_name);
                     $('#ip_address').html(data.ip_address);
                     $('#referer_url').html(data.referer_url);
-                    $('#user_agent').html(data.user_agent);
-                    $('#device').html(data.device);
-                    $('#redirected_to').html(data.redirected_to);
+                    $('#user_agent').html(data.details.user_agent);
+                    // $('#device').html(data.device);
+                    $('#redirected_to').html(data.details.redirected_to);
                     $('#continent').html(data.continent);
                     $('#country').html(data.country);
                     $('#country_code').html(data.country_code);

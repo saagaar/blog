@@ -16,12 +16,12 @@ class FrontendController extends BaseController
      * Create a new controller instance.
      *
      * @return void
-     */protected $userlog;
-    protected $info;
-    public function __construct(SiteoptionsInterface $SiteOptions,UserlogInterface $userlog)
+     */
+    protected $userlog;
+    public function __construct()
     {
-         $this->userlog=$userlog;
-        $globals=$SiteOptions->getAll();
+         // $this->userlog=$userlog;
+        $this->globals=SiteoptionsInterface->GetSiteInfo();
         $WebSiteName=$globals->site_name;
     }   
 
@@ -32,6 +32,7 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {
+        
         // print_r($request->server('HTTP_USER_AGENT'));
         return view('frontend.home.index');
     }

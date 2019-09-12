@@ -204,9 +204,9 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/gallery/{id}','Admin\GalleryController@delete')->name('gallery.delete');
 
 	//Route for Websitelog
-	Route::get('/list/websitelog','Admin\WebsitelogController@list')->name('websitelog.list');
-	Route::get('/view/websitelog/{id}','Admin\WebsitelogController@view')->name('websitelog.view');
-	Route::get('/block/websitelog/{id}','Admin\WebsitelogController@block')->name('websitelog.block');
+	Route::get('/list/websitelog','Admin\UserlogController@list')->name('websitelog.list');
+	Route::get('/view/websitelog/{id}','Admin\UserlogController@view')->name('websitelog.view');
+	Route::get('/block/websitelog/{id}','Admin\UserlogController@block')->name('websitelog.block');
 
 	//Route for IP Block List
 	Route::get('/list/blocklist','Admin\BlocklistController@list')->name('blocklist.list');
