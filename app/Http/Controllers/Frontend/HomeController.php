@@ -33,10 +33,20 @@ class HomeController extends FrontendController
         return view('frontend.layouts.app');
     }
 
-    public function test()
+// <<<<<<< HEAD
+//     public function test()
+//     {
+//         // $this->savelog($info);
+//         print_r($globals);exit;
+//         return view('frontend.home.test');
+//     }
+// =======
+//         return view('frontend.home.index');
+//     }
+    public function test(VisitorInfo $info)
     {
-        // $this->savelog($info);
-        print_r($globals);exit;
+        $this->savelog($info);
+
         return view('frontend.home.test');
     }
     public function blog()

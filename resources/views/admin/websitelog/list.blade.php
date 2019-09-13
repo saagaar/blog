@@ -21,10 +21,10 @@
                 <tr>
                   <th>id</th>
                   <th>Ip Address</th>
-                  <th>Referer Url</th>
-                  <th>Visit Date</th>
+                  <th>Region</th>
+                  <th>City</th>
                   <th>Country</th>
-                  <th>Created at</th>
+                  <th>Total Logs</th>
                   <th colspan="2">Action</th>
                 </tr>
                 </thead>
@@ -34,24 +34,15 @@
                 @foreach ($websitelog as $eachlogs)
                 <tr>
                   <td>{{ ++$i }}</td>
-                  <td>{{ $eachlogs->ip_address }}</td>
-                   <td>
-                   	<?php 
-							$str = $eachlogs->referer_url;
-								$length = strlen($str);
-
-								if ($length < 25) {
-                                  $str = mb_substr($str, 0, 25,"utf-8");
-                              } else {
-                                  $str = mb_substr($str, 0, 25,"utf-8");
-                                  $str .= str_repeat('.', 3);
-                              }
-								echo $str;
-							?>
-                   </td>
-                  <td>{{$eachlogs->visit_date}}</td>
+                  <td>{{ $eachlogs->ip_address }}
+                  	<button type="button" title="View"  class="btnview btn btn-primary btn-sm logdetail" data-parentid="{{ $eachlogs->id }}" >
+					  <i class="fa fa-eye" ></i>
+					</button>
+                  </td>
+                   <td>{{$eachlogs->region}}</td>
+                  <td>{{$eachlogs->city}}</td>
                   <td>{{$eachlogs->country}}</td>
-                  <td>{{$eachlogs->created_at}}</td>
+                  <td>{{$eachlogs->count()}}</td>
                   <td><button type="button" title="View"  class="btnview btn btn-primary btn-sm viewipdetail" data-parentid="{{ $eachlogs->id }}" >
 					  <i class="fa fa-eye" ></i>
 					</button>
@@ -108,9 +99,9 @@
 									</div>
 									<div class="col-md-4">
 										<h2>
-											Device
+											Region
 										</h2>
-										<p id="device"></p>
+										<p id="region"></p>
 									</div>
 									</div>
 								<div class="row">
@@ -135,9 +126,9 @@
 									</div>
 									<div class="col-md-4">
 										<h2>
-											Continent
+											Last Visit Date
 										</h2>
-										<p id="continent"></p>
+										<p id="visit_date"></p>
 									</div>
 								</div>
 								<div class="row">
@@ -154,9 +145,9 @@
 									</div>
 									<div class="col-md-4">
 										<h2>
-											State
+											Time Zone
 										</h2>
-										<p id="state"></p>
+										<p id="time_zone"></p>
 									</div>
 									</div>
 							</div>
@@ -168,6 +159,37 @@
 					    </div>
 					  </div>
 					</div>
+<div class="modal fade" id="ajaxModel" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Ip Address Detail</h4>
+      </div>
+      <div class="modal-body">
+      	<table class="table table-bordered table-striped" id="laravel_datatable">
+   <thead>
+      <tr>
+         <th>ID</th>
+         <th>Ip address</th>
+         <th>Referrer url</th>
+         <th>Redirected to</th>
+         <th>User agent</th>
+         <th>Visit Date</th>
+      </tr>
+   </thead>
+   <tbody id="listOfIpAddressDetail">
+   
+   </tbody>
+</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       <!--  <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
 var APP_URL = {!! json_encode(url('/admin/view/websitelog')) !!}
 </script>

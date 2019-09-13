@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
- use Validator,Redirect,Response,File;
+use Validator,Redirect,Response,File;
 use Socialite;
 use App\Repository\AccountInterface;
 
@@ -20,7 +20,6 @@ class LoginController extends HomeController
 
     /**
      * Show the application dashboard.
-     *p
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)

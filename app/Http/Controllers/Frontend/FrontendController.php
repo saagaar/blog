@@ -11,24 +11,24 @@ use App\Repository\UserlogInterface;
 
 class FrontendController extends BaseController
 {
-    Protected $globals;
+    Protected $siteSettings;
+
+    Protected $UserlogInterface;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    protected $userlog;
+    protected $ipInfoService;
     public function __construct()
     {
-        $SiteOptions = app()->make('App\Repository\SiteoptionsInterface');
-
-        $globals=$SiteOptions->GetSiteInfo();
-        $WebSiteName=$globals->site_name;
-    }   
-
+        $SiteoptionsInterface = app()->make('App\Repository\SiteoptionsInterface');
+        $this->UserlogInterface = app()->make('App\Repository\UserlogInterface');
+        $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
+    }
     /**
      * Show the application dashboard.
-     *p
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -48,7 +48,7 @@ class FrontendController extends BaseController
         $serverdata =  $info->visitorsIp();
         // print_r($serverdata['path']);exit;
         date_default_timezone_set('Asia/Kathmandu');
-        $dblogdata=$this->userlog->getLogbyIpAddressAndURL($serverdata['ip_address'],$serverdata['path']);
+        $dblogdata=$this->UserlogInterface->getLogbyIpAddressAndURL($serverdata['ip_address'],$serverdata['path']);
         // print_r($dblogdata);exit;
         if($dblogdata){
             $start = date_create($dblogdata['details']->visit_date);
