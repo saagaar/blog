@@ -53,7 +53,7 @@ class LoginController extends BaseController
              'token'        =>$getInfo->token,
          ]);
         return $userdata;
-    } 
+    }
     public function login(){  
         if(Auth::guard('web')->attempt(['email' => request('email'), 'password' => request('password')]))
         { 
