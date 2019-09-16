@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\File;
 use App;
 class ClientController extends AdminController
 {
-    protected $Client;
+    protected $client;
     function __construct(ClientInterface $client)
     {
          parent::__construct();
-         $this->Client=$client;
+         $this->client=$client;
     }
     public function list(Request $request)
     {
@@ -23,9 +23,9 @@ class ClientController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $Client = $this->Client->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $Client = $this->client->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $Client = $this->Client->getAll()->paginate($this->PerPage);
+            $Client = $this->client->getAll()->paginate($this->PerPage);
         }
         return view('admin.client.list')->with(array('Client'=>$Client,'breadcrumb'=>$breadcrumb,'menu'=>'Client List'));
     }
@@ -44,7 +44,7 @@ class ClientController extends AdminController
             $logoName = time().'.'.request()->logo->getClientOriginalExtension();
             request()->logo->move(public_path('frontend/images/client'), $logoName);
             $validatedData['logo'] = $logoName;
-            $this->Client->create($validatedData);
+            $this->client->create($validatedData);
             return redirect()->route('client.list')    
                              ->with(array('success'=>'Client created successfully.','breadcrumb'=>$breadcrumb));
         }
@@ -57,7 +57,7 @@ class ClientController extends AdminController
                         'All Clients' => route('client.list'),
                         'current_menu'=>'Edit Client',
                           ]];
-            $client =$this->Client->getById($id);    
+            $client =$this->client->getById($id);    
             if ($request->method()=='POST')
             {
                 $requestobj=app(ClientRequest::class);
@@ -73,7 +73,7 @@ class ClientController extends AdminController
                 {
                     $validatedData['logo'] = $client->logo;
                 }
-                $this->Client->update($id,$validatedData);
+                $this->client->update($id,$validatedData);
                 return redirect()->route('client.list')
                             ->with('success','Client Updated Successfully.');
             }
@@ -82,7 +82,7 @@ class ClientController extends AdminController
 
     public function delete($id)
     {
-       $client =$this->Client->getById($id);       
+       $client =$this->client->getById($id);       
         if($client){
             $dir = 'frontend/images/client/';
             if ($client->logo != '' && File::exists($dir . $client->logo)){
@@ -96,7 +96,7 @@ class ClientController extends AdminController
 
      public function changeStatus(Request $request)
     {
-        $client = $this->Client->getById($request->id);
+        $client = $this->client->getById($request->id);
         $status = $request->status;
         $client->update(array('status'=>$status));  
        return redirect()->route('client.list')

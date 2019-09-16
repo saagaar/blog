@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\File;
 use App;
 class CmsController extends AdminController
 {
-    protected $CMS;
+    protected $cms;
 
     function __construct(CmsInterface $cms)
     {
         parent::__construct();
-        $this->CMS=$cms;
+        $this->cms=$cms;
     }
     public function list(Request $request)
     {
@@ -25,12 +25,12 @@ class CmsController extends AdminController
                     ]];
         $search = $request->get('search');
         if($search){
-            $cms = $this->CMS->getAll()
+            $cms = $this->cms->getAll()
             ->where('heading', 'like', '%' . $search . '%')
             ->paginate($this->PerPage)
             ->withPath('?search=' . $search);
         }else{
-            $cms = $this->CMS->getAll()->paginate($this->PerPage);
+            $cms = $this->cms->getAll()->paginate($this->PerPage);
         }
         return view('admin.cms.list')->with(array('CMS'=>$cms,'breadcrumb'=>$breadcrumb,'menu'=>'CMS List'));
     }
@@ -46,7 +46,7 @@ class CmsController extends AdminController
         {
             $requestobj=app(CmsRequest::class);
             $validatedData = $requestobj->validated();
-            $this->CMS->create($validatedData);
+            $this->cms->create($validatedData);
             return redirect()->route('cms.list') 
                              ->with('success','CMS created successfully.');
         }
@@ -59,12 +59,12 @@ class CmsController extends AdminController
                         'All cms' => route('cms.list'),
                         'current_menu'=>'Edit Cms',
                          ]];
-            $cms =$this->CMS->getcmsById($id);
+            $cms =$this->cms->getcmsById($id);
             if ($request->method()=='POST') 
             {
                 $requestobj=app(CmsRequest::class);
                 $validatedData = $requestobj->validated();
-                $this->CMS->update($id,$validatedData);
+                $this->cms->update($id,$validatedData);
                 return redirect()->route('cms.list')
                             ->with('success','CMS Updated Successfully.');
             }
@@ -72,7 +72,7 @@ class CmsController extends AdminController
     }
     public function delete($id)
     {
-       $cms =$this->CMS->getcmsById($id);
+       $cms =$this->cms->getcmsById($id);
        if ($cms->deletable=='N'){
            return redirect()->route('cms.list')
         ->with('error', 'cms is undeletable');
@@ -84,7 +84,7 @@ class CmsController extends AdminController
     }
      public function changeStatus(Request $request)
     {
-        $cms = $this->CMS->getcmsById($request->id);
+        $cms = $this->cms->getcmsById($request->id);
         $status = $request->status;
         $cms->update(array('status'=>$status));  
        return redirect()->route('cms.list')
@@ -93,9 +93,9 @@ class CmsController extends AdminController
 
      public function changeCmstype(Request $request)
     {
-        $Cmstype = $this->CMS->getcmsById($request->id);
-        $Cmstype = $request->cmstype;
-        $Cmstype->update(array('cms_type'=>$Cmstype));  
+        $cmstype = $this->cms->getcmsById($request->id);
+        $cmstype = $request->cmstype;
+        $cmstype->update(array('cms_type'=>$cmstype));  
        return redirect()->route('Cms.list')
                         ->with('success','Status change successfully.');
     }

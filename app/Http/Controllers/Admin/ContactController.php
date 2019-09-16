@@ -33,26 +33,7 @@ class ContactController extends AdminController
         }
         return view('admin.contact.list')->with(array('contact'=>$contact,'breadcrumb'=>$breadcrumb,'menu'=>'contact List'));
     }
-    // public function create(Request $request)
-    // {
-    //     $breadcrumb=['breadcrumbs'    => 
-    //                 [
-    //                   'Dashboard'     => route('admin.dashboard'),
-    //                   'All contact' => route('contact.list'),
-    //                   'current_menu'  =>'Create contact',
-    //                 ]];
-
-    //     if ($request->method()=='POST') 
-    //     {
-    //         $requestobj=app(contactRequest::class); 
-    //         $validatedData = $requestobj->validated();
-    //         $this->contact->create($validatedData);
-
-    //         return redirect()->route('contact.list') 
-    //                          ->with(array('success'=>'contact created successfully.','breadcrumb'=>$breadcrumb));
-    //     }
-    //     return view('contact.createcontact')->with(array('breadcrumb'=>$breadcrumb));
-    // }
+   
     public function edit(Request $request, $id)
     {
             $breadcrumb=['breadcrumbs' => [
@@ -65,12 +46,10 @@ class ContactController extends AdminController
             {
                 $requestobj=app(contactRequest::class);
                 $validatedData = $requestobj->validated();
-                // dd($validatedData);
                 $this->contact->update($id,$validatedData);
                 return redirect()->route('contact.list')
                             ->with('success','contact Updated Successfully.');
             }
-            // dd($contact);
             return view('admin.contact.edit',compact('contact','breadcrumb'));
     }
 }

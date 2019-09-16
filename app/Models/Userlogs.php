@@ -22,4 +22,9 @@ class Userlogs extends Model implements Auditable
     {
         return $this->hasMany(LogDetails::class,'userlogs_id');
     }
+    public function count()
+    {
+        return $this->hasMany(LogDetails::class,'userlogs_id')->count();
+    }
+
 }

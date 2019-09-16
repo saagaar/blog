@@ -6,6 +6,8 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Admin | Dashboard</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  <link rel="stylesheet"  href="{{ asset('admin/dist/css/select2.min.css') }}"/>
   <link rel="stylesheet" href="{{ asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/bower_components/font-awesome/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/bower_components/Ionicons/css/ionicons.min.css') }}">
@@ -18,7 +20,10 @@
   <link rel="stylesheet" href="{{ asset('admin/dist/css/skins/skin-blue.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/dist/plugins/wysihtml5/bootstrap3-wysihtml5.min.css') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        <link rel="stylesheet" href="{{ asset('admin/dist/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/dist/css/style.css') }}">
+
+
+</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -62,6 +67,8 @@
 <script src="{{ asset('admin/dist/plugins/wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script src="{{ asset('admin/dist/plugins/iCheck/icheck.min.js') }}"></script>
 <!-- <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script> -->
+
+<script src="{{ asset('admin/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('admin/dist/js/pages/siteoptions.js') }}"></script>
 <script src="{{ asset('admin/dist/js/app.js') }}"></script>
 <script src="{{ asset('admin/dist/js/bootstrap2-toggle.min.js') }}"></script>
@@ -86,7 +93,9 @@
 });
 </script>
 <script type="text/javascript">
-
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
 $(document).ready(function () {
  
 window.setTimeout(function() {
@@ -166,5 +175,6 @@ window.setTimeout(function() {
     });
   });
 </script>
+
 </body>
 </html>

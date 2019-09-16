@@ -11,7 +11,6 @@
                   <a href="{{route('roles.create')}}" class="btn btn-primary">Add User Roles</a>
                 </div>
               </div>
-              
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">

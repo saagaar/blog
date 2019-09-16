@@ -9,20 +9,20 @@ use App;
 class SiteOptionController extends AdminController
 {
     /**
-    *@var $siteoptions
+    *@var $siteOptions
     * object of instance siteoption interface
     *
     */
-    protected $siteoptions;
+    protected $siteOptions;
 
-    function __construct(SiteoptionsInterface $siteoptions)
+    function __construct(SiteoptionsInterface $siteOptions)
     {
          parent::__construct();
-         $this->site=$siteoptions;
+         $this->siteOptions=$siteOptions;
     }
     public function edit(Request $request)
     {   
-        $site =$this->site->GetSiteInfo();
+        $site =$this->siteOptions->GetSiteInfo();
         $breadcrumb=array('breadcrumbs'=>array('Dashboard'     => route('admin.dashboard'),
                           'current_menu' => 'Site Settings',
                           ));
@@ -30,7 +30,7 @@ class SiteOptionController extends AdminController
         {
             $requestobj=app(SiteoptionsRequest::class);
             $validatedData = $requestobj->validated();
-            $this->site->update($validatedData);
+            $this->siteOptions->update($validatedData);
             return redirect()->route('sitesetting')
                             ->with('success','Site Settings Updated Successfully.');
         }

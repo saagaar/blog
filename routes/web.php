@@ -98,6 +98,13 @@ Route::prefix('admin')->group(function()
 
 	//blog category
 
+
+	//Route for Testimonial
+	Route::get('/list/tags','Admin\TagsController@list')->name('tags.list');
+	Route::match(['get','post'],'/create/tags','Admin\TagsController@create')->name('tags.create');
+	Route::match(['get','post'],'/edit/tags/{id}','Admin\TagsController@edit')->name('tags.edit');
+	Route::get('/delete/tags/{id}','Admin\TagsController@delete')->name('tags.delete');
+	Route::get('changestatus/tags', 'Admin\TagsController@changeStatus')->name('tags.changestatus');
 	/**
 	*Routes for Creating Blog
 	**/
@@ -204,9 +211,9 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/gallery/{id}','Admin\GalleryController@delete')->name('gallery.delete');
 
 	//Route for Websitelog
-	Route::get('/list/websitelog','Admin\WebsitelogController@list')->name('websitelog.list');
-	Route::get('/view/websitelog/{id}','Admin\WebsitelogController@view')->name('websitelog.view');
-	Route::get('/block/websitelog/{id}','Admin\WebsitelogController@block')->name('websitelog.block');
+	Route::get('/list/websitelog','Admin\UserlogController@list')->name('websitelog.list');
+	Route::get('/view/websitelog/{id}','Admin\UserlogController@view')->name('websitelog.view');
+	Route::get('/block/websitelog/{id}','Admin\UserlogController@block')->name('websitelog.block');
 
 	//Route for IP Block List
 	Route::get('/list/blocklist','Admin\BlocklistController@list')->name('blocklist.list');

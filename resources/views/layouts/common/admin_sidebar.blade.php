@@ -64,6 +64,7 @@
           <ul class="treeview-menu">
             <li><a href="{{route('adminblogcategory.list')}}"><i class="fa  fa-paint-brush"></i> Blog Category</a></li>
             <li><a href="{{route('blog.list')}}"><i class="fa fa-info-circle"></i> Blog</a></li>
+            <li><a href="{{route('tags.list')}}"><i class="fa fa-hashtag"></i> <span>Tags</span></a>
          
           </ul>
       </li>

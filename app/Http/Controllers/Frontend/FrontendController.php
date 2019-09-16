@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-
 use App\Repository\SiteoptionsInterface;
 use App\Services\VisitorInfo;
 use Illuminate\Support\Facades\Route;
@@ -12,16 +11,20 @@ use App\Repository\UserlogInterface;
 
 class FrontendController extends BaseController
 {
-    Protected $globals;
+    Protected $siteSettings;
+
+    Protected $UserlogInterface;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
+    protected $ipInfoService;
     public function __construct()
     {
-        $SiteOptions = app()->make('App\Repository\SiteoptionsInterface');
-        $globals=$SiteOptions->GetSiteInfo();
+        $SiteoptionsInterface = app()->make('App\Repository\SiteoptionsInterface');
+        $this->UserlogInterface = app()->make('App\Repository\UserlogInterface');
+        $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
     }
     /**
      * Show the application dashboard.
@@ -30,6 +33,7 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {
+        
         // print_r($request->server('HTTP_USER_AGENT'));
         return view('frontend.home.index');
     }
@@ -42,10 +46,8 @@ class FrontendController extends BaseController
     }
     public function savelog(VisitorInfo $info){
         $serverdata =  $info->visitorsIp();
-        // print_r($serverdata['path']);exit;
         date_default_timezone_set('Asia/Kathmandu');
-        $dblogdata=$this->userlog->getLogbyIpAddressAndURL($serverdata['ip_address'],$serverdata['path']);
-        print_r($dblogdata);exit;
+        $dblogdata=$this->UserlogInterface->getLogbyIpAddressAndURL($serverdata['ip_address'],$serverdata['path']);
         if($dblogdata){
             $start = date_create($dblogdata['details']->visit_date);
         $end = date_create(date("Y-m-d H:i:s"));

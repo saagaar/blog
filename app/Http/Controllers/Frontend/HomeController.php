@@ -33,28 +33,16 @@ class HomeController extends FrontendController
     {
         return view('frontend.layouts.app');
     }
-    public function test(VisitorInfo $info)
+
+    public function test(Request $request,VisitorInfo $info)
     {
-        $dataa = $info->visitorsIp();
-        $logdata = $this->websitelog->getall()->where('ip_address','27.34.25.94')->first();
-        $start = date_create($logdata->visit_date);
-        $end = date_create(date("Y-m-d H:i:s"));
-        $diff=date_diff($end,$start);
-        if($logdata->ip_address==$dataa['ip_address']){
-       if((($logdata->referer_url!=$dataa['refererurl']) || ($logdata->redirected_to!=$dataa['path']) ) || ($logdata->ip_address==$dataa['ip_address']) && ($logdata->referer_url==$dataa['refererurl']) && ($logdata->redirected_to==$dataa['path']) && ($diff->i>10)){
-                // $logdata->logdetailscreate();
-            }
-        }
+        $data = $request->session()->all();
+        // print_r($data);exit;
+        $this->savelog($info);
 
-        return view('frontend.home.index');
+        return view('frontend.home.test');
     }
-    // public function test(VisitorInfo $info)
-    // {
-    //     // $this->savelog($info);
-
-    //     return view('frontend.home.test');
-    // }
-    public function blog()
+    public function blog(BlogI)
     {
         $blog = Blogs::all()->latest();
         return response($blog->jsonSerialize(), Response::HTTP_OK);
@@ -67,22 +55,4 @@ class HomeController extends FrontendController
              return redirect()->route('home'); 
     }
 
-    function get_server_ip() {
-        $ipaddress = '';
-        if (isset($_SERVER['HTTP_CLIENT_IP']))
-            $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
-        else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
-            $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        else if(isset($_SERVER['HTTP_X_FORWARDED']))
-            $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
-        else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
-            $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
-        else if(isset($_SERVER['HTTP_FORWARDED']))
-            $ipaddress = $_SERVER['HTTP_FORWARDED'];
-        else if(isset($_SERVER['REMOTE_ADDR']))
-            $ipaddress = $_SERVER['REMOTE_ADDR'];
-        else
-            $ipaddress = 'UNKNOWN';
-        return $ipaddress;
-    }
 }

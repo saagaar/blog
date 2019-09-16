@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\AdminController; 
 use App\Repository\BlogInterface; 
 use App\Repository\LocaleInterface;
-// use App\Models\blogcategoriesegorys;
+use App\Repository\TagInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 use Illuminate\Support\Facades\File;
@@ -12,7 +12,6 @@ use App;
 class BlogController extends AdminController
 {
     protected $blog;
-
     function __construct(BlogInterface $blog)
     {
         parent::__construct();
@@ -32,7 +31,7 @@ class BlogController extends AdminController
         }
         return view('admin.blog.listblog')->with(array('blogs'=>$blogs,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
     }
-    public function create(Request $request,LocaleInterface $Locale)
+    public function create(Request $request,LocaleInterface $Locale,TagInterface $tag)
     {
         $breadcrumb=['breadcrumbs'    => 
                     [
@@ -40,7 +39,7 @@ class BlogController extends AdminController
                       'All Blogs' => route('blog.list'),
                       'current_menu'  =>'Create Blog',
                     ]];
-
+        $taglist = $tag->getAll()->get();
         if ($request->method()=='POST') 
         {
             $requestobj=app(BlogRequest::class);
@@ -48,21 +47,23 @@ class BlogController extends AdminController
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             request()->image->move(public_path('frontend/images/blog'), $imageName);
             $validatedData['image'] = $imageName;
-            $this->blog->create($validatedData);
-
+            $created = $this->blog->create($validatedData);
+            $created->tags()->attach($validatedData['tags']);
             return redirect()->route('blog.list')
                              ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
         }
         $LocaleList=$Locale->getActiveLocale()->toArray();
-        return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'localelist'=>$LocaleList));
+        return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'tags'=>$taglist,'localelist'=>$LocaleList));
     }
-    public function edit(Request $request, $id,$slug,LocaleInterface $Locale)
+    public function edit(Request $request, $id,$slug,LocaleInterface $Locale,TagInterface $tag)
     {
             $breadcrumb=['breadcrumbs' => [
                         'Dashboard' => route('admin.dashboard'),
                         'All Blogs' => route('blog.list'),
                         'current_menu'=>'Edit Blog',
                           ]];
+                          $taglist = $tag->getAll()->get();
+
             $blog =$this->blog->GetBlogById($id);
             if ($request->method()=='POST') 
             {
@@ -79,12 +80,14 @@ class BlogController extends AdminController
                 }else {
                     $validatedData['image'] = $blog->image;
                 }
-                $blog->update($validatedData);
+                // dd($validatedData);
+                $updated = $this->blog->update($id,$validatedData);
+                $blog->tags()->sync($validatedData['tags']);
                 return redirect()->route('blog.list')
                             ->with('success','Blog Updated Successfully.');
             }
             $localelist=$Locale->getActiveLocale()->toArray();
-            return view('admin.blog.editblog',compact('blog','breadcrumb','localelist'));
+            return view('admin.blog.editblog')->with(array('blog'=>$blog,'tags'=>$taglist,'breadcrumb'=>$breadcrumb,'localelist'=>$localelist));
     }
     public function delete($id)
     {

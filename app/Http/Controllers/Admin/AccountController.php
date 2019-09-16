@@ -10,9 +10,15 @@ use App\Http\Requests\AccountRequest;
 use Illuminate\Support\Facades\File;
 use App\Models\Countrys;
 use App;
+
+/** user account 
+
+*/
 class AccountController extends AdminController{
     protected $account;
+    //user account
     protected $roles;
+    //user roles
     function __construct(AccountInterface $account,RoleInterface $roles)
     {
         $this->account=$account;
@@ -56,35 +62,31 @@ class AccountController extends AdminController{
             $validatedData['dob'] = date("Y-m-d", strtotime($validatedData['dob']));
             $validatedData['password']= (Hash::make($validatedData['password']));
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            // dd($imageName);
             request()->image->move(public_path('frontend/images/userimages'), $imageName);
             $validatedData['image'] = $imageName;
             $user = $this->account->create($validatedData);
             
             $roles = $request->input('roles') ? $request->input('roles') : [];
-            // dd($roles);
             $user->assignRole($roles);  
             return redirect()->route('account.list')
                         ->with('success','account created successfully.');
         }
         $countries = Countrys::All();
-        // $adminroles = $this->roles->getAll()->get();
         return view('admin.account.createuser')->with(array('countries'=>$countries,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
     }
-    public function edit(Request $request,$id)
+    public function edit(Request $request,$id)// normal user list
     {
       $breadcrumb=['breadcrumbs' => [
                 'Dashboard' => route('admin.dashboard'),
                 'Users Account' => route('account.list'),
                 'current_menu'=>'Edit Users Account',
                   ]];
-                  $allroles = $this->roles->getAll()->get();
+        $allroles = $this->roles->getAll()->get();
         $accounts =$this->account->getById($id);
         if ($request->method()=='POST') 
         {
             $requestobj=app(AccountRequest::class);
             $validatedData = $requestobj->validated();
-            // dd($validatedData);
             $validatedData['dob'] = date("Y-m-d", strtotime($validatedData['dob']));
             $validatedData['password']= (Hash::make($validatedData['password']));
             if ($request->hasFile('image')) {
@@ -100,17 +102,18 @@ class AccountController extends AdminController{
                 }
             $accounts->update($validatedData);
             $roles = $request->input('roles') ? $request->input('roles') : [];
-            // dd($roles);
             $accounts->syncRoles($roles);  
             return redirect()->route('account.list')
                         ->with('success','account edited successfully.');
         }
         $countries = Countrys::All();
-        // $adminroles = $this->roles->getAll()->get();
         return view('admin.account.edituser')->with(array('countries'=>$countries,'accounts'=>$accounts,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
     }
-    public function View($id)
-    {
+    /*
+    * user account detail
+    */
+    public function View($id) 
+    { 
        $breadcrumb=['breadcrumbs' => [
                 'Dashboard' => route('admin.dashboard'),
                 'All Accounts' => route('account.list'),

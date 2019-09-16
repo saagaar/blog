@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Repository\Siteoptions;
+namespace App\Repository\Siteoption;
 
 use App\Models\SiteOptions;
 use App\Repository\SiteoptionsInterface;

@@ -53,7 +53,6 @@ class PermissionsController extends AdminController{
             return redirect()->route('permission.list')
                         ->with('success','permission created successfully.');
         }
-        // $adminroles = $this->roles->getAll()->get();
         return view('admin.userpermissions.addpermission',compact('breadcrumb'));
     }
     public function edit(Request $request,$id)
@@ -73,7 +72,6 @@ class PermissionsController extends AdminController{
             return redirect()->route('permission.list')
                         ->with('success','Permission edited successfully.');
         }
-        // $adminroles = $this->roles->getAll()->get();
         return view('admin.userpermissions.editpermission',compact('breadcrumb','permissions'));
     }
     public function delete($id)

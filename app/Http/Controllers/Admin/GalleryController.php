@@ -54,11 +54,9 @@ class GalleryController extends AdminController
                         {
            			$dir = 'frontend/images/gallery/';
                     $imageName = uniqid().'.'.$item->getClientOriginalExtension();
-                    // echo($imageName);
                     $item->move(public_path($dir), $imageName);
-                    // $data[] = $imageName;
                     $current_date_time = date('Y-m-d H:i:s');
-                    $gallerydata[] = array('title'=>$validatedData['title'],'gallery_categories_id'=>$validatedData['gallery_categories_id'],'image'=>$imageName,"created_at"=>$current_date_time,"updated_at"=>$current_date_time);
+                    $galleryData[] = array('title'=>$validatedData['title'],'gallery_categories_id'=>$validatedData['gallery_categories_id'],'image'=>$imageName,"created_at"=>$current_date_time,"updated_at"=>$current_date_time);
                     }else {
                         return redirect()->route('gallery.list')
                             ->with(array('error'=>'Sorry Only Upload png , jpg , doc','breadcrumb'=>$breadcrumb));
@@ -66,7 +64,7 @@ class GalleryController extends AdminController
 
            		}
             }
-        $this->gallery->create($gallerydata);
+        $this->gallery->create($galleryData);
        return redirect()->route('gallery.list')
                             ->with(array('success'=>'Gallery created successfully','breadcrumb'=>$breadcrumb));
         }
