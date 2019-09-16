@@ -42,11 +42,6 @@ class HomeController extends FrontendController
 
         return view('frontend.home.test');
     }
-    public function blog(BlogI)
-    {
-        $blog = Blogs::all()->latest();
-        return response($blog->jsonSerialize(), Response::HTTP_OK);
-    }
     public function dashboard()
     {
         if(\Auth::check())

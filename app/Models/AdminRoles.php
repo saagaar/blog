@@ -27,8 +27,5 @@ class AdminRoles extends Model implements Auditable
     {
         return $this->belongsToMany(ModulePermissions::class)->using(ModuleRolePermissions::class);
     }
-    public function logs()
-    {
-        return $this->morphMany(LogAdminActivitys::class, 'logable');
-    }
+   
 }

@@ -32,7 +32,9 @@ Class  Userlog implements UserlogInterface
     }
     public function getLogbyIpAddressAndURL($ip,$url){
         $data=$this->log->where('ip_address',$ip)->first();
-        $ipdata['ip']=$data->first();
+        if(!$data)
+          return false;
+        $ipdata['ip']=$data;
         $ipdata['details']=$data->logdetails->where('redirected_to',$url)->sortByDesc('created_at')->first();
         return $ipdata;
 

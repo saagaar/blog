@@ -7048,9 +7048,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -7066,7 +7063,8 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         content: '',
         bannerImage: '',
-        tags: ''
+        tags: '',
+        isAnynomous: ''
       }),
       options: [{
         name: 'Vue.js',
@@ -7097,8 +7095,7 @@ __webpack_require__.r(__webpack_exports__);
       content: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"]
       },
-      bannerImage: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"]
+      bannerImage: {// required,
       },
       tags: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"]
@@ -7125,14 +7122,14 @@ __webpack_require__.r(__webpack_exports__);
 
       reader.readAsDataURL(event.target.files[0]);
     },
-    addTag: function addTag(newTag) {
-      var tag = {
-        name: newTag,
-        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
-      };
-      this.options.push(tag);
-      this.form.tags.push(tag);
-    },
+    //          addTag (newTag) {
+    //   const tag = {
+    //     name: newTag,
+    //     code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+    //   }
+    //   this.options.push(tag)
+    //   this.form.tags.push(tag)
+    // },
     submitForm: function submitForm() {
       this.$v.$touch();
 
@@ -46524,10 +46521,10 @@ var render = function() {
               _vm._v("\n                Browse \n                "),
               _c("input", {
                 staticClass: "upload",
-                attrs: { type: "file", name: "bannerImage", id: "file1" },
+                attrs: { type: "file", name: "bannerImage" },
                 on: {
                   change: function($event) {
-                    _vm.previewImage
+                    _vm.previewImage()
                     _vm.$v.form.bannerImage.$touch()
                   }
                 }

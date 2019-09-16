@@ -8,10 +8,9 @@ use OwenIt\Auditing\Auditable as Auditables;
 
 class Tags extends Model implements Auditable
 {
-   	use Auditables;
+    use Auditables;
 
-     protected $table='tags';
-
+    protected $table='tags';
     /**
      * Tags belongs to many blogs and blogs categories
      */

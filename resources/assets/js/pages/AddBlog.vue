@@ -43,7 +43,7 @@
 
                       <div class="form-group">
 
-                       <multiselect 
+                      <multiselect 
                        v-model="form.tags" 
                        :options="options" 
                        :multiple="true" 
@@ -58,25 +58,22 @@
                        :hide-selected="false"
                        >
                        <template slot="selection" slot-scope="{ tags, search, isOpen }"><span class="multiselect__single" v-if="form.tags.length &amp;&amp; !isOpen">{{ form.tags.length }} options selected</span></template>
-                  </multiselect>
-                   
+                       </multiselect>
                          <div v-if="$v.form.tags.$anyDirty">
-                              <div class="error" v-if="!$v.form.tags.required">This Field is required</div>
-                            </div>
+                            <div class="error" v-if="!$v.form.tags.required">This Field is required</div>
+                          </div>
                      </div>
-
-
                 <div class="form-group upload_img">
                 <label><i class="fa fa-image"></i> Upload Image</label>
                 <figure> <img src="images/placeholder-image-500X300.jpg" id="image-field"/> </figure>
                  
                       <span class="file-input btn btn-success btn-file">
                         Browse 
-                        <input type="file"  name="bannerImage" id="file1" class="upload" @change="previewImage;$v.form.bannerImage.$touch()"  >
+                        <input type="file"  name="bannerImage"  class="upload" @change="previewImage();$v.form.bannerImage.$touch()"  >
                     </span>
                      <div v-if="$v.form.bannerImage.$anyDirty">
                               <div class="error" v-if="!$v.form.bannerImage.required">This Field is required</div>
-                            </div>
+                      </div>
                   </div>
                     <button @click.prevent="submitForm" class="btn btn-primary ml-30">Publish</button>
 
@@ -131,7 +128,7 @@ import Form from './../services/Form.js';
             },
             bannerImage: 
             {
-              required,
+              // required,
             },
             tags: 
             {
@@ -149,6 +146,7 @@ import Form from './../services/Form.js';
 
         methods:{
           previewImage:function(){
+            
              var reader = new FileReader();
               var imageField = document.getElementById("image-field")
               reader.onload = function () {
@@ -158,14 +156,14 @@ import Form from './../services/Form.js';
               }
               reader.readAsDataURL(event.target.files[0]);
             },
-             addTag (newTag) {
-      const tag = {
-        name: newTag,
-        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-      }
-      this.options.push(tag)
-      this.form.tags.push(tag)
-    },
+    //          addTag (newTag) {
+    //   const tag = {
+    //     name: newTag,
+    //     code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+    //   }
+    //   this.options.push(tag)
+    //   this.form.tags.push(tag)
+    // },
           submitForm:function(){
                 this.$v.$touch();
             if(!this.$v.$invalid)

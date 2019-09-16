@@ -19,12 +19,14 @@ class FrontendController extends BaseController
      *
      * @return void
      */
-    protected $ipInfoService;
+    Protected $ipInfoService;
+
     public function __construct()
     {
         $SiteoptionsInterface = app()->make('App\Repository\SiteoptionsInterface');
         $this->UserlogInterface = app()->make('App\Repository\UserlogInterface');
         $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
+        $this->savelog();
     }
     /**
      * Show the application dashboard.
@@ -44,16 +46,18 @@ class FrontendController extends BaseController
         // return view('frontend.user.dashboard');
 
     }
-    public function savelog(VisitorInfo $info){
+    public function savelog(){
+        $info=new VisitorInfo();
         $serverdata =  $info->visitorsIp();
         date_default_timezone_set('Asia/Kathmandu');
         $dblogdata=$this->UserlogInterface->getLogbyIpAddressAndURL($serverdata['ip_address'],$serverdata['path']);
-        if($dblogdata){
+
+       if($dblogdata && (trim($dblogdata['details'])!='')){
+
             $start = date_create($dblogdata['details']->visit_date);
         $end = date_create(date("Y-m-d H:i:s"));
         $diff=date_diff($end,$start);
-        }
-        if($dblogdata){
+        
         if((($dblogdata['ip']->ip_address==$serverdata['ip_address'])  && ($dblogdata['details']->redirected_to!=$serverdata['path'])) || ( ($dblogdata['ip']->ip_address==$serverdata['ip_address'])  && ($dblogdata['details']->redirected_to==$serverdata['path']) && ($diff->i>10)) ){
             $logdata = array(
                     'referer_url'   =>$serverdata['refererurl'],
@@ -63,14 +67,15 @@ class FrontendController extends BaseController
                 );
                 $dblogdata['ip']->logdetails()->create($logdata);
             }
-        }else{
+        }
+        else{
             $logdata = array(
                     'referer_url'   =>$serverdata['refererurl'],
                     'user_agent'    =>$serverdata['useragent'],
                     'redirected_to' =>$serverdata['path'],
                     'visit_date'   =>date("Y-m-d H:i:s"),
                 );
-            $logcreate= $this->userlog->create(
+            $logcreate= $this->UserlogInterface->create(
                    array(
                      'ip_address'           =>$serverdata['ip_address'],
                     'country'               =>$serverdata['country'],
