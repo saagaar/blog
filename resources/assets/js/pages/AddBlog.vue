@@ -107,7 +107,8 @@ import Form from './../services/Form.js';
                     title:'',
                     content:'',
                     bannerImage:'',
-                    tags:''
+                    tags:'',
+                    isAnynomous:''
                 }),
                  options: [
                   { name: 'Vue.js', language: 'JavaScript' },

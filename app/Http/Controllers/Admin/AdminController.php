@@ -18,8 +18,9 @@ class AdminController extends BaseController
      use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     protected $admin;
+
     protected $RolePermission;
-     
+    
      /**
     *User object Global
     *@var obj
