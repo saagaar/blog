@@ -2,6 +2,8 @@
 <template>
 <div>
 <TopNav></TopNav>
+<MainNav></MainNav>
+
 <section class="fullwidth-block area-padding-bottom">
         <div class="container-fluid">
             <div class="row">
@@ -597,12 +599,14 @@
 
 <script>
 import TopNav from './TopNav/TopNav';
+import MainNav from './MainNav/MainNav';
     export default {
         mounted() {
             // console.log('Component mounted.')
         },
         components:{
             TopNav,
+            MainNav
         },
     }
 </script>

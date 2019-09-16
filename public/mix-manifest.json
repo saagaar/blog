@@ -1,6 +1,7 @@
 {
     "/frontend/js/app.js": "/frontend/js/app.js",
     "/frontend/css/style.css": "/frontend/css/style.css",
+    "/frontend/js/dashboard.js": "/frontend/js/dashboard.js",
     "/frontend/js/common.js": "/frontend/js/common.js",
     "/frontend/css/app.css": "/frontend/css/app.css"
 }

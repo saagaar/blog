@@ -1,7 +1,10 @@
 
 <template>
 <div>
-<section class="fullwidth-block area-padding-bottom">
+<TopNav></TopNav>
+<MainNav></MainNav>
+   <vcl-instagram v-if="!myData"></vcl-instagram>
+<section class="fullwidth-block area-padding-bottom" v-else >
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 col-lg-6 col-xl-5">
@@ -568,7 +571,7 @@
                 <div class="col-lg-4">
                     <div class="single-blog style-five">
                         <div class="thumb">
-                            <img class="img-fluid" src="$this->ci->db->magazine/17.jpg" alt="">
+                            <img class="img-fluid" src="images/magazine/17.jpg" alt="">
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
@@ -589,15 +592,34 @@
             </div>
         </div>
     </div>
+<blog-footer></blog-footer>
 </div>
-
-
 </template>
 
 <script>
+  import { VclFacebook,VclInstagram } from 'vue-content-loading';
+import TopNav from './../components/TopNav/TopNav';
+import MainNav from './../components/MainNav/MainNav';
+import blogFooter from './../components/Footer/blogFooter';
     export default {
-        mounted() {
-            console.log('Component mounted.')
+         data() {
+    return {
+          myData: null
         }
+      },
+        mounted() {
+             setTimeout(() => {
+              this.myData = 'Example Data';
+            }, 5000);
+        },
+
+        components:{
+            TopNav,
+            MainNav,
+            blogFooter,
+            VclFacebook,
+            VclInstagram
+          
+        },
     }
 </script>

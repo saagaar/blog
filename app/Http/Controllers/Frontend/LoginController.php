@@ -8,13 +8,13 @@ use Validator,Redirect,Response,File;
 use Socialite;
 use App\Repository\AccountInterface;
 
-class LoginController extends HomeController
+class LoginController extends BaseController
 {
     protected $account;
     public $successStatus = 200;
     public function __construct(AccountInterface $account)
     {
-        parent::__construct();
+        // parent::__construct();
         $this->account=$account;
     }   
 
@@ -33,7 +33,6 @@ class LoginController extends HomeController
     }
     public function dashboard($provider){
     $getInfo = Socialite::driver($provider)->user(); 
-    // dd($getInfo);
     $userdata = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
         if (!$userdata) {
         $user = $this->createuser($getInfo,$provider); 
@@ -44,7 +43,6 @@ class LoginController extends HomeController
     
     public function createuser($getInfo,$provider)
     {
-    
           $userdata = $this->account->create([
              'name'     => $getInfo->name,
              'email'    => $getInfo->email,
@@ -56,15 +54,17 @@ class LoginController extends HomeController
          ]);
         return $userdata;
     } 
-    public function login(){ 
-        if(Auth::attempt(['email' => request('email'), 'password' => request('password'),'status' => '0'])){ 
+    public function login(){  
+        if(Auth::guard('web')->attempt(['email' => request('email'), 'password' => request('password')]))
+        { 
             $userid = Auth()->user()->id;
             $user = $this->account->getById($userid);
-            $success['token'] =  $user->createToken('MyApp')->accessToken; 
-            return response()->json(['success' => $success], $this->successStatus); 
+            // $success['token'] =  $user->createToken('MyApp')->accessToken; 
+            return response()->json(['status'=>true,'data'=>$user,'message'=>'Logged in Successfully']); 
         } 
-        else{ 
-            return response()->json(['error'=>'Unauthorised'], 401); 
+        else
+        { 
+            return response()->json(['status'=>false,'message'=>'Not able to Login']); 
         } 
     }
     public function register(Request $request) 

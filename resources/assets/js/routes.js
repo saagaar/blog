@@ -1,14 +1,32 @@
 import VueRouter from 'vue-router';
 
 let routes=[
+				
 				{
-						path:'/',
-						components:require('./pages/Home')
+						path:'/blog/add',
+						components:require('./pages/AddBlog')
 				},
 				{
-						path:'/contact',
-						components:require('./pages/Contact')
-				}
+						path:'/',
+						components:require('./pages/Dashboard')
+				},
+				{
+						path:'/blog/list',
+						components:require('./pages/BlogList')
+				},
+				{
+						path:'/profile',
+						components:require('./pages/EditProfile')
+				},
+				{
+						path:'/categories',
+						components:require('./pages/InterestCategory')
+				},
+				{
+						path:'/change-password',
+						components:require('./pages/ChangePassword')
+				},
+
 		   ];
 
 export default new VueRouter({

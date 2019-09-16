@@ -16,22 +16,22 @@ Route::get('/', function () {
 
 Route::get('/logincheck', function () {
     return response()->json([
-   'status'=>false
+   'status'=> \Auth::check()
 ]);
 });
-
 Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
-Route::get('/profile','Frontend\HomeController@dashboard')->name('dashboard');
+Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 Route::get('/dashboard/{provider}','Frontend\LoginController@dashboard')->name('dashboard');
 Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->name('social.login');
 // Route::match(['get','post'],'/admin/login','AdminController@login');
+Route::post('/blog/login', 'Frontend\LoginController@login')->name('login');
 
 Auth::routes();
 
 // Route::get('/home', 'HomeController@list')->name('home');
 // Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
-Route::get('/logout', 'Admin\AdminController@logout')->name('admin.logout');
+Route::get('/logout/{guard}', 'Controller@logout')->name('logout');
 
 Auth::routes(['register' => false]);
 

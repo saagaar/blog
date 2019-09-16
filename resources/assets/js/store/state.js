@@ -1,4 +1,6 @@
+import config from './../config/config.js';
 const state = {
+    settings:config,
     me: {},
     user:{
         isLoggedIn:false

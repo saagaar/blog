@@ -33,8 +33,8 @@ class AdminController extends BaseController
 
     public function __construct()
     {
-        $this->middleware('auth:admin')->except('logout');
-        $this->middleware('check_user_permission')->except('logout');
+        $this->middleware('auth:admin');
+        $this->middleware('check_user_permission');
         // $this->user = $User;
     }
     public function dashboard()
@@ -58,13 +58,7 @@ class AdminController extends BaseController
         return view('admin.dashboard',compact('breadcrumb'));
     }
     
-    public function logout()
-    {
-        Auth::logout();
-        Session::flush();
-        return (redirect()->route('admin.login'));
-    }
-
+   
     public function ImportModules(ModuleInterface $module)
     {
         $controllers = [];
