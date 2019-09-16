@@ -69,11 +69,11 @@
                  
                       <span class="file-input btn btn-success btn-file">
                         Browse 
-                        <input type="file"  name="bannerImage"  class="upload" @change="previewImage();$v.form.bannerImage.$touch()"  >
+
+                        <input type="file"  name="bannerImage" id="file1" class="upload" @change="previewImage();$v.form.bannerImage.$touch()"  >
+
                     </span>
-                     <div v-if="$v.form.bannerImage.$anyDirty">
-                              <div class="error" v-if="!$v.form.bannerImage.required">This Field is required</div>
-                      </div>
+                    
                   </div>
                     <button @click.prevent="submitForm" class="btn btn-primary ml-30">Publish</button>
 

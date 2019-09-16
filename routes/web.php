@@ -27,10 +27,9 @@ Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->n
 // Route::match(['get','post'],'/admin/login','AdminController@login');
 Route::post('/blog/login', 'Frontend\LoginController@login')->name('login');
 
+Route::post('/blog/add', 'Frontend\BlogController@create');
 Auth::routes();
 
-// Route::get('/home', 'HomeController@list')->name('home');
-// Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
 Route::get('/logout/{guard}', 'Controller@logout')->name('logout');
 
 Auth::routes(['register' => false]);
