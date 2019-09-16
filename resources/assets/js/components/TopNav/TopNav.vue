@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
-                    <a href="index.html" class="logo">
+                    <a href="/blog" class="logo">
                         <img src="images/logo.png" alt="">
                     </a>
                 </div>
@@ -24,19 +24,10 @@
                             aria-expanded="false"  title="Messaging"><i class="fas fa-envelope"></i> <span>Messaging</span> <em>28</em></a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">My Profile</a></li>
                                 <li><a href="#">New Stories</a></li>
                                 <li><a href="#">Stories</a></li>
                                 <hr>
-                                <li><a href="#">BlogSagar Partner Program</a></li>
-                                <li><a href="#">Bookmarks</a></li>
-                                <li><a href="#">Publications</a></li>
-                                <li><a href="#">Customize your interest</a></li>
-                                <hr>
-                                <li><a href="#">Settings</a></li>
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Change Password</a></li>
-                                <li><a href="index.html">Log Out</a></li>
+                               
                             </ul>
                         </li>
                         <li class="nitify dropdown">
@@ -49,15 +40,7 @@
                                 <li><a href="#">New Stories</a></li>
                                 <li><a href="#">Stories</a></li>
                                 <hr>
-                                <li><a href="#">BlogSagar Partner Program</a></li>
-                                <li><a href="#">Bookmarks</a></li>
-                                <li><a href="#">Publications</a></li>
-                                <li><a href="#">Customize your interest</a></li>
-                                <hr>
-                                <li><a href="#">Settings</a></li>
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Change Password</a></li>
-                                <li><a href="index.html">Log Out</a></li>
+                               
                             </ul>
 
                         </li>
@@ -65,7 +48,8 @@
                             <small>Welcome !</small>
                             <figure><img src="img/p_image.png"></figure> Shanvi Bhandari</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">My Profile</a></li>
+                                <li><a href="/dashboard">My Profile</a></li>
+                            
                                 <li><a href="#">New Stories</a></li>
                                 <li><a href="#">Stories</a></li>
                                 <hr>
@@ -77,7 +61,7 @@
                                 <li><a href="#">Settings</a></li>
                                 <li><a href="#">Help</a></li>
                                 <li><a href="#">Change Password</a></li>
-                                <li><a href="index.html">Log Out</a></li>
+                                <li><a v-bind:href="config.ROOT_URL+'logout/user'">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -120,7 +104,10 @@ import LoginSignupModal from './LoginSignupModal';
 
         computed:{
             isUserloggedIn:function(){
-              return   this.$store.getters.user.isLoggedIn
+              return this.$store.getters.user.isLoggedIn
+            },
+            config:function(){
+               return this.$store.getters.config;
             }
            
         },

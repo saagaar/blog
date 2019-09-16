@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Models\Blogs;
 use App\Services\VisitorInfo;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Userlogs;
 use App\Repository\UserlogInterface;
 class HomeController extends FrontendController
@@ -48,10 +49,10 @@ class HomeController extends FrontendController
     }
     public function dashboard()
     {
-       // $user = Socialite::driver('facebook')->user();
-      
+        if(\Auth::check())
         return view('frontend.layouts.dashboard');
-
+        else
+             return redirect()->route('home'); 
     }
 
 }

@@ -75,18 +75,21 @@
         </div>
         <div class="d-flex flex-column text-center">
           <form method="post">
-            <div class="form-group"  :class="{ 'form-group--error': $v.email.$error }" >
-              <input type="email" class="form-control form__input" :class="{ 'is-invalid': submitted && $v.user.firstName.$error }" v-model.trim="$v.email.$model" placeholder="Your email address...">
-                <div class="error" v-if="!$v.email.required">Field is required</div>
-                <div class="error" v-if="!$v.email.minLength">Name must have at least {{$v.email.$params.minLength.min}} letters.</div>
-                <tree-view :data="$v.email" :options="{rootObjectKey: '$v.email', maxDepth: 2}"></tree-view>
+            <div class="form-group"  :class="{ 'form-group--error': $v.form.email.$error }" >
+              <input type="email" class="form-control form__input"  @blur="$v.form.email.$touch()" v-model.trim="form.email"  placeholder="Your email address...">
+              <div v-if="$v.form.email.$anyDirty">
+                <div class="error" v-if="!$v.form.email.required">This Field is required</div>
+                <div class="error" v-if="!$v.form.email.email">This Field must be Valid Email Address</div>
+              </div>
             </div>
-           
-            <div class="form-group" :class="{ 'form-group--error': $v.password.$error }">
-              <input type="password" name="password" class="form-control" id="password1" placeholder="Your password...">
-             <div  class="error" v-if="!$v.password.required">This Field is required</div>
-            </div>
-            <button type="submit" @click.prevent="submitForm" class="btn btn-primary btn-round">Login</button>
+          
+            <div class="form-group" :class="{ 'form-group--error': $v.form.password.$error }">
+              <input type="password" name="password" class="form-control" @blur="$v.form.password.$touch()" id="password1"  placeholder="Your password..." v-model.trim="form.password">
+              <div v-if="$v.form.password.$anyDirty">
+                <div class="error" v-if="!$v.form.password.required">This Field is required</div>
+              </div>
+            </div> 
+            <button type="submit" @click.prevent="submitLoginForm"  class="btn btn-primary btn-round">Login</button>
           </form>
           
           <div class="text-center text-muted delimiter">or use a social network</div>
@@ -117,36 +120,49 @@
   </div>
 
 </template>
-
 <script>
-import { required, minLength, between } from 'vuelidate/lib/validators'
-import { validationMixin } from 'vuelidate'
+import { required, between ,email} from 'vuelidate/lib/validators'
+import Form from './../../services/Form.js'
     export default {
-      mixins: [validationMixin],
         data() {
         	 return {
-              // form:{
-              email: '',
-              password: '',
-              submitStatus: null
-              }
-          // }
+            form:new Form({
+                email: '',
+                password: '',
+              })
+          }
         },
         validations: {
-          email: {
-            required,
-            minLength: minLength(4)
-          },
-          password: {
-            between: between(5, 30)
-
+          form:{
+            email: {
+              required,
+              email
+            },
+            password: 
+            {
+              required,
+            }
           }
         },
-        methods:{
-          submitForm:function(){
-            // this.$v.form.$touch();
 
-          }
+        methods:{
+          submitLoginForm:function(){
+            this.$v.$touch();
+            if(!this.$v.$invalid)
+            {
+              this.form.post('blog/login').then(response => {
+               if(response.data.status){
+
+                  window.location.href="dashboard"
+               }
+               else{
+                  alert(response.data.message)
+               }
+              }).catch(e => {
+                  console.log(e);
+              });
+            }
+          },
         }
 
     }

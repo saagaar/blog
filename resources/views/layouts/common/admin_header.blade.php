@@ -138,7 +138,7 @@
                   <a href="{{route('adminuser.change',Auth()->user()->id)}}" class="btn btn-default btn-flat">Change Password</a>
                 </div>
                 <div class="pull-right">
-                  <a href="{{ route('admin.logout')}}" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{ route('logout','backenduser')}}" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

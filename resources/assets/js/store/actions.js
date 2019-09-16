@@ -1,16 +1,11 @@
-
-
+import Form  from './../services/Form.js'
 export const checkLoginUser = ({ commit }) => {
     // show loading
-
-     window.axios.defaults.headers.common = {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    };
-    window.axios.get('//localhost:8000/logincheck')
-  .then(function (response) {
-    // handle success
-	  commit('UserLoggedIn', response.data.status );
-  });
-  
+    let form=new Form();
+    form.get('logincheck').then(response => {
+          commit('UserLoggedIn', response.data.status );
+      }).catch(e => 
+      {
+          console.log(e);
+      });
 }

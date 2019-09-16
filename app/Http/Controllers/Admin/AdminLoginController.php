@@ -22,11 +22,11 @@ class AdminLoginController extends Controller
     protected $admin;
     function __construct(UserInterface $admin)
     {
-      $this->middleware('guest:admin')->except('logout');
+      $this->middleware('guest:admin');
       $this->admin = $admin;
     }
 
-    use AuthenticatesUsers;
+    // use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.

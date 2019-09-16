@@ -24,3 +24,5 @@ export const isLoading = state => state.isLoading
 
 // Get the app name
 export const appName = state => state.appName
+
+export const config = state => state.settings

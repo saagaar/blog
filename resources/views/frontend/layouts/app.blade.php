@@ -5,32 +5,11 @@
 <!--================ End of Meta Elements and includes=================-->
 
 <body>
-<div class="wrapper" id="app">
-<!--================ Start header Top Area =================-->
-   <top-nav></top-nav>
-<!--================ End header top Area =================-->
+<div class="wrapper" >
+<div id="app">
+
+</div>
   
-<!-- Start header Menu Area -->
-  @include('frontend.common.main-nav')
-<!-- End header MEnu Area -->
-    <!--================Fullwidth block Area =================-->
- <!-- /   @yield('content') -->
-
-    <!--================ three-block section end =================-->  
-
-    <!-- ================ start footer Area ================= -->
-        @include('frontend.common.footer')
-
-    <!-- ================ End footer Area ================= -->
-
-    <!-- ================ start footer Area ================= -->
-        <!-- @include('frontend.common.signin') -->
-
-    <!-- ================ End footer Area ================= -->
-    <!-- ================ start footer Area ================= -->
-        <!-- @include('frontend.common.signup') -->
-
-    <!-- ================ End footer Area ================= -->
 </div>
 
 
