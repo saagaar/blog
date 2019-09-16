@@ -40,7 +40,6 @@ class CategoryController extends AdminController
                       ]];
         if ($request->method()=='POST') {
 
-            // $request=::class;
             $requestobj=app(CategoryRequest::class);
             $validatedData = $requestobj->validated();
         $this->categories->create($validatedData);
@@ -75,6 +74,9 @@ class CategoryController extends AdminController
         
         return view('admin.blog.editcategories',compact('category','breadcrumb'));
     }
+    /*
+    * Change status
+    */
      public function changeStatus(Request $request)
     {
         $category = $this->categories->getcatById($request->id);

@@ -9,13 +9,11 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Repository\UserlogInterface;
 class UserlogController extends AdminController
 {
-     protected $websitelog;
-      protected $blocklist;
-    function __construct(UserlogInterface $websitelog,BlocklistInterface $blocklist)
+     protected $websiteLog;
+    function __construct(UserlogInterface $websiteLog)
     {
          parent::__construct();
-         $this->blocklist=$blocklist;
-         $this->userlog=$websitelog;
+         $this->userLog=$websiteLog;
     }
     public function list(Request $request)
     {
@@ -25,26 +23,33 @@ class UserlogController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $logs = $this->userlog->getAll()->where('ip_address', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $logs = $this->userLog->getAll()->where('ip_address', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $logs = $this->userlog->getAll()->paginate($this->PerPage);
+            $logs = $this->userLog->getAll()->paginate($this->PerPage);
         }
         return view('admin.websitelog.list')->with(array('websitelog'=>$logs,'breadcrumb'=>$breadcrumb,'menu'=>'logs List'));
     }
-    public function View($id)
+    public function View(Request $request,$id)
     {
-        $websitelog =$this->userlog->GetLogById($id);
-        $websitelog['details'] = $websitelog->logdetails->sortByDesc('created_at')->first();
-        return $websitelog;
+        
+        if($request->ajax()) {
+            $websiteLog =$this->userLog->GetLogById($id);
+        $websiteLog['details'] = $websiteLog->logdetails->sortByDesc('created_at')->first();
+        }else{
+           $websiteLog = $this->userLog->GetLogById($id);
+            $websiteLog['details'] = $websiteLog->logdetails->sortByDesc('created_at')->first();
+           
+        }
+        return $websiteLog;
     }
-    public function block($id)
+    public function block(BlocklistInterface $blocklist,$id)
     {
         $admin_id = auth()->user()->id;
-        $ipdata =$this->userlog->GetLogById($id);
+        $ipdata =$this->userLog->GetLogById($id);
         
         if ($ipdata) 
         {
-            $ip = $this->blocklist->GetByIp($ipdata->ip_address);
+            $ip = $blocklist->GetByIp($ipdata->ip_address);
             if($ip){
                 if($ip->status=='black'){
                 return redirect()->route('blocklist.list')
@@ -55,7 +60,7 @@ class UserlogController extends AdminController
             }else {
                 
                 $data = array('ip_address'=>$ipdata['ip_address'],'message'=>'Blocked By admin','status'=>'black','admin_id'=>$admin_id);
-                $this->blocklist->create($data);
+                $blocklist->create($data);
                 return redirect()->route('blocklist.list')
                         ->with('success','Block List updated successfully.');
             }

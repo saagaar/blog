@@ -94,6 +94,9 @@ class BannerController extends AdminController
         ->with('success', '');
     }
 
+    /*
+    * Change status of banner
+    */
       public function changeStatus(Request $request)
     {
         $banner = $this->Banner->getById($request->id);

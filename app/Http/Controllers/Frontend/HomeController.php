@@ -33,23 +33,15 @@ class HomeController extends FrontendController
         return view('frontend.layouts.app');
     }
 
-// <<<<<<< HEAD
-//     public function test()
-//     {
-//         // $this->savelog($info);
-//         print_r($globals);exit;
-//         return view('frontend.home.test');
-//     }
-// =======
-//         return view('frontend.home.index');
-//     }
-    public function test(VisitorInfo $info)
+    public function test(Request $request,VisitorInfo $info)
     {
+        $data = $request->session()->all();
+        // print_r($data);exit;
         $this->savelog($info);
 
         return view('frontend.home.test');
     }
-    public function blog()
+    public function blog(BlogI)
     {
         $blog = Blogs::all()->latest();
         return response($blog->jsonSerialize(), Response::HTTP_OK);

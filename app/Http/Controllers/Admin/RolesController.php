@@ -16,7 +16,7 @@ class RolesController extends AdminController
     {
         parent::__construct();
         $this->roles=$role;
-        $this->userpermissions=$permission;
+        $this->userPermissions=$permission;
         $this->middleware('auth:admin')->except('logout');
     }
     public function list(Request $request)
@@ -43,7 +43,7 @@ class RolesController extends AdminController
                      'Admin Roles'   => route('roles.list'),
                      'current_menu'  =>'Create Account roles',
                     ]];
-        $userpermission = $this->userpermissions->getAll()->get();
+        $userpermission = $this->userPermissions->getAll()->get();
         // dd($userpermission);
         if ($request->method()=='POST') 
         {
@@ -67,7 +67,7 @@ class RolesController extends AdminController
                 'Users Roles' => route('roles.list'),
                 'current_menu'=>'Edit Users Roles',
                   ]];
-        $userpermission = $this->userpermissions->getAll()->get();
+        $userpermission = $this->userPermissions->getAll()->get();
         $role =$this->roles->getroleById($id);
         if ($request->method()=='POST') 
         {

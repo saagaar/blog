@@ -98,6 +98,13 @@ Route::prefix('admin')->group(function()
 
 	//blog category
 
+
+	//Route for Testimonial
+	Route::get('/list/tags','Admin\TagsController@list')->name('tags.list');
+	Route::match(['get','post'],'/create/tags','Admin\TagsController@create')->name('tags.create');
+	Route::match(['get','post'],'/edit/tags/{id}','Admin\TagsController@edit')->name('tags.edit');
+	Route::get('/delete/tags/{id}','Admin\TagsController@delete')->name('tags.delete');
+	Route::get('changestatus/tags', 'Admin\TagsController@changeStatus')->name('tags.changestatus');
 	/**
 	*Routes for Creating Blog
 	**/

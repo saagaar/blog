@@ -11,11 +11,11 @@ use App;
 class AdminUserController extends AdminController
 {
     protected $admin;
-    protected $adminrole;
-    function __construct(UserInterface $admin,AdminRoleInterface $adminrole)
+    protected $adminRole;
+    function __construct(UserInterface $admin,AdminRoleInterface $adminRole)
     {
         $this->admin=$admin;
-        $this->roles=$adminrole;
+        $this->roles=$adminRole;
         $this->middleware('auth:admin')->except('logout');
        
     }
@@ -55,7 +55,7 @@ class AdminUserController extends AdminController
             return redirect()->route('adminuser.list')
                         ->with('success','User created successfully.');
         }
-        $adminroles = $this->roles->getAll()->get();
+        $adminRoles = $this->roles->getAll()->get();
         return view('admin.admin_users.createuser',compact('adminroles','breadcrumb'));
     }
     public function edit(Request $request,$id)
@@ -75,13 +75,13 @@ class AdminUserController extends AdminController
             return redirect()->route('adminuser.list')
                         ->with('success','User updated successfully.');
         }
-        $adminroles = $this->roles->getAll()->get();
+        $adminRoles = $this->roles->getAll()->get();
         return view('admin.admin_users.edituser',compact('adminroles','adminusers','breadcrumb'));
     }
     public function delete($id)
     {
-        $adminrole =$this->admin->getById($id);
-        $adminrole->delete();
+        $adminRole =$this->admin->getById($id);
+        $adminRole->delete();
         return redirect()->route('adminuser.list')
         ->with('success', 'User has been deleted!!');
     }
@@ -117,7 +117,9 @@ class AdminUserController extends AdminController
         }
         return view('admin_password.changepassword',compact('userid','breadcrumb'));
     }
-
+    /*
+    * Change status of adminuser
+    */
   public function changeStatus(Request $request)
     {
         $user = $this->admin->getById($request->id);

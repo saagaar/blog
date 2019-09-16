@@ -46,10 +46,8 @@ class FrontendController extends BaseController
     }
     public function savelog(VisitorInfo $info){
         $serverdata =  $info->visitorsIp();
-        // print_r($serverdata['path']);exit;
         date_default_timezone_set('Asia/Kathmandu');
         $dblogdata=$this->UserlogInterface->getLogbyIpAddressAndURL($serverdata['ip_address'],$serverdata['path']);
-        // print_r($dblogdata);exit;
         if($dblogdata){
             $start = date_create($dblogdata['details']->visit_date);
         $end = date_create(date("Y-m-d H:i:s"));

@@ -11,10 +11,10 @@ class HelpCategoryController extends AdminController
 {
     protected $category;
 
-    function __construct(HelpCatInterface $helpcat)
+    function __construct(HelpCatInterface $helpCat)
     {
         parent::__construct();
-        $this->category=$helpcat;
+        $this->category=$helpCat;
         
        
     }

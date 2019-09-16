@@ -65,7 +65,7 @@ class BlocklistController extends AdminController
                     'Block List' => route('blocklist.list'),
                     'current_menu'=>'Edit Block List',
                       ]];
-                       $admin_id = auth()->user()->id;
+        $admin_id = auth()->user()->id;
         $ipdata =$this->blocklist->GetIpById($id);
         if ($request->method()=='POST') 
         {

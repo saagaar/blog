@@ -25,19 +25,21 @@
                 {
        			 $('#IpAddressDetail').modal('show');
 
-                    // $('#pop-display_name').val(data[0].display_name);
                     $('#ip_address').html(data.ip_address);
-                    $('#referer_url').html(data.referer_url);
-                    $('#user_agent').html(data.details.user_agent);
+                    $('#region_code').html(data.region_code);
                     $('#time_zone').html(data.time_zone);
-                    $('#redirected_to').html(data.details.redirected_to);
-                    $('#visit_date').html(data.details.visit_date);
+                    $('#latitude').html(data.latitude);
+                    $('#isp').html(data.isp);
                     $('#country').html(data.country);
                     $('#country_code').html(data.country_code);
                     $('#city').html(data.city);
                     $('#region').html(data.region);
-                    
-                    // $('#add-edit-product').modal('show');
+                    $('#flagurl').html(data.flagurl);
+                    $('#currencysymbol').html(data.currencysymbol);
+                    $('#currency').html(data.currency);
+                    $('#callingcode').html(data.callingcode);
+                    $('#countrycapital').html(data.countrycapital);
+                    $('#longitude').html(data.longitude);
                 }
                 $('.img-loader').addClass('hidden');
                 setTimeout(function () {
@@ -74,25 +76,14 @@ $(document).on('click', '.logdetail', function (e) {
 
                  data.logdetails.forEach(function(i,v){
                         var nhtml='<tr>'+
-                                  '<td ></td>'+
-                                  '<td >'+i.redirected_to+'</td>'+
+                                  '<td >'+i.id+'</td>'+
                                   '<td >'+i.referer_url+'</td>'+
-                                  '<td ></td>'+
-                                  '<td>asd</td>'+
-                                  '<td ></td>'+
+                                  '<td >'+i.redirected_to+'</td>'+
+                                  '<td>'+i.user_agent+'</td>'+
+                                  '<td>'+i.visit_date+'</td>'+
                                   '</tr>';
                         $('#listOfIpAddressDetail').append(nhtml);
-                    // $('#id').html(i.id);
-                    // console.log(i);
-                    // $('#ip_address').html(i.ip_address);
-                    // $('#referer_url').html();
-                    // $('#user_agent').html(i.user_agent);
-                    // $('#redirected_to').html(i.redirected_to);
-                    // $('#visit_date').html(i.visit_date);
                  })
-                    // $('#pop-display_name').val(data[0].display_name);
-                    
-                    // $('#add-edit-product').modal('show');
                 }
                 $('.img-loader').addClass('hidden');
                 setTimeout(function () {

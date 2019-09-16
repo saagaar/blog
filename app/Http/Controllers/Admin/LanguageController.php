@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\File;
 use App;
 class LanguageController extends AdminController
 {
-    protected $Language;
+    protected $language;
     function __construct(LanguageInterface $language)
     {
          parent::__construct();
-         $this->Language=$language;
+         $this->language=$language;
     }
     public function list(Request $request)
     {
@@ -23,9 +23,9 @@ class LanguageController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $language = $this->Language->getAll()->where('language', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $language = $this->language->getAll()->where('language', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $language = $this->Language->getAll()->paginate($this->PerPage);
+            $language = $this->language->getAll()->paginate($this->PerPage);
         }
         return view('language.list')->with(array('Language'=>$language,'breadcrumb'=>$breadcrumb,'menu'=>'Language List'));
     }
@@ -41,7 +41,7 @@ class LanguageController extends AdminController
         {
             $requestobj=app(LanguageRequest::class);
             $validatedData = $requestobj->validated();
-            $this->Language->create($validatedData);
+            $this->language->create($validatedData);
             return redirect()->route('language.list')    
                              ->with(array('success'=>'Language created successfully.','breadcrumb'=>$breadcrumb));
         }
@@ -54,12 +54,12 @@ class LanguageController extends AdminController
                         'All languages' => route('language.list'),
                         'current_menu'=>'Edit languages',
                           ]];
-            $language =$this->Language->getById($id);    
+            $language =$this->language->getById($id);    
             if ($request->method()=='POST')
             {
                 $requestobj=app(LanguageRequest::class);
                 $validatedData = $requestobj->validated();
-                $this->Language->update($id,$validatedData);
+                $this->language->update($id,$validatedData);
                 return redirect()->route('language.list')
                             ->with('success','Languages Updated Successfully.');
             }
@@ -67,7 +67,7 @@ class LanguageController extends AdminController
     }
     public function delete($id)
     {
-       $language =$this->Language->getById($id);       
+       $language =$this->language->getById($id);       
         $language->delete();        
         return redirect()->route('language.list')
         ->with('success', 'Language deleted Successfully');
@@ -75,7 +75,7 @@ class LanguageController extends AdminController
 
        public function changeStatus(Request $request)
     {
-        $language = $this->Language->getById($request->id);
+        $language = $this->language->getById($request->id);
         $status = $request->status;
         $language->update(array('status'=>$status));  
         return redirect()->route('language.list')

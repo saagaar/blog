@@ -14,7 +14,7 @@ class CreateBlogsTable extends Migration
     public function up()
     {
         Schema::create('blogs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->unsigned();
             $table->timestamps();
             $table->string('title');
             $table->text('content');
@@ -23,6 +23,8 @@ class CreateBlogsTable extends Migration
                     ->onDelete('cascade');
             $table->unsignedBigInteger('locale_id');
             $table->enum('save_method',['1','2'])->comment('1=Save to draft,2-Publish')->default('1');
+            $table->enum('featured',['1','0'])->comment('1=yes,2=no');
+            $table->enum('anynomous',['1','0'])->comment('1=yes,2-No');
             $table->string('image');
         });
     }
