@@ -37,6 +37,8 @@ class CreateSiteOptionsTable extends Migration
             $table->string('city', 100);
             $table->string('state', 100);
             $table->string('country', 100);
+            $table->enum('blog_requires_activation', ['Y','N']);
+            $table->enum('user_requires_activation', ['Y','N']);
             $table->timestamps();
         });
     }

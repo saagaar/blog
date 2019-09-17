@@ -13,11 +13,11 @@ class CreateLogdetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('logdetails', function (Blueprint $table) {
+        Schema::create('log_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('userlogs_id');
-            $table->foreign('userlogs_id')
-                    ->references('id')->on('userlogs')
+            $table->unsignedBigInteger('log_id');
+            $table->foreign('log_id')
+                    ->references('id')->on('users_log')
                     ->onDelete('cascade');
              $table->string('referer_url');
             $table->string('user_agent');
