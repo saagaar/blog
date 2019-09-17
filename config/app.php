@@ -40,7 +40,8 @@ return [
     */
 
     'debug' => env('APP_DEBUG', false),
-
+    'log' => 'daily',
+    'log_level' => env('APP_LOG_LEVEL', 'error'),
     /*
     |--------------------------------------------------------------------------
     | Application URL
