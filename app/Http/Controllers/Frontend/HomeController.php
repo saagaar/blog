@@ -30,7 +30,7 @@ class HomeController extends FrontendController
      */
     public function index(Request $request)
     {
-        print_r($this->siteName);
+        // print_r($this->siteName);
         return view('frontend.layouts.app');
     }
 

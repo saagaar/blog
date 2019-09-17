@@ -65,7 +65,7 @@ Class VisitorInfo
         $iPhone  = stripos( $useragent,"iPhone");
         $iPad    = stripos( $useragent,"iPad");
         $Android = stripos( $useragent,"Android");
-        $mac   = stripos( $useragent,"mac");
+        $mac     = stripos( $useragent,"mac");
         $mobile   = stripos( $useragent,"mobile");
         $linux   = stripos( $useragent,"linux");
         $windows   = stripos( $useragent,"windows");
