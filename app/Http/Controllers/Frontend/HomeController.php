@@ -5,7 +5,6 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Models\Blogs;
-use App\Services\VisitorInfo;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Userlogs;
@@ -38,13 +37,13 @@ class HomeController extends FrontendController
         return view('frontend.layouts.app');
     }
 
-    public function test(Request $request,VisitorInfo $info)
+    public function test(Request $request)
     {
-        $data = $request->session()->all();
+        // $data = $request->session()->all();
         // print_r($data);exit;
-        $this->savelog($info);
+        
 
-        return view('frontend.home.test');
+        return view('frontend.layouts.app');
     }
     public function dashboard()
     {
