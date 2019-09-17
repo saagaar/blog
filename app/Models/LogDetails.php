@@ -8,7 +8,7 @@ use OwenIt\Auditing\Auditable as Auditables;
 class LogDetails extends Model implements Auditable
 {
 	use Auditables;
-	protected $table='logdetails';
+	protected $table='log_details';
 
 
     protected $fillable = [

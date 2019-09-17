@@ -26,6 +26,25 @@ class FrontendController extends BaseController
         $SiteoptionsInterface = app()->make('App\Repository\SiteoptionsInterface');
         $this->UserlogInterface = app()->make('App\Repository\UserlogInterface');
         $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
+        $this->siteName =  $this->siteSettings->site_name;
+        $this->contactEmail =  $this->siteSettings->contact_email;
+        $this->contactName =  $this->siteSettings->contact_name;
+        $this->contactNumber =  $this->siteSettings->contact_number;
+        $this->mode =  $this->siteSettings->mode;
+        $this->maintainence =  $this->siteSettings->maintainence;
+        $this->userActivation =  $this->siteSettings->user_requires_activation;
+        $this->blogRequiresActivation =  $this->siteSettings->blog_requires_activation;
+        $this->facebookId =  $this->siteSettings->facebook_id;
+        $this->linkedinId =  $this->siteSettings->linkedin_id;
+        $this->twitterId =  $this->siteSettings->twitter_id;
+        $this->instagramId =  $this->siteSettings->instagram_id;
+        $this->youtube =  $this->siteSettings->youtube;
+        $this->timezone =  $this->siteSettings->timezone;
+        $this->currencySign =  $this->siteSettings->currency_sign;
+        $this->address =  $this->siteSettings->address;
+        $this->city =  $this->siteSettings->city;
+        $this->state =  $this->siteSettings->state;
+        $this->country =  $this->siteSettings->country;
         $this->savelog();
     }
     /**

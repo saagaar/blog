@@ -25,13 +25,17 @@ class BlogController extends FrontendController
             'content' => 'required', 
             // 'bannerImage' => 'required', 
         	]);
-            if ($validator->fails()) {
-                return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+            if($this->blogRequiresActivation=='N'){
+                return response()->json(['status'=>false,'data'=>'','message'=>'Post cannot be created for now. Please try again later'], 401);
             }else{
-            	$input = $request->all(); 
-            	$input['locale_id']='1';
-            	$input['image']='211.jpg';
-            	$this->blog->create($input);
-            }
+                if ($validator->fails()) {
+                    return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+                }else{
+                    $input = $request->all(); 
+                    $input['locale_id']='1';
+                    $input['image']='211.jpg';
+                    $this->blog->create($input);
+                }
+            } 
    	}
 }

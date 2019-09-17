@@ -35,7 +35,8 @@ class CategoryRequest extends FormRequest
         return [
                 'name'      => 'required|min:2|max:255',
                 'status'   => 'required',
-                'slug'      => $slug
+                'slug'      => $slug,
+                // 'banner_image'  =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
     }
 }

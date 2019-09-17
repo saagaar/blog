@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\AdminController; 
 use App\Repository\CategoryInterface;  
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\CategoryRequest;
 use App;
 class CategoryController extends AdminController
@@ -39,19 +40,31 @@ class CategoryController extends AdminController
                     'current_menu'=>'Create Blog Category',
                       ]];
         if ($request->method()=='POST') {
-
+            // dd($request->all());
             $requestobj=app(CategoryRequest::class);
+            $this->validate($request, [
+                'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000',
+                ]);
             $validatedData = $requestobj->validated();
+            $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
+            request()->banner_image->move(public_path('frontend/images/categories-images'), $imageName);
+            $validatedData['banner_image'] = $imageName;
         $this->categories->create($validatedData);
        return redirect()->route('adminblogcategory.list')
-                            ->with(array('success'=>'blog Category created successfully.','breadcrumb'=>$breadcrumb));
+                            ->with(array('success'=>'Blog Category created successfully.','breadcrumb'=>$breadcrumb));
         }
        return view('admin.blog.createcategories')->with(array('breadcrumb'=>$breadcrumb));;
     }
     public function delete($id)
     {
         $category =$this->categories->getcatById($id);
-        $category->delete();
+        if( $category){
+            $dir = 'frontend/images/categories-images/';
+            if ($category->banner_image != '' && File::exists($dir . $category->banner_image)){
+                File::delete($dir . $category->banner_image);
+            }
+            $category->delete();
+        }
         return redirect()->route('adminblogcategory.list')
         ->with('success', 'Blog category has been deleted!!');
     }
@@ -66,8 +79,22 @@ class CategoryController extends AdminController
         if ($request->method()=='POST') 
         {           
                 $requestobj=app(CategoryRequest::class);
+                $this->validate($request, [
+                'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000',
+                ]);
                 $validatedData = $requestobj->validated();
                 $this->categories->update($id,$validatedData);
+                if ($request->hasFile('banner_image')) {
+                    $dir = 'frontend/images/categories-images/';
+                    if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
+                    File::delete($dir . $category->banner_image);
+
+                    $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
+                    request()->banner_image->move(public_path('frontend/images/categories-images'), $imageName);
+                    $validatedData['banner_image'] = $imageName;
+                }else {
+                    $validatedData['banner_image'] = $category->banner_image;
+                }
                 return redirect()->route('adminblogcategory.list')
                             ->with('success','Blog Category Updated Successfully.');
             }

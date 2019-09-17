@@ -39,10 +39,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="image">Image Upload</label>
-                  <input type="file" class="form-control" name="banner_image" id="image">
-                  @if ($errors->has('image'))
-                  <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                  <label for="banner_image">Image Upload</label>
+                  <input type="file" class="form-control" name="banner_image" id="banner_image">
+                  @if ($errors->has('banner_image'))
+                  <div class="alert alert-danger">{{ $errors->first('banner_image') }}</div>
                   @endif
                 </div>
                 <div class="form-group">

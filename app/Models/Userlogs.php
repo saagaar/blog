@@ -8,7 +8,7 @@ use OwenIt\Auditing\Auditable as Auditables;
 class Userlogs extends Model implements Auditable
 {
     use Auditables;
-    protected $table='userlogs';
+    protected $table='user_logs';
 
 
     protected $fillable = [
@@ -20,11 +20,11 @@ class Userlogs extends Model implements Auditable
     }
     public function logdetails()
     {
-        return $this->hasMany(LogDetails::class,'userlogs_id');
+        return $this->hasMany(LogDetails::class,'log_id');
     }
     public function count()
     {
-        return $this->hasMany(LogDetails::class,'userlogs_id')->count();
+        return $this->hasMany(LogDetails::class,'log_id')->count();
     }
 
 }
