@@ -113,8 +113,7 @@ window.setTimeout(function() {
             data: {'status': status,'mode': paymentmode,'save_method':savemethod,'display':status,'id': id},
              success: function(data){
               console.log(data.success)
-            }
-            
+            }           
         });
     })
   })

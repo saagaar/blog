@@ -2,14 +2,13 @@
 
 namespace App\Repository\Category;
 
-use App\Models\Categories;
+use App\Categorys;
 use App\Repository\CategoryInterface;
-
-Class  Category implements CategoryInterface
+Class Category implements CategoryInterface
 {
 	protected $cat;
 
-	public function __construct(Categories $blogcat)
+	public function __construct(Categorys $blogcat)
 	{
 		$this->cat=$blogcat;
 	}

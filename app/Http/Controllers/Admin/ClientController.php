@@ -41,7 +41,7 @@ class ClientController extends AdminController
         {
              $request->validate([
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);  
+            ]);
             $requestobj=app(ClientRequest::class);
             $validatedData = $requestobj->validated();
             $logoName = time().'.'.request()->logo->getClientOriginalExtension();
