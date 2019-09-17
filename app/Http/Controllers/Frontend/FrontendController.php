@@ -52,12 +52,11 @@ class FrontendController extends BaseController
         date_default_timezone_set('Asia/Kathmandu');
         $dblogdata=$this->UserlogInterface->getLogbyIpAddressAndURL($serverdata['ip_address'],$serverdata['path']);
 
-       if($dblogdata && (trim($dblogdata['details'])!='')){
+       if($dblogdata['ip'] && (trim($dblogdata['details'])!='')){
 
             $start = date_create($dblogdata['details']->visit_date);
         $end = date_create(date("Y-m-d H:i:s"));
         $diff=date_diff($end,$start);
-        
         if((($dblogdata['ip']->ip_address==$serverdata['ip_address'])  && ($dblogdata['details']->redirected_to!=$serverdata['path'])) || ( ($dblogdata['ip']->ip_address==$serverdata['ip_address'])  && ($dblogdata['details']->redirected_to==$serverdata['path']) && ($diff->i>10)) ){
             $logdata = array(
                     'referer_url'   =>$serverdata['refererurl'],
@@ -67,6 +66,15 @@ class FrontendController extends BaseController
                 );
                 $dblogdata['ip']->logdetails()->create($logdata);
             }
+        }
+        elseif($dblogdata['ip'] && (trim($dblogdata['details'])=='')){
+            $logdata = array(
+                    'referer_url'   =>$serverdata['refererurl'],
+                    'user_agent'    =>$serverdata['useragent'],
+                    'redirected_to' =>$serverdata['path'],
+                    'visit_date'   =>date("Y-m-d H:i:s"),
+                );
+                $dblogdata['ip']->logdetails()->create($logdata);
         }
         else{
             $logdata = array(
