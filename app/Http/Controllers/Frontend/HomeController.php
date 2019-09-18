@@ -30,19 +30,12 @@ class HomeController extends FrontendController
      */
     public function index(Request $request)
     {
-
-        header("HTTP/1.1 200");
-                                        header("RECEIVEOK");
-                                        echo "RECEIVEOK";exit;
+        // print_r($this->siteName);
         return view('frontend.layouts.app');
     }
 
     public function test(Request $request)
     {
-        // $data = $request->session()->all();
-        // print_r($data);exit;
-        
-
         return view('frontend.layouts.app');
     }
     public function dashboard()

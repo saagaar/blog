@@ -82,11 +82,11 @@
                   </div>
                   <div class="form-group col-md-4">
                       <br><br>
-                          <label for="user_activation">User Activation: </label>
-                            <input type="radio"  class="flat-red user_activation" name="user_activation"  value="Y" {{ $site->user_activation == 'Y' ? 'checked' : ''}}>Yes 
-                          <label><input type="radio" class="flat-red"  name="user_activation" value="N"  {{ $site->user_activation == 'N' ? 'checked' : ''}}>No</label>
-                          @if ($errors->has('user_activation'))
-                        <div class="alert alert-danger">{{ $errors->first('user_activation') }}</div>
+                          <label for="user_requires_activation">User requires activation: </label>
+                            <input type="radio"  class="flat-red user_requires_activation" name="user_requires_activation"  value="Y" {{ $site->user_requires_activation == 'Y' ? 'checked' : ''}}>Yes 
+                          <label><input type="radio" class="flat-red"  name="user_requires_activation" value="N"  {{ $site->user_requires_activation == 'N' ? 'checked' : ''}}>No</label>
+                          @if ($errors->has('user_requires_activation'))
+                        <div class="alert alert-danger">{{ $errors->first('user_requires_activation') }}</div>
                         @endif
                      </div> 
                       <div class="form-group col-md-4">
@@ -158,11 +158,11 @@
                         @endif
                     </div>
                       <div class="form-group col-md-4">
-                          <label for="log_admin_invalid_login">Approve Post: </label>
-                          <label><input type="radio" class="flat-red" name="approve_post" value="Y" {{ $site->log_admin_invalid_login == 'Y' ? 'checked' : ''}}>Yes</label>
-                          <label><input type="radio" class="flat-red" name="approve_post" value="N"  {{ $site->log_admin_invalid_login == 'N' ? 'checked' : ''}}>No</label>
-                          @if ($errors->has('log_admin_invalid_login'))
-                        <div class="alert alert-danger">{{ $errors->first('log_admin_invalid_login') }}</div>
+                          <label for="blog_requires_activation">Approve Post: </label>
+                          <label><input type="radio" class="flat-red" name="approve_post" value="Y" {{ $site->blog_requires_activation == 'Y' ? 'checked' : ''}}>Yes</label>
+                          <label><input type="radio" class="flat-red" name="approve_post" value="N"  {{ $site->blog_requires_activation == 'N' ? 'checked' : ''}}>No</label>
+                          @if ($errors->has('blog_requires_activation'))
+                        <div class="alert alert-danger">{{ $errors->first('blog_requires_activation') }}</div>
                         @endif
                     </div>
                </div>

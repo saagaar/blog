@@ -13,7 +13,7 @@ class CreateUserlogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('userlogs', function (Blueprint $table) {
+        Schema::create('user_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ip_address');
             $table->string('country')->nullable();

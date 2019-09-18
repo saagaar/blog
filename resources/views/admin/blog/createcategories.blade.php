@@ -35,7 +35,7 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{route('adminblogcategory.create')}}" method="POST">
+            <form action="{{route('adminblogcategory.create')}}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="box-body">
                 <div class="form-group">
@@ -59,6 +59,13 @@
                   @if ($errors->has('status'))
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>
                 @endif
+                </div>
+                <div class="form-group">
+                  <label for="banner_image">Image Upload</label>
+                  <input type="file" class="form-control" name="banner_image" id="banner_image">
+                  @if ($errors->has('banner_image'))
+                  <div class="alert alert-danger">{{ $errors->first('banner_image') }}</div>
+                  @endif
                 </div>
               </div>
               <!-- /.box-body -->

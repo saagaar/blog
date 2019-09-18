@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->enum('status',['1','0']);
+            $table->string('banner_image');
             $table->timestamps();
         });
     }

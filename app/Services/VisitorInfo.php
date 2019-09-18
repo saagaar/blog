@@ -4,24 +4,17 @@ namespace App\Services;
 
 Class VisitorInfo
 {
-	public function visitorsIp(){
-		$serverinfo = $this->getServerInfo();
-		// print_r($serverinfo);exit;
-		// $ip ='27.34.25.94'; //$_SERVER['REMOTE_ADDR'];
-		if($serverinfo['clientip']){
-			$ip_api = json_decode(file_get_contents("http://ip-api.io/json/{$serverinfo['clientip']}"));
+	public function visitorsIp($ipAddress){
+		if($ipAddress){
+			$ip_api = json_decode(file_get_contents("http://ip-api.io/json/{$ipAddress}"));
 
 			if($ip_api && !array_key_exists('status_message', $ip_api)){
 				$data = array(
-						'ip_address' 			=>$serverinfo['clientip'],
 						'country_code' 			=>$ip_api->country_code,
 						'country'				=>$ip_api->country_name,
 						'region'				=>$ip_api->region_name,
 						'region_code' 			=>$ip_api->region_code,
 						'city'					=>$ip_api->city,
-						'useragent'				=>$serverinfo['useragent'],
-						'refererurl'			=>$serverinfo['refererurl'],
-						'path'              	=>$serverinfo['path'],
 						'time_zone'				=>$ip_api->time_zone,
 						'latitude' 				=>$ip_api->latitude,
 						'longitude'				=>$ip_api->longitude,
@@ -33,17 +26,13 @@ Class VisitorInfo
 						'countrycapital'		=>$ip_api->countryCapital,
 					);
 			}else{
-				$plugin = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip={$serverinfo['clientip']}"));
+				$plugin = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip={$ipAddress}"));
 				$data = array(
-						'ip_address' 			=>$serverinfo['clientip'],
 						'country_code' 			=>$plugin->geoplugin_countryCode,
 						'country'				=>$plugin->geoplugin_countryName,
 						'region'				=>$plugin->geoplugin_regionName,
 						'region_code' 			=>$plugin->geoplugin_regionCode,
 						'city'					=>$plugin->geoplugin_city,
-						'useragent'				=>$serverinfo['useragent'],
-						'refererurl'			=>$serverinfo['refererurl'],
-						'path'					=>$serverinfo['path'],
 						'time_zone'				=>$plugin->geoplugin_timezone,
 						'latitude' 				=>$plugin->geoplugin_latitude,
 						'longitude'				=>$plugin->geoplugin_longitude,
@@ -59,17 +48,17 @@ Class VisitorInfo
 		}
 	}
 	public function getServerInfo(){
-		$device = '';
+        $device = '';
         $useragent = $_SERVER['HTTP_USER_AGENT']; 
-        $iPod    = stripos( $useragent,"iPod");
-        $iPhone  = stripos( $useragent,"iPhone");
-        $iPad    = stripos( $useragent,"iPad");
-        $Android = stripos( $useragent,"Android");
-        $mac     = stripos( $useragent,"mac");
-        $mobile   = stripos( $useragent,"mobile");
-        $linux   = stripos( $useragent,"linux");
-        $windows   = stripos( $useragent,"windows");
-        if( $iPod || $iPhone ){
+        $iPod    = stripos($useragent,"iPod");
+        $iPhone  = stripos($useragent,"iPhone");
+        $iPad    = stripos($useragent,"iPad");
+        $Android = stripos($useragent,"Android");
+        $mac     = stripos($useragent,"mac");
+        $mobile   = stripos($useragent,"mobile");
+        $linux   = stripos($useragent,"linux");
+        $windows   = stripos($useragent,"windows");
+        if($iPod || $iPhone ){
             $device = 'Ipod';
         }else if($iPad){
             $device = 'IPad';
@@ -84,21 +73,22 @@ Class VisitorInfo
         }else if($windows){
             $device = 'Windows';
         }
-	    if (array_key_exists('HTTP_REFERER',$_SERVER)) {
-	    	$reff = $_SERVER['HTTP_REFERER'];
-	    }else{
-	    	$reff = '';
-		}
+        if (array_key_exists('HTTP_REFERER',$_SERVER)) {
+            $reff = $_SERVER['HTTP_REFERER'];
+        }else{
+            $reff = '';
+        }
         $server = array(
-                    'clientip'          => '27.34.25.94',//$_SERVER['REMOTE_ADDR'],
+                    'ip_address'          => '27.34.25.94',//$_SERVER['REMOTE_ADDR'],
                     'servername'        =>$_SERVER['SERVER_NAME'],
                     'method'            =>$_SERVER['REQUEST_METHOD'],
                     'path'              =>$_SERVER['PATH_INFO'],
-                    'host'				=>$_SERVER['HTTP_HOST'],
+                    'host'              =>$_SERVER['HTTP_HOST'],
                     'requesturl'        =>$_SERVER['REQUEST_URI'],
                     'refererurl'        =>$reff,
                     'useragent'         =>$device,
         );
         return $server;
-	}
+    }
+	
 }

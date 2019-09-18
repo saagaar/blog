@@ -17,7 +17,7 @@ class CreateLogdetailsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('log_id');
             $table->foreign('log_id')
-                    ->references('id')->on('users_log')
+                    ->references('id')->on('user_logs')
                     ->onDelete('cascade');
              $table->string('referer_url');
             $table->string('user_agent');

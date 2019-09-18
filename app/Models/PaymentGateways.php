@@ -9,7 +9,7 @@ class PaymentGateways extends Model implements Auditable
 {
     use Auditables;
 
-     protected $table='payment_gateways';
+     protected $table='payment_gateway';
 
     /**
      * The attributes that are mass assignable.

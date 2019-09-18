@@ -35,7 +35,7 @@
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{route('adminblogcategory.edit',$category->id)}}" method="POST">
+            <form action="{{route('adminblogcategory.edit',$category->id)}}" method="POST" enctype="multipart/form-data">
             {{csrf_field()}}
               <div class="box-body">
                 <div class="form-group">
@@ -59,6 +59,14 @@
                   <label><input type="radio" name="status" value="0" @if($category->status=='0') checked @endif >Inactive</label>
                   @if ($errors->has('status'))
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>
+                @endif
+                </div>
+                <div class="form-group">
+                  <label for="banner_image">Image Upload</label>
+                  <img src="{{ asset('frontend/images/categories-images/'.$category['banner_image']) }}" alt="Image" height="42" width="42">
+                  <input type="file" class="form-control" name="banner_image" id="banner_image" value="{{$category->banner_image}}">
+                  @if ($errors->has('banner_image'))
+                <div class="alert alert-danger">{{$errors->first('banner_image') }}</div>
                 @endif
                 </div>
               </div>
