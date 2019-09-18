@@ -46518,10 +46518,10 @@ var render = function() {
             _vm._m(2),
             _vm._v(" "),
             _c("span", { staticClass: "file-input btn btn-success btn-file" }, [
-              _vm._v("\n                Browse \n                "),
+              _vm._v("\n                Browse \n\n                "),
               _c("input", {
                 staticClass: "upload",
-                attrs: { type: "file", name: "bannerImage" },
+                attrs: { type: "file", name: "bannerImage", id: "file1" },
                 on: {
                   change: function($event) {
                     _vm.previewImage()
@@ -46701,7 +46701,7 @@ var staticRenderFns = [
                               },
                               [
                                 _vm._v(
-                                  "\r\n                                         All\r\n                                         "
+                                  "\n                                         All\n                                         "
                                 ),
                                 _c("i", { staticClass: "fa fa-angle-down " })
                               ]
@@ -46767,7 +46767,7 @@ var staticRenderFns = [
                             },
                             [
                               _vm._v(
-                                "\r\n                                     More\r\n                                     "
+                                "\n                                     More\n                                     "
                               ),
                               _c("i", { staticClass: "fa fa-angle-down " })
                             ]
@@ -46814,7 +46814,7 @@ var staticRenderFns = [
                             },
                             [
                               _vm._v(
-                                "\r\n                                     Move to\r\n                                     "
+                                "\n                                     Move to\n                                     "
                               ),
                               _c("i", { staticClass: "fa fa-angle-down " })
                             ]
@@ -48701,14 +48701,14 @@ var staticRenderFns = [
                       _c("input", {
                         attrs: { type: "radio", name: "optradio", checked: "" }
                       }),
-                      _vm._v("Male\r\n      ")
+                      _vm._v("Male\n      ")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
                       _c("input", {
                         attrs: { type: "radio", name: "optradio" }
                       }),
-                      _vm._v("Female\r\n      ")
+                      _vm._v("Female\n      ")
                     ])
                   ])
                 ]),
@@ -48776,7 +48776,7 @@ var staticRenderFns = [
                     "span",
                     { staticClass: "file-input btn btn-success btn-file" },
                     [
-                      _vm._v("\r\n            Browse \r\n            "),
+                      _vm._v("\n            Browse \n            "),
                       _c("input", {
                         staticClass: "upload",
                         attrs: {
@@ -48807,7 +48807,7 @@ var staticRenderFns = [
                     },
                     [
                       _vm._v(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\r\n"
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
                       )
                     ]
                   )
@@ -48874,7 +48874,7 @@ var staticRenderFns = [
                     },
                     [
                       _vm._v(
-                        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.\r\n"
+                        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.\n"
                       )
                     ]
                   )
@@ -48890,14 +48890,14 @@ var staticRenderFns = [
                       _c("input", {
                         attrs: { type: "radio", name: "graduated", checked: "" }
                       }),
-                      _vm._v("Yes\r\n      ")
+                      _vm._v("Yes\n      ")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
                       _c("input", {
                         attrs: { type: "radio", name: "graduated" }
                       }),
-                      _vm._v("No\r\n      ")
+                      _vm._v("No\n      ")
                     ])
                   ])
                 ]),
@@ -48977,7 +48977,7 @@ var staticRenderFns = [
                     },
                     [
                       _vm._v(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\r\n"
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n"
                       )
                     ]
                   )
@@ -49013,7 +49013,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\r\n  Bycicle \r\n  "),
+                    _vm._v("\n  Bycicle \n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49025,7 +49025,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\r\n  Photography \r\n  "),
+                    _vm._v("\n  Photography \n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49037,7 +49037,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\r\n  Shopping \r\n  "),
+                    _vm._v("\n  Shopping \n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49049,7 +49049,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\r\n  Traveling \r\n  "),
+                    _vm._v("\n  Traveling \n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49061,7 +49061,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\r\n  Eating \r\n  "),
+                    _vm._v("\n  Eating \n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 )
@@ -69148,7 +69148,7 @@ var state = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\blog\resources\assets\js\dashboard.js */"./resources/assets/js/dashboard.js");
+module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/js/dashboard.js */"./resources/assets/js/dashboard.js");
 
 
 /***/ })
