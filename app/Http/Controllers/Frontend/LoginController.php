@@ -75,15 +75,15 @@ class LoginController extends BaseController
             'password' => 'required', 
             'confirm_password' => 'required|same:password', 
         ]);
-    if ($validator->fails()) { 
-                return response()->json(['error'=>$validator->errors()], 401);            
-            }
-    $input = $request->all(); 
-            $input['password'] = bcrypt($input['password']); 
-            $user = $this->account->create($input); 
-            $success['token'] =  $user->createToken('MyApp')->accessToken; 
-            $success['name'] =  $user->name;
-    return response()->json(['success'=>$success], $this->successStatus); 
+        if ($validator->fails()) { 
+            return response()->json(['error'=>$validator->errors()], 401);            
+        }
+        $input = $request->all(); 
+        $input['password'] = bcrypt($input['password']); 
+        $user = $this->account->create($input); 
+        // $success['token'] =  $user->createToken('MyApp')->accessToken; 
+        $success['name'] =  $user->name;
+    return response()->json(['status'=>true,'data'=>$user,'message'=>'Registration completed Successfully']); 
     }
     public function user(){
         $userid = Auth()->user()->id;

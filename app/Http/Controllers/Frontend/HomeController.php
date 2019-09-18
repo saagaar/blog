@@ -31,6 +31,7 @@ class HomeController extends FrontendController
     public function index(Request $request)
     {
         // print_r($this->siteName);
+       $this->save_visitor_info();
         return view('frontend.layouts.app');
     }
 

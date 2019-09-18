@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repository\SiteoptionsInterface;
 use Illuminate\Support\Facades\Route;
 use App\Models\Userlogs;
+use App\Services\VisitorInfo;
 use App\Jobs\VisitorLog;
 use App\Repository\UserlogInterface;
 
@@ -35,8 +36,9 @@ class FrontendController extends BaseController
     public function __construct()
     {
         $SiteoptionsInterface = app()->make('App\Repository\SiteoptionsInterface');
-        $this->UserlogInterface = app()->make('App\Repository\UserlogInterface');
+        $this->userLogInterface=$this->UserlogInterface = app()->make('App\Repository\UserlogInterface');
         $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
+        $this->visitorInfo =  new visitorInfo();
         $this->siteName =  $this->siteSettings->site_name;
         $this->contactEmail =  $this->siteSettings->contact_email;
         $this->contactName =  $this->siteSettings->contact_name;
@@ -55,8 +57,10 @@ class FrontendController extends BaseController
         $this->city =  $this->siteSettings->city;
         $this->state =  $this->siteSettings->state;
         $this->country =  $this->siteSettings->country;
-        // $this->savelog();
+        $this->save_visitor_info();
         $this->websiteMode=$this->siteSettings->mode;
+
+        date_default_timezone_set('Asia/Kathmandu');
        
         if($this->websiteMode=='3')
         {
@@ -82,11 +86,53 @@ class FrontendController extends BaseController
         // return view('frontend.user.dashboard');
 
     }
-
+    
 
     public function save_visitor_info()
     {
+        $serverData = $this->visitorInfo->getServerInfo();
+        $ipAddress=$serverData['ip_address'];  
+        $dblogdata=$this->userLogInterface->getLogbyIpAddressAndURL($serverData['ip_address'],$serverData['path']);
+       if($dblogdata && (trim($dblogdata['details'])!='')){
+            $start = date_create($dblogdata['details']->visit_date);
+        $end = date_create(date("Y-m-d H:i:s"));
+        $diff=date_diff($end,$start);
+        
+        if((($dblogdata['ip']->ip_address==$serverData['ip_address'])  && ($dblogdata['details']->redirected_to!=$serverData['path'])) || ( ($dblogdata['ip']->ip_address==$serverData['ip_address'])  && ($dblogdata['details']->redirected_to==$serverData['path']) && ($diff->i>10)) ){
+            $logdata = array(
+                    'referer_url'   =>$serverData['refererurl'],
+                    'user_agent'    =>$serverData['useragent'],
+                    'redirected_to' =>$serverData['path'],
+                    'visit_date'   =>date("Y-m-d H:i:s"),
+                );
+                $dblogdata['ip']->logdetails()->create($logdata);
+            }
+        }
+        elseif ($dblogdata && trim($dblogdata['details'])=='') {
+            $logdata = array(
+                    'referer_url'   =>$serverData['refererurl'],
+                    'user_agent'    =>$serverData['useragent'],
+                    'redirected_to' =>$serverData['path'],
+                    'visit_date'   =>date("Y-m-d H:i:s"),
+                );
+            $dblogdata['ip']->logdetails()->create($logdata);
+        }
+        else{
+            $logdata = array(
+                    'referer_url'   =>$serverData['refererurl'],
+                    'user_agent'    =>$serverData['useragent'],
+                    'redirected_to' =>$serverData['path'],
+                    'visit_date'   =>date("Y-m-d H:i:s"),
+                );
+            $logcreate= $this->userLogInterface->create(
+                   array(
+                    'ip_address'           =>$serverData['ip_address'],
+                   )
+                );
+            $logcreate->logdetails()->create($logdata);
+        }
+        VisitorLog::dispatch($this->UserlogInterface,$ipAddress);
 
-         VisitorLog::dispatch($this->UserlogInterface,$ipaddress);
+        
     }
 }

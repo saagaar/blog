@@ -21,5 +21,7 @@ interface UserlogInterface
 
     public function create(array $data);
     
+    public function update( $id,array $data);
+    
     public function getLogbyIpAddressAndURL($userip,$urlpath);
 }

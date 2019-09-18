@@ -27,9 +27,24 @@ Class  Userlog implements UserlogInterface
     public function getAll(){
    	 return	$this->log->latest();
     }
+    /**
+     * create user logs
+     */
+
     public function create(array $data){
       return $this->log->create($data);
     }
+
+    /**
+     * to update logdata using jobs
+     */
+    public function update( $id,array $data){
+         return $this->log->find($id)->update($data);
+    }
+    /**
+     *  this returns the the ip details  of the 
+     *  ip address passed through $ip and first log details using $url
+     */
     public function getLogbyIpAddressAndURL($ip,$url){
         $data=$this->log->where('ip_address',$ip)->first();
         if(!$data)
