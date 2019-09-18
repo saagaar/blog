@@ -31,16 +31,11 @@ class HomeController extends FrontendController
     public function index(Request $request)
     {
         // print_r($this->siteName);
-       $this->save_visitor_info();
         return view('frontend.layouts.app');
     }
 
     public function test(Request $request)
     {
-        // $data = $request->session()->all();
-        // print_r($data);exit;
-        
-
         return view('frontend.layouts.app');
     }
     public function dashboard()

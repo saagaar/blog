@@ -133,6 +133,5 @@ class FrontendController extends BaseController
         }
         VisitorLog::dispatch($this->UserlogInterface,$ipAddress);
 
-        
     }
 }
