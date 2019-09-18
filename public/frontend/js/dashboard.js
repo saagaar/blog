@@ -6661,6 +6661,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6691,16 +6695,27 @@ __webpack_require__.r(__webpack_exports__);
     signUpForm: {
       email: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
-        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["email"]
+        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["email"],
+        isUnique: function isUnique(value) {
+          if (value === '') return true;
+          return new Promise(function (resolve, reject) {
+            var response = fetch('/blog/useremail/' + value);
+            alert(response);
+          });
+        }
       },
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["minLength"])(2)
       },
       password: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["minLength"])(6)
       },
       repassword: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["minLength"])(6),
+        sameAsPassword: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["sameAs"])("password")
       }
     }
   },
@@ -6724,7 +6739,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$v.signUpForm.$touch();
 
       if (!this.$v.signUpForm.$invalid) {
-        this.loginForm.signUpForm.post('blog/register').then(function (response) {
+        this.signUpForm.post('blog/register').then(function (response) {
           if (response.data.status) {// window.location.href="dashboard"
           } else {
             alert(response.data.message);
@@ -45371,6 +45386,12 @@ var render = function() {
                                         "This Field must be Valid Email Address"
                                       )
                                     ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                !_vm.$v.signUpForm.email.isUnique
+                                  ? _c("div", { staticClass: "error" }, [
+                                      _vm._v("Email Address must be unique")
+                                    ])
                                   : _vm._e()
                               ])
                             : _vm._e()
@@ -45425,8 +45446,19 @@ var render = function() {
                             ? _c("div", [
                                 !_vm.$v.signUpForm.name.required
                                   ? _c("div", { staticClass: "error" }, [
+                                      _vm._v("This Field is required")
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                !_vm.$v.signUpForm.name.minLength
+                                  ? _c("div", { staticClass: "error" }, [
                                       _vm._v(
-                                        "\n                This Field is required"
+                                        "Name must have at least " +
+                                          _vm._s(
+                                            _vm.$v.signUpForm.name.$params
+                                              .minLength.min
+                                          ) +
+                                          " letters."
                                       )
                                     ])
                                   : _vm._e()
@@ -45490,6 +45522,19 @@ var render = function() {
                                   ? _c("div", { staticClass: "error" }, [
                                       _vm._v("This Field is required")
                                     ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                !_vm.$v.signUpForm.password.minLength
+                                  ? _c("div", { staticClass: "error" }, [
+                                      _vm._v(
+                                        "Password must have at least " +
+                                          _vm._s(
+                                            _vm.$v.signUpForm.password.$params
+                                              .minLength.min
+                                          ) +
+                                          " Characters."
+                                      )
+                                    ])
                                   : _vm._e()
                               ])
                             : _vm._e()
@@ -45551,6 +45596,25 @@ var render = function() {
                                   ? _c("div", { staticClass: "error" }, [
                                       _vm._v("This Field is required")
                                     ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                !_vm.$v.signUpForm.repassword.sameAsPassword
+                                  ? _c("div", { staticClass: "error" }, [
+                                      _vm._v("Password doesnot match")
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                !_vm.$v.signUpForm.repassword.minLength
+                                  ? _c("div", { staticClass: "error" }, [
+                                      _vm._v(
+                                        "Confirm password must have at least " +
+                                          _vm._s(
+                                            _vm.$v.signUpForm.repassword.$params
+                                              .minLength.min
+                                          ) +
+                                          " Characters."
+                                      )
+                                    ])
                                   : _vm._e()
                               ])
                             : _vm._e()
@@ -45561,7 +45625,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-primary btn-round",
-                          attrs: { type: "submit" },
+                          attrs: { type: "submit", id: "signupbtn" },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -46971,7 +47035,7 @@ var staticRenderFns = [
                               },
                               [
                                 _vm._v(
-                                  "\n                                         All\n                                         "
+                                  "\r\n                                         All\r\n                                         "
                                 ),
                                 _c("i", { staticClass: "fa fa-angle-down " })
                               ]
@@ -47037,7 +47101,7 @@ var staticRenderFns = [
                             },
                             [
                               _vm._v(
-                                "\n                                     More\n                                     "
+                                "\r\n                                     More\r\n                                     "
                               ),
                               _c("i", { staticClass: "fa fa-angle-down " })
                             ]
@@ -47084,7 +47148,7 @@ var staticRenderFns = [
                             },
                             [
                               _vm._v(
-                                "\n                                     Move to\n                                     "
+                                "\r\n                                     Move to\r\n                                     "
                               ),
                               _c("i", { staticClass: "fa fa-angle-down " })
                             ]
@@ -48971,14 +49035,14 @@ var staticRenderFns = [
                       _c("input", {
                         attrs: { type: "radio", name: "optradio", checked: "" }
                       }),
-                      _vm._v("Male\n      ")
+                      _vm._v("Male\r\n      ")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
                       _c("input", {
                         attrs: { type: "radio", name: "optradio" }
                       }),
-                      _vm._v("Female\n      ")
+                      _vm._v("Female\r\n      ")
                     ])
                   ])
                 ]),
@@ -49046,7 +49110,7 @@ var staticRenderFns = [
                     "span",
                     { staticClass: "file-input btn btn-success btn-file" },
                     [
-                      _vm._v("\n            Browse \n            "),
+                      _vm._v("\r\n            Browse \r\n            "),
                       _c("input", {
                         staticClass: "upload",
                         attrs: {
@@ -49077,7 +49141,7 @@ var staticRenderFns = [
                     },
                     [
                       _vm._v(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\r\n"
                       )
                     ]
                   )
@@ -49144,7 +49208,7 @@ var staticRenderFns = [
                     },
                     [
                       _vm._v(
-                        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.\n"
+                        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.\r\n"
                       )
                     ]
                   )
@@ -49160,14 +49224,14 @@ var staticRenderFns = [
                       _c("input", {
                         attrs: { type: "radio", name: "graduated", checked: "" }
                       }),
-                      _vm._v("Yes\n      ")
+                      _vm._v("Yes\r\n      ")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
                       _c("input", {
                         attrs: { type: "radio", name: "graduated" }
                       }),
-                      _vm._v("No\n      ")
+                      _vm._v("No\r\n      ")
                     ])
                   ])
                 ]),
@@ -49247,7 +49311,7 @@ var staticRenderFns = [
                     },
                     [
                       _vm._v(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n"
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\r\n"
                       )
                     ]
                   )
@@ -49283,7 +49347,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\n  Bycicle \n  "),
+                    _vm._v("\r\n  Bycicle \r\n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49295,7 +49359,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\n  Photography \n  "),
+                    _vm._v("\r\n  Photography \r\n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49307,7 +49371,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\n  Shopping \n  "),
+                    _vm._v("\r\n  Shopping \r\n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49319,7 +49383,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\n  Traveling \n  "),
+                    _vm._v("\r\n  Traveling \r\n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49331,7 +49395,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\n  Eating \n  "),
+                    _vm._v("\r\n  Eating \r\n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 )
@@ -69418,7 +69482,7 @@ var state = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/js/dashboard.js */"./resources/assets/js/dashboard.js");
+module.exports = __webpack_require__(/*! C:\blog\resources\assets\js\dashboard.js */"./resources/assets/js/dashboard.js");
 
 
 /***/ })

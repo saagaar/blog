@@ -22,13 +22,14 @@
               <div v-if="$v.signUpForm.email.$anyDirty">
                 <div class="error" v-if="!$v.signUpForm.email.required">This Field is required</div>
                 <div class="error" v-if="!$v.signUpForm.email.email">This Field must be Valid Email Address</div>
+                <div class="error" v-if="!$v.signUpForm.email.isUnique">Email Address must be unique</div>
               </div>
             </div>
             <div class="form-group"  :class="{ 'form-group--error': $v.signUpForm.name.$error }" >
               <input type="text" class="form-control form__input"  @blur="$v.signUpForm.name.$touch()" v-model.trim="signUpForm.name"  placeholder="Full Name..">
               <div v-if="$v.signUpForm.name.$anyDirty">
-                <div class="error" v-if="!$v.signUpForm.name.required">
-                This Field is required</div>
+                <div class="error" v-if="!$v.signUpForm.name.required">This Field is required</div>
+                <div class="error" v-if="!$v.signUpForm.name.minLength">Name must have at least {{$v.signUpForm.name.$params.minLength.min}} letters.</div>
                 
               </div>
             </div>
@@ -36,16 +37,19 @@
               <input type="password" name="password" class="form-control" @blur="$v.signUpForm.password.$touch()"  placeholder="Your password..." v-model.trim="signUpForm.password">
               <div v-if="$v.signUpForm.password.$anyDirty">
                 <div class="error" v-if="!$v.signUpForm.password.required">This Field is required</div>
+                <div class="error" v-if="!$v.signUpForm.password.minLength">Password must have at least {{$v.signUpForm.password.$params.minLength.min}} Characters.</div>
               </div>
             </div> 
           <div class="form-group" :class="{ 'form-group--error': $v.signUpForm.repassword.$error }">
               <input type="password" name="password" class="form-control" @blur="$v.signUpForm.repassword.$touch()"   placeholder="Re-type password..." v-model.trim="signUpForm.repassword">
               <div v-if="$v.signUpForm.repassword.$anyDirty">
                 <div class="error" v-if="!$v.signUpForm.repassword.required">This Field is required</div>
+                <div class="error" v-if="!$v.signUpForm.repassword.sameAsPassword">Password doesnot match</div>
+                <div class="error" v-if="!$v.signUpForm.repassword.minLength">Confirm password must have at least {{$v.signUpForm.repassword.$params.minLength.min}} Characters.</div>
                  <!-- <div class="error" v-if="!$v.repassword.sameAsPassword">Passwords must be identical.</div> -->
               </div>
             </div> 
-            <button type="submit"  @click.prevent="submitSignUpForm" class="btn btn-primary btn-round">Sign Up</button>
+            <button type="submit" id="signupbtn" @click.prevent="submitSignUpForm" class="btn btn-primary btn-round">Sign Up</button>
           </form>
           
           <div class="text-center text-muted delimiter">or use a social network</div>
@@ -137,9 +141,10 @@
 
 </template>
 <script>
-import { required, sameAs, between ,email} from 'vuelidate/lib/validators'
+import { required, minLength , sameAs, between ,email} from 'vuelidate/lib/validators'
 import Form from './../../services/Form.js'
     export default {
+
         data() {
         	 return {
             loginForm:new Form({
@@ -155,6 +160,7 @@ import Form from './../../services/Form.js'
           }
         },
         validations: {
+        
           loginForm:{
             email: 
             {
@@ -170,25 +176,38 @@ import Form from './../../services/Form.js'
             email: 
             {
               required,
-              email
+              email,
+                isUnique(value) {
+                if (value === '') return true
+                    return new Promise((resolve, reject) => {
+                        const response =  fetch('/blog/useremail/'+value)
+                        alert(response);
+                    })
+              }
             },
             name: 
             {
               required,
+              minLength: minLength(2)
             },
             password: 
             {
               required,
+               minLength: minLength(6)
             },
             repassword: 
             {
               required,
+               minLength: minLength(6),
+               sameAsPassword: sameAs("password")
  
             }
           }
+          
         },
 
         methods:{
+
           submitLoginForm:function(){
 
           
@@ -212,7 +231,7 @@ import Form from './../../services/Form.js'
             this.$v.signUpForm.$touch();
             if(!this.$v.signUpForm.$invalid)
             {
-              this.loginForm.signUpForm.post('blog/register').then(response => {
+              this.signUpForm.post('blog/register').then(response => {
                if(response.data.status){
 
                   // window.location.href="dashboard"

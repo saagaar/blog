@@ -44,7 +44,7 @@ class FrontendController extends BaseController
         $this->contactName =  $this->siteSettings->contact_name;
         $this->contactNumber =  $this->siteSettings->contact_number;
         $this->maintainence =  $this->siteSettings->maintainence;
-        $this->userActivation =  $this->siteSettings->user_requires_activation;
+        $this->userRequiresActivation  =  $this->siteSettings->user_requires_activation;
         $this->blogRequiresActivation =  $this->siteSettings->blog_requires_activation;
         $this->facebookId =  $this->siteSettings->facebook_id;
         $this->linkedinId =  $this->siteSettings->linkedin_id;
@@ -80,12 +80,6 @@ class FrontendController extends BaseController
         return view('frontend.home.index');
     }
   
-    public function dashboard(){
-       $user = Socialite::driver('facebook')->user();
-      
-        // return view('frontend.user.dashboard');
-
-    }
     
 
     public function save_visitor_info()

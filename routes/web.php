@@ -26,6 +26,9 @@ Route::get('/dashboard/{provider}','Frontend\LoginController@dashboard')->name('
 Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->name('social.login');
 // Route::match(['get','post'],'/admin/login','AdminController@login');
 Route::post('/blog/login', 'Frontend\LoginController@login')->name('login');
+Route::post('/blog/register', 'Frontend\LoginController@register')->name('register');
+
+Route::get('/blog/useremail/{email}', 'Frontend\LoginController@useremail')->name('useremail');
 
 Route::post('/blog/add', 'Frontend\BlogController@create');
 Auth::routes();

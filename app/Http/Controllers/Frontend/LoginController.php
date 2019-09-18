@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator,Redirect,Response,File;
 use Socialite;
 use App\Repository\AccountInterface;
 
-class LoginController extends BaseController
+class LoginController extends FrontendController
 {
     protected $account;
     public $successStatus = 200;
     public function __construct(AccountInterface $account)
     {
-        // parent::__construct();
+        parent::__construct();
         $this->account=$account;
     }   
 
@@ -22,10 +23,7 @@ class LoginController extends BaseController
      * Show the application dashboard.
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        return view('frontend.home.index');
-    }
+   
     public function socialLogin($provider)
     {
         return Socialite::driver($provider)->redirect();
@@ -59,7 +57,6 @@ class LoginController extends BaseController
         { 
             $userid = Auth()->user()->id;
             $user = $this->account->getById($userid);
-            // $success['token'] =  $user->createToken('MyApp')->accessToken; 
             return response()->json(['status'=>true,'data'=>$user,'message'=>'Logged in Successfully']); 
         } 
         else
@@ -70,24 +67,31 @@ class LoginController extends BaseController
     public function register(Request $request) 
     { 
         $validator = Validator::make($request->all(), [ 
-            'name' => 'required', 
-            'email' => 'required|email', 
-            'password' => 'required', 
-            'confirm_password' => 'required|same:password', 
+            'name' => 'required|min:2', 
+            'email' => 'required|email|unique:users,email', 
+            'password' => 'required|min:6', 
+            'repassword' => 'required|min:6|same:password', 
         ]);
         if ($validator->fails()) { 
             return response()->json(['status'=>false,'error'=>$validator->errors()], 401);            
         }
         $input = $request->all(); 
         $input['password'] = bcrypt($input['password']); 
-        $user = $this->account->create($input); 
-        // $success['token'] =  $user->createToken('MyApp')->accessToken; 
-        $success['name'] =  $user->name;
+        if($this->userRequiresActivation=='Y'){
+            $input['status']    ='1';
+        }else{
+            $input['status']    ='0';
+        }
+        
+        $user = $this->account->create($input);
     return response()->json(['status'=>true,'data'=>$user,'message'=>'Registration completed Successfully']); 
     }
-    public function user(){
-        $userid = Auth()->user()->id;
-        $user = $this->account->getById($userid);
-         return response()->json(['success' => $user], $this->successStatus); 
-    }  
+    public function userEmail($email){
+        $user = $this->account->getAll()->where('email',$email)->first();
+        if ($user) {
+            return true;
+            }else{
+                false
+            }
+        } 
 }
