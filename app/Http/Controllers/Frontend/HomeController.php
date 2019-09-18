@@ -30,6 +30,10 @@ class HomeController extends FrontendController
      */
     public function index(Request $request)
     {
+
+        header("HTTP/1.1 200");
+                                        header("RECEIVEOK");
+                                        echo "RECEIVEOK";exit;
         return view('frontend.layouts.app');
     }
 

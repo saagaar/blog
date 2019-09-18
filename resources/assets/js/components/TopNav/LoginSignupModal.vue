@@ -16,20 +16,36 @@
           <p>Create an account to receive great stories in your inbox and follow authors and topics that you love.</p>
         </div>
         <div class="d-flex flex-column text-center">
-          <form action="/user/signup" method="post">
-            <div class="form-group">
-              <input type="text" class="form-control" id="fullname"placeholder="Your Full Name...">
+          <form method="post">
+           <div class="form-group"  :class="{ 'form-group--error': $v.signUpForm.email.$error }" >
+              <input type="email" class="form-control form__input"  @blur="$v.signUpForm.email.$touch()" v-model.trim="signUpForm.email"  placeholder="Your email address...">
+              <div v-if="$v.signUpForm.email.$anyDirty">
+                <div class="error" v-if="!$v.signUpForm.email.required">This Field is required</div>
+                <div class="error" v-if="!$v.signUpForm.email.email">This Field must be Valid Email Address</div>
+              </div>
             </div>
-            <div class="form-group">
-              <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+            <div class="form-group"  :class="{ 'form-group--error': $v.signUpForm.name.$error }" >
+              <input type="text" class="form-control form__input"  @blur="$v.signUpForm.name.$touch()" v-model.trim="signUpForm.name"  placeholder="Full Name..">
+              <div v-if="$v.signUpForm.name.$anyDirty">
+                <div class="error" v-if="!$v.signUpForm.name.required">
+                This Field is required</div>
+                
+              </div>
             </div>
-            <div class="form-group">
-              <input type="password" class="form-control"  placeholder="Your password...">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control"  placeholder="Re-type password...">
-            </div>
-            <button type="submit" class="btn btn-primary btn-round">Sign Up</button>
+            <div class="form-group" :class="{ 'form-group--error': $v.signUpForm.password.$error }">
+              <input type="password" name="password" class="form-control" @blur="$v.signUpForm.password.$touch()"  placeholder="Your password..." v-model.trim="signUpForm.password">
+              <div v-if="$v.signUpForm.password.$anyDirty">
+                <div class="error" v-if="!$v.signUpForm.password.required">This Field is required</div>
+              </div>
+            </div> 
+          <div class="form-group" :class="{ 'form-group--error': $v.signUpForm.repassword.$error }">
+              <input type="password" name="password" class="form-control" @blur="$v.signUpForm.repassword.$touch()"   placeholder="Re-type password..." v-model.trim="signUpForm.repassword">
+              <div v-if="$v.signUpForm.repassword.$anyDirty">
+                <div class="error" v-if="!$v.signUpForm.repassword.required">This Field is required</div>
+                 <!-- <div class="error" v-if="!$v.repassword.sameAsPassword">Passwords must be identical.</div> -->
+              </div>
+            </div> 
+            <button type="submit"  @click.prevent="submitSignUpForm" class="btn btn-primary btn-round">Sign Up</button>
           </form>
           
           <div class="text-center text-muted delimiter">or use a social network</div>
@@ -75,18 +91,18 @@
         </div>
         <div class="d-flex flex-column text-center">
           <form method="post">
-            <div class="form-group"  :class="{ 'form-group--error': $v.form.email.$error }" >
-              <input type="email" class="form-control form__input"  @blur="$v.form.email.$touch()" v-model.trim="form.email"  placeholder="Your email address...">
-              <div v-if="$v.form.email.$anyDirty">
-                <div class="error" v-if="!$v.form.email.required">This Field is required</div>
-                <div class="error" v-if="!$v.form.email.email">This Field must be Valid Email Address</div>
+            <div class="form-group"  :class="{ 'form-group--error': $v.loginForm.email.$error }" >
+              <input type="email" class="form-control form__input"  @blur="$v.loginForm.email.$touch()" v-model.trim="loginForm.email"  placeholder="Your email address...">
+              <div v-if="$v.loginForm.email.$anyDirty">
+                <div class="error" v-if="!$v.loginForm.email.required">This Field is required</div>
+                <div class="error" v-if="!$v.loginForm.email.email">This Field must be Valid Email Address</div>
               </div>
             </div>
           
-            <div class="form-group" :class="{ 'form-group--error': $v.form.password.$error }">
-              <input type="password" name="password" class="form-control" @blur="$v.form.password.$touch()" id="password1"  placeholder="Your password..." v-model.trim="form.password">
-              <div v-if="$v.form.password.$anyDirty">
-                <div class="error" v-if="!$v.form.password.required">This Field is required</div>
+            <div class="form-group" :class="{ 'form-group--error': $v.loginForm.password.$error }">
+              <input type="password" name="password" class="form-control" @blur="$v.loginForm.password.$touch()" id="password1"  placeholder="Your password..." v-model.trim="loginForm.password">
+              <div v-if="$v.loginForm.password.$anyDirty">
+                <div class="error" v-if="!$v.loginForm.password.required">This Field is required</div>
               </div>
             </div> 
             <button type="submit" @click.prevent="submitLoginForm"  class="btn btn-primary btn-round">Login</button>
@@ -121,20 +137,27 @@
 
 </template>
 <script>
-import { required, between ,email} from 'vuelidate/lib/validators'
+import { required, sameAs, between ,email} from 'vuelidate/lib/validators'
 import Form from './../../services/Form.js'
     export default {
         data() {
         	 return {
-            form:new Form({
+            loginForm:new Form({
                 email: '',
                 password: '',
+              }),
+            signUpForm:new Form({
+                email: '',
+                password: '',
+                repassword:'',
+                name:'',
               })
           }
         },
         validations: {
-          form:{
-            email: {
+          loginForm:{
+            email: 
+            {
               required,
               email
             },
@@ -142,15 +165,37 @@ import Form from './../../services/Form.js'
             {
               required,
             }
+          },
+          signUpForm:{
+            email: 
+            {
+              required,
+              email
+            },
+            name: 
+            {
+              required,
+            },
+            password: 
+            {
+              required,
+            },
+            repassword: 
+            {
+              required,
+ 
+            }
           }
         },
 
         methods:{
           submitLoginForm:function(){
-            this.$v.$touch();
-            if(!this.$v.$invalid)
+
+          
+            this.$v.loginForm.$touch();
+            if(!this.$v.loginForm.$invalid)
             {
-              this.form.post('blog/login').then(response => {
+              this.loginForm.post('blog/login').then(response => {
                if(response.data.status){
 
                   window.location.href="dashboard"
@@ -163,6 +208,24 @@ import Form from './../../services/Form.js'
               });
             }
           },
+          submitSignUpForm:function(){
+            this.$v.signUpForm.$touch();
+            if(!this.$v.signUpForm.$invalid)
+            {
+              this.loginForm.signUpForm.post('blog/register').then(response => {
+               if(response.data.status){
+
+                  // window.location.href="dashboard"
+               }
+               else{
+                  alert(response.data.message)
+               }
+              }).catch(e => {
+                  console.log(e);
+              });
+            }
+          },
+
         }
 
     }

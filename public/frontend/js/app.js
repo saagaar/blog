@@ -6629,19 +6629,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]({
+      loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]({
         email: '',
         password: ''
+      }),
+      signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]({
+        email: '',
+        password: '',
+        repassword: '',
+        name: ''
       })
     };
   },
   validations: {
-    form: {
+    loginForm: {
       email: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
         email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["email"]
@@ -6649,16 +6671,45 @@ __webpack_require__.r(__webpack_exports__);
       password: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
       }
+    },
+    signUpForm: {
+      email: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["email"]
+      },
+      name: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+      },
+      password: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+      },
+      repassword: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+      }
     }
   },
   methods: {
     submitLoginForm: function submitLoginForm() {
-      this.$v.$touch();
+      this.$v.loginForm.$touch();
 
-      if (!this.$v.$invalid) {
-        this.form.post('blog/login').then(function (response) {
+      if (!this.$v.loginForm.$invalid) {
+        this.loginForm.post('blog/login').then(function (response) {
           if (response.data.status) {
             window.location.href = "dashboard";
+          } else {
+            alert(response.data.message);
+          }
+        })["catch"](function (e) {
+          console.log(e);
+        });
+      }
+    },
+    submitSignUpForm: function submitSignUpForm() {
+      this.$v.signUpForm.$touch();
+
+      if (!this.$v.signUpForm.$invalid) {
+        this.loginForm.signUpForm.post('blog/register').then(function (response) {
+          if (response.data.status) {// window.location.href="dashboard"
           } else {
             alert(response.data.message);
           }
@@ -45761,7 +45812,317 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c(
+      "div",
+      {
+        staticClass: "modal log-modal fade",
+        attrs: {
+          id: "SignUpModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered modal-lg",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-box" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "d-flex flex-column text-center" }, [
+                    _c("form", { attrs: { method: "post" } }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          class: {
+                            "form-group--error": _vm.$v.signUpForm.email.$error
+                          }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.trim",
+                                value: _vm.signUpForm.email,
+                                expression: "signUpForm.email",
+                                modifiers: { trim: true }
+                              }
+                            ],
+                            staticClass: "form-control form__input",
+                            attrs: {
+                              type: "email",
+                              placeholder: "Your email address..."
+                            },
+                            domProps: { value: _vm.signUpForm.email },
+                            on: {
+                              blur: [
+                                function($event) {
+                                  return _vm.$v.signUpForm.email.$touch()
+                                },
+                                function($event) {
+                                  return _vm.$forceUpdate()
+                                }
+                              ],
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.signUpForm,
+                                  "email",
+                                  $event.target.value.trim()
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.$v.signUpForm.email.$anyDirty
+                            ? _c("div", [
+                                !_vm.$v.signUpForm.email.required
+                                  ? _c("div", { staticClass: "error" }, [
+                                      _vm._v("This Field is required")
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                !_vm.$v.signUpForm.email.email
+                                  ? _c("div", { staticClass: "error" }, [
+                                      _vm._v(
+                                        "This Field must be Valid Email Address"
+                                      )
+                                    ])
+                                  : _vm._e()
+                              ])
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          class: {
+                            "form-group--error": _vm.$v.signUpForm.name.$error
+                          }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.trim",
+                                value: _vm.signUpForm.name,
+                                expression: "signUpForm.name",
+                                modifiers: { trim: true }
+                              }
+                            ],
+                            staticClass: "form-control form__input",
+                            attrs: { type: "text", placeholder: "Full Name.." },
+                            domProps: { value: _vm.signUpForm.name },
+                            on: {
+                              blur: [
+                                function($event) {
+                                  return _vm.$v.signUpForm.name.$touch()
+                                },
+                                function($event) {
+                                  return _vm.$forceUpdate()
+                                }
+                              ],
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.signUpForm,
+                                  "name",
+                                  $event.target.value.trim()
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.$v.signUpForm.name.$anyDirty
+                            ? _c("div", [
+                                !_vm.$v.signUpForm.name.required
+                                  ? _c("div", { staticClass: "error" }, [
+                                      _vm._v(
+                                        "\n                This Field is required"
+                                      )
+                                    ])
+                                  : _vm._e()
+                              ])
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          class: {
+                            "form-group--error":
+                              _vm.$v.signUpForm.password.$error
+                          }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.trim",
+                                value: _vm.signUpForm.password,
+                                expression: "signUpForm.password",
+                                modifiers: { trim: true }
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "password",
+                              name: "password",
+                              placeholder: "Your password..."
+                            },
+                            domProps: { value: _vm.signUpForm.password },
+                            on: {
+                              blur: [
+                                function($event) {
+                                  return _vm.$v.signUpForm.password.$touch()
+                                },
+                                function($event) {
+                                  return _vm.$forceUpdate()
+                                }
+                              ],
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.signUpForm,
+                                  "password",
+                                  $event.target.value.trim()
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.$v.signUpForm.password.$anyDirty
+                            ? _c("div", [
+                                !_vm.$v.signUpForm.password.required
+                                  ? _c("div", { staticClass: "error" }, [
+                                      _vm._v("This Field is required")
+                                    ])
+                                  : _vm._e()
+                              ])
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          class: {
+                            "form-group--error":
+                              _vm.$v.signUpForm.repassword.$error
+                          }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.trim",
+                                value: _vm.signUpForm.repassword,
+                                expression: "signUpForm.repassword",
+                                modifiers: { trim: true }
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "password",
+                              name: "password",
+                              placeholder: "Re-type password..."
+                            },
+                            domProps: { value: _vm.signUpForm.repassword },
+                            on: {
+                              blur: [
+                                function($event) {
+                                  return _vm.$v.signUpForm.repassword.$touch()
+                                },
+                                function($event) {
+                                  return _vm.$forceUpdate()
+                                }
+                              ],
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.signUpForm,
+                                  "repassword",
+                                  $event.target.value.trim()
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.$v.signUpForm.repassword.$anyDirty
+                            ? _c("div", [
+                                !_vm.$v.signUpForm.repassword.required
+                                  ? _c("div", { staticClass: "error" }, [
+                                      _vm._v("This Field is required")
+                                    ])
+                                  : _vm._e()
+                              ])
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-round",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.submitSignUpForm($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Sign Up")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "text-center text-muted delimiter" },
+                      [_vm._v("or use a social network")]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(2)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ]),
+                _vm._v(" "),
+                _vm._m(4)
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -45785,10 +46146,10 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-box" }, [
-                _vm._m(1),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
-                  _vm._m(2),
+                  _vm._m(6),
                   _vm._v(" "),
                   _c("div", { staticClass: "d-flex flex-column text-center" }, [
                     _c("form", { attrs: { method: "post" } }, [
@@ -45797,7 +46158,7 @@ var render = function() {
                         {
                           staticClass: "form-group",
                           class: {
-                            "form-group--error": _vm.$v.form.email.$error
+                            "form-group--error": _vm.$v.loginForm.email.$error
                           }
                         },
                         [
@@ -45806,8 +46167,8 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model.trim",
-                                value: _vm.form.email,
-                                expression: "form.email",
+                                value: _vm.loginForm.email,
+                                expression: "loginForm.email",
                                 modifiers: { trim: true }
                               }
                             ],
@@ -45816,11 +46177,11 @@ var render = function() {
                               type: "email",
                               placeholder: "Your email address..."
                             },
-                            domProps: { value: _vm.form.email },
+                            domProps: { value: _vm.loginForm.email },
                             on: {
                               blur: [
                                 function($event) {
-                                  return _vm.$v.form.email.$touch()
+                                  return _vm.$v.loginForm.email.$touch()
                                 },
                                 function($event) {
                                   return _vm.$forceUpdate()
@@ -45831,7 +46192,7 @@ var render = function() {
                                   return
                                 }
                                 _vm.$set(
-                                  _vm.form,
+                                  _vm.loginForm,
                                   "email",
                                   $event.target.value.trim()
                                 )
@@ -45839,15 +46200,15 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _vm.$v.form.email.$anyDirty
+                          _vm.$v.loginForm.email.$anyDirty
                             ? _c("div", [
-                                !_vm.$v.form.email.required
+                                !_vm.$v.loginForm.email.required
                                   ? _c("div", { staticClass: "error" }, [
                                       _vm._v("This Field is required")
                                     ])
                                   : _vm._e(),
                                 _vm._v(" "),
-                                !_vm.$v.form.email.email
+                                !_vm.$v.loginForm.email.email
                                   ? _c("div", { staticClass: "error" }, [
                                       _vm._v(
                                         "This Field must be Valid Email Address"
@@ -45864,7 +46225,8 @@ var render = function() {
                         {
                           staticClass: "form-group",
                           class: {
-                            "form-group--error": _vm.$v.form.password.$error
+                            "form-group--error":
+                              _vm.$v.loginForm.password.$error
                           }
                         },
                         [
@@ -45873,8 +46235,8 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model.trim",
-                                value: _vm.form.password,
-                                expression: "form.password",
+                                value: _vm.loginForm.password,
+                                expression: "loginForm.password",
                                 modifiers: { trim: true }
                               }
                             ],
@@ -45885,11 +46247,11 @@ var render = function() {
                               id: "password1",
                               placeholder: "Your password..."
                             },
-                            domProps: { value: _vm.form.password },
+                            domProps: { value: _vm.loginForm.password },
                             on: {
                               blur: [
                                 function($event) {
-                                  return _vm.$v.form.password.$touch()
+                                  return _vm.$v.loginForm.password.$touch()
                                 },
                                 function($event) {
                                   return _vm.$forceUpdate()
@@ -45900,7 +46262,7 @@ var render = function() {
                                   return
                                 }
                                 _vm.$set(
-                                  _vm.form,
+                                  _vm.loginForm,
                                   "password",
                                   $event.target.value.trim()
                                 )
@@ -45908,9 +46270,9 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _vm.$v.form.password.$anyDirty
+                          _vm.$v.loginForm.password.$anyDirty
                             ? _c("div", [
-                                !_vm.$v.form.password.required
+                                !_vm.$v.loginForm.password.required
                                   ? _c("div", { staticClass: "error" }, [
                                       _vm._v("This Field is required")
                                     ])
@@ -45942,13 +46304,13 @@ var render = function() {
                       [_vm._v("or use a social network")]
                     ),
                     _vm._v(" "),
-                    _vm._m(3)
+                    _vm._m(7)
                   ]),
                   _vm._v(" "),
-                  _vm._m(4)
+                  _vm._m(8)
                 ]),
                 _vm._v(" "),
-                _vm._m(5)
+                _vm._m(9)
               ])
             ])
           ]
@@ -45962,219 +46324,127 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header border-bottom-0" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-title text-center" }, [
+      _c("h3", [_vm._v("Join BlogSagar")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "Create an account to receive great stories in your inbox and follow authors and topics that you love."
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "div",
-      {
-        staticClass: "modal log-modal fade",
-        attrs: {
-          id: "SignUpModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
+      { staticClass: "d-flex justify-content-center social-buttons" },
       [
         _c(
-          "div",
+          "button",
           {
-            staticClass: "modal-dialog modal-dialog-centered modal-lg",
-            attrs: { role: "document" }
+            staticClass: "btn btn-secondary btn-round",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Google"
+            }
           },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-box" }, [
-                _c("div", { staticClass: "modal-header border-bottom-0" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "close",
-                      attrs: {
-                        type: "button",
-                        "data-dismiss": "modal",
-                        "aria-label": "Close"
-                      }
-                    },
-                    [
-                      _c("span", { attrs: { "aria-hidden": "true" } }, [
-                        _vm._v("×")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [
-                  _c("div", { staticClass: "form-title text-center" }, [
-                    _c("h3", [_vm._v("Join BlogSagar")]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Create an account to receive great stories in your inbox and follow authors and topics that you love."
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "d-flex flex-column text-center" }, [
-                    _c(
-                      "form",
-                      { attrs: { action: "/user/signup", method: "post" } },
-                      [
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              id: "fullname",
-                              placeholder: "Your Full Name..."
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "email",
-                              id: "email1",
-                              placeholder: "Your email address..."
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "password",
-                              placeholder: "Your password..."
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "password",
-                              placeholder: "Re-type password..."
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary btn-round",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Sign Up")]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "text-center text-muted delimiter" },
-                      [_vm._v("or use a social network")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "d-flex justify-content-center social-buttons"
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-secondary btn-round",
-                            attrs: {
-                              type: "button",
-                              "data-toggle": "tooltip",
-                              "data-placement": "top",
-                              title: "Google"
-                            }
-                          },
-                          [_c("i", { staticClass: "fab fa-google" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-secondary btn-round",
-                            attrs: {
-                              type: "button",
-                              "data-toggle": "tooltip",
-                              "data-placement": "top",
-                              title: "Twitter"
-                            }
-                          },
-                          [_c("i", { staticClass: "fab fa-twitter" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-secondary btn-round",
-                            attrs: {
-                              type: "button",
-                              "data-toggle": "tooltip",
-                              "data-placement": "top",
-                              title: "Facebook"
-                            }
-                          },
-                          [_c("i", { staticClass: "fab fa-facebook" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-secondary btn-round",
-                            attrs: {
-                              type: "button",
-                              "data-toggle": "tooltip",
-                              "data-placement": "top",
-                              title: "Linkedin"
-                            }
-                          },
-                          [_c("i", { staticClass: "fab fa-linkedin" })]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "signup-section text-center" }, [
-                    _vm._v("Already have an account? "),
-                    _c(
-                      "a",
-                      { staticClass: "text-info", attrs: { href: "#a" } },
-                      [_vm._v(" Sign Up")]
-                    ),
-                    _vm._v(".")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-footer text-center" }, [
-                  _c("div", { staticClass: "popup_btm" }, [
-                    _vm._v(
-                      "To make BlogSagar work, Click “Sign In” above to accept BlogSagar's "
-                    ),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v(" Terms of Service")
-                    ]),
-                    _vm._v(" & "),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v(" Privacy Policy.")
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]
+          [_c("i", { staticClass: "fab fa-google" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary btn-round",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Twitter"
+            }
+          },
+          [_c("i", { staticClass: "fab fa-twitter" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary btn-round",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Facebook"
+            }
+          },
+          [_c("i", { staticClass: "fab fa-facebook" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary btn-round",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Linkedin"
+            }
+          },
+          [_c("i", { staticClass: "fab fa-linkedin" })]
         )
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "signup-section text-center" }, [
+      _vm._v("Already have an account? "),
+      _c("a", { staticClass: "text-info", attrs: { href: "#a" } }, [
+        _vm._v(" Sign Up")
+      ]),
+      _vm._v(".")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer text-center" }, [
+      _c("div", { staticClass: "popup_btm" }, [
+        _vm._v(
+          "To make BlogSagar work, Click “Sign In” above to accept BlogSagar's "
+        ),
+        _c("a", { attrs: { href: "#" } }, [_vm._v(" Terms of Service")]),
+        _vm._v(" & "),
+        _c("a", { attrs: { href: "#" } }, [_vm._v(" Privacy Policy.")])
+      ])
+    ])
   },
   function() {
     var _vm = this
