@@ -52,7 +52,7 @@ class LoginController extends FrontendController
          ]);
         return $userdata;
     }
-    public function login(){  
+    public function login(){
         if(Auth::guard('web')->attempt(['email' => request('email'), 'password' => request('password')]))
         { 
             $userid = Auth()->user()->id;
