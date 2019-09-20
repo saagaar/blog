@@ -16,7 +16,7 @@ class Followers extends Model
      * @var array
      */
     protected $fillable = [
-       'user_id','follower_id'
+       'user_id','follow_id'
     ];
 
     /**
@@ -24,7 +24,7 @@ class Followers extends Model
      *
      * @var array
      */
-
+    
 
     /**
      * The attributes that should be cast to native types.

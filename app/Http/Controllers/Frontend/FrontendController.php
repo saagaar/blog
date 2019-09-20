@@ -77,6 +77,7 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {
+        
         return view('frontend.home.index');
     }
   

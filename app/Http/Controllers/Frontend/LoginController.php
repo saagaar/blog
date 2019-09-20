@@ -9,12 +9,13 @@ use Validator,Redirect,Response,File;
 use Socialite;
 use App\Repository\AccountInterface;
 
-class LoginController extends BaseController
+class LoginController extends FrontendController
 {
     protected $account;
     public $successStatus = 200;
     public function __construct(AccountInterface $account)
     {
+        parent::__construct();
         $this->account=$account;
     }   
 
@@ -56,6 +57,7 @@ class LoginController extends BaseController
         { 
             $userid = Auth()->user()->id;
             $user = $this->account->getById($userid);
+            $user->follow()->attach(2);
             return response()->json(['status'=>true,'data'=>$user,'message'=>'Logged in Successfully']); 
         } 
         else
@@ -81,7 +83,17 @@ class LoginController extends BaseController
         }else{
             $input['status']    ='0';
         }
-        
+        $emailParts = explode('@', $input['email']);
+
+        $username = $emailParts[0];
+        $check = $this->account->getAll()->where('username',$username)->first();
+        if (!$check) {
+            $input['username'] = $username;
+        }else{
+            $random = rand(0, 9999);
+            $randUsername = $username.$random;
+            $input['username'] = $randUsername;
+        }
         $user = $this->account->create($input);
     return response()->json(['status'=>true,'data'=>$user,'message'=>'Registration completed Successfully']); 
     }

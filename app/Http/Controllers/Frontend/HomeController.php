@@ -39,6 +39,7 @@ class HomeController extends FrontendController
 
     public function test(Request $request)
     {
+        echo str_slug("iajaf1237412~!@#$%^&*()~'-'=+_][{} ;:/.,<>?AAMNBV'' CXZLKJHG",'-');
         return view('frontend.layouts.app');
     }
     public function dashboard()

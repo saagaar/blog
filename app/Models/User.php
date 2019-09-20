@@ -20,7 +20,7 @@ class User extends Authenticatable implements Auditable
      * @var array
      */
     protected $fillable = [
-        'name', 'email','status','image','phone','address','dob','country', 'password','provider_id','token','provider'
+        'name','username', 'email','status','image','phone','address','dob','country', 'password','provider_id','token','provider'
     ];
 
     /**
@@ -52,5 +52,9 @@ class User extends Authenticatable implements Auditable
     public function country()
     {
         return $this->belongsTo(Countrys::class,'country');
+    }
+    public function Follow()
+    {
+        return $this->belongsToMany(Followers::class,'followers','user_id','follow_id');
     }
 }
