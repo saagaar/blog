@@ -21,10 +21,10 @@ class SiteOptions extends Model implements AuditableContract
     protected $fillable = [
         'site_name','log_admin_activity','log_admin_invalid_login','contact_email','contact_name','contact_number','mode','maintainence','user_activation','facebook_id','linkedin_id','twitter_id','instagram_id','youtube','timezone','currency_sign','currency_code','google_analytics_code','address','city','state','country'
     ];
-    public function Timezone(){
+    public function timezone(){
         $this->hasOne(Timezone::class);
     }
-    public function Country(){
+    public function country(){
         $this->hasOne(Country::class);
     }
     public function logs()

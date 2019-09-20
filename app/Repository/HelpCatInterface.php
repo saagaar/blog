@@ -8,7 +8,7 @@ interface HelpCatInterface
      *
      * @param int
      */
-    public function getcatById($helpcat_id);
+    public function getCatById($helpcat_id);
       
       /**
      * Get's all posts.

@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\File;
 use App;
 class TeamController extends AdminController
 {
-    protected $Team;
+    protected $team;
     function __construct(TeamInterface $team)
     {
          parent::__construct();
-         $this->Team=$team;
+         $this->team=$team;
     }
     public function list(Request $request)
     {
@@ -23,11 +23,11 @@ class TeamController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $Team = $this->Team->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $team = $this->team->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $Team = $this->Team->getAll()->paginate($this->PerPage);
+            $team = $this->team->getAll()->paginate($this->PerPage);
         }
-        return view('admin.team.list')->with(array('Team'=>$Team,'breadcrumb'=>$breadcrumb,'menu'=>'Team List'));
+        return view('admin.team.list')->with(array('team'=>$team,'breadcrumb'=>$breadcrumb,'menu'=>'Team List'));
     }
     public function create(Request $request)
     {
@@ -39,10 +39,13 @@ class TeamController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-            $requestobj=app(TeamRequest::class);
-            $validatedData = $requestobj->validated();
+             $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);  
+           $requestObj=app(TeamRequest::class);
+            $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('frontend/images/team-images'), $imageName);
+            request()->image->move(public_path('images/team-images'), $imageName);
             $validatedData['image'] = $imageName;
             $this->Team->create($validatedData);
             return redirect()->route('team.list')    
@@ -57,11 +60,14 @@ class TeamController extends AdminController
                         'All Teams' => route('team.list'),
                         'current_menu'=>'Edit Team',
                           ]];
-            $team =$this->Team->getById($id);    
+            $team =$this->team->getById($id);    
             if ($request->method()=='POST')
             {
-                $requestobj=app(TeamRequest::class);
-                $validatedData = $requestobj->validated();
+            $request->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              ]);
+               $requestObj=app(TeamRequest::class);
+                $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')) {
                     $dir = 'frontend/images/team-images/';
                     if ($team->image != '' && File::exists($dir . $team->image))
@@ -72,7 +78,7 @@ class TeamController extends AdminController
                 }else {
                     $validatedData['image'] = $team->image;
                 }
-                $this->Team->update($id,$validatedData);
+                $this->team->update($id,$validatedData);
                 return redirect()->route('team.list')
                             ->with('success','Team Updated Successfully.');
             }
@@ -80,7 +86,7 @@ class TeamController extends AdminController
     }
     public function delete($id)
     {
-       $team =$this->Team->getById($id);
+       $team =$this->team->getById($id);
         if($team){
             $dir = 'frontend/images/team-images/';
             if ($team->image != '' && File::exists($dir . $team->image)){
@@ -89,11 +95,11 @@ class TeamController extends AdminController
             $team->delete();
         }
         return redirect()->route('team.list')
-        ->with('success', '');
+        ->with('success', 'Team has been deleted!');
     }
      public function changeStatus(Request $request)
     {
-        $team = $this->Team->getById($request->id);
+        $team = $this->team->getById($request->id);
         $status =$request->status;
         $team->update(array('status'=>$status)); 
         return redirect()->route('team.list')

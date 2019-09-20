@@ -16,7 +16,7 @@ class CreateTagsTable extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->enum('status',['1', '0']);
+            $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');
             $table->timestamps();
         });
     }

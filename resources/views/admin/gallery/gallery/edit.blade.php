@@ -47,8 +47,7 @@
                                         <option value="{{ $selected->id }}">{{ $selected->title }}</option>
                                     @endforeach
                         @endif
-                  @foreach ($category as $cat)
-                  
+                  @foreach ($category as $cat)                  
                     <option value="{{$cat->id}}">{{$cat->title}}</option>
                     @endforeach
                   </select>

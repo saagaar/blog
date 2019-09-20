@@ -33,7 +33,7 @@ class HelpCategories extends Model implements Auditable
      *
      * @var array
      */
-    public function Helps(){
+    public function help(){
         $this->belongsTo(Helps::class);
     }
     public function logs()

@@ -20,7 +20,7 @@ class Tags extends Model implements Auditable
     public function blogs(){
     	return $this->belongsToMany(Blogs::class,'blogs_id');
     }
-    public function Categories(){
+    public function categories(){
     	return $this->belongsToMany(Categories::class,'categories_id');
     }
 }

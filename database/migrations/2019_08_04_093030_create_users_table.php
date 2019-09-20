@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->unsignedBigInteger('country')->nullable();
             $table->foreign('country')
-                    ->references('id')->on('countrys')
+                    ->references('id')->on('countries')
                     ->onDelete('cascade');
             $table->date('dob')->nullable();
             $table->string('image')->nullable();

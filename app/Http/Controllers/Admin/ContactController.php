@@ -44,8 +44,8 @@ class ContactController extends AdminController
             $contact =$this->contact->getcontactById($id);
             if ($request->method()=='POST') 
             {
-                $requestobj=app(contactRequest::class);
-                $validatedData = $requestobj->validated();
+                $requestObj=app(contactRequest::class);
+                $validatedData = $requestObj->validated();
                 $this->contact->update($id,$validatedData);
                 return redirect()->route('contact.list')
                             ->with('success','contact Updated Successfully.');

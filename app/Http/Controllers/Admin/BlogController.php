@@ -31,7 +31,7 @@ class BlogController extends AdminController
         }
         return view('admin.blog.listblog')->with(array('blogs'=>$blogs,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
     }
-    public function create(Request $request,LocaleInterface $Locale,TagInterface $tag)
+    public function create(Request $request,LocaleInterface $locale,TagInterface $tag)
     {
         $breadcrumb=['breadcrumbs'    => 
                     [
@@ -39,21 +39,26 @@ class BlogController extends AdminController
                       'All Blogs' => route('blog.list'),
                       'current_menu'  =>'Create Blog',
                     ]];
-        $taglist = $tag->getAll()->get();
+        $tagList = $tag->getAll()->get();
         if ($request->method()=='POST') 
         {
-            $requestobj=app(BlogRequest::class);
-            $validatedData = $requestobj->validated();
+             $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);  
+            $requestObj=app(BlogRequest::class);
+            $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             request()->image->move(public_path('frontend/images/blog'), $imageName);
             $validatedData['image'] = $imageName;
+             $validatedData['user_id'] = Auth()->user()->id;
             $created = $this->blog->create($validatedData);
             $created->tags()->attach($validatedData['tags']);
             return redirect()->route('blog.list')
                              ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
         }
-        $LocaleList=$Locale->getActiveLocale()->toArray();
-        return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'tags'=>$taglist,'localelist'=>$LocaleList));
+        $localeList=$locale->getActiveLocale()->toArray();
+        return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'tags'=>$tagList,'localelist'=>$localeList));
+
     }
     public function edit(Request $request, $id,$slug,LocaleInterface $Locale,TagInterface $tag)
     {
@@ -67,8 +72,11 @@ class BlogController extends AdminController
             $blog =$this->blog->GetBlogById($id);
             if ($request->method()=='POST') 
             {
-                $requestobj=app(BlogRequest::class);
-                $validatedData = $requestobj->validated();
+                 $request->validate([
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);  
+                $requestObj=app(BlogRequest::class);
+                $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')) {
                     $dir = 'images/blogimages/';
                     if ($blog->image != '' && File::exists($dir . $blog->image))
@@ -80,19 +88,19 @@ class BlogController extends AdminController
                 }else {
                     $validatedData['image'] = $blog->image;
                 }
-                // dd($validatedData);
+                $validatedData['user_id'] = Auth()->user()->id;
                 $updated = $this->blog->update($id,$validatedData);
                 $blog->tags()->sync($validatedData['tags']);
                 return redirect()->route('blog.list')
                             ->with('success','Blog Updated Successfully.');
             }
-            $localelist=$Locale->getActiveLocale()->toArray();
-            return view('admin.blog.editblog')->with(array('blog'=>$blog,'tags'=>$taglist,'breadcrumb'=>$breadcrumb,'localelist'=>$localelist));
+
+            $localeList=$Locale->getActiveLocale()->toArray();
+            return view('admin.blog.editblog')->with(array('blog'=>$blog,'tags'=>$taglist,'breadcrumb'=>$breadcrumb,'localelist'=>$localeList));
     }
     public function delete($id)
     {
        $blog =$this->blog->GetBlogById($id);
-
         if( $blog){
             $dir = 'frontend/images/blog';
             if ($blog->image != '' && File::exists($dir . $blog->image)){
@@ -102,5 +110,14 @@ class BlogController extends AdminController
         }
         return redirect()->route('blog.list')
         ->with('success', 'Blog has been deleted!!');
+    }
+
+     public function changeSaveMethod(Request $request)
+    {
+        $blog = $this->blog->GetBlogById($request->id);
+        $changemethod= $request->save_method;  
+        $blog->update(array('save_method'=>$changemethod));  
+        return redirect()->route('blog.list')
+                        ->with('success','Status change successfully.');
     }
 }

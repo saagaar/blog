@@ -19,12 +19,12 @@ Class Blog implements BlogInterface
    *
    * @param int
    */
-  public function GetBlogById($blogid){
-    return  $this->blog->where('id', $blogid)->first();
+  public function GetBlogById($blogId){
+    return  $this->blog->where('id', $blogId)->first();
   }
      
-  public function GetAssociatedCategoryOfBlog($bloid){
-      return	$this->blog->where('id', $bloid)->first();
+  public function GetAssociatedCategoryOfBlog($blogId){
+      return	$this->blog->where('id', $blogId)->first();
   }
 
       /**

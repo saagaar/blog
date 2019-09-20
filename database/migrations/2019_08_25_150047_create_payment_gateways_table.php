@@ -16,14 +16,14 @@ class CreatePaymentGatewaysTable extends Migration
         Schema::create('payment_gateways', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('email');
-            $table->enum('payment_gateway',['paypal', 'ipay']);
             $table->enum('mode',['1', '0']);
+            $table->enum('payment_gateway',['paypal', 'ipay']);
+            $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');
             $table->String('image');            
             $table->String('api_merchant_key');
             $table->String('api_merchant_password');
             $table->String('api_merchant_signature');
             $table->String('api_version');
-            $table->enum('status',['1', '0']);
             $table->timestamps();
         });
     }

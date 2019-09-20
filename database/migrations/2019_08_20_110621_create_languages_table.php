@@ -17,7 +17,7 @@ class CreateLanguagesTable extends Migration
             $table->bigIncrements('id');
             $table->String('short_code');
             $table->String('lang_name');
-            $table->enum('status',['1','0']);
+            $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');
             $table->String('currency_code');
             $table->String('currency_sign');
             $table->integer('priority')->default(0);

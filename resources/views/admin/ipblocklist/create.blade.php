@@ -34,14 +34,14 @@
                   <div class="col-md-12">
                     <div class="form-group">
                        <label for="ip_address">Ip Address</label>
-                       <input type="text" class="form-control" name="ip_address" id="ip_address" value="{{ old('ip_address') }}" placeholder="Enter ip_address">
+                       <input type="text" class="form-control" name="ip_address" id="ip_address" value="{{ old('ip_address') }}" placeholder="Enter IP address">
                        @if ($errors->has('ip_address'))
                        <div class="alert alert-danger">{{ $errors->first('ip_address') }}</div>
                        @endif
                     </div>
                     <div class="form-group">
                        <label for="message">Message</label>
-                       <input type="hidden" name="admin_id" id="admin_id" value="{{ $admin_id }}">
+                       <input type="hidden" name="admin_id" id="admin_id" value="{{ $adminId }}">
                        <input type="text" class="form-control" name="message" id="message" value="{{ old('message') }}" placeholder="Enter message">
                        @if ($errors->has('message'))
                        <div class="alert alert-danger">{{ $errors->first('message') }}</div>

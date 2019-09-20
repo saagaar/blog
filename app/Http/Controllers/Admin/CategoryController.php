@@ -24,12 +24,12 @@ class CategoryController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $categorys = $this->categories->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $categories = $this->categories->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $categorys = $this->categories->getAll()->paginate($this->PerPage);
+            $categories = $this->categories->getAll()->paginate($this->PerPage);
         }
         
-        return view('admin.blog.listcategories')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb,'menu'=>'Blog Category'));
+        return view('admin.blog.listcategories')->with(array('categories'=>$categories,'breadcrumb'=>$breadcrumb,'menu'=>'Blog Category'));
     }
     public function create(Request $request)
     {
@@ -40,8 +40,8 @@ class CategoryController extends AdminController
                       ]];
         if ($request->method()=='POST') {
 
-            $requestobj=app(CategoryRequest::class);
-            $validatedData = $requestobj->validated();
+            $requestObj=app(CategoryRequest::class);
+            $validatedData = $requestObj->validated();
         $this->categories->create($validatedData);
        return redirect()->route('adminblogcategory.list')
                             ->with(array('success'=>'blog Category created successfully.','breadcrumb'=>$breadcrumb));
@@ -50,7 +50,7 @@ class CategoryController extends AdminController
     }
     public function delete($id)
     {
-        $category =$this->categories->getcatById($id);
+        $category =$this->categories->getCatById($id);
         $category->delete();
         return redirect()->route('adminblogcategory.list')
         ->with('success', 'Blog category has been deleted!!');
@@ -62,11 +62,11 @@ class CategoryController extends AdminController
                     'blog Category' => route('adminblogcategory.list'),
                     'current_menu'=>'Edit Blog Category',
                       ]];
-        $category =$this->categories->getcatById($id);
+        $category =$this->categories->getCatById($id);
         if ($request->method()=='POST') 
         {           
-                $requestobj=app(CategoryRequest::class);
-                $validatedData = $requestobj->validated();
+                $requestObj=app(CategoryRequest::class);
+                $validatedData = $requestObj->validated();
                 $this->categories->update($id,$validatedData);
                 return redirect()->route('adminblogcategory.list')
                             ->with('success','Blog Category Updated Successfully.');
@@ -79,7 +79,7 @@ class CategoryController extends AdminController
     */
      public function changeStatus(Request $request)
     {
-        $category = $this->categories->getcatById($request->id);
+        $category = $this->categories->getCatById($request->id);
         $status = $request->status;
         $category->update(array('status'=>$status));  
        return redirect()->route('adminblogcategory.list')

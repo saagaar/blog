@@ -23,12 +23,14 @@ class ClientController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $Client = $this->client->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
-        }else{
-            $Client = $this->client->getAll()->paginate($this->PerPage);
+          $client = $this->client->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }
-        return view('admin.client.list')->with(array('Client'=>$Client,'breadcrumb'=>$breadcrumb,'menu'=>'Client List'));
+        else{
+            $client = $this->client->getAll()->paginate($this->PerPage);
+            }
+              return view('admin.client.list')->with(array('client'=>$client,'breadcrumb'=>$breadcrumb,'menu'=>'Client List'));
     }
+    
     public function create(Request $request)
     {
         $breadcrumb=['breadcrumbs'=> 
@@ -39,10 +41,13 @@ class ClientController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-            $requestobj=app(ClientRequest::class);
-            $validatedData = $requestobj->validated();
+             $request->validate([
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $requestObj=app(ClientRequest::class);
+            $validatedData = $requestObj->validated();
             $logoName = time().'.'.request()->logo->getClientOriginalExtension();
-            request()->logo->move(public_path('frontend/images/client'), $logoName);
+            request()->logo->move(public_path('images/client-images'), $logoName);
             $validatedData['logo'] = $logoName;
             $this->client->create($validatedData);
             return redirect()->route('client.list')    
@@ -60,8 +65,11 @@ class ClientController extends AdminController
             $client =$this->client->getById($id);    
             if ($request->method()=='POST')
             {
-                $requestobj=app(ClientRequest::class);
-                $validatedData = $requestobj->validated();
+                  $request->validate([
+                  'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                  ]);  
+                $requestObj=app(ClientRequest::class);
+                $validatedData = $requestObj->validated();
                 if($request->hasFile('logo')) {
                     $dir = 'frontend/images/client/';
                 if ($client->logo != '' && File::exists($dir . $client->logo))             File::delete($dir . $client->logo);
@@ -91,7 +99,7 @@ class ClientController extends AdminController
             $client->delete();
         }
         return redirect()->route('client.list')
-        ->with('success', '');
+        ->with('success', 'Client had been deleted!');
     }
 
      public function changeStatus(Request $request)

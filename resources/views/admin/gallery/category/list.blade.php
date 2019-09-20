@@ -30,15 +30,15 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if (!$categorys->isEmpty())
-                @foreach ($categorys as $eachcat)
+                @if (!$categories->isEmpty())
+                @foreach ($categories as $eachcat)
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachcat->title }}</td>
                    <td>
                    	<img src="{{asset('frontend/images/gallerycat-images/'.$eachcat['banner_image']) }}" alt="Image" height="42" width="42"></td>
                   <td>
-                     <input data-id="{{$eachcat->id}}" data-url="{{route('gallerycategory.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachcat->status ? 'checked' : '' }}>
+                     <input data-id="{{$eachcat->id}}" data-url="{{route('gallerycategory.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachcat->status==1 ? 'checked' : '' }}>
                   </td>
                   <td>{{$eachcat->created_at}}</td>
                   <td>{{$eachcat->updated_at}}</td>
@@ -57,7 +57,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $categorys->links() !!}
+              {!! $categories->links() !!}
               </ul>
             </div>
             <!-- /.box-body -->

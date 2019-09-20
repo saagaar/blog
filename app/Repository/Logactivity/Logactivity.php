@@ -2,16 +2,16 @@
 
 namespace App\Repository\Logactivity;
 
-use App\Models\LogAdminActivitys;
-use App\Repository\LogactivityInterface;
+use App\Models\LogAdminActivities;
+use App\Repository\LogActivityInterface;
 
-Class  Logactivity implements LogactivityInterface
+Class  LogActivity implements LogActivityInterface
 {
-	protected $Logactivity;
+	protected $log;
 
-	public function __construct(LogAdminActivitys $Logactivity)
+	public function __construct(LogAdminActivities $logActivity)
 	{
-		$this->log=$Logactivity;
+		$this->log=$logActivity;
 	}
 
      

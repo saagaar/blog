@@ -61,7 +61,7 @@
               <div class="form-group">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
-                  <img src='frontend/images/banner/{{$banner->image}}' width="50">
+                  <img src='/images/banner-images/{{$banner->image}}' width="50"/>
                   @if ($errors->has('image'))
                   <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                   @endif  
@@ -76,7 +76,7 @@
                         <label class="custom-control-label" for="defaultChecked">Publish</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="0" @if($banner->status=='0')checked @endif >
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="2" @if($banner->status=='2')checked @endif >
                         <label class="custom-control-label" for="defaultChecked">Unpublish</label>
                     </div>
                          @if ($errors->has('status'))

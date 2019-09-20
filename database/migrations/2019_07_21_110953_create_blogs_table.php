@@ -15,6 +15,10 @@ class CreateBlogsTable extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
+            $table->foreign('user_id')
+                    ->references('id')->on('users')
+                    ->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->string('title');
             $table->text('content');

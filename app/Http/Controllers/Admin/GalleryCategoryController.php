@@ -25,12 +25,12 @@ class GalleryCategoryController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $categorys = $this->categories->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $categories= $this->categories->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $categorys = $this->categories->getAll()->paginate($this->PerPage);
+            $categories = $this->categories->getAll()->paginate($this->PerPage);
         }
         
-        return view('admin.gallery.category.list')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb,'menu'=>'gallery Category'));
+        return view('admin.gallery.category.list')->with(array('categories'=>$categories,'breadcrumb'=>$breadcrumb,'menu'=>'gallery Category'));
     }
     public function create(Request $request)
     {
@@ -39,16 +39,16 @@ class GalleryCategoryController extends AdminController
                     'Gallery Category' => route('gallerycategory.list'),
                     'current_menu'=>'Create Gallery Category',
                       ]];
-        if ($request->method()=='POST') {
+        if ($request->method()=='POST') 
+        {
 
-            // $request=::class;
             $requestobj=app(GallerycatRequest::class);
             $validatedData = $requestobj->validated();
             $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
             request()->banner_image->move(public_path('frontend/images/gallerycat-images'), $imageName);
             $validatedData['banner_image'] = $imageName;
-        $this->categories->create($validatedData);
-       return redirect()->route('gallerycategory.list')
+            $this->categories->create($validatedData);
+            return redirect()->route('gallerycategory.list')
                             ->with(array('success'=>'gallery Category created successfully.','breadcrumb'=>$breadcrumb));
         }
        return view('admin.gallery.category.create')->with(array('breadcrumb'=>$breadcrumb));;
@@ -64,8 +64,8 @@ class GalleryCategoryController extends AdminController
         $category =$this->categories->getByCatId($id);
         if ($request->method()=='POST') 
         {
-            $requestobj=app(GallerycatRequest::class);
-            $validatedData = $requestobj->validated();
+            $requestObj=app(GallerycatRequest::class);
+            $validatedData = $requestObj->validated();
                 if ($request->hasFile('banner_image')) {
                     $dir = 'frontend/images/gallerycat-images/';
                     if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
@@ -108,7 +108,6 @@ class GalleryCategoryController extends AdminController
                       ]];
         $category =$this->categories->getByCatId($id);
         $gallery = $category->galleries()->get();
-        // dd($gallery);
         return view('admin.gallery.category.viewgallery')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
     }
 

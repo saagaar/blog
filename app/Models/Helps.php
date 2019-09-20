@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Helps extends Model
 {
-    protected $guard='help';
+    protected $guard='helps';
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,7 @@ class Helps extends Model
      * @var array
      */
 
-    public function HelpCategories(){
+    public function helpCategory(){
         $this->hasOne(HelpCategories::class);
     }
 }

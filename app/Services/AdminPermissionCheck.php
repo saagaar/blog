@@ -2,8 +2,8 @@
 namespace App\Services;
 use Illuminate\Support\Facades\Route;
 // use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Repository\ModuleRolePermissionInterface;
-use App\Repository\ModuleInterface;
+use App\Repository\AdminRolePermissionInterface;
+use App\Repository\AdminPermissionInterface;
 // use App\Repository\User\AdminUser;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,14 +19,14 @@ class AdminPermissionCheck
      *
      * @var ModuleRolePermission object
      */
-     protected $RoleModule;
+     protected $roleAdmin;
 
           /**
      * Object of Module  repository
      *
      * @var Moduleobject
      */
-     protected $Module;
+     protected $permission;
 
       /**
      * Object of ModuleRolePermission repository
@@ -40,10 +40,10 @@ class AdminPermissionCheck
      * @param AdminRole $role
      * @return bool
      */
-    public function __construct(ModuleRolePermissionInterface $RoleModule,ModuleInterface $module)
+    public function __construct(AdminRolePermissionInterface $roleAdmin,AdminPermission Interface $permission)
     {
-        $this->RoleModule=$RoleModule;
-        $this->Module=$module;
+        $this->roleAdmin=$roleAdmin;
+        $this->permission=$permission;
     } 
     
     public function checkAdminPermission()
@@ -54,16 +54,16 @@ class AdminPermissionCheck
         */
         $currentroute=Route::getCurrentRoute()->getAction();
         $currentRouteName=($currentroute['as']);
-        $module=$this->Module->getModuleByRouteName($currentRouteName);
+        $permission=$this->permission->getModuleByRouteName($currentRouteName);
         $this->User = \Auth::user(); 
         /**
         * check user permission
         * @var Roleid ,Module Id
         * @return mixed
         */
-        if(!blank($module))
+        if(!blank($permission))
         {
-             $permission=$this->RoleModule->userHasPersmissionByRouteName($this->User->role_id,$module->id);
+             $permission=$this->roleAdmin->userHasPersmissionByRouteName($this->User->role_id,$module->id);
              return $permission;
         }
         return false;

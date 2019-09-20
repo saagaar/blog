@@ -25,11 +25,11 @@ class SubscriptionController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $Subscription = $this->subscriptionManager->getAll()->where('email', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $subscription = $this->subscriptionManager->getAll()->where('email', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $Subscription = $this->subscriptionManager->getAll()->paginate($this->PerPage);
+            $subscription = $this->subscriptionManager->getAll()->paginate($this->PerPage);
         }
-        return view('admin.subscriptionmanager.list')->with(array('Subscription'=>$Subscription,'breadcrumb'=>$breadcrumb,'menu'=>'Subscription List'));
+        return view('admin.subscriptionmanager.list')->with(array('subscription'=>$subscription,'breadcrumb'=>$breadcrumb,'menu'=>'Subscription List'));
     }
  
     public function edit(Request $request, $id)
@@ -42,8 +42,8 @@ class SubscriptionController extends AdminController
             $subscription=$this->subscriptionManager->getById($id);                  
           if ($request->method()=='POST')
             {
-                $requestobj=app(SubscriptionManagerRequest::class);
-                $validatedData = $requestobj->validated();
+                $requestObj=app(SubscriptionManagerRequest::class);
+                $validatedData = $requestObj->validated();
                 $this->subscriptionManager->update($id,$validatedData);
                 return redirect()->route('subscription.list')
                             ->with('success','Subscription Updated Successfully.');

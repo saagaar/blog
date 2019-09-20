@@ -26,12 +26,12 @@ class GalleryController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $gallerys = $this->gallery->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $galleries = $this->gallery->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $gallerys = $this->gallery->getAll()->paginate($this->PerPage);
+            $galleries = $this->gallery->getAll()->paginate($this->PerPage);
         }
         
-        return view('admin.gallery.gallery.list')->with(array('gallerys'=>$gallerys,'breadcrumb'=>$breadcrumb,'menu'=>'gallery'));
+        return view('admin.gallery.gallery.list')->with(array('galleries'=>$galleries,'breadcrumb'=>$breadcrumb,'menu'=>'gallery'));
     }
     public function create(Request $request)
     {
@@ -42,11 +42,11 @@ class GalleryController extends AdminController
                       ]];
         $category = $this->category->GetAll()->get();
         if ($request->method()=='POST') {
-            $requestobj=app(GalleryRequest::class);
-            $validatedData = $requestobj->validated();
+            $requestObj=app(GalleryRequest::class);
+            $validatedData = $requestObj->validated();
             $allowedfileExtension=['jpg','png','jpeg','gif','svg'];
-           if ($request->file('image')) {
-           		foreach ($request->image as $item) {
+               if ($request->file('image')) {
+           		foreach ($request->image as $item){
            			$filename = $item->getClientOriginalName();
                     $extension = $item->getClientOriginalExtension();
                     $check=in_array($extension,$allowedfileExtension);
@@ -82,8 +82,8 @@ class GalleryController extends AdminController
         $category = $this->category->GetAll()->get();
         if ($request->method()=='POST') 
         {
-            $requestobj=app(GalleryRequest::class);
-            $validatedData = $requestobj->validated();
+            $requestObj=app(GalleryRequest::class);
+            $validatedData = $requestObj->validated();
             $allowedfileExtension=['jpg','png','jpeg','gif','svg'];
                 if ($request->hasFile('image')) {
                     $filename = $item->getClientOriginalName();

@@ -39,13 +39,13 @@
                   <td>{{ $eachcontact->message }}</td>
                   <td>
                       @if($eachcontact->status=='pending')
-                       <span class="label label-danger">Pending</span>
+                       <span class="label label-default label-large">Pending</span>
                        @elseif($eachcontact->status=='followup')
-                       <span class="label label-primary">Followup</span>
+                       <span class="label label-primary label-large">Followup</span>
                        @elseif($eachcontact->status=='contacted')
-                       <span class="label label-success">Contacted</span>
+                       <span class="label label-success label-large">Contacted</span>
                        @elseif($eachcontact->status=='closed')
-                       <span class="label label-default">Closed</span>
+                       <span class="label label-danger label-large">Closed</span>
                        @endif
                   </td>
                   <td>{{$eachcontact->follow_date }}</td>

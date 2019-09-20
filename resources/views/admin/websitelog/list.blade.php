@@ -30,8 +30,8 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if (!$websitelog->isEmpty())
-                @foreach ($websitelog as $eachlogs)
+                @if (!$websiteLog->isEmpty())
+                @foreach ($websiteLog as $eachlogs)
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>
@@ -62,7 +62,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $websitelog->links() !!}
+              {!! $websiteLog->links() !!}
               </ul>
             </div>
             <!-- /.box-body -->

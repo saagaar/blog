@@ -28,12 +28,12 @@ class SiteOptionController extends AdminController
                           ));
         if ($request->method()=='POST') 
         {
-            $requestobj=app(SiteoptionsRequest::class);
-            $validatedData = $requestobj->validated();
+            $requestObj=app(SiteoptionsRequest::class);
+            $validatedData = $requestObj->validated();
             $this->siteOptions->update($validatedData);
             return redirect()->route('sitesetting')
                             ->with('success','Site Settings Updated Successfully.');
         }
-        return view('admin.siteoptions.siteoptions')->with(array('site'=>$site,'breadcrumb'=>$breadcrumb));
+        return view('admin.siteoption.edit')->with(array('site'=>$site,'breadcrumb'=>$breadcrumb));
     }
 }

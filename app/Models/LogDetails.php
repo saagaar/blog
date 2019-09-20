@@ -8,14 +8,14 @@ use OwenIt\Auditing\Auditable as Auditables;
 class LogDetails extends Model implements Auditable
 {
 	use Auditables;
-	protected $table='logdetails';
+	protected $table='log_details';
 
 
     protected $fillable = [
        'referer_url','user_agent','redirected_to','visit_date'
     ];
-    public function userlogs()
+    public function userlog()
     {
-        return $this->belongsTo(Userlogs::class);
+        return $this->belongsTo(VisitorsLogs::class);
     }
 }

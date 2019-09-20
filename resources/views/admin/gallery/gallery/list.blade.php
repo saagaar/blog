@@ -30,8 +30,8 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if (!$gallerys->isEmpty())
-                @foreach ($gallerys as $item)
+                @if (!$galleries->isEmpty())
+                @foreach ($galleries as $item)
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $item->title }}</td>
@@ -39,7 +39,7 @@
                    	<img src="{{ asset('frontend/images/gallery/'.$item['image']) }}" alt="Image" height="42" width="42"></td>
                    	<td>
                        @foreach ($item->categories()->pluck('title') as $category)
-                                        <span class="label label-info label-many">{{ $category }}</span>
+                                        <span class="label label-info label-large">{{ $category }}</span>
                                     @endforeach
                     </td>
                   <td>{{$item->created_at}}</td>
@@ -58,7 +58,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $gallerys->links() !!}
+              {!! $galleries->links() !!}
               </ul>
             </div>
             <!-- /.box-body -->
