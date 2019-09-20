@@ -22,7 +22,7 @@
               <div v-if="$v.signUpForm.email.$anyDirty">
                 <div class="error" v-if="!$v.signUpForm.email.required">This Field is required</div>
                 <div class="error" v-if="!$v.signUpForm.email.email">This Field must be Valid Email Address</div>
-                <div class="error" v-if="!$v.signUpForm.email.isUnique">Email Address must be unique</div>
+                <div class="error" v-if="!$v.signUpForm.email.isUnique">This Email Address is Already Used</div>
               </div>
             </div>
             <div class="form-group"  :class="{ 'form-group--error': $v.signUpForm.name.$error }" >
@@ -94,9 +94,9 @@
           <p>Sign in to get personalized view your choices,recommendations, follow the topics you love.</p>
         </div>
         <div class="d-flex flex-column text-center">
-          <form method="post">
+          <form method="post" autocomplete="none">
             <div class="form-group"  :class="{ 'form-group--error': $v.loginForm.email.$error }" >
-              <input type="email" class="form-control form__input"  @blur="$v.loginForm.email.$touch()" v-model.trim="loginForm.email"  placeholder="Your email address...">
+              <input type="email" class="form-control form__input"  @blur="$v.loginForm.email.$touch()" v-model.trim="loginForm.email"  placeholder="Your email address..." autocomplete="off">
               <div v-if="$v.loginForm.email.$anyDirty">
                 <div class="error" v-if="!$v.loginForm.email.required">This Field is required</div>
                 <div class="error" v-if="!$v.loginForm.email.email">This Field must be Valid Email Address</div>
@@ -177,12 +177,12 @@ import Form from './../../services/Form.js'
             {
               required,
               email,
-                isUnique(value) {
+               async isUnique(value) {
                 if (value === '') return true
-                    return new Promise((resolve, reject) => {
-                        const response =  fetch('/blog/useremail/'+value)
-                        alert(response);
-                    })
+                    
+                        const response = await fetch('/blog/isemailregistered/'+value)
+                       return Boolean(await response.json())
+                    
               }
             },
             name: 

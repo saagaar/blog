@@ -610,7 +610,7 @@ import blogFooter from './../components/Footer/blogFooter';
         mounted() {
              setTimeout(() => {
               this.myData = 'Example Data';
-            }, 5000);
+            }, 1000);
         },
 
         components:{

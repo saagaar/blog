@@ -28,7 +28,7 @@ Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->n
 Route::post('/blog/login', 'Frontend\LoginController@login')->name('login');
 Route::post('/blog/register', 'Frontend\LoginController@register')->name('register');
 
-Route::get('/blog/useremail/{email}', 'Frontend\LoginController@useremail')->name('useremail');
+Route::get('/blog/isemailregistered/{email}', 'Frontend\LoginController@isEmailAlreadyRegistered')->name('useremail');
 
 Route::post('/blog/add', 'Frontend\BlogController@create');
 Auth::routes();
