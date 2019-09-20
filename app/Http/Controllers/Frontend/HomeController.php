@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Frontend\FrontendController;
-use App\Models\Blogs;
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Userlogs;
+use App\Models\Perm;
 use App\Repository\UserlogInterface;
+use Spatie\Permission\Traits\HasRoles;
 class HomeController extends FrontendController
 {
+     use HasRoles;
+
     /**
      * Create a new controller instance.
      *
@@ -19,7 +23,6 @@ class HomeController extends FrontendController
    
     function __construct()
     {
-
          parent::__construct();
     }
 
@@ -40,6 +43,19 @@ class HomeController extends FrontendController
     }
     public function dashboard()
     {
+    //     $role = Role::findByName('writer');
+    // $role->givePermissionTo('blog-edit');
+        // $permissions = [
+          // \Auth::user()->givePermissionTo('blog-create');
+        //    'blog-edit',
+        //    'blog-create',
+        //    'product-delete'
+        // ];
+
+
+        // foreach ($permissions as $permission) {
+        //      Permission::create(['name' => $permission]);
+        // }
         if(\Auth::check())
         return view('frontend.layouts.dashboard');
         else

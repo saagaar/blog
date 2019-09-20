@@ -57,9 +57,9 @@ class FrontendController extends BaseController
         $this->city =  $this->siteSettings->city;
         $this->state =  $this->siteSettings->state;
         $this->country =  $this->siteSettings->country;
-        $this->save_visitor_info();
         $this->websiteMode=$this->siteSettings->mode;
-
+        $this->save_visitor_info();
+       
         date_default_timezone_set('Asia/Kathmandu');
        
         if($this->websiteMode=='3')
