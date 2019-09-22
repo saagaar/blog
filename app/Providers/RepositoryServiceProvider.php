@@ -58,6 +58,8 @@ use App\Repository\LanguageInterface;
 use App\Repository\Language\Language;
 use App\Repository\TagInterface;
 use App\Repository\Tag\Tag;
+use App\Repository\FollowerInterface;
+use App\Repository\Follower\Follower;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -105,5 +107,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(SeoInterface::class, Seo::class);
         $this->app->singleton(LanguageInterface::class, Language::class);
         $this->app->singleton(TagInterface::class, Tag::class);
+        $this->app->singleton(FollowerInterface::class, Follower::class);
     }
 }

@@ -78,11 +78,16 @@ Class VisitorInfo
         }else{
             $reff = '';
         }
+        if (array_key_exists('PATH_INFO',$_SERVER)) {
+            $path = $_SERVER['PATH_INFO'];
+        }else{
+            $path = '';
+        }
         $server = array(
                     'ip_address'          => '27.34.25.94',//$_SERVER['REMOTE_ADDR'],
                     'servername'        =>$_SERVER['SERVER_NAME'],
                     'method'            =>$_SERVER['REQUEST_METHOD'],
-                    'path'              =>$_SERVER['PATH_INFO'],
+                    'path'              =>$path,
                     'host'              =>$_SERVER['HTTP_HOST'],
                     'requesturl'        =>$_SERVER['REQUEST_URI'],
                     'refererurl'        =>$reff,
