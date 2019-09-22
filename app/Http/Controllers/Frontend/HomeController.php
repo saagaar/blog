@@ -39,7 +39,6 @@ class HomeController extends FrontendController
 
     public function test(Request $request)
     {
-        echo str_slug("iajaf1237412~!@#$%^&*()~'-'=+_][{} ;:/.,<>?AAMNBV'' CXZLKJHG",'-');
         return view('frontend.layouts.app');
     }
     public function dashboard()
@@ -57,6 +56,8 @@ class HomeController extends FrontendController
         // foreach ($permissions as $permission) {
         //      Permission::create(['name' => $permission]);
         // }
+        $user = Auth()->user()->toArray();
+        $data['user']=$user;
         if(\Auth::check())
         return view('frontend.layouts.dashboard');
         else
