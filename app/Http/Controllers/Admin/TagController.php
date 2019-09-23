@@ -32,7 +32,7 @@ class TagController extends AdminController
         }else{
             $tags = $this->tag->getAll()->paginate($this->PerPage);
         }
-        return view('admin.tag.list')->with(array('tags'=>$tags,'breadcrumb'=>$breadcrumb,'menu'=>'Tags List'));
+        return view('admin.tag.list')->with(array('tags'=>$tags,'breadcrumb'=>$breadcrumb,'menu'=>'Tags List','primary_menu'=>'tag.list'));
     }
 
     /**
@@ -56,7 +56,7 @@ class TagController extends AdminController
             return redirect()->route('tags.list')    
                              ->with(array('success'=>'Tags created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('admin.tag.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.tag.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'tag.list'));
     }
     /**
      * Update the specified resource in storage.
@@ -81,7 +81,7 @@ class TagController extends AdminController
                 return redirect()->route('tags.list')
                             ->with('success','Tags Updated Successfully.');
             }
-            return view('admin.tag.edit',compact('tag','breadcrumb'));
+            return view('admin.tag.edit',compact('tag','breadcrumb'))->with(array('primary_menu'=>'tag.list'));
     }
 
     

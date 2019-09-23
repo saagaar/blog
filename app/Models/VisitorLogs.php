@@ -10,19 +10,19 @@ class VisitorLogs extends Model implements Auditable
     use Auditables;
     protected $table='visitor_logs';
     protected $fillable = [
-        'ip_address','region_code','country','country_code','city','time_zone','latitude','isp','flagurl','currencysymbol','currency','callingcode','countrycapital','longitude','region'
+        'ip_address','region_code','country','country_code','city','time_zone','latitude','isp','flag_url','currency_symbol','currency','calling_code','capital','longitude','region'
     ];
     public function countries()
     {
         return $this->hasMany(Countries::class);
     }
-    public function logdetails()
+    public function visitordetails()
     {
-        return $this->hasMany(LogDetails::class,'userlogs_id');
+        return $this->hasMany(VisitorDetails::class,'logs_id');
     }
     public function counts()
     {
-        return $this->hasMany(LogDetails::class,'userlogs_id')->count();
+        return $this->hasMany(VisitorDetails::class,'logs_id')->count();
     }
 
 }

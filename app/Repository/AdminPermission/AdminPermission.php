@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Repository\Adminpermission;
+namespace App\Repository\AdminPermission;
 
 use App\Models\AdminPermissions;
 use App\Repository\AdminPermissionInterface;

@@ -29,7 +29,7 @@ class BlogController extends AdminController
         }else{
             $blogs = $this->blog->getAll()->paginate($this->PerPage);
         }
-        return view('admin.blog.listblog')->with(array('blogs'=>$blogs,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List'));
+        return view('admin.blog.listblog')->with(array('blogs'=>$blogs,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List','primary_menu'=>'blog.list'));
     }
     public function create(Request $request,LocaleInterface $locale,TagInterface $tag)
     {
@@ -48,7 +48,7 @@ class BlogController extends AdminController
             $requestObj=app(BlogRequest::class);
             $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('frontend/images/blog'), $imageName);
+            request()->image->move(public_path('images/blog'), $imageName);
             $validatedData['image'] = $imageName;
              $validatedData['user_id'] = Auth()->user()->id;
             $created = $this->blog->create($validatedData);
@@ -57,7 +57,7 @@ class BlogController extends AdminController
                              ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
         }
         $localeList=$locale->getActiveLocale()->toArray();
-        return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'tags'=>$tagList,'localelist'=>$localeList));
+        return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'tags'=>$tagList,'localelist'=>$localeList,'primary_menu'=>'blog.list'));
 
     }
     public function edit(Request $request, $id,$slug,LocaleInterface $Locale,TagInterface $tag)
@@ -78,12 +78,12 @@ class BlogController extends AdminController
                 $requestObj=app(BlogRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')) {
-                    $dir = 'images/blogimages/';
+                    $dir = 'images/blog-images/';
                     if ($blog->image != '' && File::exists($dir . $blog->image))
                     File::delete($dir . $blog->image);
 
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('frontend/images/blog'), $imageName);
+                    request()->image->move(public_path('images/blog-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }else {
                     $validatedData['image'] = $blog->image;
@@ -96,7 +96,7 @@ class BlogController extends AdminController
             }
 
             $localeList=$Locale->getActiveLocale()->toArray();
-            return view('admin.blog.editblog')->with(array('blog'=>$blog,'tags'=>$taglist,'breadcrumb'=>$breadcrumb,'localelist'=>$localeList));
+            return view('admin.blog.editblog')->with(array('blog'=>$blog,'tags'=>$taglist,'breadcrumb'=>$breadcrumb,'localelist'=>$localeList,'primary_menu'=>'blog.list'));
     }
     public function delete($id)
     {

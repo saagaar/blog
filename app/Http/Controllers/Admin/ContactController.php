@@ -24,14 +24,14 @@ class ContactController extends AdminController
                     ]];
         $search = $request->get('search');
         if($search){
-            $contact = $this->contact->GetAll()
+            $contact = $this->contact->getAll()
             ->where('name', 'like', '%' . $search . '%')
             ->paginate($this->PerPage)
             ->withPath('?search=' . $search);
         }else{
-            $contact = $this->contact->GetAll()->paginate($this->PerPage);
+            $contact = $this->contact->getAll()->paginate($this->PerPage);
         }
-        return view('admin.contact.list')->with(array('contact'=>$contact,'breadcrumb'=>$breadcrumb,'menu'=>'contact List'));
+        return view('admin.contact.list')->with(array('contact'=>$contact,'breadcrumb'=>$breadcrumb,'menu'=>'contact List','primary_menu'=>'contact.list'));
     }
    
     public function edit(Request $request, $id)
@@ -41,7 +41,7 @@ class ContactController extends AdminController
                         'All contact' => route('contact.list'),
                         'current_menu'=>'Edit contact',
                          ]];
-            $contact =$this->contact->getcontactById($id);
+            $contact =$this->contact->getContactById($id);
             if ($request->method()=='POST') 
             {
                 $requestObj=app(contactRequest::class);
@@ -50,6 +50,6 @@ class ContactController extends AdminController
                 return redirect()->route('contact.list')
                             ->with('success','contact Updated Successfully.');
             }
-            return view('admin.contact.edit',compact('contact','breadcrumb'));
+            return view('admin.contact.edit',compact('contact','breadcrumb'))->with(array('primary_menu'=>'contact.list'));
     }
 }

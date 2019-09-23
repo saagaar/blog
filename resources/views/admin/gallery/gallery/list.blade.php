@@ -36,7 +36,7 @@
                   <td>{{ ++$i }}</td>
                   <td>{{ $item->title }}</td>
                    <td>
-                   	<img src="{{ asset('frontend/images/gallery/'.$item['image']) }}" alt="Image" height="42" width="42"></td>
+                   	<img src="{{ asset('images/gallery/'.$item['image']) }}" alt="Gallery Image" height="42" width="42"></td>
                    	<td>
                        @foreach ($item->categories()->pluck('title') as $category)
                                         <span class="label label-info label-large">{{ $category }}</span>
@@ -50,7 +50,7 @@
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="9" align="center" style="background-color: #d2d6de;"> No Gallerys Found </td>
+                    <td colspan="9" align="center" style="background-color: #d2d6de;"> No Galleries Found </td>
                   </tr>
                   @endif
                 </tbody>

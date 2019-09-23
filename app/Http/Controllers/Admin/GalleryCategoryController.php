@@ -30,7 +30,7 @@ class GalleryCategoryController extends AdminController
             $categories = $this->categories->getAll()->paginate($this->PerPage);
         }
         
-        return view('admin.gallery.category.list')->with(array('categories'=>$categories,'breadcrumb'=>$breadcrumb,'menu'=>'gallery Category'));
+        return view('admin.gallery.category.list')->with(array('categories'=>$categories,'breadcrumb'=>$breadcrumb,'menu'=>'gallery Category','primary_menu'=>'gallerycat.list'));
     }
     public function create(Request $request)
     {
@@ -44,14 +44,14 @@ class GalleryCategoryController extends AdminController
 
             $requestobj=app(GallerycatRequest::class);
             $validatedData = $requestobj->validated();
-            $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-            request()->banner_image->move(public_path('frontend/images/gallerycat-images'), $imageName);
+           $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
+            request()->banner_image->move(public_path('images/gallery-cat-images'), $imageName);
             $validatedData['banner_image'] = $imageName;
             $this->categories->create($validatedData);
             return redirect()->route('gallerycategory.list')
                             ->with(array('success'=>'gallery Category created successfully.','breadcrumb'=>$breadcrumb));
         }
-       return view('admin.gallery.category.create')->with(array('breadcrumb'=>$breadcrumb));;
+       return view('admin.gallery.category.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'gallerycat.list'));;
     }
    
     public function edit(Request $request, $id)
@@ -66,15 +66,15 @@ class GalleryCategoryController extends AdminController
         {
             $requestObj=app(GallerycatRequest::class);
             $validatedData = $requestObj->validated();
-                if ($request->hasFile('banner_image')) {
-                    $dir = 'frontend/images/gallerycat-images/';
+                if ($request->hasFile('banner_image')){
+                    $dir = 'images/gallery-cat-images/';
                     if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
-                    File::delete($dir . $category->banner_image);
-
                     $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-                    request()->banner_image->move(public_path('frontend/images/gallerycat-images'), $imageName);
+                    request()->banner_image->move(public_path('images/gallery-cat-images'), $imageName);
                     $validatedData['banner_image'] = $imageName;
-                }else {
+
+                }
+                else {
                     $validatedData['banner_image'] = $category->banner_image;
                 }
             $this->categories->update($id,$validatedData);
@@ -82,7 +82,7 @@ class GalleryCategoryController extends AdminController
                         ->with('success','gallery category updated successfully.');
         }
         
-        return view('admin.gallery.category.edit')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));
+        return view('admin.gallery.category.edit')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb,'primary_menu'=>'gallerycat.list'));
     }
 
 
@@ -90,7 +90,7 @@ class GalleryCategoryController extends AdminController
     {
         $category =$this->categories->getByCatId($id);
         if( $category){
-            $dir = 'frontend/images/gallerycat-images/';
+            $dir = 'images/gallerycat-images/';
             if ($category->image != '' && File::exists($dir . $category->image)){
                 File::delete($dir . $category->image);
             }
@@ -108,7 +108,7 @@ class GalleryCategoryController extends AdminController
                       ]];
         $category =$this->categories->getByCatId($id);
         $gallery = $category->galleries()->get();
-        return view('admin.gallery.category.viewgallery')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
+        return view('admin.gallery.category.viewgallery')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb,'primary_menu'=>'gallerycat.list'));
     }
 
      public function changeStatus(Request $request)

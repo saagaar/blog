@@ -28,7 +28,7 @@ class TestimonialController extends AdminController
         }else{
             $testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }
-        return view('admin.testimonial.list')->with(array('testimony'=>$testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'testimonial List'));
+        return view('admin.testimonial.list')->with(array('testimony'=>$testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'testimonial List','primary_menu'=>'testimonial.list'));
     }
     public function create(Request $request)
     {
@@ -52,7 +52,7 @@ class TestimonialController extends AdminController
             return redirect()->route('testimonial.list')    
                              ->with(array('success'=>'Testimonial created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('admin.testimonial.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.testimonial.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'testimonial.list'));
     }
     public function edit(Request $request, $id)
     {
@@ -70,26 +70,28 @@ class TestimonialController extends AdminController
                 $requestObj=app(TestimonialRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')){
-                    $dir = 'frontend/images/testimonial-images/';
+
+                    $dir = 'images/testimonial-images/';
                     if ($testimony->image != '' && File::exists($dir . $testimony->image))
-                    File::delete($dir . $testimony->image);
+                          File::delete($dir . $testimony->image);
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('frontend/images/testimonial-images'), $imageName);
+                    request()->image->move(public_path('images/testimonial-images'), $imageName);
                     $validatedData['image'] = $imageName;
-                }else {
+                }
+                else {
                     $validatedData['image'] = $testimony->image;
                 }
                 $this->testimony->update($id,$validatedData);
                 return redirect()->route('testimonial.list')
                             ->with('success','Testimonial Updated Successfully.');
             }
-            return view('admin.testimonial.edit',compact('testimony','breadcrumb'));
+            return view('admin.testimonial.edit',compact('testimony','breadcrumb'))->with(array('primary_menu'=>'testimonial.list'));
     }
     public function delete($id)
     {
        $testimony =$this->testimony->getById($id);
         if($testimony){
-            $dir = 'frontend/images/testimonial-images/';
+            $dir = 'images/testimonial-images/';
             if ($testimony->image != '' && File::exists($dir . $testimony->image)){
                 File::delete($dir . $testimony->image);
             }

@@ -28,7 +28,7 @@ class ClientController extends AdminController
         else{
             $client = $this->client->getAll()->paginate($this->PerPage);
             }
-              return view('admin.client.list')->with(array('client'=>$client,'breadcrumb'=>$breadcrumb,'menu'=>'Client List'));
+              return view('admin.client.list')->with(array('client'=>$client,'breadcrumb'=>$breadcrumb,'menu'=>'Client List','primary_menu'=>'client.list'));
     }
     
     public function create(Request $request)
@@ -53,7 +53,7 @@ class ClientController extends AdminController
             return redirect()->route('client.list')    
                              ->with(array('success'=>'Client created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('admin.client.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.client.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'client.list'));
     }
     public function edit(Request $request, $id)
     {
@@ -71,10 +71,10 @@ class ClientController extends AdminController
                 $requestObj=app(ClientRequest::class);
                 $validatedData = $requestObj->validated();
                 if($request->hasFile('logo')) {
-                    $dir = 'frontend/images/client/';
+                    $dir = 'images/client-images/';
                 if ($client->logo != '' && File::exists($dir . $client->logo))             File::delete($dir . $client->logo);
                     $logoName = time().'.'.request()->logo->getClientOriginalExtension();
-                    request()->logo->move(public_path('frontend/images/client'), $logoName);
+                    request()->logo->move(public_path('images/client-images'), $logoName);
                     $validatedData['logo'] = $logoName;
                 }
                 else 
@@ -85,14 +85,14 @@ class ClientController extends AdminController
                 return redirect()->route('client.list')
                             ->with('success','Client Updated Successfully.');
             }
-            return view('admin.client.edit',compact('client','breadcrumb'));
+            return view('admin.client.edit',compact('client','breadcrumb'))->with(array('primary_menu'=>'client.list'));
     }
 
     public function delete($id)
     {
        $client =$this->client->getById($id);       
         if($client){
-            $dir = 'frontend/images/client/';
+            $dir = 'images/client-images/';
             if ($client->logo != '' && File::exists($dir . $client->logo)){
                 File::delete($dir . $client->logo);
             }

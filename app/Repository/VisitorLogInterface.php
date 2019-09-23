@@ -8,7 +8,7 @@ interface VisitorLogInterface
      *
      * @param int
      */
-    public function GetLogById($id);
+    public function getLogById($id);
     
      /**
      * Updates Sitesettings.

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 class AdminRolePermissions extends Pivot
 {
-    protected $table='admin_role_permission';
+    protected $table='admin_role_permissions';
    
    
   //   /**

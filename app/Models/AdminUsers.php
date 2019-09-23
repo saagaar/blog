@@ -46,13 +46,13 @@ class AdminUsers extends Authenticatable implements Auditable
         return $this->hasOne(AdminRoles::class);
     }
 
-    public function modulePermissions()
+    public function adminPermissions()
     {
-        return $this->hasMany('App\ModuleRolePermissions','module_role_permissions');
+        return $this->hasMany('App\AdminRolePermissions','admin_role_permissions');
     }
     public function logs()
     {
-        return $this->morphMany(LogAdminActivitys::class, 'logable');
+        return $this->morphMany(LogAdminActivities::class, 'logables');
     }
     
 }

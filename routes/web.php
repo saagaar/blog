@@ -196,7 +196,7 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::get('/list/contact','Admin\ContactController@list')->name('contact.list');
 	Route::match(['get','post'],'/edit/contact/{id}','Admin\ContactController@edit')->name('contact.edit');
 
-	//route for galery category
+	//route for gallery category
 	Route::get('/list/gallery/category','Admin\GalleryCategoryController@list')->name('gallerycategory.list');
 	Route::match(['get','post'],'/create/gallery/category','Admin\GalleryCategoryController@create')->name('gallerycategory.create');
 	Route::match(['get','post'],'/edit/gallery/category/{id}','Admin\GalleryCategoryController@edit')->name('gallerycategory.edit');

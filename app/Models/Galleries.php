@@ -19,10 +19,10 @@ class Galleries extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'title','gallery_categories_id','image'
+        'title','categories_id','image'
     ];
     public function categories()
     {
-        return $this->belongsTo(GalleryCategories::class,'gallery_categories_id');
+        return $this->belongsTo(GalleryCategories::class,'categories_id');
     }
 }

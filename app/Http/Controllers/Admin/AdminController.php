@@ -35,7 +35,7 @@ class AdminController extends BaseController
     public function __construct()
     {
         $this->middleware('auth:admin');
-        // $this->middleware('check_user_permission');
+        $this->middleware('check_user_permission');
         // $this->user = $User;
     }
     public function dashboard()

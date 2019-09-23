@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 use App\Repository\UserInterface;
-use App\Repository\User\AdminUser;
+use App\Repository\AdminUser\AdminUser;
 use App\Repository\HelpCatInterface;
 use App\Repository\HelpCat\HelpCat;
 use App\Repository\AdminRoleInterface;
-use App\Repository\Admin\AdminRole;
+use App\Repository\AdminRole\AdminRole;
 use App\Repository\AdminRolePermissionInterface;
 use App\Repository\AdminRolePermission\AdminRolePermission;
 use App\Repository\AdminPermissionInterface;
@@ -43,7 +43,7 @@ use App\Repository\PaymentGateway\PaymentGateway;
 use App\Repository\SubscriptionManagerInterface;
 use App\Repository\SubscriptionManager\SubscriptionManager;
 use App\Repository\ContactInterface;
-use App\Repository\Contacts\Contacts;
+use App\Repository\Contact\Contacts;
 use App\Repository\GallerycatInterface;
 use App\Repository\GalleryCategory\GalleryCategory;
 use App\Repository\GalleryInterface;

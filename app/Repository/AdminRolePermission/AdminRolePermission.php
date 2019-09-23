@@ -1,5 +1,5 @@
 <?php 
-namespace App\Repository\Adminrole;
+namespace App\Repository\AdminRolePermission;
 
 // use App\Models\AdminRoles;
 use App\Models\AdminRolePermissions;

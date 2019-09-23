@@ -19,11 +19,11 @@ Class Blog implements BlogInterface
    *
    * @param int
    */
-  public function GetBlogById($blogId){
+  public function getBlogById($blogId){
     return  $this->blog->where('id', $blogId)->first();
   }
      
-  public function GetAssociatedCategoryOfBlog($blogId){
+  public function getAssociatedCategoryOfBlog($blogId){
       return	$this->blog->where('id', $blogId)->first();
   }
 
@@ -32,7 +32,7 @@ Class Blog implements BlogInterface
      *
      * @return mixed
      */
-    public function GetAll(){
+    public function getAll(){
    	 return	$this->blog->latest();
     }
  	
@@ -41,7 +41,7 @@ Class Blog implements BlogInterface
      *
      * @return mixed
      */
-    public function Create(array $data){
+    public function create(array $data){
       return	$this->blog->create($data);
     }
      /**
@@ -51,7 +51,7 @@ Class Blog implements BlogInterface
      * @param array
      */
 
-    public function Update( $id,array $data){
+    public function update( $id,array $data){
       return	$this->blog->find($id)->update($data);
     }
 
@@ -60,7 +60,7 @@ Class Blog implements BlogInterface
      *
      * @param int
      */
-    public function Delete($id){
+    public function delete($id){
       return	$this->blog->find($id)->delete();
     }
 }

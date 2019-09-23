@@ -27,7 +27,7 @@ class LanguageController extends AdminController
         }else{
             $language = $this->language->getAll()->paginate($this->PerPage);
         }
-        return view('admin.language.list')->with(array('language'=>$language,'breadcrumb'=>$breadcrumb,'menu'=>'Language List'));
+        return view('admin.language.list')->with(array('language'=>$language,'breadcrumb'=>$breadcrumb,'menu'=>'Language List','primary_menu'=>'language.list'));
     }
     public function create(Request $request)
     {
@@ -45,7 +45,7 @@ class LanguageController extends AdminController
             return redirect()->route('language.list')    
                              ->with(array('success'=>'Language created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('admin.language.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.language.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'language.list'));
     }
    public function edit(Request $request, $id)
     {
@@ -63,7 +63,7 @@ class LanguageController extends AdminController
                 return redirect()->route('language.list')
                             ->with('success','Languages Updated Successfully.');
             }
-            return view('admin.language.edit',compact('language','breadcrumb'));
+            return view('admin.language.edit',compact('language','breadcrumb'))->with(array('primary_menu'=>'language.list'));
     }
     public function delete($id)
     {

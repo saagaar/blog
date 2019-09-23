@@ -29,7 +29,7 @@ class ServiceController extends AdminController
         }else{
             $services = $this->service->getAll()->paginate($this->PerPage);
         }
-        return view('admin.service.list')->with(array('service'=>$services,'breadcrumb'=>$breadcrumb,'menu'=>'services List'));
+        return view('admin.service.list')->with(array('service'=>$services,'breadcrumb'=>$breadcrumb,'menu'=>'Services List','primary_menu'=>'services.list'));
     }
     public function create(Request $request)
     {
@@ -70,11 +70,10 @@ class ServiceController extends AdminController
                 $requestObj=app(servicesRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('icon')) {
-                    $dir = 'frontend/images/services-icon/';
+                    $dir = 'images/services-images/';
                     if ($service->icon != '' && File::exists($dir . $service->icon))
-                    File::delete($dir . $service->icon);
                     $iconName = time().'.'.request()->icon->getClientOriginalExtension();
-                    request()->icon->move(public_path('frontend/images/services-icon'), $iconName);
+                    request()->icon->move(public_path('images/services-images'), $iconName);
                     $validatedData['icon'] = $iconName;
                 }else {
                     $validatedData['icon'] = $service->icon;
@@ -83,13 +82,13 @@ class ServiceController extends AdminController
                 return redirect()->route('services.list')
                             ->with('success','Services Updated Successfully.');
             }
-            return view('admin.service.edit',compact('service','breadcrumb'));
+            return view('admin.service.edit',compact('service','breadcrumb'))->with(array('primary_menu'=>'service.list'));;
     }
     public function delete($id)
     {
        $services=$this->service->getById($id);
         if($services){
-            $dir = 'frontend/images/services-icon/';
+            $dir = 'images/services-icon/';
             if ($services->icon != '' && File::exists($dir . $services->icon)){
                 File::delete($dir . $services->icon);
             }   

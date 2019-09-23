@@ -16,8 +16,8 @@ class CreateGalleriesTable extends Migration
         Schema::create('galleries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->unsignedBigInteger('gallery_categories_id');
-            $table->foreign('gallery_categories_id')
+            $table->unsignedBigInteger('categories_id');
+            $table->foreign('categories_id')
                     ->references('id')->on('gallery_categories')
                     ->onDelete('cascade');
             $table->string('image');

@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                   <label for="banner_image">Image Upload</label>
-                  <img src="{{ asset('frontend/images/gallerycat-images/'.$category['banner_image']) }}" alt="Image" height="42" width="42">
+                 <img src='/images/gallery-cat-images/{{$category->banner_image}}' width="50"/>
                   <input type="file" class="form-control" name="banner_image" id="banner_image" value="{{$category->banner_image}}">
                   @if ($errors->has('banner_image'))
                 <div class="alert alert-danger">{{$errors->first('banner_image') }}</div>
@@ -65,7 +65,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
               </div>
             </form>
             </div>

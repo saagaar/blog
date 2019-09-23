@@ -40,10 +40,10 @@ class AdminPermissionCheck
      * @param AdminRole $role
      * @return bool
      */
-    public function __construct(AdminRolePermissionInterface $roleAdmin,AdminPermission Interface $permission)
+    public function __construct()
     {
-        $this->roleAdmin=$roleAdmin;
-        $this->permission=$permission;
+        $this->roleAdmin = app()->make('App\Repository\AdminRolePermissionInterface');
+        $this->permission=app()->make('App\Repository\AdminPermissionInterface');
     } 
     
     public function checkAdminPermission()

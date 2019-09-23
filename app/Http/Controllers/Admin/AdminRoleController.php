@@ -52,7 +52,7 @@ class AdminRoleController extends AdminController
     }
     public function delete($id)
     {
-        $adminRole =$this->roles->getroleById($id);
+        $adminRole =$this->roles->getRoleById($id);
         $adminRole->delete();
         return redirect()->route('adminrole.list')
         ->with('success', 'Role has been deleted!!');
@@ -66,7 +66,7 @@ class AdminRoleController extends AdminController
                         'current_menu'  =>  'Edit'
                                            ]
                     ];
-        $adminRole =$this->roles->getroleById($id);
+        $adminRole =$this->roles->getRoleById($id);
         if ($request->method()=='POST') 
         {
             $requestObj=app(RoleRequest::class);
@@ -82,7 +82,7 @@ class AdminRoleController extends AdminController
     */
     public function changeStatus(Request $request)
     {
-        $role = $this->roles->getroleById($request->id);
+        $role = $this->roles->getRoleById($request->id);
         $status = $request->status;
         $role->update(array('status'=>$status));  
         return redirect()->route('adminrole.list')

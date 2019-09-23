@@ -38,7 +38,7 @@
                     <td>{{$adminRole->role_name }}</td>
                     <td>{{$adminRole->slug}}</td>
                     <td>
-                         <input data-id="{{$adminRole->id}}" data-url="{{route('adminrole.change')}}" style="size: 12px;" data-width="75" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $adminRole->status ? 'checked' : '' }}>
+                         <input data-id="{{$adminRole->id}}" data-url="{{route('adminrole.change')}}" style="size: 12px;" data-width="75" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $adminRole->status==1 ? 'checked' : '' }}>
                     </td>
 
                     <td>{{$adminRole->created_at}}</td>

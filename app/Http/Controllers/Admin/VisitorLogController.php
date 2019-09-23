@@ -27,16 +27,16 @@ class VisitorLogController extends AdminController
         }else{
             $logs = $this->visitorLog->getAll()->paginate($this->PerPage);
         }
-        return view('admin.websitelog.list')->with(array('websiteLog'=>$logs,'breadcrumb'=>$breadcrumb,'menu'=>'logs List'));
+        return view('admin.websitelog.list')->with(array('websiteLog'=>$logs,'breadcrumb'=>$breadcrumb,'menu'=>'logs List','primary_menu'=>'websitelog.list'));
     }
     public function View(Request $request,$id)
     {
         
         if($request->ajax()) {
-            $websiteLog =$this->visitorLog->GetLogById($id);
+            $websiteLog =$this->visitorLog->getLogById($id);
         $websiteLog['details'] = $websiteLog->logdetails->sortByDesc('created_at')->first();
         }else{
-           $websiteLog = $this->visitorLog->GetLogById($id);
+           $websiteLog = $this->visitorLog->getLogById($id);
             $websiteLog['details'] = $websiteLog->logdetails->sortByDesc('created_at')->first();
            
         }
@@ -45,11 +45,11 @@ class VisitorLogController extends AdminController
     public function block(BlocklistInterface $blockList,$id)
     {
         $adminId = auth()->user()->id;
-        $ipData =$this->visitorLog->GetLogById($id);
+        $ipData =$this->visitorLog->getLogById($id);
         
         if ($ipData) 
         {
-            $ip = $blockList->GetByIp($ipData->ip_address);
+            $ip = $blockList->getByIp($ipData->ip_address);
             if($ip){
                 if($ip->status=='black'){
                 return redirect()->route('blockList.list')

@@ -29,7 +29,7 @@ class CategoryController extends AdminController
             $categories = $this->categories->getAll()->paginate($this->PerPage);
         }
         
-        return view('admin.blog.listcategories')->with(array('categories'=>$categories,'breadcrumb'=>$breadcrumb,'menu'=>'Blog Category'));
+        return view('admin.blog.listcategories')->with(array('categories'=>$categories,'breadcrumb'=>$breadcrumb,'menu'=>'Blog Category','primary_menu'=>'gallery.list','primary_menu'=>'category.list'));
     }
     public function create(Request $request)
     {
@@ -46,7 +46,7 @@ class CategoryController extends AdminController
        return redirect()->route('adminblogcategory.list')
                             ->with(array('success'=>'blog Category created successfully.','breadcrumb'=>$breadcrumb));
         }
-       return view('admin.blog.createcategories')->with(array('breadcrumb'=>$breadcrumb));;
+       return view('admin.blog.createcategories')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'category.list'));;
     }
     public function delete($id)
     {
@@ -72,7 +72,7 @@ class CategoryController extends AdminController
                             ->with('success','Blog Category Updated Successfully.');
             }
         
-        return view('admin.blog.editcategories',compact('category','breadcrumb'));
+        return view('admin.blog.editcategories',compact('category','breadcrumb'))->with(array('primary_menu'=>'category.list'));
     }
     /*
     * Change status

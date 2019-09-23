@@ -29,7 +29,7 @@ class CreateVisitorLogsTable extends Migration
             $table->string('currency_symbol')->nullable();
             $table->string('currency')->nullable();
             $table->string('calling_code')->nullable();
-            $table->string('country_capital')->nullable();
+            $table->string('capital')->nullable();
             $table->timestamps();
         });
     }

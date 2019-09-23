@@ -41,7 +41,7 @@
                   <td>{{ $adminUser->username }}</td>
                   <td>{{ $adminUser->email }}</td>
                   <td>
-                       <input data-id="{{$adminUser->id}}" data-url="{{route('adminuser.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $adminUser->status ? 'checked' : '' }}>
+                       <input data-id="{{$adminUser->id}}" data-url="{{route('adminuser.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $adminUser->status==1 ? 'checked' : '' }}>
                   </td>
                   <td>{{$adminUser->role_id}}</td>
                   <td>{{$adminUser->created_at}}</td>

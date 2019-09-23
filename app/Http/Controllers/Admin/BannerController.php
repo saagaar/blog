@@ -27,7 +27,7 @@ class BannerController extends AdminController
         }else{
             $banner = $this->banner->getAll()->paginate($this->PerPage);
         }
-        return view('admin.banner.list')->with(array('banner'=>$banner,'breadcrumb'=>$breadcrumb,'menu'=>'Banner List'));
+        return view('admin.banner.list')->with(array('banner'=>$banner,'breadcrumb'=>$breadcrumb,'menu'=>'Banner List','primary_menu'=>'banner.list'));
     }
     public function create(Request $request)
     {
@@ -51,7 +51,7 @@ class BannerController extends AdminController
         return redirect()->route('banner.list')    
                          ->with(array('success'=>'Banner created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('admin.banner.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.banner.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'banner.list'));
     }
     public function edit(Request $request, $id)
     {
@@ -69,10 +69,10 @@ class BannerController extends AdminController
                 $requestObj=app(BannerRequest::class);
                 $validatedData = $requestObj->validated();
                 if($request->hasFile('image')){
-                    $dir = 'frontend/images/banner/';
+                    $dir = 'images/banner-images/';
                 if ($banner->image != '' && File::exists($dir . $banner->image)){           File::delete($dir . $banner->image);}
                     $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('frontend/images/banner'), $imageName);
+                    request()->image->move(public_path('images/banner-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }
                 else 
@@ -83,14 +83,14 @@ class BannerController extends AdminController
                 return redirect()->route('banner.list')
                             ->with('success','Banner Updated Successfully.');
             }
-            return view('admin.banner.edit',compact('banner','breadcrumb'));
+            return view('admin.banner.edit',compact('banner','breadcrumb'))->with(array('primary_menu'=>'banner.list'));
     }
 
     public function delete($id)
     {
        $banner =$this->banner->getById($id);       
         if($banner){
-            $dir = 'frontend/images/banner/';
+            $dir = 'images/banner-images/';
             if ($banner->image != '' && File::exists($dir . $banner->image)){
                 File::delete($dir . $banner->image);
             }

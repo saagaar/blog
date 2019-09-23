@@ -27,7 +27,7 @@ class PaymentGatewayController extends AdminController
         }else{
             $paymentGateway = $this->paymentGateway->getAll()->paginate($this->PerPage);
         }
-        return view('admin.paymentgateway.list')->with(array('paymentGateway'=>$paymentGateway,'breadcrumb'=>$breadcrumb,'menu'=>'PaymentGateway List'));
+        return view('admin.paymentgateway.list')->with(array('paymentGateway'=>$paymentGateway,'breadcrumb'=>$breadcrumb,'menu'=>'Payment   Gateway List','primary_menu'=>'paymentgateway.list'));
     }
     public function create(Request $request)
     {
@@ -51,7 +51,7 @@ class PaymentGatewayController extends AdminController
             return redirect()->route('paymentgateway.list')    
                              ->with(array('success'=>'PaymentGateway created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('admin.paymentgateway.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.paymentgateway.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'paymentgateway.list'));
     }
    public function edit(Request $request, $id)
     {
@@ -69,11 +69,11 @@ class PaymentGatewayController extends AdminController
                 $requestObj=app(PaymentGatewayRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')) {
-                    $dir = 'images/payment-images/';
+                    $dir = 'images/paymentgateway-images/';
                     if ($paymentGateway->image != '' && File::exists($dir . $paymentGateway->image))
                     File::delete($dir . $paymentGateway->image);
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/payment-images'), $imageName);
+                    request()->image->move(public_path('images/paymentgateway-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }else 
                 {
@@ -83,7 +83,7 @@ class PaymentGatewayController extends AdminController
                 return redirect()->route('paymentgateway.list')
                             ->with('success','Payment gateway Updated Successfully.');
             }
-            return view('admin.paymentgateway.edit',compact('paymentGateway','breadcrumb'));
+            return view('admin.paymentgateway.edit',compact('paymentGateway','breadcrumb'))->with(array('primary_menu'=>'paymentgateway.list'));
     }
     public function delete($id)
     {

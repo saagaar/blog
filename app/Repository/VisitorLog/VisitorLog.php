@@ -15,7 +15,7 @@ Class  VisitorLog implements VisitorLogInterface
 	}
 
      
-    public function GetLogById($log_id){
+    public function getLogById($log_id){
       return $this->log->where('id', $log_id)->first();
     }
 

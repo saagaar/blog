@@ -27,7 +27,7 @@ class TeamController extends AdminController
         }else{
             $team = $this->team->getAll()->paginate($this->PerPage);
         }
-        return view('admin.team.list')->with(array('team'=>$team,'breadcrumb'=>$breadcrumb,'menu'=>'Team List'));
+        return view('admin.team.list')->with(array('team'=>$team,'breadcrumb'=>$breadcrumb,'menu'=>'Team List','primary_menu'=>'team.list'));
     }
     public function create(Request $request)
     {
@@ -47,11 +47,11 @@ class TeamController extends AdminController
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             request()->image->move(public_path('images/team-images'), $imageName);
             $validatedData['image'] = $imageName;
-            $this->Team->create($validatedData);
+            $this->team->create($validatedData);
             return redirect()->route('team.list')    
                              ->with(array('success'=>'Team created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('admin.team.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.team.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'team.list'));
     }
     public function edit(Request $request, $id)
     {
@@ -69,11 +69,11 @@ class TeamController extends AdminController
                $requestObj=app(TeamRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')) {
-                    $dir = 'frontend/images/team-images/';
+                    $dir = 'images/team-images/';
                     if ($team->image != '' && File::exists($dir . $team->image))
                     File::delete($dir . $team->image);
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('frontend/images/team-images'), $imageName);
+                    request()->image->move(public_path('images/team-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }else {
                     $validatedData['image'] = $team->image;
@@ -82,13 +82,13 @@ class TeamController extends AdminController
                 return redirect()->route('team.list')
                             ->with('success','Team Updated Successfully.');
             }
-            return view('admin.team.edit',compact('team','breadcrumb'));
+            return view('admin.team.edit',compact('team','breadcrumb'))->with(array('primary_menu'=>'team.list'));
     }
     public function delete($id)
     {
        $team =$this->team->getById($id);
         if($team){
-            $dir = 'frontend/images/team-images/';
+            $dir = 'images/team-images/';
             if ($team->image != '' && File::exists($dir . $team->image)){
                 File::delete($dir . $team->image);
             }

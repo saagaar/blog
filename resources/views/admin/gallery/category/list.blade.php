@@ -31,25 +31,25 @@
                 <tbody>
                 <?php  $i = 0; ?>
                 @if (!$categories->isEmpty())
-                @foreach ($categories as $eachcat)
+                @foreach ($categories as $eachCat)
                 <tr>
                   <td>{{ ++$i }}</td>
-                  <td>{{ $eachcat->title }}</td>
+                  <td>{{ $eachCat->title }}</td>
                    <td>
-                   	<img src="{{asset('frontend/images/gallerycat-images/'.$eachcat['banner_image']) }}" alt="Image" height="42" width="42"></td>
+                   <img src="{{asset('images/gallery-cat-images/'.$eachCat->banner_image) }}" alt="Gallery Categories Image" height="42" width="42"></td>
                   <td>
-                     <input data-id="{{$eachcat->id}}" data-url="{{route('gallerycategory.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachcat->status==1 ? 'checked' : '' }}>
+                     <input data-id="{{$eachCat->id}}" data-url="{{route('gallerycategory.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachCat->status==1 ? 'checked' : '' }}>
                   </td>
-                  <td>{{$eachcat->created_at}}</td>
-                  <td>{{$eachcat->updated_at}}</td>
-                  <td><a href="{{route('gallerycategory.edit',[ $eachcat->id])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('gallerycategory.view',$eachcat->id)}}"><i class="glyphicon glyphicon-picture"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('gallerycategory.delete', $eachcat->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td>{{$eachCat->created_at}}</td>
+                  <td>{{$eachCat->updated_at}}</td>
+                  <td><a href="{{route('gallerycategory.edit',[ $eachCat->id])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('gallerycategory.view',$eachCat->id)}}"><i class="glyphicon glyphicon-picture"  aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('gallerycategory.delete', $eachCat->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="9" align="center" style="background-color: #d2d6de;"> No Categorys Found </td>
+                    <td colspan="9" align="center" style="background-color: #d2d6de;"> No Categories Found </td>
                   </tr>
                   @endif
                 </tbody>

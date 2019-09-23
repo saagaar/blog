@@ -8,7 +8,7 @@ interface SeoInterface
      *
      * @param int
      */
-    public function GetSeoById($seo_id);
+    public function getSeoById($seo_id);
       
       /**
      * Get's all posts.

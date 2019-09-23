@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Repository\Admin;
+namespace App\Repository\AdminRole;
 
 use App\Models\AdminRoles;
 use App\Repository\AdminRoleInterface;
@@ -8,13 +8,13 @@ use App\Repository\AdminRoleInterface;
 Class  AdminRole implements AdminRoleInterface
 {
 	protected $role;
-	public function __construct(AdminRoles $AdminRole)
+	public function __construct(AdminRoles $adminRole)
 	{
-		$this->role=$AdminRole;
+		$this->role=$adminRole;
 	}
 
-  public function getroleById($AdminRole_id){
-      return	$this->role->where('id', $AdminRole_id)->first();
+  public function getRoleById($adminRole_id){
+      return	$this->role->where('id', $adminRole_id)->first();
     }
 
       /**

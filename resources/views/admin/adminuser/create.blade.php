@@ -70,11 +70,11 @@
                 @endif
                 </div>
                 <div class="form-group">
-                  <label>Role</label>         R       
+                  <label>Role</label>           
                   <select name="role_id" class="form-control">
                   <option value="">--Select--</option>
                   @foreach ($adminRoles as $role)                 
-                    <option value="{{$role->id}}" value="{{ old('name') }}">{{$role->role_name}}</optio n>
+                    <option value="{{$role->id}}" value="{{ old('name') }}">{{$role->role_name}}</option>
                     @endforeach
                   </select>                
                 </div>

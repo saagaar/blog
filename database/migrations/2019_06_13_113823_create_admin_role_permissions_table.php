@@ -13,7 +13,7 @@ class CreateAdminRolePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin_role_permission', function (Blueprint $table) {
+        Schema::create('admin_role_permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreign('permission_id')
                     ->references('id')->on('admin_permissions')
@@ -34,6 +34,6 @@ class CreateAdminRolePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('module_role_permission');
+        Schema::dropIfExists('admin_role_permissions');
     }
 }
