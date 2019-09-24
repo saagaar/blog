@@ -1,14 +1,14 @@
 <?php 
 namespace App\Repository;
 
-interface SiteoptionsInterface
+interface SiteoptionInterface
 {
 	 /**
      * Get's sitesettings by it's ID
      *
      * @param int
      */
-    public function GetSiteInfo();
+    public function getSiteInfo();
     
      /**
      * Updates Sitesettings.

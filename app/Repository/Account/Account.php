@@ -6,7 +6,7 @@ use App\Models\User;
 use Spatie\Permission\Traits\HasRoles;
 use App\Repository\AccountInterface;
 
-Class  Accounts implements AccountInterface
+Class  Account implements AccountInterface
 {
 	protected $user;
     use HasRoles;
@@ -16,8 +16,8 @@ Class  Accounts implements AccountInterface
 	}
 
      
-    public function getById($memberid){
-      return $this->account->where('id', $memberid)->first();
+    public function getById($memberId){
+      return $this->account->where('id', $memberId)->first();
     }
 
       /**

@@ -5,19 +5,19 @@ use App\Repository\LocaleInterface;
 class Locale implements LocaleInterface
 {
 	
-    protected $Locales;
+    protected $locales;
 
     public function __construct(Locales $locales)
     {
-        $this->Locales=$locales;
+        $this->locales=$locales;
     }
       /**
      * Get's all Locales.
      *
      * @return mixed
      */
-    public function GetAll(){
-        return $this->Locales->get();
+    public function getAll(){
+        return $this->locales->get();
     }
  	
  	  /**
@@ -25,7 +25,7 @@ class Locale implements LocaleInterface
      *
      * @return mixed
      */
-    public function Create(array $data){
+    public function create(array $data){
 
     }
      /**
@@ -35,7 +35,7 @@ class Locale implements LocaleInterface
      * @param array
      */
 
-    public function Update( $id,array $data){
+    public function update( $id,array $data){
 
     }
 
@@ -44,12 +44,12 @@ class Locale implements LocaleInterface
      *
      * @param int
      */
-    public function Delete($id){
+    public function delete($id){
 
     }
 
-    public function GetActiveLocale(){
-      return  $this->Locales->where('display','1')->get();
+    public function getActiveLocale(){
+      return  $this->locales->where('display','1')->get();
     }
     
 }

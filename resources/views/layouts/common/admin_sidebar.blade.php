@@ -29,9 +29,9 @@
 
   <!-- Sidebar Menu -->
   <ul class="sidebar-menu" data-widget="tree">
-    <li class="header">Dashboard</li>
+    <li @if($primary_menu=="dashboard.list") class="header" @endif>Dashboard</li>
     <!-- Optionally, you can add icons to the links -->
-     <li><a href="{{route('sitesetting')}}"><i class="fa  fa-gear"></i> <span>Site setting</span></a></li>
+     <li @if($primary_menu=="siteoption.list") class="active" @endif><a href="{{route('sitesetting')}}"><i class="fa  fa-gear"></i> <span>Site setting</span></a></li>
     <li class="treeview">
       <a href=""><i class="fa fa-user-plus"></i> <span>User Account</span>
       <span class="pull-right-container">
@@ -39,9 +39,9 @@
       </span>
       </a>
           <ul class="treeview-menu">
-            <li><a href="{{route('account.list')}}"><i class="fa  fa-paint-brush"></i>Accounts</a></li>
-            <li><a href="{{route('roles.list')}}"><i class="fa fa-group"></i> User Roles</a></li>
-            <li><a href="{{route('permission.list')}}"><i class="glyphicon glyphicon-lock"></i> User Permissions</a></li>
+            <li @if($primary_menu=="account.list") class="active" @endif><a href="{{route('account.list')}}"><i class="fa  fa-paint-brush"></i>Accounts</a></li>
+            <li @if($primary_menu=="role.list") class="active" @endif><a href="{{route('roles.list')}}"><i class="fa fa-group"></i> User Roles</a></li>
+            <li @if($primary_menu=="permission.list") class="active" @endif><a href="{{route('permission.list')}}"><i class="glyphicon glyphicon-lock"></i> User Permissions</a></li>
           </ul>
       </li>
       <li @if($primary_menu=="cms.list") class="active" @endif><a href="{{route('cms.list')}}"><i class="fa fa-chain"  aria-hidden="true"></i> <span>CMS</span></a>

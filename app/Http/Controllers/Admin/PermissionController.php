@@ -37,7 +37,7 @@ class PermissionController extends AdminController{
             $permission = $this->permission->getAll()->paginate($this->PerPage);
         }         
         
-        return view('admin.userpermission.list')->with(array('permissions'=>$permission,'breadcrumb'=>$breadcrumb));
+        return view('admin.userpermission.list')->with(array('permissions'=>$permission,'breadcrumb'=>$breadcrumb,'primary_menu'=>'permission.list'));
     }
      public function create(Request $request)
     {
@@ -54,7 +54,7 @@ class PermissionController extends AdminController{
             return redirect()->route('permission.list')
                         ->with('success','Permission created successfully.');
         }
-        return view('admin.userpermission.create',compact('breadcrumb'));
+        return view('admin.userpermission.create',compact('breadcrumb'))->with(array('primary_menu'=>'permission.list'));
     }
     public function edit(Request $request,$id)
     {
@@ -73,7 +73,7 @@ class PermissionController extends AdminController{
             return redirect()->route('permission.list')
                         ->with('success','Permission edited successfully.');
         }
-        return view('admin.userpermission.edit',compact('breadcrumb','permissions'));
+        return view('admin.userpermission.edit',compact('breadcrumb','permissions'))->with(array('primary_menu'=>'permission.list'));
     }
     public function delete($id)
     {

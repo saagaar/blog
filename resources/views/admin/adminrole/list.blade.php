@@ -40,7 +40,6 @@
                     <td>
                          <input data-id="{{$adminRole->id}}" data-url="{{route('adminrole.change')}}" style="size: 12px;" data-width="75" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $adminRole->status==1 ? 'checked' : '' }}>
                     </td>
-
                     <td>{{$adminRole->created_at}}</td>
                     <td>{{$adminRole->updated_at}}</td>
                     
@@ -52,7 +51,7 @@
                   @endforeach
                   @else
                     <tr>
-                    <td colspan="7" align="center" style="background-color: #d2d6de;"> No Admin Role Found </td>
+                    <td colspan="7" align="center" style="background-color: #d2d6de;">No Admin Role Found </td>
                   </tr>
                   @endif
                 </tbody>

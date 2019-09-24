@@ -33,7 +33,7 @@ class RoleController extends AdminController
         }else{
            $roles = $this->roles->getAll()->paginate($this->PerPage);
         }
-        return view('admin.userrole.list')->with(array('roles'=>$roles,'breadcrumb'=>$breadcrumbs));
+        return view('admin.userrole.list')->with(array('roles'=>$roles,'breadcrumb'=>$breadcrumbs,'primary_menu'=>'role.list'));
     }
     public function create(Request $request)
     {
@@ -54,7 +54,7 @@ class RoleController extends AdminController
             return redirect()->route('roles.list')
                         ->with('success','Roles created successfully.');
         }
-       return view('admin.userrole.create')->with(array('breadcrumb'=>$breadcrumb,'permissions'=>$userPermission));
+       return view('admin.userrole.create')->with(array('breadcrumb'=>$breadcrumb,'permissions'=>$userPermission,'primary_menu'=>'role.list'));
     }
     public function edit(Request $request,$id)
     {
@@ -75,7 +75,7 @@ class RoleController extends AdminController
             return redirect()->route('roles.list')
                         ->with('success','Roles edited successfully.');
         }
-        return view('admin.userrole.edit')->with(array('breadcrumb'=>$breadcrumb,'role'=>$role,'permissions'=>$userPermission));;
+        return view('admin.userrole.edit')->with(array('breadcrumb'=>$breadcrumb,'role'=>$role,'permissions'=>$userPermission,'primary_menu'=>'role.list'));;
     }
     public function delete($id)
     {

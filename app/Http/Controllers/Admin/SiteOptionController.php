@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\AdminController; 
-use App\Repository\SiteoptionsInterface;
+use App\Repository\SiteoptionInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\SiteoptionsRequest;
 use App;
@@ -15,15 +15,15 @@ class SiteOptionController extends AdminController
     */
     protected $siteOptions;
 
-    function __construct(SiteoptionsInterface $siteOptions)
+    function __construct(SiteoptionInterface $siteOptions)
     {
          parent::__construct();
          $this->siteOptions=$siteOptions;
     }
     public function edit(Request $request)
     {   
-        $site =$this->siteOptions->GetSiteInfo();
-        $breadcrumb=array('breadcrumbs'=>array('Dashboard'     => route('admin.dashboard'),
+        $site =$this->siteOptions->getSiteInfo();
+        $breadcrumb=array('breadcrumbs'=>array('Dashboard' => route('admin.dashboard'),
                           'current_menu' => 'Site Settings',
                           ));
         if ($request->method()=='POST') 
@@ -34,6 +34,6 @@ class SiteOptionController extends AdminController
             return redirect()->route('sitesetting')
                             ->with('success','Site Settings Updated Successfully.');
         }
-        return view('admin.siteoption.edit')->with(array('site'=>$site,'breadcrumb'=>$breadcrumb));
+        return view('admin.siteoption.edit')->with(array('site'=>$site,'breadcrumb'=>$breadcrumb,'primary_menu'=>'siteoption.list'));
     }
 }

@@ -31,7 +31,7 @@ class AdminRoleController extends AdminController
         }else{
            $adminRoles = $this->roles->getAll()->paginate($this->PerPage);
         }
-        return view('admin.adminrole.list')->with(array('adminRoles'=>$adminRoles,'breadcrumb'=>$breadcrumbs));
+        return view('admin.adminrole.list')->with(array('adminRoles'=>$adminRoles,'breadcrumb'=>$breadcrumbs,'primary_menu'=>'role.list'));
     }
     public function create(Request $request)
     {
@@ -48,7 +48,7 @@ class AdminRoleController extends AdminController
             return redirect()->route('adminrole.list')
                         ->with('success','Roles created successfully.');
         }
-       return view('admin.adminrole.create')->with(array('breadcrumb'=>$breadcrumb));
+       return view('admin.adminrole.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'role.list'));
     }
     public function delete($id)
     {
@@ -75,7 +75,7 @@ class AdminRoleController extends AdminController
             return redirect()->route('adminrole.list')
                             ->with('success','Role Updated successfully.');
         }
-        return view('admin.adminrole.edit',compact('adminRole'))->with(array('adminRole'=>$adminRole,'breadcrumb'=>$breadcrumb));
+        return view('admin.adminrole.edit',compact('adminRole'))->with(array('adminRole'=>$adminRole,'breadcrumb'=>$breadcrumb,'primary_menu'=>'role.list'));
     }
     /*
     * Change status of admin role

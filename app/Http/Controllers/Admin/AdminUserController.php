@@ -37,7 +37,7 @@ class AdminUserController extends AdminController
             $adminUsers = $this->admin->getAll()->paginate($this->PerPage);
         }         
         
-        return view('admin.adminuser.list')->with(array('adminUsers'=>$adminUsers,'breadcrumb'=>$breadcrumb));
+        return view('admin.adminuser.list')->with(array('adminUsers'=>$adminUsers,'breadcrumb'=>$breadcrumb,'primary_menu'=>'adminpassword'));
     }
     public function create(Request $request)
     {
@@ -56,7 +56,7 @@ class AdminUserController extends AdminController
                         ->with('success','User created successfully.');
         }
         $adminRoles = $this->roles->getAll()->get();
-        return view('admin.adminuser.create',compact('adminRoles','breadcrumb'));
+        return view('admin.adminuser.create',compact('adminRoles','breadcrumb'))->with(array('primary_menu'=>'adminpassword'));
     }
     public function edit(Request $request,$id)
     {
@@ -76,7 +76,7 @@ class AdminUserController extends AdminController
                         ->with('success','User updated successfully.');
         }
         $adminRoles = $this->roles->getAll()->get();
-        return view('admin.adminuser.edit',compact('adminRoles','adminUsers','breadcrumb'));
+        return view('admin.adminuser.edit',compact('adminRoles','adminUsers','breadcrumb'))->with(array('primary_menu'=>'adminpassword'));
     }
     public function delete($id)
     {
@@ -116,7 +116,7 @@ class AdminUserController extends AdminController
                         ->with('success','Password Changed successfully.');
               }
         }
-        return view('admin.adminpassword.changepassword',compact('userId','breadcrumb'));
+        return view('admin.adminpassword.changepassword',compact('userId','breadcrumb'))->with(array('primary_menu'=>'adminpassword'));
     }
     /*
     * Change status of adminuser

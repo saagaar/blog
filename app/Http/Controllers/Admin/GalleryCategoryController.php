@@ -10,7 +10,7 @@ use App;
 class GalleryCategoryController extends AdminController
 {
     protected $categories;
-
+    
     function __construct(GallerycatInterface $categories)
     {
         parent::__construct();

@@ -34,10 +34,10 @@ class VisitorLogController extends AdminController
         
         if($request->ajax()) {
             $websiteLog =$this->visitorLog->getLogById($id);
-        $websiteLog['details'] = $websiteLog->logdetails->sortByDesc('created_at')->first();
+        $websiteLog['details'] = $websiteLog->visitordetails->sortByDesc('created_at')->first();
         }else{
            $websiteLog = $this->visitorLog->getLogById($id);
-            $websiteLog['details'] = $websiteLog->logdetails->sortByDesc('created_at')->first();
+            $websiteLog['details'] = $websiteLog->visitordetails->sortByDesc('created_at')->first();
            
         }
         return $websiteLog;

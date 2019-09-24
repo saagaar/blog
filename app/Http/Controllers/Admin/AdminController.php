@@ -56,7 +56,7 @@ class AdminController extends BaseController
         // print_r($this->user);
         // $data=($this->user->getAll());
         // dd($data->username);
-        return view('admin.dashboard',compact('breadcrumb'));
+        return view('admin.dashboard',compact('breadcrumb'))->with(array('primary_menu'=>'dashboard.list'));
     }
     
    

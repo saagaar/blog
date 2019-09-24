@@ -43,7 +43,7 @@
                   <td>{{$eachCat->created_at}}</td>
                   <td>{{$eachCat->updated_at}}</td>
                   <td><a href="{{route('gallerycategory.edit',[ $eachCat->id])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('gallerycategory.view',$eachCat->id)}}"><i class="glyphicon glyphicon-picture"  aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('gallerycategory.view',[$eachCat->id])}}"><i class="glyphicon glyphicon-picture"  aria-hidden="true"></i></a></td>
                   <td><a href="{{route('gallerycategory.delete', $eachCat->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach

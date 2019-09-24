@@ -82,7 +82,7 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::match(['get','post'],'/create/adminrole','Admin\AdminRoleController@create')->name('adminrole.create');
 	Route::match(['get','post'],'/edit/adminrole/{id}','Admin\AdminRoleController@edit')->name('adminrole.edit');
 	Route::get('/delete/adminrole/{id}','Admin\AdminRoleController@delete')->name('adminrole.delete');
-	Route::match(['get','post'],'/manage/adminrole/{roleid}','Admin\ModuleController@manage')->name('adminrole.managepermission');
+	Route::match(['get','post'],'/manage/adminrole/{roleid}','Admin\AdminRoleController@manage')->name('adminrole.managepermission');
 	Route::get('changestatus/role', 'Admin\AdminRoleController@changeStatus')->name('adminrole.change');
 
 	//admin roles

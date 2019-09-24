@@ -45,7 +45,7 @@ class AccountController extends AdminController{
             $account = $this->account->getAll()->paginate($this->PerPage);
         }         
         
-        return view('admin.account.list')->with(array('account'=>$account,'breadcrumb'=>$breadcrumb));
+        return view('admin.account.list')->with(array('account'=>$account,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
     public function create(Request $request)
     {
@@ -71,7 +71,7 @@ class AccountController extends AdminController{
                         ->with('success','account created successfully.');
         }
         $countries = Countries::All();
-        return view('admin.account.create')->with(array('countries'=>$countries,'roles'=>$allRoles,'breadcrumb'=>$breadcrumb));
+        return view('admin.account.create')->with(array('countries'=>$countries,'roles'=>$allRoles,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
     public function edit(Request $request,$id)// normal user list
     {
@@ -90,12 +90,12 @@ class AccountController extends AdminController{
           $validatedData['password']= (Hash::make($validatedData['password']));
             if ($request->hasFile('image')) 
             {
-                    $dir = 'frontend/images/userimages/';
-                    if ($accounts->image != '' && File::exists($dir . $accounts->image))
-                    File::delete($dir . $accounts->image);
+                    $dir = 'images/user-images/';
+                    if ($accounts->image != '' && File::exists($dir . $accounts->image)){
+                    File::delete($dir . $accounts->image);}
 
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('frontend/images/userimages'), $imageName);
+                    request()->image->move(public_path('images/user-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }
             else 
@@ -109,7 +109,7 @@ class AccountController extends AdminController{
                         ->with('success','account edited successfully.');
         }
         $countries = Countries::All();
-        return view('admin.account.edit')->with(array('countries'=>$countries,'accounts'=>$accounts,'roles'=>$allRoles,'breadcrumb'=>$breadcrumb));
+        return view('admin.account.edit')->with(array('countries'=>$countries,'accounts'=>$accounts,'roles'=>$allRoles,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
     /*
     * user account detail
@@ -123,14 +123,14 @@ class AccountController extends AdminController{
                   ]];
         $accounts =$this->account->getById($id);
         
-        return view('admin.account.detail')->with(array('account'=>$accounts,'breadcrumb'=>$breadcrumb));
+        return view('admin.account.detail')->with(array('account'=>$accounts,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
     public function delete($id)
     {
         $accounts =$this->account->getById($id);
         
         if($accounts){
-            $dir = 'frontend/images/userimages/';
+            $dir = 'images/user-images/';
             if ($accounts->image != '' && File::exists($dir . $accounts->image)){
                 File::delete($dir . $accounts->image);
             }
