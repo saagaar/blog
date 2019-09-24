@@ -43,7 +43,7 @@
                   </td>
                   <td><img src="{{ asset('frontend/images/blog/'.$eachblog['image']) }}" alt="Blog Image" height="42" width="42"></td>
                   <td>
-                     @foreach ($eachblog->Locales()->pluck('lang_name') as $lang)
+                     @foreach ($eachblog->locale()->pluck('lang_name') as $lang)
                                         <span class="label label-info label-many">{{ $lang }}</span>
                                     @endforeach
                   </td>

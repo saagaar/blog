@@ -3,12 +3,13 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailer;
+use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EmailClass extends Mailer
+class SendMailable extends Mailable
 {
+    use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
@@ -25,10 +26,8 @@ class EmailClass extends Mailer
      *
      * @return $this
      */
-    public function build($view)
+    public function build()
     {
-        // print_r($view);exit;
-        return $this->send($view);
+        return $this->view('view.name');
     }
-
 }
