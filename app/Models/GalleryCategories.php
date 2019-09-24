@@ -23,6 +23,6 @@ class GalleryCategories extends Model implements Auditable
     ];
     public function galleries()
     {
-        return $this->hasMany(Gallerys::class);
+        return $this->hasMany(Galleries::class,'categories_id');
     }
 }

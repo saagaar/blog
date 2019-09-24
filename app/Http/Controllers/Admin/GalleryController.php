@@ -26,12 +26,12 @@ class GalleryController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $gallerys = $this->gallery->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $galleries = $this->gallery->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $gallerys = $this->gallery->getAll()->paginate($this->PerPage);
+            $galleries = $this->gallery->getAll()->paginate($this->PerPage);
         }
         
-        return view('admin.gallery.gallery.list')->with(array('gallerys'=>$gallerys,'breadcrumb'=>$breadcrumb,'menu'=>'gallery'));
+        return view('admin.gallery.gallery.list')->with(array('galleries'=>$galleries,'breadcrumb'=>$breadcrumb,'menu'=>'gallery','primary_menu'=>'gallery.list'));
     }
     public function create(Request $request)
     {
@@ -40,24 +40,25 @@ class GalleryController extends AdminController
                     'Gallery' => route('gallery.list'),
                     'current_menu'=>'Create Gallery',
                       ]];
-        $category = $this->category->GetAll()->get();
+        $category = $this->category->getAll()->get();
         if ($request->method()=='POST') {
-            $requestobj=app(GalleryRequest::class);
-            $validatedData = $requestobj->validated();
-            $allowedfileExtension=['jpg','png','jpeg','gif','svg'];
-           if ($request->file('image')) {
-           		foreach ($request->image as $item) {
+            $requestObj=app(GalleryRequest::class);
+            $validatedData = $requestObj->validated();
+            $allowedFileExtension=['jpg','png','jpeg','gif','svg'];
+               if ($request->file('image')) {
+           		foreach ($request->image as $item){
            			$filename = $item->getClientOriginalName();
                     $extension = $item->getClientOriginalExtension();
-                    $check=in_array($extension,$allowedfileExtension);
+                    $check=in_array($extension,$allowedFileExtension);
                         if($check)
                         {
-           			$dir = 'frontend/images/gallery/';
+           			$dir = 'images/gallery/';
                     $imageName = uniqid().'.'.$item->getClientOriginalExtension();
                     $item->move(public_path($dir), $imageName);
-                    $current_date_time = date('Y-m-d H:i:s');
-                    $galleryData[] = array('title'=>$validatedData['title'],'gallery_categories_id'=>$validatedData['gallery_categories_id'],'image'=>$imageName,"created_at"=>$current_date_time,"updated_at"=>$current_date_time);
-                    }else {
+                    $currentDateTime = date('Y-m-d H:i:s');
+                    $galleryData[] = array('title'=>$validatedData['title'],'categories_id'=>$validatedData['categories_id'],'image'=>$imageName,"created_at"=>$currentDateTime,"updated_at"=>$currentDateTime);
+                    }
+                    else {
                         return redirect()->route('gallery.list')
                             ->with(array('error'=>'Sorry Only Upload png , jpg , doc','breadcrumb'=>$breadcrumb));
                     }
@@ -68,7 +69,7 @@ class GalleryController extends AdminController
        return redirect()->route('gallery.list')
                             ->with(array('success'=>'Gallery created successfully','breadcrumb'=>$breadcrumb));
         }
-       return view('admin.gallery.gallery.create')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));;
+       return view('admin.gallery.gallery.create')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb,'primary_menu'=>'gallery.list'));;
     }
    
     public function edit(Request $request, $id)
@@ -79,38 +80,40 @@ class GalleryController extends AdminController
                     'current_menu'=>'Edit Gallery',
                       ]];
         $gallery =$this->gallery->getByImgId($id);
-        $category = $this->category->GetAll()->get();
+        $category = $this->category->getAll()->get();
         if ($request->method()=='POST') 
         {
-            $requestobj=app(GalleryRequest::class);
-            $validatedData = $requestobj->validated();
-            $allowedfileExtension=['jpg','png','jpeg','gif','svg'];
-                if ($request->hasFile('image')) {
-                    $filename = $item->getClientOriginalName();
-                    $extension = $item->getClientOriginalExtension();
-                    $check=in_array($extension,$allowedfileExtension);
+            $requestObj=app(GalleryRequest::class);
+            $validatedData = $requestObj->validated();
+            $allowedFileExtension=['jpg','png','jpeg','gif','svg'];
+                if ($request->hasFile('image')) 
+                {                    
+                    $extension = request()->image->getClientOriginalExtension();
+                    $check=in_array($extension,$allowedFileExtension);
                     if($check)
                     {
-                    $dir = 'frontend/images/gallery/';
-                    if ($gallery->image != '' && File::exists($dir . $gallery->image))
-                    File::delete($dir . $gallery->image);
-
+                    $dir = 'images/gallery/';
+                    if ($gallery->image != '' && File::exists($dir . $gallery->image)){
+                    File::delete($dir . $gallery->image);}
                     $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('frontend/images/gallery'), $imageName);
+                   request()->image->move(public_path($dir), $imageName);
                     $validatedData['image'] = $imageName;
-                    }else{
+                    }
+
+                    else{
                         return redirect()->route('gallery.list')
                             ->with(array('error'=>'Sorry Only Upload png , jpg , doc','breadcrumb'=>$breadcrumb));
-                    }
-                }else {
-                    $validatedData['image'] = $gallery->image;
+                        }
                 }
+                else {
+                    $validatedData['image'] = $gallery->image;
+                     }
             $this->gallery->update($id,$validatedData);
             return redirect()->route('gallery.list')
                         ->with('success','Gallery updated successfully.');
         }
         
-        return view('admin.gallery.gallery.edit')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb));
+        return view('admin.gallery.gallery.edit')->with(array('category'=>$category,'gallery'=>$gallery,'breadcrumb'=>$breadcrumb,'primary_menu'=>'gallery.list'));
     }
 
 
@@ -118,7 +121,7 @@ class GalleryController extends AdminController
     {
         $gallery =$this->gallery->getByImgId($id);
         if( $gallery){
-            $dir = 'frontend/images/gallery/';
+            $dir = 'images/gallery/';
             if ($gallery->image != '' && File::exists($dir . $gallery->image)){
                 File::delete($dir . $gallery->image);
             }

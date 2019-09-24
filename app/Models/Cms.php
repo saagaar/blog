@@ -8,7 +8,7 @@ use OwenIt\Auditing\Auditable as Auditables;
 class Cms extends Model implements Auditable
 {
     use Auditables;
-    protected $guard='cms';
+    protected $table='cms';
     /**
      * The attributes that are mass assignable.
      *

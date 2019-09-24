@@ -9,13 +9,12 @@ Class  HelpCat implements HelpCatInterface
 {
 	protected $cat;
 
-	public function __construct(HelpCategories $helpcat)
+	public function __construct(HelpCategories $helpCat)
 	{
-		$this->cat=$helpcat;
+		$this->cat=$helpCat;
 	}
-
-     
-  public function getcatById($helpcat_id){
+  
+  public function getCatById($helpcat_id){
       return	$this->cat->where('id', $helpcat_id)->first();
     }
 

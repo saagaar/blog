@@ -262,6 +262,6 @@ class CountriesSeeder extends Seeder
             ['country' => 'Zambia', "created_at" => date("Y-m-d H:i:s"), 'code' => 'ZM'],
             ['country' => 'Zimbabwe', "created_at" => date("Y-m-d H:i:s"), 'code' => 'ZW'],
         ];
-        DB::table('countrys')->insert($countrys);
+        DB::table('countries')->insert($countrys);
     }
 }

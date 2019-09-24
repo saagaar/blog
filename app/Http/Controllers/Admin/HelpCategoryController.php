@@ -26,15 +26,15 @@ class HelpCategoryController extends AdminController
                     ]];
         $search = $request->get('search');
         if($search){
-            $categorys = $this->category->getAll()
+            $categories = $this->category->getAll()
             ->where('name', 'like', '%' . $search . '%')
             ->paginate($this->PerPage)
             ->withPath('?search=' . $search);
         }else{
-            $categorys = $this->category->getAll()->paginate($this->PerPage);
+            $categories = $this->category->getAll()->paginate($this->PerPage);
         }
         
-        return view('admin.help.helpcat')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb));
+        return view('admin.help.list')->with(array('categories'=>$categories,'breadcrumb'=>$breadcrumb,'primary_menu'=>'helpcat.list'));
     }
     public function create(Request $request)
     {
@@ -54,7 +54,7 @@ class HelpCategoryController extends AdminController
                             ->with('success','Help Category created successfully.');
             
         }
-       return view('admin.help.createhelpcat')->with(array('breadcrumb'=>$breadcrumb));
+       return view('admin.help.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'helpcat.list'));
     }
     public function delete($id)
     {
@@ -77,10 +77,20 @@ class HelpCategoryController extends AdminController
                 'display' => 'required',
             ]);
             $category->update($request->all());
-            $logcat =$this->category->getcatById($id);
+            $logCat =$this->category->getcatById($id);
             return redirect()->route('helpcat.list')
                              ->with('success','Help Category updated successfully.');
         }
-        return view('admin.help.edithelpcat')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb));;
+        return view('admin.help.edit')->with(array('category'=>$category,'breadcrumb'=>$breadcrumb,'primary_menu'=>'helpcat.list'));;
     }
+
+    public function changeDisplay(Request $request)
+    {
+        $category = $this->category->getcatById($request->id);
+        $displayValue= $request->display;
+        $category->update(array('display'=>$displayValue));  
+        return redirect()->route('helpcat.list')
+                        ->with('success','Status change successfully.');
+    }
+
 }

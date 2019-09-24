@@ -27,7 +27,7 @@ class GalleryRequest extends FormRequest
             'title'     =>'required',
             // 'image' => 'required',
             // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'gallery_categories_id'     =>'required'
+            'categories_id'     =>'required'
  
         ];
     }

@@ -8,27 +8,27 @@ interface BlogInterface
      *
      * @param int
      */
-    public function GetBlogById($blogid);
+    public function getBlogById($blogid);
 	 /**
      * Get all category  by it's ID
      *
      * @param int
      */
-    public function GetAssociatedCategoryOfBlog($blogid);
+    public function getAssociatedCategoryOfBlog($blogid);
       
       /**
      * Get's all posts.
      *
      * @return mixed
      */
-    public function GetAll();
+    public function getAll();
  	
  	  /**
      * create a 
      *
      * @return mixed
      */
-    public function Create(array $data);
+    public function create(array $data);
      /**
      * Updates a post.
      *
@@ -36,14 +36,14 @@ interface BlogInterface
      * @param array
      */
 
-    public function Update( $id,array $data);
+    public function update( $id,array $data);
 
       /**
      * Deletes a post.
      *
      * @param int
      */
-    public function Delete($id);
+    public function delete($id);
 
     
 }
