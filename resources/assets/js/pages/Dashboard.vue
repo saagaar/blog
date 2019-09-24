@@ -174,30 +174,7 @@
         </div>
         <div class="col-md-3 col-sm-3 pad-left-0">
             <div class="white-box mb20">
-            <div class="suggestions">
-              <h4 class="grey"><i class="fa fa-star"></i> Request feed</h4>
-              <div class="follow-user">
-                <img src="images/user-5.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Jacqueline Fernandez (jackyee) </a></h5>
-                  <a href="#" class="btn btn-sm btn-round btn-success"><i class="fa fa-user-plus">&nbsp;</i> Accept</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/user-3.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Rozina Thapa Magar</a></h5>
-                  <a href="#" class="btn btn-sm btn-round btn-success"><i class="fa fa-user-plus">&nbsp;</i> Accept</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/user-4.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Babita Baniya (Jeery)</a></h5>
-                  <a href="#" class="btn btn-sm btn-round btn-success"><i class="fa fa-user-plus">&nbsp;</i> Accept</a>
-                </div>
-              </div>
-            </div>
+                <FollowSuggestionsList   :followSuggestion="followSuggestion"></FollowSuggestionsList>
             </div>
             <div class="clearfix"></div>
             <div id="sidebar2" class="white-box mb20">
@@ -246,13 +223,22 @@
 </div>
 </template>
 <script>
-import RightSideBar from './../components/RightSideBar';
+import mixin  from './../mixins/LoadData.mixin.js';
+import FollowSuggestionsList from './../components/Follows/FollowSuggestionsList';
+import TheRightSideBar from './../components/TheRightSideBar';
     export default {
         mounted() {
             // console.log('Component mounted.')
         },
+        mixins: [ mixin ],  
+        data:function(){
+          return {
+            followSuggestion:''
+          }
+        },
         components:{
-            RightSideBar,
+            TheRightSideBar,
+            FollowSuggestionsList
         },
     }
 

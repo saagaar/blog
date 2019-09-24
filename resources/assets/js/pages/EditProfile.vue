@@ -246,9 +246,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             reader.readAsDataURL(event.target.files[0]);
         }
   import { VclFacebook,VclInstagram } from 'vue-content-loading';
-import TopNav from './../components/TopNav/TopNav';
-import MainNav from './../components/MainNav/MainNav';
-import blogFooter from './../components/Footer/blogFooter';
+
     export default {
          data() {
     return {
@@ -263,7 +261,6 @@ import blogFooter from './../components/Footer/blogFooter';
 
         components:{
             
-            blogFooter,
             VclFacebook,
             VclInstagram
           

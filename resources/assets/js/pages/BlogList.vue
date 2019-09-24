@@ -312,13 +312,14 @@
 </div>
 </template>
 <script>
-import TopNav from './../components/TopNav/TopNav';
+import mixin  from './../mixins/LoadData.mixin.js';
+
     export default {
         mounted() {
             // console.log('Component mounted.')
         },
+        mixins:[mixin],
         components:{
-            TopNav,
         },
     }
 </script>

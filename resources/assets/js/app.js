@@ -30,8 +30,8 @@ Custom Imports goes here
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('top-nav', require('./components/TopNav/TopNav.vue').default);
-Vue.component('main-nav', require('./components/MainNav/MainNav.vue').default);
+Vue.component('top-nav', require('./components/TopNav/TheTopNav.vue').default);
+Vue.component('main-nav', require('./components/MainNav/TheMainNav.vue').default);
 // Vue.component('footer', require('./components/Footer/Footer.vue').default);
 
 // Vue.component('Home', require('./components/Home.vue').default);

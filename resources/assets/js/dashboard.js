@@ -18,8 +18,6 @@ Vue.use( CKEditor );
 
 import store from './store/index'
 
-Vue.component('top-nav', require('./components/TopNav/TopNav.vue').default);
-
 import config from './config/config.js';
 import UserDashboard from './components/UserDashboard';
 const app = new Vue({
@@ -31,6 +29,10 @@ const app = new Vue({
     store,
     beforeCreate() 
     {
+        let userState = JSON.parse(window.__USER_STATE__) || {};
+        if (userState) {
+            this.$store.commit('ADD_ME', userState)
+        }
         this.$store.dispatch('checkLoginUser');
     },
     render: function (createElement) 

@@ -20,13 +20,20 @@ Class  Accounts implements AccountInterface
       return $this->account->where('id', $memberid)->first();
     }
 
+    public function getUserByUsername($username){
+      return $this->account->where('username', $username)->first();
+    }
+
+    public function getActiveAccounts(){
+     return $this->account->where('status',1)->get();
+    }
       /**
      * Get's all posts.
      *
      * @return mixed
      */
     public function getAll(){
-   	 return	$this->account->latest();
+   	  return $this->account->latest();
     }
  	
  	  /**
@@ -45,7 +52,7 @@ Class  Accounts implements AccountInterface
      */
 
     public function update( $id,array $data){
-         return $this->account->find($id)->update($data);
+      return $this->account->find($id)->update($data);
     }
 
       /**
@@ -56,5 +63,6 @@ Class  Accounts implements AccountInterface
     public function delete($id){
       return    $this->account->find($id)->delete();
     }
+
 }
 ?>

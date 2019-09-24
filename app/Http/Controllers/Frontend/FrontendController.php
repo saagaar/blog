@@ -35,6 +35,7 @@ class FrontendController extends BaseController
 
     public function __construct()
     {
+        
         $SiteoptionsInterface = app()->make('App\Repository\SiteoptionsInterface');
         $this->userLogInterface=$this->UserlogInterface = app()->make('App\Repository\UserlogInterface');
         $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
@@ -69,6 +70,10 @@ class FrontendController extends BaseController
         if($this->websiteMode=='2'){
             exit('sorry we currently offline');
         }
+        $this->middleware(function ($request, $next) {
+        $this->authUser= \Auth::user();
+            return $next($request);
+        });
     }
     /**
      * Show the application dashboard.

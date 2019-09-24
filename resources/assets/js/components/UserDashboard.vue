@@ -1,7 +1,7 @@
 
 <template>
 <div>
-<TopNav></TopNav>
+<TheTopNav></TheTopNav>
 <div class="mid_part" >
 <!--================Dashboard =================-->
   <section class="dashboard_sec">
@@ -12,13 +12,13 @@
             <div id="sidebar">      
             <div class="profile-card">
                 <img src="images/p_image.png" alt="user" class="profile-photo">
-                <h5><a href="timeline.html" class="text-white">Shanvi Bhandari</a></h5>
-                <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
+                <h5><a href="timeline.html" class="text-white">{{ me.name}}</a></h5>
+                <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> {{ me.followersCount}} followers</a>
             </div>
             <ul class="nav-news-feed">
               <li>
                   <i class="fa fa-newspaper"></i>
-                  <div><router-link to="/">Reports</router-link></div>
+                  <div><router-link to="/dashboard">Reports</router-link></div>
               </li>
               <li>
                   <i class="fa fa-list-ol"></i>
@@ -64,19 +64,29 @@
   <!--================Dashboard Area =================-->
  
 </div>
-<Footer></Footer>
+<TheFooter></TheFooter>
 </div>
 </template>
 <script>
-import TopNav from './../components/TopNav/TopNav';
-import Footer from './../components/Footer/blogFooter';
+import mixin  from './../mixins/LoadData.mixin.js';
+import TheTopNav from './../components/TopNav/TheTopNav';
+import TheFooter from './../components/Footer/TheFooter';
     export default {
-        mounted() {
-            // console.log('Component mounted.')
+        data() {
+          return {
+           
+           }
+        },
+        computed:{
+            me:function(){
+              return this.$store.getters.me
+            },
+            
+           
         },
         components:{
-            TopNav,
-            Footer
+            TheTopNav,
+            TheFooter
         },
     }
 </script>

@@ -5,12 +5,12 @@
 </template>
 <script>
 import LoginMixin from './../../mixins/Login.mixins';
-import LoginSignupModal from './LoginSignupModal';
+// import LoginSignupModal from './LoginSignupModal';
  
     export default {
-        components:{
-           LoginSignupModal 
-        },
+        // components:{
+        //    LoginSignupModal 
+        // },
         data() {
         	return {
            }

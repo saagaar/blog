@@ -19,6 +19,9 @@ Route::get('/logincheck', function () {
    'status'=> \Auth::check()
 ]);
 });
+
+Route::get('/api/unfollowuser/{username}/{offset}','Frontend\HomeController@unfollowuser');
+Route::get('/api/followuser/{username}/{offset}','Frontend\HomeController@followuser');
 Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
