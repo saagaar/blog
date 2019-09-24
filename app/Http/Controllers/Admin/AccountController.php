@@ -132,8 +132,7 @@ class AccountController extends AdminController{
                 'All Accounts' => route('account.list'),
                 'current_menu'=> 'Members Details',
                   ]];
-        $accounts =$this->account->getById($id);
-        
+        $accounts =$this->account->getById($id);       
         return view('admin.account.detail')->with(array('account'=>$accounts,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
     public function delete($id)
