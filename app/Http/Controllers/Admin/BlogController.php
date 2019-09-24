@@ -47,7 +47,13 @@ class BlogController extends AdminController
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             request()->image->move(public_path('frontend/images/blog'), $imageName);
             $validatedData['image'] = $imageName;
-            $created = $this->blog->create($validatedData);
+            $validatedData['user_id'] = Auth()->user()->id;
+            $created = $this->blog->create($validatedData); 
+            $code= uniqid();
+            $part1=substr($code,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
+            $part2=substr($code, 7,-1);
+            $created['code']= $part1.$part2;
+            $created->save();
             $created->tags()->attach($validatedData['tags']);
             return redirect()->route('blog.list')
                              ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));

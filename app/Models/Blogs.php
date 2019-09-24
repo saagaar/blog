@@ -19,7 +19,7 @@ class Blogs extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'title','content','save_method','image','locale_id','featured','anynomous'
+        'title','user_id','code','content','save_method','image','locale_id','featured','anynomous'
     ];
 
     /**

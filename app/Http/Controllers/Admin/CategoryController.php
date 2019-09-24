@@ -49,6 +49,11 @@ class CategoryController extends AdminController
             $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
             request()->banner_image->move(public_path('frontend/images/categories-images'), $imageName);
             $validatedData['banner_image'] = $imageName;
+            $code= uniqid();
+            $part1=substr($code,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
+            $part2=substr($code, 7,-1);
+            $created['code']= $part1.$part2;
+            $created->save();
         $this->categories->create($validatedData);
        return redirect()->route('adminblogcategory.list')
                             ->with(array('success'=>'Blog Category created successfully.','breadcrumb'=>$breadcrumb));
