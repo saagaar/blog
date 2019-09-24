@@ -5,7 +5,7 @@ namespace App\Repository\Cms;
 use App\Models\Cms;
 use App\Repository\CmsInterface;
 
-Class  Cmss implements CmsInterface
+Class Cmss implements CmsInterface
 {
 	protected $cms;
 
@@ -13,9 +13,8 @@ Class  Cmss implements CmsInterface
 	{
 		$this->cms=$cms;
 	}
-
-     
-  public function getcmsById($cms_id){
+    
+  public function getCmsById($cms_id){
       return	$this->cms->where('id', $cms_id)->first();
     }
 

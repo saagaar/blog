@@ -110,21 +110,19 @@ window.setTimeout(function() {
 <script>
   $(function(){
     $('.toggle-class').change(function() {
-        var status = $(this).prop('checked') == true ? 1 : 0;
-        var cmstype = $(this).prop('checked') == true ? 1 : 0;
+        var status = $(this).prop('checked') == true ? 1 : 2;
         var paymentmode = $(this).prop('checked') == true ? 1 : 0;
-        // alert(paymentmode);
+        var savemethod = $(this).prop('checked') == true ? 1 : 0;
         var id = $(this).data('id');
         var url = $(this).data('url');  
         $.ajax({
             type: "GET",
             dataType: "json",
             url: url,
-            data: {'status': status,'cms_type':cmstype,'mode':paymentmode,'id': id},
+            data: {'status': status,'mode': paymentmode,'save_method':savemethod,'display':status,'id': id},
              success: function(data){
               console.log(data.success)
-            }
-            
+            }           
         });
     })
   })

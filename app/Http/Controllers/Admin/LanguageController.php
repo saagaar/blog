@@ -27,7 +27,7 @@ class LanguageController extends AdminController
         }else{
             $language = $this->language->getAll()->paginate($this->PerPage);
         }
-        return view('language.list')->with(array('Language'=>$language,'breadcrumb'=>$breadcrumb,'menu'=>'Language List'));
+        return view('admin.language.list')->with(array('language'=>$language,'breadcrumb'=>$breadcrumb,'menu'=>'Language List','primary_menu'=>'language.list'));
     }
     public function create(Request $request)
     {
@@ -39,13 +39,13 @@ class LanguageController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-            $requestobj=app(LanguageRequest::class);
-            $validatedData = $requestobj->validated();
+            $requestObj=app(LanguageRequest::class);
+            $validatedData = $requestObj->validated();
             $this->language->create($validatedData);
             return redirect()->route('language.list')    
                              ->with(array('success'=>'Language created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('language.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.language.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'language.list'));
     }
    public function edit(Request $request, $id)
     {
@@ -57,20 +57,20 @@ class LanguageController extends AdminController
             $language =$this->language->getById($id);    
             if ($request->method()=='POST')
             {
-                $requestobj=app(LanguageRequest::class);
-                $validatedData = $requestobj->validated();
+                $requestObj=app(LanguageRequest::class);
+                $validatedData = $requestObj->validated();
                 $this->language->update($id,$validatedData);
                 return redirect()->route('language.list')
                             ->with('success','Languages Updated Successfully.');
             }
-            return view('language.edit',compact('language','breadcrumb'));
+            return view('admin.language.edit',compact('language','breadcrumb'))->with(array('primary_menu'=>'language.list'));
     }
     public function delete($id)
     {
-       $language =$this->language->getById($id);       
+        $language =$this->language->getById($id);       
         $language->delete();        
         return redirect()->route('language.list')
-        ->with('success', 'Language deleted Successfully');
+        ->with('success', 'Language has been deleted!');
     }
 
        public function changeStatus(Request $request)

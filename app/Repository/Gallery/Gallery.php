@@ -2,13 +2,13 @@
 
 namespace App\Repository\Gallery;
 
-use App\Models\Gallerys;
+use App\Models\Galleries;
 use App\Repository\GalleryInterface;
 
 Class  Gallery implements GalleryInterface
 {
 	protected $image;
-	public function __construct(Gallerys $image)
+	public function __construct(Galleries $image)
 	{
 		$this->image=$image;
 	}

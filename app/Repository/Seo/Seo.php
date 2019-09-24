@@ -9,14 +9,14 @@ Class  Seo implements SeoInterface
 {
 	protected $seo;
 
-	public function __construct(Seos $Seo)
+	public function __construct(Seos $seo)
 	{
-		$this->seo=$Seo;
+		$this->seo=$seo;
 	}
 
      
-    public function GetSeoById($seoid){
-      return $this->seo->where('id', $seoid)->first();
+    public function getSeoById($seoId){
+      return $this->seo->where('id', $seoId)->first();
     }
 
     

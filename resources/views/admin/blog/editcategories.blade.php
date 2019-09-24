@@ -56,7 +56,7 @@
                 <div class="form-group">
                   <label for="status">Display:</label>
                   <label><input type="radio" name="status" value="1" @if($category->status=='1') checked @endif >Active</label>
-                  <label><input type="radio" name="status" value="0" @if($category->status=='0') checked @endif >Inactive</label>
+                  <label><input type="radio" name="status" value="2" @if($category->status=='2') checked @endif >Inactive</label>
                   @if ($errors->has('status'))
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>
                 @endif

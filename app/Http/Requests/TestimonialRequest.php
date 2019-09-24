@@ -10,14 +10,23 @@ class TestimonialRequest extends FormRequest
     {
         return true;
     }
-    
+
     public function rules()
     {
+
+         // if ($this->method() == 'POST')
+         //  {
+         //    $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+         //  }
+         //  else
+         //  {
+         //    $image = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+         //  }
+
         return 
         [
             'name'=>'required',
             'description'=>'required',
-            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status'=>'required',
             'position'=>'required',
         ];

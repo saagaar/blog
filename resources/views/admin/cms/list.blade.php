@@ -31,25 +31,29 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if(!$CMS->isEmpty())
-                @foreach ($CMS as $eachcms)
+                @if(!$cms->isEmpty())
+                @foreach ($cms as $eachCms)
                 <tr>
                   <td>{{ ++$i }}</td>
-                  <td>{{ $eachcms->heading }}</td>
-                  <td>{{ strip_tags($eachcms->content)}}</td>
+                  <td>{{ $eachCms->heading }}</td>
+                  <td>{{ strip_tags($eachCms->content)}}</td>
                   <td>
-                      <input data-id="{{$eachcms->id}}" data-url="{{route('cms.changestatus')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachcms->status ? 'checked' : ''}}>
+                      <input data-id="{{$eachCms->id}}" data-url="{{route('cms.changestatus')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachCms->status==1 ? 'checked' : ''}}>
                   </td>
                   <td>
-                    <input data-id="{{$eachcms->id}}" data-url="{{route('cms.cmstype')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Website" data-off="System"{{$eachcms->cms_type ? 'checked' : ''}}>
+                     @if($eachCms->cms_type=='website')
+                    <span class="label label-success label-large">Website</span>
+                    @else
+                   <span class="label label-warning label-large ">System</span>
+                  @endif
                   </td>
-                  <td>{{$eachcms->created_at}}</td>
-                  <td>{{$eachcms->updated_at}}</td>
+                  <td>{{$eachCms->created_at}}</td>
+                  <td>{{$eachCms->updated_at}}</td>
                   
-                      <td><a href="{{route('cms.edit',$eachcms->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                      <td><a href="{{route('cms.edit',$eachCms->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                       <td>
-                      @if($eachcms->deletable=='Y')
-                       <a href="{{route('cms.delete',$eachcms->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      @if($eachCms->deletable=='Y')
+                       <a href="{{route('cms.delete',$eachCms->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                       @endif  
                      </td>
                 </tr>
@@ -64,7 +68,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $CMS->links() !!}
+              {!! $cms->links() !!}
               </ul>
             </div>           
             <!-- /.box-body -->

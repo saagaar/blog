@@ -8,7 +8,7 @@ interface ContactInterface
      *
      * @param int
      */
-    public function GetContactById($contactid);
+    public function getContactById($contactid);
 	 /**
      * Get all category  by it's ID
      *
@@ -20,14 +20,14 @@ interface ContactInterface
      *
      * @return mixed
      */
-    public function GetAll();
+    public function getAll();
  	
  	  /**
      * create a 
      *
      * @return mixed
      */
-    public function Create(array $data);
+    public function create(array $data);
      /**
      * Updates a post.
      *
@@ -35,14 +35,14 @@ interface ContactInterface
      * @param array
      */
 
-    public function Update( $id,array $data);
+    public function update( $id,array $data);
 
       /**
      * Deletes a post.
      *
      * @param int
      */
-    public function Delete($id);
+    public function delete($id);
 
     
 }

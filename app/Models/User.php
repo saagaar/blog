@@ -51,7 +51,7 @@ class User extends Authenticatable implements Auditable
     }
     public function country()
     {
-        return $this->belongsTo(Countrys::class,'country');
+        return $this->belongsTo(Countries::class,'country');
     }
     public function Follow()
     {

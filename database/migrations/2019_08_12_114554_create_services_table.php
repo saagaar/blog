@@ -18,7 +18,7 @@ class CreateServicesTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('icon');
-            $table->enum('status', ['0', '1']);
+             $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');
              $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class CreateBlocklistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('blocklists', function (Blueprint $table) {
+        Schema::create('block_lists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ip_address');
             $table->string('message');
@@ -33,6 +33,6 @@ class CreateBlocklistsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blocklists');
+        Schema::dropIfExists('block_lists');
     }
 }

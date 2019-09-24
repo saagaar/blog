@@ -55,7 +55,7 @@
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status"  value="0" @if($cms->status=='0') checked @endif>
+                        <input type="radio" class="custom-control-input flat-red" name="status"  value="2" @if($cms->status=='2') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">No</label>
                       </div>
                   @if ($errors->has('status'))
@@ -66,11 +66,11 @@
                  <div class="form-group">
                   <label for="cms_type">CMS Type</label>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="1" @if($cms->cms_type=='1') checked @endif>
+                        <input type="radio" class="custom-control-input flat-red" name="cms_type" value="website" @if($cms->cms_type=='website') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Website</label>
                     </div> 
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="0" @if($cms->cms_type=='0') checked @endif>
+                        <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="system" @if($cms->cms_type=='system') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">System</label>
                       </div>
                   @if ($errors->has('cms_type'))

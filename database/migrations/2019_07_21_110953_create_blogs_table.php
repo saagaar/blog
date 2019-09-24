@@ -16,21 +16,21 @@ class CreateBlogsTable extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->string('code')->nullable();
-            $table->timestamps();
             $table->string('title');
-            $table->text('content');
+            $table->text('content');         
+            $table->unsignedBigInteger('locale_id');        
             $table->foreign('locale_id')
                     ->references('id')->on('locales')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('locale_id');
             $table->foreign('user_id')
                     ->references('id')->on('users')
                     ->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->enum('save_method',['1','2'])->comment('1=Save to draft,2-Publish')->default('1');
-            $table->enum('featured',['1','0'])->comment('1=yes,2=no');
-            $table->enum('anynomous',['1','0'])->comment('1=yes,2-No');
+            $table->enum('featured',['1','2'])->comment('1=yes,2=no');
+            $table->enum('anynomous',['1','2'])->comment('1=yes,2-No');
             $table->string('image');
+            $table->timestamps();
         });
     }
     

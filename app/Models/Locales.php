@@ -20,7 +20,7 @@ class Locales extends Model implements Auditable
         'lang','lang_name','display','order'
     ];
 
-    public function Blogs()
+    public function blog()
     {
         $this->belongsTo(Blogs::class);
     }

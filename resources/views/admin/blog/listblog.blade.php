@@ -39,11 +39,7 @@
                   <td>{{ $eachblog->title }}</td>
                    <td>{{strip_tags($eachblog->content) }}</td>
                   <td>
-                      @if ($eachblog->save_method == '0')
-                        <span class="label label-danger">Draft</span>
-                      @else
-                        <span class="label label-success">Published</span>
-                      @endif
+                   <input data-id="{{$eachblog->id}}" data-url="{{route('blog.changemethod')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Publish" data-off="Save"{{$eachblog->save_method ? 'checked' : '' }}>
                   </td>
                   <td><img src="{{ asset('frontend/images/blog/'.$eachblog['image']) }}" alt="Blog Image" height="42" width="42"></td>
                   <td>

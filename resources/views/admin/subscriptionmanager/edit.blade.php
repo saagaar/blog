@@ -57,7 +57,7 @@
                         <label class="custom-control-label" for="defaultChecked">Subscribed</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="0"  @if($subscription->status=='0') checked @endif >
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="2"  @if($subscription->status=='2') checked @endif >
                         <label class="custom-control-label" for="defaultChecked">Unsubscribed</label>
                     </div>
                          @if ($errors->has('status'))

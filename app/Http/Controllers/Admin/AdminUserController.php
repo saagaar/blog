@@ -28,16 +28,16 @@ class AdminUserController extends AdminController
 
          $search = $request->get('search');
         if($search){
-            $adminusers = $this->admin->getAll()
+            $adminUsers = $this->admin->getAll()
                     ->where('username', 'like', '%' . $search . '%')
                      ->orWhere('email', 'like', '%' . $search . '%')
                     ->paginate($this->PerPage)
                     ->withPath('?search=' . $search);
         }else{
-            $adminusers = $this->admin->getAll()->paginate($this->PerPage);
+            $adminUsers = $this->admin->getAll()->paginate($this->PerPage);
         }         
         
-        return view('admin.admin_users.listadmin')->with(array('adminusers'=>$adminusers,'breadcrumb'=>$breadcrumb));
+        return view('admin.adminuser.list')->with(array('adminUsers'=>$adminUsers,'breadcrumb'=>$breadcrumb,'primary_menu'=>'adminpassword'));
     }
     public function create(Request $request)
     {
@@ -48,15 +48,15 @@ class AdminUserController extends AdminController
                   ]];
         if ($request->method()=='POST') 
         {
-            $requestobj=app(AdminuserRequest::class);
-            $validatedData = $requestobj->validated();
-            $validatedData['password']= (Hash::make($requestobj->password));
+            $requestObj=app(AdminuserRequest::class);
+            $validatedData = $requestObj->validated();
+            $validatedData['password']= (Hash::make($requestObj->password));
             $this->admin->create($validatedData);
             return redirect()->route('adminuser.list')
                         ->with('success','User created successfully.');
         }
         $adminRoles = $this->roles->getAll()->get();
-        return view('admin.admin_users.createuser',compact('adminroles','breadcrumb'));
+        return view('admin.adminuser.create',compact('adminRoles','breadcrumb'))->with(array('primary_menu'=>'adminpassword'));
     }
     public function edit(Request $request,$id)
     {
@@ -65,18 +65,18 @@ class AdminUserController extends AdminController
                     'Admin Users' => route('adminuser.list'),
                     'current_menu'=>'All Admin Users',
                       ]];
-        $adminusers =$this->admin->getById($id);
+        $adminUsers =$this->admin->getById($id);
         if ($request->method()=='POST') 
         {
-            $requestobj=app(AdminuserRequest::class);
-            $validatedData = $requestobj->validated();
-            $validatedData['password']= (Hash::make($requestobj->password));
+            $requestObj=app(AdminuserRequest::class);
+            $validatedData = $requestObj->validated();
+            $validatedData['password']= (Hash::make($requestObj->password));
             $this->admin->update($id,$validatedData);
             return redirect()->route('adminuser.list')
                         ->with('success','User updated successfully.');
         }
         $adminRoles = $this->roles->getAll()->get();
-        return view('admin.admin_users.edituser',compact('adminroles','adminusers','breadcrumb'));
+        return view('admin.adminuser.edit',compact('adminRoles','adminUsers','breadcrumb'))->with(array('primary_menu'=>'adminpassword'));
     }
     public function delete($id)
     {
@@ -93,9 +93,8 @@ class AdminUserController extends AdminController
                     'Admin Users' => route('adminuser.list'),
                     'current_menu'=>'Change Password',
                       ]];
-        $userid = Auth()->user()->id;//current user 
-        $adminusers =$this->admin->getById($userid);
-        echo $adminusers;                                                                                   
+        $userId = Auth()->user()->id;//current user 
+        $adminUser =$this->admin->getById($userId);                                                                                   
        if ($request->method()=='POST') 
         {
             $this->validate($request,[
@@ -104,18 +103,20 @@ class AdminUserController extends AdminController
             'confirm_password' =>'required_with:password|same:password|min:6'
 
         ]);
-             $validatedData = $request->all();// all data will be here  
-             if (!Hash::check($validatedData['old_password'], $adminusers->password)) {
-             return back()->with('error', 'The specified password does not match the database password');
+        $validatedData = $request->all();// all data will be here 
+         if (!Hash::check($validatedData['old_password'], $adminUser->password)) 
+            {
+              return back()->with('error', 'The specified password does not match the database password');
             } 
-            else {
+         else 
+             {
                 $data['password']= (Hash::make($request->password));
                 $this->admin->update($id,array('password'=>$data['password']));
-                return redirect()->route('admin.logout')
-                            ->with('success','Password Changed successfully.');
-                }
+                return redirect()->route('logout','backenduser')
+                        ->with('success','Password Changed successfully.');
+              }
         }
-        return view('admin_password.changepassword',compact('userid','breadcrumb'));
+        return view('admin.adminpassword.changepassword',compact('userId','breadcrumb'))->with(array('primary_menu'=>'adminpassword'));
     }
     /*
     * Change status of adminuser

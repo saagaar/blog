@@ -8,10 +8,10 @@ interface BlocklistInterface
      *
      * @param int
      */
-    public function GetIpById($ip_id);
+    public function getIpById($ip_id);
       
 
-      public function GetByIp($ip_ad);
+      public function getByIp($ip_ad);
       /**
      * Get's all posts.
      *

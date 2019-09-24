@@ -25,12 +25,12 @@ class CategoryController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $categorys = $this->categories->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $categories = $this->categories->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $categorys = $this->categories->getAll()->paginate($this->PerPage);
+            $categories = $this->categories->getAll()->paginate($this->PerPage);
         }
         
-        return view('admin.blog.listcategories')->with(array('categorys'=>$categorys,'breadcrumb'=>$breadcrumb,'menu'=>'Blog Category'));
+        return view('admin.blog.listcategories')->with(array('categories'=>$categories,'breadcrumb'=>$breadcrumb,'menu'=>'Blog Category','primary_menu'=>'gallery.list','primary_menu'=>'category.list'));
     }
     public function create(Request $request)
     {
@@ -58,7 +58,7 @@ class CategoryController extends AdminController
        return redirect()->route('adminblogcategory.list')
                             ->with(array('success'=>'Blog Category created successfully.','breadcrumb'=>$breadcrumb));
         }
-       return view('admin.blog.createcategories')->with(array('breadcrumb'=>$breadcrumb));;
+       return view('admin.blog.createcategories')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'category.list'));;
     }
     public function delete($id)
     {
@@ -80,7 +80,7 @@ class CategoryController extends AdminController
                     'blog Category' => route('adminblogcategory.list'),
                     'current_menu'=>'Edit Blog Category',
                       ]];
-        $category =$this->categories->getcatById($id);
+        $category =$this->categories->getCatById($id);
         if ($request->method()=='POST') 
         {           
                 $requestobj=app(CategoryRequest::class);
@@ -104,14 +104,14 @@ class CategoryController extends AdminController
                             ->with('success','Blog Category Updated Successfully.');
             }
         
-        return view('admin.blog.editcategories',compact('category','breadcrumb'));
+        return view('admin.blog.editcategories',compact('category','breadcrumb'))->with(array('primary_menu'=>'category.list'));
     }
     /*
     * Change status
     */
      public function changeStatus(Request $request)
     {
-        $category = $this->categories->getcatById($request->id);
+        $category = $this->categories->getCatById($request->id);
         $status = $request->status;
         $category->update(array('status'=>$status));  
        return redirect()->route('adminblogcategory.list')

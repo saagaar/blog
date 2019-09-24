@@ -8,7 +8,7 @@ interface AdminRoleInterface
      *
      * @param int
      */
-    public function getroleById($role_id);
+    public function getRoleById($role_id);
       
       /**
      * Get's all posts.

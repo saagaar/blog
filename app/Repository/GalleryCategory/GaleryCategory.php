@@ -14,8 +14,8 @@ Class  GalleryCategory implements GallerycatInterface
 	}
 
      
-    public function getByCatId($catid){
-      return $this->category->where('id', $catid)->first();
+    public function getByCatId($catId){
+      return $this->category->where('id', $catId)->first();
     }
 
       /**
