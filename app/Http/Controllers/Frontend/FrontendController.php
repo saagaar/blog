@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Repository\SiteoptionsInterface;
+use App\Repository\SiteoptionInterface;
 use Illuminate\Support\Facades\Route;
 use App\Models\Userlogs;
 use App\Services\VisitorInfo;
@@ -35,8 +35,8 @@ class FrontendController extends BaseController
 
     public function __construct()
     {
-        $SiteoptionsInterface = app()->make('App\Repository\SiteoptionsInterface');
-        $this->userLogInterface=$this->UserlogInterface = app()->make('App\Repository\UserlogInterface');
+        $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
+        $this->userLogInterface=$this->UserlogInterface = app()->make('App\Repository\VisitorLogInterface');
         $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
         $this->visitorInfo =  new visitorInfo();
         $this->siteName =  $this->siteSettings->site_name;
@@ -100,7 +100,7 @@ class FrontendController extends BaseController
                     'redirected_to' =>$serverData['path'],
                     'visit_date'   =>date("Y-m-d H:i:s"),
                 );
-                $dblogdata['ip']->logdetails()->create($logdata);
+                $dblogdata['ip']->visitordetails()->create($logdata);
             }
         }
         elseif ($dblogdata && trim($dblogdata['details'])=='') {
@@ -110,7 +110,7 @@ class FrontendController extends BaseController
                     'redirected_to' =>$serverData['path'],
                     'visit_date'   =>date("Y-m-d H:i:s"),
                 );
-            $dblogdata['ip']->logdetails()->create($logdata);
+            $dblogdata['ip']->visitordetails()->create($logdata);
         }
         else{
             $logdata = array(
@@ -124,7 +124,7 @@ class FrontendController extends BaseController
                     'ip_address'           =>$serverData['ip_address'],
                    )
                 );
-            $logcreate->logdetails()->create($logdata);
+            $logcreate->visitordetails()->create($logdata);
         }
         VisitorLog::dispatch($this->UserlogInterface,$ipAddress);
 
