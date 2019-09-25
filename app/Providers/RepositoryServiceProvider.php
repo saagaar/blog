@@ -62,6 +62,7 @@ use App\Repository\FollowerInterface;
 use App\Repository\Follower\Follower;
 use App\Repository\LogActivityInterface;
 use App\Repository\LogActivity\LogActivity;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
