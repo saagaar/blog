@@ -19,7 +19,7 @@ class Blogs extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'title','content','save_method','image','locale_id','featured','anynomous'
+        'title','user_id','code','content','save_method','image','locale_id','featured','anynomous'
     ];
 
     /**
@@ -34,12 +34,12 @@ class Blogs extends Model implements Auditable
      *
      * @var array
      */
-    public function Categories()
+    public function categories()
     {
         return $this->belongsToMany(Categories::class)->using(BlogCategories::class);
     }
 
-    public function Locales(){
+    public function locale(){
        return $this->belongsTo(Locales::class,'locale_id');
     }
     public function tags(){

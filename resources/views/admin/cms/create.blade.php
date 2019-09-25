@@ -53,7 +53,7 @@
                     <label class="custom-control-label" for="defaultChecked">Yes</label>
                   </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status"  value="0" >
+                        <input type="radio" class="custom-control-input flat-red" name="status"  value="2" >
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
                         @if ($errors->has('status'))
@@ -63,11 +63,11 @@
                   <div class="form-group">
                   <label for="cms_type">Cms Type</label>
                   <div class="custom-control custom-radio radio-inline">
-                    <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="1" checked>
+                    <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="website" checked>
                     <label class="custom-control-label" for="defaultChecked">Website</label>
                   </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="cms_type"  value="0" >
+                        <input type="radio" class="custom-control-input flat-red" name="cms_type" value="system" >
                         <label class="custom-control-label" for="defaultChecked">System</label>
                     </div>
                         @if ($errors->has('cms_type'))

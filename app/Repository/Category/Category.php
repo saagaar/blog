@@ -4,18 +4,17 @@ namespace App\Repository\Category;
 
 use App\Models\Categories;
 use App\Repository\CategoryInterface;
-
-Class  Category implements CategoryInterface
+Class Category implements CategoryInterface
 {
 	protected $cat;
 
-	public function __construct(Categories $blogcat)
+	public function __construct(Categories $blogCat)
 	{
-		$this->cat=$blogcat;
+		$this->cat=$blogCat;
 	}
 
      
-  public function getcatById($blogcat_id){
+  public function getCatById($blogcat_id){
       return	$this->cat->where('id', $blogcat_id)->first();
     }
 

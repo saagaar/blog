@@ -35,8 +35,8 @@ Class  Follower implements FollowerInterface
     /**
      * 
      */
- 	public function getAllFollowers($user_id){
-      return $this->follower->where('follow_id', $follower_id)->all();
+ 	public function getAllFollowers($user){
+      return $user->followers()->get();
     }
        /**
      * Get's all follow lists.
@@ -45,7 +45,8 @@ Class  Follower implements FollowerInterface
      * @return mixed
      */
 
-     public function getAllFollowings($userid){
+     public function getAllFollowings($user){
+        return $user->followings()->get();
      }
  	  /**
      * Insert follower

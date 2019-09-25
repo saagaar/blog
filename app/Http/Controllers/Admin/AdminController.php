@@ -9,7 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Services\NotificationCommander;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Route;
-use App\Repository\ModuleInterface;
+use App\Repository\AdminPermissionInterface;
 
 use Auth;
 use Session;
@@ -56,11 +56,11 @@ class AdminController extends BaseController
         // print_r($this->user);
         // $data=($this->user->getAll());
         // dd($data->username);
-        return view('admin.dashboard',compact('breadcrumb'));
+        return view('admin.dashboard',compact('breadcrumb'))->with(array('primary_menu'=>'dashboard.list'));
     }
     
    
-    public function ImportModules(ModuleInterface $module)
+    public function ImportModules(AdminPermissionInterface $module)
     {
         $controllers = [];
         $i=1;

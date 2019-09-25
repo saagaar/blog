@@ -27,47 +27,48 @@
           <!-- Form Element sizes -->
           <div class="box ">
             <div class="box-body">
-            <form action="{{route('seo.edit',$seodata->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('seo.edit',$seoData->id)}}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="box-body">
                 <div class="form-group">
                   <label for="pageid">Page id</label>
-                  <input type="text" class="form-control" name="pageid" id="pageid" value="{{ $seodata->pageid }}" placeholder="Enter pageid">
+                  <input type="text" class="form-control" name="pageid" id="pageid" value="{{ $seoData->pageid }}" placeholder="Enter pageid">
                   @if ($errors->has('pageid'))
                 <div class="alert alert-danger">{{ $errors->first('pageid') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="page_slug">Page Slug</label>
-                  <input type="text" class="form-control" name="page_slug" id="page_slug" value="{{ $seodata->page_slug }}" placeholder="Enter page_slug">
+                  <input type="text" class="form-control" name="page_slug" id="page_slug" value="{{ $seoData->page_slug }}" placeholder="Enter page_slug">
                   @if ($errors->has('page_slug'))
                 <div class="alert alert-danger">{{ $errors->first('page_slug') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="meta_key">Meta Key</label>
-                  <input type="text" class="form-control" name="meta_key" id="meta_key" value="{{ $seodata->meta_key }}" placeholder="Enter meta key">
+                  <input type="text" class="form-control" name="meta_key" id="meta_key" value="{{ $seoData->meta_key }}" placeholder="Enter meta key">
                   @if ($errors->has('meta_key'))
                 <div class="alert alert-danger">{{ $errors->first('meta_key') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="meta_description">Meta Description: </label>
-                    <textarea name="meta_description" class="form-control" rows="5" placeholder="Meta Description here..">{{ $seodata->meta_description }}</textarea>
+                    <textarea name="meta_description" class="form-control" rows="5" placeholder="Meta Description here..">{{ $seoData->meta_description }}</textarea>
+
                   @if ($errors->has('meta_description'))
-                <div class="alert alert-danger">{{ $errors->first('meta_description') }}</div>
-                @endif
+                  <div class="alert alert-danger">{{ $errors->first('meta_description') }}</div>
+                  @endif
                 </div>
                 <div class="form-group">
                   <label for="schema1">schema1</label>
-                  <textarea name="schema1" class="form-control" rows="8" placeholder="Schema1 here..">{{ $seodata->schema1 }}</textarea>
+                  <textarea name="schema1" class="form-control" rows="8" placeholder="Schema1 here..">{{ $seoData->schema1 }}</textarea>
                   @if ($errors->has('schema1'))
                 <div class="alert alert-danger">{{ $errors->first('schema1') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="schema2">schema2</label>
-                  <textarea name="schema2" class="form-control" rows="8" placeholder="Schema2 here..">{{ $seodata->schema2 }}</textarea>
+                  <textarea name="schema2" class="form-control" rows="8" placeholder="Schema2 here..">{{ $seoData->schema2 }}</textarea>
                   @if ($errors->has('schema2'))
                 <div class="alert alert-danger">{{ $errors->first('schema2') }}</div>
                 @endif
@@ -77,7 +78,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
               </div>
             </form>
             </div>

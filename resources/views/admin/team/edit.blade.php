@@ -91,7 +91,7 @@
                 <div class="form-group">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
-                  <img src='frontend//images/team-images/{{$team->image}}' width="50">
+                  <img src='/images/team-images/{{$team->image}}' width="50"/>
                   @if ($errors->has('image'))
                   <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                   @endif
@@ -103,7 +103,7 @@
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="0"@if($team->status=='0') checked @endif>
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="2"@if($team->status=='2') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
                          @if ($errors->has('status'))

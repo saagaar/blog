@@ -7,20 +7,20 @@ use App\Repository\BlocklistInterface;
 
 Class Blocklist implements BlocklistInterface
 {
-	protected $blocklist;
+	protected $blockList;
 
-	public function __construct(Blocklists $blocklist)
+	public function __construct(Blocklists $blockList)
 	{
-		$this->blocklist=$blocklist;
+		$this->blockList=$blockList;
 	}
 
      
-  public function GetIpById($ipaddress_id){
-      return $this->blocklist->where('id', $ipaddress_id)->first();
+  public function getIpById($ipaddress_id){
+      return $this->blockList->where('id', $ipaddress_id)->first();
     }
 
-public function GetByIp($ipaddress){
-      return $this->blocklist->where('ip_address', $ipaddress)->first();
+public function getByIp($ipaddress){
+      return $this->blockList->where('ip_address', $ipaddress)->first();
     }
       /**
      * Get's all posts.
@@ -28,7 +28,7 @@ public function GetByIp($ipaddress){
      * @return mixed
      */
     public function getAll(){
-   	 return	$this->blocklist->latest();
+   	 return	$this->blockList->latest();
     }
  	
  	  /**
@@ -37,7 +37,7 @@ public function GetByIp($ipaddress){
      * @return mixed
      */
     public function create(array $data){
-      return	$this->blocklist->create($data);
+      return	$this->blockList->create($data);
     }
      /**
      * Updates a post.
@@ -47,7 +47,7 @@ public function GetByIp($ipaddress){
      */
 
     public function update( $id,array $data){
-      return	$this->blocklist->find($id)->update($data);
+      return	$this->blockList->find($id)->update($data);
     }
 
       /**
@@ -56,7 +56,7 @@ public function GetByIp($ipaddress){
      * @param int
      */
     public function delete($id){
-      return	$this->blocklist->find($id)->delete();
+      return	$this->blockList->find($id)->delete();
     }
 }
 ?>

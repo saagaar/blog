@@ -20,10 +20,16 @@ Route::get('/logincheck', function () {
 ]);
 });
 
+
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\HomeController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\HomeController@followuser');
+Route::get('/categories', 'Frontend\ProfileController@categories')->name('categories');
 Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
+
+Route::get('/tests', 'Frontend\HomeController@test')->name('test');
+Route::get('/blogs','Frontend\HomeController@index')->name('home');
+
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 Route::get('/dashboard/{provider}','Frontend\LoginController@dashboard')->name('dashboard');
 Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->name('social.login');
@@ -42,33 +48,33 @@ Auth::routes(['register' => false]);
 
 
 Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.dashboard');
-//help category
-
-// help category
 
 
-Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
+    Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
-//admin users
+    //admin users
 
 
 
 	Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 
-Route::get('/home', 'Frontend\HomeController@index')->name('home');
+    Route::get('/home', 'Frontend\HomeController@index')->name('home');
 
-Route::prefix('admin')->group(function()
-{
+    Route::prefix('admin')->group(function()
+    {
 
 	Route::get('/dashboard', 'Admin\AdminController@dashboard')->name('admin.dashboard');
 
 	Route::get('/mail', 'Admin\AdminController@checkmail')->name('admin.checkmail');
 
+	//help category
 	Route::match(['get','post'],'/create/helpcategory','Admin\HelpCategoryController@create')->name('helpcat.create');
 	Route::get('/helpcategory','Admin\HelpCategoryController@list')->name('helpcat.list');
 	Route::match(['get','post'],'/edit/helpcategory/{id}','Admin\HelpCategoryController@edit')->name('helpcat.edit');
 	Route::get('/delete/helpcategory/{id}','Admin\HelpCategoryController@delete')->name('helpcat.delete');
+	Route::get('changedisplay/helpcategory', 'Admin\HelpCategoryController@changeDisplay')->name('helpcat.changedisplay');
+	//**end help category
 
 	// Route::get('/logout', 'Auth\AdminLoginController@logout')->name('logout');
 
@@ -80,7 +86,7 @@ Route::prefix('admin')->group(function()
 	Route::get('changestatus/user', 'Admin\AdminUserController@changeStatus')->name('adminuser.changestatus');
 
 
-	//route for changing admin passwords 
+	//route for changing admin passwords
 	Route::match(['get','post'],'/change/password/{id}','Admin\AdminUserController@password')->name('adminuser.change');
 	
 	//admin roles
@@ -88,7 +94,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/adminrole','Admin\AdminRoleController@create')->name('adminrole.create');
 	Route::match(['get','post'],'/edit/adminrole/{id}','Admin\AdminRoleController@edit')->name('adminrole.edit');
 	Route::get('/delete/adminrole/{id}','Admin\AdminRoleController@delete')->name('adminrole.delete');
-	Route::match(['get','post'],'/manage/adminrole/{roleid}','Admin\ModuleController@manage')->name('adminrole.managepermission');
+	Route::match(['get','post'],'/manage/adminrole/{roleid}','Admin\AdminPermissionController@manage')->name('adminrole.managepermission');
 	Route::get('changestatus/role', 'Admin\AdminRoleController@changeStatus')->name('adminrole.change');
 
 	//admin roles
@@ -104,12 +110,12 @@ Route::prefix('admin')->group(function()
 	//blog category
 
 
-	//Route for Testimonial
-	Route::get('/list/tags','Admin\TagsController@list')->name('tags.list');
-	Route::match(['get','post'],'/create/tags','Admin\TagsController@create')->name('tags.create');
-	Route::match(['get','post'],'/edit/tags/{id}','Admin\TagsController@edit')->name('tags.edit');
-	Route::get('/delete/tags/{id}','Admin\TagsController@delete')->name('tags.delete');
-	Route::get('changestatus/tags', 'Admin\TagsController@changeStatus')->name('tags.changestatus');
+	//Route for Tags
+	Route::get('/list/tags','Admin\TagController@list')->name('tags.list');
+	Route::match(['get','post'],'/create/tags','Admin\TagController@create')->name('tags.create');
+	Route::match(['get','post'],'/edit/tags/{id}','Admin\TagController@edit')->name('tags.edit');
+	Route::get('/delete/tags/{id}','Admin\TagController@delete')->name('tags.delete');
+	Route::get('changestatus/tags', 'Admin\TagController@changeStatus')->name('tags.changestatus');
 	/**
 	*Routes for Creating Blog
 	**/
@@ -117,6 +123,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/create/blog','Admin\BlogController@create')->name('blog.create');
 	Route::match(['get','post'],'/edit/blog/{id}/{slug}','Admin\BlogController@edit')->name('blog.edit');
 	Route::get('/delete/blog/{id}','Admin\BlogController@delete')->name('blog.delete');
+	Route::get('blog/changesavemethod', 'Admin\BlogController@changeSaveMethod')->name('blog.changemethod');
 
 	// route for user account
 	Route::get('/list/account','Admin\AccountController@list')->name('account.list');
@@ -126,16 +133,16 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/account/{id}','Admin\AccountController@delete')->name('account.delete');
 
 	//Route for user Account roles
-	Route::get('/list/roles','Admin\RolesController@list')->name('roles.list');
-	Route::match(['get','post'],'/create/roles','Admin\RolesController@create')->name('roles.create');
-	Route::match(['get','post'],'/edit/roles/{id}','Admin\RolesController@edit')->name('roles.edit');
-	Route::get('/delete/roles/{id}','Admin\RolesController@delete')->name('roles.delete');
+	Route::get('/list/roles','Admin\RoleController@list')->name('roles.list');
+	Route::match(['get','post'],'/create/roles','Admin\RoleController@create')->name('roles.create');
+	Route::match(['get','post'],'/edit/roles/{id}','Admin\RoleController@edit')->name('roles.edit');
+	Route::get('/delete/roles/{id}','Admin\RoleController@delete')->name('roles.delete');
 
 	//Route for Account Permission
-	Route::get('/list/permission','Admin\PermissionsController@list')->name('permission.list');
-	Route::match(['get','post'],'/create/permission','Admin\PermissionsController@create')->name('permission.create');
-	Route::match(['get','post'],'/edit/permission/{id}','Admin\PermissionsController@edit')->name('permission.edit');
-	Route::get('/delete/permission/{id}','Admin\PermissionsController@delete')->name('permission.delete');
+	Route::get('/list/permission','Admin\PermissionController@list')->name('permission.list');
+	Route::match(['get','post'],'/create/permission','Admin\PermissionController@create')->name('permission.create');
+	Route::match(['get','post'],'/edit/permission/{id}','Admin\PermissionController@edit')->name('permission.edit');
+	Route::get('/delete/permission/{id}','Admin\PermissionController@delete')->name('permission.delete');
 	
 	//Route for Cms
 	Route::get('/list/cms','Admin\CmsController@list')->name('cms.list');
@@ -143,7 +150,7 @@ Route::prefix('admin')->group(function()
 	Route::match(['get','post'],'/edit/cms/{id}','Admin\CmsController@edit')->name('cms.edit');
 	Route::get('/delete/cms/{id}','Admin\CmsController@delete')->name('cms.delete');
 	Route::get('changestatus/cms', 'Admin\CmsController@changeStatus')->name('cms.changestatus');
-	Route::get('changecmstype/cms', 'Admin\CmsController@changeCmstype')->name('cms.cmstype');
+	Route::get('changecmstype/cms', 'Admin\CmsController@changeCmsType')->name('cms.cmstype');
 
 	//Route for Testimonial
 	Route::get('/list/testimonial','Admin\TestimonialController@list')->name('testimonial.list');
@@ -154,11 +161,11 @@ Route::prefix('admin')->group(function()
 
 
 //Route for Services
-	Route::get('/list/services','Admin\ServicesController@list')->name('services.list');
-	Route::match(['get','post'],'/create/services','Admin\ServicesController@create')->name('services.create');
-	Route::match(['get','post'],'/edit/services/{id}','Admin\ServicesController@edit')->name('services.edit');
-	Route::get('/delete/services/{id}','Admin\ServicesController@delete')->name('services.delete');
-	Route::get('changestatus/services', 'Admin\ServicesController@changeStatus')->name('services.changestatus');
+	Route::get('/list/services','Admin\ServiceController@list')->name('services.list');
+	Route::match(['get','post'],'/create/services','Admin\ServiceController@create')->name('services.create');
+	Route::match(['get','post'],'/edit/services/{id}','Admin\ServiceController@edit')->name('services.edit');
+	Route::get('/delete/services/{id}','Admin\ServiceController@delete')->name('services.delete');
+	Route::get('changestatus/services', 'Admin\ServiceController@changeStatus')->name('services.changestatus');
 
 
 //Route for team
@@ -201,7 +208,7 @@ Route::prefix('admin')->group(function()
 	Route::get('/list/contact','Admin\ContactController@list')->name('contact.list');
 	Route::match(['get','post'],'/edit/contact/{id}','Admin\ContactController@edit')->name('contact.edit');
 
-	//route for galery category
+	//route for gallery category
 	Route::get('/list/gallery/category','Admin\GalleryCategoryController@list')->name('gallerycategory.list');
 	Route::match(['get','post'],'/create/gallery/category','Admin\GalleryCategoryController@create')->name('gallerycategory.create');
 	Route::match(['get','post'],'/edit/gallery/category/{id}','Admin\GalleryCategoryController@edit')->name('gallerycategory.edit');
@@ -216,15 +223,15 @@ Route::prefix('admin')->group(function()
 	Route::get('/delete/gallery/{id}','Admin\GalleryController@delete')->name('gallery.delete');
 
 	//Route for Websitelog
-	Route::get('/list/websitelog','Admin\UserlogController@list')->name('websitelog.list');
-	Route::get('/view/websitelog/{id}','Admin\UserlogController@view')->name('websitelog.view');
-	Route::get('/block/websitelog/{id}','Admin\UserlogController@block')->name('websitelog.block');
+	Route::get('/list/websitelog','Admin\VisitorLogController@list')->name('websitelog.list');
+	Route::get('/view/websitelog/{id}','Admin\VisitorLogController@view')->name('websitelog.view');
+	Route::get('/block/websitelog/{id}','Admin\VisitorLogController@block')->name('websitelog.block');
 
 	//Route for IP Block List
-	Route::get('/list/blocklist','Admin\BlocklistController@list')->name('blocklist.list');
-	Route::match(['get','post'],'/create/blocklist','Admin\BlocklistController@create')->name('blocklist.create');
-	Route::match(['get','post'],'/edit/blocklist/{id}','Admin\BlocklistController@edit')->name('blocklist.edit');
-	Route::get('/delete/blocklist/{id}','Admin\BlocklistController@delete')->name('blocklist.delete');
+	Route::get('/list/blocklist','Admin\BlockListController@list')->name('blocklist.list');
+	Route::match(['get','post'],'/create/blocklist','Admin\BlockListController@create')->name('blocklist.create');
+	Route::match(['get','post'],'/edit/blocklist/{id}','Admin\BlockListController@edit')->name('blocklist.edit');
+	Route::get('/delete/blocklist/{id}','Admin\BlockListController@delete')->name('blocklist.delete');
 
 	//route for SEO
 	Route::get('/list/seo','Admin\SeoController@list')->name('seo.list');

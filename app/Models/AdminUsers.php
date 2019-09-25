@@ -14,7 +14,7 @@ class AdminUsers extends Authenticatable implements Auditable
     use Notifiable;
     use Auditables;
 
-    protected $guard='admin';
+    protected $guard='admin_users';
 
     /**
      * The attributes that are mass assignable.
@@ -42,17 +42,17 @@ class AdminUsers extends Authenticatable implements Auditable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function AdminRoles(){
+    public function adminRole(){
         return $this->hasOne(AdminRoles::class);
     }
 
-    public function ModulePermissions()
+    public function adminPermissions()
     {
-        return $this->hasMany('App\ModuleRolePermissions','module_role_permissions');
+        return $this->hasMany('App\AdminRolePermissions','admin_role_permissions');
     }
     public function logs()
     {
-        return $this->morphMany(LogAdminActivitys::class, 'logable');
+        return $this->morphMany(LogAdminActivities::class, 'logables');
     }
     
 }

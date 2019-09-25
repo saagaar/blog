@@ -30,7 +30,7 @@ let action='';
 	        		form.get(action).then(response => {
 		               if(response.data.status)
 		               {
-		               	 this.$store.commit('INCREMENT_FOLLOWERS_COUNT', 1);
+		               	 this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
 
 		               	  this.$emit('clicked',this.username,response.data.message);
 		        //        	    let index = state.followSuggestions.indexOf(user);

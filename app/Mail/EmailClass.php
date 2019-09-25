@@ -27,7 +27,7 @@ class EmailClass extends Mailer
      */
     public function build($view)
     {
-        print_r($view);exit;
+        // print_r($view);exit;
         return $this->send($view);
     }
 

@@ -26,7 +26,7 @@
 					<div class="gallery">
             @if($gallery)
 						@foreach($gallery as $data)
-									<a href="{{ asset('frontend/images/gallery/'.$data['image']) }}" class="big"><img src="{{ asset('images/gallery-images/'.$data['image']) }}" alt="" title="{{$data['title']}}" /></a>
+									<a href="{{ asset('images/gallery/'.$data['image']) }}" class="big"><img src="{{ asset('images/gallery/'.$data['image']) }}" alt="" title="{{$data['title']}}" /></a>
 									@endforeach
             @else
             <p> No Images Found</p>

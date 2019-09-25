@@ -17,7 +17,7 @@ class CreateAdminRolesTable extends Migration
             $table->bigIncrements('id');
             $table->string('role_name');
             $table->string('slug')->uniqid();
-            $table->enum('status', ['0', '1']);	
+            $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');	
             $table->timestamps();
         });
     }

@@ -24,11 +24,11 @@ class TestimonialController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $Testimonial = $this->testimony->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $testimonial = $this->testimony->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $Testimonial = $this->testimony->getAll()->paginate($this->PerPage);
+            $testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }
-        return view('admin.testimonial.list')->with(array('testimony'=>$Testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'testimonial List'));
+        return view('admin.testimonial.list')->with(array('testimony'=>$testimonial,'breadcrumb'=>$breadcrumb,'menu'=>'testimonial List','primary_menu'=>'testimonial.list'));
     }
     public function create(Request $request)
     {
@@ -40,16 +40,19 @@ class TestimonialController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-            $requestobj=app(TestimonialRequest::class);
-            $validatedData = $requestobj->validated();
+             $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);  
+            $requestObj=app(TestimonialRequest::class);
+            $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('frontend/images/testimonial-images'), $imageName);
+            request()->image->move(public_path('images/testimonial-images'), $imageName);
             $validatedData['image'] = $imageName;
             $this->testimony->create($validatedData);
             return redirect()->route('testimonial.list')    
-                             ->with(array('success'=>'testimonials created successfully.','breadcrumb'=>$breadcrumb));
+                             ->with(array('success'=>'Testimonial created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('admin.testimonial.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.testimonial.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'testimonial.list'));
     }
     public function edit(Request $request, $id)
     {
@@ -61,44 +64,48 @@ class TestimonialController extends AdminController
             $testimony =$this->testimony->getById($id);    
             if ($request->method()=='POST')
             {
-                $requestobj=app(TestimonialRequest::class);
-                $validatedData = $requestobj->validated();
-                if ($request->hasFile('image')) {
-                    $dir = 'frontend/images/testimonial-images/';
+               $request->validate([
+               'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              ]);  
+                $requestObj=app(TestimonialRequest::class);
+                $validatedData = $requestObj->validated();
+                if ($request->hasFile('image')){
+
+                    $dir = 'images/testimonial-images/';
                     if ($testimony->image != '' && File::exists($dir . $testimony->image))
-                    File::delete($dir . $testimony->image);
+                          File::delete($dir . $testimony->image);
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('frontend/images/testimonial-images'), $imageName);
+                    request()->image->move(public_path('images/testimonial-images'), $imageName);
                     $validatedData['image'] = $imageName;
-                }else {
+                }
+                else {
                     $validatedData['image'] = $testimony->image;
                 }
                 $this->testimony->update($id,$validatedData);
                 return redirect()->route('testimonial.list')
-                            ->with('success','testimonial Updated Successfully.');
+                            ->with('success','Testimonial Updated Successfully.');
             }
-            return view('admin.testimonial.edit',compact('testimony','breadcrumb'));
+            return view('admin.testimonial.edit',compact('testimony','breadcrumb'))->with(array('primary_menu'=>'testimonial.list'));
     }
     public function delete($id)
     {
        $testimony =$this->testimony->getById($id);
         if($testimony){
-            $dir = 'frontend/images/testimonial-images/';
+            $dir = 'images/testimonial-images/';
             if ($testimony->image != '' && File::exists($dir . $testimony->image)){
                 File::delete($dir . $testimony->image);
             }
             $testimony->delete();
         }
         return redirect()->route('testimonial.list')
-        ->with('success', 'Testimonial deleted successfully');
+        ->with('success', 'Testimonial has been deleted!!');
     }
 
      public function changeStatus(Request $request)
     {
-        $testimony = $this->testimony->getById($request->id);
+        $testimony =$this->testimony->getById($request->id);
         $status =$request->status;
         $testimony->update(array('status'=>$status)); 
-        return redirect()->route('testimony.list')
-                        ->with('success','Status change successfully.');
+        return ['status'=>true,'message'=>'Status Updated Successfully'];      
     } 
 }

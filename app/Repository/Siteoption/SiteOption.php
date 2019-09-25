@@ -1,27 +1,27 @@
 <?php 
 
-namespace App\Repository\Siteoption;
+namespace App\Repository\SiteOption;
 
 use App\Models\SiteOptions;
-use App\Repository\SiteoptionsInterface;
+use App\Repository\SiteoptionInterface;
 
-Class  SiteOption implements SiteoptionsInterface
+Class  SiteOption implements SiteoptionInterface
 {
-	protected $sitesettings;
+	protected $siteSettings;
 
-	public function __construct(SiteOptions $sitesettings)
+	public function __construct(SiteOptions $siteSettings)
 	{
-		  $this->sitesettings=$sitesettings;
+		  $this->siteSettings=$siteSettings;
 	}
-  public function GetSiteInfo()
+  public function getSiteInfo()
   {
-      return	$this->sitesettings->latest()->first();
+      return	$this->siteSettings->latest()->first();                                                                                                            
   }
 
   public function update( array $data)
   {
       $id=1;
-      return	$this->sitesettings->find($id)->update($data);
+      return	$this->siteSettings->find($id)->update($data);
   }
 }
 ?>

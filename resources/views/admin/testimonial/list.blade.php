@@ -39,9 +39,9 @@
                   <td>{{$testimonial->name}}</td>
                    <td>{{$testimonial->position }}</td>
                    <td>{{$testimonial->description }}</td>
-                   <td><img src="{{asset('frontend/images/testimonial-images/'.$testimonial->image) }}" alt="testimonial Image" height="42" width="42"></td>
+                   <td><img src="{{asset('images/testimonial-images/'.$testimonial->image) }}" alt="Testimonial Image" height="42" width="42"></td>
                   <td>
-                    <input data-id="{{$testimonial->id}}" data-url="{{route('testimonial.changestatus')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$testimonial->status ? 'checked' : ''}}>
+                    <input data-id="{{$testimonial->id}}" data-url="{{route('testimonial.changestatus')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$testimonial->status==1 ? 'checked' : ''}}>
                       </td>             
                   <td>{{$testimonial->created_at}}</td>
                   <td>{{$testimonial->updated_at}}</td>

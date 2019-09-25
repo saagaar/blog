@@ -34,7 +34,12 @@ class BlogController extends FrontendController
                     $input = $request->all(); 
                     $input['locale_id']='1';
                     $input['image']='211.jpg';
-                    $this->blog->create($input);
+                    $created = $this->blog->create($input);
+                    $code= uniqid();
+                    $part1=substr($code,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
+                    $part2=substr($code, 7,-1);
+                    $created['code']= $part1.$part2;
+                    $created->save();
                 }
             } 
    	}

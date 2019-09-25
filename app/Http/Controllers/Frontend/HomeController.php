@@ -4,13 +4,9 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Frontend\FrontendController;
-use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Repository\BlogInterface; 
-use App\Repository\AccountInterface; 
 use App\Repository\FollowerInterface; 
-use App\Models\Perm;
 use Spatie\Permission\Traits\HasRoles;
 class HomeController extends FrontendController
 {
@@ -27,7 +23,7 @@ class HomeController extends FrontendController
      * @return void
      */
    
-    function __construct(FollowerInterface $followInterface,AccountInterface $accountInterface)
+    function __construct(FollowerInterface $followInterface)
     {
          parent::__construct();
          $this->followerList=$followInterface;
@@ -70,8 +66,8 @@ class HomeController extends FrontendController
 
             $suggestion=$this->getFollowSuggestions(3);
             $user =$this->authUser;
-            $user->followersCount=100;
-            $user->followingCount=10;
+            $user->followersCount=$this->followerList->getAllFollowers($this->authUser)->count();
+            $user->followingCount=$this->followerList->getAllFollowings($this->authUser)->count();
             $user=$user->toArray();
             $data['followSuggestion']=$suggestion;
             $data['path']='/blog/list';
