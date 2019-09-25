@@ -42,7 +42,7 @@ class HomeController extends FrontendController
 
     public function test(Request $request)
     {
-         Mail::to('abhishekgiri49.ag@gmail.com')->send(new SendMailable());
+         // Mail::to('abhishekgiri49@hotmail.com')->send(new SendMailable());
         // echo str_slug("iajaf1237412~!@#$%^&*()~'-'=+_][{} ;:/.,<>?AAMNBV'' CXZLKJHG",'-');
         return view('frontend.layouts.app');
     }
