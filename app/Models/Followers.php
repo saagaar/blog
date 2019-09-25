@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 
-class Followers extends Model 
+class Followers extends Pivot 
 {
 
      protected $table='followers';

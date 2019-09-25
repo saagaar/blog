@@ -7,14 +7,14 @@
 
 <script>
 
-import LoginSignupModal from './LoginSignupModal';
+// import TheLoginSignupModal from './TheLoginSignupModal';
   
 import LoginMixin from './../../mixins/Login.mixins';
  
     export default {
-      components:{
-           LoginSignupModal 
-        },
+      // components:{
+      //      TheLoginSignupModal 
+      //   },
         data() {
           return {
            }

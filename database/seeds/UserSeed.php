@@ -12,15 +12,17 @@ class UserSeed extends Seeder
      */
     public function run()
     {
-            DB::table('admin_users')->insert([
-            'username' => 'Admin',
-            'email' => 'admin@admin.com',
+            DB::table('users')->insert([
+            'name'=>'user',
+            'username'=>'user123',
+            'email'=>'user123@gmail.com',
             'status'   =>'1',
             'invalid_login' =>'0',
-            'role_id' => '1',
+            'phone' => '9813953180',
             'password' => bcrypt('123456'),
             'created_at' => date("Y-m-d H:i:s")
         ]);
+
         
     }
 }

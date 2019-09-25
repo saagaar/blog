@@ -2,48 +2,77 @@
 
 namespace App\Repository\Follower;
 
-use App\Models\Followers;
+use App\Models\User;
 use App\Repository\FollowerInterface;
 
 Class  Follower implements FollowerInterface
 {
 	protected $follower;
-	public function __construct(Followers $follower)
+
+	public function __construct(User $users)
 	{
-		$this->follower=$follower;
+		$this->user=$users;
 	}
 
-     
-    public function getByFollowId($following_id){
-      return $this->follower->where('user_id', $following_id)->all();
+    /**
+     * check if current user $user_id is following following_id
+     *
+     * @return boolean
+     */
+    public function isFollowing($user,$following_id){
+      return  $user->followings()->find($following_id);
     }
 
-
+    /**
+     * check if current user $user_id is following username
+     *
+     * @return boolean
+     */
+    public function isFollowingByUsername($user,$followingusername){
+       
+        return ($user->followings->where('username',$followingusername));
+    }
     /**
      * 
      */
- 	public function getByFollowerId($follower_id){
-      return $this->follower->where('follow_id', $follower_id)->all();
+ 	public function getAllFollowers($user){
+      return $user->followers()->get();
     }
- 	  /**
-     * create a 
-     *
-     * @return mixed
-     */
-    public function create($user_id,$follow_id){
-    	$followdata = $this->getByFollowId($user_id);
-    	if ($followdata->follow_id != $follow_id) {
-    		return $this->follower->create($user_id,$follow_id);
-    	}
-    }
-
-      /**
-     * Deletes a post.
+       /**
+     * Get's all follow lists.
      *
      * @param int
+     * @return mixed
      */
-    public function delete($user_id,$follow_id){
-      return  $this->follower->find($user_id,$follow_id)->delete();
+
+     public function getAllFollowings($user){
+        return $user->followings()->get();
+     }
+ 	  /**
+     * Insert follower
+     * @param 1 : integer
+     * @param 2 : integer
+     * @return mixed
+     */
+    public function followUser($user,$followerUsername){
+       return  $user->followings()->attach($this->user->where('username',$followerUsername)->get());
+    }
+      /**
+     * Unfollows  a user
+     *
+     * @param 1 Object
+     * @param 2 int
+     */
+    public function unFollowUser($user,$followerUsername){
+     return  $user->followings()->detach($this->user->where('username',$followerUsername)->get());
+    }
+
+
+    public function getFollowUserSuggestions($user,$limit=3,$head=0){
+        $followcollection=array();
+       
+        $followers=$user->followings()->get()->pluck('pivot')->pluck('follow_id');
+        return  $getfollowuser=$this->user->select('username','name')->whereNotIn('id',array($user->id))->whereNotIn('id',$followers)->skip($head-1)->take($limit)->get();
     }
 }
 ?>

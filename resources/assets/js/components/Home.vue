@@ -1,8 +1,8 @@
 
 <template>
 <div>
-<TopNav></TopNav>
-<MainNav></MainNav>
+<TheTopNav></TheTopNav>
+<TheMainNav></TheMainNav>
 
 <section class="fullwidth-block area-padding-bottom">
         <div class="container-fluid">
@@ -598,15 +598,15 @@
 </template>
 
 <script>
-import TopNav from './TopNav/TopNav';
-import MainNav from './MainNav/MainNav';
+import TheTopNav from './TopNav/TheTopNav';
+import TheMainNav from './MainNav/TheMainNav';
     export default {
         mounted() {
             // console.log('Component mounted.')
         },
         components:{
-            TopNav,
-            MainNav
+            TheTopNav,
+            TheMainNav
         },
     }
 </script>

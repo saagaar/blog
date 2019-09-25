@@ -30,6 +30,7 @@ $factory->define(User::class, function (Faker $faker) {
         'name' => $faker->name,
         'username' => $faker->unique()->username,
         'email' => $faker->unique()->safeEmail,
+         'phone' => random_int(9800000000, 9899999999),
         'email_verified_at' => now(),
         'password' => Hash::make('123456'), // password
         'remember_token' => Str::random(10),

@@ -1,8 +1,8 @@
 
 <template>
 <div>
-<TopNav></TopNav>
-<MainNav></MainNav>
+<TheTopNav></TheTopNav>
+<TheMainNav></TheMainNav>
    <vcl-instagram v-if="!myData"></vcl-instagram>
 <section class="fullwidth-block area-padding-bottom" v-else >
         <div class="container-fluid">
@@ -592,15 +592,17 @@
             </div>
         </div>
     </div>
-<blog-footer></blog-footer>
+<TheFooter></TheFooter>
 </div>
 </template>
 
 <script>
   import { VclFacebook,VclInstagram } from 'vue-content-loading';
-import TopNav from './../components/TopNav/TopNav';
-import MainNav from './../components/MainNav/MainNav';
-import blogFooter from './../components/Footer/blogFooter';
+import TheTopNav from './../components/TopNav/TheTopNav';
+import TheMainNav from './../components/MainNav/TheMainNav';
+import TheFooter from './../components/Footer/TheFooter';
+import mixin  from './../mixins/LoadData.mixin.js';
+
     export default {
          data() {
     return {
@@ -612,11 +614,11 @@ import blogFooter from './../components/Footer/blogFooter';
               this.myData = 'Example Data';
             }, 1000);
         },
-
+          mixins: [ mixin ],  
         components:{
-            TopNav,
-            MainNav,
-            blogFooter,
+            TheTopNav,
+            TheMainNav,
+            TheFooter,
             VclFacebook,
             VclInstagram
           
