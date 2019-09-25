@@ -35,9 +35,11 @@ class FrontendController extends BaseController
 
     public function __construct()
     {
+
         
         $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
+
         $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
         $this->visitorInfo =  new visitorInfo();
         $this->siteName =  $this->siteSettings->site_name;
@@ -106,7 +108,7 @@ class FrontendController extends BaseController
                     'redirected_to' =>$serverData['path'],
                     'visit_date'   =>date("Y-m-d H:i:s"),
                 );
-                $dblogdata['ip']->logdetails()->create($logdata);
+                $dblogdata['ip']->visitordetails()->create($logdata);
             }
         }
         elseif ($dblogdata && trim($dblogdata['details'])=='') {
@@ -116,7 +118,7 @@ class FrontendController extends BaseController
                     'redirected_to' =>$serverData['path'],
                     'visit_date'   =>date("Y-m-d H:i:s"),
                 );
-            $dblogdata['ip']->logdetails()->create($logdata);
+            $dblogdata['ip']->visitordetails()->create($logdata);
         }
         else{
             $logdata = array(
@@ -130,7 +132,7 @@ class FrontendController extends BaseController
                     'ip_address'           =>$serverData['ip_address'],
                    )
                 );
-            $logcreate->logdetails()->create($logdata);
+            $logcreate->visitordetails()->create($logdata);
         }
         VisitorLog::dispatch($this->VisitorlogInterface,$ipAddress);
 

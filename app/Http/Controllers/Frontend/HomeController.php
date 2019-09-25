@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Repository\FollowerInterface; 
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailable;
+
 class HomeController extends FrontendController
 {
      use HasRoles;
@@ -42,6 +45,10 @@ class HomeController extends FrontendController
 
     public function test(Request $request)
     {
+
+         Mail::to('abhishekgiri49.ag@gmail.com')->send(new SendMailable());
+        // echo str_slug("iajaf1237412~!@#$%^&*()~'-'=+_][{} ;:/.,<>?AAMNBV'' CXZLKJHG",'-');
+
         return view('frontend.layouts.app');
     }
     public function dashboard()
