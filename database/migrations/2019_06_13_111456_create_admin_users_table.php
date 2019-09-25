@@ -17,6 +17,7 @@ class CreateAdminUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('username')->unique();
             $table->string('email')->unique();
+            $table->string('phone')->nullable();
             $table->string('password');
             $table->integer('invalid_login')->default(0);
             $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');

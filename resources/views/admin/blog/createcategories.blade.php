@@ -46,6 +46,22 @@
                 @endif
                 </div>
                 <div class="form-group">
+                  <label for="parent_id">Parent</label>
+                    <select class="form-control"  name="parent_id" id="parent_id">
+                      <option value="">none</option>
+                      @foreach ($category as $values)
+                      <!-- <option value="0">none</option> -->
+                      <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                      @endforeach
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('parent_id'))
+                        <p class="help-block">
+                            {{ $errors->first('parent_id') }}
+                        </p>
+                    @endif
+                </div>
+                <div class="form-group">
                   <label for="slug">Slug</label>
                   <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}" placeholder="Enter Slug">
                   @if ($errors->has('slug'))

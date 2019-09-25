@@ -19,7 +19,7 @@ class Categories extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'name','code','status','slug','banner_image'
+        'parent_id','name','status','slug','banner_image'
     ];
 
     /**
@@ -41,6 +41,6 @@ class Categories extends Model implements Auditable
 
     public function categories()
     {
-        return $this->hasMany(Categories::class,'parent_id','id')
+        return $this->hasMany(Categories::class,'parent_id','id');
     }
 }
