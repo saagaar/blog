@@ -7,25 +7,25 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Repository\UserlogInterface;
+use App\Repository\VisitorLogInterface;
 use Illuminate\Support\Facades\Log;
 class VisitorLog implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     
     protected $visitorInfo;
-    protected $userLogInterface;
+    protected $VisitorLogInterface;
     protected $ipAddress;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct( UserlogInterface $userLogInterface,$ipAddress)
+    public function __construct( VisitorLogInterface $VisitorLogInterface,$ipAddress)
     {
         $this->ipAddress=$ipAddress;
         $this->visitorInfo =  new visitorInfo();
-        $this->userLogInterface=$this->UserlogInterface = app()->make('App\Repository\UserlogInterface');
+        $this->VisitorLogInterface=$this->VisitorLogInterface = app()->make('App\Repository\VisitorLogInterface');
     }
     /**
      * Execute the job.
@@ -35,8 +35,8 @@ class VisitorLog implements ShouldQueue
     public function handle()
     {
         $visitorApiData =  $this->visitorInfo->visitorsIp($this->ipAddress);
-        $dbLogData=$this->userLogInterface->getAll()->where('ip_address',$this->ipAddress)->first()->toArray();
-        $this->userLogInterface->update($dbLogData['id'],
+        $dbLogData=$this->VisitorLogInterface->getAll()->where('ip_address',$this->ipAddress)->first()->toArray();
+        $this->VisitorLogInterface->update($dbLogData['id'],
                    array(
                     'country'               =>$visitorApiData['country'],
                     'country_code'          =>$visitorApiData['country_code'],
