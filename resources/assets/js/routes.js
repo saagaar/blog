@@ -7,7 +7,7 @@ let routes=[
 						components:require('./pages/AddBlog')
 				},
 				{
-						path:'/',
+						path:'/dashboard',
 						components:require('./pages/Dashboard')
 				},
 				{
@@ -31,5 +31,8 @@ let routes=[
 
 export default new VueRouter({
 	routes,
-	linkActiveClass: 'isActive'
+
+	linkActiveClass: 'isActive',
+	mode: 'history',
+	hash: false,
 })

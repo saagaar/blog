@@ -9,3 +9,8 @@ export const checkLoginUser = ({ commit }) => {
           console.log(e);
       });
 }
+
+// export const lodingInitialData = ({ commit }) => {
+//     // show loading
+    
+// }

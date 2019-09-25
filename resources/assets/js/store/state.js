@@ -20,7 +20,6 @@ const state = {
         replies: []
     },
     openTweetDetails: null,
-    followSuggestions: [],
     isLoading: false,
     appName: 'TheBloggersClub.com'
 }

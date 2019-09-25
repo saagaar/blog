@@ -46,7 +46,7 @@
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
-                            <figure><img src="img/p_image.png"></figure> Shanvi Bhandari</a>
+                            <figure><img src="img/p_image.png"></figure> {{ me.name}}</a>
                             <ul class="dropdown-menu">
                                 <li><a href="/dashboard">My Profile</a></li>
                             
@@ -81,7 +81,7 @@
         </div>
 
     </section>
-      <LoginSignupModal></LoginSignupModal>
+      <TheLoginSignupModal></TheLoginSignupModal>
       </div>
     
 
@@ -91,10 +91,10 @@
 <script>
 
 
-import LoginButton from './Login.vue';
-import SignUpButton from './SignUp.vue';
+import LoginButton from './LoginButton.vue';
+import SignUpButton from './SignUpButton.vue';
 
-import LoginSignupModal from './LoginSignupModal';
+import TheLoginSignupModal from './TheLoginSignupModal';
 
     export default {
        
@@ -108,7 +108,10 @@ import LoginSignupModal from './LoginSignupModal';
             },
             config:function(){
                return this.$store.getters.config;
-            }
+            },
+            me:function(){
+              return this.$store.getters.me
+            },
            
         },
 
@@ -124,7 +127,7 @@ import LoginSignupModal from './LoginSignupModal';
 
             SignUpButton,
             LoginButton,
-            LoginSignupModal
+            TheLoginSignupModal
         },
        
         
@@ -132,7 +135,7 @@ import LoginSignupModal from './LoginSignupModal';
     }
 </script>
 
-<style type="text/css">
+<style type="text/css " scoped>
     #search_input_box{
         display: none
     }

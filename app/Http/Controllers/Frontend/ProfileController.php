@@ -4,15 +4,12 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Frontend\FrontendController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Repository\FollowerInterface; 
+use App\Repository\UserInterface; 
 use Spatie\Permission\Traits\HasRoles;
-class HomeController extends FrontendController
+class ProfileController extends FrontendController
 {
      use HasRoles;
-
-     protected $followerList;
 
      protected $userAccounts;
 
@@ -23,10 +20,10 @@ class HomeController extends FrontendController
      * @return void
      */
    
-    function __construct(FollowerInterface $followInterface)
+    function __construct(UserInterface $userInterface)
     {
          parent::__construct();
-         $this->followerList=$followInterface;
+         $this->userAccounts=$userInterface;
     }
 
     /**
@@ -40,37 +37,12 @@ class HomeController extends FrontendController
         return view('frontend.layouts.app');
     }
 
-    public function test(Request $request)
+    public function categories()
     {
-        return view('frontend.layouts.app');
-    }
-    public function dashboard()
-    {
-
-        //     $role = Role::findByName('writer');
-        // $role->givePermissionTo('blog-edit');
-        // $permissions = [
-          // \Auth::user()->givePermissionTo('blog-create');
-        //    'blog-edit',
-        //    'blog-create',
-        //    'product-delete'
-        // ];
-
-
-        // foreach ($permissions as $permission) {
-        //      Permission::create(['name' => $permission]);
-        // }
-     
         if(\Auth::check())
         {
 
-            $suggestion=$this->getFollowSuggestions(3);
-            $user =$this->authUser;
-            $user->followersCount=$this->followerList->getAllFollowers($this->authUser)->count();
-            $user->followingCount=$this->followerList->getAllFollowings($this->authUser)->count();
-            $user=$user->toArray();
-            $data['followSuggestion']=$suggestion;
-            $data['path']='/blog/list';
+            $data['path']='/categories';
             $initialState=json_encode($data);
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
 

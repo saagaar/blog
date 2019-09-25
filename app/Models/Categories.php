@@ -34,8 +34,13 @@ class Categories extends Model implements Auditable
      *
      * @var array
      */
-     public function Blogs()
+    public function Tags()
     {
-        return $this->belongsToMany(Blogs::class)->using(BlogCategories::class);
+        return $this->belongsToMany(Tags::class)->using(TagCategories::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Categories::class,'parent_id','id')
     }
 }

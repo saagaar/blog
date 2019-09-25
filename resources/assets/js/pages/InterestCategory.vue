@@ -248,7 +248,7 @@
             }
             reader.readAsDataURL(event.target.files[0]);
         }
-import blogFooter from './../components/Footer/blogFooter';
+import TheFooter from './../components/Footer/TheFooter';
     export default {
          data() {
     return {

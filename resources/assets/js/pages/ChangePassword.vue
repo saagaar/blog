@@ -1,8 +1,8 @@
 
 <template>
 <div>
-<TopNav></TopNav>
-<MainNav></MainNav>
+<TheTopNav></TheTopNav>
+<TheMainNav></TheMainNav>
    <vcl-instagram v-if="!myData"></vcl-instagram>
     <section class="dashboard_sec">
     <div class="container">
@@ -80,9 +80,9 @@
 
 <script>
   import { VclFacebook,VclInstagram } from 'vue-content-loading';
-import TopNav from './../components/TopNav/TopNav';
-import MainNav from './../components/MainNav/MainNav';
-import blogFooter from './../components/Footer/blogFooter';
+import TheTopNav from './../components/TopNav/TheTopNav';
+import TheMainNav from './../components/MainNav/TheMainNav';
+import TheFooter from './../components/Footer/TheFooter';
     export default {
          data() {
     return {
@@ -96,9 +96,9 @@ import blogFooter from './../components/Footer/blogFooter';
         },
 
         components:{
-            TopNav,
-            MainNav,
-            blogFooter,
+            TheTopNav,
+            TheMainNav,
+            TheFooter,
             VclFacebook,
             VclInstagram
           

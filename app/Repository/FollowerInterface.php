@@ -4,36 +4,46 @@ namespace App\Repository;
 interface FollowerInterface
 {
 	 /**
-     * Get's a post by it's ID
+     * check if user is following another user
      *
-     * @param int
+     * @param 1 int
+     * @param 2 int
      */
-    public function getByFollowId($followid);
+    public function isFollowing($userid,$followid);
       
       /**
-     * Get's all posts.
-     *
+     * Get's all Followers.
+     * @param int
      * @return mixed
      */
 
-     /**
-      * 
-      */
-     public function getByFollowerId($followerid);
- 	
- 	  /**
-     * create a 
-     *
-     * @return mixed
-     */
-    public function create($userid,$followid);
+   
+     public function getAllFollowers($userid);
 
       /**
-     * Deletes a post.
+     * Get's all follow lists.
      *
      * @param int
+     * @return mixed
      */
-    public function delete($userid);
+
+   
+     public function getAllFollowings($userid);
+ 	
+ 	  /**
+     * Follow user
+     * @param int
+     * @return boolean
+     */
+    public function followUser($userid,$followid);
+
+      /**
+     * Unfollows a user.
+     *
+     * @param int
+     * @return boolean
+     */
+    public function unFollowUser($userid,$followid);
 
     
 }
