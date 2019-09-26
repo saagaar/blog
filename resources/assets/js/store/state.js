@@ -3,7 +3,9 @@ const state = {
     settings:config,
     me: {},
     user:{
-        isLoggedIn:false
+        isLoggedIn:false,
+        followersCount:0,
+        followingsCount:0
     },
     feed: [],
     profilePage: {

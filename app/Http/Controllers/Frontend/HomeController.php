@@ -77,7 +77,7 @@ class HomeController extends FrontendController
             $user->followingCount=$this->followerList->getAllFollowings($this->authUser)->count();
             $user=$user->toArray();
             $data['followSuggestion']=$suggestion;
-            $data['path']='/blog/list';
+            $data['path']='/dashboard';
             $initialState=json_encode($data);
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
 
@@ -85,11 +85,14 @@ class HomeController extends FrontendController
         else
              return redirect()->route('home'); 
     }
+    public function listBlog()
+    {
 
+    }
     public function followUser($username,$offset=false)
     {
-        $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
-         if(isset($isFollowing))
+         $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
+         if(!isset($isFollowing))
          {
             $this->followerList->followUser($this->authUser,$username);
          }  
@@ -106,7 +109,6 @@ class HomeController extends FrontendController
     }
     public function getFollowSuggestions($limit=1,$offset=0)
     {
-     
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
 }

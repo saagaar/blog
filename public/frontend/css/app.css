@@ -15204,6 +15204,10 @@ body.mobile-nav-active #mobile-nav-toggle {
     font-weight: 600; }
     .single-blog.video-style .short_details a:hover {
       color: #008dec; }
+
+.single-blog.video-style .short_details p{line-height: 24px; font-size: 14px;
+    text-align: justify;}
+
 .single-blog.video-style .thumb {
   overflow: hidden;
   position: relative; }
@@ -15247,7 +15251,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   overflow: hidden;
   padding-right: 0; }
 .single-blog.video-style.small .meta-bottom {
-  margin-bottom: 15px; }
+  margin-bottom: 10px; }
   .single-blog.video-style.small .meta-bottom a {
     display: inline-block;
     color: #797979;
@@ -15811,9 +15815,9 @@ body.mobile-nav-active #mobile-nav-toggle {
     color: #fff; }
 
 .blog-pagination .page-item.active .page-link {
-  background-color: #fbf9ff;
-  border-color: #f0e9ff;
-  color: #888888; }
+  background-color: #4cb748;
+  border-color: #047000;
+  color: #fff; }
 
 .blog-pagination .page-item:last-child .page-link {
   margin-right: 0; }
@@ -17692,7 +17696,8 @@ h6 {
     background: #008dec;
     color: #fff;
     border-color: #008dec;
-    padding: 5px 30px; }
+    padding: 5px 30px;
+    border-radius: 50px; }
     .button-contactForm:hover {
       border-color: #2a2a2a;
       background: #2a2a2a;
@@ -18446,17 +18451,19 @@ padding: 15px 40px 10px 10px !important;}
     margin-bottom: 0;
 }
 .table-inbox tr td {
-    padding: 12px !important;
+    padding: 10px 10px 2px 10px !important;
+    color: #000;
 }
-.table-inbox tr td:hover {
+/*.table-inbox tr td:hover {
     cursor: pointer;
-}
+}*/
 .table-inbox tr td .fa-star.inbox-started, .table-inbox tr td .fa-star:hover {
     color: #f78a09;
 }
 .table-inbox tr td .fa-star {
     color: #d5d5d5;
 }
+.table-inbox tr td i{color:#999;}
 .table-inbox tr.unread td {
     background: none repeat scroll 0 0 #f7f7f7;
     font-weight: 600;
@@ -18739,8 +18746,21 @@ input:focus, .form-control:focus{border-color: #4cb748;}
 
 #lp-register .radio-inline{padding-left: 15px;}
 #lp-register .radio-inline input{margin-right: 5px;}
-
-
+.main_menu{border-bottom:1px solid #eee;}
+.all_blog_listiing .single-blog.video-style.small .thumb{max-height: 235px; 
+  overflow: hidden;}
+  .hidden_sec{display: block; min-height: 32px;}
+  a.sort_info_link, a.author_link{color: #006699;}
+  a.draft_link{color: #ff5722;}
+  .table-inbox tr td .hidden_td_link{display: none;}
+  .table-inbox tr td:hover .hidden_td_link{display: block;}
+  .hidden_td_link a{display: inline-block; position: relative; color: #27aae1;
+    font-weight: normal;}
+  a.sort_info_link:hover, a.author_link:hover, a.draft_link:hover, 
+  .hidden_td_link a:hover{color: #4cb748;}
+  .table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, .014) !important;
+}
 @media (max-width:1619px){
 	/* Main Menu Area css
 	============================================================================================ */

@@ -22,6 +22,8 @@ class Blogs extends Model implements Auditable
         'title','user_id','code','content','save_method','image','locale_id','featured','anynomous'
     ];
 
+
+    protected $hidden = array('user_id','id');
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -44,6 +46,10 @@ class Blogs extends Model implements Auditable
     }
     public function tags(){
        return $this->belongsToMany(Tags::class,'blog_tags');
+    }
+    public function user()
+    {
+         return $this->belongsTo(Users::class);
     }
     public function getTagListAttribute(){
        return $this->tags->lists('id');

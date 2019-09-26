@@ -7418,204 +7418,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {// console.log('Component mounted.')
+  mounted: function mounted() {},
+  data: function data() {
+    return {
+      blogList: ''
+    };
   },
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
-  components: {}
+  components: {},
+  methods: {
+    myBlog: function myBlog() {}
+  }
 });
 
 /***/ }),
@@ -7987,7 +7802,9 @@ __webpack_require__.r(__webpack_exports__);
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
-      followSuggestion: ''
+      followSuggestion: '',
+      followingsCount: 0,
+      followersCount: 0
     };
   },
   components: {
@@ -48319,1081 +48136,362 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.blogList.length > 0
+    ? _c("div", { staticClass: "col-md-9 col-sm-9" }, [
+        _c("section", { staticClass: "dashboard_sec" }, [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12 col-sm-12" }, [
+                _c("div", { attrs: { id: "main" } }, [
+                  _c("div", { staticClass: "user_blog_list" }, [
+                    _c("aside", { staticClass: "lg-side" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "inbox-body" }, [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c(
+                          "table",
+                          { staticClass: "table table-inbox table-hover" },
+                          [
+                            _c(
+                              "tbody",
+                              _vm._l(_vm.blogList, function(eachblog) {
+                                return _c("tr", { staticClass: "unread" }, [
+                                  _vm._m(2, true),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "view-message" }, [
+                                    _c("div", [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "sort_info_link",
+                                          attrs: { href: "#" }
+                                        },
+                                        [_vm._v(_vm._s(eachblog.title))]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm._m(3, true)
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass:
+                                        "view-message inbox-small-cells"
+                                    },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "draft_link",
+                                          attrs: { href: "#" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              eachblog.save_method == 1
+                                                ? "Draft"
+                                                : "Published"
+                                            )
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(4, true),
+                                  _vm._v(" "),
+                                  _vm._m(5, true),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { staticClass: "view-message text-right" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("moment")(
+                                            eachblog.created_at,
+                                            "from",
+                                            "now"
+                                          )
+                                        )
+                                      )
+                                    ]
+                                  )
+                                ])
+                              }),
+                              0
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" })
+            ])
+          ])
+        ])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("section", { staticClass: "dashboard_sec" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12 col-sm-12" }, [
-              _c("div", { attrs: { id: "main" } }, [
-                _c("div", { staticClass: "user_blog_list" }, [
-                  _c("aside", { staticClass: "lg-side" }, [
-                    _c("div", { staticClass: "inbox-head" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-sm-6" }, [
-                          _c("h3", [
-                            _c("i", { staticClass: "fa fa-mail-bulk" }, [
-                              _vm._v(" ")
-                            ]),
-                            _vm._v(" All Posts")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-sm-6" }, [
-                          _c(
-                            "form",
-                            {
-                              staticClass: "position text-right",
-                              attrs: { action: "#" }
-                            },
-                            [
-                              _c("div", { staticClass: "input-append" }, [
-                                _c("input", {
-                                  staticClass: "sr-input",
-                                  attrs: {
-                                    type: "text",
-                                    placeholder: "Search Post"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn sr-btn",
-                                    attrs: { type: "button" }
-                                  },
-                                  [_c("i", { staticClass: "fa fa-search" })]
-                                )
-                              ])
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "clearfix" })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "inbox-body" }, [
-                      _c("div", { staticClass: "mail-option" }, [
-                        _c("div", { staticClass: "chk-all" }, [
-                          _c("input", {
-                            staticClass: "mail-checkbox mail-group-checkbox",
-                            attrs: { type: "checkbox" }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "btn-group" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn mini all",
-                                attrs: {
-                                  "data-toggle": "dropdown",
-                                  href: "#",
-                                  "aria-expanded": "false"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                         All\n                                         "
-                                ),
-                                _c("i", { staticClass: "fa fa-angle-down " })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("ul", { staticClass: "dropdown-menu" }, [
-                              _c("li", [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _c("i", { staticClass: "fa fa-ban" }, [
-                                    _vm._v(" ")
-                                  ]),
-                                  _vm._v(" None")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("li", [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _c("i", { staticClass: "fa fa-book" }, [
-                                    _vm._v(" ")
-                                  ]),
-                                  _vm._v(" Read")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("li", [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _c("i", { staticClass: "fa fa-file-word" }, [
-                                    _vm._v(" ")
-                                  ]),
-                                  _vm._v(" Unread")
-                                ])
-                              ])
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "btn-group" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn mini tooltips",
-                              attrs: {
-                                "data-original-title": "Refresh",
-                                "data-placement": "top",
-                                "data-toggle": "dropdown",
-                                href: "#"
-                              }
-                            },
-                            [_c("i", { staticClass: " fa fa-sync" })]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "btn-group hidden-phone" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn mini blue",
-                              attrs: {
-                                "data-toggle": "dropdown",
-                                href: "#",
-                                "aria-expanded": "false"
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                     More\n                                     "
-                              ),
-                              _c("i", { staticClass: "fa fa-angle-down " })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("ul", { staticClass: "dropdown-menu" }, [
-                            _c("li", [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("i", { staticClass: "fa fa-pencil-alt" }, [
-                                  _vm._v(" ")
-                                ]),
-                                _vm._v(" Mark as Read")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("li", [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("i", { staticClass: "fa fa-ban" }, [
-                                  _vm._v(" ")
-                                ]),
-                                _vm._v(" Spam")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "divider" }),
-                            _vm._v(" "),
-                            _c("li", [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("i", { staticClass: "fa fa-trash-alt" }, [
-                                  _vm._v(" ")
-                                ]),
-                                _vm._v(" Delete")
-                              ])
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "btn-group" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn mini blue",
-                              attrs: { "data-toggle": "dropdown", href: "#" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                     Move to\n                                     "
-                              ),
-                              _c("i", { staticClass: "fa fa-angle-down " })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("ul", { staticClass: "dropdown-menu" }, [
-                            _c("li", [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("i", { staticClass: "fa fa-pencil-alt" }, [
-                                  _vm._v(" ")
-                                ]),
-                                _vm._v(" Mark as Read")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("li", [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("i", { staticClass: "fa fa-ban" }, [
-                                  _vm._v(" ")
-                                ]),
-                                _vm._v(" Spam")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "divider" }),
-                            _vm._v(" "),
-                            _c("li", [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _c("i", { staticClass: "fa fa-trash-alt" }, [
-                                  _vm._v(" ")
-                                ]),
-                                _vm._v(" Delete")
-                              ])
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("ul", { staticClass: "unstyled inbox-pagination" }, [
-                          _c("li", [_c("span", [_vm._v("1-50 of 234")])]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c(
-                              "a",
-                              { staticClass: "np-btn", attrs: { href: "#" } },
-                              [
-                                _c("i", {
-                                  staticClass:
-                                    "fa fa-angle-left  pagination-left"
-                                })
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c(
-                              "a",
-                              { staticClass: "np-btn", attrs: { href: "#" } },
-                              [
-                                _c("i", {
-                                  staticClass:
-                                    "fa fa-angle-right pagination-right"
-                                })
-                              ]
-                            )
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "table",
-                        { staticClass: "table table-inbox table-hover" },
-                        [
-                          _c("tbody", [
-                            _c("tr", { staticClass: "unread" }, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message  dont-show" },
-                                [_vm._v("PHPClass")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message " }, [
-                                _vm._v(
-                                  "Added a new class: Login Class Fast Site"
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "view-message  inbox-small-cells"
-                                },
-                                [_c("i", { staticClass: "fa fa-paperclip" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message  text-right" },
-                                [_vm._v("9:27 AM")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", { staticClass: "unread" }, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("Google Webmaster ")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v("Improve the search presence of WebSite")
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("March 15")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("JW Player")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v("Last Chance: Upgrade to Pro for ")
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("March 15")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("Tim Reid, S P N")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v("Boost Your Website Traffic")
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("April 01")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-star inbox-started"
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [
-                                  _vm._v("Freelancer.com "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "label label-danger pull-right"
-                                    },
-                                    [_vm._v("urgent")]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v("Stop wasting your visitors ")
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("May 23")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-star inbox-started"
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("WOW Slider ")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v("New WOW Slider v7.8 - 67% off")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "view-message inbox-small-cells"
-                                },
-                                [_c("i", { staticClass: "fa fa-paperclip" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("March 14")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-star inbox-started"
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("LinkedIn Pulse")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v("The One Sign Your Co-Worker Will Stab")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "view-message inbox-small-cells"
-                                },
-                                [_c("i", { staticClass: "fa fa-paperclip" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("Feb 19")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [
-                                  _vm._v("Drupal Community"),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "label label-success pull-right"
-                                    },
-                                    [_vm._v("megazine")]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message view-message" },
-                                [_vm._v("Welcome to the Drupal Community")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("March 04")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("Facebook")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message view-message" },
-                                [_vm._v("Somebody requested a new password ")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("June 13")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [
-                                  _vm._v("Skype "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass: "label label-info pull-right"
-                                    },
-                                    [_vm._v("family")]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message view-message" },
-                                [_vm._v("Password successfully changed")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("March 24")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-star inbox-started"
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("Google+")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v("alireza, do you know")
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("March 09")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-star inbox-started"
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "dont-show" }, [
-                                _vm._v("Zoosk ")
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v("7 new singles we think you'll like")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "view-message inbox-small-cells"
-                                },
-                                [_c("i", { staticClass: "fa fa-paperclip" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("May 14")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("LinkedIn ")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v(
-                                  "Alireza: Nokia Networks, System Group and "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "view-message inbox-small-cells"
-                                },
-                                [_c("i", { staticClass: "fa fa-paperclip" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("February 25")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "dont-show" }, [
-                                _vm._v("Facebook")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message view-message" },
-                                [
-                                  _vm._v(
-                                    "Your account was recently logged into"
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("March 14")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("Twitter")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v("Your Twitter password has been changed")
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("April 07")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("InternetSeer Website Monitoring")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v(
-                                  "http://golddesigner.org/ Performance Report"
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("July 14")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-star inbox-started"
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("AddMe.com")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v(
-                                  "Submit Your Website to the AddMe Business Directory"
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("August 10")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("Terri Rexer, S P N")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message view-message" },
-                                [
-                                  _vm._v(
-                                    "Forget Google AdWords: Un-Limited Clicks fo"
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "view-message inbox-small-cells"
-                                },
-                                [_c("i", { staticClass: "fa fa-paperclip" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("April 14")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("Bertina ")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v("IMPORTANT: Don't lose your domains!")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "view-message inbox-small-cells"
-                                },
-                                [_c("i", { staticClass: "fa fa-paperclip" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("June 16")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", {
-                                  staticClass: "fa fa-star inbox-started"
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("Laura Gaffin, S P N ")]
-                              ),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "view-message" }, [
-                                _vm._v(
-                                  "Your Website On Google (Higher Rankings Are Better)"
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                staticClass: "view-message inbox-small-cells"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("August 10")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", {}, [
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("input", {
-                                  staticClass: "mail-checkbox",
-                                  attrs: { type: "checkbox" }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "inbox-small-cells" }, [
-                                _c("i", { staticClass: "fa fa-star" })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message dont-show" },
-                                [_vm._v("Facebook")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message view-message" },
-                                [_vm._v("Alireza Zare Login faild")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "view-message inbox-small-cells"
-                                },
-                                [_c("i", { staticClass: "fa fa-paperclip" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { staticClass: "view-message text-right" },
-                                [_vm._v("feb 14")]
-                              )
-                            ])
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ])
+    return _c("div", { staticClass: "inbox-head" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c("h3", [
+            _c("i", { staticClass: "fa fa-mail-bulk" }, [_vm._v(" ")]),
+            _vm._v(" All Posts")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c(
+            "form",
+            { staticClass: "position text-right", attrs: { action: "#" } },
+            [
+              _c("div", { staticClass: "input-append" }, [
+                _c("input", {
+                  staticClass: "sr-input",
+                  attrs: { type: "text", placeholder: "Search Post" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "btn sr-btn", attrs: { type: "button" } },
+                  [_c("i", { staticClass: "fa fa-search" })]
+                )
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "clearfix" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mail-option" }, [
+      _c("div", { staticClass: "chk-all" }, [
+        _c("input", {
+          staticClass: "mail-checkbox mail-group-checkbox",
+          attrs: { type: "checkbox" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "btn-group" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn mini all",
+              attrs: {
+                "data-toggle": "dropdown",
+                href: "#",
+                "aria-expanded": "false"
+              }
+            },
+            [
+              _vm._v(
+                "\n                                         All\n                                         "
+              ),
+              _c("i", { staticClass: "fa fa-angle-down " })
+            ]
+          ),
+          _vm._v(" "),
+          _c("ul", { staticClass: "dropdown-menu" }, [
+            _c("li", [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("i", { staticClass: "fa fa-ban" }, [_vm._v(" ")]),
+                _vm._v(" None")
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "clearfix" })
+            _c("li", [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("i", { staticClass: "fa fa-book" }, [_vm._v(" ")]),
+                _vm._v(" Read")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("i", { staticClass: "fa fa-file-word" }, [_vm._v(" ")]),
+                _vm._v(" Unread")
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "btn-group" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn mini tooltips",
+            attrs: {
+              "data-original-title": "Refresh",
+              "data-placement": "top",
+              "data-toggle": "dropdown",
+              href: "#"
+            }
+          },
+          [_c("i", { staticClass: " fa fa-sync" })]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "btn-group hidden-phone" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn mini blue",
+            attrs: {
+              "data-toggle": "dropdown",
+              href: "#",
+              "aria-expanded": "false"
+            }
+          },
+          [
+            _vm._v(
+              "\n                                     More\n                                     "
+            ),
+            _c("i", { staticClass: "fa fa-angle-down " })
+          ]
+        ),
+        _vm._v(" "),
+        _c("ul", { staticClass: "dropdown-menu" }, [
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "fa fa-pencil-alt" }, [_vm._v(" ")]),
+              _vm._v(" Mark as Read")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "fa fa-ban" }, [_vm._v(" ")]),
+              _vm._v(" Spam")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "divider" }),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "fa fa-trash-alt" }, [_vm._v(" ")]),
+              _vm._v(" Delete")
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "btn-group" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn mini blue",
+            attrs: { "data-toggle": "dropdown", href: "#" }
+          },
+          [
+            _vm._v(
+              "\n                                     Sort by\n             "
+            ),
+            _c("i", { staticClass: "fa fa-angle-down " })
+          ]
+        ),
+        _vm._v(" "),
+        _c("ul", { staticClass: "dropdown-menu" }, [
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "fa fa-pencil-alt" }, [_vm._v(" ")]),
+              _vm._v(" Draft")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "fa fa-ban" }, [_vm._v(" ")]),
+              _vm._v(" Publish")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "divider" }),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "fa fa-trash-alt" }, [_vm._v(" ")]),
+              _vm._v(" Delete")
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "unstyled inbox-pagination" }, [
+        _c("li", [_c("span", [_vm._v("1-50 of 234")])]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { staticClass: "np-btn", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-angle-left  pagination-left" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { staticClass: "np-btn", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-angle-right pagination-right" })
           ])
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "inbox-small-cells" }, [
+      _c("input", { staticClass: "mail-checkbox", attrs: { type: "checkbox" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "hidden_sec" }, [
+      _c("div", { staticClass: "hidden_td_link" }, [
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Edit")]),
+        _vm._v("\n                   | \n                  "),
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Preview")]),
+        _vm._v("\n                   | \n                  "),
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Delete")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "view-message inbox-small-cells" }, [
+      _vm._v("5 "),
+      _c("i", { staticClass: "fa fa-comments" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "td",
+      { staticClass: "inbox-small-cells", attrs: { width: "62px" } },
+      [_vm._v(" 14 "), _c("i", { staticClass: "fa fa-eye" })]
+    )
   }
 ]
 render._withStripped = true
@@ -71322,10 +70420,10 @@ var getData = function getData(to) {
     var initialState = JSON.parse(window.__INITIAL_STATE__) || {};
 
     if (!initialState.path || to.path !== initialState.path) {
-      // axios.get(`/api${to.path}`).then(({ data }) => {
-      //   resolve(data);
-      // })
-      resolve(initialState);
+      axios.get('/api' + to.path).then(function (_ref) {
+        var data = _ref.data;
+        resolve(data);
+      });
     } else {
       resolve(initialState);
     }
@@ -72237,13 +71335,13 @@ var ADD_ME = function ADD_ME(state, user) {
   state.me = user;
 };
 var INCREMENT_FOLLOWERS_COUNT = function INCREMENT_FOLLOWERS_COUNT(state, count) {
-  state.me.followersCount += count;
+  state.me.followerCount += count;
 };
 var INCREMENT_FOLLOWING_COUNT = function INCREMENT_FOLLOWING_COUNT(state, count) {
   state.me.followingCount += count;
 };
 var DECREMENT_FOLLOWERS_COUNT = function DECREMENT_FOLLOWERS_COUNT(state, count) {
-  state.me.followersCount -= count;
+  state.me.followerCount -= count;
 };
 var DECREMENT_FOLLOWING_COUNT = function DECREMENT_FOLLOWING_COUNT(state, count) {
   state.me.followingCount -= count;
@@ -72266,7 +71364,9 @@ var state = {
   settings: _config_config_js__WEBPACK_IMPORTED_MODULE_0__["default"],
   me: {},
   user: {
-    isLoggedIn: false
+    isLoggedIn: false,
+    followersCount: 0,
+    followingsCount: 0
   },
   feed: [],
   profilePage: {

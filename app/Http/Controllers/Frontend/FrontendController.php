@@ -9,6 +9,7 @@ use App\Models\Userlogs;
 use App\Services\VisitorInfo;
 use App\Jobs\VisitorLog;
 use App\Repository\VisitorlogInterface;
+use App\Repository\FollowerInterface; 
 
 class FrontendController extends BaseController
 {
@@ -67,7 +68,7 @@ class FrontendController extends BaseController
        
         if($this->websiteMode=='3')
         {
-            exit('sorry we are maintaining..It is a regular maintainence');
+            exit('Sorry we are maintaining..It is a regular maintainence');
         }
         if($this->websiteMode=='2'){
             exit('sorry we currently offline');
@@ -88,7 +89,15 @@ class FrontendController extends BaseController
         return view('frontend.home.index');
     }
   
-    
+    public function user_state_info(FollowerInterface $followerList){
+         if(\Auth::check())
+        {
+            $user =$this->authUser;
+            $user->followersCount=$followerList->getAllFollowers($this->authUser)->count();
+            $user->followingCount=$followerList->getAllFollowings($this->authUser)->count();
+            $user=$user->toArray();
+        }
+    }
 
     public function save_visitor_info()
     {
