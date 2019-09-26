@@ -48,9 +48,8 @@
                 <div class="form-group">
                   <label for="parent_id">Parent</label>
                     <select class="form-control"  name="parent_id" id="parent_id">
-                      <?php print_r($blogcategory); ?>
-                      @foreach ($blogcategory as $values)
                       <option value="">none</option>
+                      @foreach ($blogcategory as $values)
                       <option value="{{ $values->id }}"> {{ $values->name }}  </option>
                       @endforeach
                     </select>

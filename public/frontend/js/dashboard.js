@@ -8222,198 +8222,7 @@ function previewimage(event) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-
-/* harmony import */ var _components_Footer_TheFooter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../components/Footer/TheFooter */ "./resources/assets/js/components/Footer/TheFooter.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
 //
 //
 //
@@ -8473,26 +8282,18 @@ __webpack_require__.r(__webpack_exports__);
 //     reader.readAsDataURL(event.target.files[0]);
 // }
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {},
   data: function data() {
     return {
-      myData: null
+      myCategory: ''
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    setTimeout(function () {
-      _this.myData = 'Example Data';
-    }, 5000);
-  },
-  computed: {
-    categoryData: function categoryData() {
-      return this.$store.getters.categoryPage;
-    }
-  },
-  components: {}
+  mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  components: {},
+  methods: {
+    myCategory: function myCategory() {}
+  }
 });
 
 /***/ }),
@@ -47372,7 +47173,7 @@ var render = function() {
                     _c("div", { staticClass: "profile-card" }, [
                       _c("img", {
                         staticClass: "profile-photo",
-                        attrs: { src: "images/p_image.png", alt: "user" }
+                        attrs: { src: "/images/p_image.png", alt: "user" }
                       }),
                       _vm._v(" "),
                       _c("h5", [
@@ -47977,7 +47778,7 @@ var staticRenderFns = [
             },
             [
               _vm._v(
-                "\n                                         All\n                                         "
+                "\r\n                                         All\r\n                                         "
               ),
               _c("i", { staticClass: "fa fa-angle-down " })
             ]
@@ -48037,7 +47838,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                                     More\n                                     "
+              "\r\n                                     More\r\n                                     "
             ),
             _c("i", { staticClass: "fa fa-angle-down " })
           ]
@@ -48078,7 +47879,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                                     Sort by\n             "
+              "\r\n                                     Sort by\r\n             "
             ),
             _c("i", { staticClass: "fa fa-angle-down " })
           ]
@@ -48142,9 +47943,9 @@ var staticRenderFns = [
     return _c("div", { staticClass: "hidden_sec" }, [
       _c("div", { staticClass: "hidden_td_link" }, [
         _c("a", { attrs: { href: "#" } }, [_vm._v("Edit")]),
-        _vm._v("\n                   | \n                  "),
+        _vm._v("\r\n                   | \r\n                  "),
         _c("a", { attrs: { href: "#" } }, [_vm._v("Preview")]),
-        _vm._v("\n                   | \n                  "),
+        _vm._v("\r\n                   | \r\n                  "),
         _c("a", { attrs: { href: "#" } }, [_vm._v("Delete")])
       ])
     ])
@@ -49062,14 +48863,14 @@ var staticRenderFns = [
                       _c("input", {
                         attrs: { type: "radio", name: "optradio", checked: "" }
                       }),
-                      _vm._v("Male\n      ")
+                      _vm._v("Male\r\n      ")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
                       _c("input", {
                         attrs: { type: "radio", name: "optradio" }
                       }),
-                      _vm._v("Female\n      ")
+                      _vm._v("Female\r\n      ")
                     ])
                   ])
                 ]),
@@ -49137,7 +48938,7 @@ var staticRenderFns = [
                     "span",
                     { staticClass: "file-input btn btn-success btn-file" },
                     [
-                      _vm._v("\n            Browse \n            "),
+                      _vm._v("\r\n            Browse \r\n            "),
                       _c("input", {
                         staticClass: "upload",
                         attrs: {
@@ -49168,7 +48969,7 @@ var staticRenderFns = [
                     },
                     [
                       _vm._v(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\r\n"
                       )
                     ]
                   )
@@ -49235,7 +49036,7 @@ var staticRenderFns = [
                     },
                     [
                       _vm._v(
-                        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.\n"
+                        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.\r\n"
                       )
                     ]
                   )
@@ -49251,14 +49052,14 @@ var staticRenderFns = [
                       _c("input", {
                         attrs: { type: "radio", name: "graduated", checked: "" }
                       }),
-                      _vm._v("Yes\n      ")
+                      _vm._v("Yes\r\n      ")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
                       _c("input", {
                         attrs: { type: "radio", name: "graduated" }
                       }),
-                      _vm._v("No\n      ")
+                      _vm._v("No\r\n      ")
                     ])
                   ])
                 ]),
@@ -49338,7 +49139,7 @@ var staticRenderFns = [
                     },
                     [
                       _vm._v(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n"
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\r\n"
                       )
                     ]
                   )
@@ -49374,7 +49175,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\n  Bycicle \n  "),
+                    _vm._v("\r\n  Bycicle \r\n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49386,7 +49187,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\n  Photography \n  "),
+                    _vm._v("\r\n  Photography \r\n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49398,7 +49199,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\n  Shopping \n  "),
+                    _vm._v("\r\n  Shopping \r\n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49410,7 +49211,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\n  Traveling \n  "),
+                    _vm._v("\r\n  Traveling \r\n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 ),
@@ -49422,7 +49223,7 @@ var staticRenderFns = [
                     attrs: { href: "#" }
                   },
                   [
-                    _vm._v("\n  Eating \n  "),
+                    _vm._v("\r\n  Eating \r\n  "),
                     _c("i", { staticClass: "fa fa-times" })
                   ]
                 )
@@ -49484,440 +49285,88 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.myCategory.length > 0
+    ? _c("div", { staticClass: "col-md-9 col-sm-9" }, [
+        _c(
+          "div",
+          { attrs: { id: "main" } },
+          _vm._l(_vm.myCategory, function(eachCategory) {
+            return _c(
+              "section",
+              { staticClass: "category-page category-list" },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "area-heading" }, [
+                      _c("h3", [_vm._v(_vm._s(eachCategory.name))])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "clearfix" })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(eachCategory.categories, function(subCategory) {
+                    return _c(
+                      "div",
+                      { staticClass: "col-lg-4 col-md-4 col-sm-6" },
+                      [
+                        _c("div", { staticClass: "single-category" }, [
+                          _c("div", { staticClass: "thumb" }, [
+                            _c("a", { attrs: { href: "#" } }, [
+                              _c("img", {
+                                staticClass: "img-fluid",
+                                attrs: {
+                                  src: subCategory.banner_image,
+                                  alt: ""
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "short_details" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "d-block",
+                                attrs: { href: "single-blog.html" }
+                              },
+                              [_c("h4", [_vm._v(_vm._s(subCategory.name))])]
+                            ),
+                            _vm._v(" "),
+                            _vm._m(0, true)
+                          ])
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9 col-sm-9" }, [
-      _c("div", { attrs: { id: "main" } }, [
-        _c("section", { staticClass: "category-page category-list" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "area-heading" }, [
-                _c("h3", [_vm._v("Arts & Entertainment")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-6" }, [
-              _c("div", { staticClass: "single-category" }, [
-                _c("div", { staticClass: "thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: {
-                        src: "images/user-images/category/1.jpg",
-                        alt: ""
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "short_details" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block",
-                      attrs: { href: "single-blog.html" }
-                    },
-                    [_c("h4", [_vm._v("Artificial Intelligence")])]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "plus-minus", attrs: { href: "#" } }, [
-                    _c("input", {
-                      staticClass: "css-checkbox",
-                      attrs: { type: "checkbox", name: "a", id: "a" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "css-label", attrs: { for: "a" } },
-                      [
-                        _c("span", { staticClass: "fa fa-plus" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "fa fa-check" })
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-6" }, [
-              _c("div", { staticClass: "single-category" }, [
-                _c("div", { staticClass: "thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: {
-                        src: "images/user-images/category/2.jpg",
-                        alt: ""
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "short_details" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block",
-                      attrs: { href: "single-blog.html" }
-                    },
-                    [_c("h4", [_vm._v("Beauty Service")])]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "plus-minus", attrs: { href: "#" } }, [
-                    _c("input", {
-                      staticClass: "css-checkbox",
-                      attrs: { type: "checkbox", name: "b", id: "b" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "css-label", attrs: { for: "b" } },
-                      [
-                        _c("span", { staticClass: "fa fa-plus" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "fa fa-check" })
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-6" }, [
-              _c("div", { staticClass: "single-category" }, [
-                _c("div", { staticClass: "thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: {
-                        src: "images/user-images/category/3.jpg",
-                        alt: ""
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "short_details" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block",
-                      attrs: { href: "single-blog.html" }
-                    },
-                    [_c("h4", [_vm._v("Mantashwori")])]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "plus-minus", attrs: { href: "#" } }, [
-                    _c("input", {
-                      staticClass: "css-checkbox",
-                      attrs: { type: "checkbox", name: "c", id: "c" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "css-label", attrs: { for: "c" } },
-                      [
-                        _c("span", { staticClass: "fa fa-plus" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "fa fa-check" })
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-6" }, [
-              _c("div", { staticClass: "single-category" }, [
-                _c("div", { staticClass: "thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: {
-                        src: "images/user-images/category/4.jpg",
-                        alt: ""
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "short_details" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block",
-                      attrs: { href: "single-blog.html" }
-                    },
-                    [_c("h4", [_vm._v("Baby Gaming")])]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "plus-minus", attrs: { href: "#" } }, [
-                    _c("input", {
-                      staticClass: "css-checkbox",
-                      attrs: { type: "checkbox", name: "d", id: "d" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "css-label", attrs: { for: "d" } },
-                      [
-                        _c("span", { staticClass: "fa fa-plus" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "fa fa-check" })
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-6" }, [
-              _c("div", { staticClass: "single-category" }, [
-                _c("div", { staticClass: "thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: {
-                        src: "images/user-images/category/5.jpg",
-                        alt: ""
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "short_details" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block",
-                      attrs: { href: "single-blog.html" }
-                    },
-                    [_c("h4", [_vm._v("Lens Cart")])]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "plus-minus", attrs: { href: "#" } }, [
-                    _c("input", {
-                      staticClass: "css-checkbox",
-                      attrs: { type: "checkbox", name: "e", id: "e" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "css-label", attrs: { for: "e" } },
-                      [
-                        _c("span", { staticClass: "fa fa-plus" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "fa fa-check" })
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-6" }, [
-              _c("div", { staticClass: "single-category" }, [
-                _c("div", { staticClass: "thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: {
-                        src: "images/user-images/category/6.jpg",
-                        alt: ""
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "short_details" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block",
-                      attrs: { href: "single-blog.html" }
-                    },
-                    [_c("h4", [_vm._v("Camera")])]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "plus-minus", attrs: { href: "#" } }, [
-                    _c("input", {
-                      staticClass: "css-checkbox",
-                      attrs: { type: "checkbox", name: "f", id: "f" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "css-label", attrs: { for: "f" } },
-                      [
-                        _c("span", { staticClass: "fa fa-plus" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "fa fa-check" })
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "area-heading" }, [
-                _c("h3", [_vm._v("Innovation & Technology")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-6" }, [
-              _c("div", { staticClass: "single-category" }, [
-                _c("div", { staticClass: "thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: {
-                        src: "images/user-images/category/7.jpg",
-                        alt: ""
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "short_details" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block",
-                      attrs: { href: "single-blog.html" }
-                    },
-                    [_c("h4", [_vm._v("Kids Care")])]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "plus-minus", attrs: { href: "#" } }, [
-                    _c("input", {
-                      staticClass: "css-checkbox",
-                      attrs: { type: "checkbox", name: "g", id: "g" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "css-label", attrs: { for: "g" } },
-                      [
-                        _c("span", { staticClass: "fa fa-plus" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "fa fa-check" })
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-6" }, [
-              _c("div", { staticClass: "single-category" }, [
-                _c("div", { staticClass: "thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: {
-                        src: "images/user-images/category/8.jpg",
-                        alt: ""
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "short_details" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block",
-                      attrs: { href: "single-blog.html" }
-                    },
-                    [_c("h4", [_vm._v("Electronics")])]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "plus-minus", attrs: { href: "#" } }, [
-                    _c("input", {
-                      staticClass: "css-checkbox",
-                      attrs: { type: "checkbox", name: "h", id: "h" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "css-label", attrs: { for: "h" } },
-                      [
-                        _c("span", { staticClass: "fa fa-plus" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "fa fa-check" })
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-6" }, [
-              _c("div", { staticClass: "single-category" }, [
-                _c("div", { staticClass: "thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: {
-                        src: "images/user-images/category/9.jpg",
-                        alt: ""
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "short_details" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block",
-                      attrs: { href: "single-blog.html" }
-                    },
-                    [_c("h4", [_vm._v("Called Multiply")])]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "plus-minus", attrs: { href: "#" } }, [
-                    _c("input", {
-                      staticClass: "css-checkbox",
-                      attrs: { type: "checkbox", name: "i", id: "i" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "css-label", attrs: { for: "i" } },
-                      [
-                        _c("span", { staticClass: "fa fa-plus" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "fa fa-check" })
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" })
-          ])
-        ])
+    return _c("a", { staticClass: "plus-minus", attrs: { href: "#" } }, [
+      _c("input", {
+        staticClass: "css-checkbox",
+        attrs: { type: "checkbox", name: "a", id: "a" }
+      }),
+      _vm._v(" "),
+      _c("label", { staticClass: "css-label", attrs: { for: "a" } }, [
+        _c("span", { staticClass: "fa fa-plus" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "fa fa-check" })
       ])
     ])
   }
@@ -74232,13 +73681,12 @@ function () {
 /*!**********************************************!*\
   !*** ./resources/assets/js/store/actions.js ***!
   \**********************************************/
-/*! exports provided: checkLoginUser, categoryPage */
+/*! exports provided: checkLoginUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkLoginUser", function() { return checkLoginUser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "categoryPage", function() { return categoryPage; });
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
 
 var checkLoginUser = function checkLoginUser(_ref) {
@@ -74247,15 +73695,6 @@ var checkLoginUser = function checkLoginUser(_ref) {
   var form = new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
   form.get('logincheck').then(function (response) {
     commit('UserLoggedIn', response.data.status);
-  })["catch"](function (e) {
-    console.log(e);
-  });
-};
-var categoryPage = function categoryPage(_ref2) {
-  var commit = _ref2.commit;
-  // show loading
-  form.get('/all/category').then(function (response) {
-    commit('PROFILE_PAGE', response.data.status);
   })["catch"](function (e) {
     console.log(e);
   });
@@ -74364,14 +73803,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*!************************************************!*\
   !*** ./resources/assets/js/store/mutations.js ***!
   \************************************************/
-/*! exports provided: UserLoggedIn, ADD_ME, CATEGORY_PAGE, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT */
+/*! exports provided: UserLoggedIn, ADD_ME, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserLoggedIn", function() { return UserLoggedIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_ME", function() { return ADD_ME; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CATEGORY_PAGE", function() { return CATEGORY_PAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_FOLLOWERS_COUNT", function() { return INCREMENT_FOLLOWERS_COUNT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_FOLLOWING_COUNT", function() { return INCREMENT_FOLLOWING_COUNT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DECREMENT_FOLLOWERS_COUNT", function() { return DECREMENT_FOLLOWERS_COUNT; });
@@ -74381,9 +73819,6 @@ var UserLoggedIn = function UserLoggedIn(state, user) {
 };
 var ADD_ME = function ADD_ME(state, user) {
   state.me = user;
-};
-var CATEGORY_PAGE = function CATEGORY_PAGE(state, data) {
-  state.categoryPage = data;
 };
 var INCREMENT_FOLLOWERS_COUNT = function INCREMENT_FOLLOWERS_COUNT(state, count) {
   state.me.followerCount += count;
@@ -74420,11 +73855,14 @@ var state = {
     followingsCount: 0
   },
   feed: [],
-  categoryPage: {
-    code: '',
-    title: '',
-    content: '',
-    image: ''
+  profilePage: {
+    profile: {
+      bio: ''
+    },
+    avatar: '',
+    username: '',
+    tweets: [],
+    is_following: false
   },
   tweetDetail: {
     user: {},
@@ -74445,7 +73883,7 @@ var state = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/js/dashboard.js */"./resources/assets/js/dashboard.js");
+module.exports = __webpack_require__(/*! C:\blog\resources\assets\js\dashboard.js */"./resources/assets/js/dashboard.js");
 
 
 /***/ })

@@ -41,7 +41,7 @@ class Categories extends Model implements Auditable
 
     public function categories()
     {
-        return $this->hasMany(Categories::class,'parent_id','id');
+        return $this->hasMany(Categories::class,'parent_id');
     }
 
     public function users()
