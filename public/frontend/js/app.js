@@ -50984,7 +50984,9 @@ var render = function() {
                               _c("img", {
                                 staticClass: "img-fluid",
                                 attrs: {
-                                  src: subCategory.banner_image,
+                                  src:
+                                    "images/user-images/category/" +
+                                    subCategory.banner_image,
                                   alt: ""
                                 }
                               })

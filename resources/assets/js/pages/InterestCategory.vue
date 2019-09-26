@@ -20,7 +20,7 @@
                     <div class="single-category">
                         <div class="thumb">
                            <a href="#"> <img class="img-fluid" 
-                            :src="subCategory.banner_image" alt=""></a>
+                            :src="'images/user-images/category/'+subCategory.banner_image" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">

@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CountriesSeeder::class);
         $this->call(LocalesSeeder::class);
         $this->call(AdminUserSeeder::class);
-        
+        $this->call(CategorySeeder::class);
     }
 }
