@@ -35,8 +35,14 @@ class FrontendController extends BaseController
 
     public function __construct()
     {
+        
+        
         $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
+
+        $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
+        $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
+
         $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
         $this->visitorInfo =  new visitorInfo();
         $this->siteName =  $this->siteSettings->site_name;
@@ -64,7 +70,7 @@ class FrontendController extends BaseController
        
         if($this->websiteMode=='3')
         {
-            exit('sorry we are maintaining..It is a regular maintainence');
+            exit('Sorry we are maintaining..It is a regular maintainence');
         }
         if($this->websiteMode=='2'){
             exit('sorry we currently offline');
@@ -73,6 +79,7 @@ class FrontendController extends BaseController
         $this->authUser= \Auth::user();
             return $next($request);
         });
+
     }
     /**
      * Show the application dashboard.
@@ -85,7 +92,15 @@ class FrontendController extends BaseController
         return view('frontend.home.index');
     }
   
-    
+    public function user_state_info(FollowerInterface $followerList){
+         if(\Auth::check())
+        {
+            $user =$this->authUser;
+            $user->followersCount=$followerList->getAllFollowers($this->authUser)->count();
+            $user->followingCount=$followerList->getAllFollowings($this->authUser)->count();
+            $user=$user->toArray();
+        }
+    }
 
     public function save_visitor_info()
     {

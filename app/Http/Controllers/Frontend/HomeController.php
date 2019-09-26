@@ -46,6 +46,10 @@ class HomeController extends FrontendController
     public function test(Request $request)
     {
 
+
+         Mail::to('abhishekgiri49.ag@gmail.com')->send(new SendMailable());
+        // echo str_slug("iajaf1237412~!@#$%^&*()~'-'=+_][{} ;:/.,<>?AAMNBV'' CXZLKJHG",'-');
+
         return view('frontend.layouts.app');
     }
     public function dashboard()
@@ -74,7 +78,7 @@ class HomeController extends FrontendController
             $user->followingCount=$this->followerList->getAllFollowings($this->authUser)->count();
             $user=$user->toArray();
             $data['followSuggestion']=$suggestion;
-            $data['path']='/blog/list';
+            $data['path']='/dashboard';
             $initialState=json_encode($data);
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
 

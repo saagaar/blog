@@ -43,4 +43,6 @@ class BlogController extends FrontendController
                 }
             } 
    	}
+
+   
 }

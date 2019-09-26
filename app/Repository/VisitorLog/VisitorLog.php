@@ -52,7 +52,6 @@ Class  VisitorLog implements VisitorLogInterface
         $ipData['ip']=$data;
         $ipData['details']=$data->visitordetails->where('redirected_to',$url)->sortByDesc('created_at')->first();
         return $ipData;
-
     }
 }
 ?>
