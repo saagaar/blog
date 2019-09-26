@@ -8405,7 +8405,8 @@ function previewimage(event) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_Footer_TheFooter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../components/Footer/TheFooter */ "./resources/assets/js/components/Footer/TheFooter.vue");
+/* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
+/* harmony import */ var _components_Footer_TheFooter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/Footer/TheFooter */ "./resources/assets/js/components/Footer/TheFooter.vue");
 //
 //
 //
@@ -8644,18 +8645,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-function previewimage(event) {
-  var reader = new FileReader();
-  var imageField = document.getElementById("image-field");
-
-  reader.onload = function () {
-    if (reader.readyState == 2) {
-      imageField.src = reader.result;
-    }
-  };
-
-  reader.readAsDataURL(event.target.files[0]);
-}
+// function previewimage(event) {
+//     var reader = new FileReader();
+//     var imageField = document.getElementById("image-field")
+//     reader.onload = function () {
+//         if (reader.readyState == 2) {
+//             imageField.src = reader.result;
+//         }
+//     }
+//     reader.readAsDataURL(event.target.files[0]);
+// }
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8670,6 +8669,11 @@ function previewimage(event) {
     setTimeout(function () {
       _this.myData = 'Example Data';
     }, 5000);
+  },
+  computed: {
+    categoryData: function categoryData() {
+      return this.$store.getters.categoryPage;
+    }
   },
   components: {}
 });
@@ -70414,12 +70418,13 @@ function () {
 /*!**********************************************!*\
   !*** ./resources/assets/js/store/actions.js ***!
   \**********************************************/
-/*! exports provided: checkLoginUser */
+/*! exports provided: checkLoginUser, categoryPage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkLoginUser", function() { return checkLoginUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "categoryPage", function() { return categoryPage; });
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
 
 var checkLoginUser = function checkLoginUser(_ref) {
@@ -70428,6 +70433,15 @@ var checkLoginUser = function checkLoginUser(_ref) {
   var form = new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
   form.get('logincheck').then(function (response) {
     commit('UserLoggedIn', response.data.status);
+  })["catch"](function (e) {
+    console.log(e);
+  });
+};
+var categoryPage = function categoryPage(_ref2) {
+  var commit = _ref2.commit;
+  // show loading
+  form.get('/all/category').then(function (response) {
+    commit('PROFILE_PAGE', response.data.status);
   })["catch"](function (e) {
     console.log(e);
   });
@@ -70441,7 +70455,7 @@ var checkLoginUser = function checkLoginUser(_ref) {
 /*!**********************************************!*\
   !*** ./resources/assets/js/store/getters.js ***!
   \**********************************************/
-/*! exports provided: me, user, feed, profilePage, tweetDetail, followerSuggestions, openTweetDetails, isLoading, appName, config */
+/*! exports provided: me, user, feed, categoryPage, tweetDetail, followerSuggestions, openTweetDetails, isLoading, appName, config */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70449,7 +70463,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "me", function() { return me; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "feed", function() { return feed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "profilePage", function() { return profilePage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "categoryPage", function() { return categoryPage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tweetDetail", function() { return tweetDetail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "followerSuggestions", function() { return followerSuggestions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openTweetDetails", function() { return openTweetDetails; });
@@ -70470,8 +70484,8 @@ var feed = function feed(state) {
   return state.feed;
 }; // Get user profile page
 
-var profilePage = function profilePage(state) {
-  return state.profilePage;
+var categoryPage = function categoryPage(state) {
+  return state.categoryPage;
 }; // Get tweet detail
 
 var tweetDetail = function tweetDetail(state) {
@@ -70536,13 +70550,14 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*!************************************************!*\
   !*** ./resources/assets/js/store/mutations.js ***!
   \************************************************/
-/*! exports provided: UserLoggedIn, ADD_ME, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT */
+/*! exports provided: UserLoggedIn, ADD_ME, CATEGORY_PAGE, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserLoggedIn", function() { return UserLoggedIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_ME", function() { return ADD_ME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CATEGORY_PAGE", function() { return CATEGORY_PAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_FOLLOWERS_COUNT", function() { return INCREMENT_FOLLOWERS_COUNT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_FOLLOWING_COUNT", function() { return INCREMENT_FOLLOWING_COUNT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DECREMENT_FOLLOWERS_COUNT", function() { return DECREMENT_FOLLOWERS_COUNT; });
@@ -70552,6 +70567,9 @@ var UserLoggedIn = function UserLoggedIn(state, user) {
 };
 var ADD_ME = function ADD_ME(state, user) {
   state.me = user;
+};
+var CATEGORY_PAGE = function CATEGORY_PAGE(state, data) {
+  state.categoryPage = data;
 };
 var INCREMENT_FOLLOWERS_COUNT = function INCREMENT_FOLLOWERS_COUNT(state, count) {
   state.me.followersCount += count;
@@ -70586,14 +70604,11 @@ var state = {
     isLoggedIn: false
   },
   feed: [],
-  profilePage: {
-    profile: {
-      bio: ''
-    },
-    avatar: '',
-    username: '',
-    tweets: [],
-    is_following: false
+  categoryPage: {
+    code: '',
+    title: '',
+    content: '',
+    image: ''
   },
   tweetDetail: {
     user: {},
