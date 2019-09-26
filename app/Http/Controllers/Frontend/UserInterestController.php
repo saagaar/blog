@@ -19,7 +19,19 @@ class UserInterestController extends FrontendController
          $this->userInterest=$userInterest;
          $this->category=$category;
     }
-    
+    public function categories()
+    {
+        if(\Auth::check())
+        {
+            $user = $this->authUser;
+            $data['path']='/categories';
+            $initialState=json_encode($data);
+            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+
+        }
+        else
+             return redirect()->route('home'); 
+    }
    public function addUserInterest($slug)
     {
         
@@ -42,9 +54,16 @@ class UserInterestController extends FrontendController
          }  
         return array('status'=>true,'message'=>'');
     }
-    public function testinterest(){
-        $slug = 'educationada';
-        // print_r($this->authUser);
-        print_r($this->getCategory());
+    public function getUserInterest()
+    {
+        if ($this->authUser) {
+            return $this->userInterest->getAllInterests($this->authUser)->toArray();
+        }else
+            return array('status'=>false,'message'=>'No Interest Found');
+    }
+        
+    public function testinterest()
+    {
+        print_r($this->getUserInterest());
     }
 }

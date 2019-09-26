@@ -23,7 +23,7 @@ Route::get('/logincheck', function () {
 
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\HomeController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\HomeController@followuser');
-Route::get('/categories', 'Frontend\ProfileController@categories')->name('categories');
+Route::get('/categories', 'Frontend\UserInterestController@categories')->name('categories');
 Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 

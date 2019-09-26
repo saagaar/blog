@@ -19,7 +19,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-category">
                         <div class="thumb">
-                           <a href="#"> <img class="img-fluid" src="images/userimages/category/1.jpg" alt=""></a>
+                           <a href="#"> <img class="img-fluid" src="images/user-images/category/1.jpg" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">
@@ -40,7 +40,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-category">
                         <div class="thumb">
-                           <a href="#"> <img class="img-fluid" src="images/userimages/category/2.jpg" alt=""></a>
+                           <a href="#"> <img class="img-fluid" src="images/user-images/category/2.jpg" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">
@@ -61,7 +61,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-category">
                         <div class="thumb">
-                           <a href="#"> <img class="img-fluid" src="images/userimages/category/3.jpg" alt=""></a>
+                           <a href="#"> <img class="img-fluid" src="images/user-images/category/3.jpg" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">
@@ -82,7 +82,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-category">
                         <div class="thumb">
-                           <a href="#"> <img class="img-fluid" src="images/userimages/category/4.jpg" alt=""></a>
+                           <a href="#"> <img class="img-fluid" src="images/user-images/category/4.jpg" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">
@@ -103,7 +103,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-category">
                         <div class="thumb">
-                           <a href="#"> <img class="img-fluid" src="images/userimages/category/5.jpg" alt=""></a>
+                           <a href="#"> <img class="img-fluid" src="images/user-images/category/5.jpg" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">
@@ -124,7 +124,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-category">
                         <div class="thumb">
-                           <a href="#"> <img class="img-fluid" src="images/userimages/category/6.jpg" alt=""></a>
+                           <a href="#"> <img class="img-fluid" src="images/user-images/category/6.jpg" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">
@@ -159,7 +159,7 @@
                     <div class="single-category">
                         <div class="thumb">
                            <a href="#"> 
-                            <img class="img-fluid" src="images/userimages/category/7.jpg" alt="">
+                            <img class="img-fluid" src="images/user-images/category/7.jpg" alt="">
                             </a>
                         </div>
                         <div class="short_details">
@@ -183,7 +183,7 @@
                     <div class="single-category">
                         <div class="thumb">
                            <a href="#"> 
-                            <img class="img-fluid" src="images/userimages/category/8.jpg" alt="">
+                            <img class="img-fluid" src="images/user-images/category/8.jpg" alt="">
                             </a>
                         </div>
                         <div class="short_details">
@@ -207,7 +207,7 @@
                     <div class="single-category">
                         <div class="thumb">
                            <a href="#"> 
-                            <img class="img-fluid" src="images/userimages/category/9.jpg" alt="">
+                            <img class="img-fluid" src="images/user-images/category/9.jpg" alt="">
                             </a>
                         </div>
                         <div class="short_details">
