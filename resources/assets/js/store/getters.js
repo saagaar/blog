@@ -9,7 +9,7 @@ export const user = state => state.user
 export const feed = state => state.feed
 
 // Get user profile page
-export const profilePage = state => state.profilePage
+export const categoryPage = state => state.categoryPage
 
 // Get tweet detail
 export const tweetDetail = state => state.tweetDetail

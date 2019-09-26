@@ -23,6 +23,7 @@ class UserInterestController extends FrontendController
     {
         if(\Auth::check())
         {
+            $data['myCategory'] = $this->category->getAll()->where('parent_id', NULL)->with('categories')->get()->toArray();
             $user = $this->authUser;
             $data['path']='/categories';
             $initialState=json_encode($data);
@@ -41,9 +42,6 @@ class UserInterestController extends FrontendController
             $this->userInterest->addInterest($this->authUser,$slug);
          }  
          return array('status'=>true,'message'=>'success');
-    }
-    public function getCategory(){
-        return $this->category->getAll()->get()->toArray();
     }
     public function removeUserInterest($slug)
     {
