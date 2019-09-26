@@ -52,7 +52,7 @@ class ServiceController extends AdminController
             return redirect()->route('services.list')    
                              ->with(array('success'=>'Service created successfully.','breadcrumb'=>$breadcrumb));
         }
-        return view('admin.service.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.service.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'service.list'));
     }
     public function edit(Request $request, $id)
     {

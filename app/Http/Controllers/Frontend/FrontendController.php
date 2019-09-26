@@ -36,8 +36,10 @@ class FrontendController extends BaseController
 
     public function __construct()
     {
-
         
+        $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
+        $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
+
         $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
 

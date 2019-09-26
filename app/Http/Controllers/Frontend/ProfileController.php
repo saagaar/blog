@@ -41,7 +41,7 @@ class ProfileController extends FrontendController
     {
         if(\Auth::check())
         {
-
+            $user = $this->authUser;
             $data['path']='/categories';
             $initialState=json_encode($data);
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);

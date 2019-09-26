@@ -23,17 +23,19 @@ Route::get('/logincheck', function () {
 
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\HomeController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\HomeController@followuser');
+
 Route::get('/api/blog/list/','Frontend\UserController@myBlogs');
 
 
 
-Route::get('/categories', 'Frontend\ProfileController@categories')->name('categories');
 Route::get('/blog/list','Frontend\UserController@myBlogs')->name('my.blog');
+
+Route::get('/categories', 'Frontend\UserInterestController@categories')->name('categories');
 
 Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 
-Route::get('/tests', 'Frontend\HomeController@test')->name('test');
+Route::get('/tests', 'Frontend\UserInterestController@testinterest')->name('test');
 Route::get('/blogs','Frontend\HomeController@index')->name('home');
 
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');

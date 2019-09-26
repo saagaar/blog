@@ -39,32 +39,28 @@ class CategoryController extends AdminController
                     'blog Category' => route('adminblogcategory.list'),
                     'current_menu'=>'Create Blog Category',
                       ]];
+        $blogcategory = $this->categories->getAll()->get();
         if ($request->method()=='POST') {
-            // dd($request->all());
             $requestobj=app(CategoryRequest::class);
-            $this->validate($request, [
+             $validatedData = $requestobj->validated();
+             $this->validate($request, [
                 'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000',
                 ]);
-            $validatedData = $requestobj->validated();
+           
             $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-            request()->banner_image->move(public_path('frontend/images/categories-images'), $imageName);
+            request()->banner_image->move(public_path('images/categories-images'), $imageName);
             $validatedData['banner_image'] = $imageName;
-            $code= uniqid();
-            $part1=substr($code,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
-            $part2=substr($code, 7,-1);
-            $created['code']= $part1.$part2;
-            $created->save();
         $this->categories->create($validatedData);
-       return redirect()->route('adminblogcategory.list')
+        return redirect()->route('adminblogcategory.list')
                             ->with(array('success'=>'Blog Category created successfully.','breadcrumb'=>$breadcrumb));
         }
-       return view('admin.blog.createcategories')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'category.list'));;
+       return view('admin.blog.createcategories')->with(array('breadcrumb'=>$breadcrumb,'blogcategory'=>$blogcategory,'primary_menu'=>'category.list'));;
     }
     public function delete($id)
     {
         $category =$this->categories->getcatById($id);
         if( $category){
-            $dir = 'frontend/images/categories-images/';
+            $dir = 'images/categories-images/';
             if ($category->banner_image != '' && File::exists($dir . $category->banner_image)){
                 File::delete($dir . $category->banner_image);
             }
@@ -80,6 +76,7 @@ class CategoryController extends AdminController
                     'blog Category' => route('adminblogcategory.list'),
                     'current_menu'=>'Edit Blog Category',
                       ]];
+        $blogcategory = $this->categories->getAll()->get();
         $category =$this->categories->getCatById($id);
         if ($request->method()=='POST') 
         {           
@@ -90,7 +87,7 @@ class CategoryController extends AdminController
                 $validatedData = $requestobj->validated();
                 $this->categories->update($id,$validatedData);
                 if ($request->hasFile('banner_image')) {
-                    $dir = 'frontend/images/categories-images/';
+                    $dir = 'images/categories-images/';
                     if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
                     File::delete($dir . $category->banner_image);
 
@@ -104,7 +101,7 @@ class CategoryController extends AdminController
                             ->with('success','Blog Category Updated Successfully.');
             }
         
-        return view('admin.blog.editcategories',compact('category','breadcrumb'))->with(array('primary_menu'=>'category.list'));
+        return view('admin.blog.editcategories',compact('category','breadcrumb'))->with(array('blogcategory'=>$blogcategory,'primary_menu'=>'category.list'));
     }
     /*
     * Change status
