@@ -68,23 +68,28 @@ class HomeController extends FrontendController
         // foreach ($permissions as $permission) {
         //      Permission::create(['name' => $permission]);
         // }
-     
+        
         if(\Auth::check())
         {
-
+            $routeName= ROUTE::currentRouteName();
             $suggestion=$this->getFollowSuggestions(3);
-            $user =$this->authUser;
-            $user->followersCount=$this->followerList->getAllFollowers($this->authUser)->count();
-            $user->followingCount=$this->followerList->getAllFollowings($this->authUser)->count();
-            $user=$user->toArray();
             $data['followSuggestion']=$suggestion;
-            $data['path']='/dashboard';
-            $initialState=json_encode($data);
-            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+          }
 
         }
         else
+        {
              return redirect()->route('home'); 
+        }
     }
 
     public function followUser($username,$offset=false)

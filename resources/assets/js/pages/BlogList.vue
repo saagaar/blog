@@ -1,5 +1,5 @@
-
 <template>
+
 <div class="col-md-9 col-sm-9" v-if="blogList.length>0" >
   <section class="dashboard_sec">
     <div class="container">
@@ -121,7 +121,6 @@
 </template>
 <script>
 import mixin  from './../mixins/LoadData.mixin.js';
-
     export default {
         mounted() {
            
@@ -129,6 +128,7 @@ import mixin  from './../mixins/LoadData.mixin.js';
         data:function(){
           return {
             blogList:'',
+            url:'images'
           }
         },
         mixins:[mixin],

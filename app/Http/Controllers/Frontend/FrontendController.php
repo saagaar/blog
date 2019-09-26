@@ -36,7 +36,7 @@ class FrontendController extends BaseController
     public function __construct()
     {
         
-        
+
         $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
 
@@ -92,13 +92,18 @@ class FrontendController extends BaseController
         return view('frontend.home.index');
     }
   
-    public function user_state_info(FollowerInterface $followerList){
-         if(\Auth::check())
+    public function user_state_info(){
+       $followerList = app()->make('App\Repository\FollowerInterface');
+        if(\Auth::check())
         {
             $user =$this->authUser;
             $user->followersCount=$followerList->getAllFollowers($this->authUser)->count();
             $user->followingCount=$followerList->getAllFollowings($this->authUser)->count();
             $user=$user->toArray();
+            return $user;
+        }
+        else{
+            return redirect()->route('home'); 
         }
     }
 

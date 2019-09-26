@@ -23,28 +23,25 @@ class UserController extends FrontendController
     }
     public function myBlogs()
     {
-   
-
-        // $user=$this->user_state_info();
-        // if($user)
-        // {
-        $user='';
-           
+            $routeName= Route::currentRouteName();
             $myBlogs=$this->user->getBlogsByUser($this->authUser->username);
             $data['blogList']=$myBlogs;
             $data['path']='blog/list';
-            return $data;
-            // $initialState=json_encode($data);
-            // return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-
-        // }
-        // else
-        //      return redirect()->route('home'); 
+           if($routeName=='api')
+           {
+             return ($data);
+           }
+           else
+           {
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+           }
     }
    
     public function followUser($username,$offset=false)
     {
-        $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
+         $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
          if(isset($isFollowing))
          {
             $this->followerList->followUser($this->authUser,$username);

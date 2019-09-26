@@ -24,9 +24,11 @@ Route::get('/logincheck', function () {
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\HomeController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\HomeController@followuser');
 
-Route::get('/api/blog/list/','Frontend\UserController@myBlogs');
+Route::get('/api/blog/list/','Frontend\UserController@myBlogs')->name('api');
 
+Route::get('api/dashboard','Frontend\HomeController@dashboard')->name('api');
 
+Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 
 Route::get('/blog/list','Frontend\UserController@myBlogs')->name('my.blog');
 
@@ -38,7 +40,7 @@ Route::get('/blog','Frontend\HomeController@index')->name('home');
 Route::get('/tests', 'Frontend\UserInterestController@testinterest')->name('test');
 Route::get('/blogs','Frontend\HomeController@index')->name('home');
 
-Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
+
 Route::get('/dashboard/{provider}','Frontend\LoginController@dashboard')->name('dashboard');
 Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->name('social.login');
 // Route::match(['get','post'],'/admin/login','AdminController@login');

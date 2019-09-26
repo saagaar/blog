@@ -7540,7 +7540,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   data: function data() {
     return {
-      blogList: ''
+      blogList: '',
+      url: 'images'
     };
   },
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -47368,7 +47369,7 @@ var render = function() {
                     _c("div", { staticClass: "profile-card" }, [
                       _c("img", {
                         staticClass: "profile-photo",
-                        attrs: { src: "images/p_image.png", alt: "user" }
+                        attrs: { src: "/images/p_image.png", alt: "user" }
                       }),
                       _vm._v(" "),
                       _c("h5", [
