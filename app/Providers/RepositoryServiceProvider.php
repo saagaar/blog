@@ -62,6 +62,8 @@ use App\Repository\FollowerInterface;
 use App\Repository\Follower\Follower;
 use App\Repository\LogActivityInterface;
 use App\Repository\LogActivity\LogActivity;
+use App\Repository\UserInterestInterface;
+use App\Repository\UserInterest\UserInterest;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -111,5 +113,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(TagInterface::class, Tag::class);
         $this->app->singleton(FollowerInterface::class, Follower::class);
         $this->app->singleton(LogActivityInterface::class, LogActivity::class);
+        $this->app->singleton(UserInterestInterface::class, UserInterest::class);
     }
 }

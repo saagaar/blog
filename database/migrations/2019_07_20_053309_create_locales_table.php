@@ -17,7 +17,7 @@ class CreateLocalesTable extends Migration
                 $table->bigIncrements('id');
                 $table->string('lang',3);
                 $table->string('lang_name',50);
-                $table->enum('display',['1','0']);
+                $table->enum('display',['1','2']);
                 $table->timestamps();
         });
     }

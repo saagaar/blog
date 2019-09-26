@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Userlogs;
 use App\Services\VisitorInfo;
 use App\Jobs\VisitorLog;
-use App\Repository\UserlogInterface;
+use App\Repository\VisitorlogInterface;
 
 class FrontendController extends BaseController
 {
     Protected $siteSettings;
 
-    Protected $UserlogInterface;
+    Protected $VisitorlogInterface;
 
     /***
     * Wheather website is in maintainence ,live or Offline mode
@@ -36,7 +36,7 @@ class FrontendController extends BaseController
     public function __construct()
     {
         $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
-        $this->userLogInterface=$this->UserlogInterface = app()->make('App\Repository\VisitorLogInterface');
+        $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
         $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
         $this->visitorInfo =  new visitorInfo();
         $this->siteName =  $this->siteSettings->site_name;
@@ -58,7 +58,7 @@ class FrontendController extends BaseController
         $this->state =  $this->siteSettings->state;
         $this->country =  $this->siteSettings->country;
         $this->websiteMode=$this->siteSettings->mode;
-        $this->save_visitor_info();
+        // $this->save_visitor_info();
        
         date_default_timezone_set('Asia/Kathmandu');
        
@@ -69,6 +69,10 @@ class FrontendController extends BaseController
         if($this->websiteMode=='2'){
             exit('sorry we currently offline');
         }
+        $this->middleware(function ($request, $next) {
+        $this->authUser= \Auth::user();
+            return $next($request);
+        });
     }
     /**
      * Show the application dashboard.
@@ -86,8 +90,9 @@ class FrontendController extends BaseController
     public function save_visitor_info()
     {
         $serverData = $this->visitorInfo->getServerInfo();
+
         $ipAddress=$serverData['ip_address'];  
-        $dblogdata=$this->userLogInterface->getLogbyIpAddressAndURL($serverData['ip_address'],$serverData['path']);
+        $dblogdata=$this->VisitorLogInterface->getLogbyIpAddressAndURL($serverData['ip_address'],$serverData['path']);
        if($dblogdata && (trim($dblogdata['details'])!='')){
             $start = date_create($dblogdata['details']->visit_date);
         $end = date_create(date("Y-m-d H:i:s"));
@@ -119,14 +124,14 @@ class FrontendController extends BaseController
                     'redirected_to' =>$serverData['path'],
                     'visit_date'   =>date("Y-m-d H:i:s"),
                 );
-            $logcreate= $this->userLogInterface->create(
+            $logcreate= $this->VisitorLogInterface->create(
                    array(
                     'ip_address'           =>$serverData['ip_address'],
                    )
                 );
             $logcreate->visitordetails()->create($logdata);
         }
-        VisitorLog::dispatch($this->UserlogInterface,$ipAddress);
+        VisitorLog::dispatch($this->VisitorlogInterface,$ipAddress);
 
     }
 }

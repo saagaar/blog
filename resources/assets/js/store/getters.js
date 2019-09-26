@@ -3,6 +3,7 @@ export const me = state => state.me
 
 //Get Loggedin info
 export const user = state => state.user
+//Get initial data from html
 
 // Get user feed
 export const feed = state => state.feed
