@@ -86,14 +86,11 @@ class HomeController extends FrontendController
         else
              return redirect()->route('home'); 
     }
-    public function listBlog()
-    {
 
-    }
     public function followUser($username,$offset=false)
     {
-         $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
-         if(!isset($isFollowing))
+        $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
+         if(isset($isFollowing))
          {
             $this->followerList->followUser($this->authUser,$username);
          }  
@@ -110,6 +107,7 @@ class HomeController extends FrontendController
     }
     public function getFollowSuggestions($limit=1,$offset=0)
     {
+     
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
 }

@@ -9,7 +9,6 @@ use App\Models\Userlogs;
 use App\Services\VisitorInfo;
 use App\Jobs\VisitorLog;
 use App\Repository\VisitorlogInterface;
-use App\Repository\FollowerInterface; 
 
 class FrontendController extends BaseController
 {
@@ -36,6 +35,7 @@ class FrontendController extends BaseController
 
     public function __construct()
     {
+        
         
         $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
@@ -79,6 +79,7 @@ class FrontendController extends BaseController
         $this->authUser= \Auth::user();
             return $next($request);
         });
+
     }
     /**
      * Show the application dashboard.
