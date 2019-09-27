@@ -16,7 +16,7 @@ use App\Repository\Category\Category;
 use App\Repository\SiteoptionInterface;
 use App\Repository\SiteOption\SiteOption;
 use App\Repository\BlogInterface;
-use App\Repository\blog\Blog;
+use App\Repository\Blog\Blog;
 use App\Repository\LocaleInterface;
 use App\Repository\locale\Locale;
 use Illuminate\Support\ServiceProvider;

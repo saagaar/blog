@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Traits\HasRoles;
 use App\Repository\AccountInterface; 
+use App\Repository\BlogInterface; 
 
 class UserController extends FrontendController
 {
@@ -21,18 +22,31 @@ class UserController extends FrontendController
         parent::__construct();
          $this->user=$user;
     }
-    public function myBlogs()
+    public function myBlogs(BlogInterface $blog,Request $request)
     {
+         
             $routeName= Route::currentRouteName();
-            $myBlogs=$this->user->getBlogsByUser($this->authUser->username);
-            $data['blogList']=$myBlogs;
-            $data['path']='blog/list';
+            $myBlogs=$blog->getBlogByUserId($this->authUser->id);
+
            if($routeName=='api')
            {
-             return ($data);
+              $search=$request->get('search');
+              $filterBy=$request->get('filter_by');
+              $sortBy=$request->get('sort_by');
+              if($filterBy)
+                 $myBlogs=$myBlogs->where('save_method',$filterBy);
+              if($search)
+                $myBlogs=$myBlogs->where('title' ,'like','%'.$search.'%');
+              if($sortBy)
+                $myBlogs=$myBlogs->orderBy('created_at',strtoupper($sortBy));
+            
+                $data['blogList']=$myBlogs->paginate($this->perPage);
+              return ($data);
            }
            else
            {
+              $data['blogList']=$myBlogs->paginate($this->perPage);
+              $data['path']='/blog/list';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
               return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
@@ -53,7 +67,7 @@ class UserController extends FrontendController
         $isFollowing=$this->followerList->isFollowing($this->authUser,$username,$offset);
          if(($isFollowing))
          {
-            $this->followerList->unfollowUser($this->authUser,$username);
+            $this->followerListlowerList->unfollowUser($this->authUser,$username);
          }  
         return array('status'=>true,'message'=>'');
     }

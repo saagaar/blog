@@ -33,6 +33,7 @@ class FrontendController extends BaseController
      */
     Protected $ipInfoService;
 
+    Protected $perPage=10;
     public function __construct()
     {
         

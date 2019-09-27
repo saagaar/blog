@@ -187,7 +187,7 @@ $factory->define(Blogs::class, function (Faker $faker) {
         'code'                  =>$faker->unique()->text($maxNbChars = 20),
         'content'               =>$faker->text($maxNbChars = 20),
         'save_method'             =>$faker->randomElement(['1' ,'2']),
-        'locales_id'            =>$faker->randomElement($locales_id)->id,
+        'locale_id'            =>1,
         'image'                 =>'1569324080.jpg',
         'featured'             =>$faker->randomElement(['1' ,'2']),
         'anynomous'             =>$faker->randomElement(['1' ,'2']),

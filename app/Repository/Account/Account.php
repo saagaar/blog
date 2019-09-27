@@ -62,9 +62,13 @@ Class Account implements AccountInterface
       return $this->account->find($id)->delete();
     }
 
-    public function getBlogsByUser($username)
-    {
-      return $this->account->with('blogs')->where('username',$username)->first()['blogs']->toArray();
-    }
+    // public function getBlogsByUser($username)
+    // {
+    //     echo '<pre>';
+    //     $data=$this->account->where('username',$username)->first()->toArray();
+    //       $comments = Comment::where('post_id', $postId)->with('user')->paginate(15);
+    //     print_r($data);
+    //   return $data;
+    // }
 }
 ?>

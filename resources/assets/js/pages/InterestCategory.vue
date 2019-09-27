@@ -28,7 +28,7 @@
                             </a>
 
                       <a href="#" class="plus-minus">
-                        <input type="checkbox" name="a" id="a" class="css-checkbox">
+                        <input type="checkbox" name="a" id="a" class="css-checkbox" checked="checked">
                         <label for="a" class="css-label">
                           <span class="fa fa-plus"></span>
                           <span class="fa fa-check"></span>
