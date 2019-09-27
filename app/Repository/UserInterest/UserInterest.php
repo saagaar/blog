@@ -43,6 +43,11 @@ Class  UserInterest implements UserInterestInterface
      public function getAllInterests($user){
         return $user->userInterests()->get();
      }
+
+
+     public function getUserInterestsSlug($user){
+        return $user->userInterests()->select('slug')->get();
+     }
  	  /**
      * Insert follower
      * @param 1 : integer

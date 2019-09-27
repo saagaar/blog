@@ -13,4 +13,6 @@ class UserInterests extends Pivot implements Auditable
 
     protected $fillable = ['user_id','category_id'];
 
+
+    protected $hidden  = ['user_id','category_id'];
 }

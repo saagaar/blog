@@ -28,7 +28,7 @@ class Categories extends Model implements Auditable
      * @var array
      */
 
-
+    protected $hidden  = ['id','parent_id'];
     /**
      * The attributes that should be cast to native types.
      *
@@ -46,7 +46,7 @@ class Categories extends Model implements Auditable
 
     public function users()
     {
-        return $this->belongsToMany(Users::class,'user_interests','category_id','user_id');
+        return $this->belongsToMany(User::class,'user_interests','category_id','user_id');
     }
  
 }
