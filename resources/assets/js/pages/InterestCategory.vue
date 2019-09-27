@@ -1,11 +1,11 @@
 
 <template>
-<div class="col-md-9 col-sm-9"  v-if="myCategory.length>0">
+<div class="col-md-9 col-sm-9"  v-if="allCategories.length>0">
                 <div id="main" class="">
 
             <!--================Category  Area Start =================-->
 
-    <section class="category-page category-list"   v-for="eachCategory in myCategory">
+    <section class="category-page category-list"   v-for="eachCategory in allCategories">
             <div class="row">
                 <div class="col-md-12">
                     <div class="area-heading">
@@ -20,20 +20,17 @@
                     <div class="single-category">
                         <div class="thumb">
                            <a href="#"> <img class="img-fluid" 
-                            :src="'images/user-images/category/'+subCategory.banner_image" alt=""></a>
+                            :src="'/images/user-images/category/'+subCategory.banner_image" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">
-                                <h4>{{subCategory.name}}</h4>
+                                <h4>{{subCategory.name}} </h4>
                             </a>
-
-                      <a href="#" class="plus-minus">
-                        <input type="checkbox" name="a" id="a" class="css-checkbox">
-                        <label for="a" class="css-label">
-                          <span class="fa fa-plus"></span>
-                          <span class="fa fa-check"></span>
-                        </label>
-                      </a>
+                            <Favorite
+                            :currentCategory="subCategory.slug"
+                            :userInterest= "userInterest"
+                        ></Favorite>
+                        
 
                         </div>
                     </div> 
@@ -57,7 +54,9 @@
         //         }
         //     }
         //     reader.readAsDataURL(event.target.files[0]);
-        // }
+        // 
+import Favorite from './../components/Favorites/Favorite';
+// Vue.component('favorite', require('./Favorites/Favorite.vue'));
 import mixin  from './../mixins/LoadData.mixin.js';
     export default {
         mounted() {
@@ -65,17 +64,17 @@ import mixin  from './../mixins/LoadData.mixin.js';
         },
         data:function(){
           return {
-            myCategory:'',
+           allCategories:[],
+            userInterest:[],
             
           }
         },
         mixins:[mixin],
         components:{
+            Favorite
         },
         methods:{
-          myCategory:function(){
-            
-          }
+          
         }
     }
 </script>

@@ -23,7 +23,8 @@ class UserInterestController extends FrontendController
     {
         if(\Auth::check())
         {
-            $data['myCategory'] = $this->category->getAll()->where('parent_id', NULL)->with('categories')->get()->toArray();
+            $data['allCategories'] = $this->category->getAll()->where('parent_id', NULL)->with('categories')->get()->toArray();
+            $data['userInterest'] = $this->getUserInterest();
             $user = $this->authUser;
             $data['path']='/categories';
             $initialState=json_encode($data);
@@ -55,13 +56,13 @@ class UserInterestController extends FrontendController
     public function getUserInterest()
     {
         if ($this->authUser) {
-            return $this->userInterest->getAllInterests($this->authUser)->toArray();
+            return $this->userInterest->getUserInterestsSlug($this->authUser)->pluck('slug');
         }else
             return array('status'=>false,'message'=>'No Interest Found');
     }
         
     public function testinterest()
     {
-        print_r($this->getUserInterest());
+        print_r($this->addUserInterest('pubg'));
     }
 }
