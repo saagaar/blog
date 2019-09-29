@@ -28,8 +28,8 @@ Class Blog implements BlogInterface
    *
    * @param int
    */
-  public function getBlogByUserId($user){
-    return  $this->blog->where('id', $blogId)->first();
+  public function getBlogByUserId($userid){
+    return  $this->blog->where('user_id', $userid)->first();
   }
      
      

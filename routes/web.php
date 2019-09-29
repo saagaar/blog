@@ -24,9 +24,11 @@ Route::get('/logincheck', function () {
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\HomeController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\HomeController@followuser');
 
-Route::get('/api/blog/list/','Frontend\UserController@myBlogs');
+Route::get('/api/blog/list/','Frontend\UserController@myBlogs')->name('api');
 
+Route::get('api/dashboard','Frontend\HomeController@dashboard')->name('api');
 
+Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 
 Route::get('/blog/list','Frontend\UserController@myBlogs')->name('my.blog');
 
@@ -42,7 +44,7 @@ Route::get('/blog','Frontend\HomeController@index')->name('home');
 Route::get('/tests', 'Frontend\UserInterestController@testinterest')->name('test');
 Route::get('/blogs','Frontend\HomeController@index')->name('home');
 
-Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
+
 Route::get('/dashboard/{provider}','Frontend\LoginController@dashboard')->name('dashboard');
 Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->name('social.login');
 // Route::match(['get','post'],'/admin/login','AdminController@login');
@@ -259,7 +261,13 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::get('/delete/language/{id}','Admin\LanguageController@delete')->name('language.delete');
 	Route::get('changestatus/language', 'Admin\LanguageController@changeStatus')->name('language.changestatus');
 	
-
+//route for notifications
+	Route::get('/list/notification','Admin\NotificationSettingController@list')->name('notification.list');
+	Route::match(['get','post'],'/create/notification','Admin\NotificationSettingController@create')->name('notification.create');
+	Route::match(['get','post'],'/edit/notification/{id}','Admin\NotificationSettingController@edit')->name('notification.edit');
+	Route::get('/delete/notification/{id}','Admin\NotificationSettingController@delete')->name('notification.delete');
+	Route::get('changestatus/notification', 'Admin\NotificationSettingController@changeStatus')->name('notification.changestatus');
+	
 Route::get('/importmodules','Admin\AdminUserController@ImportModules')->name('adminuser.importmodules');
 
 });

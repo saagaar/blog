@@ -7360,6 +7360,18 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
+/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7482,17 +7494,88 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {},
   data: function data() {
     return {
-      blogList: ''
+      blogList: {},
+      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"](),
+      sort_by: '',
+      filter_by: '',
+      search: '',
+      postIds: [],
+      allSelected: false
     };
   },
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
   components: {},
+  watch: {
+    filter_by: function filter_by() {
+      this.getResults();
+    },
+    sort_by: function sort_by() {
+      this.getResults();
+    },
+    search: function search(newValue, oldValue) {
+      var newspacecount = newValue.split(' ').length;
+      var oldspacecount = oldValue.split(' ').length;
+
+      if (newspacecount != oldspacecount) {
+        this.getResults();
+      } else if (newValue.trim() == '') {
+        this.getResults();
+      }
+    }
+  },
   methods: {
-    myBlog: function myBlog() {}
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.form.get('api/blog/list?page=' + page + '&search=' + this.search + '&sort_by=' + this.sort_by + '&filter_by=' + this.filter_by).then(function (response) {
+        if (response.data) {
+          _this.blogList = response.data.blogList;
+        } else {
+          alert(response.data.message);
+        }
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    updateFilterBy: function updateFilterBy() {
+      var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      this.filter_by = value;
+    },
+    updateSortBy: function updateSortBy(value) {
+      this.sort_by = value;
+    },
+    searchPost: function searchPost() {
+      this.getResults();
+    },
+    resetFilters: function resetFilters() {
+      this.filter_by = '';
+      this.sort_by = '';
+      this.search = '';
+    },
+    selectAllCheckbox: function selectAllCheckbox() {
+      var postids = this.postIds;
+      var selected = this.selected;
+
+      if (!this.allSelected) {
+        this.blogList.data.forEach(function (item, value) {
+          postids.push(item.code);
+          selected = true;
+        });
+      } else {
+        postids = [];
+        selected = false;
+      }
+
+      this.allSelected = selected;
+      this.postIds = postids;
+    },
+    select: function select() {// this.allSelected = false;
+    }
   }
 });
 
@@ -8813,6 +8896,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Favorites_Favorite__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../components/Favorites/Favorite */ "./resources/assets/js/components/Favorites/Favorite.vue");
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
+//
 //
 //
 //
@@ -48055,145 +48139,494 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.blogList.length > 0
-    ? _c("div", { staticClass: "col-md-9 col-sm-9" }, [
-        _c("section", { staticClass: "dashboard_sec" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-12 col-sm-12" }, [
-                _c("div", { attrs: { id: "main" } }, [
-                  _c("div", { staticClass: "user_blog_list" }, [
-                    _c("aside", { staticClass: "lg-side" }, [
+  return _c("div", { staticClass: "col-md-9 col-sm-9" }, [
+    _c("section", { staticClass: "dashboard_sec" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12 col-sm-12" }, [
+            _c("div", { attrs: { id: "main" } }, [
+              _c("div", { staticClass: "user_blog_list" }, [
+                _c("aside", { staticClass: "lg-side" }, [
+                  _c("div", { staticClass: "inbox-head" }, [
+                    _c("div", { staticClass: "row" }, [
                       _vm._m(0),
                       _vm._v(" "),
-                      _c("div", { staticClass: "inbox-body" }, [
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _c(
-                          "table",
-                          { staticClass: "table table-inbox table-hover" },
-                          [
+                      _c("div", { staticClass: "col-sm-6" }, [
+                        _c("form", { staticClass: "position text-right" }, [
+                          _c("div", { staticClass: "input-append" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model.trim",
+                                  value: _vm.search,
+                                  expression: "search",
+                                  modifiers: { trim: true }
+                                }
+                              ],
+                              staticClass: "sr-input",
+                              attrs: {
+                                type: "text",
+                                placeholder: "Search Post"
+                              },
+                              domProps: { value: _vm.search },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.search = $event.target.value.trim()
+                                },
+                                blur: function($event) {
+                                  return _vm.$forceUpdate()
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
                             _c(
+                              "button",
+                              {
+                                staticClass: "btn sr-btn",
+                                attrs: { type: "submit" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.searchPost($event)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fa fa-search" })]
+                            )
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "clearfix" })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "inbox-body" }, [
+                    _c("div", { staticClass: "mail-option" }, [
+                      _c("div", { staticClass: "chk-all" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.allSelected,
+                              expression: "allSelected"
+                            }
+                          ],
+                          staticClass: "mail-checkbox mail-group-checkbox",
+                          attrs: { type: "checkbox", v: "" },
+                          domProps: {
+                            checked: Array.isArray(_vm.allSelected)
+                              ? _vm._i(_vm.allSelected, null) > -1
+                              : _vm.allSelected
+                          },
+                          on: {
+                            click: _vm.selectAllCheckbox,
+                            change: function($event) {
+                              var $$a = _vm.allSelected,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    (_vm.allSelected = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.allSelected = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.allSelected = $$c
+                              }
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "btn-group" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn mini tooltips",
+                            attrs: {
+                              "data-original-title": "Refresh",
+                              "data-placement": "top",
+                              "data-toggle": "dropdown",
+                              href: "#"
+                            },
+                            on: { click: _vm.resetFilters }
+                          },
+                          [_c("i", { staticClass: " fa fa-sync" })]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "btn-group hidden-phone" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("ul", { staticClass: "dropdown-menu" }, [
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.updateSortBy("asc")
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fa fa-sort-up" }, [
+                                  _vm._v(" ")
+                                ]),
+                                _vm._v("Ascending")
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.updateSortBy("desc")
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "i",
+                                  {
+                                    staticClass: "fa fa-sort-down",
+                                    attrs: { "aria-hidden": "true" }
+                                  },
+                                  [_vm._v(" ")]
+                                ),
+                                _vm._v(" Descending")
+                              ]
+                            )
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "btn-group" }, [
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _c("ul", { staticClass: "dropdown-menu" }, [
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.updateFilterBy()
+                                  }
+                                }
+                              },
+                              [_vm._v(" "), _vm._v(" --All--")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.updateFilterBy(1)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fa fa-save" }, [
+                                  _vm._v(" ")
+                                ]),
+                                _vm._v(" Draft")
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.updateFilterBy(2)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fa fa-eye" }, [
+                                  _vm._v(" ")
+                                ]),
+                                _vm._v(" Published")
+                              ]
+                            )
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        { staticClass: "unstyled inbox-pagination" },
+                        [
+                          _c("li", [
+                            _c("span", [
+                              _vm._v(
+                                _vm._s(_vm.blogList.from) +
+                                  "-" +
+                                  _vm._s(_vm.blogList.to) +
+                                  " of " +
+                                  _vm._s(_vm.blogList.total)
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "pagination",
+                            {
+                              attrs: {
+                                data: _vm.blogList,
+                                limit: -1,
+                                "show-disabled": true
+                              },
+                              on: { "pagination-change-page": _vm.getResults }
+                            },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  attrs: { slot: "prev-nav" },
+                                  slot: "prev-nav"
+                                },
+                                [
+                                  _c("li", [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "np-btn",
+                                        attrs: { href: "#" }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass:
+                                            "fa fa-angle-left  pagination-left"
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  attrs: { slot: "next-nav" },
+                                  slot: "next-nav"
+                                },
+                                [
+                                  _c("li", [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "np-btn",
+                                        attrs: { href: "#" }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass:
+                                            "fa fa-angle-right pagination-right"
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "table",
+                      { staticClass: "table table-inbox table-hover" },
+                      [
+                        _vm.blogList.data
+                          ? _c(
                               "tbody",
-                              _vm._l(_vm.blogList, function(eachblog) {
-                                return _c("tr", { staticClass: "unread" }, [
-                                  _vm._m(2, true),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "view-message" }, [
-                                    _c("div", [
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass: "sort_info_link",
-                                          attrs: { href: "#" }
-                                        },
-                                        [_vm._v(_vm._s(eachblog.title))]
-                                      )
+                              _vm._l(_vm.blogList.data, function(eachblog) {
+                                return _c(
+                                  "tr",
+                                  {
+                                    key: _vm.blogList.data.id,
+                                    staticClass: "unread"
+                                  },
+                                  [
+                                    _c(
+                                      "td",
+                                      { staticClass: "inbox-small-cells" },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.postIds,
+                                              expression: "postIds"
+                                            }
+                                          ],
+                                          staticClass: "mail-checkbox",
+                                          attrs: { type: "checkbox" },
+                                          domProps: {
+                                            value: eachblog.code,
+                                            checked: Array.isArray(_vm.postIds)
+                                              ? _vm._i(
+                                                  _vm.postIds,
+                                                  eachblog.code
+                                                ) > -1
+                                              : _vm.postIds
+                                          },
+                                          on: {
+                                            click: _vm.select,
+                                            change: function($event) {
+                                              var $$a = _vm.postIds,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked
+                                                  ? true
+                                                  : false
+                                              if (Array.isArray($$a)) {
+                                                var $$v = eachblog.code,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    (_vm.postIds = $$a.concat([
+                                                      $$v
+                                                    ]))
+                                                } else {
+                                                  $$i > -1 &&
+                                                    (_vm.postIds = $$a
+                                                      .slice(0, $$i)
+                                                      .concat(
+                                                        $$a.slice($$i + 1)
+                                                      ))
+                                                }
+                                              } else {
+                                                _vm.postIds = $$c
+                                              }
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "view-message" }, [
+                                      _c("div", [
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass: "sort_info_link",
+                                            attrs: { href: "#" }
+                                          },
+                                          [_vm._v(_vm._s(eachblog.title))]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _vm._m(4, true)
                                     ]),
                                     _vm._v(" "),
-                                    _vm._m(3, true)
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    {
-                                      staticClass:
-                                        "view-message inbox-small-cells"
-                                    },
-                                    [
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass: "draft_link",
-                                          attrs: { href: "#" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              eachblog.save_method == 1
-                                                ? "Draft"
-                                                : "Published"
+                                    _c(
+                                      "td",
+                                      {
+                                        staticClass:
+                                          "view-message inbox-small-cells"
+                                      },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass: "draft_link",
+                                            attrs: { href: "#" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                eachblog.save_method == 1
+                                                  ? "Draft"
+                                                  : "Published"
+                                              )
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._m(5, true),
+                                    _vm._v(" "),
+                                    _vm._m(6, true),
+                                    _vm._v(" "),
+                                    _c(
+                                      "td",
+                                      {
+                                        staticClass: "view-message text-right"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm._f("moment")(
+                                              eachblog.created_at,
+                                              "from",
+                                              "now"
                                             )
                                           )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm._m(4, true),
-                                  _vm._v(" "),
-                                  _vm._m(5, true),
-                                  _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    { staticClass: "view-message text-right" },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm._f("moment")(
-                                            eachblog.created_at,
-                                            "from",
-                                            "now"
-                                          )
                                         )
-                                      )
-                                    ]
-                                  )
-                                ])
+                                      ]
+                                    )
+                                  ]
+                                )
                               }),
                               0
                             )
-                          ]
-                        )
-                      ])
-                    ])
+                          : _c("tbody", [_vm._m(7)])
+                      ]
+                    )
                   ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "clearfix" })
+              ])
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "clearfix" })
         ])
       ])
-    : _vm._e()
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inbox-head" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-sm-6" }, [
-          _c("h3", [
-            _c("i", { staticClass: "fa fa-mail-bulk" }, [_vm._v(" ")]),
-            _vm._v(" All Posts")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-6" }, [
-          _c(
-            "form",
-            { staticClass: "position text-right", attrs: { action: "#" } },
-            [
-              _c("div", { staticClass: "input-append" }, [
-                _c("input", {
-                  staticClass: "sr-input",
-                  attrs: { type: "text", placeholder: "Search Post" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "btn sr-btn", attrs: { type: "button" } },
-                  [_c("i", { staticClass: "fa fa-search" })]
-                )
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "clearfix" })
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("h3", [
+        _c("i", { staticClass: "fa fa-mail-bulk" }, [_vm._v(" ")]),
+        _vm._v(" All Posts")
       ])
     ])
   },
@@ -48201,183 +48634,61 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mail-option" }, [
-      _c("div", { staticClass: "chk-all" }, [
-        _c("input", {
-          staticClass: "mail-checkbox mail-group-checkbox",
-          attrs: { type: "checkbox" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "btn-group" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn mini all",
-              attrs: {
-                "data-toggle": "dropdown",
-                href: "#",
-                "aria-expanded": "false"
-              }
-            },
-            [
-              _vm._v(
-                "\r\n                                         All\r\n                                         "
-              ),
-              _c("i", { staticClass: "fa fa-angle-down " })
-            ]
-          ),
-          _vm._v(" "),
-          _c("ul", { staticClass: "dropdown-menu" }, [
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("i", { staticClass: "fa fa-ban" }, [_vm._v(" ")]),
-                _vm._v(" None")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("i", { staticClass: "fa fa-book" }, [_vm._v(" ")]),
-                _vm._v(" Read")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("i", { staticClass: "fa fa-file-word" }, [_vm._v(" ")]),
-                _vm._v(" Unread")
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "btn-group" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn mini tooltips",
-            attrs: {
-              "data-original-title": "Refresh",
-              "data-placement": "top",
-              "data-toggle": "dropdown",
-              href: "#"
-            }
-          },
-          [_c("i", { staticClass: " fa fa-sync" })]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "btn-group hidden-phone" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn mini blue",
-            attrs: {
-              "data-toggle": "dropdown",
-              href: "#",
-              "aria-expanded": "false"
-            }
-          },
-          [
-            _vm._v(
-              "\r\n                                     More\r\n                                     "
-            ),
-            _c("i", { staticClass: "fa fa-angle-down " })
-          ]
-        ),
-        _vm._v(" "),
-        _c("ul", { staticClass: "dropdown-menu" }, [
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-pencil-alt" }, [_vm._v(" ")]),
-              _vm._v(" Mark as Read")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-ban" }, [_vm._v(" ")]),
-              _vm._v(" Spam")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "divider" }),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-trash-alt" }, [_vm._v(" ")]),
-              _vm._v(" Delete")
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "btn-group" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn mini blue",
-            attrs: { "data-toggle": "dropdown", href: "#" }
-          },
-          [
-            _vm._v(
-              "\r\n                                     Sort by\r\n             "
-            ),
-            _c("i", { staticClass: "fa fa-angle-down " })
-          ]
-        ),
-        _vm._v(" "),
-        _c("ul", { staticClass: "dropdown-menu" }, [
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-pencil-alt" }, [_vm._v(" ")]),
-              _vm._v(" Draft")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-ban" }, [_vm._v(" ")]),
-              _vm._v(" Publish")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "divider" }),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-trash-alt" }, [_vm._v(" ")]),
-              _vm._v(" Delete")
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "unstyled inbox-pagination" }, [
-        _c("li", [_c("span", [_vm._v("1-50 of 234")])]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { staticClass: "np-btn", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "fa fa-angle-left  pagination-left" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { staticClass: "np-btn", attrs: { href: "#" } }, [
-            _c("i", { staticClass: "fa fa-angle-right pagination-right" })
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "btn-group" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn mini all",
+          attrs: {
+            "data-toggle": "dropdown",
+            href: "#",
+            "aria-expanded": "false"
+          }
+        },
+        [
+          _vm._v("\r\n                   All\r\n                   "),
+          _c("i", { staticClass: "fa fa-angle-down " })
+        ]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "inbox-small-cells" }, [
-      _c("input", { staticClass: "mail-checkbox", attrs: { type: "checkbox" } })
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "btn mini blue",
+        attrs: {
+          "data-toggle": "dropdown",
+          href: "#",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _vm._v("\r\n                     Sort by\r\n                     "),
+        _c("i", { staticClass: "fa fa-angle-down " })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn mini blue",
+        attrs: { "data-toggle": "dropdown", href: "#" }
+      },
+      [
+        _vm._v(
+          "\r\n                                     Filter by\r\n             "
+        ),
+        _c("i", { staticClass: "fa fa-angle-down " })
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -48411,6 +48722,14 @@ var staticRenderFns = [
       { staticClass: "inbox-small-cells", attrs: { width: "62px" } },
       [_vm._v(" 14 "), _c("i", { staticClass: "fa fa-eye" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { attrs: { colspan: "6" } }, [_vm._v("No post are available")])
+    ])
   }
 ]
 render._withStripped = true
@@ -70049,12 +70368,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var getData = function getData(to) {
-  // return new Promise((resolve, reject) => {
+  var form = new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
   return new Promise(function (resolve, reject) {
     var initialState = JSON.parse(window.__INITIAL_STATE__) || {};
 
     if (!initialState.path || to.path !== initialState.path) {
-      axios.get('/api' + to.path).then(function (_ref) {
+      form.get('/api' + to.path).then(function (_ref) {
         var data = _ref.data;
         resolve(data);
       });

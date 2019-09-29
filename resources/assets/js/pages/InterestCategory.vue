@@ -26,11 +26,12 @@
                             <a class="d-block" href="single-blog.html">
                                 <h4>{{subCategory.name}} </h4>
                             </a>
+
                             <Favorite
                             :currentCategory="subCategory.slug"
                             :userInterest= "userInterest"
                         ></Favorite>
-                        
+
 
                         </div>
                     </div> 

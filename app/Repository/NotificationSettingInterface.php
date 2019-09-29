@@ -1,17 +1,24 @@
 <?php 
 namespace App\Repository;
-
-interface EmailInterface
+use App\Repository\NotificationSettingInterface;
+interface NotificationSettingInterface
 {
 	 /**
-     * Get's a post by it's ID
+     * Get's a Email by it's ID
      *
      * @param int
      */
-    public function getemailById($email_id);
+    public function getNotificationById($id);
+
+     /**
+     * Get's a Email content by it's code
+     *
+     * @param int
+     */
+    public function getNotificationByCode($NotificationCode);
       
       /**
-     * Get's all posts.
+     * Get's all Email.
      *
      * @return mixed
      */
@@ -33,7 +40,7 @@ interface EmailInterface
     public function update( $id,array $data);
 
       /**
-     * Deletes a post.
+     * Deletes a Email.
      *
      * @param int
      */
