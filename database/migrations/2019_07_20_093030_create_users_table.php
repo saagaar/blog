@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('invalid_login')->default(0);
-            $table->enum('status',['0','1','2','3'])->comment('0=active,1=inactive,2-closed,3=suspended')->default('1');
+            $table->enum('status',['1','2','3','4'])->comment('1=active,2=inactive,3-closed,4=suspended')->default('1');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->unsignedBigInteger('country')->nullable();

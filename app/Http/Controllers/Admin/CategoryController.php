@@ -43,11 +43,10 @@ class CategoryController extends AdminController
 
         if ($request->method()=='POST') {
             $requestobj=app(CategoryRequest::class);
-             $validatedData = $requestobj->validated();
-             $this->validate($request, [
+            $validatedData = $requestobj->validated();
+            $this->validate($request, [
                 'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000',
                 ]);
-           
             $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
             request()->banner_image->move(public_path('images/categories-images'), $imageName);
             $validatedData['banner_image'] = $imageName;

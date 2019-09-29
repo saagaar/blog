@@ -15,7 +15,7 @@
               <table id="example2" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                   <th>id</th>
+                  <th>id</th>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Subject</th>
