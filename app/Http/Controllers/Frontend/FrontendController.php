@@ -27,11 +27,17 @@ class FrontendController extends BaseController
     */
     Protected $maintainenceKey;
     /**
-     * Create a new controller instance.
+     * website visitor's ip
      *
      * @return void
      */
     Protected $ipInfoService;
+     /***
+    * This email is used to send email by client to admin of site
+    * @type=email
+    */
+
+    Protected $contactEmail;
 
     Protected $perPage=10;
     public function __construct()

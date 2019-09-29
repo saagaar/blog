@@ -4,22 +4,26 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmailSettingsTable extends Migration
+class CreateNotificationSettingsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up()    
     {
-        Schema::create('email_settings', function (Blueprint $table) {
+        Schema::create('notification_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('title');
-            $table->string('email_code', 100);
+            $table->string('code', 100)->unique();
+            $table->string('view',50)->default('default');
             $table->string('subject', 100);
             $table->longText('email_body');
-            $table->enum('display', ['1', '0']);
+            $table->longText('sms_body');
+            $table->longText('database_body');
+            $table->json('notification_type')->comment('mail,database,sms');
+            $table->enum('active', ['1', '2'])->comment('1=active,2-inactive')->default('1');;
             $table->timestamps();
         });
     }

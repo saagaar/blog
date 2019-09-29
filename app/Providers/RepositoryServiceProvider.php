@@ -24,6 +24,8 @@ use App\Repository\AccountInterface;
 use App\Repository\Account\Account;
 use App\Repository\RoleInterface;
 use App\Repository\Role\Roles;
+use App\Repository\NotificationSettingInterface;
+use App\Repository\NotificationSetting\NotificationSetting;
 use App\Repository\PermissionInterface;
 use App\Repository\UserPermission\Permissions;
 use App\Repository\CmsInterface;
@@ -114,5 +116,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(FollowerInterface::class, Follower::class);
         $this->app->singleton(LogActivityInterface::class, LogActivity::class);
         $this->app->singleton(UserInterestInterface::class, UserInterest::class);
+        $this->app->singleton(NotificationSettingInterface::class, NotificationSetting::class);
     }
 }

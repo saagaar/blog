@@ -10,10 +10,13 @@ use App\Repository\FollowerInterface;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\Notifications;
 
 class HomeController extends FrontendController
 {
      use HasRoles;
+     use Notifiable;
 
      protected $followerList;
 
@@ -39,17 +42,19 @@ class HomeController extends FrontendController
      */
     public function index(Request $request)
     {
-        // print_r($this->siteName);
         return view('frontend.layouts.app');
     }
 
     public function test(Request $request)
     {
+        $code='user_registration';
+        $data=['FIRSTNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
+        $this->authUser->notify(new Notifications($code,$data));
 
-
-         Mail::to('abhishekgiri49.ag@gmail.com')->send(new SendMailable());
-        // echo str_slug("iajaf1237412~!@#$%^&*()~'-'=+_][{} ;:/.,<>?AAMNBV'' CXZLKJHG",'-');
-
+            // foreach ($this->authUser->unreadNotifications as $notification) {
+            //      echo $notification->data['message'];
+            // }
+            // exit;
         return view('frontend.layouts.app');
     }
     public function dashboard()
@@ -68,7 +73,7 @@ class HomeController extends FrontendController
         // foreach ($permissions as $permission) {
         //      Permission::create(['name' => $permission]);
         // }
-        
+       
         if(\Auth::check())
         {
             $routeName= ROUTE::currentRouteName();

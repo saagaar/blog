@@ -32,7 +32,7 @@ Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 
 Route::get('/blog/list','Frontend\UserController@myBlogs')->name('my.blog');
 
-Route::get('/categories', 'Frontend\UserInterestController@categories')->name('categories');
+Route::get('api/categories', 'Frontend\UserInterestController@categories')->name('categories');
 Route::get('/api/remove/userinterest/{slug}','Frontend\UserInterestController@removeUserInterest');
 Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUserInterest');
 
