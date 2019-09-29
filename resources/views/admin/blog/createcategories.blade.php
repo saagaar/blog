@@ -68,6 +68,21 @@
                 @endif
                 </div>
                 <div class="form-group">
+                  <label for="tags">Tags</label>
+                  <!-- value="{{ $tags }}" -->
+                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
+                      @foreach ($tags as $values)
+                      <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                      @endforeach
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('tags'))
+                        <p class="help-block">
+                            {{ $errors->first('tags') }}
+                        </p>
+                    @endif
+                </div>
+                <div class="form-group">
                   <label for="status">Display:</label>
                   <label><input type="radio" name="status" value="1">Active</label>
                   <label><input type="radio" name="status" value="2">Inactive</label>

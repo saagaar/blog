@@ -85,6 +85,29 @@
                 <div class="alert alert-danger">{{$errors->first('banner_image') }}</div>
                 @endif
                 </div>
+                <div class="form-group">
+                  <label for="tags">tags</label>
+                  <!-- value="{{ $tags }}" -->
+                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
+                      
+                      @foreach ($tags as $values)
+                        <?php if(!$category->tags()->pluck('tags_id')){ ?>
+                        <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                        <?php }else{ ?>
+                          @foreach ($category->tags()->pluck('tags_id') as $tag)
+                          <option value="{{ $values->id }}" @if($values->id==$tag) selected @endif > {{ $values->name }}  </option>
+                          @endforeach
+                        <?php } ?>
+                      @endforeach
+
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('tags'))
+                        <p class="help-block">
+                            {{ $errors->first('tags') }}
+                        </p>
+                    @endif
+                </div>
               </div>
               <!-- /.box-body -->
 

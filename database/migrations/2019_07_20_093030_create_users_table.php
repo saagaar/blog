@@ -18,8 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('username')->unique();
             $table->string('email')->unique();
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->integer('invalid_login')->default(0);
             $table->enum('status',['0','1','2','3'])->comment('0=active,1=inactive,2-closed,3=suspended')->default('1');
             $table->string('phone')->nullable();
@@ -30,6 +32,8 @@ class CreateUsersTable extends Migration
                     ->onDelete('cascade');
             $table->date('dob')->nullable();
             $table->string('image')->nullable();
+
+            $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
