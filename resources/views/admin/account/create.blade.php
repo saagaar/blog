@@ -71,7 +71,7 @@
                 </div>
                 <div class="form-group">
                   <label for="roles" class="control-label">Roles</label>
-                    <select multiple="multiple" class="form-control select2" name="roles[]" id="roles">
+                    <select multiple="multiple" class="form-control js-example-basic-multiple" name="roles[]" id="roles">
                       @foreach ($roles as $values)
                       <option value="{{ $values->id }}"> {{ $values->name }}  </option>
                       @endforeach

@@ -60,27 +60,6 @@
                   @endif
                 </div>
                 <div class="form-group">
-                  <label for="email_body">Email body: </label>
-                    <textarea name="email_body" class="form-control" id="contenteditor" placeholder="Blog Email Body here.."></textarea>
-                  @if ($errors->has('email_body'))
-                <div class="alert alert-danger">{{ $errors->first('email_body') }}</div>
-                @endif
-                </div>
-                <div class="form-group">
-                  <label for="database_body">Database body: </label>
-                    <textarea name="database_body" class="form-control" id="contenteditor" placeholder="Blog Database Body here.."></textarea>
-                  @if ($errors->has('database_body'))
-                <div class="alert alert-danger">{{ $errors->first('database_body') }}</div>
-                @endif
-                </div>
-                <div class="form-group">
-                  <label for="sms_body">Sms body: </label>
-                    <textarea name="sms_body" class="form-control" id="contenteditor" placeholder="Blog sms Body here.."></textarea>
-                  @if ($errors->has('sms_body'))
-                <div class="alert alert-danger">{{ $errors->first('sms_body') }}</div>
-                @endif
-                </div>
-                <div class="form-group">
                   <label for="notification_type">Notification Type:</label>
                   <div class="checkbox">
                     <label>
@@ -88,11 +67,11 @@
                       Mail
                     </label>
                     <label>
-                      <input type="checkbox"  name="notification_type[]" value="database">
+                      <input type="checkbox"  name="notification_type[]" value="database"  id="myCheck"  onclick="showFunction()">
                       Database
                     </label>
                     <label>
-                      <input type="checkbox"  name="notification_type[]" value="sms">
+                      <input type="checkbox"  name="notification_type[]" value="sms"  id="myChecksms"  onclick="showSmsFunction()">
                       Sms
                     </label>
                   </div>
@@ -105,6 +84,28 @@
                 <div class="alert alert-danger">{{ $errors->first('notification_type') }}</div>
                 @endif
                 </div>
+                <div class="form-group">
+                  <label for="email_body">Email body: </label>
+                    <textarea name="email_body" class="form-control" id="contenteditor" placeholder="Blog Email Body here.."></textarea>
+                  @if ($errors->has('email_body'))
+                <div class="alert alert-danger">{{ $errors->first('email_body') }}</div>
+                @endif
+                </div>
+                <div class="form-group" id="emaildb" style="display:none">
+                  <label for="database_body">Database body: </label>
+                    <textarea name="database_body" class="form-control" id="contenteditor" placeholder="Blog Database Body here.."></textarea>
+                  @if ($errors->has('database_body'))
+                <div class="alert alert-danger">{{ $errors->first('database_body') }}</div>
+                @endif
+                </div>
+                <div class="form-group" id="emailsms" style="display:none">
+                  <label for="sms_body">Sms body: </label>
+                    <textarea name="sms_body" class="form-control" id="contenteditor" placeholder="Blog sms Body here.."></textarea>
+                  @if ($errors->has('sms_body'))
+                <div class="alert alert-danger">{{ $errors->first('sms_body') }}</div>
+                @endif
+                </div>
+                
                   <div class="form-group">
                   <label for="active">Status: </label>
                     <div class="custom-control custom-radio">

@@ -7539,7 +7539,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_content_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-content-loader */ "./node_modules/vue-content-loader/dist/vue-content-loader.es.js");
+/* harmony import */ var vue_content_loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-content-loader */ "./node_modules/vue-content-loader/dist/vue-content-loader.es.js");
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
 //
@@ -7704,8 +7704,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_1__["default"]],
   components: {
-    BulletListLoader: vue_content_loader__WEBPACK_IMPORTED_MODULE_0__["BulletListLoader"],
-    ContentLoader: vue_content_loader__WEBPACK_IMPORTED_MODULE_0__["ContentLoader"]
+    BulletListLoader: vue_content_loader__WEBPACK_IMPORTED_MODULE_3__["BulletListLoader"],
+    ContentLoader: vue_content_loader__WEBPACK_IMPORTED_MODULE_3__["ContentLoader"]
   },
   watch: {
     filter_by: function filter_by() {

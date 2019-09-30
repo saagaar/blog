@@ -49,6 +49,7 @@ class HomeController extends FrontendController
     {
         $code='user_registration';
         $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
+        // print_r($data);exit;
         $this->authUser->notify(new Notifications($code,$data));
 
             // foreach ($this->authUser->unreadNotifications as $notification) {
