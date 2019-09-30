@@ -23,7 +23,8 @@ class UserController extends FrontendController
          $this->user=$user;
     }
     public function myBlogs(BlogInterface $blog,Request $request)
-    {
+    { 
+      sleep(2);
          
             $routeName= Route::currentRouteName();
             $myBlogs=$blog->getBlogByUserId($this->authUser->id);

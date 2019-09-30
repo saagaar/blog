@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Repository\EmailInterface;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailer;
 use Illuminate\Queue\SerializesModels;
@@ -18,7 +17,7 @@ class EmailClass extends Mailer
      *
      * @return void
      */
-    public function __construct(EmailInterface $email )
+    public function __construct( )
     {
         $this->email=$email;
     }
