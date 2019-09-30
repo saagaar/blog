@@ -82,11 +82,20 @@
                 </div>
                 <div class="form-group">
                   <label for="notification_type">Notification Type:</label>
-                  <select  multiple="multiple" class="form-control" name="notification_type[]">
-                      <option value="mail">Mail</option>
-                      <option value="database">Database</option>
-                      <option value="sms">Sms</option>
-                  </select>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" @if($notification->notification_type[0]=='mail') checked @endif name="notification_type[]" value="mail">
+                      Mail
+                    </label>
+                    <label>
+                      <input type="checkbox" @if($notification->notification_type[1]=='database') checked @endif name="notification_type[]" value="database">
+                      Database
+                    </label>
+                    <label>
+                      <input type="checkbox" @if($notification->notification_type[2]=='sms') checked @endif name="notification_type[]" value="sms">
+                      Sms
+                    </label>
+                  </div>
                   @if ($errors->has('notification_type')) 
                 <div class="alert alert-danger">{{ $errors->first('notification_type') }}</div>
                 @endif

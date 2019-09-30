@@ -43,7 +43,6 @@ class NotificationSettingController extends AdminController
         if ($request->method()=='POST') 
         {
             $requestObj=app(NotificationRequest::class);
-            dd($requestObj->notification_type);
             $validatedData = $requestObj->validated();
             $this->notification->create($validatedData);
             return redirect()->route('notification.list')    
