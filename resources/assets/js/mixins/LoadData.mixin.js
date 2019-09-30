@@ -1,15 +1,19 @@
 import Form from './../services/Form.js'
 
-let getData = function(to) {
- let form=new Form();
+let getData = function(to,form) {
+ // let form=new Form();
     return new Promise((resolve, reject) => {
     let initialState = JSON.parse(window.__INITIAL_STATE__) || {};
 
-    if (!initialState.path || to.path !== initialState.path) {
+    if (!initialState.path || to.path !== initialState.path) 
+    {
       form.get('/api'+to.path).then(({ data }) => {
         resolve(data);
       })
-    } else {
+    } 
+    else 
+    {
+      form.isLoading=true;
       resolve(initialState);
     }
   });
@@ -18,12 +22,14 @@ let getData = function(to) {
 export default {
   created () 
   {
+  let  form=this.form;
     // this.isLoading=true;
-    getData(this.$router.currentRoute).then((data) => 
+    getData(this.$router.currentRoute,form).then((data) => 
     {
-      setTimeout(() => {
-        this.isLoading=false;
-      this.$data.blogList=(data.blogList)
+      setTimeout(() => 
+      {
+        form.isLoading=false;
+        this.$data.blogList=(data.blogList)
       },2000);
     });
   }

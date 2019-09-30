@@ -86,7 +86,62 @@
 
         </div>
         <table class="table table-inbox table-hover">
-          <tbody v-if="blogList.data" >
+        <tbody v-if="form.isLoading===true">
+           <ContentLoader
+             
+            height=700
+            width=1000
+            speed=2
+            primaryColor="#c0c0c0"
+            secondaryColor="#ffffff"
+            >
+              
+ <rect x="26" y="31" rx="0" ry="0" width="27" height="26" /> 
+    <rect x="70" y="31" rx="0" ry="0" width="287" height="25" /> 
+    <rect x="375" y="31" rx="0" ry="0" width="32" height="23" /> 
+    <rect x="430" y="31" rx="0" ry="0" width="42" height="23" /> 
+    <rect x="493" y="31" rx="0" ry="0" width="41" height="22" /> 
+    <rect x="546" y="32" rx="0" ry="0" width="46" height="22" /> 
+    <rect x="26" y="79" rx="0" ry="0" width="26" height="25" /> 
+    <rect x="70" y="78" rx="0" ry="0" width="287" height="26" /> 
+    <rect x="378" y="78" rx="0" ry="0" width="31" height="25" /> 
+    <rect x="433" y="80" rx="0" ry="0" width="40" height="23" /> 
+    <rect x="499" y="79" rx="0" ry="0" width="38" height="23" /> 
+    <rect x="549" y="79" rx="0" ry="0" width="46" height="24" /> 
+    <rect x="26" y="123" rx="0" ry="0" width="27" height="23" /> 
+    <rect x="70" y="123" rx="0" ry="0" width="286" height="25" /> 
+    <rect x="380" y="123" rx="0" ry="0" width="34" height="23" /> 
+    <rect x="435" y="123" rx="0" ry="0" width="40" height="23" /> 
+    <rect x="500" y="123" rx="0" ry="0" width="35" height="23" /> 
+    <rect x="549" y="123" rx="0" ry="0" width="46" height="23" /> 
+    <rect x="27" y="162" rx="0" ry="0" width="26" height="25" /> 
+    <rect x="70" y="163" rx="0" ry="0" width="287" height="27" /> 
+    <rect x="380" y="166" rx="0" ry="0" width="33" height="24" /> 
+    <rect x="435" y="166" rx="0" ry="0" width="38" height="24" /> 
+    <rect x="500" y="166" rx="0" ry="0" width="36" height="24" /> 
+    <rect x="549" y="166" rx="0" ry="0" width="43" height="24" /> 
+    <rect x="26" y="205" rx="0" ry="0" width="27" height="26" /> 
+    <rect x="70" y="205" rx="0" ry="0" width="287" height="25" /> 
+    <rect x="377" y="205" rx="0" ry="0" width="32" height="23" /> 
+    <rect x="433" y="205" rx="0" ry="0" width="40" height="23" /> 
+    <rect x="497" y="205" rx="0" ry="0" width="35" height="22" /> 
+    <rect x="546" y="205" rx="0" ry="0" width="46" height="22" /> 
+    <rect x="26" y="256" rx="0" ry="0" width="25" height="26" /> 
+    <rect x="70" y="257" rx="0" ry="0" width="285" height="25" /> 
+    <rect x="375" y="256" rx="0" ry="0" width="32" height="23" /> 
+    <rect x="430" y="256" rx="0" ry="0" width="42" height="23" /> 
+    <rect x="493" y="256" rx="0" ry="0" width="41" height="22" /> 
+    <rect x="546" y="256" rx="0" ry="0" width="46" height="22" /> 
+    <rect x="26" y="310" rx="0" ry="0" width="25.11" height="28" /> 
+    <rect x="70" y="310" rx="0" ry="0" width="287" height="25" /> 
+    <rect x="375" y="310" rx="0" ry="0" width="32" height="23" /> 
+    <rect x="430" y="310" rx="0" ry="0" width="42" height="23" /> 
+    <rect x="493" y="310" rx="0" ry="0" width="41" height="22" /> 
+    <rect x="546" y="310" rx="0" ry="0" width="46" height="22" />
+
+            </ContentLoader>
+          </tbody>
+          <tbody v-else-if="blogList.data" >
             <tr class="unread"  v-for="eachblog in blogList.data" :key="blogList.data.id">
               <td class="inbox-small-cells">
                 <input type="checkbox" class="mail-checkbox" @click="select" v-model="postIds" :value="eachblog.code">
@@ -110,20 +165,8 @@
             </tr>
            
           </tbody>
-          <tbody v-else-if="isLoading">
-           <ContentLoader
-              height=200
-              width=600
-              speed={2}
-              primaryColor="#f3f3f3"
-              secondaryColor="#ecebeb"
-            >
-                <rect x="20" y="20" rx="5" ry="5" width="30" height="20" />
-                <rect x="105" y="20" rx="5" ry="5" width="250" height="20" />
-                <rect x="105" y="20" rx="5" ry="5" width="150" height="20" />
-            </ContentLoader>
-          </tbody>
-          <tbody v-else>
+          
+          <tbody v-else-if="isLoading===false && !blogList.data">
              <tr >
               <td colspan="6">No post are available</td>
             </tr>
@@ -193,6 +236,7 @@ import Form  from './../services/Form.js';
       },
       methods: {
         getResults(page = 1) {
+          this.blogList={};
           this.form.get('api/blog/list?page=' + page+'&search='+this.search+'&sort_by='+this.sort_by+'&filter_by='+this.filter_by).then(response => {
                if(response.data)
                {
@@ -206,7 +250,6 @@ import Form  from './../services/Form.js';
               {
                   console.log(e);
               });
-
         },
 
         updateFilterBy(value=''){

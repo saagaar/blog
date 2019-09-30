@@ -114,8 +114,8 @@ export default class Form {
                             resolve(response);
                         })
                         .catch(error => {
-                            this.isLoading=false;
                             this.onFail(error.response.data);
+                            this.isLoading=false;
                             reject(error.response.data);
                         });
                 });

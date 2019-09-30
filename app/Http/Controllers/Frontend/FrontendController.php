@@ -45,7 +45,6 @@ class FrontendController extends BaseController
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
 
         $this->visitorInfo =  new visitorInfo();
-        
         $this->siteName =  config('settings.site_name');
         $this->contactEmail =  config('settings.contact_email');
         $this->systemEmail =  config('settings.system_email');

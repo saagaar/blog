@@ -7687,6 +7687,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7732,6 +7775,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.blogList = {};
       this.form.get('api/blog/list?page=' + page + '&search=' + this.search + '&sort_by=' + this.sort_by + '&filter_by=' + this.filter_by).then(function (response) {
         if (response.data) {
           _this.blogList = response.data.blogList;
@@ -50057,7 +50101,489 @@ var render = function() {
                       "table",
                       { staticClass: "table table-inbox table-hover" },
                       [
-                        _vm.blogList.data
+                        _vm.form.isLoading === true
+                          ? _c(
+                              "tbody",
+                              [
+                                _c(
+                                  "ContentLoader",
+                                  {
+                                    attrs: {
+                                      height: "700",
+                                      width: "1000",
+                                      speed: "2",
+                                      primaryColor: "#c0c0c0",
+                                      secondaryColor: "#ffffff"
+                                    }
+                                  },
+                                  [
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "26",
+                                        y: "31",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "27",
+                                        height: "26"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "70",
+                                        y: "31",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "287",
+                                        height: "25"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "375",
+                                        y: "31",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "32",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "430",
+                                        y: "31",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "42",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "493",
+                                        y: "31",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "41",
+                                        height: "22"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "546",
+                                        y: "32",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "46",
+                                        height: "22"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "26",
+                                        y: "79",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "26",
+                                        height: "25"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "70",
+                                        y: "78",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "287",
+                                        height: "26"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "378",
+                                        y: "78",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "31",
+                                        height: "25"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "433",
+                                        y: "80",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "40",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "499",
+                                        y: "79",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "38",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "549",
+                                        y: "79",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "46",
+                                        height: "24"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "26",
+                                        y: "123",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "27",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "70",
+                                        y: "123",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "286",
+                                        height: "25"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "380",
+                                        y: "123",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "34",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "435",
+                                        y: "123",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "40",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "500",
+                                        y: "123",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "35",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "549",
+                                        y: "123",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "46",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "27",
+                                        y: "162",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "26",
+                                        height: "25"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "70",
+                                        y: "163",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "287",
+                                        height: "27"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "380",
+                                        y: "166",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "33",
+                                        height: "24"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "435",
+                                        y: "166",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "38",
+                                        height: "24"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "500",
+                                        y: "166",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "36",
+                                        height: "24"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "549",
+                                        y: "166",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "43",
+                                        height: "24"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "26",
+                                        y: "205",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "27",
+                                        height: "26"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "70",
+                                        y: "205",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "287",
+                                        height: "25"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "377",
+                                        y: "205",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "32",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "433",
+                                        y: "205",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "40",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "497",
+                                        y: "205",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "35",
+                                        height: "22"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "546",
+                                        y: "205",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "46",
+                                        height: "22"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "26",
+                                        y: "256",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "25",
+                                        height: "26"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "70",
+                                        y: "257",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "285",
+                                        height: "25"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "375",
+                                        y: "256",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "32",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "430",
+                                        y: "256",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "42",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "493",
+                                        y: "256",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "41",
+                                        height: "22"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "546",
+                                        y: "256",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "46",
+                                        height: "22"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "26",
+                                        y: "310",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "25.11",
+                                        height: "28"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "70",
+                                        y: "310",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "287",
+                                        height: "25"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "375",
+                                        y: "310",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "32",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "430",
+                                        y: "310",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "42",
+                                        height: "23"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "493",
+                                        y: "310",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "41",
+                                        height: "22"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("rect", {
+                                      attrs: {
+                                        x: "546",
+                                        y: "310",
+                                        rx: "0",
+                                        ry: "0",
+                                        width: "46",
+                                        height: "22"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          : _vm.blogList.data
                           ? _c(
                               "tbody",
                               _vm._l(_vm.blogList.data, function(eachblog) {
@@ -50192,60 +50718,9 @@ var render = function() {
                               }),
                               0
                             )
-                          : _vm.isLoading
-                          ? _c(
-                              "tbody",
-                              [
-                                _c(
-                                  "ContentLoader",
-                                  {
-                                    attrs: {
-                                      height: "200",
-                                      width: "600",
-                                      speed: "{2}",
-                                      primaryColor: "#f3f3f3",
-                                      secondaryColor: "#ecebeb"
-                                    }
-                                  },
-                                  [
-                                    _c("rect", {
-                                      attrs: {
-                                        x: "20",
-                                        y: "20",
-                                        rx: "5",
-                                        ry: "5",
-                                        width: "30",
-                                        height: "20"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("rect", {
-                                      attrs: {
-                                        x: "105",
-                                        y: "20",
-                                        rx: "5",
-                                        ry: "5",
-                                        width: "250",
-                                        height: "20"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("rect", {
-                                      attrs: {
-                                        x: "105",
-                                        y: "20",
-                                        rx: "5",
-                                        ry: "5",
-                                        width: "150",
-                                        height: "20"
-                                      }
-                                    })
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          : _c("tbody", [_vm._m(7)])
+                          : _vm.isLoading === false && !_vm.blogList.data
+                          ? _c("tbody", [_vm._m(7)])
+                          : _vm._e()
                       ]
                     )
                   ])
@@ -75441,8 +75916,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
 
 
-var getData = function getData(to) {
-  var form = new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+var getData = function getData(to, form) {
+  // let form=new Form();
   return new Promise(function (resolve, reject) {
     var initialState = JSON.parse(window.__INITIAL_STATE__) || {};
 
@@ -75452,6 +75927,7 @@ var getData = function getData(to) {
         resolve(data);
       });
     } else {
+      form.isLoading = true;
       resolve(initialState);
     }
   });
@@ -75461,10 +75937,11 @@ var getData = function getData(to) {
   created: function created() {
     var _this = this;
 
-    // this.isLoading=true;
-    getData(this.$router.currentRoute).then(function (data) {
+    var form = this.form; // this.isLoading=true;
+
+    getData(this.$router.currentRoute, form).then(function (data) {
       setTimeout(function () {
-        _this.isLoading = false;
+        form.isLoading = false;
         _this.$data.blogList = data.blogList;
       }, 2000);
     });
@@ -76120,10 +76597,9 @@ function () {
           _this.isLoading = false;
           resolve(response);
         })["catch"](function (error) {
-          _this.isLoading = false;
-
           _this.onFail(error.response.data);
 
+          _this.isLoading = false;
           reject(error.response.data);
         });
       });

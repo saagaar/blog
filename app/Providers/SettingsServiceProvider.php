@@ -24,6 +24,7 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Contracts\Cache\Factory $cache, SiteoptionInterface $settings)
     {
+        
         $siteOptions=$settings->getSiteInfo()->toArray();
         $settings = $cache->remember('settings', 60, function() use ($siteOptions )
         {
