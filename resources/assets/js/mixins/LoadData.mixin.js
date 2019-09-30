@@ -4,6 +4,7 @@ let getData = function(to) {
  let form=new Form();
     return new Promise((resolve, reject) => {
     let initialState = JSON.parse(window.__INITIAL_STATE__) || {};
+
     if (!initialState.path || to.path !== initialState.path) {
       form.get('/api'+to.path).then(({ data }) => {
         resolve(data);
@@ -15,11 +16,15 @@ let getData = function(to) {
   
 };
 export default {
-  beforeRouteEnter (to, from, next) 
+  created () 
   {
-    getData(to).then((data) => 
+    // this.isLoading=true;
+    getData(this.$router.currentRoute).then((data) => 
     {
-      next(vm => Object.assign(vm.$data, (data)))
+      setTimeout(() => {
+        this.isLoading=false;
+      this.$data.blogList=(data.blogList)
+      },2000);
     });
   }
 };

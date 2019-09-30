@@ -11,14 +11,15 @@ class SendMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $mailBody
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($mailBody)
     {
-        //
+        $this->mailBody=$mailBody;
     }
 
     /**

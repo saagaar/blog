@@ -48,7 +48,7 @@ class HomeController extends FrontendController
     public function test(Request $request)
     {
         $code='user_registration';
-        $data=['FIRSTNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
+        $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
         $this->authUser->notify(new Notifications($code,$data));
 
             // foreach ($this->authUser->unreadNotifications as $notification) {
@@ -73,7 +73,7 @@ class HomeController extends FrontendController
         // foreach ($permissions as $permission) {
         //      Permission::create(['name' => $permission]);
         // }
-       
+      
         if(\Auth::check())
         {
             $routeName= ROUTE::currentRouteName();
@@ -85,6 +85,7 @@ class HomeController extends FrontendController
           }
           else
           {
+              $data['path']='/dashboard';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
               return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);

@@ -8,13 +8,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Repository\NotificationSettingInterface; 
 
-class Notifications extends Notification
+class Notifications extends Notification implements ShouldQueue
 {
     use Queueable;
 
     protected $notification;
 
-    protected $contactEmail='idatasolutionnepal@gmail.com';
+    protected $contactEmail;
+
+    protected $systemEmail;
 
     /**
      * All notification Channels to list
@@ -41,7 +43,7 @@ class Notifications extends Notification
       $this->notification=$repoNotify->getNotificationByCode($code);
       $this->_channel=$this->notification->notification_type;
       $this->rawData=$rawData;
-
+      $this->contactEmail=config('settings.contact_email');
     }
 
     /**
@@ -56,7 +58,6 @@ class Notifications extends Notification
         {
             throw new \Exception('Notification Couldn\'t be set. No channel provided.');
         }
-       
         return is_array($this->_channel) ? $this->_channel : [$this->_channel];
     }
 
@@ -69,11 +70,11 @@ class Notifications extends Notification
     public function toMail($notifiable)
     {
         $body=$this->parseNotificationBody($this->notification->email_body);
-        // print_r($body);exit;
         return (new MailMessage)
-                    ->subject($this->notification->subject)
-                    ->line($body);
-                    
+        ->view('emailTemplate.default', ['body' => $body])
+        ->subject($this->notification->subject)
+        ->from($this->contactEmail);
+                           
     }
 
     /**
@@ -85,8 +86,9 @@ class Notifications extends Notification
     public function toDatabase($notifiable)
     {
         $body=$this->parseNotificationBody($this->notification->database_body);
-        return [
-              'message'=>$body
+        return 
+        [
+             'message'=>$body
         ];
     }
 
@@ -96,14 +98,12 @@ class Notifications extends Notification
         $patterns_string = array();
         $replacement_string = array();
         $parseElement=$this->rawData;
-
-            foreach($parseElement as $name=>$value)
-            {
-                    $patterns_string[] = '/['.$name.']/';
-                    $replacement_string[] = $value;
-            }
-         
-       
-            return preg_replace($patterns_string, $replacement_string, $text_string);
+        foreach($parseElement as $key=>$value)
+        {
+            $parserName=$key;
+            $parseValue=$value;
+            $text_string=str_replace("[$parserName]",$parseValue,$text_string);
+        }
+        return preg_replace($patterns_string, $replacement_string, $text_string);
     }
 }

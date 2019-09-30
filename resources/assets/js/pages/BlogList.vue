@@ -110,6 +110,19 @@
             </tr>
            
           </tbody>
+          <tbody v-else-if="isLoading">
+           <ContentLoader
+              height=200
+              width=600
+              speed={2}
+              primaryColor="#f3f3f3"
+              secondaryColor="#ecebeb"
+            >
+                <rect x="20" y="20" rx="5" ry="5" width="30" height="20" />
+                <rect x="105" y="20" rx="5" ry="5" width="250" height="20" />
+                <rect x="105" y="20" rx="5" ry="5" width="150" height="20" />
+            </ContentLoader>
+          </tbody>
           <tbody v-else>
              <tr >
               <td colspan="6">No post are available</td>
@@ -131,23 +144,26 @@
 </div>
 </template>
 <script>
+ import { BulletListLoader,ContentLoader } from 'vue-content-loader';
 import mixin  from './../mixins/LoadData.mixin.js';
 import Form  from './../services/Form.js';
     export default {
         
         data:function(){
           return {
-            blogList:{ },
+            blogList:{},
             form:new Form(),
             sort_by:'',
             filter_by:'',
             search:'',
             postIds:[],
-            allSelected:false
+            allSelected:false,
           }
         },
         mixins:[mixin],
         components:{
+          BulletListLoader,
+          ContentLoader
         },
         watch: {
           filter_by: function () {
@@ -172,8 +188,10 @@ import Form  from './../services/Form.js';
 
 
       },
+      created(){
+        // this.getResults();
+      },
       methods: {
-        
         getResults(page = 1) {
           this.form.get('api/blog/list?page=' + page+'&search='+this.search+'&sort_by='+this.sort_by+'&filter_by='+this.filter_by).then(response => {
                if(response.data)
@@ -188,6 +206,7 @@ import Form  from './../services/Form.js';
               {
                   console.log(e);
               });
+
         },
 
         updateFilterBy(value=''){
@@ -223,6 +242,10 @@ import Form  from './../services/Form.js';
             }
             this.allSelected=selected;
             this.postIds=postids;
+        },
+        isLoading:function()
+        {
+          return form.isLoading;
         },
         select: function() {
             // this.allSelected = false;

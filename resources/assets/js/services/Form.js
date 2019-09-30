@@ -14,7 +14,7 @@ export default class Form {
                 else{
                     this.originalData='';
                 }
-               
+                this.isLoading=false;
                 this.errors={};
              }
 
@@ -100,6 +100,7 @@ export default class Form {
              * @param {string} url
              */
         	submit(requestType, url) {
+                this.isLoading=true;
                 return new Promise((resolve, reject) => {
                      window.axios.defaults.headers.common = {
                         'X-Requested-With': 'XMLHttpRequest',
@@ -109,9 +110,11 @@ export default class Form {
                      window.axios[requestType](fullUrl, this.data())
                         .then(response => {
                             this.onSuccess(response.data);
+                            this.isLoading=false;
                             resolve(response);
                         })
                         .catch(error => {
+                            this.isLoading=false;
                             this.onFail(error.response.data);
                             reject(error.response.data);
                         });
