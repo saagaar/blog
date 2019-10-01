@@ -57,7 +57,7 @@
                 <div class="form-group">
                   <label for="permissions">permissions</label>
                   <!-- value="{{ $permissions }}" -->
-                    <select multiple="multiple" class="form-control select2"  name="permission[]" id="permission">
+                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="permission[]" id="permission">
                       @foreach ($permissions as $values)
                       <option value="{{ $values->name }}"> {{ $values->name }}  </option>
                       @endforeach

@@ -1,16 +1,14 @@
 import Form from './../services/Form.js'
 
 let getData = function(to) {
-
-  // return new Promise((resolve, reject) => {
-
+ let form=new Form();
     return new Promise((resolve, reject) => {
     let initialState = JSON.parse(window.__INITIAL_STATE__) || {};
+
     if (!initialState.path || to.path !== initialState.path) {
-      // axios.get(`/api${to.path}`).then(({ data }) => {
-      //   resolve(data);
-      // })
-      resolve(initialState);	
+      form.get('/api'+to.path).then(({ data }) => {
+        resolve(data);
+      })
     } else {
       resolve(initialState);
     }
@@ -18,13 +16,15 @@ let getData = function(to) {
   
 };
 export default {
-  beforeRouteEnter (to, from, next) 
+  created () 
   {
-
-    getData(to).then((data) => 
+    // this.isLoading=true;
+    getData(this.$router.currentRoute).then((data) => 
     {
-    
-      next(vm => Object.assign(vm.$data, (data)))
+      setTimeout(() => {
+        this.isLoading=false;
+      this.$data.blogList=(data.blogList)
+      },2000);
     });
   }
 };

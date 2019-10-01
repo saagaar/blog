@@ -67,7 +67,7 @@
                 <div class="form-group">
                   <label for="roles" class="control-label">Roles</label>
                   <!-- value="{{ $roles }}" -->
-                    <select multiple="multiple" class="form-control select2"  name="roles[]" id="roles">
+                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="roles[]" id="roles">
                       @if($accounts->roles()->pluck('name'))
                            @foreach ($accounts->roles()->get() as $rol)
                                         <option value="{{ $rol->id }}"selected>{{ $rol->name }}</option>

@@ -15,9 +15,9 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
 Vue.use( CKEditor );
-
+Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.use(require('vue-moment'));
 import store from './store/index'
-
 import config from './config/config.js';
 import UserDashboard from './components/UserDashboard';
 const app = new Vue({
@@ -31,15 +31,15 @@ const app = new Vue({
     {
         let userState = JSON.parse(window.__USER_STATE__) || {};
         if (userState) {
-            this.$store.commit('ADD_ME', userState)
+           this.$store.commit('ADD_ME', userState)
         }
-        this.$store.dispatch('checkLoginUser');
+            this.$store.dispatch('checkLoginUser');
     },
     render: function (createElement) 
     {
     	// this.$store.dispatch('checkLoginUser');
     	// if(this.$store.getters.user.isLoggedIn)
-	  	    return createElement(UserDashboard);
+	  	 return createElement(UserDashboard);
 	},
 
 });

@@ -22,6 +22,16 @@ Class Blog implements BlogInterface
   public function getBlogById($blogId){
     return  $this->blog->where('id', $blogId)->first();
   }
+
+   /**
+   * Get  Blog by user id
+   *
+   * @param int
+   */
+  public function getBlogByUserId($userid){
+    return  $this->blog->where('user_id', $userid)->first();
+  }
+     
      
   public function getAssociatedCategoryOfBlog($blogId){
       return	$this->blog->where('id', $blogId)->first();

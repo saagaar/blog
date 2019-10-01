@@ -233,9 +233,13 @@ import TheRightSideBar from './../components/TheRightSideBar';
         mixins: [ mixin ],  
         data:function(){
           return {
-            followSuggestion:''
+            followSuggestion:'',
+            followingsCount:0,
+            followersCount:0,
+
           }
         },
+       
         components:{
             TheRightSideBar,
             FollowSuggestionsList

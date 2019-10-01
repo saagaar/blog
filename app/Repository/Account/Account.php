@@ -6,7 +6,7 @@ use App\Models\User;
 use Spatie\Permission\Traits\HasRoles;
 use App\Repository\AccountInterface;
 
-Class  Account implements AccountInterface
+Class Account implements AccountInterface
 {
 	protected $user;
     use HasRoles;
@@ -14,7 +14,6 @@ Class  Account implements AccountInterface
 	{
 		$this->account=$user;
 	}
-
      
     public function getById($memberId){
       return $this->account->where('id', $memberId)->first();
@@ -37,7 +36,7 @@ Class  Account implements AccountInterface
     }
  	
  	  /**
-     * create a 
+     * 
      *
      * @return mixed
      */
@@ -54,15 +53,22 @@ Class  Account implements AccountInterface
     public function update( $id,array $data){
       return $this->account->find($id)->update($data);
     }
-
       /**
      * Deletes a post.
      *
      * @param int
      */
     public function delete($id){
-      return    $this->account->find($id)->delete();
+      return $this->account->find($id)->delete();
     }
 
+    // public function getBlogsByUser($username)
+    // {
+    //     echo '<pre>';
+    //     $data=$this->account->where('username',$username)->first()->toArray();
+    //       $comments = Comment::where('post_id', $postId)->with('user')->paginate(15);
+    //     print_r($data);
+    //   return $data;
+    // }
 }
 ?>

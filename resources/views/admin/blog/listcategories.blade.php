@@ -5,10 +5,10 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Blog Category</h3>
+              <h3 class="box-title">All Category</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <a href="{{route('adminblogcategory.create')}}" class="btn btn-primary">Add Blog Category</a>
+                  <a href="{{route('adminblogcategory.create')}}" class="btn btn-primary">Add Category</a>
                 </div>
               </div>
             </div>
@@ -48,7 +48,7 @@
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="7" align="center" style="background-color: #d2d6de;"> No Blog Category Found </td>
+                    <td colspan="7" align="center" style="background-color: #d2d6de;"> No Category Found </td>
                   </tr>
                   @endif
                 </tbody>

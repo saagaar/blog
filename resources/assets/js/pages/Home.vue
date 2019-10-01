@@ -3,7 +3,7 @@
 <div>
 <TheTopNav></TheTopNav>
 <TheMainNav></TheMainNav>
-   <vcl-instagram v-if="!myData"></vcl-instagram>
+   <Bullet-List-loader v-if="!myData"></Bullet-List-loader>
 <section class="fullwidth-block area-padding-bottom" v-else >
         <div class="container-fluid">
             <div class="row">
@@ -597,7 +597,7 @@
 </template>
 
 <script>
-  import { VclFacebook,VclInstagram } from 'vue-content-loading';
+  import { BulletListLoader,FacebookLoader } from 'vue-content-loader';
 import TheTopNav from './../components/TopNav/TheTopNav';
 import TheMainNav from './../components/MainNav/TheMainNav';
 import TheFooter from './../components/Footer/TheFooter';
@@ -612,15 +612,15 @@ import mixin  from './../mixins/LoadData.mixin.js';
         mounted() {
              setTimeout(() => {
               this.myData = 'Example Data';
-            }, 1000);
+            }, 2000);
         },
           mixins: [ mixin ],  
         components:{
             TheTopNav,
             TheMainNav,
             TheFooter,
-            VclFacebook,
-            VclInstagram
+            BulletListLoader,
+            FacebookLoader
           
         },
     }

@@ -7,7 +7,7 @@
         <div class="col-md-3">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Blog Category</h3>
+              <h3 class="box-title">Category</h3>
 
               <!-- <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -16,8 +16,8 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="{{route('adminblogcategory.list')}}"><span class="glyphicon glyphicon-minus"></span> List All Blog Category</a></li>
-                <li class="{{ (request()->is('/create/blogcategory')) ? 'active' : '' }}"><a href="{{route('adminblogcategory.create')}}"><span class="glyphicon glyphicon-minus"></span> Create Blog Category</a></li>
+                <li><a href="{{route('adminblogcategory.list')}}"><span class="glyphicon glyphicon-minus"></span> List All Category</a></li>
+                <li class="{{ (request()->is('/create/blogcategory')) ? 'active' : '' }}"><a href="{{route('adminblogcategory.create')}}"><span class="glyphicon glyphicon-minus"></span> Create Category</a></li>
                 
               </ul>
             </div>
@@ -29,7 +29,7 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Edit Blog Category</h3>
+              <h3 class="box-title">Edit Category</h3>
             </div>
 
           <!-- Form Element sizes -->
@@ -45,6 +45,22 @@
                   @if ($errors->has('name'))
                 <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                 @endif
+                </div>
+                <div class="form-group">
+                  <label for="parent_id">Parent</label>
+                    <select class="form-control"  name="parent_id" id="parent_id">
+                      <?php print_r($blogcategory); ?>
+                      @foreach ($blogcategory as $values)
+                      <option value="">none</option>
+                      <option value="{{ $values->id }}" @if($values->id==$category->parent_id) selected @endif > {{ $values->name }}  </option>
+                      @endforeach
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('parent_id'))
+                        <p class="help-block">
+                            {{ $errors->first('parent_id') }}
+                        </p>
+                    @endif
                 </div>
                 <div class="form-group">
                   <label for="slug">Slug</label>
@@ -63,11 +79,34 @@
                 </div>
                 <div class="form-group">
                   <label for="banner_image">Image Upload</label>
-                  <img src="{{ asset('frontend/images/categories-images/'.$category['banner_image']) }}" alt="Image" height="42" width="42">
+                  <img src="{{ asset('images/user-images/category/'.$category['banner_image']) }}" alt="Image" height="42" width="42">
                   <input type="file" class="form-control" name="banner_image" id="banner_image" value="{{$category->banner_image}}">
                   @if ($errors->has('banner_image'))
                 <div class="alert alert-danger">{{$errors->first('banner_image') }}</div>
                 @endif
+                </div>
+                <div class="form-group">
+                  <label for="tags">tags</label>
+                  <!-- value="{{ $tags }}" -->
+                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
+                      
+                      @foreach ($tags as $values)
+                        <?php if(!$category->tags()->pluck('tags_id')){ ?>
+                        <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                        <?php }else{ ?>
+                          @foreach ($category->tags()->pluck('tags_id') as $tag)
+                          <option value="{{ $values->id }}" @if($values->id==$tag) selected @endif > {{ $values->name }}  </option>
+                          @endforeach
+                        <?php } ?>
+                      @endforeach
+
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('tags'))
+                        <p class="help-block">
+                            {{ $errors->first('tags') }}
+                        </p>
+                    @endif
                 </div>
               </div>
               <!-- /.box-body -->

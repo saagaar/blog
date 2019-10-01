@@ -36,7 +36,8 @@ class CategoryRequest extends FormRequest
                 'parent_id'   => '',
                 'name'      => 'required|min:2|max:255',
                 'status'   => 'required',
-                'slug'      => $slug
+                'slug'      => $slug,
+                'tags'      =>'required'
               
         ];
     }

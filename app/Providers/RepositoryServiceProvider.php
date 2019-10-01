@@ -16,7 +16,7 @@ use App\Repository\Category\Category;
 use App\Repository\SiteoptionInterface;
 use App\Repository\SiteOption\SiteOption;
 use App\Repository\BlogInterface;
-use App\Repository\blog\Blog;
+use App\Repository\Blog\Blog;
 use App\Repository\LocaleInterface;
 use App\Repository\locale\Locale;
 use Illuminate\Support\ServiceProvider;
@@ -24,6 +24,8 @@ use App\Repository\AccountInterface;
 use App\Repository\Account\Account;
 use App\Repository\RoleInterface;
 use App\Repository\Role\Roles;
+use App\Repository\NotificationSettingInterface;
+use App\Repository\NotificationSetting\NotificationSetting;
 use App\Repository\PermissionInterface;
 use App\Repository\UserPermission\Permissions;
 use App\Repository\CmsInterface;
@@ -62,7 +64,8 @@ use App\Repository\FollowerInterface;
 use App\Repository\Follower\Follower;
 use App\Repository\LogActivityInterface;
 use App\Repository\LogActivity\LogActivity;
-
+use App\Repository\UserInterestInterface;
+use App\Repository\UserInterest\UserInterest;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -112,5 +115,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(TagInterface::class, Tag::class);
         $this->app->singleton(FollowerInterface::class, Follower::class);
         $this->app->singleton(LogActivityInterface::class, LogActivity::class);
+        $this->app->singleton(UserInterestInterface::class, UserInterest::class);
+        $this->app->singleton(NotificationSettingInterface::class, NotificationSetting::class);
     }
 }

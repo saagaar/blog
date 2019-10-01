@@ -19,7 +19,7 @@
                         </ul>
                          <ul v-else>
                         <li><a id="search" @click="OpenSearchBox" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
-                        <li class="nitify dropdown">
+                       <!--  <li class="nitify dropdown">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" data-toggle="dropdown" role="button" aria-haspopup="true" 
                             aria-expanded="false"  title="Messaging"><i class="fas fa-envelope"></i> <span>Messaging</span> <em>28</em></a>
 
@@ -29,17 +29,19 @@
                                 <hr>
                                
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="nitify dropdown">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
-                            aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>14</em></a>
+                            aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ me.unReadNotificationsCount }}</em></a>
 
-                            <ul class="dropdown-menu">
-                                <li><a href="#">My Profile</a></li>
-                                <li><a href="#">New Stories</a></li>
-                                <li><a href="#">Stories</a></li>
-                                <hr>
+                            <ul class="dropdown-menu" v-if="me.notifications">
+
+                                <li v-for="eachNotifications in me.notifications"><a href="#">{{eachNotifications.data.message}}</a>
+                                    <hr>
+                                </li>
+                              
+                                
                                
                             </ul>
 
@@ -111,6 +113,7 @@ import TheLoginSignupModal from './TheLoginSignupModal';
             },
             me:function(){
               return this.$store.getters.me
+             
             },
            
         },

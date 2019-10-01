@@ -177,3 +177,19 @@ $factory->define(Categories::class, function (Faker $faker) {
         'display'             =>$faker->randomElement(['Y' ,'N'])
     ];
 });
+$factory->define(Blogs::class, function (Faker $faker) {
+    $users = \DB::table('users')->select('id')->get();
+    $userid = $faker->randomElement($users)->id;
+    $locales_id = \DB::table('locales')->select('id')->get();
+    return [
+        'title'                 =>$faker->text($maxNbChars = 20),
+        'user_id'               =>'1',
+        'code'                  =>$faker->unique()->text($maxNbChars = 20),
+        'content'               =>$faker->text($maxNbChars = 20),
+        'save_method'             =>$faker->randomElement(['1' ,'2']),
+        'locale_id'            =>1,
+        'image'                 =>'1569324080.jpg',
+        'featured'             =>$faker->randomElement(['1' ,'2']),
+        'anynomous'             =>$faker->randomElement(['1' ,'2']),
+    ];
+});
