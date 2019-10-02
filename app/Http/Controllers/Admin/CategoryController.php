@@ -50,7 +50,7 @@ class CategoryController extends AdminController
                 ]);
            
             $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-            request()->banner_image->move(public_path('images/user-images/category/'), $imageName);
+            request()->banner_image->move(public_path('frontend/images/categories-images/'), $imageName);
             $validatedData['banner_image'] = $imageName;
         $created = $this->categories->create($validatedData);
         $created->tags()->attach($validatedData['tags']);
@@ -63,7 +63,7 @@ class CategoryController extends AdminController
     {
         $category =$this->categories->getcatById($id);
         if( $category){
-            $dir = 'images/user-images/category/';
+            $dir = 'frontend/images/categories-images/';
             if ($category->banner_image != '' && File::exists($dir . $category->banner_image)){
                 File::delete($dir . $category->banner_image);
             }
@@ -91,12 +91,12 @@ class CategoryController extends AdminController
                 $validatedData = $requestobj->validated();
                 $this->categories->update($id,$validatedData);
                 if ($request->hasFile('banner_image')) {
-                    $dir = 'images/user-images/category/';
+                    $dir = 'frontend/images/categories-images/';
                     if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
                     File::delete($dir . $category->banner_image);
 
                     $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-                    request()->banner_image->move(public_path('images/user-images/category/'), $imageName);
+                    request()->banner_image->move(public_path('frontend/images/categories-images/'), $imageName);
                     $validatedData['banner_image'] = $imageName;
                 }else {
                     $validatedData['banner_image'] = $category->banner_image;

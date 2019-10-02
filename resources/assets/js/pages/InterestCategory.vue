@@ -20,13 +20,12 @@
                     <div class="single-category">
                         <div class="thumb">
                            <a href="#"> <img class="img-fluid" 
-                            :src="'/images/user-images/category/'+subCategory.banner_image" alt=""></a>
+                            :src="'frontend/images/categories-images/'+subCategory.banner_image" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">
                                 <h4>{{subCategory.name}} </h4>
                             </a>
-
                             <Favorite
                             :currentCategory="subCategory.slug"
                             :userInterest= "userInterest"
@@ -45,19 +44,7 @@
 </template>
 
 <script>
-        // function previewimage(event) {
-            
-        //     var reader = new FileReader();
-        //     var imageField = document.getElementById("image-field")
-        //     reader.onload = function () {
-        //         if (reader.readyState == 2) {
-        //             imageField.src = reader.result;
-        //         }
-        //     }
-        //     reader.readAsDataURL(event.target.files[0]);
-        // 
 import Favorite from './../components/Favorites/Favorite';
-// Vue.component('favorite', require('./Favorites/Favorite.vue'));
 import mixin  from './../mixins/LoadData.mixin.js';
     export default {
         mounted() {
@@ -74,8 +61,5 @@ import mixin  from './../mixins/LoadData.mixin.js';
         components:{
             Favorite
         },
-        methods:{
-          
-        }
     }
 </script>

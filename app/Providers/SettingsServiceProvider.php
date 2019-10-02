@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Repository\SiteoptionInterface; 
-
+use Illuminate\Support\Facades\Schema;
 class SettingsServiceProvider extends ServiceProvider
 {
     /**
@@ -24,11 +24,13 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Contracts\Cache\Factory $cache, SiteoptionInterface $settings)
     {
-        $siteOptions=$settings->getSiteInfo()->toArray();
+        if(Schema::hasTable('site_options')){
+            $siteOptions=$settings->getSiteInfo()->toArray();
         $settings = $cache->remember('settings', 60, function() use ($siteOptions )
         {
           return $siteOptions; 
         });
         config()->set('settings', $settings);
+        }
     }
 }
