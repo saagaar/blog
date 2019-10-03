@@ -1,35 +1,50 @@
-import Form from './../services/Form.js'
+import Form  from './../services/Form.js';
 
-let getData = function(to,form) {
- // let form=new Form();
+let getData = function(to,store) {
+    
+ // 
     return new Promise((resolve, reject) => {
     let initialState = JSON.parse(window.__INITIAL_STATE__) || {};
 
     if (!initialState.path || to.path !== initialState.path) 
     {
+     let form=new Form();
+
       form.get('/api'+to.path).then(({ data }) => {
+     // alert(store.getters.isLoading)
+         // this.$store.commit('TOGGLE_LOADING');
+
         resolve(data);
       })
     } 
     else 
     {
-      form.isLoading=true;
+       // alert(store.getters.isLoading)
+      // alert(this.$store.getters.isLoading);
+     // store.commit('TOGGLE_LOADING');
+      // this.$store.commit('TOGGLE_LOADING');
       resolve(initialState);
     }
   });
   
 };
 export default {
-  created () 
+  beforeCreate () 
   {
-  let  form=this.form;
-    // this.isLoading=true;
-    getData(this.$router.currentRoute,form).then((data) => 
+    // alert(this.$store.getters.isLoading);
+    this.$store.commit('TOGGLE_LOADING');
+    let store=this.$store;
+    // alert(this.$store.getters.isLoading);
+    getData(this.$router.currentRoute,store).then((data) => 
     {
+
       setTimeout(() => 
       {
-        form.isLoading=false;
-        this.$data.blogList=(data.blogList)
+      this.$store.commit('TOGGLE_LOADING');
+        
+      // alert(store.getters.isLoading);
+
+         this.$data.initialState=data;
       },2000);
     });
   }

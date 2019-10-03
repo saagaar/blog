@@ -16,7 +16,8 @@ let action='';
         },
         data() {
         	return {
-        		isFollowing: this.following
+        		isFollowing: this.following,
+                form:new Form()
            }
         },
         methods:
@@ -26,8 +27,8 @@ let action='';
         			action='api/followuser/'+this.username+'/'+this.followSuggestionHead;
         		else 
         			action='api/unFollowuser'+this.username+'/'+this.followSuggestionHead;
-	        		var form=new Form();
-	        		form.get(action).then(response => {
+	        		
+	        		this.form.get(action).then(response => {
 		               if(response.data.status)
 		               {
 		               	 this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
@@ -47,7 +48,12 @@ let action='';
 	                  console.log(e);
 	              });
 
-        	}
+        	},
+            isLoading:function()
+            {
+              return this.form.isLoading;
+            },
+      
         }
     }
 </script>

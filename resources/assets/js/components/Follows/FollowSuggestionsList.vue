@@ -12,6 +12,9 @@
                     </div>
                    </div>
                    </div>
+                    <div v-else-if="this.$store.getters.isLoading===true && !followSuggestion" class="follow-user">
+                        <PlaceHolderDashboardFeed></PlaceHolderDashboardFeed>
+                   </div>
                    <div v-else class="follow-user">
                     No New suggestions
                    </div>
@@ -20,21 +23,18 @@
 
 <script>
 import FollowButton from './FollowButton';
-
+import PlaceHolderDashboardFeed  from './../ContentPlaceholder/PlaceHolderDashboardFeed';
     export default {
         props:['followSuggestion'],
         data() {
         	return {
-              followSuggestionStart: ''
+              followSuggestionStart: '',
+              isLoading:''
            }
         },
         
         methods:{
-            /*
-            * To 
-            **/
           userFollowed:function(toRemoveUser,toAddUser){
-          
            var index=this.followSuggestion.filter(p => p.username == toRemoveUser);
 
             if(toAddUser[0]!==  undefined)
@@ -48,7 +48,10 @@ import FollowButton from './FollowButton';
           }
         },
         components:{
-            FollowButton
-        }
+            FollowButton,
+            PlaceHolderDashboardFeed
+        },
+       
+
     }
 </script>
