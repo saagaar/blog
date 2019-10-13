@@ -4,45 +4,73 @@
         <div class="col-md-9 col-sm-9">
                 <div id="main" class="">
               <div class="white-box add_blog">
-                <form method="post" action="add_blog_next.html">
-                  <div class="create-post">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                          <div class="form-group post_title">
-                            <img src="img/p_image.png" alt="" class="profile-photo-md">
-                            <span>Posting as <b>Shanvi</b> &nbsp; &nbsp; &nbsp;</span>
-                            <input type="text" @blur="$v.form.title.$touch()" name="title" class="form-control" placeholder="Post Title" v-model="form.title"/> 
-                            <div v-if="$v.form.title.$anyDirty">
-                              <div class="error" v-if="!$v.form.title.required">This Field is required</div>
-                            </div>
+                <form method="post">
+                    <div>
+                          <div class="form-group upload_img">
+                          <label><i class="fa fa-image"></i> Upload Image</label>
+                          <figure> 
+                              <img :src="'/images/upload.png'" id="image-field"/>
+                              <span class="file-input btn btn-success btn-file">
+                                  <input type="file"  name="bannerImage" id="file1" class="upload" @change="previewImage(); $v.form.bannerImage.$touch()" >
+                              </span>
+                          </figure>
                           </div>
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-lg-3 col-md-4 col-sm-4">
+                        
                         <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Description </h4>
-                      </div>
-                      <div class="col-lg-9 col-md-8 col-sm-8">
-                        <div class="tools add_btn">
-                            <button class="btn btn-light">Save</button>
-                           <!--  <button class="btn btn-light">Preview</button>
-                            <button class="btn btn-light">Close</button> -->
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                
-                    <div class="form-group">
-                        <textarea  class="form-control ckeditor" id="editor" blur="$v.form.content.$touch()"  v-model="form.content"></textarea>
-                         <div v-if="$v.form.content.$anyDirty">
-                              <div class="error" v-if="!$v.form.content.required">This Field is required</div>
+
+                       <div class="form-group">
+                        <textarea  class="form-control ckeditor" id="editor" blur="$v.form.short_description.$touch()"  v-model="form.short_description"></textarea>
+                         <div v-if="$v.form.short_description.$anyDirty">
+                              <div class="error" v-if="!$v.form.short_description.required">This Field is required</div>
                             </div>
                      </div>
 
-                    <button @click.prevent="submitForm" class="btn btn-primary ml-30">Continue</button>
+                      <div class=" pad-box">
+                      <div class="form-group">
+                        <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
+                      </div>
+                      <div class="tgl-group">
+                          <span><i class="fa fa-globe">&nbsp;</i> Post As Anonymous Only</span>
+                          <input class="tgl tgl-light" name="isAnynomous" id="display-address" type="checkbox">
+                          <label class="tgl-btn" for="display-address"></label>
+                      </div>
 
+
+                      <div class="autocomplete form-group">
+                          <input id="myInput" type="text" name="userName" class="form-control" placeholder="B">
+                          <div id="myInputautocomplete-list" class="autocomplete-items">
+                              <!-- <div><strong>B</strong>Bikash
+                                  <input type="hidden" value="Bikash">
+                              </div>
+                               <div>
+                                   <strong>B</strong>Bipin<input type="hidden" value="Bipin">
+                                  </div>
+                                  <div>
+                                      <strong>B</strong>Bisal<input type="hidden" value="Bisal">
+                                  </div>
+                              </div> -->
+                      </div>
+
+
+                      </div>
+
+                      <hr/>
+
+                      <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                          <button @click.prevent="submitForm" class="btn btn-primary ml-30">Publish</button>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                          <div class="tools add_btn">
+                              <button class="btn btn-light">Save</button>
+                              <button class="btn btn-light">Preview</button>
+                              <button class="btn btn-light">Close</button>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
                   </form>
               </div>
 
@@ -66,9 +94,9 @@ import Form from './../services/Form.js';
 
           return {
                 editor: ClassicEditor,
+                step:1,
                 form:new Form({
-                    title:'',
-                    content:'',
+                    short_description:'',
                     bannerImage:'',
                     tags:'',
                     isAnynomous:''
@@ -81,26 +109,16 @@ import Form from './../services/Form.js';
                   { name: 'Laravel', language: 'PHP' },
                   { name: 'Phoenix', language: 'Elixir' }
                 ]
-            };
+            }
          },
         validations: {
           form:{
-            title: {
+            short_description: {
               required,
             },
-            content: 
-            {
-              required,
-            },
-            bannerImage: 
-            {
-              // required,
-            },
-            tags: 
-            {
-              required,
-            },
+            bannerImage:{
 
+            },
           }
         },
 
@@ -111,6 +129,13 @@ import Form from './../services/Form.js';
         },
 
         methods:{
+          // next() {
+          //   this.$v.form.$touch();
+          //   if(!this.$v.form.$invalid)
+          //   {
+          //     this.step++;
+          //   }
+          // },
           previewImage:function(){
             
              var reader = new FileReader();
@@ -131,10 +156,10 @@ import Form from './../services/Form.js';
     //   this.form.tags.push(tag)
     // },
           submitForm:function(){
-                this.$v.$touch();
-            if(!this.$v.$invalid)
+                this.$v.form.$touch();
+            if(!this.$v.form.$invalid)
             {
-              this.form.post('api/blog/add').then(response => {
+              this.form.post('/blog/edit/{postid}').then(response => {
                if(response.data.status){
 
                   window.location.href="dashboard"
