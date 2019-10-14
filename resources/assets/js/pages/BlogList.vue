@@ -42,7 +42,7 @@
           </div>
 
           <div class="btn-group">
-            <a data-original-title="Refresh" @click="resetFilters " data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
+            <a data-original-title="Refresh" @click="resetFilters" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
               <i class=" fa fa-sync"></i>
             </a>
           </div>
@@ -70,11 +70,11 @@
             </ul>
           </div>
 
-          <ul class="unstyled inbox-pagination" >
-            <li><span>{{blogList.from}}-{{ blogList.to}} of {{blogList.total}}</span></li>
+          <ul class="unstyled inbox-pagination" v-if="initialState.blogList" >
+            <li><span>{{initialState.blogList.from}}-{{ initialState.blogList.to}} of {{initialState.blogList.total}}</span></li>
             
            
-         <pagination :data="blogList"  :limit="-1" :show-disabled="true"  @pagination-change-page="getResults">
+         <pagination :data="initialState.blogList"  :limit="-1" :show-disabled="true"  @pagination-change-page="getResults">
            <span slot="prev-nav"><li>
               <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
             </li></span>
@@ -86,8 +86,11 @@
 
         </div>
         <table class="table table-inbox table-hover">
-          <tbody v-if="blogList.data" >
-            <tr class="unread"  v-for="eachblog in blogList.data" :key="blogList.data.id">
+        <tbody v-if="this.$store.getters.isLoading===false">
+           <PlaceHolderBlogList></PlaceHolderBlogList>
+        </tbody>
+          <tbody v-else-if="initialState.blogList" >
+            <tr class="unread"  v-for="eachblog in initialState.blogList.data">
               <td class="inbox-small-cells">
                 <input type="checkbox" class="mail-checkbox" @click="select" v-model="postIds" :value="eachblog.code">
               </td>
@@ -110,20 +113,8 @@
             </tr>
            
           </tbody>
-          <tbody v-else-if="isLoading">
-           <ContentLoader
-              height=200
-              width=600
-              speed={2}
-              primaryColor="#f3f3f3"
-              secondaryColor="#ecebeb"
-            >
-                <rect x="20" y="20" rx="5" ry="5" width="30" height="20" />
-                <rect x="105" y="20" rx="5" ry="5" width="250" height="20" />
-                <rect x="105" y="20" rx="5" ry="5" width="150" height="20" />
-            </ContentLoader>
-          </tbody>
-          <tbody v-else>
+          
+          <tbody v-else-if="isLoading===false">
              <tr >
               <td colspan="6">No post are available</td>
             </tr>
@@ -144,14 +135,15 @@
 </div>
 </template>
 <script>
- import { BulletListLoader,ContentLoader } from 'vue-content-loader';
+
 import mixin  from './../mixins/LoadData.mixin.js';
 import Form  from './../services/Form.js';
+import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolderBlogList';
     export default {
         
         data:function(){
           return {
-            blogList:{},
+            initialState:{},
             form:new Form(),
             sort_by:'',
             filter_by:'',
@@ -162,8 +154,7 @@ import Form  from './../services/Form.js';
         },
         mixins:[mixin],
         components:{
-          BulletListLoader,
-          ContentLoader
+          PlaceHolderBlogList
         },
         watch: {
           filter_by: function () {
@@ -175,7 +166,6 @@ import Form  from './../services/Form.js';
           search(newValue, oldValue) {
            var newspacecount=newValue.split(' ').length;
            var oldspacecount=oldValue.split(' ').length;
-            
             if(newspacecount!=oldspacecount)
             {
                this.getResults();
@@ -185,18 +175,19 @@ import Form  from './../services/Form.js';
               this.getResults();
             }        
           }
-
-
       },
       created(){
-        // this.getResults();
+        console.log(this.initialState);        // this.getResults();
       },
       methods: {
         getResults(page = 1) {
+          this.initialState.blogList={};
+          this.$store.commit('TOGGLE_LOADING');
           this.form.get('api/blog/list?page=' + page+'&search='+this.search+'&sort_by='+this.sort_by+'&filter_by='+this.filter_by).then(response => {
+               this.$store.commit('TOGGLE_LOADING');
                if(response.data)
                {
-                this.blogList=response.data.blogList
+                this.initialState.blogList=response.data.blogList
                }
                else
                {
@@ -204,9 +195,9 @@ import Form  from './../services/Form.js';
                }
               }).catch(e => 
               {
+                 this.$store.commit('TOGGLE_LOADING');
                   console.log(e);
               });
-
         },
 
         updateFilterBy(value=''){
@@ -229,7 +220,7 @@ import Form  from './../services/Form.js';
             var postids=this.postIds;
             var selected=this.selected;
             if (!this.allSelected) {
-              this.blogList.data.forEach(function(item,value)
+              this.initialState.blogList.data.forEach(function(item,value)
               {
                  postids.push(item.code);
                  selected=true;
@@ -245,7 +236,9 @@ import Form  from './../services/Form.js';
         },
         isLoading:function()
         {
-          return form.isLoading;
+          this.form.isLoading=this.$store.getters.isLoading
+          return this.$store.getters.isLoading;
+
         },
         select: function() {
             // this.allSelected = false;
