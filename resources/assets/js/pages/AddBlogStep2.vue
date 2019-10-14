@@ -106,7 +106,7 @@ import Form from './../services/Form.js';
 
           return {
                 editor: ClassicEditor,
-                options:[],
+                initialState:[],
                 form:new Form({
                     short_description:'',
                     image:'',

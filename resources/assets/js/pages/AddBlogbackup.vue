@@ -52,7 +52,6 @@
 
 <script>
 import mixin  from './../mixins/LoadData.mixin.js';
-
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Multiselect from 'vue-multiselect'
 import { required, between ,email} from 'vuelidate/lib/validators';

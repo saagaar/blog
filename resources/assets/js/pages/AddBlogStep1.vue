@@ -157,7 +157,7 @@ import Form from './../services/Form.js';
 
 <style type="text/css">
   .ck-editor__editable {
-    min-height: 300px;
+    min-height: 1000px;
    }
 
   

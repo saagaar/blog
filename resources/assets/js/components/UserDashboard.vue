@@ -77,6 +77,7 @@ import TheFooter from './../components/Footer/TheFooter';
            
            }
         },
+        mixin,
         computed:{
             me:function(){
               return this.$store.getters.me
@@ -87,6 +88,6 @@ import TheFooter from './../components/Footer/TheFooter';
         components:{
             TheTopNav,
             TheFooter
-        },
+        }
     }
 </script>

@@ -16,38 +16,41 @@ let action='';
         },
         data() {
         	return {
-        		isFollowing: this.following
+        		isFollowing: this.following,
+                form:new Form()
            }
         },
         methods:
         {
         	toggleFollow:function(){
+               this.$store.commit('TOGGLE_LOADING');
+
         		if(!this.isFollowing)
         			action='api/followuser/'+this.username+'/'+this.followSuggestionHead;
         		else 
         			action='api/unFollowuser'+this.username+'/'+this.followSuggestionHead;
-	        		var form=new Form();
-	        		form.get(action).then(response => {
+	        		
+	        		this.form.get(action).then(response => {
 		               if(response.data.status)
 		               {
-		               	 this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
-
+                          // this.$store.commit('TOGGLE_LOADING');
+   		               	  this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
 		               	  this.$emit('clicked',this.username,response.data.message);
-		        //        	    let index = state.followSuggestions.indexOf(user);
-						    // // remove after 1 second
-						    // setTimeout(function () {
-						    //     state.followSuggestions.splice(index, 1);
-						    // }, 1000);
 		               }
 		               else
 		               {
-		                 
+                          // this.$store.commit('TOGGLE_LOADING');
 		               }
 	              }).catch(e => {
-	                  console.log(e);
+                    // this.$store.commit('TOGGLE_LOADING');
 	              });
 
-        	}
+        	},
+            isLoading:function()
+            {
+              return this.form.isLoading;
+            },
+      
         }
     }
 </script>
