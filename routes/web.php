@@ -55,7 +55,8 @@ Route::post('/blog/register', 'Frontend\LoginController@register')->name('regist
 Route::get('/blog/isemailregistered/{email}', 'Frontend\LoginController@isEmailAlreadyRegistered')->name('useremail');
 
 Route::match(['get','post'],'/blog/add', 'Frontend\BlogController@create');
-Route::match(['get','post'],'/blog/edit/{postid}/step2', 'Frontend\BlogController@updateBlogDetail');
+Route::match(['get','post'],'api/blog/edit/{postid}/step2', 'Frontend\BlogController@updateBlogDetail');
+Route::match(['get','post'],'blog/edit/{postid}/step2', 'Frontend\BlogController@updateBlogDetail');
 Route::match(['get','post'],'/blog/edit/{postid}', 'Frontend\BlogController@updateBlogDetail');
 Route::match(['get','post'],'api/blog/add', 'Frontend\BlogController@create');
 Auth::routes();

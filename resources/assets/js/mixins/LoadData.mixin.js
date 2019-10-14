@@ -23,7 +23,7 @@ export default {
     {
       setTimeout(() => {
         this.isLoading=false;
-      this.$data.blogList=(data.blogList)
+      this.$data.options=(data.options)
       },2000);
     });
   }

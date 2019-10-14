@@ -7585,6 +7585,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7598,32 +7610,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default.a,
-      step: 1,
+      options: [],
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
         short_description: '',
-        bannerImage: '',
+        image: '',
         tags: '',
-        isAnynomous: ''
-      }),
-      options: [{
-        name: 'Vue.js',
-        language: 'JavaScript'
-      }, {
-        name: 'Adonis',
-        language: 'JavaScript'
-      }, {
-        name: 'Rails',
-        language: 'Ruby'
-      }, {
-        name: 'Sinatra',
-        language: 'Ruby'
-      }, {
-        name: 'Laravel',
-        language: 'PHP'
-      }, {
-        name: 'Phoenix',
-        language: 'Elixir'
-      }]
+        isAnynomous: false
+      })
     };
   },
   validations: {
@@ -7631,17 +7624,13 @@ __webpack_require__.r(__webpack_exports__);
       short_description: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"]
       },
-      bannerImage: {}
+      image: {}
     }
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    setTimeout(function () {
-      _this.myData = 'Example Data';
-    }, 5000);
-  },
   methods: {
+    onChangeEventHandler: function onChangeEventHandler() {
+      console.log(options);
+    },
     // next() {
     //   this.$v.form.$touch();
     //   if(!this.$v.form.$invalid)
@@ -7661,19 +7650,11 @@ __webpack_require__.r(__webpack_exports__);
 
       reader.readAsDataURL(event.target.files[0]);
     },
-    //          addTag (newTag) {
-    //   const tag = {
-    //     name: newTag,
-    //     code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-    //   }
-    //   this.options.push(tag)
-    //   this.form.tags.push(tag)
-    // },
     submitForm: function submitForm() {
       this.$v.form.$touch();
 
       if (!this.$v.form.$invalid) {
-        this.form.post('/blog/edit/{postid}').then(function (response) {
+        this.form.post('/blog/edit/' + this.$route.params.blogId).then(function (response) {
           if (response.data.status) {
             window.location.href = "dashboard";
           } else {}
@@ -49832,132 +49813,161 @@ var render = function() {
   return _c("div", { staticClass: "col-md-9 col-sm-9" }, [
     _c("div", { attrs: { id: "main" } }, [
       _c("div", { staticClass: "white-box add_blog" }, [
-        _c("form", { attrs: { method: "post" } }, [
-          _c("div", [
-            _c("div", { staticClass: "form-group upload_img" }, [
-              _vm._m(0),
+        _c(
+          "form",
+          { attrs: { method: "post", enctype: "multipart/form-data" } },
+          [
+            _c("div", [
+              _c("div", { staticClass: "form-group upload_img" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("figure", [
+                  _c("img", {
+                    attrs: { src: "/images/upload.png", id: "image-field" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { staticClass: "file-input btn btn-success btn-file" },
+                    [
+                      _c("input", {
+                        staticClass: "upload",
+                        attrs: { type: "file", name: "image", id: "file1" },
+                        on: {
+                          change: function($event) {
+                            _vm.previewImage()
+                            _vm.$v.form.image.$touch()
+                          }
+                        }
+                      })
+                    ]
+                  )
+                ])
+              ]),
               _vm._v(" "),
-              _c("figure", [
-                _c("img", {
-                  attrs: { src: "/images/upload.png", id: "image-field" }
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.short_description,
+                      expression: "form.short_description"
+                    }
+                  ],
+                  staticClass: "form-control ckeditor",
+                  attrs: {
+                    id: "editor",
+                    blur: "$v.form.short_description.$touch()"
+                  },
+                  domProps: { value: _vm.form.short_description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "short_description",
+                        $event.target.value
+                      )
+                    }
+                  }
                 }),
                 _vm._v(" "),
-                _c(
-                  "span",
-                  { staticClass: "file-input btn btn-success btn-file" },
-                  [
-                    _c("input", {
-                      staticClass: "upload",
-                      attrs: { type: "file", name: "bannerImage", id: "file1" },
-                      on: {
-                        change: function($event) {
-                          _vm.previewImage()
-                          _vm.$v.form.bannerImage.$touch()
-                        }
-                      }
-                    })
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.short_description,
-                    expression: "form.short_description"
-                  }
-                ],
-                staticClass: "form-control ckeditor",
-                attrs: {
-                  id: "editor",
-                  blur: "$v.form.short_description.$touch()"
-                },
-                domProps: { value: _vm.form.short_description },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "short_description", $event.target.value)
-                  }
-                }
-              }),
+                _vm.$v.form.short_description.$anyDirty
+                  ? _c("div", [
+                      !_vm.$v.form.short_description.required
+                        ? _c("div", { staticClass: "error" }, [
+                            _vm._v("This Field is required")
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e()
+              ]),
               _vm._v(" "),
-              _vm.$v.form.short_description.$anyDirty
-                ? _c("div", [
-                    !_vm.$v.form.short_description.required
-                      ? _c("div", { staticClass: "error" }, [
-                          _vm._v("This Field is required")
-                        ])
-                      : _vm._e()
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: " pad-box" }, [
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("multiselect", {
-                    attrs: {
-                      "tag-placeholder": "Add this as new tag",
-                      placeholder: "Search or add a tag",
-                      label: "name",
-                      "track-by": "code",
-                      options: _vm.options,
-                      multiple: true,
-                      taggable: true
-                    },
-                    on: { tag: _vm.addTag },
-                    model: {
-                      value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-4" }, [
+              _c("div", { staticClass: " pad-box" }, [
+                _c("div", { staticClass: "form-group" }, [
                   _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary ml-30",
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.submitForm($event)
+                    "div",
+                    [
+                      _c("label", { staticClass: "typo__label" }, [
+                        _vm._v("Tags")
+                      ]),
+                      _vm._v(" "),
+                      _c("multiselect", {
+                        attrs: {
+                          "tag-placeholder": "Add this as new tag",
+                          placeholder: "Search or add a tag",
+                          label: "name",
+                          "track-by": "name",
+                          options: _vm.options,
+                          multiple: true,
+                          taggable: true
+                        },
+                        model: {
+                          value: _vm.form.tags,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "tags", $$v)
+                          },
+                          expression: "form.tags"
                         }
-                      }
-                    },
-                    [_vm._v("Publish")]
+                      })
+                    ],
+                    1
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(4),
+                _c("div", { staticClass: "tgl-group" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "tgl tgl-light",
+                    attrs: {
+                      name: "isAnynomous",
+                      id: "display-address",
+                      type: "checkbox"
+                    },
+                    on: { change: _vm.onChangeEventHandler }
+                  }),
+                  _vm._v(" "),
+                  _c("label", {
+                    staticClass: "tgl-btn",
+                    attrs: { for: "display-address" }
+                  })
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "clearfix" })
+                _vm._m(3),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-4" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary ml-30",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.submitForm($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Publish")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "clearfix" })
+                ])
               ])
             ])
-          ])
-        ])
+          ]
+        )
       ])
     ])
   ])
@@ -49985,18 +49995,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tgl-group" }, [
-      _c("span", [
-        _c("i", { staticClass: "fa fa-globe" }, [_vm._v(" ")]),
-        _vm._v(" Post As Anonymous Only")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "tgl tgl-light",
-        attrs: { name: "isAnynomous", id: "display-address", type: "checkbox" }
-      }),
-      _vm._v(" "),
-      _c("label", { staticClass: "tgl-btn", attrs: { for: "display-address" } })
+    return _c("span", [
+      _c("i", { staticClass: "fa fa-globe" }, [_vm._v(" ")]),
+      _vm._v(" Post As Anonymous Only")
     ])
   },
   function() {
@@ -75793,7 +75794,7 @@ var getData = function getData(to) {
     getData(this.$router.currentRoute).then(function (data) {
       setTimeout(function () {
         _this.isLoading = false;
-        _this.$data.blogList = data.blogList;
+        _this.$data.options = data.options;
       }, 2000);
     });
   }

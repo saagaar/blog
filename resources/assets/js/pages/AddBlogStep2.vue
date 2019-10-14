@@ -4,14 +4,14 @@
         <div class="col-md-9 col-sm-9">
                 <div id="main" class="">
               <div class="white-box add_blog">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div>
                           <div class="form-group upload_img">
                           <label><i class="fa fa-image"></i> Upload Image</label>
                           <figure> 
                               <img :src="'/images/upload.png'" id="image-field"/>
                               <span class="file-input btn btn-success btn-file">
-                                  <input type="file"  name="bannerImage" id="file1" class="upload" @change="previewImage(); $v.form.bannerImage.$touch()" >
+                                  <input type="file"  name="image" id="file1" class="upload" @change="previewImage(); $v.form.image.$touch()" >
                               </span>
                           </figure>
                           </div>
@@ -27,11 +27,23 @@
 
                       <div class=" pad-box">
                       <div class="form-group">
-                        <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
+                        <div>
+                          <label class="typo__label">Tags</label>
+                          <multiselect
+                           v-model="form.tags" 
+                           tag-placeholder="Add this as new tag" 
+                           placeholder="Search or add a tag" 
+                           label="name" 
+                           track-by="name" 
+                           :options="options" 
+                           :multiple="true" 
+                           :taggable="true">
+                           </multiselect>
+                        </div>
                       </div>
                       <div class="tgl-group">
                           <span><i class="fa fa-globe">&nbsp;</i> Post As Anonymous Only</span>
-                          <input class="tgl tgl-light" name="isAnynomous" id="display-address" type="checkbox">
+                          <input @change="onChangeEventHandler" class="tgl tgl-light"  name="isAnynomous" id="display-address" type="checkbox">
                           <label class="tgl-btn" for="display-address"></label>
                       </div>
 
@@ -90,25 +102,18 @@ import Form from './../services/Form.js';
           Multiselect
         },
         mixins:[mixin],
-        data() {
+         data:function(){
 
           return {
                 editor: ClassicEditor,
-                step:1,
+                options:[],
                 form:new Form({
                     short_description:'',
-                    bannerImage:'',
+                    image:'',
                     tags:'',
-                    isAnynomous:''
+                    isAnynomous:false
                 }),
-                 options: [
-                  { name: 'Vue.js', language: 'JavaScript' },
-                  { name: 'Adonis', language: 'JavaScript' },
-                  { name: 'Rails', language: 'Ruby' },
-                  { name: 'Sinatra', language: 'Ruby' },
-                  { name: 'Laravel', language: 'PHP' },
-                  { name: 'Phoenix', language: 'Elixir' }
-                ]
+                 
             }
          },
         validations: {
@@ -116,19 +121,18 @@ import Form from './../services/Form.js';
             short_description: {
               required,
             },
-            bannerImage:{
+            image:{
 
             },
           }
         },
 
-        mounted() {
-             setTimeout(() => {
-              this.myData = 'Example Data';
-            }, 5000);
-        },
 
         methods:{
+
+          onChangeEventHandler(){
+            console.log(options);
+          },
           // next() {
           //   this.$v.form.$touch();
           //   if(!this.$v.form.$invalid)
@@ -147,19 +151,13 @@ import Form from './../services/Form.js';
               }
               reader.readAsDataURL(event.target.files[0]);
             },
-    //          addTag (newTag) {
-    //   const tag = {
-    //     name: newTag,
-    //     code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-    //   }
-    //   this.options.push(tag)
-    //   this.form.tags.push(tag)
-    // },
+
+
           submitForm:function(){
                 this.$v.form.$touch();
             if(!this.$v.form.$invalid)
             {
-              this.form.post('/blog/edit/{postid}').then(response => {
+              this.form.post('/blog/edit/'+this.$route.params.blogId).then(response => {
                if(response.data.status){
 
                   window.location.href="dashboard"
