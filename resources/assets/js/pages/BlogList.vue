@@ -42,7 +42,7 @@
           </div>
 
           <div class="btn-group">
-            <a data-original-title="Refresh" @click="resetFilters " data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
+            <a data-original-title="Refresh" @click="resetFilters" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
               <i class=" fa fa-sync"></i>
             </a>
           </div>
@@ -166,7 +166,6 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
           search(newValue, oldValue) {
            var newspacecount=newValue.split(' ').length;
            var oldspacecount=oldValue.split(' ').length;
-            
             if(newspacecount!=oldspacecount)
             {
                this.getResults();
@@ -176,8 +175,6 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
               this.getResults();
             }        
           }
-
-
       },
       created(){
         console.log(this.initialState);        // this.getResults();
@@ -187,7 +184,7 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
           this.initialState.blogList={};
           this.$store.commit('TOGGLE_LOADING');
           this.form.get('api/blog/list?page=' + page+'&search='+this.search+'&sort_by='+this.sort_by+'&filter_by='+this.filter_by).then(response => {
-              this.$store.commit('TOGGLE_LOADING');
+               this.$store.commit('TOGGLE_LOADING');
                if(response.data)
                {
                 this.initialState.blogList=response.data.blogList

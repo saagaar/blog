@@ -31,21 +31,12 @@ let getData = function(to,store) {
 export default {
   beforeCreate () 
   {
-    // alert(this.$store.getters.isLoading);
     this.$store.commit('TOGGLE_LOADING');
     let store=this.$store;
-    // alert(this.$store.getters.isLoading);
     getData(this.$router.currentRoute,store).then((data) => 
     {
-
-      setTimeout(() => 
-      {
       this.$store.commit('TOGGLE_LOADING');
-        
-      // alert(store.getters.isLoading);
-
-         this.$data.initialState=data;
-      },2000);
+      this.$data.initialState=data;
     });
   }
 };
