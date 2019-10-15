@@ -11,7 +11,7 @@
     <rect x="200" y="75" rx="0" ry="0" width="300" height="27" /> 
     
   
-    <circle cx="90" cy="276" r="80" /> 
+    <circle cx="90" cy="276" r="80"/> 
     <rect x="200" y="240" rx="0" ry="0" width="600" height="27" /> 
     <rect x="200" y="278" rx="0" ry="0" width="300" height="27" /> 
 
