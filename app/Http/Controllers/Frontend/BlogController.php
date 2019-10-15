@@ -25,7 +25,7 @@ class BlogController extends FrontendController
         if($routeName=='api')
            {
              
-            $data['options'] = $tag->getAll()->where('status',1)->get('name')->toArray();
+            $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
               return ($data);
            }
            else
@@ -56,46 +56,48 @@ class BlogController extends FrontendController
                 }
             } 
         }
-      $data['options'] = $tag->getAll()->where('status',1)->get('name')->toArray();
+      $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
       $initialState=json_encode($data);
       $user=$this->user_state_info();
       return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
    }
         
    	}
-    public function updateBlogDetail(Request $request,$postId,TagInterface $tag){
-        $routeName= Route::currentRouteName();
-         if($routeName=='api')
-           {
-             
-            $data['options'] = $tag->getAll()->where('status',1)->get('name')->toArray();
-              return ($data);
-           }
-           else
-           {
-                $data = [];
-                $data['options'] = $tag->getAll()->where('status',1)->get('name')->toArray();
-                // dd($data['options']);
-                if($request->method()=='POST'){
-                    $validator = Validator::make($request->all(), [ 
-                    'short_description' => 'required', 
-                    ]);
-                    if($this->blogRequiresActivation=='N'){
-                        return response()->json(['status'=>false,'data'=>'','message'=>'Post cannot be created for now. Please try again later'], 401);
-                    }else{
-                        if ($validator->fails()) {
-                            return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
-                        }else{
-                            // dd($$request->tags->toArray());
-                            $form['short_description']=$request->short_description;
-                            $form['image']='211.jpg';
-                            $updated = $this->blog->updateByCode($postId,$form);  
-                            // $updated->addTag($request->tags);                  
-                        }
-                    } 
+    public function updateBlogDetail(Request $request,$postId,TagInterface $tag)
+    {
+    $routeName= Route::currentRouteName();
+    if($routeName=='api')
+    {
+     
+        $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
+        return ($data);
+    }
+    else
+    {
+        $data = [];
+        $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
+        if($request->method()=='POST'){
+            $validator = Validator::make($request->all(), [ 
+            'short_description' => 'required',
+            'tags'              =>'required' 
+            ]);
+            if($this->blogRequiresActivation=='N'){
+                return response()->json(['status'=>false,'data'=>'','message'=>'Post cannot be created for now. Please try again later'], 401);
+            }else{
+                if ($validator->fails()) {
+                    return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+                }else{
+                    $form['short_description']=$request->short_description;
+                    $form['image']=$request->image;
+                    $form['anynomous'] = $request->isAnynomous ? '1' : '2';
+                    $this->blog->updateByCode($postId,$form); 
+                    $tagid = $tag->getTagByName($request->tags);
+                    $this->blog->addTag($postId,$tagid);  
+                                    
                 }
-                 return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>'']);
-            }
+            } 
         }
-   
+          return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>'']);
+    }
+    }
 }

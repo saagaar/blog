@@ -29,13 +29,13 @@
                       <div class="form-group">
                         <div>
                           <label class="typo__label">Tags</label>
-                          <multiselect
+                          <multiselect v-if="initialState.options"
                            v-model="form.tags" 
                            tag-placeholder="Add this as new tag" 
                            placeholder="Search or add a tag" 
                            label="name" 
                            track-by="name" 
-                           :options="options" 
+                           :options="initialState.options" 
                            :multiple="true" 
                            :taggable="true">
                            </multiselect>
@@ -43,7 +43,7 @@
                       </div>
                       <div class="tgl-group">
                           <span><i class="fa fa-globe">&nbsp;</i> Post As Anonymous Only</span>
-                          <input @change="onChangeEventHandler" class="tgl tgl-light"  name="isAnynomous" id="display-address" type="checkbox">
+                          <input class="tgl tgl-light"  name="isAnynomous" id="display-address" type="checkbox" v-model="form.isAnynomous">
                           <label class="tgl-btn" for="display-address"></label>
                       </div>
 
@@ -102,15 +102,15 @@ import Form from './../services/Form.js';
           Multiselect
         },
         mixins:[mixin],
-         data:function(){
-
+      data:function(){
           return {
                 editor: ClassicEditor,
-                initialState:[],
+                options:[],
+                initialState:{},
                 form:new Form({
                     short_description:'',
                     image:'',
-                    tags:'',
+                    tags:[],
                     isAnynomous:false
                 }),
                  
@@ -126,7 +126,10 @@ import Form from './../services/Form.js';
             },
           }
         },
+        // created: function(){
 
+        //   console.log(this.initialState.option);
+        // },
 
         methods:{
 

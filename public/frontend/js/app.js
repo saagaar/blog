@@ -7344,11 +7344,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
 /* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
 /* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
-/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
 //
 //
 //
@@ -7402,21 +7400,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
-  },
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default.a,
       step: 1,
-      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
+      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
         title: '',
         content: ''
       })
@@ -7425,10 +7419,10 @@ __webpack_require__.r(__webpack_exports__);
   validations: {
     form: {
       title: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"]
       },
       content: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"]
       }
     }
   },
@@ -7620,11 +7614,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default.a,
-      initialState: [],
+      options: [],
+      initialState: {},
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
         short_description: '',
         image: '',
-        tags: '',
+        tags: [],
         isAnynomous: false
       })
     };
@@ -7637,6 +7632,9 @@ __webpack_require__.r(__webpack_exports__);
       image: {}
     }
   },
+  // created: function(){
+  //   console.log(this.initialState.option);
+  // },
   methods: {
     onChangeEventHandler: function onChangeEventHandler() {
       console.log(options);
@@ -7863,9 +7861,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  created: function created() {
-    console.log(this.initialState); // this.getResults();
-  },
+  mounted: function mounted() {},
   methods: {
     getResults: function getResults() {
       var _this = this;
@@ -49509,24 +49505,26 @@ var render = function() {
                         _vm._v("Tags")
                       ]),
                       _vm._v(" "),
-                      _c("multiselect", {
-                        attrs: {
-                          "tag-placeholder": "Add this as new tag",
-                          placeholder: "Search or add a tag",
-                          label: "name",
-                          "track-by": "name",
-                          options: _vm.options,
-                          multiple: true,
-                          taggable: true
-                        },
-                        model: {
-                          value: _vm.form.tags,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "tags", $$v)
-                          },
-                          expression: "form.tags"
-                        }
-                      })
+                      _vm.initialState.options
+                        ? _c("multiselect", {
+                            attrs: {
+                              "tag-placeholder": "Add this as new tag",
+                              placeholder: "Search or add a tag",
+                              label: "name",
+                              "track-by": "name",
+                              options: _vm.initialState.options,
+                              multiple: true,
+                              taggable: true
+                            },
+                            model: {
+                              value: _vm.form.tags,
+                              callback: function($$v) {
+                                _vm.$set(_vm.form, "tags", $$v)
+                              },
+                              expression: "form.tags"
+                            }
+                          })
+                        : _vm._e()
                     ],
                     1
                   )
@@ -49536,13 +49534,53 @@ var render = function() {
                   _vm._m(2),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.isAnynomous,
+                        expression: "form.isAnynomous"
+                      }
+                    ],
                     staticClass: "tgl tgl-light",
                     attrs: {
                       name: "isAnynomous",
                       id: "display-address",
                       type: "checkbox"
                     },
-                    on: { change: _vm.onChangeEventHandler }
+                    domProps: {
+                      checked: Array.isArray(_vm.form.isAnynomous)
+                        ? _vm._i(_vm.form.isAnynomous, null) > -1
+                        : _vm.form.isAnynomous
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.form.isAnynomous,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                _vm.form,
+                                "isAnynomous",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.form,
+                                "isAnynomous",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.form, "isAnynomous", $$c)
+                        }
+                      }
+                    }
                   }),
                   _vm._v(" "),
                   _c("label", {
@@ -50002,7 +50040,7 @@ var render = function() {
                       "table",
                       { staticClass: "table table-inbox table-hover" },
                       [
-                        this.$store.getters.isLoading === false
+                        this.$store.getters.isLoading === true
                           ? _c("tbody", [_c("PlaceHolderBlogList")], 1)
                           : _vm.initialState.blogList
                           ? _c(

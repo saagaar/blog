@@ -66,7 +66,7 @@ Class Blog implements BlogInterface
       return	$this->blog->find($id)->update($data);
     }
     public function updateByCode( $code,array $data){
-      return  $this->blog->where('code', $code)->update($data);
+      return $this->blog->where('code', $code)->update($data);
     }
       /**
      * Deletes a post.
@@ -76,8 +76,10 @@ Class Blog implements BlogInterface
     public function delete($id){
       return	$this->blog->find($id)->delete();
     }
-    public function addTag($name){
-       return  $this->blog->tags()->sync($this->tag->where('name',$name)->get());
+    public function addTag($postId,$tags){
+      $blogData = $this->blog->where('code',$postId)->first();
+      return $blogData->tags()->sync($tags);
+      
     }
 }
 ?>
