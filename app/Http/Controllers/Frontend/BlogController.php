@@ -20,7 +20,7 @@ class BlogController extends FrontendController
         $this->blog=$blog;
     }
 
-   	public function create(Request $request,TagInterface $tag){
+   	public function create(Request $request,$blogCode=false,TagInterface $tag){
         $routeName= Route::currentRouteName();
         if($routeName=='api')
            {
@@ -37,13 +37,17 @@ class BlogController extends FrontendController
             // 'bannerImage' => 'required', 
             ]);
             if($this->blogRequiresActivation=='N'){
-                return response()->json(['status'=>false,'data'=>'','message'=>'Post cannot be created for now. Please try again later'], 401);
+                return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
             }else{
                 if ($validator->fails()) {
                     return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
                 }else{
-
-                    $input = $request->all(); 
+                    if($blogCode){
+                        $input = $request->all();
+                        $this->blog->updateByCode($blogCode,$input);
+                        return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'Blog updated successfully']);exit;
+                    }
+                    
                     $input['locale_id']='1';
                     $input['user_id']=Auth()->user()->id;
                     $created = $this->blog->create($input);
@@ -52,7 +56,7 @@ class BlogController extends FrontendController
                     $part2=substr($code, 7,-1);
                     $created['code']= $part1.$part2;
                     $created->save();
-                    return response()->json(['status'=>true,'blogId'=>$created['code'],'message'=>'Post saved successfully']);
+                    return response()->json(['status'=>true,'blogId'=>$created['code'],'message'=>'Blog saved successfully']);
                 }
             } 
         }
@@ -70,19 +74,23 @@ class BlogController extends FrontendController
     {
      
         $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
+        $data['blog']   = $this->blog->getBlogByCode($postId);
         return ($data);
     }
     else
     {
         $data = [];
         $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
+        $data['blog']   = $this->blog->getBlogByCode($postId);
+        $data['path']='/blog/edit/'.$postId;
+        // dd($data['blog']);
         if($request->method()=='POST'){
             $validator = Validator::make($request->all(), [ 
             'short_description' => 'required',
             'tags'              =>'required' 
             ]);
             if($this->blogRequiresActivation=='N'){
-                return response()->json(['status'=>false,'data'=>'','message'=>'Post cannot be created for now. Please try again later'], 401);
+                return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
             }else{
                 if ($validator->fails()) {
                     return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            

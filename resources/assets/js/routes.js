@@ -24,7 +24,9 @@ let routes=[
 				},
 				{
 						path:'/profile',
-						components:require('./pages/EditProfile')
+						// components:require('./pages/Profile'),
+						meta:{layout:"timeline"}
+						
 				},
 				{
 						path:'/categories',

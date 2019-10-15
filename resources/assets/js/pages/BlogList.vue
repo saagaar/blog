@@ -11,7 +11,7 @@
       <div class="inbox-head">
         <div class="row">
             <div class="col-sm-6">
-                <h3> <i class="fa fa-mail-bulk">&nbsp;</i> All Posts</h3>
+                <h3> <i class="fa fa-mail-bulk">&nbsp;</i> All Posts &nbsp;&nbsp;&nbsp; <router-link to="/blog/add"><i class="fa fa-plus-circle"></i></router-link></h3>
             </div>
             <div class="col-sm-6">
                 <form class="position text-right">

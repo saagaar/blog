@@ -12,7 +12,7 @@
                           <div class="form-group post_title">
                             <img src="img/p_image.png" alt="" class="profile-photo-md">
                             <span>Posting as <b>Shanvi</b> &nbsp; &nbsp; &nbsp;</span>
-                            <input type="text" @blur="$v.form.title.$touch()" name="title" class="form-control" placeholder="Post Title" v-model="form.title"/> 
+                            <input type="text" @blur="$v.form.title.$touch()" name="title" value=" initialState.blog.title " class="form-control" placeholder="Post Title" v-model="form.title"/> 
                             <div v-if="$v.form.title.$anyDirty">
                               <div class="error" v-if="!$v.form.title.required">This Field is required</div>
                             </div>
@@ -53,7 +53,6 @@
 
 <script>
 import mixin  from './../mixins/LoadData.mixin.js';
-
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { required, between ,email} from 'vuelidate/lib/validators';
 import Form from './../services/Form.js';
@@ -64,7 +63,7 @@ import Form from './../services/Form.js';
 
           return {
                 editor: ClassicEditor,
-                step:1,
+                initialState:{},
                 form:new Form({
                     title:'',
                     content:'',
@@ -82,13 +81,15 @@ import Form from './../services/Form.js';
             },
           }
         },
-
-        mounted() {
-             setTimeout(() => {
-              this.myData = 'Example Data';
-            }, 5000);
+       
+          watch: {
+        initialState: function (value) {
+            this.form.title=value.blog.title;        
+            this.form.content=value.blog.content;   
+           
         },
-
+      },
+        
         methods:{
           next() {
             this.$v.form.$touch();
@@ -120,10 +121,13 @@ import Form from './../services/Form.js';
     //   this.form.tags.push(tag)
     // },
           submitForm:function(next=false){
+              var url='/blog/add';
                 this.$v.form.$touch();
             if(!this.$v.form.$invalid)
             {
-              this.form.post('/blog/add').then(response => {
+              if(this.initialState.blog)
+                url='/blog/edit/'+this.initialState.blog.code;
+              this.form.post(url).then(response => {
                if(response.data.status){
 
                 if(next===true)

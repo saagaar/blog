@@ -19,7 +19,13 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(require('vue-moment'));
 import store from './store/index'
 import config from './config/config.js';
-import UserDashboard from './components/UserDashboard';
+import UserDashboard from './layouts/UserDashboard';
+import Profile from './layouts/Profile';
+Vue.component('default-layout',UserDashboard);
+Vue.component('timeline-layout', Profile);
+
+
+const default_layout="default";
 const app = new Vue({
     el: '#dashboard',
     router,
@@ -37,9 +43,9 @@ const app = new Vue({
     },
     render: function (createElement) 
     {
-    	// this.$store.dispatch('checkLoginUser');
-    	// if(this.$store.getters.user.isLoggedIn)
-	  	 return createElement(UserDashboard);
+    
+         let layout=(this.$route.meta.layout || default_layout)+'-layout';
+	  	 return createElement(layout);
 	},
 
 

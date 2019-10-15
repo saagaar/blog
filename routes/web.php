@@ -28,6 +28,8 @@ Route::get('/api/blog/list/','Frontend\UserController@myBlogs')->name('api');
 
 Route::get('api/dashboard','Frontend\HomeController@dashboard')->name('api');
 
+Route::get('api/profile','Frontend\UserController@profile')->name('api');
+
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 
 Route::get('/blog/list','Frontend\UserController@myBlogs')->name('my.blog');
@@ -38,6 +40,7 @@ Route::get('/api/categories', 'Frontend\UserInterestController@categories')->nam
 Route::get('/api/remove/userinterest/{slug}','Frontend\UserInterestController@removeUserInterest');
 Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUserInterest');
 
+Route::get('/profile','Frontend\UserController@profile')->name('profile');
 
 Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
@@ -56,8 +59,9 @@ Route::get('/blog/isemailregistered/{email}', 'Frontend\LoginController@isEmailA
 
 Route::match(['get','post'],'/blog/add', 'Frontend\BlogController@create');
 Route::match(['get','post'],'api/blog/edit/{postid}/step2', 'Frontend\BlogController@updateBlogDetail')->name('api');
+Route::match(['get','post'],'api/blog/edit/{postid}', 'Frontend\BlogController@updateBlogDetail')->name('api');
 Route::match(['get','post'],'blog/edit/{postid}/step2', 'Frontend\BlogController@updateBlogDetail');
-Route::match(['get','post'],'/blog/edit/{postid}', 'Frontend\BlogController@updateBlogDetail');
+Route::match(['get','post'],'/blog/edit/{postid}', 'Frontend\BlogController@create');
 Route::match(['get','post'],'api/blog/add', 'Frontend\BlogController@create')->name('api');
 Auth::routes();
 

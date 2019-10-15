@@ -3,7 +3,7 @@
 
                 <h4 class="grey"><i class="fa fa-star"></i> Follow </h4>
 
-                  <div v-if="!followSuggestion">
+                  <div v-if="followSuggestion.length>0">
                    <div class="follow-user" v-for="eachsuggestion in followSuggestion" >
                     <img src="images/user-3.jpg" alt="" class="profile-photo-sm pull-left">
                     <div>
@@ -12,7 +12,7 @@
                     </div>
                    </div>
                    </div>
-                    <div v-else-if="this.$store.getters.isLoading===false && followSuggestion" class="follow-user">
+                    <div v-else-if="this.$store.getters.isLoading===true && !followSuggestion" class="follow-user">
                         <PlaceHolderDashboardFeed></PlaceHolderDashboardFeed>
                    </div>
                    <div v-else class="follow-user">
