@@ -49,6 +49,10 @@
         <li  @if($primary_menu=="services.list") class="active" @endif><a href="{{route('services.list')}}"><i class=" fa fa-wrench"  aria-hidden="true"></i> <span>Services</span></a></li>
         <li @if($primary_menu=="banner.list") class="active" @endif><a href="{{route('banner.list')}}"><i class="fa fa-bookmark-o "  aria-hidden="true"></i> <span>Banner</span></a></li>
         <li  @if($primary_menu=="team.list") class="active" @endif><a href="{{route('team.list')}}"><i class="fa fa-group"  aria-hidden="true"></i> <span>Team</span></a></li>
+
+        <li  @if($primary_menu=="notification.list") class="active" @endif><a href="{{route('notification.list')}}"><i class="fa fa-bell"  aria-hidden="true"></i> <span>Notification Settings</span></a></li>
+
+
          <li @if($primary_menu=="subscription.list" ) class="active" @endif><a href="{{route('subscription.list')}}"><i class="fa fa-flag-checkered"  aria-hidden="true"></i> <span>Subscription Manager</span></a>  </li> 
         <li @if($primary_menu=="paymentgateway.list" ) class="active" @endif><a href="{{route('paymentgateway.list')}}"><i class="fa  fa-credit-card"  aria-hidden="true"></i> <span>Payment Gateway</span></a> </li>
         <li @if($primary_menu=="client.list") class="active" @endif><a href="{{route('client.list')}}"><i class="fa fa-user"  aria-hidden="true"></i> <span>Client</span></a>  </li> 

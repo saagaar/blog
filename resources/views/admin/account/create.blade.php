@@ -71,7 +71,7 @@
                 </div>
                 <div class="form-group">
                   <label for="roles" class="control-label">Roles</label>
-                    <select multiple="multiple" class="form-control select2" name="roles[]" id="roles">
+                    <select multiple="multiple" class="form-control js-example-basic-multiple" name="roles[]" id="roles">
                       @foreach ($roles as $values)
                       <option value="{{ $values->id }}"> {{ $values->name }}  </option>
                       @endforeach
@@ -135,10 +135,10 @@
               </div>
               <div class="form-group">
                   <label for="status">Status: </label>
-                  <label><input type="radio" name="status" value="0" checked>Active</label>
-                  <label><input type="radio" name="status" value="1">Inactive</label>
-                  <label><input type="radio" name="status" value="2">Closed</label>
-                  <label><input type="radio" name="status" value="3">Suspended</label>
+                  <label><input type="radio" name="status" value="1" checked>Active</label>
+                  <label><input type="radio" name="status" value="2">Inactive</label>
+                  <label><input type="radio" name="status" value="3">Closed</label>
+                  <label><input type="radio" name="status" value="4">Suspended</label>
                 </div>
                 @if ($errors->has('status'))
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>

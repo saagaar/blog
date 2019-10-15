@@ -4,14 +4,15 @@ namespace App\Repository\Blog;
 
 use App\Models\Blogs;
 use App\Repository\BlogInterface;
-
+use App\Repository\TagInterface;
 Class Blog implements BlogInterface
 {
 	protected $blog;
-
-	public function __construct(Blogs $blog)
+  protected $tag;
+	public function __construct(Blogs $blog,TagInterface $tag)
 	{
 		$this->blog=$blog;
+    $this->tag=$tag;
 	}
 
   /**
@@ -64,7 +65,9 @@ Class Blog implements BlogInterface
     public function update( $id,array $data){
       return	$this->blog->find($id)->update($data);
     }
-
+    public function updateByCode( $code,array $data){
+      return $this->blog->where('code', $code)->update($data);
+    }
       /**
      * Deletes a post.
      *
@@ -72,6 +75,11 @@ Class Blog implements BlogInterface
      */
     public function delete($id){
       return	$this->blog->find($id)->delete();
+    }
+    public function addTag($postId,$tags){
+      $blogData = $this->blog->where('code',$postId)->first();
+      return $blogData->tags()->sync($tags);
+      
     }
 }
 ?>

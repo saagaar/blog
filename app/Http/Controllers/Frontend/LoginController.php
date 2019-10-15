@@ -27,30 +27,52 @@ class LoginController extends FrontendController
     public function socialLogin($provider)
     {
         return Socialite::driver($provider)->redirect();
-
     }
     public function dashboard($provider){
     $getInfo = Socialite::driver($provider)->user(); 
-    $userdata = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
-        if (!$userdata) {
-        $user = $this->createuser($getInfo,$provider); 
+    $userData = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
+        if (!$userData) {
+            $user = $this->registerUser($getInfo,$provider); 
+            if($user['status']==true){
+                auth()->login($user['userData']); 
+            }else{
+                return response()->json($user['message']);
+            }
+        }else{
+            auth()->login($userData); 
         }
-        auth()->login($user); 
         return redirect()->to('/home');
     }
     
-    public function createuser($getInfo,$provider)
+    public function registerUser($getInfo,$provider)
     {
-          $userdata = $this->account->create([
+        $emailCheck = $this->isEmailAlreadyRegistered($getInfo->email);
+        if($emailCheck==true){
+            $emailParts = explode('@', $getInfo->email);
+        $username = $emailParts[0];
+        $check = $this->account->getAll()->where('username',$username)->first();
+        if (!$check) {
+            $infoUsername = $username;
+        }else{
+            $random = rand(0, 9999);
+            $randUsername = $username.$random;
+            $infoUsername = $randUsername;
+        }
+          $userData = $this->account->create([
              'name'     => $getInfo->name,
              'email'    => $getInfo->email,
+             'username'     =>$infoUsername,
              'status'        =>'0',
              'provider'     =>$provider,
              'provider_id'  => $getInfo->id,
              'image'        =>$getInfo->avatar_original,
              'token'        =>$getInfo->token,
          ]);
-        return $userdata;
+          return array('status'=>true,'userData'=>$userData,'message'=>'Registered successfully!'); 
+        }else{
+            return array('status'=>false,'userData'=>'','message'=>'Email Already Exist!'); 
+        }
+        
     }
     public function login(){
         if(Auth::guard('web')->attempt(['email' => request('email'), 'password' => request('password')]))
@@ -100,10 +122,10 @@ class LoginController extends FrontendController
     public function isEmailAlreadyRegistered($email){
         $user = $this->account->getAll()->where('email',$email)->first();
         if($user) {
-           return response()->json(false);
+           return response()->json(['status'=>false]); 
             }
         else{
-           return response()->json(true);
+           return response()->json(['status'=>true]); 
         }
            
     } 

@@ -16,7 +16,13 @@ interface TagInterface
      * @return mixed
      */
     public function getAll();
- 	
+    
+ 	/**
+     * Get tag by name 
+     * @return id
+     */
+
+    public function getTagByName($tagsname);
  	  /**
      * create a 
      *

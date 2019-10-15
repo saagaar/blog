@@ -22,7 +22,7 @@ class NotificationSettings extends Model
      * @var array
      */
     protected $fillable = [
-        'title','code','subject','body','display','view','email_body','database_body','sms_body','notification_type','active'
+        'title','code','subject','view','email_body','database_body','sms_body','notification_type','active'
     ];
     
 }

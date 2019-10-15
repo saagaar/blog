@@ -18,7 +18,7 @@ Class  NotificationSetting implements NotificationSettingInterface
 
      
   public function getNotificationById($Notification_id){
-    return $this->notify->where('id', $notifyId)->first();
+    return $this->notify->where('id', $Notification_id)->first();
   }
 
 

@@ -176,10 +176,12 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             }        
           }
       },
-      created(){
-        console.log(this.initialState);        // this.getResults();
-      },
+     mounted: function(){
+
+          
+        },
       methods: {
+
         getResults(page = 1) {
           this.initialState.blogList={};
           this.$store.commit('TOGGLE_LOADING');

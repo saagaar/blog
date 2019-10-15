@@ -79,11 +79,34 @@
                 </div>
                 <div class="form-group">
                   <label for="banner_image">Image Upload</label>
-                  <img src="{{ asset('images/user-images/category/'.$category['banner_image']) }}" alt="Image" height="42" width="42">
+                  <img src="{{ asset('frontend/images/categories-images/'.$category['banner_image']) }}" alt="Image" height="42" width="42">
                   <input type="file" class="form-control" name="banner_image" id="banner_image" value="{{$category->banner_image}}">
                   @if ($errors->has('banner_image'))
                 <div class="alert alert-danger">{{$errors->first('banner_image') }}</div>
                 @endif
+                </div>
+                <div class="form-group">
+                  <label for="tags">tags</label>
+                  <!-- value="{{ $tags }}" -->
+                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
+                      
+                      @foreach ($tags as $values)
+                        <?php if(!$category->tags()->pluck('tags_id')){ ?>
+                        <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                        <?php }else{ ?>
+                          @foreach ($category->tags()->pluck('tags_id') as $tag)
+                          <option value="{{ $values->id }}" @if($values->id==$tag) selected @endif > {{ $values->name }}  </option>
+                          @endforeach
+                        <?php } ?>
+                      @endforeach
+
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('tags'))
+                        <p class="help-block">
+                            {{ $errors->first('tags') }}
+                        </p>
+                    @endif
                 </div>
               </div>
               <!-- /.box-body -->

@@ -41,7 +41,6 @@ class FrontendController extends BaseController
     Protected $perPage=10;
     public function __construct()
     {
-        
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
 
         $this->visitorInfo =  new visitorInfo();
@@ -90,7 +89,7 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {
-        
+        echo 'here';exit;
         return view('frontend.home.index');
     }
   

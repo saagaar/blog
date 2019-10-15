@@ -4277,7 +4277,11 @@ border-radius: 0px;}
 }
 
 input[type=text] {
+<<<<<<< HEAD
   /*width: 100%;*/
+=======
+  width: 100%;
+>>>>>>> avi
 }
 
 .autocomplete input, .autocomplete input:focus, .autocomplete input:active{color: #000;}

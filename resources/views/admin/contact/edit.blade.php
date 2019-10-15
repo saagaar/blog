@@ -32,7 +32,7 @@
                 <div class="row">
                     <fieldset disabled>
                     <div class="form-group">
-                      <label for="disabledTextInput"> Name</label>
+                      <label for="disabledTextInput">Name</label>
                       <input type="text" id="disabledInput"  class="form-control" name="name" value="{{$contact->name}}" placeholder="Enter name">
                       @if ($errors->has('name'))
                     <div class="alert alert-danger">{{ $errors->first('name') }}</div>
