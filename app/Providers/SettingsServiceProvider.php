@@ -25,7 +25,7 @@ class SettingsServiceProvider extends ServiceProvider
     public function boot(\Illuminate\Contracts\Cache\Factory $cache, SiteoptionInterface $settings)
     {
         if(Schema::hasTable('site_options')){
-            $siteOptions=$settings->getSiteInfo()->toArray();
+        $siteOptions=$settings->getSiteInfo()->toArray();
         $settings = $cache->remember('settings', 60, function() use ($siteOptions )
         {
           return $siteOptions; 

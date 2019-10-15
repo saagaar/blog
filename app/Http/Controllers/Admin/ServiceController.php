@@ -72,6 +72,7 @@ class ServiceController extends AdminController
                 if ($request->hasFile('icon')) {
                     $dir = 'images/services-images/';
                     if ($service->icon != '' && File::exists($dir . $service->icon))
+                    File::delete($dir . $service->icon);
                     $iconName = time().'.'.request()->icon->getClientOriginalExtension();
                     request()->icon->move(public_path('images/services-images'), $iconName);
                     $validatedData['icon'] = $iconName;
@@ -88,7 +89,7 @@ class ServiceController extends AdminController
     {
        $services=$this->service->getById($id);
         if($services){
-            $dir = 'images/services-icon/';
+            $dir = 'images/services-images/';
             if ($services->icon != '' && File::exists($dir . $services->icon)){
                 File::delete($dir . $services->icon);
             }   

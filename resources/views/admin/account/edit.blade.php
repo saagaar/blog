@@ -136,7 +136,7 @@
                   <div class="form-group">
                   <label for="image">Profile Picture</label>
                     <div class="text-left">
-                      <img src="{{ asset('frontend/images/userimages/'.$accounts['image']) }}" class="avatar img-circle" alt="Profile Picture" height="42" width="42">
+                      <img src="{{ asset('images/user-images/'.$accounts['image']) }}" class="avatar img-circle" alt="Profile Picture" height="42" width="42">
                   
                       <h6>Upload a different photo...</h6>
                       <input type="file" class="form-control" name="image" id="image">

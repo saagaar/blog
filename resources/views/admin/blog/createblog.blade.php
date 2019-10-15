@@ -52,16 +52,25 @@
                 <div class="alert alert-danger">{{ $errors->first('locale_id') }}</div>
                 @endif
                 </div>
-                
-
-                
+                               
                 <div class="form-group">
-                  <label for="Content">Content: </label>
+                  <label for="Content">Content:</label>
                     <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
                   @if ($errors->has('content'))
                 <div class="alert alert-danger">{{ $errors->first('content') }}</div>
                 @endif
                 </div>
+
+                  <div class="form-group">
+                  <label for="short_description">Short Description: </label>
+                    <textarea name="short_description" class="form-control" rows="5" placeholder="Short Description here..">{{old('short_description')}}</textarea>
+                  @if ($errors->has('short_description'))
+                <div class="alert alert-danger">{{ $errors->first('short_description') }}
+                </div>
+                @endif
+                </div>
+
+
                 <div class="form-group">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
