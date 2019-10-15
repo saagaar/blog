@@ -1,11 +1,11 @@
 
 <template>
-<div class="col-md-9 col-sm-9"  v-if="allCategories.length>0">
+<div class="col-md-9 col-sm-9" v-if="initialState.allCategories">
                 <div id="main" class="">
 
             <!--================Category  Area Start =================-->
 
-    <section class="category-page category-list"   v-for="eachCategory in allCategories">
+    <section class="category-page category-list"   v-for="eachCategory in initialState.allCategories">
             <div class="row">
                 <div class="col-md-12">
                     <div class="area-heading">
@@ -18,18 +18,21 @@
             <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-6" v-for="subCategory in eachCategory.categories">
                     <div class="single-category">
-                        <div class="thumb">
+                        <div class="thumb" v-if="subCategory.banner_image">
                            <a href="#"> <img class="img-fluid" 
-                            :src="'/images/user-images/category/'+subCategory.banner_image" alt=""></a>
+                            :src="'frontend/images/categories-images/'+subCategory.banner_image" alt=""></a>
+                        </div>
+                        <div class="thumb" v-else>
+                           <a href="#"> <img class="img-fluid" 
+                            :src="'frontend/images/categories-images/icon-no-image.svg'" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">
                                 <h4>{{subCategory.name}} </h4>
                             </a>
-
                             <Favorite
                             :currentCategory="subCategory.slug"
-                            :userInterest= "userInterest"
+                            :userInterest= "initialState.userInterest"
                         ></Favorite>
 
 
@@ -45,28 +48,16 @@
 </template>
 
 <script>
-        // function previewimage(event) {
-            
-        //     var reader = new FileReader();
-        //     var imageField = document.getElementById("image-field")
-        //     reader.onload = function () {
-        //         if (reader.readyState == 2) {
-        //             imageField.src = reader.result;
-        //         }
-        //     }
-        //     reader.readAsDataURL(event.target.files[0]);
-        // 
 import Favorite from './../components/Favorites/Favorite';
-// Vue.component('favorite', require('./Favorites/Favorite.vue'));
 import mixin  from './../mixins/LoadData.mixin.js';
     export default {
         mounted() {
-           
         },
         data:function(){
           return {
-           allCategories:[],
-            userInterest:[],
+            initialState:{}
+           // allCategories:[],
+           //  userInterest:[],
             
           }
         },
@@ -74,8 +65,6 @@ import mixin  from './../mixins/LoadData.mixin.js';
         components:{
             Favorite
         },
-        methods:{
-          
-        }
+ 
     }
 </script>

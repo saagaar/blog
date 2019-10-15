@@ -24,7 +24,7 @@
 
       <div class="mid_part">
           
-          {{ $body }}
+          {!! $body !!}
       </div>
        <div class="container">
        <div class="inbox-head">

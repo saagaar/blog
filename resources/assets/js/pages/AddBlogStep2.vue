@@ -1,94 +1,98 @@
 
 <template>
 
-            <div class="col-md-9 col-sm-9">
-              <div id="main" class="">
+        <div class="col-md-9 col-sm-9">
+                <div id="main" class="">
               <div class="white-box add_blog">
-                <form method="post" action="?">
-                  <div class="create-post">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                          <div class="form-group post_title">
-                            <img src="img/p_image.png" alt="" class="profile-photo-md">
-                          <!--   <span>Posting as <b>Shanvi</b> &nbsp; &nbsp; &nbsp;</span>  -->
-                            <input type="text" @blur="$v.form.title.$touch()" name="title" class="form-control" placeholder="Post Title" v-model="form.title"/>
-                             <div v-if="$v.form.title.$anyDirty">
-                              <div class="error" v-if="!$v.form.title.required">This Field is required</div>
-                            </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div>
+                          <div class="form-group upload_img">
+                          <label><i class="fa fa-image"></i> Upload Image</label>
+                          <figure> 
+                              <img :src="'/images/upload.png'" id="image-field"/>
+                              <span class="file-input btn btn-success btn-file">
+                                  <input type="file"  name="image" id="file1" class="upload" @change="previewImage(); $v.form.image.$touch()" >
+                              </span>
+                          </figure>
                           </div>
-                        </div>
-                        </div>
-                    </div>
+                        
+                        <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Description </h4>
 
-                    <div class="row">
-                      <div class="col-lg-3 col-md-4 col-sm-4">
-                        <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Compose </h4>
-                      </div>
-                      <div class="col-lg-9 col-md-8 col-sm-8">
-                        <div class="tools add_btn">
-                            <button class="btn btn-light">Save</button>
-                            <button class="btn btn-light">Preview</button>
-                            <button class="btn btn-light">Close</button>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                
-                     <div class="form-group">
-                        <ckeditor :editor="editor"  @blur="$v.form.content.$touch()"  v-model="form.content"></ckeditor>
-                         <div v-if="$v.form.content.$anyDirty">
-                              <div class="error" v-if="!$v.form.content.required">This Field is required</div>
+                       <div class="form-group">
+                        <textarea  class="form-control ckeditor" id="editor" blur="$v.form.short_description.$touch()"  v-model="form.short_description"></textarea>
+                         <div v-if="$v.form.short_description.$anyDirty">
+                              <div class="error" v-if="!$v.form.short_description.required">This Field is required</div>
                             </div>
                      </div>
 
+                      <div class=" pad-box">
                       <div class="form-group">
+                        <div>
+                          <label class="typo__label">Tags</label>
+                          <multiselect
+                           v-model="form.tags" 
+                           tag-placeholder="Add this as new tag" 
+                           placeholder="Search or add a tag" 
+                           label="name" 
+                           track-by="name" 
+                           :options="options" 
+                           :multiple="true" 
+                           :taggable="true">
+                           </multiselect>
+                        </div>
+                      </div>
+                      <div class="tgl-group">
+                          <span><i class="fa fa-globe">&nbsp;</i> Post As Anonymous Only</span>
+                          <input @change="onChangeEventHandler" class="tgl tgl-light"  name="isAnynomous" id="display-address" type="checkbox">
+                          <label class="tgl-btn" for="display-address"></label>
+                      </div>
 
-                      <multiselect 
-                       v-model="form.tags" 
-                       :options="options" 
-                       :multiple="true" 
-                       :close-on-select="false" 
-                       :clear-on-select="false" 
-                       :max="5" 
-                       :taggable="true" 
-                       :preserve-search="true" 
-                       placeholder="Pick Tags or Add New" 
-                       label="name" 
-                       track-by="name" 
-                       :hide-selected="false"
-                       >
-                       <template slot="selection" slot-scope="{ tags, search, isOpen }"><span class="multiselect__single" v-if="form.tags.length &amp;&amp; !isOpen">{{ form.tags.length }} options selected</span></template>
-                       </multiselect>
-                         <div v-if="$v.form.tags.$anyDirty">
-                            <div class="error" v-if="!$v.form.tags.required">This Field is required</div>
+
+                      <div class="autocomplete form-group">
+                          <input id="myInput" type="text" name="userName" class="form-control" placeholder="B">
+                          <div id="myInputautocomplete-list" class="autocomplete-items">
+                              <!-- <div><strong>B</strong>Bikash
+                                  <input type="hidden" value="Bikash">
+                              </div>
+                               <div>
+                                   <strong>B</strong>Bipin<input type="hidden" value="Bipin">
+                                  </div>
+                                  <div>
+                                      <strong>B</strong>Bisal<input type="hidden" value="Bisal">
+                                  </div>
+                              </div> -->
+                      </div>
+
+
+                      </div>
+
+                      <hr/>
+
+                      <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                          <button @click.prevent="submitForm" class="btn btn-primary ml-30">Publish</button>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                          <div class="tools add_btn">
+                              <button class="btn btn-light">Save</button>
+                              <button class="btn btn-light">Preview</button>
+                              <button class="btn btn-light">Close</button>
                           </div>
-                     </div>
-                <div class="form-group upload_img">
-                <label><i class="fa fa-image"></i> Upload Image</label>
-                <figure> <img src="images/placeholder-image-500X300.jpg" id="image-field"/> </figure>
-                 
-                      <span class="file-input btn btn-success btn-file">
-                        Browse 
-
-                        <input type="file"  name="bannerImage" id="file1" class="upload" @change="previewImage();$v.form.bannerImage.$touch()"  >
-
-                    </span>
-                    
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
                   </div>
-                    <button @click.prevent="submitForm" class="btn btn-primary ml-30">Publish</button>
-
                   </form>
               </div>
 
           </div>
         </div>
-
-           
-
 </template>
 
 <script>
 import mixin  from './../mixins/LoadData.mixin.js';
+
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Multiselect from 'vue-multiselect'
 import { required, between ,email} from 'vuelidate/lib/validators';
@@ -98,55 +102,44 @@ import Form from './../services/Form.js';
           Multiselect
         },
         mixins:[mixin],
-        data() {
+         data:function(){
 
           return {
                 editor: ClassicEditor,
+                initialState:[],
                 form:new Form({
-                    title:'',
-                    content:'',
-                    bannerImage:'',
+                    short_description:'',
+                    image:'',
                     tags:'',
-                    isAnynomous:''
+                    isAnynomous:false
                 }),
-                 options: [
-                  { name: 'Vue.js', language: 'JavaScript' },
-                  { name: 'Adonis', language: 'JavaScript' },
-                  { name: 'Rails', language: 'Ruby' },
-                  { name: 'Sinatra', language: 'Ruby' },
-                  { name: 'Laravel', language: 'PHP' },
-                  { name: 'Phoenix', language: 'Elixir' }
-                ]
-            };
+                 
+            }
          },
         validations: {
           form:{
-            title: {
+            short_description: {
               required,
             },
-            content: 
-            {
-              required,
-            },
-            bannerImage: 
-            {
-              // required,
-            },
-            tags: 
-            {
-              required,
-            },
+            image:{
 
+            },
           }
         },
 
-        mounted() {
-             setTimeout(() => {
-              this.myData = 'Example Data';
-            }, 5000);
-        },
 
         methods:{
+
+          onChangeEventHandler(){
+            console.log(options);
+          },
+          // next() {
+          //   this.$v.form.$touch();
+          //   if(!this.$v.form.$invalid)
+          //   {
+          //     this.step++;
+          //   }
+          // },
           previewImage:function(){
             
              var reader = new FileReader();
@@ -158,19 +151,13 @@ import Form from './../services/Form.js';
               }
               reader.readAsDataURL(event.target.files[0]);
             },
-    //          addTag (newTag) {
-    //   const tag = {
-    //     name: newTag,
-    //     code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-    //   }
-    //   this.options.push(tag)
-    //   this.form.tags.push(tag)
-    // },
+
+
           submitForm:function(){
-                this.$v.$touch();
-            if(!this.$v.$invalid)
+                this.$v.form.$touch();
+            if(!this.$v.form.$invalid)
             {
-              this.form.post('blog/add').then(response => {
+              this.form.post('/blog/edit/'+this.$route.params.blogId).then(response => {
                if(response.data.status){
 
                   window.location.href="dashboard"

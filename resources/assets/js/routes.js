@@ -4,7 +4,15 @@ let routes=[
 				
 				{
 						path:'/blog/add',
-						components:require('./pages/AddBlog')
+						components:require('./pages/AddBlogStep1')
+				},
+				{
+						path:'/blog/edit/:blogId/',
+						components:require('./pages/AddBlogStep1')
+				},
+				{
+						path:'/blog/edit/:blogId/step2',
+						components:require('./pages/AddBlogStep2')
 				},
 				{
 						path:'/dashboard',
