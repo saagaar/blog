@@ -22,8 +22,8 @@ class CreateNotificationSettingsTable extends Migration
             $table->longText('email_body');
             $table->longText('sms_body');
             $table->longText('database_body');
-            $table->json('notification_type')->comment('mail,database,sms');
-            $table->enum('active', ['1', '2'])->comment('1=active,2-inactive')->default('1');;
+            $table->string('notification_type')->nullable();
+            $table->enum('active', ['1', '2'])->comment('1=active,2=inactive');
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ class CreateNotificationSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('email_settings');
+        Schema::dropIfExists('notification_settings');
     }
 }

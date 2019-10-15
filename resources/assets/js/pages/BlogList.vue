@@ -86,7 +86,7 @@
 
         </div>
         <table class="table table-inbox table-hover">
-        <tbody v-if="this.$store.getters.isLoading===true">
+        <tbody v-if="this.$store.getters.isLoading===false">
            <PlaceHolderBlogList></PlaceHolderBlogList>
         </tbody>
           <tbody v-else-if="initialState.blogList" >

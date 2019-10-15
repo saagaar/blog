@@ -149,10 +149,10 @@
               </div>
               <div class="form-group">
                   <label for="status">Status: </label>
-                  <label><input type="radio" name="status" value="0" {{ $accounts->status == '0' ? 'checked' : ''}}>Active</label>
-                  <label><input type="radio" name="status" value="1" {{ $accounts->status == '1' ? 'checked' : ''}}>Inactive</label>
-                  <label><input type="radio" name="status" value="2" {{ $accounts->status == '2' ? 'checked' : ''}}>Closed</label>
-                  <label><input type="radio" name="status" value="3" {{ $accounts->status == '3' ? 'checked' : ''}}>Suspended</label>
+                  <label><input type="radio" name="status" value="1" {{ $accounts->status == '1' ? 'checked' : ''}}>Active</label>
+                  <label><input type="radio" name="status" value="2" {{ $accounts->status == '2' ? 'checked' : ''}}>Inactive</label>
+                  <label><input type="radio" name="status" value="3" {{ $accounts->status == '3' ? 'checked' : ''}}>Closed</label>
+                  <label><input type="radio" name="status" value="4" {{ $accounts->status == '4' ? 'checked' : ''}}>Suspended</label>
                 </div>
                 @if ($errors->has('status'))
                 <div class="active">{{ $errors->first('status') }}</div>

@@ -78,13 +78,13 @@
               <hr>
               <strong><i class="fa fa-info-circle margin-r-5"></i> Status</strong>
               <p class="text-muted">
-                    @if($account->status=='0')
+                    @if($account->status=='1')
                     <span class="label label-success">Active</span>
-                    @elseif ($account->status=='1')
-                    <span class="label label-danger">Inactive</span>
                     @elseif ($account->status=='2')
-                    <span class="label label-warning">Closed</span>
+                    <span class="label label-danger">Inactive</span>
                     @elseif ($account->status=='3')
+                    <span class="label label-warning">Closed</span>
+                    @elseif ($account->status=='4')
                     <span class="label label-default">Suspended</span>
                     @endif</p>
                     

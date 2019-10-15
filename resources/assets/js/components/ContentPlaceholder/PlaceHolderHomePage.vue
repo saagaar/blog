@@ -1,14 +1,15 @@
  <template>
  <ContentLoader
              
-            :height="800"
-            :width="900"
+            :height="300"
+            :width="600"
             :speed="2"
             primaryColor="#c0c0c0"
             secondaryColor="#ffffff"
             >
               
-         <rect x="67" y="122" rx="0" ry="0" width="290" height="170" /> 
+    <rect x="67" y="59" rx="0" ry="0" width="750" height="29" /> 
+    <rect x="67" y="122" rx="0" ry="0" width="290" height="170" /> 
     <rect x="441" y="114" rx="0" ry="0" width="157" height="123" /> 
     <rect x="448" y="283" rx="0" ry="0" width="141" height="101" /> 
     <rect x="665" y="118" rx="0" ry="0" width="152" height="243" /> 
@@ -37,6 +38,9 @@
     <rect x="508" y="405" rx="0" ry="0" width="38" height="3" /> 
     <rect x="508" y="412" rx="0" ry="0" width="29" height="2" /> 
     <rect x="742" y="379" rx="0" ry="0" width="101" height="13" /> 
+    <rect x="70" y="26" rx="0" ry="0" width="98" height="14" /> 
+    <rect x="707" y="29" rx="0" ry="0" width="41" height="9" /> 
+    <rect x="756" y="29" rx="0" ry="0" width="41" height="9" /> 
     <rect x="617" y="547" rx="0" ry="0" width="66" height="3" /> 
     <rect x="617" y="554" rx="0" ry="0" width="54" height="3" /> 
     <rect x="616" y="563" rx="0" ry="0" width="50" height="2" /> 
