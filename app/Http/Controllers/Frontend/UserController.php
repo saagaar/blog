@@ -77,4 +77,34 @@ class UserController extends FrontendController
      
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
+
+    public function profile()
+    {
+            $routeName= Route::currentRouteName();
+            // $myBlogs=$blog->getBlogByUserId($this->authUser->id);
+
+           if($routeName=='api')
+           {
+              // $search=$request->get('search');
+              // $filterBy=$request->get('filter_by');
+              // $sortBy=$request->get('sort_by');
+              // if($filterBy)
+              //    $myBlogs=$myBlogs->where('save_method',$filterBy);
+              // if($search)
+              //   $myBlogs=$myBlogs->where('title' ,'like','%'.$search.'%');
+              // if($sortBy)
+              //   $myBlogs=$myBlogs->orderBy('created_at',strtoupper($sortBy));
+            
+              //   $data['blogList']=$myBlogs->paginate($this->perPage);
+              // return ($data);
+           }
+           else
+           {
+             
+              $data['path']='/profile';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+           }
+    }
 }

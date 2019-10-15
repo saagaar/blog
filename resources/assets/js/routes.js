@@ -4,7 +4,7 @@ let routes=[
 				
 				{
 						path:'/blog/add',
-						components:require('./pages/AddBlog')
+						components:require('./pages/AddBlog'),
 				},
 				{
 						path:'/dashboard',
@@ -16,7 +16,9 @@ let routes=[
 				},
 				{
 						path:'/profile',
-						components:require('./pages/EditProfile')
+						// components:require('./pages/Profile'),
+						meta:{layout:"timeline"}
+						
 				},
 				{
 						path:'/categories',

@@ -166,3 +166,28 @@ $(window).on("load", function() {
         });
     }
 });
+
+     $(function() {
+    var top = $('#chat-block').offset().top - parseFloat($('#chat-block').css('marginTop').replace(/auto/, 0));
+    var footTop = $('#footer').offset().top - parseFloat($('#footer').css('marginTop').replace(/auto/, 0));
+    var maxY = footTop - $('#chat-block').outerHeight();
+    $(window).scroll(function(evt) {
+        var y = $(this).scrollTop();
+        if (y > top) {
+            
+//Quand scroll, ajoute une classe ".fixed" et supprime le Css existant 
+            if (y < maxY) {
+                $('#chat-block').addClass('fixed').removeAttr('style');
+            } else {
+                
+//Quand la sidebar arrive au footer, supprime la classe "fixed" précèdement ajouté
+                $('#chat-block').removeClass('fixed').css({
+                    position: 'absolute',
+                    top: (maxY - top) + 'px'
+                });
+            }
+        } else {
+            $('#chat-block').removeClass('fixed');
+        }
+    });
+});
