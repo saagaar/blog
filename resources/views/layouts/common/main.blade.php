@@ -84,6 +84,28 @@
     
   })
 </script> -->
+<script>
+function showFunction() {
+  var checkBox = document.getElementById("myCheck");
+  var text = document.getElementById("emaildb");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
+</script>
+<script>
+function showSmsFunction() {
+  var checkBox = document.getElementById("myChecksms");
+  var text = document.getElementById("emailsms");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
+</script>
 <script type="text/javascript">
   $('#datetimepicker').datetimepicker({
     format: 'yyyy-mm-dd hh:ii'

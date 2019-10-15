@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Repository\SiteoptionInterface;
 use Illuminate\Support\Facades\Route;
 use App\Models\Userlogs;
 use App\Services\VisitorInfo;
@@ -27,43 +26,45 @@ class FrontendController extends BaseController
     */
     Protected $maintainenceKey;
     /**
-     * Create a new controller instance.
+     * website visitor's ip
      *
      * @return void
      */
     Protected $ipInfoService;
+     /***
+    * This email is used to send email by client to admin of site
+    * @type=email
+    */
 
+    Protected $contactEmail;
+
+    Protected $perPage=10;
     public function __construct()
     {
-        
-        
-        $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
 
-        $SiteoptionsInterface = app()->make('App\Repository\SiteoptionInterface');
-        $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
-
-        $this->siteSettings=$SiteoptionsInterface->GetSiteInfo();
         $this->visitorInfo =  new visitorInfo();
-        $this->siteName =  $this->siteSettings->site_name;
-        $this->contactEmail =  $this->siteSettings->contact_email;
-        $this->contactName =  $this->siteSettings->contact_name;
-        $this->contactNumber =  $this->siteSettings->contact_number;
-        $this->maintainence =  $this->siteSettings->maintainence;
-        $this->userRequiresActivation  =  $this->siteSettings->user_requires_activation;
-        $this->blogRequiresActivation =  $this->siteSettings->blog_requires_activation;
-        $this->facebookId =  $this->siteSettings->facebook_id;
-        $this->linkedinId =  $this->siteSettings->linkedin_id;
-        $this->twitterId =  $this->siteSettings->twitter_id;
-        $this->instagramId =  $this->siteSettings->instagram_id;
-        $this->youtube =  $this->siteSettings->youtube;
-        $this->timezone =  $this->siteSettings->timezone;
-        $this->currencySign =  $this->siteSettings->currency_sign;
-        $this->address =  $this->siteSettings->address;
-        $this->city =  $this->siteSettings->city;
-        $this->state =  $this->siteSettings->state;
-        $this->country =  $this->siteSettings->country;
-        $this->websiteMode=$this->siteSettings->mode;
+        $this->siteName =  config('settings.site_name');
+        $this->contactEmail =  config('settings.contact_email');
+        $this->systemEmail =  config('settings.system_email');
+        $this->contactName = config('settings.contact_name');
+        $this->contactNumber = config('settings.contact_number'); 
+        $this->maintainence = config('settings.maintainence');
+        $this->userRequiresActivation  =  config('settings.user_requires_activation');
+        $this->blogRequiresActivation = config('settings.blog_requires_activation');
+        $this->facebookId =config('settings.facebook_id');  
+        $this->linkedinId = config('settings.linkedin_id');
+        $this->twitterId = config('settings.twitter_id'); 
+        $this->instagramId = config('settings.instagram_id');
+        $this->youtube =  config('settings.youtube');
+        $this->timezone = config('settings.timezone');
+        $this->currencySign = config('settings.currency_sign');
+        $this->address = config('settings.address');
+        $this->city = config('settings.city'); 
+        $this->state = config('settings.state'); 
+        $this->country = config('settings.country');
+        $this->websiteMode=config('settings.mode');
+
         // $this->save_visitor_info();
        
         date_default_timezone_set('Asia/Kathmandu');
@@ -88,17 +89,24 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {
-        
+        echo 'here';exit;
         return view('frontend.home.index');
     }
   
-    public function user_state_info(FollowerInterface $followerList){
-         if(\Auth::check())
+    public function user_state_info(){
+       $followerList = app()->make('App\Repository\FollowerInterface');
+        if(\Auth::check())
         {
             $user =$this->authUser;
             $user->followersCount=$followerList->getAllFollowers($this->authUser)->count();
             $user->followingCount=$followerList->getAllFollowings($this->authUser)->count();
+            $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
+            $user->notifications=$this->authUser->unreadNotifications()->take(10)->get();    
             $user=$user->toArray();
+            return $user;
+        }
+        else{
+            return redirect()->route('home'); 
         }
     }
 

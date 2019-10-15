@@ -16,3 +16,7 @@ export const DECREMENT_FOLLOWERS_COUNT = (state, count) => {
 export const DECREMENT_FOLLOWING_COUNT = (state, count) => {
     state.me.followingCount -= count;
 }
+export const TOGGLE_LOADING = state => 
+{
+    state.isLoading = !state.isLoading
+}

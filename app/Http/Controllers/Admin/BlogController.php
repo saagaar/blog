@@ -82,6 +82,8 @@ class BlogController extends AdminController
                 ]);  
                 $requestObj=app(BlogRequest::class);
                 $validatedData = $requestObj->validated();
+
+
                 if ($request->hasFile('image')) {
                     $dir = 'images/blog-images/';
                     if ($blog->image != '' && File::exists($dir . $blog->image))

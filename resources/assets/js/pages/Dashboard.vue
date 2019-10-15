@@ -233,14 +233,17 @@ import TheRightSideBar from './../components/TheRightSideBar';
         mixins: [ mixin ],  
         data:function(){
           return {
+            initialState:{},
             followSuggestion:'',
-            followingsCount:0,
-            followersCount:0,
-
           }
         },
-       
-        components:{
+       watch: {
+        initialState: function (val) {
+          this.followSuggestion=this.initialState.followSuggestion;
+        },
+      },
+    
+      components:{
             TheRightSideBar,
             FollowSuggestionsList
         },

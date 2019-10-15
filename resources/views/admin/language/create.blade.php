@@ -32,7 +32,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="short_code">Short Code</label>
-                  <input type="text" class="form-control" name="short_code" id="Short Code" value="{{ old('short_code') }}" placeholder="Enter short_code">
+                  <input type="text" class="form-control" name="short_code" id="Short Code" value="{{ old('short_code') }}" placeholder="Enter Short Code">
                   @if ($errors->has('short_code'))
                   <div class="alert alert-danger">{{ $errors->first('short_code') }}</div>
                   @endif
@@ -40,7 +40,7 @@
 
                  <div class="form-group">
                   <label for="lang_name">Language</label>
-                  <input type="text" class="form-control" name="lang_name" id="Language" value="{{ old('lang_name') }}" placeholder="Enter lang_name">
+                  <input type="text" class="form-control" name="lang_name" id="Language" value="{{ old('lang_name') }}" placeholder="Enter Lang Name">
                   @if ($errors->has('lang_name'))
                   <div class="alert alert-danger">{{ $errors->first('lang_name') }}</div>
                    @endif

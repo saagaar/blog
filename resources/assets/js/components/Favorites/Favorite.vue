@@ -33,8 +33,6 @@ let action='';
             }
         },
 
-     
-
         methods: {
             toggleInterest:function(){
                 if(this.isChecked)

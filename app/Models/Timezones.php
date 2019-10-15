@@ -21,6 +21,6 @@ class timezones extends Model
     }
     public function logs()
     {
-        return $this->morphMany(LogAdminActivitys::class, 'logable');
+        return $this->morphMany(LogAdminActivities::class, 'logable');
     }
 }

@@ -1,95 +1,57 @@
 
 <template>
 
-            <div class="col-md-9 col-sm-9">
-              <div id="main" class="">
+        <div class="col-md-9 col-sm-9">
+                <div id="main" class="">
               <div class="white-box add_blog">
-                <form method="post" action="?">
-                  <div class="create-post">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
+                <form method="post">
+                  <div>
+                    <div class="create-post">
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12">
                           <div class="form-group post_title">
                             <img src="img/p_image.png" alt="" class="profile-photo-md">
-                          <!--   <span>Posting as <b>Shanvi</b> &nbsp; &nbsp; &nbsp;</span>  -->
-                            <input type="text" @blur="$v.form.title.$touch()" name="title" class="form-control" placeholder="Post Title" v-model="form.title"/>
-                             <div v-if="$v.form.title.$anyDirty">
+                            <span>Posting as <b>Shanvi</b> &nbsp; &nbsp; &nbsp;</span>
+                            <input type="text" @blur="$v.form.title.$touch()" name="title" class="form-control" placeholder="Post Title" v-model="form.title"/> 
+                            <div v-if="$v.form.title.$anyDirty">
                               <div class="error" v-if="!$v.form.title.required">This Field is required</div>
                             </div>
                           </div>
                         </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-lg-3 col-md-4 col-sm-4">
-                        <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Compose </h4>
                       </div>
-                      <div class="col-lg-9 col-md-8 col-sm-8">
-                        <div class="tools add_btn">
-                            <button class="btn btn-light">Save</button>
-                            <button class="btn btn-light">Preview</button>
-                            <button class="btn btn-light">Close</button>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
                     </div>
-                
-                     <div class="form-group">
-                        <ckeditor :editor="editor"  @blur="$v.form.content.$touch()"  v-model="form.content"></ckeditor>
-                         <div v-if="$v.form.content.$anyDirty">
-                              <div class="error" v-if="!$v.form.content.required">This Field is required</div>
-                            </div>
-                     </div>
-
-                      <div class="form-group">
-
-                      <multiselect 
-                       v-model="form.tags" 
-                       :options="options" 
-                       :multiple="true" 
-                       :close-on-select="false" 
-                       :clear-on-select="false" 
-                       :max="5" 
-                       :taggable="true" 
-                       :preserve-search="true" 
-                       placeholder="Pick Tags or Add New" 
-                       label="name" 
-                       track-by="name" 
-                       :hide-selected="false"
-                       >
-                       <template slot="selection" slot-scope="{ tags, search, isOpen }"><span class="multiselect__single" v-if="form.tags.length &amp;&amp; !isOpen">{{ form.tags.length }} options selected</span></template>
-                       </multiselect>
-                         <div v-if="$v.form.tags.$anyDirty">
-                            <div class="error" v-if="!$v.form.tags.required">This Field is required</div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-4">
+                          <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Main Content </h4>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-8">
+                          <div class="tools add_btn">
+                              <button class="btn btn-light">Save</button>
+                             <!--  <button class="btn btn-light">Preview</button>
+                              <button class="btn btn-light">Close</button> -->
                           </div>
-                     </div>
-                <div class="form-group upload_img">
-                <label><i class="fa fa-image"></i> Upload Image</label>
-                <figure> <img src="images/placeholder-image-500X300.jpg" id="image-field"/> </figure>
-                 
-                      <span class="file-input btn btn-success btn-file">
-                        Browse 
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                  
+                      <div class="form-group">
+                        <ckeditor :editor="editor"  @blur="$v.form.content.$touch()"  v-model="form.content"></ckeditor>
+                           <div v-if="$v.form.content.$anyDirty">
+                                <div class="error" v-if="!$v.form.content.required">This Field is required</div>
+                              </div>
+                       </div>
 
-                        <input type="file"  name="bannerImage" id="file1" class="upload" @change="previewImage();$v.form.bannerImage.$touch()"  >
-
-                    </span>
-                    
-                  </div>
-                    <button @click.prevent="submitForm" class="btn btn-primary ml-30">Publish</button>
-
+                      <button @click.prevent="next()" class="btn btn-primary ml-30">Continue</button>
+                    </div>
                   </form>
               </div>
 
           </div>
         </div>
-
-           
-
 </template>
 
 <script>
 import mixin  from './../mixins/LoadData.mixin.js';
-
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Multiselect from 'vue-multiselect'
 import { required, between ,email} from 'vuelidate/lib/validators';
@@ -103,22 +65,24 @@ import Form from './../services/Form.js';
 
           return {
                 editor: ClassicEditor,
+                step:1,
                 form:new Form({
                     title:'',
                     content:'',
-                    bannerImage:'',
-                    tags:'',
-                    isAnynomous:''
+                    // short_description:'',
+                    // bannerImage:'',
+                    // tags:'',
+                    // isAnynomous:''
                 }),
-                 options: [
-                  { name: 'Vue.js', language: 'JavaScript' },
-                  { name: 'Adonis', language: 'JavaScript' },
-                  { name: 'Rails', language: 'Ruby' },
-                  { name: 'Sinatra', language: 'Ruby' },
-                  { name: 'Laravel', language: 'PHP' },
-                  { name: 'Phoenix', language: 'Elixir' }
-                ]
-            };
+                //  options: [
+                //   { name: 'Vue.js', language: 'JavaScript' },
+                //   { name: 'Adonis', language: 'JavaScript' },
+                //   { name: 'Rails', language: 'Ruby' },
+                //   { name: 'Sinatra', language: 'Ruby' },
+                //   { name: 'Laravel', language: 'PHP' },
+                //   { name: 'Phoenix', language: 'Elixir' }
+                // ]
+            }
          },
         validations: {
           form:{
@@ -129,15 +93,12 @@ import Form from './../services/Form.js';
             {
               required,
             },
-            bannerImage: 
-            {
-              // required,
-            },
-            tags: 
-            {
-              required,
-            },
+            // short_description: {
+            //   required,
+            // },
+            // bannerImage:{
 
+            // },
           }
         },
 
@@ -148,6 +109,13 @@ import Form from './../services/Form.js';
         },
 
         methods:{
+          next() {
+            this.$v.form.$touch();
+            if(!this.$v.form.title.$invalid && !this.$v.form.content.$invalid)
+            {
+              this.step++;
+            }
+          },
           previewImage:function(){
             
              var reader = new FileReader();
@@ -168,10 +136,10 @@ import Form from './../services/Form.js';
     //   this.form.tags.push(tag)
     // },
           submitForm:function(){
-                this.$v.$touch();
-            if(!this.$v.$invalid)
+                this.$v.form.$touch();
+            if(!this.$v.form.$invalid)
             {
-              this.form.post('blog/add').then(response => {
+              this.form.post('/blog/add').then(response => {
                if(response.data.status){
 
                   window.location.href="dashboard"

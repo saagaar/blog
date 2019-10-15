@@ -17,7 +17,8 @@ class CreateBlogsTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->string('code')->nullable();
             $table->string('title');
-            $table->text('content');         
+            $table->text('content');  
+            $table->text('short_description')->nullable();       
             $table->unsignedBigInteger('locale_id');        
             $table->foreign('locale_id')
                     ->references('id')->on('locales')
@@ -29,7 +30,7 @@ class CreateBlogsTable extends Migration
             $table->enum('save_method',['1','2'])->comment('1=Save to draft,2-Publish')->default('1');
             $table->enum('featured',['1','2'])->comment('1=yes,2=no');
             $table->enum('anynomous',['1','2'])->comment('1=yes,2-No');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

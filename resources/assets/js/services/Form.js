@@ -14,7 +14,6 @@ export default class Form {
                 else{
                     this.originalData='';
                 }
-               
                 this.errors={};
              }
 
@@ -63,7 +62,6 @@ export default class Form {
                 return this.submit('post', url);
             }
 
-
             /**
              * Send a PUT request to the given URL.
              * .
@@ -73,7 +71,6 @@ export default class Form {
                 return this.submit('put', url);
             }
 
-
             /**
              * Send a PATCH request to the given URL.
              * .
@@ -82,7 +79,6 @@ export default class Form {
             patch(url) {
                 return this.submit('patch', url);
             }
-
 
             /**
              * Send a DELETE request to the given URL.
@@ -100,6 +96,7 @@ export default class Form {
              * @param {string} url
              */
         	submit(requestType, url) {
+                
                 return new Promise((resolve, reject) => {
                      window.axios.defaults.headers.common = {
                         'X-Requested-With': 'XMLHttpRequest',
