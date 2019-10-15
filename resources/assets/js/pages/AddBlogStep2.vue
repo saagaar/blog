@@ -35,6 +35,8 @@
                            placeholder="Search or add a tag" 
                            label="name" 
                            track-by="name" 
+                           max="3"
+                           optionsLimit="5"
                            :options="initialState.options" 
                            :multiple="true" 
                            :taggable="true">

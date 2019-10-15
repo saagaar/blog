@@ -7601,6 +7601,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -9293,6 +9295,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -9307,6 +9314,12 @@ __webpack_require__.r(__webpack_exports__);
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_1__["default"]],
   components: {
     Favorite: _components_Favorites_Favorite__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  method: {
+    isLoading: function isLoading() {
+      this.form.isLoading = this.$store.getters.isLoading;
+      return this.$store.getters.isLoading;
+    }
   }
 });
 
@@ -49512,6 +49525,8 @@ var render = function() {
                               placeholder: "Search or add a tag",
                               label: "name",
                               "track-by": "name",
+                              max: "3",
+                              optionsLimit: "5",
                               options: _vm.initialState.options,
                               multiple: true,
                               taggable: true
@@ -52948,7 +52963,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.initialState.allCategories
+  return _vm.isLoading === true
+    ? _c("div", { staticClass: "col-md-9 col-sm-9" })
+    : _vm.initialState.allCategories
     ? _c("div", { staticClass: "col-md-9 col-sm-9" }, [
         _c(
           "div",
@@ -53042,7 +53059,9 @@ var render = function() {
           0
         )
       ])
-    : _vm._e()
+    : _c("div", { staticClass: "col-md-9 col-sm-9" }, [
+        _vm._v("\r\n   Sorry, No Category Found\r\n")
+      ])
 }
 var staticRenderFns = []
 render._withStripped = true

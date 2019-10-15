@@ -47,7 +47,7 @@
     <!--================Category  Area End =================-->
   </div>
 </div>
-<div class="col-md-9 col-sm-9" v-if="isLoading===false && !initialState.allCategories">
+<div class="col-md-9 col-sm-9" v-else="isLoading===false && !initialState.allCategories">
    Sorry, No Category Found
 </div>
 </template>
