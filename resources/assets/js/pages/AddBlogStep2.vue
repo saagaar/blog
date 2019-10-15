@@ -19,7 +19,7 @@
                         <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Description </h4>
 
                        <div class="form-group">
-                        <textarea  class="form-control ckeditor" id="editor" blur="$v.form.short_description.$touch()"  v-model="form.short_description"></textarea>
+                        <textarea  class="form-control ckeditor" id="editor" rows="10" blur="$v.form.short_description.$touch()"  v-model="form.short_description"></textarea>
                          <div v-if="$v.form.short_description.$anyDirty">
                               <div class="error" v-if="!$v.form.short_description.required">This Field is required</div>
                             </div>
@@ -32,7 +32,7 @@
                           <multiselect v-if="initialState.options"
                            v-model="form.tags" 
                            tag-placeholder="Add this as new tag" 
-                           placeholder="Search or add a tag" 
+                           placeholder="Search a tag" 
                            label="name" 
                            track-by="name" 
                            max="3"

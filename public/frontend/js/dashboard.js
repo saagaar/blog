@@ -50528,6 +50528,7 @@ var render = function() {
                   staticClass: "form-control ckeditor",
                   attrs: {
                     id: "editor",
+                    rows: "10",
                     blur: "$v.form.short_description.$touch()"
                   },
                   domProps: { value: _vm.form.short_description },
@@ -50569,7 +50570,7 @@ var render = function() {
                         ? _c("multiselect", {
                             attrs: {
                               "tag-placeholder": "Add this as new tag",
-                              placeholder: "Search or add a tag",
+                              placeholder: "Search a tag",
                               label: "name",
                               "track-by": "name",
                               max: "3",
