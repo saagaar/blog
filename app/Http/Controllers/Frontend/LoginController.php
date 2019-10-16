@@ -62,7 +62,7 @@ class LoginController extends FrontendController
              'name'     => $getInfo->name,
              'email'    => $getInfo->email,
              'username'     =>$infoUsername,
-             'status'        =>'0',
+             'status'        =>'2',
              'provider'     =>$provider,
              'provider_id'  => $getInfo->id,
              'image'        =>$getInfo->avatar_original,

@@ -30,7 +30,7 @@ Class  Follower implements FollowerInterface
      */
     public function isFollowingByUsername($user,$followingusername){
        
-        return ($user->followings->where('username',$followingusername));
+        return ($user->followings->where('username',$followingusername)->toArray());
     }
     /**
      * 
@@ -46,7 +46,7 @@ Class  Follower implements FollowerInterface
      */
 
      public function getAllFollowings($user){
-        return $user->followings()->get();
+        return $user->followings()->select(['username','name'])->get();
      }
  	  /**
      * Insert follower

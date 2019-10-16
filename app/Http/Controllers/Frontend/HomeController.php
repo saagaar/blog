@@ -99,10 +99,62 @@ class HomeController extends FrontendController
         }
     }
 
+    public function followings()
+    {
+        if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+            $suggestion=$this->getFollowSuggestions(3);
+            $followings = $this->followerList->getAllFollowings($this->authUser);
+            $data['followSuggestion']=$suggestion;
+            $data['followings'] = $followings;
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/followings';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+          }
+
+        }
+        else
+        {
+             return redirect()->route('home'); 
+        }
+    }
+    public function followers()
+    {
+        if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+            $followers = $this->followerList->getAllFollowers($this->authUser);
+            $data['followers'] = $followers;
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/followers';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+          }
+
+        }
+        else
+        {
+             return redirect()->route('home'); 
+        }
+    }
     public function followUser($username,$offset=false)
     {
         $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
-         if(isset($isFollowing))
+         if(!($isFollowing))
          {
             $this->followerList->followUser($this->authUser,$username);
          }  
@@ -110,7 +162,7 @@ class HomeController extends FrontendController
     }
     public function unFollowUser($username,$offset=false)
     {
-        $isFollowing=$this->followerList->isFollowing($this->authUser,$username,$offset);
+        $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username,$offset);
          if(($isFollowing))
          {
             $this->followerList->unfollowUser($this->authUser,$username);
@@ -119,7 +171,6 @@ class HomeController extends FrontendController
     }
     public function getFollowSuggestions($limit=1,$offset=0)
     {
-     
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
 }

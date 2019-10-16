@@ -1,5 +1,5 @@
 <template>
-  <a href='' class="btn btn-sm btn-round btn-success" @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
+  <a href='' :class="Buttonclass" @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
   {{ isFollowing ? 'Unfollow' : 'Follow'}}
   </a>
 </template>
@@ -12,7 +12,8 @@ let action='';
         props: {
             username: String,
             following: {type: Boolean, default: false},
-            followSuggestionHead:Number
+            followSuggestionHead:Number,
+            Buttonclass:String
         },
         data() {
         	return {
@@ -28,14 +29,17 @@ let action='';
         		if(!this.isFollowing)
         			action='api/followuser/'+this.username+'/'+this.followSuggestionHead;
         		else 
-        			action='api/unFollowuser'+this.username+'/'+this.followSuggestionHead;
+        			action='api/unfollowuser/'+this.username+'/'+this.followSuggestionHead;
 	        		
 	        		this.form.get(action).then(response => {
 		               if(response.data.status)
 		               {
                           // this.$store.commit('TOGGLE_LOADING');
-   		               	  this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
-		               	  this.$emit('clicked',this.username,response.data.message);
+                          if(!this.isFollowing)
+                            this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
+                          else 
+   		               	       this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
+		               	        this.$emit('clicked',this.username,response.data.message);
 		               }
 		               else
 		               {
