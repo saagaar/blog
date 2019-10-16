@@ -5,7 +5,7 @@ use Illuminate\Contracts\Cache\Factory;
 use App\Models\SiteOptions;
 use App\Repository\SiteoptionInterface;
 
-Class  SiteOption implements SiteoptionInterface
+Class SiteOption implements SiteoptionInterface
 {
 	protected $siteSettings;
 
@@ -21,7 +21,7 @@ Class  SiteOption implements SiteoptionInterface
   public function update( array $data)
   {
     //to remove cache set for config  in SettingsService provider
-      $cache=app()->make('Factory');
+      $cache=app()->make('Illuminate\Contracts\Cache\Factory');
       $cache->forget('settings');
       $id=1;
       return	$this->siteSettings->find($id)->update($data);

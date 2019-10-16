@@ -47,7 +47,7 @@
         </div>
 </template>
 
-<script>
+<script>p
 import Favorite from './../components/Favorites/Favorite';
 import mixin  from './../mixins/LoadData.mixin.js';
     export default {

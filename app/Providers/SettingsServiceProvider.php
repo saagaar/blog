@@ -31,6 +31,10 @@ class SettingsServiceProvider extends ServiceProvider
           return $siteOptions; 
         });
         config()->set('settings', $settings);
+     
+     
+
         }
     }
+
 }

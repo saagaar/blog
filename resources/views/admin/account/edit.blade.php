@@ -17,7 +17,7 @@
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
                 <li><a href="{{route('account.list')}}"><span class="glyphicon glyphicon-minus"></span> List All User Account</a></li>
-                <li class="{{ (request()->is('admin/createuser')) ? 'active' : '' }}"><a href="{{route('account.create')}}"><span class="glyphicon glyphicon-minus"></span> Create User Account</a></li>
+                <li class="{{ (request()->is('admin/createuser')) ? 'active' : '' }}"><a href="{{route('account.create')}}"><span class="glyphicon glyphicon-minus"></span> create User Account</a></li>
                 
               </ul>
             </div>
@@ -30,7 +30,7 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Create user</h3>
+              <h3 class="box-title">Edit user</h3>
             </div>
           
           <!-- Form Element sizes -->

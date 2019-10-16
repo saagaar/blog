@@ -51,7 +51,7 @@
                  </div>                                 
 
                <div class="form-group">
-                  <label for="status">Status</label>
+                   <label for="status">Status</label>
                     <div class="custom-control custom-radio radio-inline">
                         <input type="radio" class="custom-control-input flat-red" name="status" value="1" @if($subscription->status=='1') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Subscribed</label>
