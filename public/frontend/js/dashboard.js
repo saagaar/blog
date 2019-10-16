@@ -7979,12 +7979,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default.a,
-      options: [],
+      max: 3,
+      optionsLimit: 5,
       initialState: {},
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
         short_description: '',
         image: '',
-        tags: [],
+        tags: '',
         isAnynomous: false
       })
     };
@@ -7995,6 +7996,13 @@ __webpack_require__.r(__webpack_exports__);
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"]
       },
       image: {}
+    }
+  },
+  watch: {
+    initialState: function initialState(value) {
+      this.form.short_description = value.blog.short_description;
+      this.form.tags = value.blog.tags;
+      this.form.isAnynomous = value.blog.anynomous;
     }
   },
   // created: function(){
@@ -8027,7 +8035,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$v.form.$touch();
 
       if (!this.$v.form.$invalid) {
-        this.form.post('/blog/edit/' + this.$route.params.blogId).then(function (response) {
+        this.form.post('/blog/edit/' + this.$route.params.blogId + '/step2').then(function (response) {
           if (response.data.status) {
             window.location.href = "dashboard";
           } else {}
@@ -51276,8 +51284,8 @@ var render = function() {
                               placeholder: "Search a tag",
                               label: "name",
                               "track-by": "name",
-                              max: "3",
-                              optionsLimit: "5",
+                              max: _vm.max,
+                              optionsLimit: _vm.optionsLimit,
                               options: _vm.initialState.options,
                               multiple: true,
                               taggable: true

@@ -101,7 +101,7 @@ class BlogController extends FrontendController
                     $this->blog->updateByCode($postId,$form); 
                     $tagid = $tag->getTagByName($request->tags);
                     $this->blog->addTag($postId,$tagid);  
-                                    
+                    return response()->json(['status'=>true,'blogId'=>$postId,'message'=>'Blog updated successfully']);                
                 }
             } 
         }

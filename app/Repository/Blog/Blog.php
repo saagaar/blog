@@ -28,7 +28,7 @@ Class Blog implements BlogInterface
    */
 
   public function getBlogByCode($blogCode){
-    return $this->blog->where('code', $blogCode)->first();
+    return $this->blog->where('code', $blogCode)->with('tags')->first();
   }
    /**
    * Get  Blog by user id

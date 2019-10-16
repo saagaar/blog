@@ -11,7 +11,7 @@
                           <figure> 
                               <img :src="'/images/upload.png'" id="image-field"/>
                               <span class="file-input btn btn-success btn-file">
-                                  <input type="file"  name="image" id="file1" class="upload" @change="previewImage(); $v.form.image.$touch()" >
+                                  <input type="file"  name="image" id="file1" class="upload" @change="previewImage(); $v.form.image.$touch()">
                               </span>
                           </figure>
                           </div>
@@ -35,8 +35,8 @@
                            placeholder="Search a tag" 
                            label="name" 
                            track-by="name" 
-                           max="3"
-                           optionsLimit="5"
+                           :max="max"
+                           :optionsLimit="optionsLimit"
                            :options="initialState.options" 
                            :multiple="true" 
                            :taggable="true">
@@ -107,12 +107,13 @@ import Form from './../services/Form.js';
       data:function(){
           return {
                 editor: ClassicEditor,
-                options:[],
+                max:3,
+                optionsLimit:5,
                 initialState:{},
                 form:new Form({
                     short_description:'',
                     image:'',
-                    tags:[],
+                    tags:'',
                     isAnynomous:false
                 }),
                  
@@ -128,6 +129,13 @@ import Form from './../services/Form.js';
             },
           }
         },
+        watch: {
+        initialState: function (value) {
+            this.form.short_description=value.blog.short_description;        
+            this.form.tags=value.blog.tags;   
+            this.form.isAnynomous=value.blog.anynomous;
+        },
+      },
         // created: function(){
 
         //   console.log(this.initialState.option);
@@ -162,7 +170,7 @@ import Form from './../services/Form.js';
                 this.$v.form.$touch();
             if(!this.$v.form.$invalid)
             {
-              this.form.post('/blog/edit/'+this.$route.params.blogId).then(response => {
+              this.form.post('/blog/edit/'+this.$route.params.blogId+'/step2').then(response => {
                if(response.data.status){
 
                   window.location.href="dashboard"
