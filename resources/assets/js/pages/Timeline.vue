@@ -1,0 +1,112 @@
+
+<template>
+            <div>
+              <div id="main" class="">
+                <div class="white-box create-post">
+                  <div class="row">
+                    <div class="col-md-8 col-sm-8">
+                      <div class="form-group"> <img src="/images/p_image.png" alt="Profile Image" class="profile-photo-md">
+                        <textarea name="texts" id="exampleTextarea" cols="60" rows="1" class="form-control" placeholder="Write Bikash Bhandari Wall"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 pad-left-0">
+                      <div class="tools">
+                        <ul class="publishing-tools list-inline">
+                          <li><a href="#"><i class="fa fa-edit"></i></a></li>
+                          <li><a href="#"><i class="fa fa-image"></i></a></li>
+                          <li><a href="#"><i class="fa fa-video"></i></a></li>
+                        </ul>
+                        <button class="btn btn-primary pull-right">Publish</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="single-blog video-style small row m_b_30">
+                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="img/magazine/12.jpg" alt="Blog Image Name Goes Here"> </div>
+                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
+                        <h4>Blessed night morning on
+                          them you great</h4>
+                        </a>
+                        <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part that is observable to us. If you look just at the portion of the Universe we can see, you can measure its spatial curvature, and find that it’s incredibly close to flat...</p>
+                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i>mar 12</a> <a href="#"><i class="ti-heart"></i> 0 like</a> <a href="#"><i class="ti-eye"></i> 1k view</a> </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="single-blog video-style small row m_b_30 ">
+                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="img/magazine/13.jpg" alt="Blog Image Name Goes Here"> </div>
+                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
+                        <h4>Blessed night morning on
+                          them you great</h4>
+                        </a>
+                        <p>Inflation did not occur at arbitrarily high energies. There’s an energy scale at which the laws of physics no longer make sense: the Planck scale, or about 1019 GeV. This is about 100 trillion times larger than the maximum energies the LHC achieves…</p>
+                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i>mar 12</a> <a href="#"><i class="ti-heart"></i> 0 like</a> <a href="#"><i class="ti-eye"></i> 1k view</a> </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="single-blog video-style small row m_b_30">
+                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="img/magazine/14.jpg" alt="Blog Image Name Goes Here"> </div>
+                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
+                        <h4>Blessed night morning on
+                          them you great</h4>
+                        </a>
+                        <p>The idea that the Big Bang happened everywhere at once may apply to our Universe, but certainly ought not to apply to the vast majority of Universes existing in the Multiverse. Assuming that inflation is a quantum field, like all fields we know of, it must spread…</p>
+                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i>mar 12</a> <a href="#"><i class="ti-heart"></i> 0 like</a> <a href="#"><i class="ti-eye"></i> 1k view</a> </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="single-blog video-style small row m_b_30">
+                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="img/magazine/12.jpg" alt="Blog Image Name Goes Here"> </div>
+                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
+                        <h4>Blessed night morning on
+                          them you great</h4>
+                        </a>
+                        <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part that is observable to us. If you look just at the portion of the Universe we can see, you can measure its spatial curvature, and find that it’s incredibly close to flat. No regions...</p>
+                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i>mar 12</a> <a href="#"><i class="ti-heart"></i> 0 like</a> <a href="#"><i class="ti-eye"></i> 1k view</a> </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-12 text-center">
+                    <div class="lds-ring">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              </div>
+            
+</template>
+
+<script>
+import TheTopNav from './../components/TopNav/TheTopNav';
+import TheMainNav from './../components/MainNav/TheMainNav';
+import TheFooter from './../components/Footer/TheFooter';
+    export default {
+         data() {
+    return {
+          myData: null
+        }
+      },
+        mounted() {
+             setTimeout(() => {
+              this.myData = 'Example Data';
+            }, 5000);
+        },
+
+        components:{
+            TheTopNav,
+            TheMainNav,
+            TheFooter,
+        },
+    }
+</script>

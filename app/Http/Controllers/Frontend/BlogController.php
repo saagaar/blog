@@ -76,6 +76,8 @@ class BlogController extends FrontendController
     {
         $data = [];
         $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
+        $data['blog']   = $this->blog->getBlogByCode($postId);
+        $data['path']='blog/edit/'.$postId.'/';  
         if($request->method()=='POST'){
             $validator = Validator::make($request->all(), [ 
             'short_description' => 'required',

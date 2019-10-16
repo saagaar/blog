@@ -225,8 +225,10 @@ import Favorite from './../components/Favorites/Favorite';
 // Vue.component('favorite', require('./Favorites/Favorite.vue'));
 import mixin  from './../mixins/LoadData.mixin.js';
     export default {
-        mounted() {
-           
+        computed:{
+            me:function(){
+              return this.$store.getters.me
+            },
         },
         data:function(){
           return {

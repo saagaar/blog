@@ -65,6 +65,7 @@ import Form from './../services/Form.js';
           return {
                 editor: ClassicEditor,
                 step:1,
+                initialState:{},
                 form:new Form({
                     title:'',
                     content:'',
