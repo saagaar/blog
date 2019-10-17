@@ -7,7 +7,7 @@
                    <div class="follow-user" v-for="eachsuggestion in followSuggestion" >
                     <img src="images/user-3.jpg" alt="" class="profile-photo-sm pull-left">
                     <div>
-                      <h5><a href="timeline.html">{{ eachsuggestion.name}}</a></h5>
+                      <h5><a href="#">{{ eachsuggestion.name}}</a></h5>
                       <FollowButton  @clicked="userFollowed" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
                     </div>
                    </div>

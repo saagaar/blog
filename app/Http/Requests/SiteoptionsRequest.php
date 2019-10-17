@@ -32,7 +32,7 @@ class SiteoptionsRequest extends FormRequest
             'contact_number'                =>'required|min:6|max:50',
             'mode'                          =>'required',
             'maintainence'                  =>'required',
-            'user_requires_activation'      =>'required'
+            'user_requires_activation'      =>'required',
             'blog_requires_activation'      =>'required',
             'facebook_id'                   =>'required|min:6|max:50',
             'linkedin_id'                   =>'required|min:6|max:50',

@@ -6350,6 +6350,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6408,6 +6422,138 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
+  components: {
+    ContentLoader: vue_content_loader__WEBPACK_IMPORTED_MODULE_0__["ContentLoader"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_content_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-content-loader */ "./node_modules/vue-content-loader/dist/vue-content-loader.es.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  components: {
+    ContentLoader: vue_content_loader__WEBPACK_IMPORTED_MODULE_0__["ContentLoader"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_content_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-content-loader */ "./node_modules/vue-content-loader/dist/vue-content-loader.es.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ContentLoader: vue_content_loader__WEBPACK_IMPORTED_MODULE_0__["ContentLoader"]
   }
@@ -6511,8 +6657,14 @@ var action = '';
   data: function data() {
     return {
       isFollowing: this.following,
-      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]()
+      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"](),
+      buttonDesign: " text-green"
     };
+  },
+  watch: {
+    isFollowing: function isFollowing(val) {
+      if (val == true) this.buttonDesign = 'text-green';else this.buttonDesign = 'btn-success';
+    }
   },
   mounted: function mounted() {
     if (this.followings) {
@@ -6520,8 +6672,10 @@ var action = '';
 
       if (indexval == -1) {
         this.isFollowing = false;
+        this.buttonDesign = 'btn-success';
       } else {
         this.isFollowing = true;
+        this.buttonDesign = 'text-green';
       }
     }
   },
@@ -6529,31 +6683,20 @@ var action = '';
     toggleFollow: function toggleFollow() {
       var _this = this;
 
-      // this.$store.commit('TOGGLE_LOADING');
       if (!this.isFollowing) action = 'api/followuser/' + this.username + '/' + this.followSuggestionHead;else action = 'api/unfollowuser/' + this.username + '/' + this.followSuggestionHead;
       this.form.get(action).then(function (response) {
         if (response.data.status) {
-          // this.$store.commit('TOGGLE_LOADING');
           if (!_this.isFollowing) {
             _this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
 
             _this.isFollowing = true;
           } else {
-            _this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
-
             _this.isFollowing = false;
           }
 
-          _this.$store.commit('TOGGLE_LOADING');
-
           _this.$emit('clicked', _this.username, response.data.message);
-        } else {// this.$store.commit('TOGGLE_LOADING');
-        }
-      })["catch"](function (e) {// this.$store.commit('TOGGLE_LOADING');
-      });
-    },
-    isLoading: function isLoading() {
-      return this.form.isLoading;
+        } else {}
+      })["catch"](function (e) {});
     }
   }
 });
@@ -7879,7 +8022,8 @@ __webpack_require__.r(__webpack_exports__);
       filter_by: '',
       search: '',
       postIds: [],
-      allSelected: false
+      allSelected: false,
+      isLoading: false
     };
   },
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -7957,10 +8101,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.allSelected = selected;
       this.postIds = postids;
-    },
-    isLoading: function isLoading() {
-      this.form.isLoading = this.$store.getters.isLoading;
-      return this.$store.getters.isLoading;
     },
     select: function select() {// this.allSelected = false;
     }
@@ -8364,6 +8504,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
 /* harmony import */ var _components_Follows_FollowButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/Follows/FollowButton */ "./resources/assets/js/components/Follows/FollowButton.vue");
+/* harmony import */ var _components_ContentPlaceholder_PlaceHolderFollowers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/ContentPlaceholder/PlaceHolderFollowers */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue");
 //
 //
 //
@@ -8391,6 +8532,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8401,26 +8547,16 @@ __webpack_require__.r(__webpack_exports__);
       isFollowing: false
     };
   },
-  mounted: function mounted() {// if()
-    // {
-    //     this.isFollowing=false;
-    // }else{
-    //     this.isFollowing=true;
-    // }
-  },
   methods: {
     userFollowed: function userFollowed(user) {
       var index = this.initialState.followers.filter(function (p) {
         return p.username == user;
       }); // remove after 1 second
-    },
-    isLoading: function isLoading() {
-      return true;
-      return this.$store.getters.isLoading;
     }
   },
   components: {
-    FollowButton: _components_Follows_FollowButton__WEBPACK_IMPORTED_MODULE_1__["default"]
+    FollowButton: _components_Follows_FollowButton__WEBPACK_IMPORTED_MODULE_1__["default"],
+    PlaceHolderFollowers: _components_ContentPlaceholder_PlaceHolderFollowers__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -8438,6 +8574,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
 /* harmony import */ var _components_Follows_FollowButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/Follows/FollowButton */ "./resources/assets/js/components/Follows/FollowButton.vue");
 /* harmony import */ var _components_Follows_FollowSuggestionsList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/Follows/FollowSuggestionsList */ "./resources/assets/js/components/Follows/FollowSuggestionsList.vue");
+/* harmony import */ var _components_ContentPlaceholder_PlaceHolderFollowings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../components/ContentPlaceholder/PlaceHolderFollowings */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue");
 //
 //
 //
@@ -8522,6 +8659,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -8544,16 +8682,12 @@ __webpack_require__.r(__webpack_exports__);
         return p.username == user;
       }); // remove after 1 second
       // (this.initialState.followings.splice(index, 1));
-    },
-    isLoading: function isLoading() {
-      return true; // alert(this.$store.getters.isLoading);
-
-      return this.$store.getters.isLoading;
     }
   },
   components: {
     FollowButton: _components_Follows_FollowButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-    FollowSuggestionsList: _components_Follows_FollowSuggestionsList__WEBPACK_IMPORTED_MODULE_2__["default"]
+    FollowSuggestionsList: _components_Follows_FollowSuggestionsList__WEBPACK_IMPORTED_MODULE_2__["default"],
+    PlaceHolderFollowings: _components_ContentPlaceholder_PlaceHolderFollowings__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 
@@ -46710,8 +46844,8 @@ var render = function() {
     "ContentLoader",
     {
       attrs: {
-        height: 800,
-        width: 900,
+        height: 400,
+        width: 800,
         speed: 2,
         primaryColor: "#c0c0c0",
         secondaryColor: "#ffffff"
@@ -46719,351 +46853,439 @@ var render = function() {
     },
     [
       _c("rect", {
+        attrs: { x: "26", y: "31", rx: "0", ry: "0", width: "15", height: "15" }
+      }),
+      _vm._v(" "),
+      _c("rect", {
         attrs: {
-          x: "67",
-          y: "122",
-          rx: "0",
-          ry: "0",
-          width: "290",
-          height: "170"
+          x: "75",
+          y: "31",
+          rx: "8",
+          ry: "8",
+          width: "295",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "441",
-          y: "114",
-          rx: "0",
-          ry: "0",
-          width: "157",
-          height: "123"
+          x: "475",
+          y: "31",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "448",
-          y: "283",
-          rx: "0",
-          ry: "0",
-          width: "141",
-          height: "101"
+          x: "550",
+          y: "31",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "665",
-          y: "118",
-          rx: "0",
-          ry: "0",
-          width: "152",
-          height: "243"
+          x: "625",
+          y: "31",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "68",
-          y: "427",
-          rx: "0",
-          ry: "0",
-          width: "329",
-          height: "16"
+          x: "710",
+          y: "31",
+          rx: "8",
+          ry: "8",
+          width: "46",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: { x: "26", y: "78", rx: "0", ry: "0", width: "15", height: "15" }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "75",
+          y: "78",
+          rx: "8",
+          ry: "8",
+          width: "295",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "71",
-          y: "458",
-          rx: "0",
-          ry: "0",
-          width: "439",
-          height: "232"
+          x: "475",
+          y: "78",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "547",
-          y: "600",
-          rx: "0",
-          ry: "0",
-          width: "127",
-          height: "82"
+          x: "550",
+          y: "78",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "723",
-          y: "598",
-          rx: "0",
-          ry: "0",
-          width: "100",
-          height: "85"
+          x: "625",
+          y: "78",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "552",
-          y: "455",
-          rx: "0",
-          ry: "0",
-          width: "126",
-          height: "85"
+          x: "710",
+          y: "78",
+          rx: "8",
+          ry: "8",
+          width: "46",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "723",
-          y: "461",
+          x: "26",
+          y: "125",
           rx: "0",
           ry: "0",
-          width: "98",
-          height: "79"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: { x: "402", y: "547", rx: "0", ry: "0", width: "3", height: "4" }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "301",
-          y: "298",
-          rx: "0",
-          ry: "0",
-          width: "101",
-          height: "4"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: { x: "354", y: "310", rx: "0", ry: "0", width: "0", height: "0" }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "302",
-          y: "304",
-          rx: "0",
-          ry: "0",
-          width: "84",
-          height: "5"
+          width: "15",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "302",
-          y: "333",
-          rx: "0",
-          ry: "0",
-          width: "48",
-          height: "0"
+          x: "75",
+          y: "125",
+          rx: "8",
+          ry: "8",
+          width: "295",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "301",
+          x: "475",
+          y: "125",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "550",
+          y: "125",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "625",
+          y: "125",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "710",
+          y: "125",
+          rx: "8",
+          ry: "8",
+          width: "46",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "26",
+          y: "172",
+          rx: "0",
+          ry: "0",
+          width: "15",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "75",
+          y: "172",
+          rx: "8",
+          ry: "8",
+          width: "295",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "475",
+          y: "172",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "550",
+          y: "172",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "625",
+          y: "172",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "710",
+          y: "172",
+          rx: "8",
+          ry: "8",
+          width: "46",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "26",
+          y: "219",
+          rx: "0",
+          ry: "0",
+          width: "15",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "75",
+          y: "219",
+          rx: "8",
+          ry: "8",
+          width: "295",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "475",
+          y: "219",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "550",
+          y: "219",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "625",
+          y: "219",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "710",
+          y: "219",
+          rx: "8",
+          ry: "8",
+          width: "46",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "26",
+          y: "266",
+          rx: "0",
+          ry: "0",
+          width: "15",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "75",
+          y: "266",
+          rx: "8",
+          ry: "8",
+          width: "295",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "475",
+          y: "266",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "550",
+          y: "266",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "625",
+          y: "266",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "710",
+          y: "266",
+          rx: "8",
+          ry: "8",
+          width: "46",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "75",
           y: "313",
-          rx: "0",
-          ry: "0",
-          width: "65",
-          height: "4"
+          rx: "8",
+          ry: "8",
+          width: "295",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "301",
-          y: "322",
-          rx: "0",
-          ry: "0",
-          width: "57",
-          height: "4"
+          x: "475",
+          y: "313",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
         }
       }),
       _vm._v(" "),
       _c("rect", {
         attrs: {
-          x: "302",
-          y: "331",
-          rx: "0",
-          ry: "0",
+          x: "550",
+          y: "313",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "625",
+          y: "313",
+          rx: "8",
+          ry: "8",
+          width: "36",
+          height: "15"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "710",
+          y: "313",
+          rx: "8",
+          ry: "8",
           width: "46",
-          height: "4"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "302",
-          y: "338",
-          rx: "0",
-          ry: "0",
-          width: "30",
-          height: "4"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "530",
-          y: "245",
-          rx: "0",
-          ry: "0",
-          width: "65",
-          height: "3"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "530",
-          y: "253",
-          rx: "0",
-          ry: "0",
-          width: "57",
-          height: "3"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "530",
-          y: "261",
-          rx: "0",
-          ry: "0",
-          width: "46",
-          height: "3"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "530",
-          y: "268",
-          rx: "0",
-          ry: "0",
-          width: "35",
-          height: "2"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "510",
-          y: "391",
-          rx: "0",
-          ry: "0",
-          width: "65",
-          height: "3"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "509",
-          y: "398",
-          rx: "0",
-          ry: "0",
-          width: "51",
-          height: "3"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "508",
-          y: "409",
-          rx: "0",
-          ry: "0",
-          width: "31",
-          height: "0"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "508",
-          y: "405",
-          rx: "0",
-          ry: "0",
-          width: "38",
-          height: "3"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "508",
-          y: "412",
-          rx: "0",
-          ry: "0",
-          width: "29",
-          height: "2"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "742",
-          y: "379",
-          rx: "0",
-          ry: "0",
-          width: "101",
-          height: "13"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "617",
-          y: "547",
-          rx: "0",
-          ry: "0",
-          width: "66",
-          height: "3"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "617",
-          y: "554",
-          rx: "0",
-          ry: "0",
-          width: "54",
-          height: "3"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "616",
-          y: "563",
-          rx: "0",
-          ry: "0",
-          width: "50",
-          height: "2"
-        }
-      }),
-      _vm._v(" "),
-      _c("rect", {
-        attrs: {
-          x: "615",
-          y: "572",
-          rx: "0",
-          ry: "0",
-          width: "40",
-          height: "2"
+          height: "15"
         }
       })
     ]
@@ -47208,6 +47430,638 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=template&id=4975a830&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=template&id=4975a830& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "content-loader",
+    {
+      attrs: {
+        height: 800,
+        width: 800,
+        speed: 2,
+        primaryColor: "#c0c0c0",
+        secondaryColor: "#ffffff"
+      }
+    },
+    [
+      _c("circle", { attrs: { cx: "57.38", cy: "66.63", r: "28.96" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "103.3",
+          y: "42.67",
+          rx: "8",
+          ry: "8",
+          width: "118.38",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "107.3",
+          y: "69.67",
+          rx: "8",
+          ry: "8",
+          width: "91.99",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "283.3",
+          y: "70.67",
+          rx: "8",
+          ry: "8",
+          width: "82.87",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "437.38", cy: "66.63", r: "28.96" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "480.3",
+          y: "49.67",
+          rx: "8",
+          ry: "8",
+          width: "118.38",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "481.3",
+          y: "74.67",
+          rx: "8",
+          ry: "8",
+          width: "91.99",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "676.3",
+          y: "72.67",
+          rx: "8",
+          ry: "8",
+          width: "82.87",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "60.38", cy: "141.63", r: "28.96" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "103.3",
+          y: "123.67",
+          rx: "8",
+          ry: "8",
+          width: "118.38",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "103.3",
+          y: "149.67",
+          rx: "8",
+          ry: "8",
+          width: "91.99",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "283.3",
+          y: "147.67",
+          rx: "8",
+          ry: "8",
+          width: "82.87",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "440.38", cy: "141.63", r: "28.96" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "484.3",
+          y: "123.67",
+          rx: "8",
+          ry: "8",
+          width: "118.38",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "485.3",
+          y: "148.67",
+          rx: "8",
+          ry: "8",
+          width: "91.99",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "678.3",
+          y: "149.67",
+          rx: "8",
+          ry: "8",
+          width: "82.87",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "59.38", cy: "225.63", r: "28.96" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "107.3",
+          y: "203.67",
+          rx: "8",
+          ry: "8",
+          width: "118.38",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "109.3",
+          y: "230.67",
+          rx: "8",
+          ry: "8",
+          width: "91.99",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "284.3",
+          y: "227.67",
+          rx: "8",
+          ry: "8",
+          width: "82.87",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "444.38", cy: "218.63", r: "28.96" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "483.3",
+          y: "197.67",
+          rx: "8",
+          ry: "8",
+          width: "118.38",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "485.3",
+          y: "225.67",
+          rx: "8",
+          ry: "8",
+          width: "91.99",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "680.3",
+          y: "219.67",
+          rx: "8",
+          ry: "8",
+          width: "82.87",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "58.38", cy: "312.63", r: "28.96" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "102.3",
+          y: "291.67",
+          rx: "8",
+          ry: "8",
+          width: "118.38",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "101.3",
+          y: "318.67",
+          rx: "8",
+          ry: "8",
+          width: "91.99",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "285.3",
+          y: "313.67",
+          rx: "8",
+          ry: "8",
+          width: "82.87",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "445.38", cy: "306.63", r: "28.96" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "487.3",
+          y: "286.67",
+          rx: "8",
+          ry: "8",
+          width: "118.38",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "489.3",
+          y: "311.67",
+          rx: "8",
+          ry: "8",
+          width: "91.99",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "681.3",
+          y: "308.67",
+          rx: "8",
+          ry: "8",
+          width: "82.87",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "59.38", cy: "396.63", r: "28.96" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "102.3",
+          y: "375.67",
+          rx: "8",
+          ry: "8",
+          width: "118.38",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "103.3",
+          y: "403.67",
+          rx: "8",
+          ry: "8",
+          width: "91.99",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "289.3",
+          y: "397.67",
+          rx: "8",
+          ry: "8",
+          width: "82.87",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "448.38", cy: "391.63", r: "28.96" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "492.3",
+          y: "371.67",
+          rx: "8",
+          ry: "8",
+          width: "118.38",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "494.3",
+          y: "399.67",
+          rx: "8",
+          ry: "8",
+          width: "91.99",
+          height: "15.2"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "684.3",
+          y: "391.67",
+          rx: "8",
+          ry: "8",
+          width: "82.87",
+          height: "15.2"
+        }
+      })
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=template&id=bf46c412&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=template&id=bf46c412& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "content-loader",
+    {
+      attrs: {
+        height: 800,
+        width: 800,
+        speed: 2,
+        primaryColor: "#c0c0c0",
+        secondaryColor: "#ffffff"
+      }
+    },
+    [
+      _c("circle", { attrs: { cx: "69.08", cy: "72.33", r: "36.66" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "156.27",
+          y: "80.67",
+          rx: "8",
+          ry: "8",
+          width: "112.86",
+          height: "20"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "155.27",
+          y: "42.67",
+          rx: "8",
+          ry: "8",
+          width: "168.86",
+          height: "21"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "560.27",
+          y: "87.67",
+          rx: "8",
+          ry: "8",
+          width: "110.4",
+          height: "23"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "71.08", cy: "176.33", r: "36.66" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "162.27",
+          y: "146.67",
+          rx: "8",
+          ry: "8",
+          width: "168.86",
+          height: "21"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "163.27",
+          y: "182.67",
+          rx: "8",
+          ry: "8",
+          width: "112.86",
+          height: "20"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "560.27",
+          y: "183.67",
+          rx: "8",
+          ry: "8",
+          width: "115",
+          height: "23"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "73.08", cy: "287.33", r: "36.66" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "161.27",
+          y: "257.67",
+          rx: "8",
+          ry: "8",
+          width: "168.86",
+          height: "21"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "162.27",
+          y: "293.67",
+          rx: "8",
+          ry: "8",
+          width: "112.86",
+          height: "20"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "564.27",
+          y: "287.67",
+          rx: "8",
+          ry: "8",
+          width: "115",
+          height: "23"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "75.08", cy: "390.33", r: "36.66" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "164.27",
+          y: "360.67",
+          rx: "8",
+          ry: "8",
+          width: "168.86",
+          height: "21"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "165.27",
+          y: "399.67",
+          rx: "8",
+          ry: "8",
+          width: "112.86",
+          height: "20"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "568.27",
+          y: "382.67",
+          rx: "8",
+          ry: "8",
+          width: "115",
+          height: "23"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "78.08", cy: "499.33", r: "36.66" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "166.27",
+          y: "463.67",
+          rx: "8",
+          ry: "8",
+          width: "168.86",
+          height: "21"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "166.27",
+          y: "501.67",
+          rx: "8",
+          ry: "8",
+          width: "112.86",
+          height: "20"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "570.27",
+          y: "486.67",
+          rx: "8",
+          ry: "8",
+          width: "115",
+          height: "23"
+        }
+      }),
+      _vm._v(" "),
+      _c("circle", { attrs: { cx: "80.08", cy: "598.33", r: "36.66" } }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "169.27",
+          y: "565.67",
+          rx: "8",
+          ry: "8",
+          width: "168.86",
+          height: "21"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "168.27",
+          y: "602.67",
+          rx: "8",
+          ry: "8",
+          width: "112.86",
+          height: "20"
+        }
+      }),
+      _vm._v(" "),
+      _c("rect", {
+        attrs: {
+          x: "572.27",
+          y: "599.67",
+          rx: "8",
+          ry: "8",
+          width: "115",
+          height: "23"
+        }
+      })
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Favorites/Favorite.vue?vue&type=template&id=12617aeb&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Favorites/Favorite.vue?vue&type=template&id=12617aeb& ***!
@@ -47276,7 +48130,8 @@ var render = function() {
   return _c(
     "a",
     {
-      class: _vm.Buttonclass,
+      staticClass: "btn btn-sm  btn-round",
+      class: [_vm.Buttonclass, _vm.buttonDesign],
       attrs: { href: "" },
       on: {
         click: function($event) {
@@ -47330,7 +48185,7 @@ var render = function() {
                 "div",
                 [
                   _c("h5", [
-                    _c("a", { attrs: { href: "timeline.html" } }, [
+                    _c("a", { attrs: { href: "#" } }, [
                       _vm._v(_vm._s(eachsuggestion.name))
                     ])
                   ]),
@@ -50295,7 +51150,7 @@ var render = function() {
                               }),
                               0
                             )
-                          : _vm.isLoading === false
+                          : this.$store.getters.isLoading === false
                           ? _c("tbody", [_vm._m(6)])
                           : _vm._e()
                       ]
@@ -50329,7 +51184,7 @@ var staticRenderFns = [
           }
         },
         [
-          _vm._v("\r\n                   All\r\n                   "),
+          _vm._v("\n                   All\n                   "),
           _c("i", { staticClass: "fa fa-angle-down " })
         ]
       )
@@ -50350,7 +51205,7 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v("\r\n                     Sort by\r\n                     "),
+        _vm._v("\n                     Sort by\n                     "),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
     )
@@ -50367,7 +51222,7 @@ var staticRenderFns = [
       },
       [
         _vm._v(
-          "\r\n                                     Filter by\r\n             "
+          "\n                                     Filter by\n             "
         ),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
@@ -50380,9 +51235,9 @@ var staticRenderFns = [
     return _c("div", { staticClass: "hidden_sec" }, [
       _c("div", { staticClass: "hidden_td_link" }, [
         _c("a", { attrs: { href: "#" } }, [_vm._v("Edit")]),
-        _vm._v("\r\n                   | \r\n                  "),
+        _vm._v("\n                   | \n                  "),
         _c("a", { attrs: { href: "#" } }, [_vm._v("Preview")]),
-        _vm._v("\r\n                   | \r\n                  "),
+        _vm._v("\n                   | \n                  "),
         _c("a", { attrs: { href: "#" } }, [_vm._v("Delete")])
       ])
     ])
@@ -51137,58 +51992,65 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "main" } }, [
-    _vm.isLoading === true
-      ? _c("div", { staticClass: "friend-list fn_list_2" })
+    this.$store.getters.isLoading === true
+      ? _c("div", [_c("PlaceHolderFollowers")], 1)
       : _vm.initialState.followers
-      ? _c(
-          "div",
-          { staticClass: "friend-list fn_list_2" },
-          _vm._l(_vm.initialState.followers, function(eachFollowers) {
-            return _c("div", { staticClass: "col-md-6 col-sm-12" }, [
-              _c("div", { staticClass: "friend-card" }, [
-                _c("div", { staticClass: "row card-info" }, [
-                  _vm._m(0, true),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-9 col-md-8" }, [
-                    _c(
-                      "div",
-                      { staticClass: "friend-info" },
-                      [
-                        _c("h5", [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "profile-link",
-                              attrs: { href: "timeline.html" }
+      ? _c("div", [
+          _c(
+            "div",
+            { staticClass: "friend-list fn_list_2" },
+            _vm._l(_vm.initialState.followers, function(eachFollowers) {
+              return _c("div", { staticClass: "col-md-6 col-sm-12" }, [
+                _c("div", { staticClass: "friend-card" }, [
+                  _c("div", { staticClass: "row card-info" }, [
+                    _vm._m(0, true),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-9 col-md-8" }, [
+                      _c(
+                        "div",
+                        { staticClass: "friend-info" },
+                        [
+                          _c("h5", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "profile-link",
+                                attrs: { href: "timeline.html" }
+                              },
+                              [_vm._v(_vm._s(eachFollowers.name) + " ")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("FollowButton", {
+                            attrs: {
+                              followings: _vm.initialState.followings,
+                              Buttonclass: "float-right",
+                              username: eachFollowers.username,
+                              followSuggestionHead: 3
                             },
-                            [_vm._v(_vm._s(eachFollowers.name) + " ")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("FollowButton", {
-                          attrs: {
-                            followings: _vm.initialState.followings,
-                            Buttonclass: "float-right text-green btn",
-                            username: eachFollowers.username,
-                            followSuggestionHead: 3
-                          },
-                          on: { clicked: _vm.userFollowed }
-                        }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("14960 Followers")])
-                      ],
-                      1
-                    )
+                            on: { clicked: _vm.userFollowed }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              _vm._s(eachFollowers.followers_count) +
+                                " Followers"
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ])
                   ])
                 ])
               ])
-            ])
-          }),
-          0
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "friend-list fn_list_2" })
+            }),
+            0
+          )
+        ])
+      : _c("div", { staticClass: "friend-list fn_list_2" }, [
+          _vm._v("\n      No Records found\n    ")
+        ])
   ])
 }
 var staticRenderFns = [
@@ -51226,10 +52088,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _vm.isLoading === true
-      ? _c("div", { staticClass: "col-md-9 col-sm-9 pad-left-0" }, [
-          _vm._v("\r\n      sadd\r\n   ")
-        ])
+    this.$store.getters.isLoading === true
+      ? _c(
+          "div",
+          { staticClass: "col-md-9 col-sm-9 pad-left-0" },
+          [_c("PlaceHolderFollowings")],
+          1
+        )
       : _vm.initialState.followings
       ? _c(
           "div",
@@ -51259,14 +52124,19 @@ var render = function() {
                         _c("FollowButton", {
                           attrs: {
                             following: true,
-                            Buttonclass: "float-right text-green btn",
+                            Buttonclass: "float-right   ",
                             username: eachFollowings.username,
                             followSuggestionHead: _vm.followSuggestion.length
                           },
                           on: { clicked: _vm.userFollowed }
                         }),
                         _vm._v(" "),
-                        _c("p", [_vm._v("14960 Followers")])
+                        _c("p", [
+                          _vm._v(
+                            _vm._s(eachFollowings.followers_count) +
+                              "  Followers"
+                          )
+                        ])
                       ],
                       1
                     )
@@ -51314,7 +52184,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "friend-list" }, [
       _c("div", { staticClass: "friend-card" }, [
         _c("div", { staticClass: "row card-info" }, [
-          _vm._v("\r\n              Sorry! No Following found\r\n            ")
+          _vm._v("\n              Sorry! No Following found\n            ")
         ])
       ])
     ])
@@ -51555,7 +52425,7 @@ var render = function() {
                           [
                             _c("h4", [
                               _vm._v(
-                                "Created face stars sixth forth fow\r\n                                Earth firmament meat"
+                                "Created face stars sixth forth fow\n                                Earth firmament meat"
                               )
                             ])
                           ]
@@ -51652,7 +52522,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\r\n                                "),
+                  _vm._v("/\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -51665,7 +52535,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Brought dreepeth youll blessed\r\n                                from whose signs over"
+                        "Brought dreepeth youll blessed\n                                from whose signs over"
                       )
                     ])
                   ]
@@ -51700,7 +52570,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\r\n                                        "),
+                      _vm._v("/\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -51715,7 +52585,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\r\n                                        may heaven to"
+                            "Shall for rule whoses\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -51742,7 +52612,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\r\n                                        "),
+                      _vm._v("/\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -51757,7 +52627,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\r\n                                        may heaven to"
+                            "Shall for rule whoses\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -51784,7 +52654,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\r\n                                        "),
+                      _vm._v("/\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -51799,7 +52669,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\r\n                                        may heaven to"
+                            "Shall for rule whoses\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -51826,7 +52696,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\r\n                                        "),
+                      _vm._v("/\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -51841,7 +52711,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\r\n                                        may heaven to"
+                            "Shall for rule whoses\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -51920,7 +52790,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Brought all day domi\r\n                                        nion appear from\r\n                                        subdue dominion\r\n                                    firmament over face"
+                            "Brought all day domi\n                                        nion appear from\n                                        subdue dominion\n                                    firmament over face"
                           )
                         ])
                       ]
@@ -51966,7 +52836,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Abundantly forth late\r\n                                appear fourth us."
+                        "Abundantly forth late\n                                appear fourth us."
                       )
                     ])
                   ]
@@ -51998,7 +52868,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Abundantly forth late\r\n                                appear fourth us."
+                        "Abundantly forth late\n                                appear fourth us."
                       )
                     ])
                   ]
@@ -52063,7 +52933,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Created face stars sixth forth\r\n                                Earth firmament"
+                        "Created face stars sixth forth\n                                Earth firmament"
                       )
                     ])
                   ]
@@ -52104,7 +52974,7 @@ var staticRenderFns = [
                       [
                         _c("h4", { staticClass: "font-20" }, [
                           _vm._v(
-                            "Light that hath itself god\r\n                                        grass herb dark sea on\r\n                                    the hath dowe "
+                            "Light that hath itself god\n                                        grass herb dark sea on\n                                    the hath dowe "
                           )
                         ])
                       ]
@@ -52159,7 +53029,7 @@ var staticRenderFns = [
                       [
                         _c("h4", { staticClass: "font-20" }, [
                           _vm._v(
-                            "Light that hath itself god\r\n                                        grass herb dark sea on\r\n                                    the hath dowe "
+                            "Light that hath itself god\n                                        grass herb dark sea on\n                                    the hath dowe "
                           )
                         ])
                       ]
@@ -52240,7 +53110,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "short_details" }, [
                   _c("div", { staticClass: "meta-top d-flex" }, [
                     _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                    _vm._v("/\r\n                                "),
+                    _vm._v("/\n                                "),
                     _c("a", { attrs: { href: "#" } }, [
                       _vm._v("March 15, 2019")
                     ])
@@ -52255,7 +53125,7 @@ var staticRenderFns = [
                     [
                       _c("h4", [
                         _vm._v(
-                          "Created face stars sixth forth fow\r\n                                Earth firmament meat"
+                          "Created face stars sixth forth fow\n                                Earth firmament meat"
                         )
                       ])
                     ]
@@ -52323,7 +53193,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Blessed night morning on\r\n                                them you great"
+                            "Blessed night morning on\n                                them you great"
                           )
                         ])
                       ]
@@ -52390,7 +53260,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Blessed night morning on\r\n                                them you great"
+                            "Blessed night morning on\n                                them you great"
                           )
                         ])
                       ]
@@ -52454,7 +53324,7 @@ var staticRenderFns = [
                     [
                       _c("h4", [
                         _vm._v(
-                          "Blessed night morning on\r\n                                them you great"
+                          "Blessed night morning on\n                                them you great"
                         )
                       ])
                     ]
@@ -52526,7 +53396,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\r\n                                "),
+                  _vm._v("/\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -52539,7 +53409,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Shall for rule whose toge one\r\n                                may heaven to dat"
+                        "Shall for rule whose toge one\n                                may heaven to dat"
                       )
                     ])
                   ]
@@ -52572,7 +53442,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\r\n                                "),
+                  _vm._v("/\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -52585,7 +53455,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Shall for rule whose toge one\r\n                                may heaven to dat"
+                        "Shall for rule whose toge one\n                                may heaven to dat"
                       )
                     ])
                   ]
@@ -52618,7 +53488,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\r\n                                "),
+                  _vm._v("/\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -52631,7 +53501,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Shall for rule whose toge one\r\n                                may heaven to dat"
+                        "Shall for rule whose toge one\n                                may heaven to dat"
                       )
                     ])
                   ]
@@ -52774,7 +53644,7 @@ var render = function() {
         )
       ])
     : _c("div", { staticClass: "col-md-9 col-sm-9" }, [
-        _vm._v("\r\n   Sorry, No Category Found\r\n")
+        _vm._v("\n   Sorry, No Category Found\n")
       ])
 }
 var staticRenderFns = []
@@ -71277,6 +72147,144 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue":
+/*!************************************************************************************!*\
+  !*** ./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PlaceHolderFollowers_vue_vue_type_template_id_4975a830___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PlaceHolderFollowers.vue?vue&type=template&id=4975a830& */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=template&id=4975a830&");
+/* harmony import */ var _PlaceHolderFollowers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PlaceHolderFollowers.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PlaceHolderFollowers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PlaceHolderFollowers_vue_vue_type_template_id_4975a830___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PlaceHolderFollowers_vue_vue_type_template_id_4975a830___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaceHolderFollowers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PlaceHolderFollowers.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaceHolderFollowers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=template&id=4975a830&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=template&id=4975a830& ***!
+  \*******************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaceHolderFollowers_vue_vue_type_template_id_4975a830___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PlaceHolderFollowers.vue?vue&type=template&id=4975a830& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowers.vue?vue&type=template&id=4975a830&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaceHolderFollowers_vue_vue_type_template_id_4975a830___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaceHolderFollowers_vue_vue_type_template_id_4975a830___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue":
+/*!*************************************************************************************!*\
+  !*** ./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PlaceHolderFollowings_vue_vue_type_template_id_bf46c412___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PlaceHolderFollowings.vue?vue&type=template&id=bf46c412& */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=template&id=bf46c412&");
+/* harmony import */ var _PlaceHolderFollowings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PlaceHolderFollowings.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PlaceHolderFollowings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PlaceHolderFollowings_vue_vue_type_template_id_bf46c412___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PlaceHolderFollowings_vue_vue_type_template_id_bf46c412___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaceHolderFollowings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PlaceHolderFollowings.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaceHolderFollowings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=template&id=bf46c412&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=template&id=bf46c412& ***!
+  \********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaceHolderFollowings_vue_vue_type_template_id_bf46c412___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PlaceHolderFollowings.vue?vue&type=template&id=bf46c412& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue?vue&type=template&id=bf46c412&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaceHolderFollowings_vue_vue_type_template_id_bf46c412___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaceHolderFollowings_vue_vue_type_template_id_bf46c412___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/Favorites/Favorite.vue":
 /*!***************************************************************!*\
   !*** ./resources/assets/js/components/Favorites/Favorite.vue ***!
@@ -73286,8 +74294,8 @@ var state = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\blog\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! C:\blog\resources\assets\sass\style.scss */"./resources/assets/sass/style.scss");
+__webpack_require__(/*! /var/www/html/blog/resources/assets/js/app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/sass/style.scss */"./resources/assets/sass/style.scss");
 
 
 /***/ })

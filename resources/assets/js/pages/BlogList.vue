@@ -114,7 +114,7 @@
            
           </tbody>
           
-          <tbody v-else-if="isLoading===false">
+          <tbody v-else-if="this.$store.getters.isLoading===false">
              <tr >
               <td colspan="6">No post are available</td>
             </tr>
@@ -150,6 +150,7 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             search:'',
             postIds:[],
             allSelected:false,
+            isLoading:false
           }
         },
         mixins:[mixin],
@@ -236,12 +237,7 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             this.allSelected=selected;
             this.postIds=postids;
         },
-        isLoading:function()
-        {
-          this.form.isLoading=this.$store.getters.isLoading
-          return this.$store.getters.isLoading;
-
-        },
+      
         select: function() {
             // this.allSelected = false;
         }

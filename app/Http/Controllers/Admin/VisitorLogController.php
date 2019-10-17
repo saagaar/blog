@@ -24,7 +24,8 @@ class VisitorLogController extends AdminController
         $search = $request->get('search');
         if($search){
             $logs = $this->visitorLog->getAll()->where('ip_address', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
-        }else{
+        }
+        else{
             $logs = $this->visitorLog->getAll()->paginate($this->PerPage);
         }
         return view('admin.websitelog.list')->with(array('websiteLog'=>$logs,'breadcrumb'=>$breadcrumb,'menu'=>'logs List','primary_menu'=>'websitelog.list'));
@@ -44,24 +45,32 @@ class VisitorLogController extends AdminController
     }
     public function block(BlocklistInterface $blockList,$id)
     {
-        $adminId = auth()->user()->id;
+        $adminId = auth()->user()->id;  
+
         $ipData =$this->visitorLog->getLogById($id);
-        
+                      
         if ($ipData) 
         {
-            $ip = $blockList->getByIp($ipData->ip_address);
-            if($ip){
-                if($ip->status=='black'){
-                return redirect()->route('blockList.list')
+            $ip=$blockList->getByIp($ipData->ip_address);
+             
+            if($ip)
+            {
+                if($ip->status=='black')
+                {
+                        return redirect()->route('blocklist.list')
                         ->with('error','Ip is already Blocked');
-                }else{
-                    return redirect()->route('blockList.list');
                 }
-            }else {
+                else
+                    {
+                     return redirect()->route('blocklist.list');
+                    }
+            }
+            
+            else {
                 
                 $data = array('ip_address'=>$ipData['ip_address'],'message'=>'Blocked By admin','status'=>'black','admin_id'=>$adminId);
                 $blockList->create($data);
-                return redirect()->route('blockList.list')
+                return redirect()->route('blocklist.list')
                         ->with('success','Block List updated successfully.');
             }
         }
