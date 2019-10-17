@@ -48,16 +48,15 @@
     <rect x="550" y="266" rx="8" ry="8" width="36" height="15" /> 
     <rect x="625" y="266" rx="8" ry="8" width="36" height="15" /> 
     <rect x="710" y="266" rx="8" ry="8" width="46" height="15" /> 
-
-   
+  
     <rect x="75" y="313" rx="8" ry="8" width="295" height="15" /> 
     <rect x="475" y="313" rx="8" ry="8" width="36" height="15" /> 
     <rect x="550" y="313" rx="8" ry="8" width="36" height="15" /> 
     <rect x="625" y="313" rx="8" ry="8" width="36" height="15" /> 
     <rect x="710" y="313" rx="8" ry="8" width="46" height="15" />
  
-            </ContentLoader>
-</template>
+</ContentLoader>
+ </template>
 
 
 
