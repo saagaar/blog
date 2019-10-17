@@ -104,9 +104,20 @@
                 <div class="alert alert-danger">{{ $errors->first('content') }}</div>
                 @endif
                 </div>
+
+                <div class="form-group">
+                  <label for="short_description">Short Description: </label>
+                    <textarea name="short_description" class="form-control" rows="5" placeholder="Short Description here..">{{ $blog->short_description }}</textarea>
+
+                  @if ($errors->has('short_description'))
+                  <div class="alert alert-danger">{{ $errors->first('short_description')}}</div>
+                  @endif
+                </div>
+
+
                 <div class="form-group">
                   <label for="image">Image Upload</label>
-                  <img src="{{ asset('images/blogimages/'.$blog['image']) }}" alt="Blog Image" height="42" width="42">
+                 <img src='/images/blog/{{$blog->image}}' width="50"/>
                   <input type="file" class="form-control" name="image" id="image">
                   @if ($errors->has('image'))
                 <div class="alert alert-danger">{{ $errors->first('image') }}</div>
@@ -139,7 +150,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
               </div>
             </form>
             </div>

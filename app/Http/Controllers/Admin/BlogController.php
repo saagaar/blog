@@ -61,6 +61,7 @@ class BlogController extends AdminController
             return redirect()->route('blog.list')
                              ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
         }
+        
         $localeList=$locale->getActiveLocale()->toArray();
         return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'tags'=>$tagList,'localelist'=>$localeList,'primary_menu'=>'blog.list'));
 
@@ -85,12 +86,12 @@ class BlogController extends AdminController
 
 
                 if ($request->hasFile('image')) {
-                    $dir = 'images/blog-images/';
+                    $dir = 'images/blog/';
                     if ($blog->image != '' && File::exists($dir . $blog->image))
                     File::delete($dir . $blog->image);
 
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/blog-images'), $imageName);
+                    request()->image->move(public_path('images/blog'), $imageName);
                     $validatedData['image'] = $imageName;
                 }else {
                     $validatedData['image'] = $blog->image;
@@ -108,8 +109,9 @@ class BlogController extends AdminController
     public function delete($id)
     {
        $blog =$this->blog->GetBlogById($id);
+       echo $blog;
         if( $blog){
-            $dir = 'frontend/images/blog';
+            $dir = 'images/blog/';
             if ($blog->image != '' && File::exists($dir . $blog->image)){
                 File::delete($dir . $blog->image);
             }

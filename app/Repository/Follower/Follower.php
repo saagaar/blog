@@ -36,7 +36,15 @@ Class  Follower implements FollowerInterface
      * 
      */
  	public function getAllFollowers($user){
-      return $user->followers()->get();
+      return $user->followers()->withCount('followers')->get();
+    }
+
+    public function getFollowersCount($user){
+      return $user->followers()->count();
+    }
+
+     public function getFollowingsCount($user){
+      return $user->followings()->count();
     }
        /**
      * Get's all follow lists.
@@ -46,7 +54,7 @@ Class  Follower implements FollowerInterface
      */
 
      public function getAllFollowings($user){
-        return $user->followings()->select(['username','name'])->get();
+        return $user->followings()->withCount('followers')->get();
      }
  	  /**
      * Insert follower

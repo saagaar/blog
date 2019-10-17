@@ -47,7 +47,9 @@ class UserController extends FrontendController
            }
            else
            {
+
               $data['blogList']=$myBlogs->paginate($this->perPage);
+
               $data['path']='/blog/list';
               $initialState=json_encode($data);
               $user=$this->user_state_info();

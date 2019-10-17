@@ -51,8 +51,6 @@ let action='';
         methods:
         {
         	toggleFollow:function(){
-               // this.$store.commit('TOGGLE_LOADING');
-
         		if(!this.isFollowing)
         			action='api/followuser/'+this.username+'/'+this.followSuggestionHead;
         		else 
@@ -61,31 +59,22 @@ let action='';
 	        		this.form.get(action).then(response => {
 		               if(response.data.status)
 		               {
-                          // this.$store.commit('TOGGLE_LOADING');
                           if(!this.isFollowing){
                             this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
                             this.isFollowing=true;
 
                           }else{
-   		               	       this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
                               this.isFollowing=false;
                           }
-                           this.$store.commit('TOGGLE_LOADING');
 		               	        this.$emit('clicked',this.username,response.data.message);
 		               }
 		               else
 		               {
-                          // this.$store.commit('TOGGLE_LOADING');
 		               }
 	              }).catch(e => {
-                    // this.$store.commit('TOGGLE_LOADING');
 	              });
 
         	},
-            isLoading:function()
-            {
-              return this.form.isLoading;
-            },
       
         }
     }

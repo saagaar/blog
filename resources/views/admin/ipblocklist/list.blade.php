@@ -57,7 +57,7 @@
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No Blocklist Found </td>
+                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No Blocklists Found </td>
                   </tr>
                   @endif
                 </tbody>

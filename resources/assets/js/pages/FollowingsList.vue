@@ -2,7 +2,7 @@
 <template>
 <div class="row">
   <div class="col-md-9 col-sm-9 pad-left-0" v-if="this.$store.getters.isLoading===true">
-      
+      <PlaceHolderFollowings></PlaceHolderFollowings>
   </div>
   <div class="col-md-9 col-sm-9 pad-left-0" v-else-if="initialState.followings">
         <div class="friend-list" v-for="eachFollowings in initialState.followings">
@@ -16,7 +16,7 @@
                   <h5><a href="timeline.html" class="profile-link">{{eachFollowings.name}}</a></h5>
                  <!--  <a href="#" class="float-right text-green btn">Unfollow</a> -->
                  <FollowButton  @clicked="userFollowed" :following="true" :Buttonclass="'float-right   '" :username="eachFollowings.username" :followSuggestionHead="followSuggestion.length" ></FollowButton>
-                  <p>14960 Followers</p>
+                  <p>{{eachFollowings.followers_count}}  Followers</p>
                 </div>
               </div>
             </div>
@@ -86,7 +86,8 @@
 
   import mixin  from './../mixins/LoadData.mixin.js';
   import FollowButton from './../components/Follows/FollowButton';
-import FollowSuggestionsList from './../components/Follows/FollowSuggestionsList';
+  import FollowSuggestionsList from './../components/Follows/FollowSuggestionsList';
+  import PlaceHolderFollowings  from './../components/ContentPlaceholder/PlaceHolderFollowings';
     export default {
       mixins: [ mixin ],
          data:function(){
@@ -112,7 +113,8 @@ import FollowSuggestionsList from './../components/Follows/FollowSuggestionsList
         },
         components:{
           FollowButton,
-          FollowSuggestionsList
+          FollowSuggestionsList,
+          PlaceHolderFollowings
           
         },
     }
