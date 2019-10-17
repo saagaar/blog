@@ -21,8 +21,8 @@ Route::get('/logincheck', function () {
 });
 
 
-Route::get('/api/unfollowuser/{username}/{offset}','Frontend\HomeController@unfollowuser');
-Route::get('/api/followuser/{username}/{offset}','Frontend\HomeController@followuser');
+Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
+Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');
 
 Route::get('/api/blog/list/','Frontend\UserController@myBlogs')->name('api');
 
@@ -72,11 +72,11 @@ Route::match(['get','post'],'api/blog/add', 'Frontend\BlogController@create')->n
  * for user
  */
 
-Route::get('api/followings','Frontend\HomeController@followings')->name('api');
-Route::get('/followings','Frontend\HomeController@followings')->name('followings');
+Route::get('api/followings','Frontend\UserController@followings')->name('api');
+Route::get('/followings','Frontend\UserController@followings')->name('followings');
 	
-Route::get('api/followers','Frontend\HomeController@followers')->name('api');
-Route::get('/followers','Frontend\HomeController@followers')->name('followers');
+Route::get('api/followers','Frontend\UserController@followers')->name('api');
+Route::get('/followers','Frontend\UserController@followers')->name('followers');
 
 
 Auth::routes();
