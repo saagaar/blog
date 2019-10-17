@@ -50286,7 +50286,7 @@ var staticRenderFns = [
           }
         },
         [
-          _vm._v("\r\n                   All\r\n                   "),
+          _vm._v("\n                   All\n                   "),
           _c("i", { staticClass: "fa fa-angle-down " })
         ]
       )
@@ -50307,7 +50307,7 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v("\r\n                     Sort by\r\n                     "),
+        _vm._v("\n                     Sort by\n                     "),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
     )
@@ -50324,7 +50324,7 @@ var staticRenderFns = [
       },
       [
         _vm._v(
-          "\r\n                                     Filter by\r\n             "
+          "\n                                     Filter by\n             "
         ),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
@@ -50337,9 +50337,9 @@ var staticRenderFns = [
     return _c("div", { staticClass: "hidden_sec" }, [
       _c("div", { staticClass: "hidden_td_link" }, [
         _c("a", { attrs: { href: "#" } }, [_vm._v("Edit")]),
-        _vm._v("\r\n                   | \r\n                  "),
+        _vm._v("\n                   | \n                  "),
         _c("a", { attrs: { href: "#" } }, [_vm._v("Preview")]),
-        _vm._v("\r\n                   | \r\n                  "),
+        _vm._v("\n                   | \n                  "),
         _c("a", { attrs: { href: "#" } }, [_vm._v("Delete")])
       ])
     ])
@@ -51184,7 +51184,7 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _vm.isLoading === true
       ? _c("div", { staticClass: "col-md-9 col-sm-9 pad-left-0" }, [
-          _vm._v("\r\n      sadd\r\n   ")
+          _vm._v("\n      sadd\n   ")
         ])
       : _vm.initialState.followings
       ? _c(
@@ -51272,7 +51272,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "friend-list" }, [
       _c("div", { staticClass: "friend-card" }, [
         _c("div", { staticClass: "row card-info" }, [
-          _vm._v("\r\n              Sorry! No Following found\r\n            ")
+          _vm._v("\n              Sorry! No Following found\n            ")
         ])
       ])
     ])
@@ -51630,7 +51630,7 @@ var render = function() {
                           [
                             _c("h4", [
                               _vm._v(
-                                "Created face stars sixth forth fow\r\n                                Earth firmament meat"
+                                "Created face stars sixth forth fow\n                                Earth firmament meat"
                               )
                             ])
                           ]
@@ -51727,7 +51727,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\r\n                                "),
+                  _vm._v("/\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -51740,7 +51740,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Brought dreepeth youll blessed\r\n                                from whose signs over"
+                        "Brought dreepeth youll blessed\n                                from whose signs over"
                       )
                     ])
                   ]
@@ -51775,7 +51775,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\r\n                                        "),
+                      _vm._v("/\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -51790,7 +51790,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\r\n                                        may heaven to"
+                            "Shall for rule whoses\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -51817,7 +51817,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\r\n                                        "),
+                      _vm._v("/\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -51832,7 +51832,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\r\n                                        may heaven to"
+                            "Shall for rule whoses\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -51859,7 +51859,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\r\n                                        "),
+                      _vm._v("/\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -51874,7 +51874,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\r\n                                        may heaven to"
+                            "Shall for rule whoses\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -51901,7 +51901,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\r\n                                        "),
+                      _vm._v("/\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -51916,7 +51916,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\r\n                                        may heaven to"
+                            "Shall for rule whoses\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -51995,7 +51995,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Brought all day domi\r\n                                        nion appear from\r\n                                        subdue dominion\r\n                                    firmament over face"
+                            "Brought all day domi\n                                        nion appear from\n                                        subdue dominion\n                                    firmament over face"
                           )
                         ])
                       ]
@@ -52041,7 +52041,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Abundantly forth late\r\n                                appear fourth us."
+                        "Abundantly forth late\n                                appear fourth us."
                       )
                     ])
                   ]
@@ -52073,7 +52073,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Abundantly forth late\r\n                                appear fourth us."
+                        "Abundantly forth late\n                                appear fourth us."
                       )
                     ])
                   ]
@@ -52138,7 +52138,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Created face stars sixth forth\r\n                                Earth firmament"
+                        "Created face stars sixth forth\n                                Earth firmament"
                       )
                     ])
                   ]
@@ -52179,7 +52179,7 @@ var staticRenderFns = [
                       [
                         _c("h4", { staticClass: "font-20" }, [
                           _vm._v(
-                            "Light that hath itself god\r\n                                        grass herb dark sea on\r\n                                    the hath dowe "
+                            "Light that hath itself god\n                                        grass herb dark sea on\n                                    the hath dowe "
                           )
                         ])
                       ]
@@ -52234,7 +52234,7 @@ var staticRenderFns = [
                       [
                         _c("h4", { staticClass: "font-20" }, [
                           _vm._v(
-                            "Light that hath itself god\r\n                                        grass herb dark sea on\r\n                                    the hath dowe "
+                            "Light that hath itself god\n                                        grass herb dark sea on\n                                    the hath dowe "
                           )
                         ])
                       ]
@@ -52315,7 +52315,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "short_details" }, [
                   _c("div", { staticClass: "meta-top d-flex" }, [
                     _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                    _vm._v("/\r\n                                "),
+                    _vm._v("/\n                                "),
                     _c("a", { attrs: { href: "#" } }, [
                       _vm._v("March 15, 2019")
                     ])
@@ -52330,7 +52330,7 @@ var staticRenderFns = [
                     [
                       _c("h4", [
                         _vm._v(
-                          "Created face stars sixth forth fow\r\n                                Earth firmament meat"
+                          "Created face stars sixth forth fow\n                                Earth firmament meat"
                         )
                       ])
                     ]
@@ -52398,7 +52398,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Blessed night morning on\r\n                                them you great"
+                            "Blessed night morning on\n                                them you great"
                           )
                         ])
                       ]
@@ -52465,7 +52465,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Blessed night morning on\r\n                                them you great"
+                            "Blessed night morning on\n                                them you great"
                           )
                         ])
                       ]
@@ -52529,7 +52529,7 @@ var staticRenderFns = [
                     [
                       _c("h4", [
                         _vm._v(
-                          "Blessed night morning on\r\n                                them you great"
+                          "Blessed night morning on\n                                them you great"
                         )
                       ])
                     ]
@@ -52601,7 +52601,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\r\n                                "),
+                  _vm._v("/\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -52614,7 +52614,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Shall for rule whose toge one\r\n                                may heaven to dat"
+                        "Shall for rule whose toge one\n                                may heaven to dat"
                       )
                     ])
                   ]
@@ -52647,7 +52647,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\r\n                                "),
+                  _vm._v("/\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -52660,7 +52660,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Shall for rule whose toge one\r\n                                may heaven to dat"
+                        "Shall for rule whose toge one\n                                may heaven to dat"
                       )
                     ])
                   ]
@@ -52693,7 +52693,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\r\n                                "),
+                  _vm._v("/\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -52706,7 +52706,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Shall for rule whose toge one\r\n                                may heaven to dat"
+                        "Shall for rule whose toge one\n                                may heaven to dat"
                       )
                     ])
                   ]
@@ -52849,7 +52849,7 @@ var render = function() {
         )
       ])
     : _c("div", { staticClass: "col-md-9 col-sm-9" }, [
-        _vm._v("\r\n   Sorry, No Category Found\r\n")
+        _vm._v("\n   Sorry, No Category Found\n")
       ])
 }
 var staticRenderFns = []
@@ -73500,8 +73500,8 @@ var state = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\blog\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! C:\blog\resources\assets\sass\style.scss */"./resources/assets/sass/style.scss");
+__webpack_require__(/*! /var/www/html/blog/resources/assets/js/app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/sass/style.scss */"./resources/assets/sass/style.scss");
 
 
 /***/ })
