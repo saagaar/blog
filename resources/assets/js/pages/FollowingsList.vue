@@ -37,8 +37,8 @@
           <FollowSuggestionsList   :followSuggestion="followSuggestion"></FollowSuggestionsList>
               </div>
               <div class="clearfix"></div>
-              <div id="sidebar2" class="white-box mb20">
-              <!-- <div class="suggestions">
+              <!-- <div id="sidebar2" class="white-box mb20">
+              <div class="suggestions">
                 <h4 class="grey"><i class="fa fa-star"></i>  Add to your feed</h4>
                 <div class="follow-user">
                   <img src="img/user-1.jpg" alt="" class="profile-photo-sm pull-left">
@@ -75,8 +75,8 @@
                     <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
                   </div>
                 </div>
-          </div> -->
-      </div>
+          </div>
+      </div> -->
     </div>
     </div>
 

@@ -52791,9 +52791,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "clearfix" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "white-box mb20", attrs: { id: "sidebar2" } })
+      _c("div", { staticClass: "clearfix" })
     ])
   ])
 }
