@@ -5,9 +5,9 @@ let getData = function(to,store) {
  // 
     return new Promise((resolve, reject) => {
     let initialState = JSON.parse(window.__INITIAL_STATE__) || {};
+
     if (!initialState.path || to.path !== initialState.path) 
     {
-
      let form=new Form();
       form.get('/api'+to.path).then(({ data }) => {
      // alert(store.getters.isLoading)

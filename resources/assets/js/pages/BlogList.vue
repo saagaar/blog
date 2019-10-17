@@ -86,7 +86,7 @@
 
         </div>
         <table class="table table-inbox table-hover">
-        <tbody v-if="this.$store.getters.isLoading===true">
+        <tbody v-if="isLoading===true">
            <PlaceHolderBlogList></PlaceHolderBlogList>
         </tbody>
           <tbody v-else-if="initialState.blogList" >
@@ -150,6 +150,7 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             search:'',
             postIds:[],
             allSelected:false,
+            isLoading:false
           }
         },
         mixins:[mixin],
@@ -236,12 +237,7 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             this.allSelected=selected;
             this.postIds=postids;
         },
-        isLoading:function()
-        {
-          this.form.isLoading=this.$store.getters.isLoading
-          return this.$store.getters.isLoading;
-
-        },
+      
         select: function() {
             // this.allSelected = false;
         }

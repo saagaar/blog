@@ -22,7 +22,7 @@ const state = {
         replies: []
     },
     openTweetDetails: null,
-    isLoading: false,
+    isLoading: true,
     appName: 'TheBloggersClub.com'
 }
 export default state

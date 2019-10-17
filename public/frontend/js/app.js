@@ -6511,8 +6511,14 @@ var action = '';
   data: function data() {
     return {
       isFollowing: this.following,
-      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]()
+      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"](),
+      buttonDesign: " text-green"
     };
+  },
+  watch: {
+    isFollowing: function isFollowing(val) {
+      if (val == true) this.buttonDesign = 'text-green';else this.buttonDesign = 'btn-success';
+    }
   },
   mounted: function mounted() {
     if (this.followings) {
@@ -6520,8 +6526,10 @@ var action = '';
 
       if (indexval == -1) {
         this.isFollowing = false;
+        this.buttonDesign = 'btn-success';
       } else {
         this.isFollowing = true;
+        this.buttonDesign = 'text-green';
       }
     }
   },
@@ -7870,7 +7878,8 @@ __webpack_require__.r(__webpack_exports__);
       filter_by: '',
       search: '',
       postIds: [],
-      allSelected: false
+      allSelected: false,
+      isLoading: false
     };
   },
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -7948,10 +7957,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.allSelected = selected;
       this.postIds = postids;
-    },
-    isLoading: function isLoading() {
-      this.form.isLoading = this.$store.getters.isLoading;
-      return this.$store.getters.isLoading;
     },
     select: function select() {// this.allSelected = false;
     }
@@ -8392,13 +8397,6 @@ __webpack_require__.r(__webpack_exports__);
       isFollowing: false
     };
   },
-  mounted: function mounted() {// if()
-    // {
-    //     this.isFollowing=false;
-    // }else{
-    //     this.isFollowing=true;
-    // }
-  },
   methods: {
     userFollowed: function userFollowed(user) {
       var index = this.initialState.followers.filter(function (p) {
@@ -8406,7 +8404,6 @@ __webpack_require__.r(__webpack_exports__);
       }); // remove after 1 second
     },
     isLoading: function isLoading() {
-      return true;
       return this.$store.getters.isLoading;
     }
   },
@@ -8535,11 +8532,6 @@ __webpack_require__.r(__webpack_exports__);
         return p.username == user;
       }); // remove after 1 second
       // (this.initialState.followings.splice(index, 1));
-    },
-    isLoading: function isLoading() {
-      return true; // alert(this.$store.getters.isLoading);
-
-      return this.$store.getters.isLoading;
     }
   },
   components: {
@@ -47300,7 +47292,8 @@ var render = function() {
   return _c(
     "a",
     {
-      class: _vm.Buttonclass,
+      staticClass: "btn btn-sm  btn-round",
+      class: [_vm.Buttonclass, _vm.buttonDesign],
       attrs: { href: "" },
       on: {
         click: function($event) {
@@ -50155,7 +50148,7 @@ var render = function() {
                       "table",
                       { staticClass: "table table-inbox table-hover" },
                       [
-                        this.$store.getters.isLoading === true
+                        _vm.isLoading === true
                           ? _c("tbody", [_c("PlaceHolderBlogList")], 1)
                           : _vm.initialState.blogList
                           ? _c(
@@ -51154,9 +51147,9 @@ var render = function() {
                         _c("FollowButton", {
                           attrs: {
                             followings: _vm.initialState.followings,
-                            Buttonclass: "float-right text-green btn",
+                            Buttonclass: "float-right",
                             username: eachFollowers.username,
-                            followSuggestionHead: 3
+                            followSuggestionHead: 5
                           },
                           on: { clicked: _vm.userFollowed }
                         }),
@@ -51212,10 +51205,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _vm.isLoading === true
-      ? _c("div", { staticClass: "col-md-9 col-sm-9 pad-left-0" }, [
-          _vm._v("\n      sadd\n   ")
-        ])
+    this.$store.getters.isLoading === true
+      ? _c("div", { staticClass: "col-md-9 col-sm-9 pad-left-0" })
       : _vm.initialState.followings
       ? _c(
           "div",
@@ -51245,7 +51236,7 @@ var render = function() {
                         _c("FollowButton", {
                           attrs: {
                             following: true,
-                            Buttonclass: "float-right text-green btn",
+                            Buttonclass: "float-right   ",
                             username: eachFollowings.username,
                             followSuggestionHead: _vm.followSuggestion.length
                           },
@@ -71477,14 +71468,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************************!*\
   !*** ./resources/assets/js/components/Follows/FollowButton.vue ***!
   \*****************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FollowButton_vue_vue_type_template_id_1cfb5b27___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FollowButton.vue?vue&type=template&id=1cfb5b27& */ "./resources/assets/js/components/Follows/FollowButton.vue?vue&type=template&id=1cfb5b27&");
 /* harmony import */ var _FollowButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FollowButton.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Follows/FollowButton.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _FollowButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _FollowButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -71514,7 +71506,7 @@ component.options.__file = "resources/assets/js/components/Follows/FollowButton.
 /*!******************************************************************************************!*\
   !*** ./resources/assets/js/components/Follows/FollowButton.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -73388,7 +73380,7 @@ var state = {
     replies: []
   },
   openTweetDetails: null,
-  isLoading: false,
+  isLoading: true,
   appName: 'TheBloggersClub.com'
 };
 /* harmony default export */ __webpack_exports__["default"] = (state);

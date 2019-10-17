@@ -1,5 +1,5 @@
 <template>
-  <a href='' :class="Buttonclass" @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
+  <a href='' class="btn btn-sm  btn-round" :class="[Buttonclass,buttonDesign]"  @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
   {{ isFollowing ? 'Unfollow' : 'Follow'}}
   </a>
 </template>
@@ -18,9 +18,18 @@ let action='';
         },
         data() {
         	return {
-        		isFollowing: this.following,
-                form:new Form()
+        		    isFollowing: this.following,
+                form:new Form(),
+                buttonDesign:" text-green"
            }
+        },
+        watch:{
+            isFollowing: function (val) {
+              if(val==true)
+               this.buttonDesign='text-green'
+              else 
+               this.buttonDesign='btn-success'   
+          }
         },
         mounted() {
           if (this.followings) {
@@ -28,8 +37,13 @@ let action='';
             if(indexval==-1)
             {
                 this.isFollowing=false;
-            }else{
+                this.buttonDesign='btn-success'   
+                
+                
+            }else
+            {
                 this.isFollowing=true;
+                this.buttonDesign='text-green'
             }
           }
             
