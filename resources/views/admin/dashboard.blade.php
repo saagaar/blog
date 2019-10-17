@@ -1,18 +1,177 @@
 @extends('layouts.common.main')
-
 @section('content')
-<div class="content-wrapper">
+<!-- <div class="content-wrapper"> -->
     <!-- Content Header (Page header) -->
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
     <section class="content-header">
       <h1>
-        Admin Dashboard
-        <small>You are Loged In as Admin!!</small>
+        <small>You are Logged In as Admin!!</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Dashboard</a></li>
         <li class="active">Here</li>
-      </ol>
+      </ol>    
     </section>
+
+ <section class="content-header">
+    <div class="row">
+      <div class="col-xs-10">
+        
+          <div class="box-header">
+              <h3 class="box-title">RECENT ACTIVITY</h3>                        
+          </div>
+          <div class="box-body">
+               
+                <h3><strong>Visitors</strong></h3>
+                <hr style="border-color:#E3E3E3;">                          
+                
+            <!-- row -->    
+            <div class="row">
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">30</span> <br>
+                          TOTAL VISITORS
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #3C8DBC;color:white;"><span style="font-size:35px;font-weight:bold;">10</span>
+                          <br>VISITORS LOGIN TODAY
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #F26161;color:white;"><span style="font-size:35px;font-weight:bold;">12</span> 
+                          <br>REGISTERED TODAY
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- row -->
+
+              <h3><strong>Users</strong></h3>
+              <hr style="border-color:#E3E3E3;"> 
+           <div class="row">
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color:#00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">20</span> 
+                          <br>TOTAL USERS
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #374850;color:white;"><span style="font-size:35px;font-weight:bold;">10</span> 
+                          <br>USERS LOGIN TODAY</div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">10</span> 
+                          <br>REGISTERED TODAY
+                       </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- row     -->
+
+            <h3><strong>Blogs</strong></h3>
+              <hr style="border-color:#E3E3E3;"> 
+           <div class="row">
+                <div class="col-xs-4">  
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #374850;color:white;"><span style="font-size:35px;font-weight:bold;">30</span>
+                        <br>TOTAL POSTS
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">10</span>
+                          <br>PUBLISHED POSTS
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color:#00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">10</span>
+                          <br>SAVED POSTS
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- row -->
+
+             <div class="row">
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #3C8DBC;color:white;"><span style="font-size:35px;font-weight:bold;">22</span>
+                        <br>TOTAL POSTS   
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">10</span><br>                       
+                            PUBLISHED POSTS
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #F26161; color:white;"><span style="font-size:35px;font-weight:bold;">8</span> <br>                       
+                          SAVED POSTS
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- row -->
+
+              <div class="row">
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color:#00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">8</span> <br>                       
+                          TOTAL POSTS
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #374850;color:white;"><span style="font-size:35px;font-weight:bold;">13</span> <br>                       
+                          PUBLISHED POSTS
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #3C8DBC;color:white;"><span style="font-size:35px;font-weight:bold;">6</span><br>
+                          SAVED POSTS
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- row -->
+
+          </div>    
+          <!-- box-body -->
+    </div>
+  </div>
+
+</section>
+
+ 
+           
+
+    
 
 @if ($message = Session::get('success'))
 <div class="success alert-success alert-block">
@@ -35,7 +194,7 @@
 
     </section>
     <!-- /.content -->
-  </div>
+  <!-- </div> -->
 <!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

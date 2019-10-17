@@ -23,7 +23,7 @@
           <!-- general form elements -->
           <div class="box ">
             <div class="box-header">
-              <h3 class="box-title">Create Blog</h3>
+              <h3 class="box-title">Edit Blog</h3>
             </div>
           <!-- Form Element sizes -->
           <div class="box ">
