@@ -13,7 +13,8 @@ let action='';
             username: String,
             following: {type: Boolean, default: false},
             followSuggestionHead:Number,
-            Buttonclass:String
+            Buttonclass:String,
+            followings:Array,
         },
         data() {
         	return {
@@ -21,10 +22,22 @@ let action='';
                 form:new Form()
            }
         },
+        mounted() {
+          if (this.followings) {
+            var indexval=(this.followings.indexOf(this.username));
+            if(indexval==-1)
+            {
+                this.isFollowing=false;
+            }else{
+                this.isFollowing=true;
+            }
+          }
+            
+        },
         methods:
         {
         	toggleFollow:function(){
-               this.$store.commit('TOGGLE_LOADING');
+               // this.$store.commit('TOGGLE_LOADING');
 
         		if(!this.isFollowing)
         			action='api/followuser/'+this.username+'/'+this.followSuggestionHead;
@@ -35,10 +48,15 @@ let action='';
 		               if(response.data.status)
 		               {
                           // this.$store.commit('TOGGLE_LOADING');
-                          if(!this.isFollowing)
+                          if(!this.isFollowing){
                             this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
-                          else 
+                            this.isFollowing=true;
+
+                          }else{
    		               	       this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
+                              this.isFollowing=false;
+                          }
+                           this.$store.commit('TOGGLE_LOADING');
 		               	        this.$emit('clicked',this.username,response.data.message);
 		               }
 		               else

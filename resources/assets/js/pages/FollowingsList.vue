@@ -38,7 +38,7 @@
               </div>
               <div class="clearfix"></div>
               <div id="sidebar2" class="white-box mb20">
-              <div class="suggestions">
+              <!-- <div class="suggestions">
                 <h4 class="grey"><i class="fa fa-star"></i>  Add to your feed</h4>
                 <div class="follow-user">
                   <img src="img/user-1.jpg" alt="" class="profile-photo-sm pull-left">
@@ -75,7 +75,7 @@
                     <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
                   </div>
                 </div>
-          </div>
+          </div> -->
       </div>
     </div>
     </div>
@@ -105,7 +105,7 @@ import FollowSuggestionsList from './../components/Follows/FollowSuggestionsList
            var index=this.initialState.followings.filter(p => p.username == user);
                // remove after 1 second
               
-                (this.initialState.followings.splice(index, 1));
+                // (this.initialState.followings.splice(index, 1));
             
           },
           isLoading:function()

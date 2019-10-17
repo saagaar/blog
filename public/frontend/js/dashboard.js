@@ -6581,7 +6581,8 @@ var action = '';
       "default": false
     },
     followSuggestionHead: Number,
-    Buttonclass: String
+    Buttonclass: String,
+    followings: Array
   },
   data: function data() {
     return {
@@ -6589,16 +6590,37 @@ var action = '';
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]()
     };
   },
+  mounted: function mounted() {
+    if (this.followings) {
+      var indexval = this.followings.indexOf(this.username);
+
+      if (indexval == -1) {
+        this.isFollowing = false;
+      } else {
+        this.isFollowing = true;
+      }
+    }
+  },
   methods: {
     toggleFollow: function toggleFollow() {
       var _this = this;
 
-      this.$store.commit('TOGGLE_LOADING');
+      // this.$store.commit('TOGGLE_LOADING');
       if (!this.isFollowing) action = 'api/followuser/' + this.username + '/' + this.followSuggestionHead;else action = 'api/unfollowuser/' + this.username + '/' + this.followSuggestionHead;
       this.form.get(action).then(function (response) {
         if (response.data.status) {
           // this.$store.commit('TOGGLE_LOADING');
-          if (!_this.isFollowing) _this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);else _this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
+          if (!_this.isFollowing) {
+            _this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
+
+            _this.isFollowing = true;
+          } else {
+            _this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
+
+            _this.isFollowing = false;
+          }
+
+          _this.$store.commit('TOGGLE_LOADING');
 
           _this.$emit('clicked', _this.username, response.data.message);
         } else {// this.$store.commit('TOGGLE_LOADING');
@@ -8647,8 +8669,16 @@ __webpack_require__.r(__webpack_exports__);
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
-      initialState: {}
+      initialState: {},
+      isFollowing: false
     };
+  },
+  mounted: function mounted() {// if()
+    // {
+    //     this.isFollowing=false;
+    // }else{
+    //     this.isFollowing=true;
+    // }
   },
   methods: {
     userFollowed: function userFollowed(user) {
@@ -8785,8 +8815,7 @@ __webpack_require__.r(__webpack_exports__);
       var index = this.initialState.followings.filter(function (p) {
         return p.username == user;
       }); // remove after 1 second
-
-      this.initialState.followings.splice(index, 1);
+      // (this.initialState.followings.splice(index, 1));
     },
     isLoading: function isLoading() {
       return true; // alert(this.$store.getters.isLoading);
@@ -52638,6 +52667,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("FollowButton", {
                           attrs: {
+                            followings: _vm.initialState.followings,
                             Buttonclass: "float-right text-green btn",
                             username: eachFollowers.username,
                             followSuggestionHead: 3
@@ -52763,7 +52793,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "clearfix" }),
       _vm._v(" "),
-      _vm._m(2)
+      _c("div", { staticClass: "white-box mb20", attrs: { id: "sidebar2" } })
     ])
   ])
 }
@@ -52790,123 +52820,6 @@ var staticRenderFns = [
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "white-box mb20", attrs: { id: "sidebar2" } },
-      [
-        _c("div", { staticClass: "suggestions" }, [
-          _c("h4", { staticClass: "grey" }, [
-            _c("i", { staticClass: "fa fa-star" }),
-            _vm._v("  Add to your feed")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "follow-user" }, [
-            _c("img", {
-              staticClass: "profile-photo-sm pull-left",
-              attrs: { src: "img/user-1.jpg", alt: "" }
-            }),
-            _vm._v(" "),
-            _c("div", [
-              _c("h5", [
-                _c("a", { attrs: { href: "timeline.html" } }, [
-                  _vm._v("Sangita Dhital")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "text-green", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "fa fa-plus" }, [_vm._v(" ")]),
-                _vm._v(" Follow")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "follow-user" }, [
-            _c("img", {
-              staticClass: "profile-photo-sm pull-left",
-              attrs: { src: "img/user-2.jpg", alt: "" }
-            }),
-            _vm._v(" "),
-            _c("div", [
-              _c("h5", [
-                _c("a", { attrs: { href: "timeline.html" } }, [
-                  _vm._v("Sagar Chapagain")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "text-green", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "fa fa-plus" }, [_vm._v(" ")]),
-                _vm._v(" Follow")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "follow-user" }, [
-            _c("img", {
-              staticClass: "profile-photo-sm pull-left",
-              attrs: { src: "img/user-3.jpg", alt: "" }
-            }),
-            _vm._v(" "),
-            _c("div", [
-              _c("h5", [
-                _c("a", { attrs: { href: "timeline.html" } }, [
-                  _vm._v("Binita Thakur")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "text-green", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "fa fa-plus" }, [_vm._v(" ")]),
-                _vm._v(" Follow")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "follow-user" }, [
-            _c("img", {
-              staticClass: "profile-photo-sm pull-left",
-              attrs: { src: "img/user-4.jpg", alt: "" }
-            }),
-            _vm._v(" "),
-            _c("div", [
-              _c("h5", [
-                _c("a", { attrs: { href: "timeline.html" } }, [
-                  _vm._v("Biswas Shrestha")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "text-green", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "fa fa-plus" }, [_vm._v(" ")]),
-                _vm._v(" Follow")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "follow-user" }, [
-            _c("img", {
-              staticClass: "profile-photo-sm pull-left",
-              attrs: { src: "img/user-6.jpg", alt: "" }
-            }),
-            _vm._v(" "),
-            _c("div", [
-              _c("h5", [
-                _c("a", { attrs: { href: "timeline.html" } }, [
-                  _vm._v("Bikash Bhandari")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("a", { staticClass: "text-green", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "fa fa-plus" }, [_vm._v(" ")]),
-                _vm._v(" Follow")
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true

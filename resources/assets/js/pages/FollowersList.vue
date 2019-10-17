@@ -13,7 +13,7 @@
             <div class="col-lg-9 col-md-8">
               <div class="friend-info">
                 <h5><a href="timeline.html" class="profile-link">{{eachFollowers.name}} </a></h5>
-                <FollowButton  @clicked="userFollowed" :Buttonclass="'float-right text-green btn'" :username="eachFollowers.username" :followSuggestionHead="3"></FollowButton>
+                <FollowButton  @clicked="userFollowed" :followings="initialState.followings" :Buttonclass="'float-right text-green btn'" :username="eachFollowers.username" :followSuggestionHead="3"></FollowButton>
                 <p>14960 Followers</p>
               </div>
             </div>
@@ -34,9 +34,17 @@
          data:function(){
     return {
             initialState:{},
+            isFollowing:false
         }
       },
-        
+        mounted() {
+            // if()
+            // {
+            //     this.isFollowing=false;
+            // }else{
+            //     this.isFollowing=true;
+            // }
+        },
        methods:{
           userFollowed:function(user){
            var index=this.initialState.followers.filter(p => p.username == user);
