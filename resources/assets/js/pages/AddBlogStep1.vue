@@ -15,6 +15,8 @@
                             <input type="text" @blur="$v.form.title.$touch()" name="title" value=" initialState.blog.title " class="form-control" placeholder="Post Title" v-model="form.title"/> 
                             <div v-if="$v.form.title.$anyDirty">
                               <div class="error" v-if="!$v.form.title.required">This Field is required</div>
+                              <div class="error" v-if="!$v.form.title.maxLength">Title must be less {{ $v.form.title.$params.maxLength.max }} letters.</div>
+                              <div class="error" v-if="!$v.form.title.minLength">Title must be at least {{ $v.form.title.$params.minLength.min }} letters.</div>
                             </div>
                           </div>
                         </div>
@@ -38,6 +40,7 @@
                         <ckeditor :editor="editor"  @blur="$v.form.content.$touch()"  v-model="form.content"></ckeditor>
                            <div v-if="$v.form.content.$anyDirty">
                                 <div class="error" v-if="!$v.form.content.required">This Field is required</div>
+                                <div class="error" v-if="!$v.form.title.minLength">Content must be at least {{ $v.form.title.$params.minLength.min }} letters.</div>
                               </div>
                        </div>
 
@@ -54,7 +57,7 @@
 <script>
 import mixin  from './../mixins/LoadData.mixin.js';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { required, between ,email} from 'vuelidate/lib/validators';
+import { required, between, minLength, maxLength ,email} from 'vuelidate/lib/validators';
 import Form from './../services/Form.js';
     export default {
       
@@ -74,6 +77,8 @@ import Form from './../services/Form.js';
           form:{
             title: {
               required,
+              minLength: minLength(4),
+              maxLength: maxLength(15)
             },
             content: 
             {

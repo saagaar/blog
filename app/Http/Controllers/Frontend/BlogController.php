@@ -19,7 +19,7 @@ class BlogController extends FrontendController
         parent::__construct();
         $this->blog=$blog;
     }
-
+    
    	public function create(Request $request,$blogCode=false,TagInterface $tag){
         $routeName= Route::currentRouteName();
         if($routeName=='api')
@@ -96,6 +96,7 @@ class BlogController extends FrontendController
                 }else{
                     $form['short_description']=$request->short_description;
                     $form['image']=$request->image;
+                    $form['save_method']='2';
                     $form['anynomous'] = $request->isAnynomous ? '1' : '2';
                     $this->blog->updateByCode($postId,$form); 
                     $tagid = $tag->getTagByName($request->tags);

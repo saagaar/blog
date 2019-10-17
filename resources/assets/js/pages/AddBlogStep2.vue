@@ -22,6 +22,8 @@
                         <textarea  class="form-control ckeditor" id="editor" rows="10" blur="$v.form.short_description.$touch()"  v-model="form.short_description"></textarea>
                          <div v-if="$v.form.short_description.$anyDirty">
                               <div class="error" v-if="!$v.form.short_description.required">This Field is required</div>
+                              <div class="error" v-if="!$v.form.short_description.maxLength">Description must be less {{ $v.form.short_description.$params.maxLength.max }} letters.</div>
+                              <div class="error" v-if="!$v.form.title.minLength">Description must be at least {{ $v.form.title.$params.minLength.min }} letters.</div>
                             </div>
                      </div>
 
@@ -50,10 +52,10 @@
                       </div>
 
 
-                      <div class="autocomplete form-group">
+                      <!-- <div class="autocomplete form-group">
                           <input id="myInput" type="text" name="userName" class="form-control" placeholder="B">
                           <div id="myInputautocomplete-list" class="autocomplete-items">
-                              <!-- <div><strong>B</strong>Bikash
+                              <div><strong>B</strong>Bikash
                                   <input type="hidden" value="Bikash">
                               </div>
                                <div>
@@ -62,11 +64,11 @@
                                   <div>
                                       <strong>B</strong>Bisal<input type="hidden" value="Bisal">
                                   </div>
-                              </div> -->
+                              </div>
                       </div>
 
 
-                      </div>
+                      </div> -->
 
                       <hr/>
 
@@ -97,7 +99,7 @@ import mixin  from './../mixins/LoadData.mixin.js';
 
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Multiselect from 'vue-multiselect'
-import { required, between ,email} from 'vuelidate/lib/validators';
+import { required, between ,email , minLength,maxLength } from 'vuelidate/lib/validators';
 import Form from './../services/Form.js';
     export default {
        components:{
@@ -123,6 +125,8 @@ import Form from './../services/Form.js';
           form:{
             short_description: {
               required,
+              minLength: minLength(4),
+              maxLength: maxLength(150)
             },
             image:{
 

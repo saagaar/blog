@@ -134,12 +134,14 @@ class UserController extends FrontendController
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
 
-    public function profile()
+    public function profile(BlogInterface $blog)
     {
             $routeName= Route::currentRouteName();
-
+            $profileBlog=$blog->getActiveBlogByUserId($this->authUser->id);
+            $data['profileBlog'] = $profileBlog;
            if($routeName=='api')
            {
+            return $data;
            }
            else
            {

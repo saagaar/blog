@@ -29,6 +29,7 @@ Route::get('/api/blog/list/','Frontend\UserController@myBlogs')->name('api');
 Route::get('api/dashboard','Frontend\HomeController@dashboard')->name('api');
 
 Route::get('api/profile','Frontend\UserController@profile')->name('api');
+Route::get('/profile','Frontend\UserController@profile')->name('profile');
 
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 
@@ -40,9 +41,9 @@ Route::get('/api/categories', 'Frontend\UserInterestController@categories')->nam
 Route::get('/api/remove/userinterest/{slug}','Frontend\UserInterestController@removeUserInterest');
 Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUserInterest');
 
-Route::get('/profile','Frontend\UserController@profile')->name('profile');
 
-Route::get('/test', 'Frontend\HomeController@test')->name('test');
+
+Route::get('/test', 'Frontend\FrontendController@index')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 
 Route::get('/tests', 'Frontend\UserInterestController@testinterest')->name('test');
