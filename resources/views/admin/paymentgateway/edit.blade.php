@@ -1,4 +1,4 @@
-@extends('layouts.common.main')
+  @extends('layouts.common.main')
 @section('content') 
     <!-- Main content -->
     <section class="content">
@@ -27,14 +27,14 @@
           <!-- Form Element sizes -->
           <div class="box ">
             <div class="box-body">
-            <form action="{{route('paymentgateway.edit',$paymentgateway->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('paymentgateway.edit',$paymentGateway->id)}}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="box-body">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" value="{{$paymentgateway->email }}" placeholder="Enter Your Email">
+                    <input type="text" class="form-control" name="email" id="email" value="{{$paymentGateway->email }}" placeholder="Enter Your Email">
                        @if ($errors->has('email'))
                        <div class="alert alert-danger">{{ $errors->first('email') }}</div>
                        @endif
@@ -43,11 +43,11 @@
                 <div class="form-group">
                   <label for="mode">Payment Mode</label>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="mode" value="1" @if($paymentgateway->mode=='1') checked @endif>
+                        <input type="radio" class="custom-control-input flat-red" name="mode" value="1" @if($paymentGateway->mode=='1') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Live</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="mode" value="0"  @if($paymentgateway->mode=='0') checked @endif>
+                        <input type="radio" class="custom-control-input flat-red" name="mode" value="0"  @if($paymentGateway->mode=='0') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Test</label>
                     </div>
                          @if ($errors->has('mode'))
@@ -55,10 +55,26 @@
                          @endif
                   </div>
 
+                  <div class="form-group">
+                    <label for="payment_gateway">Payment Gateway</label>
+                    <div class="custom-control custom-radio radio-inline">
+                        <input type="radio" class="custom-control-input flat-red" name="payment_gateway" value="paypal"  @if($paymentGateway->payment_gateway=='paypal') checked @endif>
+                        <label class="custom-control-label" for="defaultChecked">Paypal</label>
+                    </div>
+                    <div class="custom-control custom-radio radio-inline">
+                        <input type="radio" class="custom-control-input flat-red" name="payment_gateway" value="ipay" @if($paymentGateway->payment_gateway=='ipay') checked @endif>
+                        <label class="custom-control-label" for="defaultChecked">iPay88</label>
+                    </div>
+                         @if ($errors->has('payment_gateway'))
+                         <div class="alert alert-danger">{{ $errors->first('payment_gateway') }}</div>
+                         @endif
+                  </div>
+
+
               <div class="form-group">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
-                  <img src='/images/paymentgateway-images/{{$paymentgateway->image}}' width="50"/>
+                  <img src='/images/paymentgateway-images/{{$paymentGateway->image}}' width="50"/>
                   @if ($errors->has('image'))
                   <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                   @endif
@@ -68,7 +84,7 @@
 
                <div class="form-group">
                        <label for="api_merchant_key">API Merchant Key</label>
-                       <input type="text" class="form-control" name="api_merchant_key" id="api_merchant_key" value="{{$paymentgateway->api_merchant_key}}" placeholder="Enter API Merchant Key">
+                       <input type="text" class="form-control" name="api_merchant_key" id="api_merchant_key" value="{{$paymentGateway->api_merchant_key}}" placeholder="Enter API Merchant Key">
                        @if ($errors->has('api_merchant_key'))
                        <div class="alert alert-danger">{{ $errors->first('api_merchant_key') }}</div>
                        @endif
@@ -76,7 +92,7 @@
 
                      <div class="form-group">
                        <label for="api_merchant_password">API Merchant Password</label>
-                       <input type="password" class="form-control" name="api_merchant_password" id="api_merchant_password" value="{{$paymentgateway->api_merchant_password}}" placeholder="Enter API Merchant Password">
+                       <input type="password" class="form-control" name="api_merchant_password" id="api_merchant_password" value="{{$paymentGateway->api_merchant_password}}" placeholder="Enter API Merchant Password">
                        @if ($errors->has('api_merchant_password'))
                        <div class="alert alert-danger">{{ $errors->first('api_merchant_password') }}</div>
                        @endif
@@ -84,7 +100,7 @@
 
                      <div class="form-group">
                        <label for="api_merchant_signature">API Merchant Signature</label>
-                       <input type="text" class="form-control" name="api_merchant_signature" id="api_merchant_signature" value="{{$paymentgateway->api_merchant_signature}}" placeholder="Enter API Merchant signature">
+                       <input type="text" class="form-control" name="api_merchant_signature" id="api_merchant_signature" value="{{$paymentGateway->api_merchant_signature}}" placeholder="Enter API Merchant signature">
                        @if ($errors->has('api_merchant_signature'))
                        <div class="alert alert-danger">{{ $errors->first('api_merchant_signature')}}</div>
                        @endif
@@ -92,7 +108,7 @@
                   
                   <div class="form-group">
                        <label for="api_version">API Merchant Version*</label>
-                       <input type="text" class="form-control" name="api_version" id="api_version" value="{{$paymentgateway->api_version}}" placeholder="Enter API Merchant Version">
+                       <input type="text" class="form-control" name="api_version" id="api_version" value="{{$paymentGateway->api_version}}" placeholder="Enter API Merchant Version">
                        @if ($errors->has('api_version'))
                        <div class="alert alert-danger">{{ $errors->first('api_version')}}</div>
                        @endif
@@ -101,12 +117,12 @@
                <div class="form-group">
                   <label for="status">Status</label>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="1" @if($paymentgateway->status=='1') checked @endif>
-                        <label class="custom-control-label" for="defaultChecked">Yes</label>
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="1" @if($paymentGateway->status=='1') checked @endif>
+                        <label class="custom-control-label" for="defaultChecked">Active</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status" value="1"  @if($paymentgateway->status=='0') checked @endif >
-                        <label class="custom-control-label" for="defaultChecked">No</label>
+                        <input type="radio" class="custom-control-input flat-red" name="status" value="2"  @if($paymentGateway->status=='2') checked @endif >
+                        <label class="custom-control-label" for="defaultChecked">Inactive</label>
                     </div>
                          @if ($errors->has('status'))
                          <div class="alert alert-danger">{{ $errors->first('status') }}</div>

@@ -19,7 +19,7 @@ class Categories extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'name','status','slug'
+        'parent_id','name','status','slug','banner_image'
     ];
 
     /**
@@ -28,14 +28,24 @@ class Categories extends Model implements Auditable
      * @var array
      */
 
-
+    protected $hidden  = ['id','parent_id'];
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-     public function Blogs()
-    {
-        return $this->belongsToMany(Blogs::class)->using(BlogCategories::class);
+    public function tags(){
+       return $this->belongsToMany(Tags::class,'categories_tags');
     }
+
+    public function categories()
+    {
+        return $this->hasMany(Categories::class,'parent_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'user_interests','category_id','user_id');
+    }
+ 
 }

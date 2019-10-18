@@ -41,15 +41,15 @@
                 <div class="form-group">
                   <label>Gallery Category</label>
                  
-                  <select name="gallery_categories_id" class="form-control">
+                  <select name="categories_id" class="form-control">
                   <option value="">--Select--</option>
                   @foreach ($category as $cat)
                   
                     <option value="{{$cat->id}}">{{$cat->title}}</option>
                     @endforeach
                   </select>
-                 @if ($errors->has('gallery_categories_id'))
-                <div class="alert alert-danger">{{ $errors->first('gallery_categories_id') }}</div>
+                 @if ($errors->has('categories_id'))
+                <div class="alert alert-danger">{{ $errors->first('categories_id') }}</div>
                 @endif
                 </div>
                 

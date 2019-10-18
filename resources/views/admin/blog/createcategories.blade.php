@@ -8,7 +8,7 @@
       <div class="col-md-3">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Blog Category</h3>
+              <h3 class="box-title">Category</h3>
 
               <!-- <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -17,8 +17,8 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="{{route('adminblogcategory.list')}}"><span class="glyphicon glyphicon-minus"></span> List All blog Category</a></li>
-                <li class="{{ (request()->is('create/blogcategory')) ? 'active' : '' }}"><a href="{{route('adminblogcategory.create')}}"><span class="glyphicon glyphicon-minus"></span> Create blog Category</a></li>
+                <li><a href="{{route('adminblogcategory.list')}}"><span class="glyphicon glyphicon-minus"></span> List All Category</a></li>
+                <li class="{{ (request()->is('create/blogcategory')) ? 'active' : '' }}"><a href="{{route('adminblogcategory.create')}}"><span class="glyphicon glyphicon-minus"></span> Create Category</a></li>
                 
               </ul>
             </div>
@@ -30,20 +30,35 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Create blog Category</h3>
+              <h3 class="box-title">Create Category</h3>
             </div>
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
-            <form action="{{route('adminblogcategory.create')}}" method="POST">
+            <form action="{{route('adminblogcategory.create')}}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Enter blog Category">
+                  <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Enter Category">
                   @if ($errors->has('name'))
                 <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                 @endif
+                </div>
+                <div class="form-group">
+                  <label for="parent_id">Parent</label>
+                    <select class="form-control"  name="parent_id" id="parent_id">
+                      <option value="">none</option>
+                      @foreach ($blogcategory as $values)
+                      <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                      @endforeach
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('parent_id'))
+                        <p class="help-block">
+                            {{ $errors->first('parent_id') }}
+                        </p>
+                    @endif
                 </div>
                 <div class="form-group">
                   <label for="slug">Slug</label>
@@ -53,12 +68,34 @@
                 @endif
                 </div>
                 <div class="form-group">
-                  <label for="status">Display: </label>
+                  <label for="tags">Tags</label>
+                  <!-- value="{{ $tags }}" -->
+                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
+                      @foreach ($tags as $values)
+                      <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                      @endforeach
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('tags'))
+                        <p class="help-block">
+                            {{ $errors->first('tags') }}
+                        </p>
+                    @endif
+                </div>
+                <div class="form-group">
+                  <label for="status">Display:</label>
                   <label><input type="radio" name="status" value="1">Active</label>
-                  <label><input type="radio" name="status" value="0">Inactive</label>
+                  <label><input type="radio" name="status" value="2">Inactive</label>
                   @if ($errors->has('status'))
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>
                 @endif
+                </div>
+                <div class="form-group">
+                  <label for="banner_image">Image Upload</label>
+                  <input type="file" class="form-control" name="banner_image" id="banner_image">
+                  @if ($errors->has('banner_image'))
+                  <div class="alert alert-danger">{{ $errors->first('banner_image') }}</div>
+                  @endif
                 </div>
               </div>
               <!-- /.box-body -->

@@ -8,11 +8,17 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
 use Illuminate\Support\Facades\File;
-use App\Models\Countrys;
+use App\Models\Countries;
 use App;
+
+/** user account 
+
+*/
 class AccountController extends AdminController{
     protected $account;
+    //user account
     protected $roles;
+    //user roles
     function __construct(AccountInterface $account,RoleInterface $roles)
     {
         $this->account=$account;
@@ -39,7 +45,7 @@ class AccountController extends AdminController{
             $account = $this->account->getAll()->paginate($this->PerPage);
         }         
         
-        return view('admin.account.listaccount')->with(array('account'=>$account,'breadcrumb'=>$breadcrumb));
+        return view('admin.account.list')->with(array('account'=>$account,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
     public function create(Request $request)
     {
@@ -48,85 +54,93 @@ class AccountController extends AdminController{
                 'Users Account' => route('account.list'),
                 'current_menu'=>'Add Users Account',
                   ]];
-        $allroles = $this->roles->getAll()->get();
+        $allRoles = $this->roles->getAll()->get();
         if ($request->method()=='POST') 
         {
-            $requestobj=app(AccountRequest::class);
-            $validatedData = $requestobj->validated();
+            $requestObj=app(AccountRequest::class);
+            $validatedData = $requestObj->validated();
             $validatedData['dob'] = date("Y-m-d", strtotime($validatedData['dob']));
             $validatedData['password']= (Hash::make($validatedData['password']));
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            // dd($imageName);
-            request()->image->move(public_path('frontend/images/userimages'), $imageName);
+            request()->image->move(public_path('images/user-images'), $imageName);
             $validatedData['image'] = $imageName;
-            $user = $this->account->create($validatedData);
-            
+            $emailParts = explode('@', $validatedData['email']);
+
+            $username = $emailParts[0];
+            $check = $this->account->getAll()->where('username',$username)->first();
+            if (!$check) {
+                $validatedData['username'] = $username;
+            }else{
+                $random = rand(0, 9999);
+                $randUsername = $username.$random;
+                $validatedData['username'] = $randUsername;
+            }
+            $activeUser = $this->account->create($validatedData);            
             $roles = $request->input('roles') ? $request->input('roles') : [];
-            // dd($roles);
-            $user->assignRole($roles);  
+            $activeUser->assignRole($roles);  
             return redirect()->route('account.list')
                         ->with('success','account created successfully.');
         }
-        $countries = Countrys::All();
-        // $adminroles = $this->roles->getAll()->get();
-        return view('admin.account.createuser')->with(array('countries'=>$countries,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
+        $countries = Countries::All();
+        return view('admin.account.create')->with(array('countries'=>$countries,'roles'=>$allRoles,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
-    public function edit(Request $request,$id)
+    public function edit(Request $request,$id)// normal user list
     {
       $breadcrumb=['breadcrumbs' => [
                 'Dashboard' => route('admin.dashboard'),
                 'Users Account' => route('account.list'),
                 'current_menu'=>'Edit Users Account',
                   ]];
-                  $allroles = $this->roles->getAll()->get();
+        $allRoles = $this->roles->getAll()->get();
         $accounts =$this->account->getById($id);
         if ($request->method()=='POST') 
         {
-            $requestobj=app(AccountRequest::class);
-            $validatedData = $requestobj->validated();
-            // dd($validatedData);
-            $validatedData['dob'] = date("Y-m-d", strtotime($validatedData['dob']));
-            $validatedData['password']= (Hash::make($validatedData['password']));
-            if ($request->hasFile('image')) {
-                    $dir = 'frontend/images/userimages/';
-                    if ($accounts->image != '' && File::exists($dir . $accounts->image))
-                    File::delete($dir . $accounts->image);
+          $requestObj=app(AccountRequest::class);
+          $validatedData = $requestObj->validated();
+          $validatedData['dob']=date("Y-m-d", strtotime($validatedData['dob']));
+          $validatedData['password']= (Hash::make($validatedData['password']));
+            if ($request->hasFile('image')) 
+            {
+                    $dir = 'images/user-images/';
+                    if ($accounts->image != '' && File::exists($dir . $accounts->image)){
+                    File::delete($dir . $accounts->image);}
 
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('frontend/images/userimages'), $imageName);
+                    request()->image->move(public_path('images/user-images'), $imageName);
                     $validatedData['image'] = $imageName;
-                }else {
+                }
+            else 
+                {
                     $validatedData['image'] = $accounts->image;
                 }
             $accounts->update($validatedData);
             $roles = $request->input('roles') ? $request->input('roles') : [];
-            // dd($roles);
             $accounts->syncRoles($roles);  
             return redirect()->route('account.list')
                         ->with('success','account edited successfully.');
         }
-        $countries = Countrys::All();
-        // $adminroles = $this->roles->getAll()->get();
-        return view('admin.account.edituser')->with(array('countries'=>$countries,'accounts'=>$accounts,'roles'=>$allroles,'breadcrumb'=>$breadcrumb));
+        $countries = Countries::All();
+        return view('admin.account.edit')->with(array('countries'=>$countries,'accounts'=>$accounts,'roles'=>$allRoles,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
-    public function View($id)
-    {
+    /*
+    * user account detail
+    */
+    public function view($id) 
+    { 
        $breadcrumb=['breadcrumbs' => [
                 'Dashboard' => route('admin.dashboard'),
                 'All Accounts' => route('account.list'),
                 'current_menu'=> 'Members Details',
                   ]];
-
-        $accounts =$this->account->getById($id);
-        
-        return view('admin.account.detail')->with(array('account'=>$accounts,'breadcrumb'=>$breadcrumb));
+        $accounts =$this->account->getById($id);       
+        return view('admin.account.detail')->with(array('account'=>$accounts,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
     public function delete($id)
     {
         $accounts =$this->account->getById($id);
         
         if($accounts){
-            $dir = 'frontend/images/userimages/';
+            $dir = 'images/user-images/';
             if ($accounts->image != '' && File::exists($dir . $accounts->image)){
                 File::delete($dir . $accounts->image);
             }

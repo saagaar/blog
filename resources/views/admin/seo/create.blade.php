@@ -32,21 +32,21 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="pageid">Page id</label>
-                  <input type="text" class="form-control" name="pageid" id="pageid" value="{{ old('pageid') }}" placeholder="Enter pageid">
+                  <input type="text" class="form-control" name="pageid" id="pageid" value="{{ old('pageid') }}" placeholder="Enter Page Id">
                   @if ($errors->has('pageid'))
                 <div class="alert alert-danger">{{ $errors->first('pageid') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="page_slug">Page Slug</label>
-                  <input type="text" class="form-control" name="page_slug" id="page_slug" value="{{ old('page_slug') }}" placeholder="Enter page_slug">
+                  <input type="text" class="form-control" name="page_slug" id="page_slug" value="{{ old('page_slug') }}" placeholder="Enter Page Slug">
                   @if ($errors->has('page_slug'))
                 <div class="alert alert-danger">{{ $errors->first('page_slug') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="meta_key">Meta Key</label>
-                  <input type="text" class="form-control" name="meta_key" id="meta_key" value="{{ old('meta_key') }}" placeholder="Enter meta key">
+                  <input type="text" class="form-control" name="meta_key" id="meta_key" value="{{ old('meta_key') }}" placeholder="Enter Meta Key">
                   @if ($errors->has('meta_key'))
                 <div class="alert alert-danger">{{ $errors->first('meta_key') }}</div>
                 @endif

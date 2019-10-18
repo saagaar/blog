@@ -10,7 +10,7 @@ class Blocklists extends Model implements Auditable
 {
 	 use Auditables;
 
-	 protected $table='blocklists';
+	 protected $table='block_lists';
 
 	/**
 	 * The attributes that are mass assignable.

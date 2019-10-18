@@ -17,9 +17,10 @@ class CreateAdminUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('username')->unique();
             $table->string('email')->unique();
+            $table->string('phone')->nullable();
             $table->string('password');
-            $table->integer('invalid_login');
-            $table->enum('status', ['0', '1']);
+            $table->integer('invalid_login')->default(0);
+            $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')
                     ->references('id')->on('admin_roles')

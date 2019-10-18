@@ -30,34 +30,34 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if(!$ipdata->isEmpty())
-                @foreach ($ipdata as $ipvalue)
+                @if(!$ipData->isEmpty())
+                @foreach ($ipData as $ipValue)
                 
                 <tr>
                   <td>{{ ++$i }}</td>
-                  <td>{{ $ipvalue->ip_address }}</td>
-                  <td>{{ $ipvalue->message }}</td>
+                  <td>{{ $ipValue->ip_address }}</td>
+                  <td>{{ $ipValue->message }}</td>
                   <td>
-                      @if($ipvalue->status=='black')
-                       <span class="label label-danger">Blocked</span>
-                       @elseif(($ipvalue->status=='white'))
-                       <span class="label label-success">Active</span>
+                      @if($ipValue->status=='black')
+                       <span class="label label-danger label-large">Blocked</span>
+                       @elseif(($ipValue->status=='white'))
+                       <span class="label label-success label-large">Active</span>
                        @else
-                       <span class="label label-primary">Inactive</span>
+                       <span class="label label-primary label-large">Inactive</span>
                        @endif
                   </td>
-                  <td>{{$ipvalue->created_at}}</td>
-                  <td>{{$ipvalue->updated_at}}</td>
+                  <td>{{$ipValue->created_at}}</td>
+                  <td>{{$ipValue->updated_at}}</td>
                       
-                      <td><a href="{{route('blocklist.edit',$ipvalue->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                      <td><a href="{{route('blocklist.edit',$ipValue->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                       <td>
-                       <a href="{{route('blocklist.delete',$ipvalue->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                       <a href="{{route('blocklist.delete',$ipValue->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                      </td>
                 </tr>
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No Blocklist Found </td>
+                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No Blocklists Found </td>
                   </tr>
                   @endif
                 </tbody>
@@ -65,7 +65,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $ipdata->links() !!}
+              {!! $ipData->links() !!}
               </ul>
             </div>
             

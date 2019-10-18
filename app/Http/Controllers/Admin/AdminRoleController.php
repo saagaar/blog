@@ -1,20 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AdminController; 
 use App\Repository\AdminRoleInterface;
-use App\Repository\ModuleRolePermissionInterface;
+use App\Repository\AdminRolePermissionInterface;
 use App\Http\Requests\RoleRequest;
 use App;
 class AdminRoleController extends AdminController
 {
-    protected $adminrole;
-    function __construct(AdminRoleInterface $adminrole)
+    protected $adminRole;
+    function __construct(AdminRoleInterface $adminRole)
     {
         parent::__construct();
-        $this->roles=$adminrole;
+        $this->roles=$adminRole;
         $this->middleware('auth:admin')->except('logout');
     }
     public function list(Request $request)
@@ -25,14 +24,14 @@ class AdminRoleController extends AdminController
                      ]];
         $search = $request->get('search');
         if($search){
-            $adminroles = $this->roles->getAll()
+            $adminRoles = $this->roles->getAll()
                 ->where('role_name', 'like', '%' . $search . '%')
                 ->paginate($this->PerPage)
                 ->withPath('?search=' . $search);
         }else{
-           $adminroles = $this->roles->getAll()->paginate($this->PerPage);
+           $adminRoles = $this->roles->getAll()->paginate($this->PerPage);
         }
-        return view('admin.roles.adminrole')->with(array('adminroles'=>$adminroles,'breadcrumb'=>$breadcrumbs));
+        return view('admin.adminrole.list')->with(array('adminRoles'=>$adminRoles,'breadcrumb'=>$breadcrumbs,'primary_menu'=>'role.list'));
     }
     public function create(Request $request)
     {
@@ -43,19 +42,18 @@ class AdminRoleController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-            // $request=::class;
-            $requestobj=app(RoleRequest::class);
-            $validatedData = $requestobj->validated();
+            $requestObj=app(RoleRequest::class);
+            $validatedData = $requestObj->validated();
             $this->roles->create($validatedData);
             return redirect()->route('adminrole.list')
                         ->with('success','Roles created successfully.');
         }
-       return view('admin.roles.createrole')->with(array('breadcrumb'=>$breadcrumb));
+       return view('admin.adminrole.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'role.list'));
     }
     public function delete($id)
     {
-        $adminrole =$this->roles->getroleById($id);
-        $adminrole->delete();
+        $adminRole =$this->roles->getRoleById($id);
+        $adminRole->delete();
         return redirect()->route('adminrole.list')
         ->with('success', 'Role has been deleted!!');
     }
@@ -68,24 +66,26 @@ class AdminRoleController extends AdminController
                         'current_menu'  =>  'Edit'
                                            ]
                     ];
-        $adminrole =$this->roles->getroleById($id);
+        $adminRole =$this->roles->getRoleById($id);
         if ($request->method()=='POST') 
         {
-            $requestobj=app(RoleRequest::class);
-            $validatedData = $requestobj->validated();
+            $requestObj=app(RoleRequest::class);
+            $validatedData = $requestObj->validated();
             $this->roles->update($id,$validatedData);
             return redirect()->route('adminrole.list')
                             ->with('success','Role Updated successfully.');
         }
-        return view('admin.roles.editrole',compact('adminrole'))->with(array('adminrole'=>$adminrole,'breadcrumb'=>$breadcrumb));
+        return view('admin.adminrole.edit',compact('adminRole'))->with(array('adminRole'=>$adminRole,'breadcrumb'=>$breadcrumb,'primary_menu'=>'role.list'));
     }
-
+    /*
+    * Change status of admin role
+    */
     public function changeStatus(Request $request)
     {
-        $role = $this->roles->getroleById($request->id);
+        $role = $this->roles->getRoleById($request->id);
         $status = $request->status;
         $role->update(array('status'=>$status));  
-       return redirect()->route('adminrole.list')
+        return redirect()->route('adminrole.list')
                         ->with('success','Status change successfully.');
     }
 

@@ -2,38 +2,38 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\AdminController; 
-use App\Repository\SiteoptionsInterface;
+use App\Repository\SiteoptionInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\SiteoptionsRequest;
 use App;
 class SiteOptionController extends AdminController
 {
     /**
-    *@var $siteoptions
+    *@var $siteOptions
     * object of instance siteoption interface
     *
     */
-    protected $siteoptions;
+    protected $siteOptions;
 
-    function __construct(SiteoptionsInterface $siteoptions)
+    function __construct(SiteoptionInterface $siteOptions)
     {
          parent::__construct();
-         $this->site=$siteoptions;
+         $this->siteOptions=$siteOptions;
     }
     public function edit(Request $request)
     {   
-        $site =$this->site->GetSiteInfo();
-        $breadcrumb=array('breadcrumbs'=>array('Dashboard'     => route('admin.dashboard'),
+        $site =$this->siteOptions->getSiteInfo();
+        $breadcrumb=array('breadcrumbs'=>array('Dashboard' => route('admin.dashboard'),
                           'current_menu' => 'Site Settings',
                           ));
         if ($request->method()=='POST') 
         {
-            $requestobj=app(SiteoptionsRequest::class);
-            $validatedData = $requestobj->validated();
-            $this->site->update($validatedData);
+            $requestObj=app(SiteoptionsRequest::class);
+            $validatedData = $requestObj->validated();
+            $this->siteOptions->update($validatedData);
             return redirect()->route('sitesetting')
                             ->with('success','Site Settings Updated Successfully.');
         }
-        return view('admin.siteoptions.siteoptions')->with(array('site'=>$site,'breadcrumb'=>$breadcrumb));
+        return view('admin.siteoption.edit')->with(array('site'=>$site,'breadcrumb'=>$breadcrumb,'primary_menu'=>'siteoption.list'));
     }
 }

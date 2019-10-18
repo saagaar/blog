@@ -3,12 +3,13 @@ export const me = state => state.me
 
 //Get Loggedin info
 export const user = state => state.user
+//Get initial data from html
 
 // Get user feed
 export const feed = state => state.feed
 
 // Get user profile page
-export const profilePage = state => state.profilePage
+export const categoryPage = state => state.categoryPage
 
 // Get tweet detail
 export const tweetDetail = state => state.tweetDetail
@@ -24,3 +25,5 @@ export const isLoading = state => state.isLoading
 
 // Get the app name
 export const appName = state => state.appName
+
+export const config = state => state.settings

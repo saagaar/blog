@@ -25,19 +25,65 @@
                 {
        			 $('#IpAddressDetail').modal('show');
 
-                    // $('#pop-display_name').val(data[0].display_name);
                     $('#ip_address').html(data.ip_address);
-                    $('#referer_url').html(data.referer_url);
-                    $('#user_agent').html(data.user_agent);
-                    $('#device').html(data.device);
-                    $('#redirected_to').html(data.redirected_to);
-                    $('#continent').html(data.continent);
+                    $('#region_code').html(data.region_code);
+                    $('#time_zone').html(data.time_zone);
+                    $('#latitude').html(data.latitude);
+                    $('#isp').html(data.isp);
                     $('#country').html(data.country);
                     $('#country_code').html(data.country_code);
                     $('#city').html(data.city);
-                    $('#state').html(data.state);
-                    
-                    // $('#add-edit-product').modal('show');
+                    $('#region').html(data.region);
+                    $('#flagurl').html(data.flagurl);
+                    $('#currencysymbol').html(data.currencysymbol);
+                    $('#currency').html(data.currency);
+                    $('#callingcode').html(data.callingcode);
+                    $('#countrycapital').html(data.countrycapital);
+                    $('#longitude').html(data.longitude);
+                }
+                $('.img-loader').addClass('hidden');
+                setTimeout(function () {
+                    $('.overlay_alert').addClass('hidden');
+                    $('.overlay_alert').removeClass('error');
+                    $('.overlay_alert').removeClass('success');
+                }, 5000);
+                
+            }
+        });
+    })
+
+$(document).on('click', '.logdetail', function (e) {
+        e.preventDefault();
+        var ipaddressdetailid = $(this).data('parentid');
+        $('.img-loader').removeClass('hidden');
+        $.ajax({
+            url: APP_URL + '/' + ipaddressdetailid, 
+            type: "GET",
+            dataType: 'json',
+            success: function (data) 
+            {
+                // console.log(data.logdetails);
+                // JSON.stringify(data);
+                if (data.error_message)
+                {
+                    $('.overlay_alert').removeClass('hidden');
+                    $('.overlay_alert').addClass('success');
+                    $('.overlay_alert').html(data.error_message);
+                } else
+                {
+                 $('#ajaxModel').modal('show');
+                 $('#listOfIpAddressDetail').html('');
+
+                 data.logdetails.forEach(function(i,v){
+                        var nhtml='<tr>'+
+                                  '<td >'+i.id+'</td>'+
+                                  '<td >'+i.referer_url+'</td>'+
+                                  '<td >'+i.redirected_to+'</td>'+
+                                  '<td>'+i.user_agent+'</td>'+
+                                  '<td>'+i.visit_date+'</td>'+
+                                  '</tr>';
+                        $('#listOfIpAddressDetail').append(nhtml);
+                 })
                 }
                 $('.img-loader').addClass('hidden');
                 setTimeout(function () {

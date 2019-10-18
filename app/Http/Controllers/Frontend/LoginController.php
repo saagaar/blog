@@ -2,96 +2,131 @@
 
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
- use Validator,Redirect,Response,File;
+use Validator,Redirect,Response,File;
 use Socialite;
 use App\Repository\AccountInterface;
 
-class LoginController extends BaseController
+class LoginController extends FrontendController
 {
     protected $account;
     public $successStatus = 200;
     public function __construct(AccountInterface $account)
     {
+        parent::__construct();
         $this->account=$account;
     }   
 
     /**
      * Show the application dashboard.
-     *p
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-
    
-
-        // print_r($request->server('HTTP_USER_AGENT'));
-        return view('frontend.home.index');
-    }
     public function socialLogin($provider)
     {
         return Socialite::driver($provider)->redirect();
-
     }
     public function dashboard($provider){
     $getInfo = Socialite::driver($provider)->user(); 
-    // dd($getInfo);
-    $userdata = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
-        if (!$userdata) {
-        $user = $this->createuser($getInfo,$provider); 
+    $userData = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
+        if (!$userData) {
+            $user = $this->registerUser($getInfo,$provider); 
+            if($user['status']==true){
+                auth()->login($user['userData']); 
+            }else{
+                return response()->json($user['message']);
+            }
+        }else{
+            auth()->login($userData); 
         }
-        auth()->login($user); 
         return redirect()->to('/home');
     }
     
-    public function createuser($getInfo,$provider)
+    public function registerUser($getInfo,$provider)
     {
-    
-          $userdata = $this->account->create([
+        $emailCheck = $this->isEmailAlreadyRegistered($getInfo->email);
+        if($emailCheck==true){
+            $emailParts = explode('@', $getInfo->email);
+        $username = $emailParts[0];
+        $check = $this->account->getAll()->where('username',$username)->first();
+        if (!$check) {
+            $infoUsername = $username;
+        }else{
+            $random = rand(0, 9999);
+            $randUsername = $username.$random;
+            $infoUsername = $randUsername;
+        }
+          $userData = $this->account->create([
              'name'     => $getInfo->name,
              'email'    => $getInfo->email,
-             'status'        =>'0',
+             'username'     =>$infoUsername,
+             'status'        =>'2',
              'provider'     =>$provider,
              'provider_id'  => $getInfo->id,
              'image'        =>$getInfo->avatar_original,
              'token'        =>$getInfo->token,
          ]);
-        return $userdata;
-    } 
-    public function login(){ 
-        if(Auth::attempt(['email' => request('email'), 'password' => request('password'),'status' => '0'])){ 
-            $userid = Auth()->user()->id;
-            $user = $this->account->getById($userid);
-            $success['token'] =  $user->createToken('MyApp')->accessToken; 
-            return response()->json(['success' => $success], $this->successStatus); 
+          return array('status'=>true,'userData'=>$userData,'message'=>'Registered successfully!'); 
+        }else{
+            return array('status'=>false,'userData'=>'','message'=>'Email Already Exist!'); 
+        }
+        
+    }
+    public function login(){
+        if(Auth::guard('web')->attempt(['email' => request('email'), 'password' => request('password')]))
+        { 
+            $user = Auth()->user()->toArray();
+
+         
+            return response()->json(['status'=>true,'data'=>$user,'message'=>'Logged in Successfully']); 
         } 
-        else{ 
-            return response()->json(['error'=>'Unauthorised'], 401); 
+        else
+        { 
+            return response()->json(['status'=>false,'message'=>'Not able to Login']); 
         } 
     }
     public function register(Request $request) 
     { 
         $validator = Validator::make($request->all(), [ 
-            'name' => 'required', 
-            'email' => 'required|email', 
-            'password' => 'required', 
-            'confirm_password' => 'required|same:password', 
+            'name' => 'required|min:2', 
+            'email' => 'required|email|unique:users,email', 
+            'password' => 'required|min:6', 
+            'repassword' => 'required|min:6|same:password', 
         ]);
-    if ($validator->fails()) { 
-                return response()->json(['error'=>$validator->errors()], 401);            
-            }
-    $input = $request->all(); 
-            $input['password'] = bcrypt($input['password']); 
-            $user = $this->account->create($input); 
-            $success['token'] =  $user->createToken('MyApp')->accessToken; 
-            $success['name'] =  $user->name;
-    return response()->json(['success'=>$success], $this->successStatus); 
+        if ($validator->fails()) { 
+            return response()->json(['status'=>false,'error'=>$validator->errors()], 401);            
+        }
+        $input = $request->all(); 
+        $input['password'] = bcrypt($input['password']); 
+        if($this->userRequiresActivation=='Y'){
+            $input['status']    ='1';
+        }else{
+            $input['status']    ='0';
+        }
+        $emailParts = explode('@', $input['email']);
+
+        $username = $emailParts[0];
+        $check = $this->account->getAll()->where('username',$username)->first();
+        if (!$check) {
+            $input['username'] = $username;
+        }else{
+            $random = rand(0, 9999);
+            $randUsername = $username.$random;
+            $input['username'] = $randUsername;
+        }
+        $user = $this->account->create($input);
+    return response()->json(['status'=>true,'data'=>$user,'message'=>'Registration completed Successfully']); 
     }
-    public function user(){
-        $userid = Auth()->user()->id;
-        $user = $this->account->getById($userid);
-         return response()->json(['success' => $user], $this->successStatus); 
-    }  
+    public function isEmailAlreadyRegistered($email){
+        $user = $this->account->getAll()->where('email',$email)->first();
+        if($user) {
+           return response()->json(['status'=>false]); 
+            }
+        else{
+           return response()->json(['status'=>true]); 
+        }
+           
+    } 
 }

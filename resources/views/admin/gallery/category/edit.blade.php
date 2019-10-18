@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                   <label for="banner_image">Image Upload</label>
-                  <img src="{{ asset('frontend/images/gallerycat-images/'.$category['banner_image']) }}" alt="Image" height="42" width="42">
+                 <img src='/images/gallery-cat-images/{{$category->banner_image}}' width="50"/>
                   <input type="file" class="form-control" name="banner_image" id="banner_image" value="{{$category->banner_image}}">
                   @if ($errors->has('banner_image'))
                 <div class="alert alert-danger">{{$errors->first('banner_image') }}</div>
@@ -50,11 +50,11 @@
                   <label for="status">Status</label>
                     <div class="custom-control custom-radio radio-inline">
                           <input type="radio" class="custom-control-input flat-red" name="status"  value="1" @if($category->status=='1') checked @endif>
-                        <label class="custom-control-label" for="defaultChecked">Yes</label>
+                        <label class="custom-control-label" for="defaultChecked">Active</label>
                     </div>
                     <div class="custom-control custom-radio radio-inline">
-                        <input type="radio" class="custom-control-input flat-red" name="status"  value="0" @if($category->status=='0') checked @endif>
-                        <label class="custom-control-label" for="defaultChecked">No</label>
+                        <input type="radio" class="custom-control-input flat-red" name="status"  value="2" @if($category->status=='2') checked @endif>
+                        <label class="custom-control-label" for="defaultChecked">Inactive</label>
                       </div>
                   @if ($errors->has('status'))
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>
@@ -65,7 +65,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
               </div>
             </form>
             </div>

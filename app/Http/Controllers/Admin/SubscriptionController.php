@@ -11,11 +11,11 @@ use App;
 
 class SubscriptionController extends AdminController
 {
-    protected $SubscriptionManager;
-     public function __construct(SubscriptionManagerInterface $SubscriptionManager)
+    protected $subscriptionManager;
+     public function __construct(SubscriptionManagerInterface $subscriptionManager)
     {
          parent::__construct();
-         $this->SubscriptionManager=$SubscriptionManager;
+         $this->subscriptionManager=$subscriptionManager;
     }
     public function list(Request $request)
     {
@@ -25,11 +25,11 @@ class SubscriptionController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $Subscription = $this->SubscriptionManager->getAll()->where('email', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $subscription = $this->subscriptionManager->getAll()->where('email', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $Subscription = $this->SubscriptionManager->getAll()->paginate($this->PerPage);
+            $subscription = $this->subscriptionManager->getAll()->paginate($this->PerPage);
         }
-        return view('admin.subscriptionmanager.list')->with(array('Subscription'=>$Subscription,'breadcrumb'=>$breadcrumb,'menu'=>'Subscription List'));
+        return view('admin.subscriptionmanager.list')->with(array('subscription'=>$subscription,'breadcrumb'=>$breadcrumb,'menu'=>'Subscription List','primary_menu'=>'subscription.list'));
     }
  
     public function edit(Request $request, $id)
@@ -39,21 +39,21 @@ class SubscriptionController extends AdminController
                         'All SubscriptionManager' => route('subscription.list'),
                         'current_menu'=>'Edit Subscription Manager',
                           ]];
-            $subscription=$this->SubscriptionManager->getById($id);                  
+            $subscription=$this->subscriptionManager->getById($id);                  
           if ($request->method()=='POST')
             {
-                $requestobj=app(SubscriptionManagerRequest::class);
-                $validatedData = $requestobj->validated();
-                $this->SubscriptionManager->update($id,$validatedData);
+                $requestObj=app(SubscriptionManagerRequest::class);
+                $validatedData = $requestObj->validated();
+                $this->subscriptionManager->update($id,$validatedData);
                 return redirect()->route('subscription.list')
                             ->with('success','Subscription Updated Successfully.');
             }
-            return view('admin.subscriptionmanager.edit',compact('subscription','breadcrumb'));
+            return view('admin.subscriptionmanager.edit',compact('subscription','breadcrumb'))->with(array('primary_menu'=>'subscription.list'));
     }
 
     public function changeStatus(Request $request)
     {
-        $subscription = $this->SubscriptionManager->getById($request->id);
+        $subscription = $this->subscriptionManager->getById($request->id);
         $status = $request->status;
         $subscription->update(array('status'=>$status)); 
         return redirect()->route('subscription.list')

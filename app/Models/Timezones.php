@@ -16,11 +16,11 @@ class timezones extends Model
     protected $fillable = [
         'utc_time_zone','gmt_time'
     ];
-    public function SiteOptions(){
+    public function siteOption(){
         $this->belongsTo(SiteOptions::class);
     }
     public function logs()
     {
-        return $this->morphMany(LogAdminActivitys::class, 'logable');
+        return $this->morphMany(LogAdminActivities::class, 'logable');
     }
 }

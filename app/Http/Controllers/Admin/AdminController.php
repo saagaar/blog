@@ -9,7 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Services\NotificationCommander;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Route;
-use App\Repository\ModuleInterface;
+use App\Repository\AdminPermissionInterface;
 
 use Auth;
 use Session;
@@ -18,8 +18,9 @@ class AdminController extends BaseController
      use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     protected $admin;
+
     protected $RolePermission;
-     
+    
      /**
     *User object Global
     *@var obj
@@ -33,8 +34,8 @@ class AdminController extends BaseController
 
     public function __construct()
     {
-        $this->middleware('auth:admin')->except('logout');
-        $this->middleware('check_user_permission')->except('logout');
+        $this->middleware('auth:admin');
+        $this->middleware('check_user_permission');
         // $this->user = $User;
     }
     public function dashboard()
@@ -55,17 +56,11 @@ class AdminController extends BaseController
         // print_r($this->user);
         // $data=($this->user->getAll());
         // dd($data->username);
-        return view('admin.dashboard',compact('breadcrumb'));
+        return view('admin.dashboard',compact('breadcrumb'))->with(array('primary_menu'=>'dashboard.list'));
     }
     
-    public function logout()
-    {
-        Auth::logout();
-        Session::flush();
-        return (redirect()->route('admin.login'));
-    }
-
-    public function ImportModules(ModuleInterface $module)
+   
+    public function ImportModules(AdminPermissionInterface $module)
     {
         $controllers = [];
         $i=1;

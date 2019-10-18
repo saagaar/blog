@@ -30,7 +30,7 @@
           <!-- Profile Image -->
           <div class="box box-body">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="{{ asset('frontend/images/userimages/'.$account['image']) }}" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="{{ asset('images/user-images/'.$account['image']) }}" alt="User profile picture">
 
               <h3 class="profile-username text-center">{{$account->name}}</h3>
 
@@ -78,13 +78,13 @@
               <hr>
               <strong><i class="fa fa-info-circle margin-r-5"></i> Status</strong>
               <p class="text-muted">
-                    @if($account->status=='0')
+                    @if($account->status=='1')
                     <span class="label label-success">Active</span>
-                    @elseif ($account->status=='1')
-                    <span class="label label-danger">Inactive</span>
                     @elseif ($account->status=='2')
-                    <span class="label label-warning">Closed</span>
+                    <span class="label label-danger">Inactive</span>
                     @elseif ($account->status=='3')
+                    <span class="label label-warning">Closed</span>
+                    @elseif ($account->status=='4')
                     <span class="label label-default">Suspended</span>
                     @endif</p>
                     

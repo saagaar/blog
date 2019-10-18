@@ -20,15 +20,12 @@ class AdminRoles extends Model implements Auditable
         'role_name','slug','status'
     ];
 
-    public function AdminUsers(){
+    public function adminUser(){
         return $this->belongsTo(AdminUsers::class);
     }
-    public function ModulePermissions()
+    public function adminPermissions()
     {
-        return $this->belongsToMany(ModulePermissions::class)->using(ModuleRolePermissions::class);
+        return $this->belongsToMany(AdminPermissions::class)->using(AdminRolePermissions::class);
     }
-    public function logs()
-    {
-        return $this->morphMany(LogAdminActivitys::class, 'logable');
-    }
+   
 }

@@ -52,11 +52,53 @@
                 <div class="alert alert-danger">{{ $errors->first('locale_id') }}</div>
                 @endif
                 </div>
+                               
                 <div class="form-group">
+                  <label for="Content">Content:</label>
+                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
+                  @if ($errors->has('content'))
+                <div class="alert alert-danger">{{ $errors->first('content') }}</div>
+                @endif
+                </div>
+
+                  <div class="form-group">
+                  <label for="short_description">Short Description: </label>
+                    <textarea name="short_description" class="form-control" rows="5" placeholder="Short Description here..">{{old('short_description')}}</textarea>
+                  @if ($errors->has('short_description'))
+                <div class="alert alert-danger">{{ $errors->first('short_description') }}
+                </div>
+                @endif
+                </div>
+
+
+                <div class="form-group">
+                  <label for="image">Image Upload</label>
+                  <input type="file" class="form-control" name="image" id="image">
+                  @if ($errors->has('image'))
+                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                @endif
+                </div>
+                <div class="form-group">
+                  <label for="tags">Tags</label>
+                  <!-- value="{{ $tags }}" -->
+                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
+                      @foreach ($tags as $values)
+                      <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                      @endforeach
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('tags'))
+                        <p class="help-block">
+                            {{ $errors->first('tags') }}
+                        </p>
+                    @endif
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group col-md-4">
                   <label for="Save Method">Save Method: </label>
                     <div class="custom-control custom-radio">
                         <input type="radio" class="custom-control-input flat-red" name="save_method"  value="0" checked>
-                        <label class="custom-control-label" for="defaultChecked">Save to Draft</label>
+                        <label class="custom-control-label" for="defaultChecked">Save</label>
                     </div>
                     <div class="custom-control custom-radio">
                         <input type="radio" class="custom-control-input flat-red" name="save_method"  value="1" >
@@ -66,19 +108,34 @@
                 <div class="alert alert-danger">{{ $errors->first('save_methods') }}</div>
                 @endif
                 </div>
-                <div class="form-group">
-                  <label for="Content">Content: </label>
-                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
-                  @if ($errors->has('content'))
-                <div class="alert alert-danger">{{ $errors->first('content') }}</div>
+                 <div class="form-group col-md-4">
+                  <label for="featured">Featured: </label>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input flat-red" name="featured"  value="0" checked>
+                        <label class="custom-control-label" for="defaultChecked">No</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input flat-red" name="featured"  value="1" >
+                        <label class="custom-control-label" for="defaultChecked">Yes</label>
+                      </div>
+                  @if ($errors->has('featured'))
+                <div class="alert alert-danger">{{ $errors->first('featured') }}</div>
                 @endif
                 </div>
-                <div class="form-group">
-                  <label for="image">Image Upload</label>
-                  <input type="file" class="form-control" name="image" id="image">
-                  @if ($errors->has('image'))
-                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                 <div class="form-group col-md-4">
+                  <label for="anynomous">Be Anynomous: </label>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input flat-red" name="anynomous"  value="0" checked>
+                        <label class="custom-control-label" for="defaultChecked">No</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input flat-red" name="anynomous"  value="1" >
+                        <label class="custom-control-label" for="defaultChecked">Yes</label>
+                      </div>
+                  @if ($errors->has('anynomous'))
+                <div class="alert alert-danger">{{ $errors->first('anynomouss') }}</div>
                 @endif
+                </div>
                 </div>
               </div>
               <!-- /.box-body -->

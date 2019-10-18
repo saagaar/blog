@@ -5,10 +5,10 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Blog Category</h3>
+              <h3 class="box-title">All Category</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <a href="{{route('adminblogcategory.create')}}" class="btn btn-primary">Add Blog Category</a>
+                  <a href="{{route('adminblogcategory.create')}}" class="btn btn-primary">Add Category</a>
                 </div>
               </div>
             </div>
@@ -30,14 +30,14 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if (!$categorys->isEmpty())
-                @foreach ($categorys as $category)
+                @if (!$categories->isEmpty())
+                @foreach ($categories as $category)
                 
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $category->name }}</td>
                   <td>
-                   <input data-id="{{$category->id}}" data-url="{{route('adminblogcategory.changestatus')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$category->status ? 'checked' : '' }}>
+                   <input data-id="{{$category->id}}" data-url="{{route('adminblogcategory.changestatus')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$category->status==1 ? 'checked' : '' }}>
                   </td>
                   <td>{{$category->slug}}</td>
                   <td>{{$category->created_at}}</td>
@@ -48,7 +48,7 @@
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="7" align="center" style="background-color: #d2d6de;"> No Blog Category Found </td>
+                    <td colspan="7" align="center" style="background-color: #d2d6de;"> No Category Found </td>
                   </tr>
                   @endif
                 </tbody>
@@ -56,7 +56,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $categorys->links() !!}
+              {!! $categories->links() !!}
               </ul>
             </div>
             <!-- /.box-body -->

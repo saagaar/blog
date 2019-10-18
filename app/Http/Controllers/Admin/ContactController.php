@@ -24,35 +24,16 @@ class ContactController extends AdminController
                     ]];
         $search = $request->get('search');
         if($search){
-            $contact = $this->contact->GetAll()
+            $contact = $this->contact->getAll()
             ->where('name', 'like', '%' . $search . '%')
             ->paginate($this->PerPage)
             ->withPath('?search=' . $search);
         }else{
-            $contact = $this->contact->GetAll()->paginate($this->PerPage);
+            $contact = $this->contact->getAll()->paginate($this->PerPage);
         }
-        return view('admin.contact.list')->with(array('contact'=>$contact,'breadcrumb'=>$breadcrumb,'menu'=>'contact List'));
+        return view('admin.contact.list')->with(array('contact'=>$contact,'breadcrumb'=>$breadcrumb,'menu'=>'contact List','primary_menu'=>'contact.list'));
     }
-    // public function create(Request $request)
-    // {
-    //     $breadcrumb=['breadcrumbs'    => 
-    //                 [
-    //                   'Dashboard'     => route('admin.dashboard'),
-    //                   'All contact' => route('contact.list'),
-    //                   'current_menu'  =>'Create contact',
-    //                 ]];
-
-    //     if ($request->method()=='POST') 
-    //     {
-    //         $requestobj=app(contactRequest::class); 
-    //         $validatedData = $requestobj->validated();
-    //         $this->contact->create($validatedData);
-
-    //         return redirect()->route('contact.list') 
-    //                          ->with(array('success'=>'contact created successfully.','breadcrumb'=>$breadcrumb));
-    //     }
-    //     return view('contact.createcontact')->with(array('breadcrumb'=>$breadcrumb));
-    // }
+   
     public function edit(Request $request, $id)
     {
             $breadcrumb=['breadcrumbs' => [
@@ -60,17 +41,15 @@ class ContactController extends AdminController
                         'All contact' => route('contact.list'),
                         'current_menu'=>'Edit contact',
                          ]];
-            $contact =$this->contact->getcontactById($id);
+            $contact =$this->contact->getContactById($id);
             if ($request->method()=='POST') 
             {
-                $requestobj=app(contactRequest::class);
-                $validatedData = $requestobj->validated();
-                // dd($validatedData);
+                $requestObj=app(contactRequest::class);
+                $validatedData = $requestObj->validated();
                 $this->contact->update($id,$validatedData);
                 return redirect()->route('contact.list')
                             ->with('success','contact Updated Successfully.');
             }
-            // dd($contact);
-            return view('admin.contact.edit',compact('contact','breadcrumb'));
+            return view('admin.contact.edit',compact('contact','breadcrumb'))->with(array('primary_menu'=>'contact.list'));
     }
 }

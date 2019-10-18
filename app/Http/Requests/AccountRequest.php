@@ -47,7 +47,7 @@ class AccountRequest extends FormRequest
             $image                 = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
           }
         return [
-            'name'                  =>'required|min:6',
+            'name'                  =>'required|min:2',
             'email'                 => $email_rule,
             'status'                =>'required',
             'password'              => $password,

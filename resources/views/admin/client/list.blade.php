@@ -31,15 +31,15 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if (!$Client->isEmpty())
-                @foreach ($Client as $member)
+                @if (!$client->isEmpty())
+                @foreach ($client as $member)
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{$member->title}}</td>
                    <td>{{$member->url }}</td>
-                   <td><img src="{{asset('frontend/images/client/'.$member->logo) }}" alt="client Image" height="42" width="42"></td>
+                   <td><img src="{{asset('images/client-images/'.$member->logo) }}" alt="Client Image" height="42" width="42"></td>
                   <td>
-                     <input data-id="{{$member->id}}" data-url="{{route('client.changestatus')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$member->status ? 'checked' : '' }}>
+                     <input data-id="{{$member->id}}" data-url="{{route('client.changestatus')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$member->status==1 ? 'checked' : '' }}>
                   </td>             
                   <td>{{$member->created_at}}</td>
                   <td>{{$member->updated_at}}</td>
@@ -57,7 +57,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $Client->links() !!}
+              {!! $client->links() !!}
               </ul>
             </div>
             <!-- /.box-body -->

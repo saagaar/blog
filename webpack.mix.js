@@ -11,6 +11,7 @@ const mix = require('laravel-mix');
  |
  */
     mix.js('resources/assets/js/app.js','public/frontend/js');
+    mix.js('resources/assets/js/dashboard.js','public/frontend/js');
 
     mix.scripts([
         'resources/assets/vendors/popup/jquery.magnific-popup.min.js',

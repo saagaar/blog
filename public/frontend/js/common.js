@@ -59,8 +59,9 @@ $('.play-video').magnificPopup({
     });
 
 // Search Toggle
-$("#search_input_box").hide();
+
 $("#search").on("click", function () {
+    alert('here');
     $("#search_input_box").slideToggle();
     $("#search_input").focus();
 });
@@ -82,7 +83,6 @@ $("#close_search").on("click", function () {
 
 //-------- Counter js --------//
 $(window).on("load", function() {
-
 
     $('.portfolio-filter ul li').on('click', function () {
         $('.portfolio-filter ul li').removeClass('active');
@@ -106,4 +106,88 @@ $(window).on("load", function() {
 });
 
 
+
 })(jQuery)
+
+
+  $(function() {
+        if($('#sidebar').length>0)
+        {
+                var top = $('#sidebar').offset().top - parseFloat($('#sidebar').css('marginTop').replace(/auto/, 0));
+                var footTop = $('#footer').offset().top - parseFloat($('#footer').css('marginTop').replace(/auto/, 0));
+                var maxY = footTop - $('#sidebar').outerHeight();
+                $(window).scroll(function(evt) {
+                    var y = $(this).scrollTop();
+                    if (y > top) {
+                        
+                        if (y < maxY) {
+                            $('#sidebar').addClass('fixed').removeAttr('style');
+                        } else {
+                            $('#sidebar').removeClass('fixed').css({
+                                position: 'absolute',
+                                top: (maxY - top) + 'px'
+                            });
+                        }
+                    } else {
+                        $('#sidebar').removeClass('fixed');
+                    }
+                }); 
+        }
+    
+});
+
+    $(function() 
+    {
+     if($('#sidebar2').length>0)
+    {
+        var top = $('#sidebar2').offset().top - parseFloat($('#sidebar2').css('marginTop').replace(/auto/, 0));
+        var footTop = $('#footer').offset().top - parseFloat($('#footer').css('marginTop').replace(/auto/, 0));
+
+        var maxY = footTop - $('#sidebar2').outerHeight();
+
+        $(window).scroll(function(evt) {
+            var y = $(this).scrollTop();
+            if (y > top) {
+                
+            //Quand scroll, ajoute une classe ".fixed" et supprime le Css existant 
+                if (y < maxY) {
+                    $('#sidebar2').addClass('fixed').removeAttr('style');
+                } else {
+                    
+            //Quand la sidebar arrive au footer, supprime la classe "fixed" précèdement ajouté
+                    $('#sidebar2').removeClass('fixed').css({
+                        position: 'absolute',
+                        top: (maxY - top) + 'px'
+                    });
+                }
+            } else {
+                $('#sidebar2').removeClass('fixed');
+            }
+        });
+    }
+});
+
+     $(function() {
+    var top = $('#chat-block').offset().top - parseFloat($('#chat-block').css('marginTop').replace(/auto/, 0));
+    var footTop = $('#footer').offset().top - parseFloat($('#footer').css('marginTop').replace(/auto/, 0));
+    var maxY = footTop - $('#chat-block').outerHeight();
+    $(window).scroll(function(evt) {
+        var y = $(this).scrollTop();
+        if (y > top) {
+            
+//Quand scroll, ajoute une classe ".fixed" et supprime le Css existant 
+            if (y < maxY) {
+                $('#chat-block').addClass('fixed').removeAttr('style');
+            } else {
+                
+//Quand la sidebar arrive au footer, supprime la classe "fixed" précèdement ajouté
+                $('#chat-block').removeClass('fixed').css({
+                    position: 'absolute',
+                    top: (maxY - top) + 'px'
+                });
+            }
+        } else {
+            $('#chat-block').removeClass('fixed');
+        }
+    });
+});

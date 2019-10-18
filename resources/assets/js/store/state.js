@@ -1,7 +1,11 @@
+import config from './../config/config.js';
 const state = {
+    settings:config,
     me: {},
     user:{
-        isLoggedIn:false
+        isLoggedIn:false,
+        followersCount:0,
+        followingsCount:0
     },
     feed: [],
     profilePage: {
@@ -18,7 +22,6 @@ const state = {
         replies: []
     },
     openTweetDetails: null,
-    followSuggestions: [],
     isLoading: false,
     appName: 'TheBloggersClub.com'
 }

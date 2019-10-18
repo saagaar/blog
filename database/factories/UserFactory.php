@@ -30,6 +30,8 @@ $factory->define(User::class, function (Faker $faker) {
         'name' => $faker->name,
         'username' => $faker->unique()->username,
         'email' => $faker->unique()->safeEmail,
+         'phone' => random_int(9800000000, 9899999999),
+         'status' =>'1',
         'email_verified_at' => now(),
         'password' => Hash::make('123456'), // password
         'remember_token' => Str::random(10),
@@ -174,5 +176,21 @@ $factory->define(Categories::class, function (Faker $faker) {
         'name'                =>$faker->text($maxNbChars = 20),
         'slug'          =>$faker->unique()->text($maxNbChars = 20),
         'display'             =>$faker->randomElement(['Y' ,'N'])
+    ];
+});
+$factory->define(Blogs::class, function (Faker $faker) {
+    $users = \DB::table('users')->select('id')->get();
+    $userid = $faker->randomElement($users)->id;
+    $locales_id = \DB::table('locales')->select('id')->get();
+    return [
+        'title'                 =>$faker->text($maxNbChars = 20),
+        'user_id'               =>'1',
+        'code'                  =>$faker->unique()->text($maxNbChars = 20),
+        'content'               =>$faker->text($maxNbChars = 20),
+        'save_method'             =>$faker->randomElement(['1' ,'2']),
+        'locale_id'            =>1,
+        'image'                 =>'1569324080.jpg',
+        'featured'             =>$faker->randomElement(['1' ,'2']),
+        'anynomous'             =>$faker->randomElement(['1' ,'2']),
     ];
 });

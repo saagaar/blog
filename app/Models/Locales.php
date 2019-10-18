@@ -17,10 +17,10 @@ class Locales extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'lang','lang_name','display','order'
+        'lang','lang_name','display'
     ];
 
-    public function Blogs()
+    public function blog()
     {
         $this->belongsTo(Blogs::class);
     }

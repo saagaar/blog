@@ -4,14 +4,15 @@ namespace App\Repository\Blog;
 
 use App\Models\Blogs;
 use App\Repository\BlogInterface;
-
+use App\Repository\TagInterface;
 Class Blog implements BlogInterface
 {
 	protected $blog;
-
-	public function __construct(Blogs $blog)
+  protected $tag;
+	public function __construct(Blogs $blog,TagInterface $tag)
 	{
 		$this->blog=$blog;
+    $this->tag=$tag;
 	}
 
   /**
@@ -19,12 +20,31 @@ Class Blog implements BlogInterface
    *
    * @param int
    */
-  public function GetBlogById($blogid){
-    return  $this->blog->where('id', $blogid)->first();
+  public function getBlogById($blogId){
+    return  $this->blog->where('id', $blogId)->first();
   }
+  /**
+   * 
+   */
+
+  public function getBlogByCode($blogCode){
+    return $this->blog->where('code', $blogCode)->with('tags')->first();
+  }
+   /**
+   * Get  Blog by user id
+   *
+   * @param int
+   */
+  public function getBlogByUserId($userid){
+    return  $this->blog->where('user_id', $userid)->inRandomOrder();
+  }
+  
+  public function getActiveBlogByUserId($userid){
+    return  $this->blog->where(['user_id'=>$userid,'save_method'=>'2'])->inRandomOrder();
+  } 
      
-  public function GetAssociatedCategoryOfBlog($bloid){
-      return	$this->blog->where('id', $bloid)->first();
+  public function getAssociatedCategoryOfBlog($blogId){
+      return	$this->blog->where('id', $blogId)->first();
   }
 
       /**
@@ -32,7 +52,7 @@ Class Blog implements BlogInterface
      *
      * @return mixed
      */
-    public function GetAll(){
+    public function getAll(){
    	 return	$this->blog->latest();
     }
  	
@@ -41,7 +61,7 @@ Class Blog implements BlogInterface
      *
      * @return mixed
      */
-    public function Create(array $data){
+    public function create(array $data){
       return	$this->blog->create($data);
     }
      /**
@@ -51,17 +71,24 @@ Class Blog implements BlogInterface
      * @param array
      */
 
-    public function Update( $id,array $data){
+    public function update( $id,array $data){
       return	$this->blog->find($id)->update($data);
     }
-
+    public function updateByCode( $code,array $data){
+      return $this->blog->where('code', $code)->update($data);
+    }
       /**
      * Deletes a post.
      *
      * @param int
      */
-    public function Delete($id){
+    public function delete($id){
       return	$this->blog->find($id)->delete();
+    }
+    public function addTag($postId,$tags){
+      $blogData = $this->blog->where('code',$postId)->first();
+      return $blogData->tags()->sync($tags);
+      
     }
 }
 ?>

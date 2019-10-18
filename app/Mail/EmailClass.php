@@ -6,18 +6,20 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailer;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailer;
 
 class EmailClass extends Mailer
 {
 
+    protected $email;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct( )
     {
-        //
+        $this->email=$email;
     }
 
     /**
@@ -25,9 +27,8 @@ class EmailClass extends Mailer
      *
      * @return $this
      */
-    public function build($view)
+    public function build($view='Default')
     {
-        print_r($view);exit;
         return $this->send($view);
     }
 

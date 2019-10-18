@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\File;
 use App;
 class CmsController extends AdminController
 {
-    protected $CMS;
+    protected $cms;
 
     function __construct(CmsInterface $cms)
     {
         parent::__construct();
-        $this->CMS=$cms;
+        $this->cms=$cms;
     }
     public function list(Request $request)
     {
@@ -25,14 +25,15 @@ class CmsController extends AdminController
                     ]];
         $search = $request->get('search');
         if($search){
-            $cms = $this->CMS->getAll()
+            $cms = $this->cms->getAll()
             ->where('heading', 'like', '%' . $search . '%')
             ->paginate($this->PerPage)
             ->withPath('?search=' . $search);
         }else{
-            $cms = $this->CMS->getAll()->paginate($this->PerPage);
+            $cms = $this->cms->getAll()->paginate($this->PerPage);
         }
-        return view('admin.cms.list')->with(array('CMS'=>$cms,'breadcrumb'=>$breadcrumb,'menu'=>'CMS List'));
+        return view('admin.cms.list')->with(array('cms'=>$cms,'breadcrumb'=>$breadcrumb,'menu'=>'CMS List','primary_menu'=>'cms.list'));
+
     }
     public function create(Request $request)
     {
@@ -44,13 +45,13 @@ class CmsController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-            $requestobj=app(CmsRequest::class);
-            $validatedData = $requestobj->validated();
-            $this->CMS->create($validatedData);
+            $requestObj=app(CmsRequest::class);
+            $validatedData = $requestObj->validated();
+            $this->cms->create($validatedData);
             return redirect()->route('cms.list') 
                              ->with('success','CMS created successfully.');
         }
-        return view('admin.cms.create')->with(array('breadcrumb'=>$breadcrumb));
+        return view('admin.cms.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'cms.list'));
     }
     public function edit(Request $request, $id)
     {
@@ -59,20 +60,20 @@ class CmsController extends AdminController
                         'All cms' => route('cms.list'),
                         'current_menu'=>'Edit Cms',
                          ]];
-            $cms =$this->CMS->getcmsById($id);
+            $cms =$this->cms->getCmsById($id);
             if ($request->method()=='POST') 
             {
-                $requestobj=app(CmsRequest::class);
-                $validatedData = $requestobj->validated();
-                $this->CMS->update($id,$validatedData);
+                $requestObj=app(CmsRequest::class);
+                $validatedData = $requestObj->validated();
+                $this->cms->update($id,$validatedData);
                 return redirect()->route('cms.list')
                             ->with('success','CMS Updated Successfully.');
             }
-            return view('admin.cms.edit',compact('cms','breadcrumb'));
+            return view('admin.cms.edit',compact('cms','breadcrumb'))->with(array('primary_menu'=>'cms.list'));
     }
     public function delete($id)
     {
-       $cms =$this->CMS->getcmsById($id);
+       $cms =$this->cms->getCmsById($id);
        if ($cms->deletable=='N'){
            return redirect()->route('cms.list')
         ->with('error', 'cms is undeletable');
@@ -84,18 +85,18 @@ class CmsController extends AdminController
     }
      public function changeStatus(Request $request)
     {
-        $cms = $this->CMS->getcmsById($request->id);
+        $cms = $this->cms->getCmsById($request->id);
         $status = $request->status;
         $cms->update(array('status'=>$status));  
        return redirect()->route('cms.list')
                         ->with('success','Status change successfully.');
     }
 
-     public function changeCmstype(Request $request)
+     public function changeCmsType(Request $request)
     {
-        $Cmstype = $this->CMS->getcmsById($request->id);
-        $Cmstype = $request->cmstype;
-        $Cmstype->update(array('cms_type'=>$Cmstype));  
+        $cmstype = $this->cms->getCmsById($request->id);
+        $cmstype = $request->cmstype;
+        $cmstype->update(array('cms_type'=>$cmstype));  
        return redirect()->route('Cms.list')
                         ->with('success','Status change successfully.');
     }

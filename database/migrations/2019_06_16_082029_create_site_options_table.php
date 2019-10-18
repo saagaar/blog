@@ -23,7 +23,6 @@ class CreateSiteOptionsTable extends Migration
             $table->string('contact_number', 100);
             $table->enum('mode', ['1', '2','3'])->comment('1=live,2=down,3=maintenance');
             $table->string('maintainence', 100);
-            $table->enum('user_activation', ['Y', 'N']);
             $table->string('facebook_id', 100);
             $table->string('linkedin_id', 100);
             $table->string('twitter_id', 100);
@@ -37,6 +36,8 @@ class CreateSiteOptionsTable extends Migration
             $table->string('city', 100);
             $table->string('state', 100);
             $table->string('country', 100);
+            $table->enum('blog_requires_activation', ['Y','N']);
+            $table->enum('user_requires_activation', ['Y','N']);
             $table->timestamps();
         });
     }

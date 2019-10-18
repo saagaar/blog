@@ -6,14 +6,14 @@ use App\Repository\BlocklistInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlocklistRequest;
 use App;
-class BlocklistController extends AdminController
+class BlockListController extends AdminController
 {
-    protected $blocklist;
+    protected $blockList;
 
-    function __construct(BlocklistInterface $blocklist)
+    function __construct(BlocklistInterface $blockList)
     {
         parent::__construct();
-        $this->blocklist=$blocklist;
+        $this->blockList=$blockList;
        
     }
     public function list(Request $request)
@@ -24,12 +24,12 @@ class BlocklistController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $ipdata = $this->blocklist->getAll()->where('ip_address', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $ipData = $this->blockList->getAll()->where('ip_address', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $ipdata = $this->blocklist->getAll()->paginate($this->PerPage);
+            $ipData = $this->blockList->getAll()->paginate($this->PerPage);
         }
         
-        return view('admin.ipblocklist.list')->with(array('ipdata'=>$ipdata,'breadcrumb'=>$breadcrumb,'menu'=>'Block List'));
+        return view('admin.ipblocklist.list')->with(array('ipData'=>$ipData,'breadcrumb'=>$breadcrumb,'menu'=>'Block List','primary_menu'=>'blocklist.list'));
     }
     public function create(Request $request)
     {
@@ -38,23 +38,21 @@ class BlocklistController extends AdminController
                     'Block List' => route('blocklist.list'),
                     'current_menu'=>'Create Block List',
                       ]];
-         $admin_id = auth()->user()->id;
+         $adminId = auth()->user()->id;
         if ($request->method()=='POST') {
 
-            // $request=::class;
-            $requestobj=app(BlocklistRequest::class);
-            $validatedData = $requestobj->validated();
-        $this->blocklist->create($validatedData);
-       return redirect()->route('blocklist.list')
+            $requestObj=app(BlocklistRequest::class);
+            $validatedData = $requestObj->validated();
+           $this->blockList->create($validatedData);
+           return redirect()->route('blocklist.list')
                             ->with(array('success'=>'Block List created successfully.','breadcrumb'=>$breadcrumb));
         }
-       return view('admin.ipblocklist.create')->with(array('admin_id'=>$admin_id,'breadcrumb'=>$breadcrumb));;
+       return view('admin.ipblocklist.create')->with(array('adminId'=>$adminId,'breadcrumb'=>$breadcrumb,'primary_menu'=>'blocklist.list'));;
     }
     public function delete($id)
     {
-        $ipdata = $this->blocklist->GetIpById($id);
-        // dd($ipdata);
-        $ipdata->delete();
+        $ipData = $this->blockList->GetIpById($id);
+        $ipData->delete();
         return redirect()->route('blocklist.list')
         ->with('success', 'Block List has been deleted!!');
     }
@@ -65,18 +63,18 @@ class BlocklistController extends AdminController
                     'Block List' => route('blocklist.list'),
                     'current_menu'=>'Edit Block List',
                       ]];
-                       $admin_id = auth()->user()->id;
-        $ipdata =$this->blocklist->GetIpById($id);
+        $adminId = auth()->user()->id;
+        $ipData =$this->blockList->GetIpById($id);
         if ($request->method()=='POST') 
         {
-            $requestobj=app(BlocklistRequest::class);
-            $validatedData = $requestobj->validated();
-            $this->blocklist->update($id,$validatedData);
+            $requestObj=app(BlocklistRequest::class);
+            $validatedData = $requestObj->validated();
+            $this->blockList->update($id,$validatedData);
             return redirect()->route('blocklist.list')
                         ->with('success','Block List updated successfully.');
         }
         
-        return view('admin.ipblocklist.edit',compact('ipdata'))->with(array('admin_id'=>$admin_id,'ipdata'=>$ipdata,'breadcrumb'=>$breadcrumb));
+        return view('admin.ipblocklist.edit',compact('ipData'))->with(array('admin_id'=>$adminId,'ipdata'=>$ipData,'breadcrumb'=>$breadcrumb,'primary_menu'=>'blocklist.list'));
     }
      
 }

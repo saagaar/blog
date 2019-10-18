@@ -9,7 +9,7 @@ class Teams extends Model implements Auditable
 {
     use Auditables;
 
-     protected $table='team';
+     protected $table='teams';
 
     /**
      * The attributes that are mass assignable.
