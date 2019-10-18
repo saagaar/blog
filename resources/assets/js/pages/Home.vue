@@ -10,7 +10,7 @@
                 <div class="col-md-6 col-lg-6 col-xl-5">
                     <div class="single-blog  wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
                         <div class="thumb">
-                            <img class="img-fluid" src="images/magazine/1.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/1.jpg" alt="">
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
@@ -32,7 +32,7 @@
                         <div class="col-12 col-md-6 col-lg-6 col-xl-12">
                             <div class="single-blog style-three m_b_30">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="images/magazine/3.jpg" alt="">
+                                    <img class="img-fluid" src="/images/magazine/3.jpg" alt="">
                                 </div>
                                 <div class="short_details">
 
@@ -49,7 +49,7 @@
                         <div class="col-12 col-md-6 col-lg-6 col-xl-12">
                             <div class="single-blog style-three">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="images/magazine/4.jpg" alt="">
+                                    <img class="img-fluid" src="/images/magazine/4.jpg" alt="">
                                 </div>
                                 <div class="short_details">
 
@@ -70,7 +70,7 @@
                 <div class="col-md-6 col-lg-6 col-xl-4">
                     <div class="single-blog style_two">
                         <div class="thumb">
-                            <img class="img-fluid" src="images/magazine/2.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/2.jpg" alt="">
                         </div>
                         <div class="short_details text-center ">
 
@@ -113,7 +113,7 @@
                 <div class="col-lg-6">
                     <div class="single-blog style-five">
                         <div class="thumb">
-                            <img class="img-fluid" src="images/magazine/18.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/18.jpg" alt="">
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
@@ -138,7 +138,7 @@
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="images/magazine/19.jpg" alt="">
+                                    <img class="img-fluid" src="/images/magazine/19.jpg" alt="">
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
@@ -160,7 +160,7 @@
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="images/magazine/20.jpg" alt="">
+                                    <img class="img-fluid" src="/images/magazine/20.jpg" alt="">
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
@@ -182,7 +182,7 @@
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="images/magazine/21.jpg" alt="">
+                                    <img class="img-fluid" src="/images/magazine/21.jpg" alt="">
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
@@ -204,7 +204,7 @@
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="images/magazine/22.jpg" alt="">
+                                    <img class="img-fluid" src="/images/magazine/22.jpg" alt="">
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
@@ -245,7 +245,7 @@
                     <div class="single-blog row no-gutters style-four border_one">
                         <div class="col-12 col-sm-5">
                             <div class="thumb">
-                                <img class="img-fluid" src="images/magazine/5.jpg" alt="">
+                                <img class="img-fluid" src="/images/magazine/5.jpg" alt="">
                             </div>
                         </div>
                         <div class="col-12 col-sm-7">
@@ -271,7 +271,7 @@
                 <div class="col-lg-4 col-xl-3">
                     <div class="single-blog style_five">
                         <div class="thumb">
-                            <img class="img-fluid" src="images/magazine/6.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/6.jpg" alt="">
                         </div>
                         <div class="short_details ">
 
@@ -289,7 +289,7 @@
                 <div class="col-lg-4 col-xl-3">
                     <div class="single-blog style_five">
                         <div class="thumb">
-                            <img class="img-fluid" src="images/magazine/7.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/7.jpg" alt="">
                         </div>
                         <div class="short_details ">
 
@@ -323,7 +323,7 @@
                 <div class="col-lg-5 col-xl-6">
                     <div class="single-blog">
                         <div class="thumb">
-                            <img class="img-fluid" src="images/magazine/8.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/8.jpg" alt="">
                         </div>
                         <div class="short_details pad_25 ">
                             <div class="meta-top d-flex">
@@ -357,7 +357,7 @@
                         </div>  
                         <div class="col-12 col-sm-5">
                             <div class="thumb">
-                                <img class="img-fluid" src="images/magazine/9.jpg" alt="">
+                                <img class="img-fluid" src="/images/magazine/9.jpg" alt="">
                             </div>
                         </div>
                     </div> 
@@ -365,7 +365,7 @@
                     <div class="single-blog row no-gutters style-four">
                         <div class="col-12 col-sm-5">
                             <div class="thumb">
-                                <img class="img-fluid" src="images/magazine/10.jpg" alt="">
+                                <img class="img-fluid" src="/images/magazine/10.jpg" alt="">
                             </div>
                         </div>
                         <div class="col-12 col-sm-7">
@@ -403,7 +403,7 @@
                 <div class="col-lg-7">
                     <div class="single-blog video-style">
                         <div class="thumb">
-                            <img class="img-fluid" src="images/magazine/11.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/11.jpg" alt="">
                             <div class="play_btn">
                                 <a class="play-video" href="https://www.youtube.com/watch?v=MrRvX5I8PyY" data-animate="zoomIn"
                                 data-duration="1.5s" data-delay="0.1s"><span class="ti-control-play"></span></a>
@@ -431,7 +431,7 @@
                 <div class="col-lg-5">
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-12 col-sm-5">
-                            <img class="img-fluid" src="images/magazine/12.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/12.jpg" alt="">
                             <div class="play_btn">
                                 <a class="play-video" href="https://www.youtube.com/watch?v=MrRvX5I8PyY" data-animate="zoomIn"
                                 data-duration="1.5s" data-delay="0.1s"><span class="ti-control-play"></span></a>
@@ -455,7 +455,7 @@
 
                     <div class="single-blog video-style small row m_b_30 ">
                         <div class="thumb col-12 col-sm-5">
-                            <img class="img-fluid" src="images/magazine/13.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/13.jpg" alt="">
                             <div class="play_btn">
                                 <a class="play-video" href="https://www.youtube.com/watch?v=MrRvX5I8PyY" data-animate="zoomIn"
                                 data-duration="1.5s" data-delay="0.1s"><span class="ti-control-play"></span></a>
@@ -479,7 +479,7 @@
 
                     <div class="single-blog video-style small row">
                         <div class="thumb col-12 col-sm-5">
-                            <img class="img-fluid" src="images/magazine/14.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/14.jpg" alt="">
                             <div class="play_btn">
                                 <a class="play-video" href="https://www.youtube.com/watch?v=MrRvX5I8PyY" data-animate="zoomIn"
                                 data-duration="1.5s" data-delay="0.1s"><span class="ti-control-play"></span></a>
@@ -525,7 +525,7 @@
                 <div class="col-lg-4">
                     <div class="single-blog style-five">
                         <div class="thumb">
-                            <img class="img-fluid" src="images/magazine/15.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/15.jpg" alt="">
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
@@ -548,7 +548,7 @@
                 <div class="col-lg-4">
                     <div class="single-blog style-five">
                         <div class="thumb">
-                            <img class="img-fluid" src="images/magazine/16.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/16.jpg" alt="">
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
@@ -571,7 +571,7 @@
                 <div class="col-lg-4">
                     <div class="single-blog style-five">
                         <div class="thumb">
-                            <img class="img-fluid" src="images/magazine/17.jpg" alt="">
+                            <img class="img-fluid" src="/images/magazine/17.jpg" alt="">
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">

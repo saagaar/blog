@@ -52315,7 +52315,7 @@ var render = function() {
                         _c("div", { staticClass: "thumb" }, [
                           _c("img", {
                             staticClass: "img-fluid",
-                            attrs: { src: "images/magazine/1.jpg", alt: "" }
+                            attrs: { src: "/images/magazine/1.jpg", alt: "" }
                           })
                         ]),
                         _vm._v(" "),
@@ -52374,7 +52374,7 @@ var render = function() {
                                 _c("img", {
                                   staticClass: "img-fluid",
                                   attrs: {
-                                    src: "images/magazine/3.jpg",
+                                    src: "/images/magazine/3.jpg",
                                     alt: ""
                                   }
                                 })
@@ -52426,7 +52426,7 @@ var render = function() {
                                 _c("img", {
                                   staticClass: "img-fluid",
                                   attrs: {
-                                    src: "images/magazine/4.jpg",
+                                    src: "/images/magazine/4.jpg",
                                     alt: ""
                                   }
                                 })
@@ -52473,7 +52473,7 @@ var render = function() {
                       _c("div", { staticClass: "thumb" }, [
                         _c("img", {
                           staticClass: "img-fluid",
-                          attrs: { src: "images/magazine/2.jpg", alt: "" }
+                          attrs: { src: "/images/magazine/2.jpg", alt: "" }
                         })
                       ]),
                       _vm._v(" "),
@@ -52590,7 +52590,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/18.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/18.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -52638,7 +52638,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/19.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/19.jpg", alt: "" }
                     })
                   ]),
                   _vm._v(" "),
@@ -52680,7 +52680,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/20.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/20.jpg", alt: "" }
                     })
                   ]),
                   _vm._v(" "),
@@ -52722,7 +52722,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/21.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/21.jpg", alt: "" }
                     })
                   ]),
                   _vm._v(" "),
@@ -52764,7 +52764,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/22.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/22.jpg", alt: "" }
                     })
                   ]),
                   _vm._v(" "),
@@ -52843,7 +52843,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/5.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/5.jpg", alt: "" }
                     })
                   ])
                 ]),
@@ -52893,7 +52893,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/6.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/6.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -52925,7 +52925,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/7.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/7.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -52990,7 +52990,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/8.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/8.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -53067,7 +53067,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/9.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/9.jpg", alt: "" }
                     })
                   ])
                 ])
@@ -53082,7 +53082,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/10.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/10.jpg", alt: "" }
                     })
                   ])
                 ]),
@@ -53162,7 +53162,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "thumb" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/magazine/11.jpg", alt: "" }
+                    attrs: { src: "/images/magazine/11.jpg", alt: "" }
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "play_btn" }, [
@@ -53234,7 +53234,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb col-12 col-sm-5" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/12.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/12.jpg", alt: "" }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "play_btn" }, [
@@ -53301,7 +53301,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb col-12 col-sm-5" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/13.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/13.jpg", alt: "" }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "play_btn" }, [
@@ -53365,7 +53365,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "thumb col-12 col-sm-5" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/magazine/14.jpg", alt: "" }
+                    attrs: { src: "/images/magazine/14.jpg", alt: "" }
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "play_btn" }, [
@@ -53464,7 +53464,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/15.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/15.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -53510,7 +53510,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/16.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/16.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -53556,7 +53556,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/17.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/17.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),

@@ -45,7 +45,15 @@
                   </td>
                   <td>{{ $eachNotification->subject }}</td>
                   <td>{{ $eachNotification->view }}</td>
-                  <td> <span class="label label-info label-large"><?php echo(implode(',', $eachNotification->notification_type)); ?></span></td>
+
+
+                  <td>@foreach($eachNotification->notification_type as $each)
+                      <span class="label label-info label-large">{{$each}}</span>
+
+
+                  @endforeach
+
+                  </td>
                   <td>{{$eachNotification->created_at}}</td>
                   <td><a href="{{route('notification.edit', $eachNotification->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                   <td><a href="{{route('notification.delete', $eachNotification->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
