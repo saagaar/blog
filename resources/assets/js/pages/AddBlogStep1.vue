@@ -78,7 +78,7 @@ import Form from './../services/Form.js';
             title: {
               required,
               minLength: minLength(4),
-              maxLength: maxLength(15)
+              maxLength: maxLength(150)
             },
             content: 
             {

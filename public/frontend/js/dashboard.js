@@ -7871,7 +7871,7 @@ __webpack_require__.r(__webpack_exports__);
       title: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"],
         minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["minLength"])(4),
-        maxLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["maxLength"])(15)
+        maxLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["maxLength"])(150)
       },
       content: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"]
@@ -8131,7 +8131,7 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.$v.form.$invalid) {
         this.form.post('/blog/edit/' + this.$route.params.blogId + '/step2').then(function (response) {
           if (response.data.status) {
-            window.location.href = "dashboard";
+            window.location.href = "/dashboard";
           } else {}
         })["catch"](function (e) {
           console.log(e);
@@ -9074,6 +9074,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -52698,7 +52705,7 @@ var staticRenderFns = [
           }
         },
         [
-          _vm._v("\n                   All\n                   "),
+          _vm._v("\r\n                   All\r\n                   "),
           _c("i", { staticClass: "fa fa-angle-down " })
         ]
       )
@@ -52719,7 +52726,7 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v("\n                     Sort by\n                     "),
+        _vm._v("\r\n                     Sort by\r\n                     "),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
     )
@@ -52736,7 +52743,7 @@ var staticRenderFns = [
       },
       [
         _vm._v(
-          "\n                                     Filter by\n             "
+          "\r\n                                     Filter by\r\n             "
         ),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
@@ -52749,9 +52756,9 @@ var staticRenderFns = [
     return _c("div", { staticClass: "hidden_sec" }, [
       _c("div", { staticClass: "hidden_td_link" }, [
         _c("a", { attrs: { href: "#" } }, [_vm._v("Edit")]),
-        _vm._v("\n                   | \n                  "),
+        _vm._v("\r\n                   | \r\n                  "),
         _c("a", { attrs: { href: "#" } }, [_vm._v("Preview")]),
-        _vm._v("\n                   | \n                  "),
+        _vm._v("\r\n                   | \r\n                  "),
         _c("a", { attrs: { href: "#" } }, [_vm._v("Delete")])
       ])
     ])
@@ -53563,7 +53570,7 @@ var render = function() {
           )
         ])
       : _c("div", { staticClass: "friend-list fn_list_2" }, [
-          _vm._v("\n      No Records found\n    ")
+          _vm._v("\r\n      No Records found\r\n    ")
         ])
   ])
 }
@@ -53698,7 +53705,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "friend-list" }, [
       _c("div", { staticClass: "friend-card" }, [
         _c("div", { staticClass: "row card-info" }, [
-          _vm._v("\n              Sorry! No Following found\n            ")
+          _vm._v("\r\n              Sorry! No Following found\r\n            ")
         ])
       ])
     ])
@@ -53822,7 +53829,7 @@ var render = function() {
         )
       ])
     : _c("div", { staticClass: "col-md-9 col-sm-9" }, [
-        _vm._v("\n   Sorry, No Category Found\n")
+        _vm._v("\r\n   Sorry, No Category Found\r\n")
       ])
 }
 var staticRenderFns = []
@@ -53949,50 +53956,21 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "white-box create-post" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-sm-8" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("img", {
-              staticClass: "profile-photo-md",
-              attrs: { src: "/images/p_image.png", alt: "Profile Image" }
-            }),
-            _vm._v(" "),
-            _c("textarea", {
-              staticClass: "form-control",
-              attrs: {
-                name: "texts",
-                id: "exampleTextarea",
-                cols: "60",
-                rows: "1",
-                placeholder: "Write Bikash Bhandari Wall"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-4 col-sm-4 pad-left-0" }, [
-          _c("div", { staticClass: "tools" }, [
-            _c("ul", { staticClass: "publishing-tools list-inline" }, [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-edit" })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-image" })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("i", { staticClass: "fa fa-video" })
-                ])
-              ])
+        _c("div", { staticClass: "col-md-12 col-sm-12" }, [
+          _c("form", [
+            _c("div", { staticClass: "col-md-8 col-sm-8" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text", cols: "45", placeholder: "Search Post" }
+              })
             ]),
             _vm._v(" "),
-            _c("button", { staticClass: "btn btn-primary pull-right" }, [
-              _vm._v("Publish")
+            _c("div", { staticClass: "col-md-4 col-sm-4" }, [
+              _c(
+                "button",
+                { staticClass: "btn sr-btn", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fa fa-search" })]
+              )
             ])
           ])
         ])
@@ -79299,7 +79277,7 @@ var state = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/js/dashboard.js */"./resources/assets/js/dashboard.js");
+module.exports = __webpack_require__(/*! C:\blog\resources\assets\js\dashboard.js */"./resources/assets/js/dashboard.js");
 
 
 /***/ })

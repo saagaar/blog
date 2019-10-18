@@ -177,7 +177,7 @@ import Form from './../services/Form.js';
               this.form.post('/blog/edit/'+this.$route.params.blogId+'/step2').then(response => {
                if(response.data.status){
 
-                  window.location.href="dashboard"
+                  window.location.href="/dashboard"
                }
                else{
                   

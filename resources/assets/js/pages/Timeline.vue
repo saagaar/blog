@@ -4,12 +4,19 @@
               <div id="main" class="">
                 <div class="white-box create-post">
                   <div class="row">
-                    <div class="col-md-8 col-sm-8">
-                      <div class="form-group"> <img src="/images/p_image.png" alt="Profile Image" class="profile-photo-md">
-                        <textarea name="texts" id="exampleTextarea" cols="60" rows="1" class="form-control" placeholder="Write Bikash Bhandari Wall"></textarea>
-                      </div>
+                    <div class="col-md-12 col-sm-12">
+                      <form>
+                         <!-- <textarea name="texts" id="exampleTextarea" cols="60" rows="1" class="form-control" placeholder="Write Bikash Bhandari Wall"></textarea> -->
+                         <div class="col-md-8 col-sm-8">
+                           <input type="text"  class="form-control" cols="45" placeholder="Search Post">
+                         </div>
+                         <div  class="col-md-4 col-sm-4">
+                           <button class="btn sr-btn" type="submit"><i class="fa fa-search"></i></button>
+                         </div>
+                       
+                      </form>
                     </div>
-                    <div class="col-md-4 col-sm-4 pad-left-0">
+                    <!-- <div class="col-md-4 col-sm-4 pad-left-0">
                       <div class="tools">
                         <ul class="publishing-tools list-inline">
                           <li><a href="#"><i class="fa fa-edit"></i></a></li>
@@ -18,7 +25,7 @@
                         </ul>
                         <button class="btn btn-primary pull-right">Publish</button>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <div class="row">
