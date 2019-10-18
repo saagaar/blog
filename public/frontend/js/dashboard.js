@@ -52705,7 +52705,7 @@ var staticRenderFns = [
           }
         },
         [
-          _vm._v("\r\n                   All\r\n                   "),
+          _vm._v("\n                   All\n                   "),
           _c("i", { staticClass: "fa fa-angle-down " })
         ]
       )
@@ -52726,7 +52726,7 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v("\r\n                     Sort by\r\n                     "),
+        _vm._v("\n                     Sort by\n                     "),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
     )
@@ -52743,7 +52743,7 @@ var staticRenderFns = [
       },
       [
         _vm._v(
-          "\r\n                                     Filter by\r\n             "
+          "\n                                     Filter by\n             "
         ),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
@@ -52756,9 +52756,9 @@ var staticRenderFns = [
     return _c("div", { staticClass: "hidden_sec" }, [
       _c("div", { staticClass: "hidden_td_link" }, [
         _c("a", { attrs: { href: "#" } }, [_vm._v("Edit")]),
-        _vm._v("\r\n                   | \r\n                  "),
+        _vm._v("\n                   | \n                  "),
         _c("a", { attrs: { href: "#" } }, [_vm._v("Preview")]),
-        _vm._v("\r\n                   | \r\n                  "),
+        _vm._v("\n                   | \n                  "),
         _c("a", { attrs: { href: "#" } }, [_vm._v("Delete")])
       ])
     ])
@@ -53570,7 +53570,7 @@ var render = function() {
           )
         ])
       : _c("div", { staticClass: "friend-list fn_list_2" }, [
-          _vm._v("\r\n      No Records found\r\n    ")
+          _vm._v("\n      No Records found\n    ")
         ])
   ])
 }
@@ -53705,7 +53705,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "friend-list" }, [
       _c("div", { staticClass: "friend-card" }, [
         _c("div", { staticClass: "row card-info" }, [
-          _vm._v("\r\n              Sorry! No Following found\r\n            ")
+          _vm._v("\n              Sorry! No Following found\n            ")
         ])
       ])
     ])
@@ -53829,7 +53829,7 @@ var render = function() {
         )
       ])
     : _c("div", { staticClass: "col-md-9 col-sm-9" }, [
-        _vm._v("\r\n   Sorry, No Category Found\r\n")
+        _vm._v("\n   Sorry, No Category Found\n")
       ])
 }
 var staticRenderFns = []
@@ -79277,7 +79277,7 @@ var state = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\blog\resources\assets\js\dashboard.js */"./resources/assets/js/dashboard.js");
+module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/js/dashboard.js */"./resources/assets/js/dashboard.js");
 
 
 /***/ })
