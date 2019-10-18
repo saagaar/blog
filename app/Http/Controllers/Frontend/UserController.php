@@ -136,18 +136,25 @@ class UserController extends FrontendController
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
 
-    public function profile(BlogInterface $blog)
+    public function profile(BlogInterface $blog,Request $request)
     {
             $routeName= Route::currentRouteName();
-            $profileBlog=$blog->getActiveBlogByUserId($this->authUser->id);
-            $data['profileBlog'] = $profileBlog;
+            $blogList=$blog->getActiveBlogByUserId($this->authUser->id);
+           
            if($routeName=='api')
            {
+              
+              $search=$request->get('search');
+             if($search){
+                $blogList=$blogList->where('title' ,'like','%'.$search.'%');
+             }
+
+            $data['blogList'] = $blogList;
             return $data;
            }
            else
            {
-             
+              $data['blogList'] = $blogList;
               $data['path']='/profile';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
