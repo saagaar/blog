@@ -129,7 +129,7 @@
                     <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
                       
                       @foreach ($tags as $values)
-                        <?php if(!$blog->tags()->pluck('tags_id')){ ?>
+                        <?php if(!$blog->tags()){ ?>
                         <option value="{{ $values->id }}"> {{ $values->name }}  </option>
                         <?php }else{ ?>
                           @foreach ($blog->tags()->pluck('tags_id') as $tag)

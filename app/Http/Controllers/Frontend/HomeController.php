@@ -60,25 +60,10 @@ class HomeController extends FrontendController
     }
     public function dashboard()
     {
-
-        //     $role = Role::findByName('writer');
-        // $role->givePermissionTo('blog-edit');
-        // $permissions = [
-          // \Auth::user()->givePermissionTo('blog-create');
-        //    'blog-edit',
-        //    'blog-create',
-        //    'product-delete'
-        // ];
-
-
-        // foreach ($permissions as $permission) {
-        //      Permission::create(['name' => $permission]);
-        // }
-      
         if(\Auth::check())
         {
             $routeName= ROUTE::currentRouteName();
-            $suggestion=$this->getFollowSuggestions(3);
+            $suggestion='';//$this->getFollowSuggestions(3);
             $data['followSuggestion']=$suggestion;
           if($routeName=='api')
           {

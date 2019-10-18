@@ -2,7 +2,7 @@
 
 namespace App\Repository\Account;
 
-use App\Models\User;
+use App\Models\Users;
 use Spatie\Permission\Traits\HasRoles;
 use App\Repository\AccountInterface;
 
@@ -10,7 +10,7 @@ Class Account implements AccountInterface
 {
 	protected $user;
     use HasRoles;
-	public function __construct(User $user)
+	public function __construct(Users $user)
 	{
 		$this->account=$user;
 	}

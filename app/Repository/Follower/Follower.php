@@ -2,14 +2,14 @@
 
 namespace App\Repository\Follower;
 
-use App\Models\User;
+use App\Models\Users;
 use App\Repository\FollowerInterface;
 
 Class  Follower implements FollowerInterface
 {
 	protected $follower;
 
-	public function __construct(User $users)
+	public function __construct(Users $users)
 	{
 		$this->user=$users;
 	}

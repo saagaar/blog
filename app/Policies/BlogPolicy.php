@@ -2,13 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\Users;
 
+use App\Models\Blogs;
+
+use Illuminate\Auth\Access\HandlesAuthorization;
 class BlogPolicy
 {
-    use HandlesAuthorization;
-
+ use HandlesAuthorization;
     /**
      * Create a new policy instance.
      *
@@ -21,10 +22,13 @@ class BlogPolicy
      * @param  \App\Models Blogs $blog
      * @return mixed
      */
-    public function update(User $user, Blog $blog)
+    public function UpdateBlog(Users $user, Blogs $blog)
     {
-        if( $user->id == $blog->user_id)
-        {
+
+        if ($user->can('edit own posts')) {
+            return $user->id == $post->user_id;
+        }
+        if ($user->can('edit all posts')) {
             return true;
         }
     }

@@ -8,7 +8,8 @@ use App\Models\Userlogs;
 use App\Services\VisitorInfo;
 use App\Jobs\VisitorLog;
 use App\Repository\VisitorlogInterface;
-
+use App\Repository\PermissionInterface;
+use Illuminate\Support\Facades\Auth;
 class FrontendController extends BaseController
 {
     Protected $siteSettings;
@@ -35,14 +36,14 @@ class FrontendController extends BaseController
     * This email is used to send email by client to admin of site
     * @type=email
     */
-
+    Protected $permission;
     Protected $contactEmail;
 
     Protected $perPage=10;
     public function __construct()
     {
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
-
+        $this->permission=$this->PermissionInterface = app()->make('App\Repository\PermissionInterface');
         $this->visitorInfo =  new visitorInfo();
         $this->siteName =  config('settings.site_name');
         $this->contactEmail =  config('settings.contact_email');
@@ -89,10 +90,19 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {
-        echo 'here';exit;
+        $permission = $this->getAllPermissionsAttribute();
+        print_r($permission);exit;
         return view('frontend.home.index');
     }
-  
+    public function getAllPermissionsAttribute() {
+      $permissions = [];
+        foreach ($this->permission->getAll()->get() as $permission) {
+          if (Auth::user()->can($permission->name)) {
+            $permissions[] = $permission->name;
+          }
+        }
+        return $permissions;
+    }
     public function user_state_info(){
        $followerList = app()->make('App\Repository\FollowerInterface');
         if(\Auth::check())
@@ -102,7 +112,8 @@ class FrontendController extends BaseController
             $user->followingCount=$followerList->getFollowingsCount($this->authUser);
             $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
             $user->notifications=$this->authUser->unreadNotifications()->take(10)->get();
-            $user->blogCount=$this->authUser->blogs()->count();    
+            $user->blogCount=$this->authUser->blogs()->count();
+            $user->permission= $this->getAllPermissionsAttribute();    
             $user=$user->toArray();
             return $user;
         }
