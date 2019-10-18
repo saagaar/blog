@@ -53906,7 +53906,7 @@ var staticRenderFns = [
                   _c("img", {
                     staticClass: "img-fluid",
                     attrs: {
-                      src: "img/magazine/12.jpg",
+                      src: "images/magazine/12.jpg",
                       alt: "Blog Image Name Goes Here"
                     }
                   })
@@ -53968,7 +53968,7 @@ var staticRenderFns = [
                   _c("img", {
                     staticClass: "img-fluid",
                     attrs: {
-                      src: "img/magazine/13.jpg",
+                      src: "images/magazine/13.jpg",
                       alt: "Blog Image Name Goes Here"
                     }
                   })
@@ -54030,7 +54030,7 @@ var staticRenderFns = [
                   _c("img", {
                     staticClass: "img-fluid",
                     attrs: {
-                      src: "img/magazine/14.jpg",
+                      src: "images/magazine/14.jpg",
                       alt: "Blog Image Name Goes Here"
                     }
                   })
@@ -54092,7 +54092,7 @@ var staticRenderFns = [
                   _c("img", {
                     staticClass: "img-fluid",
                     attrs: {
-                      src: "img/magazine/12.jpg",
+                      src: "images/magazine/12.jpg",
                       alt: "Blog Image Name Goes Here"
                     }
                   })

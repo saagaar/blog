@@ -24,7 +24,7 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="single-blog video-style small row m_b_30">
-                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="img/magazine/12.jpg" alt="Blog Image Name Goes Here"> </div>
+                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="images/magazine/12.jpg" alt="Blog Image Name Goes Here"> </div>
                       <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
                         <h4>Blessed night morning on
                           them you great</h4>
@@ -36,7 +36,7 @@
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="single-blog video-style small row m_b_30 ">
-                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="img/magazine/13.jpg" alt="Blog Image Name Goes Here"> </div>
+                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="images/magazine/13.jpg" alt="Blog Image Name Goes Here"> </div>
                       <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
                         <h4>Blessed night morning on
                           them you great</h4>
@@ -48,7 +48,7 @@
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="single-blog video-style small row m_b_30">
-                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="img/magazine/14.jpg" alt="Blog Image Name Goes Here"> </div>
+                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="images/magazine/14.jpg" alt="Blog Image Name Goes Here"> </div>
                       <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
                         <h4>Blessed night morning on
                           them you great</h4>
@@ -60,7 +60,7 @@
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="single-blog video-style small row m_b_30">
-                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="img/magazine/12.jpg" alt="Blog Image Name Goes Here"> </div>
+                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="images/magazine/12.jpg" alt="Blog Image Name Goes Here"> </div>
                       <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
                         <h4>Blessed night morning on
                           them you great</h4>
