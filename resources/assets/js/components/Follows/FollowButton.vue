@@ -64,6 +64,7 @@ let action='';
                             this.isFollowing=true;
 
                           }else{
+                             this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
                               this.isFollowing=false;
                           }
 		               	        this.$emit('clicked',this.username,response.data.message);

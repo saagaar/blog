@@ -4,7 +4,7 @@
   <div class="col-md-9 col-sm-9 pad-left-0" v-if="this.$store.getters.isLoading===true">
       <PlaceHolderFollowings></PlaceHolderFollowings>
   </div>
-  <div class="col-md-9 col-sm-9 pad-left-0" v-else-if="initialState.followings">
+  <div class="col-md-9 col-sm-9 pad-left-0" v-else-if="initialState.followings.length>0">
         <div class="friend-list" v-for="eachFollowings in initialState.followings">
           <div class="friend-card">
             <div class="row card-info">
@@ -23,11 +23,11 @@
           </div>
         </div>
     </div>
-    <div class="col-md-9 col-sm-9 pad-left-0" v-else="isLoading===false && !initialState.followings">
+    <div class="col-md-9 col-sm-9 pad-left-0" v-else>
       <div class="friend-list">
           <div class="friend-card">
             <div class="row card-info">
-              Sorry! No Following found
+              You haven't followed anyone!!
             </div>
           </div>
         </div>
