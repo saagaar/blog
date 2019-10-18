@@ -8537,6 +8537,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -8576,6 +8579,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Follows_FollowButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/Follows/FollowButton */ "./resources/assets/js/components/Follows/FollowButton.vue");
 /* harmony import */ var _components_Follows_FollowSuggestionsList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/Follows/FollowSuggestionsList */ "./resources/assets/js/components/Follows/FollowSuggestionsList.vue");
 /* harmony import */ var _components_ContentPlaceholder_PlaceHolderFollowings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../components/ContentPlaceholder/PlaceHolderFollowings */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue");
+//
+//
+//
 //
 //
 //
@@ -9496,17 +9502,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -9515,10 +9510,18 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"](),
       initialState: {},
+      sort_by: '',
+      filter_by: 2,
       search: ''
     };
   },
   watch: {
+    filter_by: function filter_by() {
+      this.getResults();
+    },
+    sort_by: function sort_by() {
+      this.getResults();
+    },
     search: function search(newValue, oldValue) {
       var newspacecount = newValue.split(' ').length;
       var oldspacecount = oldValue.split(' ').length;
@@ -9534,9 +9537,10 @@ __webpack_require__.r(__webpack_exports__);
     getResults: function getResults() {
       var _this = this;
 
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.initialState.blogList = {};
       this.$store.commit('TOGGLE_LOADING');
-      this.form.get('api/blog/list?search=' + this.search).then(function (response) {
+      this.form.get('api/profile?page=' + page + '&search=' + this.search + '&sort_by=' + this.sort_by).then(function (response) {
         _this.$store.commit('TOGGLE_LOADING');
 
         if (response.data) {
@@ -9552,9 +9556,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchPost: function searchPost() {
       this.getResults();
-    },
-    isLoading: function isLoading() {
-      return true;
     }
   },
   components: {}
@@ -52064,7 +52065,25 @@ var render = function() {
               return _c("div", { staticClass: "col-md-6 col-sm-12" }, [
                 _c("div", { staticClass: "friend-card" }, [
                   _c("div", { staticClass: "row card-info" }, [
-                    _vm._m(0, true),
+                    eachFollowers.image
+                      ? _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                          _c("img", {
+                            staticClass: "profile-photo-lg",
+                            attrs: {
+                              src: "/images/user-images/" + eachFollowers.image,
+                              alt: "user"
+                            }
+                          })
+                        ])
+                      : _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                          _c("img", {
+                            staticClass: "profile-photo-lg",
+                            attrs: {
+                              src: "/images/user-images/default.png",
+                              alt: "user"
+                            }
+                          })
+                        ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-9 col-md-8" }, [
                       _c(
@@ -52114,19 +52133,7 @@ var render = function() {
         ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-md-4" }, [
-      _c("img", {
-        staticClass: "profile-photo-lg",
-        attrs: { src: "/images/user-3.jpg", alt: "user" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -52164,7 +52171,25 @@ var render = function() {
             return _c("div", { staticClass: "friend-list" }, [
               _c("div", { staticClass: "friend-card" }, [
                 _c("div", { staticClass: "row card-info" }, [
-                  _vm._m(0, true),
+                  eachFollowings.image
+                    ? _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                        _c("img", {
+                          staticClass: "profile-photo-lg",
+                          attrs: {
+                            src: "/images/user-images/" + eachFollowings.image,
+                            alt: "user"
+                          }
+                        })
+                      ])
+                    : _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                        _c("img", {
+                          staticClass: "profile-photo-lg",
+                          attrs: {
+                            src: "/images/user-images/default.png",
+                            alt: "user"
+                          }
+                        })
+                      ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-lg-9 col-md-8" }, [
                     _c(
@@ -52208,7 +52233,7 @@ var render = function() {
           }),
           0
         )
-      : _c("div", { staticClass: "col-md-9 col-sm-9 pad-left-0" }, [_vm._m(1)]),
+      : _c("div", { staticClass: "col-md-9 col-sm-9 pad-left-0" }, [_vm._m(0)]),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-3 col-sm-3 pad-left-0" }, [
       _c(
@@ -52227,17 +52252,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-md-4" }, [
-      _c("img", {
-        staticClass: "profile-photo-lg",
-        attrs: { src: "/images/user-3.jpg", alt: "user" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -53765,14 +53779,11 @@ var render = function() {
                       return _vm.$forceUpdate()
                     }
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4 col-sm-4" }, [
+                }),
                 _c(
                   "button",
                   {
-                    staticClass: "btn sr-btn",
+                    staticClass: "btn btn-primary pull-right",
                     attrs: { type: "submit" },
                     on: {
                       click: function($event) {
@@ -53781,22 +53792,24 @@ var render = function() {
                       }
                     }
                   },
-                  [_c("i", { staticClass: "fa fa-search" })]
+                  [_vm._v("Search")]
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4 col-sm-4" })
             ])
           ])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _vm.isLoading === true
+        this.$store.getters.isLoading === true
           ? _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" })
           : _vm.initialState.blogList
           ? _c(
               "div",
               { staticClass: "col-lg-12 col-md-12 col-sm-12" },
-              _vm._l(_vm.initialState.blogList, function(eachBlog) {
+              _vm._l(_vm.initialState.blogList.data, function(eachBlog) {
                 return _c(
                   "div",
                   { staticClass: "single-blog video-style small row m_b_30" },

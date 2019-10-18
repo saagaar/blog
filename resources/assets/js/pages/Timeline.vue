@@ -6,34 +6,23 @@
                   <div class="row">
                     <div class="col-md-12 col-sm-12">
                       <form>
-                         <!-- <textarea name="texts" id="exampleTextarea" cols="60" rows="1" class="form-control" placeholder="Write Bikash Bhandari Wall"></textarea> -->
                          <div class="col-md-8 col-sm-8">
-                           <input type="text"  class="form-control" v-model.trim="search" cols="45" placeholder="Search Post">
+                           <input type="text"  class="form-control" v-model.trim="search" cols="45" placeholder="Search Post"><button class="btn btn-primary pull-right" @click.prevent="searchPost" type="submit">Search</button>
                          </div>
                          <div  class="col-md-4 col-sm-4">
-                           <button class="btn sr-btn" @click.prevent="searchPost" type="submit"><i class="fa fa-search"></i></button>
+                           
                          </div>
                        
                       </form>
                     </div>
-                    <!-- <div class="col-md-4 col-sm-4 pad-left-0">
-                      <div class="tools">
-                        <ul class="publishing-tools list-inline">
-                          <li><a href="#"><i class="fa fa-edit"></i></a></li>
-                          <li><a href="#"><i class="fa fa-image"></i></a></li>
-                          <li><a href="#"><i class="fa fa-video"></i></a></li>
-                        </ul>
-                        <button class="btn btn-primary pull-right">Publish</button>
-                      </div>
-                    </div> -->
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-if="isLoading===true">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true">
                     
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList">
-                    <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList">
+                    <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" :src="'/images/blog/'+eachBlog.image" :alt="eachBlog.title"> </div>
                       <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
                         <h4>{{eachBlog.title}}</h4>
@@ -44,7 +33,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-else="!initialState.blogList && isLoading===false">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-else>
                     <div class="single-blog video-style small row m_b_30">
                       <div class="short_details col-lg-12 col-md-12 col-sm-12">
                         <h4 class="text-center d-block">No post available!!</h4>
@@ -78,10 +67,18 @@
     return {
             form:new Form(),
             initialState:{},
+            sort_by:'',
+            filter_by:2,
             search:'',
         }
       },
       watch: {
+          filter_by: function () {
+            this.getResults();          
+          },
+          sort_by: function () {
+            this.getResults();          
+          },
           search(newValue, oldValue) {
            var newspacecount=newValue.split(' ').length;
            var oldspacecount=oldValue.split(' ').length;
@@ -96,10 +93,10 @@
           }
       },
        methods:{
-        getResults() {
+        getResults(page = 1) {
           this.initialState.blogList={};
           this.$store.commit('TOGGLE_LOADING');
-          this.form.get('api/blog/list?search='+this.search).then(response => {
+          this.form.get('api/profile?page='+page+'&search='+this.search+'&sort_by='+this.sort_by).then(response => {
                this.$store.commit('TOGGLE_LOADING');
                if(response.data)
                {
@@ -115,13 +112,9 @@
                   console.log(e);
               });
         },
-
         searchPost(){
          this.getResults();
         },
-        isLoading(){
-          return true;
-        }
       },
         components:{
           
