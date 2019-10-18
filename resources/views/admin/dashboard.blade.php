@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-xs-4">
                    <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">30</span> <br>
+                      <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">30</span><br>
                           TOTAL VISITORS
                       </div>
                     </div>
