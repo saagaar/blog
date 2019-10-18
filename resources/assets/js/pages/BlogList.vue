@@ -11,7 +11,7 @@
       <div class="inbox-head">
         <div class="row">
             <div class="col-sm-6">
-                <h3> <i class="fa fa-mail-bulk">&nbsp;</i> All Posts</h3>
+                <h3> <i class="fa fa-mail-bulk">&nbsp;</i> All Posts &nbsp;&nbsp;&nbsp; <router-link to="/blog/add"><i class="fa fa-plus-circle"></i></router-link></h3>
             </div>
             <div class="col-sm-6">
                 <form class="position text-right">
@@ -86,7 +86,7 @@
 
         </div>
         <table class="table table-inbox table-hover">
-        <tbody v-if="this.$store.getters.isLoading===false">
+        <tbody v-if="this.$store.getters.isLoading===true">
            <PlaceHolderBlogList></PlaceHolderBlogList>
         </tbody>
           <tbody v-else-if="initialState.blogList" >
@@ -114,7 +114,7 @@
            
           </tbody>
           
-          <tbody v-else-if="isLoading===false">
+          <tbody v-else-if="this.$store.getters.isLoading===false">
              <tr >
               <td colspan="6">No post are available</td>
             </tr>
@@ -150,6 +150,7 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             search:'',
             postIds:[],
             allSelected:false,
+            isLoading:false
           }
         },
         mixins:[mixin],
@@ -176,10 +177,12 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             }        
           }
       },
-      created(){
-        console.log(this.initialState);        // this.getResults();
-      },
+     mounted: function(){
+
+          
+        },
       methods: {
+
         getResults(page = 1) {
           this.initialState.blogList={};
           this.$store.commit('TOGGLE_LOADING');
@@ -234,12 +237,7 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             this.allSelected=selected;
             this.postIds=postids;
         },
-        isLoading:function()
-        {
-          this.form.isLoading=this.$store.getters.isLoading
-          return this.$store.getters.isLoading;
-
-        },
+      
         select: function() {
             // this.allSelected = false;
         }

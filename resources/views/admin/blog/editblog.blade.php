@@ -124,7 +124,7 @@
                 @endif
                 </div>
                 <div class="form-group">
-                  <label for="tags">tags</label>
+                  <label for="tags">Tags</label>
                   <!-- value="{{ $tags }}" -->
                     <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
                       

@@ -1,10 +1,10 @@
 <template>
     <a href="#" class="plus-minus">
-        <input type="checkbox" :checked="isChecked"    name="a" id="a" class="css-checkbox">
+        <input type="checkbox" :checked="isChecked" name="a" id="a" class="css-checkbox">
         <label for="a" class="css-label">
           <a href='' @click.prevent="toggleInterest" >
-            <span class="fa fa-plus"></span>
-            <span class="fa fa-check"></span>
+            <span class="checkbox fa fa-plus"></span>
+            <span class="checkbox fa fa-check"></span>
           </a>
         </label>
     </a>

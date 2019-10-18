@@ -3,7 +3,9 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-import '@fortawesome/fontawesome-free/js/all.js';
+import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
+fontawesome.config = { autoReplaceSvg: false }
+
 require('./bootstrap');
 window.Vue = require('vue');
 import Vuelidate from 'vuelidate'
@@ -11,7 +13,6 @@ import router from './routes.js'
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
-
 // Vue.use(window.Vuelidate.default)
 
 import store from './store/index'

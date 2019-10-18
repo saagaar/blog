@@ -58,7 +58,7 @@
         <li @if($primary_menu=="client.list") class="active" @endif><a href="{{route('client.list')}}"><i class="fa fa-user"  aria-hidden="true"></i> <span>Client</span></a>  </li> 
          <li @if($primary_menu=="seo.list") class="active" @endif><a href="{{route('seo.list')}}"><i class="fa fa-eye"  aria-hidden="true"></i> <span>SEO</span></a> </li>
           <li @if($primary_menu=="language.list") class="active" @endif><a href="{{route('language.list')}}"><i class="fa fa-language"  aria-hidden="true"></i> <span>Language</span></a>    </li> 
-    <li @if($primary_menu=="category.list") class="active" @endif><a href="{{route('adminblogcategory.list')}}"><i class="fa  fa-paint-brush"></i>Category</a></li>
+    <li @if($primary_menu=="category.list") class="active" @endif><a href="{{route('adminblogcategory.list')}}"><i class="fa  fa-paint-brush"></i><span>Category</span></a></li>
     <li class="treeview">
       <a href=""><i class="fa  fa-pencil-square"></i> <span>Blog</span>
       <span class="pull-right-container">
@@ -85,7 +85,8 @@
           </ul>
       </li>
      <li class="treeview">
-    <a href="#"><i class="fa  fa-question-circle"></i>Help <span class="pull-right-container">
+    <a href="#"><i class="fa  fa-question-circle"></i><span>Help</span>
+     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span></a>
       <ul class="treeview-menu">

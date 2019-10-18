@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Traits\HasRoles;
 use App\Repository\AccountInterface; 
 use App\Repository\BlogInterface; 
-
+use App\Repository\FollowerInterface; 
 class UserController extends FrontendController
 {
     /**
@@ -16,11 +16,12 @@ class UserController extends FrontendController
      * @return void
      */
     protected $user;
-
-    function __construct(AccountInterface $user)
+    protected $followerList;
+    function __construct(AccountInterface $user,FollowerInterface $followInterface)
     {
         parent::__construct();
          $this->user=$user;
+         $this->followerList=$followInterface;
     }
     public function myBlogs(BlogInterface $blog,Request $request)
     { 
@@ -46,7 +47,9 @@ class UserController extends FrontendController
            }
            else
            {
-               // $data['blogList']=$myBlogs->paginate($this->perPage);
+
+              $data['blogList']=$myBlogs->paginate($this->perPage);
+
               $data['path']='/blog/list';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
@@ -54,10 +57,66 @@ class UserController extends FrontendController
            }
     }
    
+    public function followings()
+    {
+        if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+            $suggestion=$this->getFollowSuggestions(3);
+            $followings = $this->followerList->getAllFollowings($this->authUser);
+            $data['followSuggestion']=$suggestion;
+            $data['followings'] = $followings;
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/followings';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+          }
+
+        }
+        else
+        {
+             return redirect()->route('home'); 
+        }
+    }
+    public function followers()
+    {
+        if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+            $followers = $this->followerList->getAllFollowers($this->authUser);
+            $followings = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
+            $data['followers'] = $followers;
+            $data['followings'] = $followings;
+            // echo "<pre>";
+            // print_r($data);exit;
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/followers';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+          }
+
+        }
+        else
+        {
+             return redirect()->route('home'); 
+        }
+    }
     public function followUser($username,$offset=false)
     {
-         $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
-         if(isset($isFollowing))
+        $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
+         if(!($isFollowing))
          {
             $this->followerList->followUser($this->authUser,$username);
          }  
@@ -65,16 +124,32 @@ class UserController extends FrontendController
     }
     public function unFollowUser($username,$offset=false)
     {
-        $isFollowing=$this->followerList->isFollowing($this->authUser,$username,$offset);
+        $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username,$offset);
          if(($isFollowing))
          {
-            $this->followerListlowerList->unfollowUser($this->authUser,$username);
+            $this->followerList->unfollowUser($this->authUser,$username);
          }  
         return array('status'=>true,'message'=>'');
     }
     public function getFollowSuggestions($limit=1,$offset=0)
     {
-     
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
+    }
+
+    public function profile()
+    {
+            $routeName= Route::currentRouteName();
+
+           if($routeName=='api')
+           {
+           }
+           else
+           {
+             
+              $data['path']='/profile';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+           }
     }
 }

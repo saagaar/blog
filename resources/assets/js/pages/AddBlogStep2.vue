@@ -11,7 +11,7 @@
                           <figure> 
                               <img :src="'/images/upload.png'" id="image-field"/>
                               <span class="file-input btn btn-success btn-file">
-                                  <input type="file"  name="image" id="file1" class="upload" @change="previewImage(); $v.form.image.$touch()" >
+                                  <input type="file"  name="image" id="file1" class="upload" @change="previewImage(); $v.form.image.$touch()">
                               </span>
                           </figure>
                           </div>
@@ -19,7 +19,7 @@
                         <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Description </h4>
 
                        <div class="form-group">
-                        <textarea  class="form-control ckeditor" id="editor" blur="$v.form.short_description.$touch()"  v-model="form.short_description"></textarea>
+                        <textarea  class="form-control ckeditor" id="editor" rows="10" blur="$v.form.short_description.$touch()"  v-model="form.short_description"></textarea>
                          <div v-if="$v.form.short_description.$anyDirty">
                               <div class="error" v-if="!$v.form.short_description.required">This Field is required</div>
                             </div>
@@ -29,13 +29,15 @@
                       <div class="form-group">
                         <div>
                           <label class="typo__label">Tags</label>
-                          <multiselect
+                          <multiselect v-if="initialState.options"
                            v-model="form.tags" 
                            tag-placeholder="Add this as new tag" 
-                           placeholder="Search or add a tag" 
+                           placeholder="Search a tag" 
                            label="name" 
                            track-by="name" 
-                           :options="options" 
+                           :max="max"
+                           :optionsLimit="optionsLimit"
+                           :options="initialState.options" 
                            :multiple="true" 
                            :taggable="true">
                            </multiselect>
@@ -43,7 +45,7 @@
                       </div>
                       <div class="tgl-group">
                           <span><i class="fa fa-globe">&nbsp;</i> Post As Anonymous Only</span>
-                          <input @change="onChangeEventHandler" class="tgl tgl-light"  name="isAnynomous" id="display-address" type="checkbox">
+                          <input class="tgl tgl-light"  name="isAnynomous" id="display-address" type="checkbox" v-model="form.isAnynomous">
                           <label class="tgl-btn" for="display-address"></label>
                       </div>
 
@@ -102,11 +104,12 @@ import Form from './../services/Form.js';
           Multiselect
         },
         mixins:[mixin],
-         data:function(){
-
+      data:function(){
           return {
                 editor: ClassicEditor,
-                initialState:[],
+                max:3,
+                optionsLimit:5,
+                initialState:{},
                 form:new Form({
                     short_description:'',
                     image:'',
@@ -126,7 +129,17 @@ import Form from './../services/Form.js';
             },
           }
         },
+        watch: {
+        initialState: function (value) {
+            this.form.short_description=value.blog.short_description;        
+            this.form.tags=value.blog.tags;   
+            this.form.isAnynomous=value.blog.anynomous;
+        },
+      },
+        // created: function(){
 
+        //   console.log(this.initialState.option);
+        // },
 
         methods:{
 
@@ -157,7 +170,7 @@ import Form from './../services/Form.js';
                 this.$v.form.$touch();
             if(!this.$v.form.$invalid)
             {
-              this.form.post('/blog/edit/'+this.$route.params.blogId).then(response => {
+              this.form.post('/blog/edit/'+this.$route.params.blogId+'/step2').then(response => {
                if(response.data.status){
 
                   window.location.href="dashboard"

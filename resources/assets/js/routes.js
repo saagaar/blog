@@ -24,7 +24,21 @@ let routes=[
 				},
 				{
 						path:'/profile',
-						components:require('./pages/EditProfile')
+						components:require('./pages/Timeline'),
+						meta:{layout:"timeline"}
+						
+				},
+				{
+						path:'/followers',
+						components:require('./pages/FollowersList'),
+						meta:{layout:"timeline"}
+						
+				},
+				{
+						path:'/followings',
+						components:require('./pages/FollowingsList'),
+						meta:{layout:"timeline"}
+						
 				},
 				{
 						path:'/categories',
@@ -40,7 +54,7 @@ let routes=[
 export default new VueRouter({
 	routes,
 
-	linkActiveClass: 'isActive',
+	linkActiveClass: 'active',
 	mode: 'history',
 	hash: false,
 })

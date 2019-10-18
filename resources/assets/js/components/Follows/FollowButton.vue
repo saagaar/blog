@@ -1,5 +1,5 @@
 <template>
-  <a href='' class="btn btn-sm btn-round btn-success" @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
+  <a href='' class="btn btn-sm  btn-round" :class="[Buttonclass,buttonDesign]"  @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
   {{ isFollowing ? 'Unfollow' : 'Follow'}}
   </a>
 </template>
@@ -12,44 +12,69 @@ let action='';
         props: {
             username: String,
             following: {type: Boolean, default: false},
-            followSuggestionHead:Number
+            followSuggestionHead:Number,
+            Buttonclass:String,
+            followings:Array,
         },
         data() {
         	return {
-        		isFollowing: this.following,
-                form:new Form()
+        		    isFollowing: this.following,
+                form:new Form(),
+                buttonDesign:" text-green"
            }
+        },
+        watch:{
+            isFollowing: function (val) {
+              if(val==true)
+               this.buttonDesign='text-green'
+              else 
+               this.buttonDesign='btn-success'   
+          }
+        },
+        mounted() {
+          if (this.followings) {
+            var indexval=(this.followings.indexOf(this.username));
+            if(indexval==-1)
+            {
+                this.isFollowing=false;
+                this.buttonDesign='btn-success'   
+                
+                
+            }else
+            {
+                this.isFollowing=true;
+                this.buttonDesign='text-green'
+            }
+          }
+            
         },
         methods:
         {
         	toggleFollow:function(){
-               this.$store.commit('TOGGLE_LOADING');
-
         		if(!this.isFollowing)
         			action='api/followuser/'+this.username+'/'+this.followSuggestionHead;
         		else 
-        			action='api/unFollowuser'+this.username+'/'+this.followSuggestionHead;
+        			action='api/unfollowuser/'+this.username+'/'+this.followSuggestionHead;
 	        		
 	        		this.form.get(action).then(response => {
 		               if(response.data.status)
 		               {
-                          // this.$store.commit('TOGGLE_LOADING');
-   		               	  this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
-		               	  this.$emit('clicked',this.username,response.data.message);
+                          if(!this.isFollowing){
+                            this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
+                            this.isFollowing=true;
+
+                          }else{
+                              this.isFollowing=false;
+                          }
+		               	        this.$emit('clicked',this.username,response.data.message);
 		               }
 		               else
 		               {
-                          // this.$store.commit('TOGGLE_LOADING');
 		               }
 	              }).catch(e => {
-                    // this.$store.commit('TOGGLE_LOADING');
 	              });
 
         	},
-            isLoading:function()
-            {
-              return this.form.isLoading;
-            },
       
         }
     }

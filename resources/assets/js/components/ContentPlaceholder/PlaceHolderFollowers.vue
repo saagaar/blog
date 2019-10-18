@@ -6,7 +6,8 @@
     primaryColor="#c0c0c0"
     secondaryColor="#ffffff"
   >
-       <rect x="103.3" y="42.67" rx="8" ry="8" width="118.38" height="15.2" /> 
+        <circle cx="57.38" cy="66.63" r="28.96" /> 
+        <rect x="103.3" y="42.67" rx="8" ry="8" width="118.38" height="15.2" /> 
         <rect x="107.3" y="69.67" rx="8" ry="8" width="91.99" height="15.2" /> 
         <rect x="283.3" y="70.67" rx="8" ry="8" width="82.87" height="15.2" /> 
         <circle cx="437.38" cy="66.63" r="28.96" /> 

@@ -9,7 +9,6 @@ let getData = function(to,store) {
     if (!initialState.path || to.path !== initialState.path) 
     {
      let form=new Form();
-
       form.get('/api'+to.path).then(({ data }) => {
      // alert(store.getters.isLoading)
          // this.$store.commit('TOGGLE_LOADING');
@@ -31,10 +30,12 @@ let getData = function(to,store) {
 export default {
   beforeCreate () 
   {
+
     this.$store.commit('TOGGLE_LOADING');
     let store=this.$store;
     getData(this.$router.currentRoute,store).then((data) => 
     {
+
       this.$store.commit('TOGGLE_LOADING');
       this.$data.initialState=data;
     });

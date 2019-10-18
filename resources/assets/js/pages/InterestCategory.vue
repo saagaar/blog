@@ -1,7 +1,9 @@
 
 <template>
-<div class="col-md-9 col-sm-9" v-if="initialState.allCategories">
-                <div id="main" class="">
+<div class="col-md-9 col-sm-9" v-if="isLoading===true">
+</div>
+<div class="col-md-9 col-sm-9" v-else-if="initialState.allCategories">
+    <div id="main" class="">
 
             <!--================Category  Area Start =================-->
 
@@ -43,8 +45,11 @@
  
     </section>
     <!--================Category  Area End =================-->
-          </div>
-        </div>
+  </div>
+</div>
+<div class="col-md-9 col-sm-9" v-else="isLoading===false && !initialState.allCategories">
+   Sorry, No Category Found
+</div>
 </template>
 
 <script>
@@ -64,6 +69,14 @@ import mixin  from './../mixins/LoadData.mixin.js';
         mixins:[mixin],
         components:{
             Favorite
+        },
+        method:{
+            isLoading:function()
+        {
+          this.form.isLoading=this.$store.getters.isLoading
+          return this.$store.getters.isLoading;
+
+        },
         },
  
     }

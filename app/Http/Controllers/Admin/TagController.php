@@ -93,7 +93,7 @@ class TagController extends AdminController
      */
     public function delete($id)
     {
-       $tag =$this->tag->getById($id);
+       $tag =$this->tag->getTagById($id);
         if($tag){
             $tag->delete();
         }

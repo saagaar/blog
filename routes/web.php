@@ -21,12 +21,14 @@ Route::get('/logincheck', function () {
 });
 
 
-Route::get('/api/unfollowuser/{username}/{offset}','Frontend\HomeController@unfollowuser');
-Route::get('/api/followuser/{username}/{offset}','Frontend\HomeController@followuser');
+Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
+Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');
 
 Route::get('/api/blog/list/','Frontend\UserController@myBlogs')->name('api');
 
 Route::get('api/dashboard','Frontend\HomeController@dashboard')->name('api');
+
+Route::get('api/profile','Frontend\UserController@profile')->name('api');
 
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 
@@ -38,6 +40,7 @@ Route::get('/api/categories', 'Frontend\UserInterestController@categories')->nam
 Route::get('/api/remove/userinterest/{slug}','Frontend\UserInterestController@removeUserInterest');
 Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUserInterest');
 
+Route::get('/profile','Frontend\UserController@profile')->name('profile');
 
 Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
@@ -54,11 +57,28 @@ Route::post('/blog/register', 'Frontend\LoginController@register')->name('regist
 
 Route::get('/blog/isemailregistered/{email}', 'Frontend\LoginController@isEmailAlreadyRegistered')->name('useremail');
 
+
+/**
+ * for blog
+ */
 Route::match(['get','post'],'/blog/add', 'Frontend\BlogController@create');
 Route::match(['get','post'],'api/blog/edit/{postid}/step2', 'Frontend\BlogController@updateBlogDetail')->name('api');
+Route::match(['get','post'],'api/blog/edit/{postid}', 'Frontend\BlogController@updateBlogDetail')->name('api');
 Route::match(['get','post'],'blog/edit/{postid}/step2', 'Frontend\BlogController@updateBlogDetail');
-Route::match(['get','post'],'/blog/edit/{postid}', 'Frontend\BlogController@updateBlogDetail');
+Route::match(['get','post'],'/blog/edit/{postid}', 'Frontend\BlogController@create');
 Route::match(['get','post'],'api/blog/add', 'Frontend\BlogController@create')->name('api');
+
+/**
+ * for user
+ */
+
+Route::get('api/followings','Frontend\UserController@followings')->name('api');
+Route::get('/followings','Frontend\UserController@followings')->name('followings');
+	
+Route::get('api/followers','Frontend\UserController@followers')->name('api');
+Route::get('/followers','Frontend\UserController@followers')->name('followers');
+
+
 Auth::routes();
 
 Route::get('/logout/{guard}', 'Controller@logout')->name('logout');

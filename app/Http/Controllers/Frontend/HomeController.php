@@ -99,27 +99,8 @@ class HomeController extends FrontendController
         }
     }
 
-    public function followUser($username,$offset=false)
-    {
-        $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
-         if(isset($isFollowing))
-         {
-            $this->followerList->followUser($this->authUser,$username);
-         }  
-         return array('status'=>true,'message'=>$this->getFollowSuggestions(1,$offset));
-    }
-    public function unFollowUser($username,$offset=false)
-    {
-        $isFollowing=$this->followerList->isFollowing($this->authUser,$username,$offset);
-         if(($isFollowing))
-         {
-            $this->followerList->unfollowUser($this->authUser,$username);
-         }  
-        return array('status'=>true,'message'=>'');
-    }
     public function getFollowSuggestions($limit=1,$offset=0)
     {
-     
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
 }
