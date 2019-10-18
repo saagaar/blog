@@ -61,37 +61,47 @@ class BlogController extends FrontendController
    }
         
    	}
-    public function update(Request $request,$blogCode,TagInterface $tag){
+    public function update(Request $request,$blogCode,TagInterface $tag)
+    {
+       
             $routeName= Route::currentRouteName();
             $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
             $data['blog']   = $this->blog->getBlogByCode($blogCode);
-            if($routeName=='api')
-               {
-                  return ($data);
-               }
-               else
-               {
-                if($request->method()=='POST'){
-                $validator = Validator::make($request->all(), [ 
-                'title' => 'required', 
-                'content' => 'required', 
-                ]);
-                if($this->blogRequiresActivation=='N'){
-                    return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
-                }else{
-                    if ($validator->fails()) {
-                        return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
-                    }else{
-                            $input = $request->all();
-                            $this->blog->updateByCode($blogCode,$input);
-                            return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'Blog updated successfully']);
+            if($this->authUser->can('UpdateBlog', $data['blog'])) 
+            {
+                if($routeName=='api')
+                   {
+                      return ($data);
+                   }
+                   else
+                   {
+                    if($request->method()=='POST')
+                    {
+                        $validator = Validator::make($request->all(), [ 
+                        'title' => 'required', 
+                        'content' => 'required', 
+                        ]);
+                        if($this->blogRequiresActivation=='N'){
+                            return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
+                        }else{
+                            if ($validator->fails()) {
+                                return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+                            }else{
+                                    $input = $request->all();
+                                    $this->blog->updateByCode($blogCode,$input);
+                                    return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'Blog updated successfully']);
+                            }
+                            } 
                     }
-                } 
-            }
-            $initialState=json_encode($data);
-            $user=$this->user_state_info();
-            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-            }
+                    $initialState=json_encode($data);
+                    $user=$this->user_state_info();
+                    return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+                }
+          }
+          else
+          {
+               return response()->json(['status'=>false,'blogId'=>$blogCode,'message'=>'You have no permission to perform this operations']);
+          }
             
         }
     public function updateBlogDetail(Request $request,$postId,TagInterface $tag)

@@ -56,21 +56,22 @@ class Users extends Authenticatable implements Auditable
     
     public function followings()
     {
-        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follow_id');
+        return $this->belongsToMany(Users::class, 'followers', 'user_id', 'follow_id');
     }
 
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'followers', 'follow_id', 'user_id');
+        return $this->belongsToMany(Users::class, 'followers', 'follow_id', 'user_id');
     }
 
     public function blogs()
     {
-        return $this->hasMany(Blogs::class);
-
+        return $this->hasMany(Blogs::class,'id','user_id');
+    }
     public function userInterests()
     {
         return $this->belongsToMany(Categories::class,'user_interests','user_id','category_id');
     }
 
 }
+    

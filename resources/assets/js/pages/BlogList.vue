@@ -165,10 +165,11 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
           sort_by: function () {
             this.getResults();          
           },
-          search(newValue, oldValue) {
+          search(newValue, oldValue) 
+          {
            var newspacecount=newValue.split(' ').length;
            var oldspacecount=oldValue.split(' ').length;
-            if(newspacecount!=oldspacecount)
+            if(newspacecount=oldspacecount)
             {
                this.getResults();
             }
@@ -184,14 +185,15 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
         },
       methods: {
 
-        getResults(page = 1) {
+        getResults(page = 1) 
+        {
           this.initialState.blogList={};
           this.$store.commit('TOGGLE_LOADING');
           this.form.get('api/blog/list?page=' + page+'&search='+this.search+'&sort_by='+this.sort_by+'&filter_by='+this.filter_by).then(response => {
                this.$store.commit('TOGGLE_LOADING');
                if(response.data)
                {
-                this.initialState.blogList=response.data.blogList
+                 this.initialState.blogList=response.data.blogList
                }
                else
                {

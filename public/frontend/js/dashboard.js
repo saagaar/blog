@@ -6767,6 +6767,8 @@ var action = '';
 
             _this.isFollowing = true;
           } else {
+            _this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
+
             _this.isFollowing = false;
           }
 
@@ -8323,7 +8325,7 @@ __webpack_require__.r(__webpack_exports__);
       var newspacecount = newValue.split(' ').length;
       var oldspacecount = oldValue.split(' ').length;
 
-      if (newspacecount != oldspacecount) {
+      if (newspacecount = oldspacecount) {
         this.getResults();
       } else if (newValue.trim() == '') {
         this.getResults();
@@ -53677,7 +53679,7 @@ var render = function() {
           [_c("PlaceHolderFollowings")],
           1
         )
-      : _vm.initialState.followings
+      : _vm.initialState.followings.length > 0
       ? _c(
           "div",
           { staticClass: "col-md-9 col-sm-9 pad-left-0" },
@@ -53773,7 +53775,9 @@ var staticRenderFns = [
     return _c("div", { staticClass: "friend-list" }, [
       _c("div", { staticClass: "friend-card" }, [
         _c("div", { staticClass: "row card-info" }, [
-          _vm._v("\r\n              Sorry! No Following found\r\n            ")
+          _vm._v(
+            "\r\n              You haven't followed anyone!!\r\n            "
+          )
         ])
       ])
     ])
