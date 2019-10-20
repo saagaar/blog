@@ -10,8 +10,9 @@ import Vuelidate from 'vuelidate'
 import router from './routes.js'
 import VueRouter from 'vue-router';
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import PermissionCheck from './mixins/PermissionCheck.mixin';
 
-
+Vue.mixin(PermissionCheck);
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
 Vue.use( CKEditor );

@@ -22,14 +22,17 @@ class BlogPolicy
      * @param  \App\Models Blogs $blog
      * @return mixed
      */
-    public function UpdateBlog(Users $user, Blogs $blog)
+    public function update(Users $user, Blogs $blog)
     {
 
         if ($user->can('edit own posts')) {
-            return $user->id == $post->user_id;
+            return $user->id != $blog->user_id;
         }
         if ($user->can('edit all posts')) {
-            return true;
+            return false;
+        }
+        if ($user->can('edit posts more then his point')) {
+            return false;
         }
     }
 

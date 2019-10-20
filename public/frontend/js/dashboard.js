@@ -77900,10 +77900,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ckeditor/ckeditor5-vue */ "./node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js");
 /* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/index */ "./resources/assets/js/store/index.js");
-/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./config/config.js */ "./resources/assets/js/config/config.js");
-/* harmony import */ var _layouts_UserDashboard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./layouts/UserDashboard */ "./resources/assets/js/layouts/UserDashboard.vue");
-/* harmony import */ var _layouts_Profile__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layouts/Profile */ "./resources/assets/js/layouts/Profile.vue");
+/* harmony import */ var _mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./mixins/PermissionCheck.mixin */ "./resources/assets/js/mixins/PermissionCheck.mixin.js");
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/index */ "./resources/assets/js/store/index.js");
+/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./config/config.js */ "./resources/assets/js/config/config.js");
+/* harmony import */ var _layouts_UserDashboard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layouts/UserDashboard */ "./resources/assets/js/layouts/UserDashboard.vue");
+/* harmony import */ var _layouts_Profile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./layouts/Profile */ "./resources/assets/js/layouts/Profile.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -77918,6 +77919,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
+
+Vue.mixin(_mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_5__["default"]);
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]);
 Vue.use(vuelidate__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.use(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_4___default.a);
@@ -77927,16 +77930,16 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
 
 
 
-Vue.component('default-layout', _layouts_UserDashboard__WEBPACK_IMPORTED_MODULE_7__["default"]);
-Vue.component('timeline-layout', _layouts_Profile__WEBPACK_IMPORTED_MODULE_8__["default"]);
+Vue.component('default-layout', _layouts_UserDashboard__WEBPACK_IMPORTED_MODULE_8__["default"]);
+Vue.component('timeline-layout', _layouts_Profile__WEBPACK_IMPORTED_MODULE_9__["default"]);
 var default_layout = "default";
 var app = new Vue({
   el: '#dashboard',
   router: _routes_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   data: function data() {
-    config: _config_config_js__WEBPACK_IMPORTED_MODULE_6__["default"];
+    config: _config_config_js__WEBPACK_IMPORTED_MODULE_7__["default"];
   },
-  store: _store_index__WEBPACK_IMPORTED_MODULE_5__["default"],
+  store: _store_index__WEBPACK_IMPORTED_MODULE_6__["default"],
   beforeCreate: function beforeCreate() {
     var userState = JSON.parse(window.__USER_STATE__) || {};
 
@@ -78159,6 +78162,25 @@ __webpack_require__.r(__webpack_exports__);
     },
     openSignUpModal: function openSignUpModal() {
       $('#SignUpModal').modal();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/mixins/PermissionCheck.mixin.js":
+/*!*************************************************************!*\
+  !*** ./resources/assets/js/mixins/PermissionCheck.mixin.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    $can: function $can(permissionName) {
+      return Permissions.indexOf(permissionName) !== -1;
     }
   }
 });
