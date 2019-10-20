@@ -5,9 +5,9 @@ namespace App\Repository\Tag;
 use App\Models\Tags;
 use App\Repository\TagInterface;
 
-Class  Tag implements TagInterface
+Class Tag implements TagInterface
 {
-	protected $tags;
+	protected $tag;
 	public function __construct(Tags $tags)
 	{
 		$this->tag=$tags;

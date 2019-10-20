@@ -6739,6 +6739,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8012,6 +8013,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -8538,6 +8540,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -8577,6 +8582,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Follows_FollowButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/Follows/FollowButton */ "./resources/assets/js/components/Follows/FollowButton.vue");
 /* harmony import */ var _components_Follows_FollowSuggestionsList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/Follows/FollowSuggestionsList */ "./resources/assets/js/components/Follows/FollowSuggestionsList.vue");
 /* harmony import */ var _components_ContentPlaceholder_PlaceHolderFollowings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../components/ContentPlaceholder/PlaceHolderFollowings */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue");
+//
+//
+//
 //
 //
 //
@@ -9437,6 +9445,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
+/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
 //
 //
 //
@@ -9496,30 +9505,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
-      initialState: {}
+      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"](),
+      initialState: {},
+      sort_by: '',
+      filter_by: 2,
+      search: ''
     };
   },
-  methods: {
-    isLoading: function isLoading() {
-      return false; // alert(this.$store.getters.isLoading);
+  watch: {
+    filter_by: function filter_by() {
+      this.getResults();
+    },
+    sort_by: function sort_by() {
+      this.getResults();
+    },
+    search: function search(newValue, oldValue) {
+      var newspacecount = newValue.split(' ').length;
+      var oldspacecount = oldValue.split(' ').length;
 
-      return this.$store.getters.isLoading;
+      if (newspacecount != oldspacecount) {
+        this.getResults();
+      } else if (newValue.trim() == '') {
+        this.getResults();
+      }
+    }
+  },
+  methods: {
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.initialState.blogList = {};
+      this.$store.commit('TOGGLE_LOADING');
+      this.form.get('api/profile?page=' + page + '&search=' + this.search + '&sort_by=' + this.sort_by).then(function (response) {
+        _this.$store.commit('TOGGLE_LOADING');
+
+        if (response.data) {
+          _this.initialState.blogList = response.data.blogList;
+        } else {
+          alert(response.data.message);
+        }
+      })["catch"](function (e) {
+        _this.$store.commit('TOGGLE_LOADING');
+
+        console.log(e);
+      });
+    },
+    searchPost: function searchPost() {
+      this.getResults();
     }
   },
   components: {}
@@ -48184,33 +48223,43 @@ var render = function() {
       ? _c(
           "div",
           _vm._l(_vm.followSuggestion, function(eachsuggestion) {
-            return _c("div", { staticClass: "follow-user" }, [
-              _c("img", {
-                staticClass: "profile-photo-sm pull-left",
-                attrs: { src: "images/user-3.jpg", alt: "" }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                [
-                  _c("h5", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v(_vm._s(eachsuggestion.name))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("FollowButton", {
-                    attrs: {
-                      Buttonclass: "btn btn-sm btn-round btn-success",
-                      username: eachsuggestion.username,
-                      followSuggestionHead: _vm.followSuggestion.length
-                    },
-                    on: { clicked: _vm.userFollowed }
-                  })
-                ],
-                1
-              )
-            ])
+            return _c(
+              "div",
+              { staticClass: "follow-user" },
+              [
+                _vm.followSuggestion.image
+                  ? _c("img", {
+                      staticClass: "profile-photo",
+                      attrs: {
+                        src: "/images/user-images/" + eachsuggestion.image,
+                        alt: "user"
+                      }
+                    })
+                  : _c("img", {
+                      staticClass: "profile-photo",
+                      attrs: {
+                        src: "/images/user-images/default.png",
+                        alt: "user"
+                      }
+                    }),
+                _vm._v(" "),
+                _c("h5", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(_vm._s(eachsuggestion.name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("FollowButton", {
+                  attrs: {
+                    Buttonclass: "btn btn-sm btn-round btn-success",
+                    username: eachsuggestion.username,
+                    followSuggestionHead: _vm.followSuggestion.length
+                  },
+                  on: { clicked: _vm.userFollowed }
+                })
+              ],
+              1
+            )
           }),
           0
         )
@@ -51107,7 +51156,38 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _vm._m(3, true)
+                                    _c("div", { staticClass: "hidden_sec" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "hidden_td_link" },
+                                        [
+                                          _c(
+                                            "router-link",
+                                            {
+                                              attrs: {
+                                                to:
+                                                  "/blog/edit/" + eachblog.code
+                                              }
+                                            },
+                                            [_vm._v("Edit")]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._v(
+                                            "\r\n                   | \r\n                  "
+                                          ),
+                                          _c("a", { attrs: { href: "#" } }, [
+                                            _vm._v("Preview")
+                                          ]),
+                                          _vm._v(
+                                            "\r\n                   | \r\n                  "
+                                          ),
+                                          _c("a", { attrs: { href: "#" } }, [
+                                            _vm._v("Delete")
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ])
                                   ]),
                                   _vm._v(" "),
                                   _c(
@@ -51136,9 +51216,9 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _vm._m(4, true),
+                                  _vm._m(3, true),
                                   _vm._v(" "),
-                                  _vm._m(5, true),
+                                  _vm._m(4, true),
                                   _vm._v(" "),
                                   _c(
                                     "td",
@@ -51160,7 +51240,7 @@ var render = function() {
                               0
                             )
                           : this.$store.getters.isLoading === false
-                          ? _c("tbody", [_vm._m(6)])
+                          ? _c("tbody", [_vm._m(5)])
                           : _vm._e()
                       ]
                     )
@@ -51193,7 +51273,7 @@ var staticRenderFns = [
           }
         },
         [
-          _vm._v("\n                   All\n                   "),
+          _vm._v("\r\n                   All\r\n                   "),
           _c("i", { staticClass: "fa fa-angle-down " })
         ]
       )
@@ -51214,7 +51294,7 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v("\n                     Sort by\n                     "),
+        _vm._v("\r\n                     Sort by\r\n                     "),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
     )
@@ -51231,25 +51311,11 @@ var staticRenderFns = [
       },
       [
         _vm._v(
-          "\n                                     Filter by\n             "
+          "\r\n                                     Filter by\r\n             "
         ),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "hidden_sec" }, [
-      _c("div", { staticClass: "hidden_td_link" }, [
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Edit")]),
-        _vm._v("\n                   | \n                  "),
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Preview")]),
-        _vm._v("\n                   | \n                  "),
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Delete")])
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -52012,7 +52078,25 @@ var render = function() {
               return _c("div", { staticClass: "col-md-6 col-sm-12" }, [
                 _c("div", { staticClass: "friend-card" }, [
                   _c("div", { staticClass: "row card-info" }, [
-                    _vm._m(0, true),
+                    eachFollowers.image
+                      ? _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                          _c("img", {
+                            staticClass: "profile-photo-lg",
+                            attrs: {
+                              src: "/images/user-images/" + eachFollowers.image,
+                              alt: "user"
+                            }
+                          })
+                        ])
+                      : _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                          _c("img", {
+                            staticClass: "profile-photo-lg",
+                            attrs: {
+                              src: "/images/user-images/default.png",
+                              alt: "user"
+                            }
+                          })
+                        ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-9 col-md-8" }, [
                       _c(
@@ -52058,23 +52142,11 @@ var render = function() {
           )
         ])
       : _c("div", { staticClass: "friend-list fn_list_2" }, [
-          _vm._v("\n      No Records found\n    ")
+          _vm._v("\r\n      No Records found\r\n    ")
         ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-md-4" }, [
-      _c("img", {
-        staticClass: "profile-photo-lg",
-        attrs: { src: "/images/user-3.jpg", alt: "user" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -52112,7 +52184,25 @@ var render = function() {
             return _c("div", { staticClass: "friend-list" }, [
               _c("div", { staticClass: "friend-card" }, [
                 _c("div", { staticClass: "row card-info" }, [
-                  _vm._m(0, true),
+                  eachFollowings.image
+                    ? _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                        _c("img", {
+                          staticClass: "profile-photo-lg",
+                          attrs: {
+                            src: "/images/user-images/" + eachFollowings.image,
+                            alt: "user"
+                          }
+                        })
+                      ])
+                    : _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                        _c("img", {
+                          staticClass: "profile-photo-lg",
+                          attrs: {
+                            src: "/images/user-images/default.png",
+                            alt: "user"
+                          }
+                        })
+                      ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-lg-9 col-md-8" }, [
                     _c(
@@ -52156,7 +52246,7 @@ var render = function() {
           }),
           0
         )
-      : _c("div", { staticClass: "col-md-9 col-sm-9 pad-left-0" }, [_vm._m(1)]),
+      : _c("div", { staticClass: "col-md-9 col-sm-9 pad-left-0" }, [_vm._m(0)]),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-3 col-sm-3 pad-left-0" }, [
       _c(
@@ -52179,21 +52269,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-md-4" }, [
-      _c("img", {
-        staticClass: "profile-photo-lg",
-        attrs: { src: "/images/user-3.jpg", alt: "user" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "friend-list" }, [
       _c("div", { staticClass: "friend-card" }, [
         _c("div", { staticClass: "row card-info" }, [
-          _vm._v("\n              You haven't followed anyone!!\n            ")
+          _vm._v(
+            "\r\n              You haven't followed anyone!!\r\n            "
+          )
         ])
       ])
     ])
@@ -52249,7 +52330,7 @@ var render = function() {
                         _c("div", { staticClass: "thumb" }, [
                           _c("img", {
                             staticClass: "img-fluid",
-                            attrs: { src: "images/magazine/1.jpg", alt: "" }
+                            attrs: { src: "/images/magazine/1.jpg", alt: "" }
                           })
                         ]),
                         _vm._v(" "),
@@ -52308,7 +52389,7 @@ var render = function() {
                                 _c("img", {
                                   staticClass: "img-fluid",
                                   attrs: {
-                                    src: "images/magazine/3.jpg",
+                                    src: "/images/magazine/3.jpg",
                                     alt: ""
                                   }
                                 })
@@ -52360,7 +52441,7 @@ var render = function() {
                                 _c("img", {
                                   staticClass: "img-fluid",
                                   attrs: {
-                                    src: "images/magazine/4.jpg",
+                                    src: "/images/magazine/4.jpg",
                                     alt: ""
                                   }
                                 })
@@ -52407,7 +52488,7 @@ var render = function() {
                       _c("div", { staticClass: "thumb" }, [
                         _c("img", {
                           staticClass: "img-fluid",
-                          attrs: { src: "images/magazine/2.jpg", alt: "" }
+                          attrs: { src: "/images/magazine/2.jpg", alt: "" }
                         })
                       ]),
                       _vm._v(" "),
@@ -52434,7 +52515,7 @@ var render = function() {
                           [
                             _c("h4", [
                               _vm._v(
-                                "Created face stars sixth forth fow\n                                Earth firmament meat"
+                                "Created face stars sixth forth fow\r\n                                Earth firmament meat"
                               )
                             ])
                           ]
@@ -52524,14 +52605,14 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/18.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/18.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\n                                "),
+                  _vm._v("/\r\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -52544,7 +52625,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Brought dreepeth youll blessed\n                                from whose signs over"
+                        "Brought dreepeth youll blessed\r\n                                from whose signs over"
                       )
                     ])
                   ]
@@ -52572,14 +52653,14 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/19.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/19.jpg", alt: "" }
                     })
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\n                                        "),
+                      _vm._v("/\r\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -52594,7 +52675,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\n                                        may heaven to"
+                            "Shall for rule whoses\r\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -52614,14 +52695,14 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/20.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/20.jpg", alt: "" }
                     })
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\n                                        "),
+                      _vm._v("/\r\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -52636,7 +52717,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\n                                        may heaven to"
+                            "Shall for rule whoses\r\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -52656,14 +52737,14 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/21.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/21.jpg", alt: "" }
                     })
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\n                                        "),
+                      _vm._v("/\r\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -52678,7 +52759,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\n                                        may heaven to"
+                            "Shall for rule whoses\r\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -52698,14 +52779,14 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/22.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/22.jpg", alt: "" }
                     })
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "short_details" }, [
                     _c("div", { staticClass: "meta-top d-flex" }, [
                       _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                      _vm._v("/\n                                        "),
+                      _vm._v("/\r\n                                        "),
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v("March 15, 2019")
                       ])
@@ -52720,7 +52801,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Shall for rule whoses\n                                        may heaven to"
+                            "Shall for rule whoses\r\n                                        may heaven to"
                           )
                         ])
                       ]
@@ -52777,7 +52858,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/5.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/5.jpg", alt: "" }
                     })
                   ])
                 ]),
@@ -52799,7 +52880,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Brought all day domi\n                                        nion appear from\n                                        subdue dominion\n                                    firmament over face"
+                            "Brought all day domi\r\n                                        nion appear from\r\n                                        subdue dominion\r\n                                    firmament over face"
                           )
                         ])
                       ]
@@ -52827,7 +52908,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/6.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/6.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -52845,7 +52926,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Abundantly forth late\n                                appear fourth us."
+                        "Abundantly forth late\r\n                                appear fourth us."
                       )
                     ])
                   ]
@@ -52859,7 +52940,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/7.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/7.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -52877,7 +52958,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Abundantly forth late\n                                appear fourth us."
+                        "Abundantly forth late\r\n                                appear fourth us."
                       )
                     ])
                   ]
@@ -52924,7 +53005,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/8.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/8.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -52942,7 +53023,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Created face stars sixth forth\n                                Earth firmament"
+                        "Created face stars sixth forth\r\n                                Earth firmament"
                       )
                     ])
                   ]
@@ -52983,7 +53064,7 @@ var staticRenderFns = [
                       [
                         _c("h4", { staticClass: "font-20" }, [
                           _vm._v(
-                            "Light that hath itself god\n                                        grass herb dark sea on\n                                    the hath dowe "
+                            "Light that hath itself god\r\n                                        grass herb dark sea on\r\n                                    the hath dowe "
                           )
                         ])
                       ]
@@ -53001,7 +53082,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/9.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/9.jpg", alt: "" }
                     })
                   ])
                 ])
@@ -53016,7 +53097,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/10.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/10.jpg", alt: "" }
                     })
                   ])
                 ]),
@@ -53038,7 +53119,7 @@ var staticRenderFns = [
                       [
                         _c("h4", { staticClass: "font-20" }, [
                           _vm._v(
-                            "Light that hath itself god\n                                        grass herb dark sea on\n                                    the hath dowe "
+                            "Light that hath itself god\r\n                                        grass herb dark sea on\r\n                                    the hath dowe "
                           )
                         ])
                       ]
@@ -53096,7 +53177,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "thumb" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/magazine/11.jpg", alt: "" }
+                    attrs: { src: "/images/magazine/11.jpg", alt: "" }
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "play_btn" }, [
@@ -53119,7 +53200,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "short_details" }, [
                   _c("div", { staticClass: "meta-top d-flex" }, [
                     _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                    _vm._v("/\n                                "),
+                    _vm._v("/\r\n                                "),
                     _c("a", { attrs: { href: "#" } }, [
                       _vm._v("March 15, 2019")
                     ])
@@ -53134,7 +53215,7 @@ var staticRenderFns = [
                     [
                       _c("h4", [
                         _vm._v(
-                          "Created face stars sixth forth fow\n                                Earth firmament meat"
+                          "Created face stars sixth forth fow\r\n                                Earth firmament meat"
                         )
                       ])
                     ]
@@ -53168,7 +53249,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb col-12 col-sm-5" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/12.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/12.jpg", alt: "" }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "play_btn" }, [
@@ -53202,7 +53283,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Blessed night morning on\n                                them you great"
+                            "Blessed night morning on\r\n                                them you great"
                           )
                         ])
                       ]
@@ -53235,7 +53316,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "thumb col-12 col-sm-5" }, [
                     _c("img", {
                       staticClass: "img-fluid",
-                      attrs: { src: "images/magazine/13.jpg", alt: "" }
+                      attrs: { src: "/images/magazine/13.jpg", alt: "" }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "play_btn" }, [
@@ -53269,7 +53350,7 @@ var staticRenderFns = [
                       [
                         _c("h4", [
                           _vm._v(
-                            "Blessed night morning on\n                                them you great"
+                            "Blessed night morning on\r\n                                them you great"
                           )
                         ])
                       ]
@@ -53299,7 +53380,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "thumb col-12 col-sm-5" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/magazine/14.jpg", alt: "" }
+                    attrs: { src: "/images/magazine/14.jpg", alt: "" }
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "play_btn" }, [
@@ -53333,7 +53414,7 @@ var staticRenderFns = [
                     [
                       _c("h4", [
                         _vm._v(
-                          "Blessed night morning on\n                                them you great"
+                          "Blessed night morning on\r\n                                them you great"
                         )
                       ])
                     ]
@@ -53398,14 +53479,14 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/15.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/15.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\n                                "),
+                  _vm._v("/\r\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -53418,7 +53499,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Shall for rule whose toge one\n                                may heaven to dat"
+                        "Shall for rule whose toge one\r\n                                may heaven to dat"
                       )
                     ])
                   ]
@@ -53444,14 +53525,14 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/16.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/16.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\n                                "),
+                  _vm._v("/\r\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -53464,7 +53545,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Shall for rule whose toge one\n                                may heaven to dat"
+                        "Shall for rule whose toge one\r\n                                may heaven to dat"
                       )
                     ])
                   ]
@@ -53490,14 +53571,14 @@ var staticRenderFns = [
               _c("div", { staticClass: "thumb" }, [
                 _c("img", {
                   staticClass: "img-fluid",
-                  attrs: { src: "images/magazine/17.jpg", alt: "" }
+                  attrs: { src: "/images/magazine/17.jpg", alt: "" }
                 })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "short_details" }, [
                 _c("div", { staticClass: "meta-top d-flex" }, [
                   _c("a", { attrs: { href: "#" } }, [_vm._v("shoes")]),
-                  _vm._v("/\n                                "),
+                  _vm._v("/\r\n                                "),
                   _c("a", { attrs: { href: "#" } }, [_vm._v("March 15, 2019")])
                 ]),
                 _vm._v(" "),
@@ -53510,7 +53591,7 @@ var staticRenderFns = [
                   [
                     _c("h4", [
                       _vm._v(
-                        "Shall for rule whose toge one\n                                may heaven to dat"
+                        "Shall for rule whose toge one\r\n                                may heaven to dat"
                       )
                     ])
                   ]
@@ -53653,7 +53734,7 @@ var render = function() {
         )
       ])
     : _c("div", { staticClass: "col-md-9 col-sm-9" }, [
-        _vm._v("\n   Sorry, No Category Found\n")
+        _vm._v("\r\n   Sorry, No Category Found\r\n")
       ])
 }
 var staticRenderFns = []
@@ -53680,16 +53761,70 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { attrs: { id: "main" } }, [
-      _vm._m(0),
+      _c("div", { staticClass: "white-box create-post" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12 col-sm-12" }, [
+            _c("form", [
+              _c("div", { staticClass: "col-md-8 col-sm-8" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.search,
+                      expression: "search",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    cols: "45",
+                    placeholder: "Search Post"
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value.trim()
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                }),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary pull-right",
+                    attrs: { type: "submit" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.searchPost($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Search")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4 col-sm-4" })
+            ])
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _vm.isLoading === true
+        this.$store.getters.isLoading === true
           ? _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" })
-          : _vm.initialState.profileBlog
+          : _vm.initialState.blogList
           ? _c(
               "div",
               { staticClass: "col-lg-12 col-md-12 col-sm-12" },
-              _vm._l(_vm.initialState.profileBlog, function(eachBlog) {
+              _vm._l(_vm.initialState.blogList.data, function(eachBlog) {
                 return _c(
                   "div",
                   { staticClass: "single-blog video-style small row m_b_30" },
@@ -53753,9 +53888,9 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(1, true),
+                          _vm._m(0, true),
                           _vm._v(" "),
-                          _vm._m(2, true)
+                          _vm._m(1, true)
                         ])
                       ]
                     )
@@ -53765,7 +53900,7 @@ var render = function() {
               0
             )
           : _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" }, [
-              _vm._m(3)
+              _vm._m(2)
             ])
       ])
     ]),
@@ -53774,33 +53909,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "white-box create-post" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12 col-sm-12" }, [
-          _c("form", [
-            _c("div", { staticClass: "col-md-8 col-sm-8" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", cols: "45", placeholder: "Search Post" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4 col-sm-4" }, [
-              _c(
-                "button",
-                { staticClass: "btn sr-btn", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fa fa-search" })]
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -74274,8 +74382,8 @@ var state = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/blog/resources/assets/js/app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/sass/style.scss */"./resources/assets/sass/style.scss");
+__webpack_require__(/*! C:\blog\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! C:\blog\resources\assets\sass\style.scss */"./resources/assets/sass/style.scss");
 
 
 /***/ })

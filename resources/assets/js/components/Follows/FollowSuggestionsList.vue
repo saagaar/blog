@@ -5,18 +5,19 @@
 
                   <div v-if="followSuggestion.length>0">
                    <div class="follow-user" v-for="eachsuggestion in followSuggestion" >
-                    <img src="images/user-3.jpg" alt="" class="profile-photo-sm pull-left">
-                    <div>
+                    <img v-if="followSuggestion.image" :src="'/images/user-images/'+eachsuggestion.image" alt="user" class="profile-photo">
+                    <img v-else src="/images/user-images/default.png" alt="user" class="profile-photo">
                       <h5><a href="#">{{ eachsuggestion.name}}</a></h5>
                       <FollowButton  @clicked="userFollowed" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
                     </div>
                    </div>
-                   </div>
+                   
                     <div v-else-if="this.$store.getters.isLoading===true && !followSuggestion" class="follow-user">
                         <PlaceHolderDashboardFeed></PlaceHolderDashboardFeed>
                    </div>
                    <div v-else class="follow-user">
                     No New suggestions
+                   </div>
                    </div>
             </div>
 </template>

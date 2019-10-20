@@ -72,8 +72,8 @@ class BlogController extends FrontendController
             $routeName= Route::currentRouteName();
             $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
             $data['blog']   = $this->blog->getBlogByCode($blogCode);
+
                  $this->authorize('update', $data['blog']);
-            
                 if($routeName=='api')
                    {
                       return ($data);

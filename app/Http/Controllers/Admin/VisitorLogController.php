@@ -22,10 +22,12 @@ class VisitorLogController extends AdminController
                     'current_menu'=>'All Website Logs List',
                       ]];
         $search = $request->get('search');
-        if($search){
+        if($search)
+        {
             $logs = $this->visitorLog->getAll()->where('ip_address', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }
         else{
+
             $logs = $this->visitorLog->getAll()->paginate($this->PerPage);
         }
         return view('admin.websitelog.list')->with(array('websiteLog'=>$logs,'breadcrumb'=>$breadcrumb,'menu'=>'logs List','primary_menu'=>'websitelog.list'));

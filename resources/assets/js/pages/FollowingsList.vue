@@ -8,8 +8,11 @@
         <div class="friend-list" v-for="eachFollowings in initialState.followings">
           <div class="friend-card">
             <div class="row card-info">
-              <div class="col-lg-3 col-md-4">
-                <img src="/images/user-3.jpg" alt="user" class="profile-photo-lg" />
+              <div class="col-lg-3 col-md-4" v-if="eachFollowings.image">
+                <img :src="'/images/user-images/'+eachFollowings.image" alt="user" class="profile-photo-lg" />
+              </div>
+              <div class="col-lg-3 col-md-4"v-else>
+                <img src="/images/user-images/default.png" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">

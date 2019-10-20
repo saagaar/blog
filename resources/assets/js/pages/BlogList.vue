@@ -98,7 +98,8 @@
                 <div><a href="#" class="sort_info_link">{{ eachblog.title}}</a></div>
                 <div class="hidden_sec">
                   <div class="hidden_td_link">
-                  <a href="#">Edit</a>
+                    <router-link :to="'/blog/edit/'+eachblog.code">Edit</router-link>
+                  <!-- <a router-link to="/blog/edit/:eachblog.code">Edit</a> -->
                   &nbsp;|&nbsp;
                   <a href="#">Preview</a>
                   &nbsp;|&nbsp;
