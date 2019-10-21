@@ -1,20 +1,21 @@
 @extends('frontend.layouts.app')
 @section('content')
-
 <section class="fullwidth-block area-padding-bottom">
         <div class="container-fluid">
             <div class="row">
+                @if($featuredBlog['0'])
                 <div class="col-md-6 col-lg-6 col-xl-5">
                     <div class="single-blog  wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{url('images/magazine/1.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['0']->image) }}" alt="">
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
                                 <a href="/test">Tours & Travel</a>
                             </div>
                             <a class="d-block" href="single-blog.html">
-                                <h4>The TV Subscriptions You’ll Need to Watch Your Favorite Shows</h4>
+                                <h5>{{ str_limit($featuredBlog['0']->short_description, $limit = 50, $end = '...') }} </h5>
+                                <!-- <h5>{{ $featuredBlog['0']->short_description }}</h5> -->
                             </a>
                             <div class="meta-bottom d-flex" >
                                 <a href="#">March 12 , 2019 . </a>
@@ -23,13 +24,15 @@
                         </div>
                     </div>    
                 </div>
-
+                @endif
+                 
                 <div class="col-lg-12 col-xl-3">
                     <div class="row">
+                        @if($featuredBlog['1'])
                         <div class="col-12 col-md-6 col-lg-6 col-xl-12">
                             <div class="single-blog style-three m_b_30">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="{{url('images/magazine/3.jpg')}}" alt="">
+                                    <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['1']->image) }}" alt="">
                                 </div>
                                 <div class="short_details">
 
@@ -37,16 +40,18 @@
                                         <a href="#">Lifestyle</a>
                                     </div>
                                     <a class="d-block" href="single-blog.html">
-                                        <h4>The abundantly brought after day fish there image</h4>
+                                        <h5>{{ str_limit($featuredBlog['1']->short_description, $limit = 50, $end = '...') }} </h5>
                                     </a>
                                 </div>
                             </div>
 
                         </div>
+                        @endif
+                        @if($featuredBlog['2'])
                         <div class="col-12 col-md-6 col-lg-6 col-xl-12">
                             <div class="single-blog style-three">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="{{url('images/magazine/4.jpg')}}" alt="">
+                                    <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['2']->image) }}" alt="">
                                 </div>
                                 <div class="short_details">
 
@@ -54,20 +59,21 @@
                                         <a href="#">Lifestyle</a>
                                     </div>
                                     <a class="d-block" href="single-blog.html">
-                                        <h4>The abundantly brought after day fish there image</h4>
+                                        <h5>{{ str_limit($featuredBlog['2']->short_description, $limit = 50, $end = '...') }} </h5>
                                     </a>
                                 </div>
                             </div>    
                         </div>
+                        @endif
                     </div>
 
                 </div>
 
-
+                @if($featuredBlog['3'])
                 <div class="col-md-6 col-lg-6 col-xl-4">
                     <div class="single-blog style_two">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{url('images/magazine/2.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['0']->image) }}" alt="">
                         </div>
                         <div class="short_details text-center ">
 
@@ -75,8 +81,7 @@
                                 <a href="#">Tours & Travel</a>
                             </div>
                             <a class="d-block" href="single-blog.html">
-                                <h4>Created face stars sixth forth fow
-                                Earth firmament meat</h4>
+                                <h5>{{ str_limit($featuredBlog['3']->short_description, $limit = 50, $end = '...') }} </h5>
                             </a>
                             <div class="meta-bottom d-flex justify-content-center">
                                 <a href="#">March 12 , 2019 . </a>
@@ -85,6 +90,7 @@
                         </div>
                     </div>    
                 </div>
+                @endif
                 <div class="clearfix"></div>
             </div>
             <div class="taxt-right all-link">
@@ -110,7 +116,7 @@
                 <div class="col-lg-6">
                     <div class="single-blog style-five">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{url('images/magazine/18.jpg')}}" alt="">
+                            <img class="img-fluid" src="/images/magazine/18.jpg" alt="">
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
@@ -135,7 +141,7 @@
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="{{url('images/magazine/19.jpg')}}" alt="">
+                                    <img class="img-fluid" src="/images/magazine/19.jpg" alt="">
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
@@ -157,7 +163,7 @@
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="{{url('images/magazine/20.jpg')}}" alt="">
+                                    <img class="img-fluid" src="/images/magazine/20.jpg" alt="">
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
@@ -179,7 +185,7 @@
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="{{url('images/magazine/21.jpg')}} alt="">
+                                    <img class="img-fluid" src="/images/magazine/21.jpg" alt="">
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
@@ -201,7 +207,7 @@
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="{{url('images/magazine/22.jpg')}}" alt="">
+                                    <img class="img-fluid" src="/images/magazine/22.jpg" alt="">
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
@@ -235,14 +241,14 @@
     <section class="first_block">
         <div class="container">
             <div class="area-heading">
-                <h3>Popular on Blog Sagar  <span> <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a> </span></h3>
+                <h3>Popular on Blog Sagar (most engaged)  <span> <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a> </span></h3>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-xl-6">
                     <div class="single-blog row no-gutters style-four border_one">
                         <div class="col-12 col-sm-5">
                             <div class="thumb">
-                                <img class="img-fluid" src="{{url('images/magazine/5.jpg')}}" alt="">
+                                <img class="img-fluid" src="/images/magazine/5.jpg" alt="">
                             </div>
                         </div>
                         <div class="col-12 col-sm-7">
@@ -268,7 +274,7 @@
                 <div class="col-lg-4 col-xl-3">
                     <div class="single-blog style_five">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{url('images/magazine/6.jpg')}}" alt="">
+                            <img class="img-fluid" src="/images/magazine/6.jpg" alt="">
                         </div>
                         <div class="short_details ">
 
@@ -286,7 +292,7 @@
                 <div class="col-lg-4 col-xl-3">
                     <div class="single-blog style_five">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{url('images/magazine/7.jpg')}}" alt="">
+                            <img class="img-fluid" src="/images/magazine/7.jpg" alt="">
                         </div>
                         <div class="short_details ">
 
@@ -312,23 +318,23 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="area-heading">
-                        <h3>Editor Picks  <span> <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a> </span></h3>
+                        <h3>Most Viewed  <span> <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a> </span></h3>
                     </div>
                 </div>
             </div>
             <div class="row">
+                @if($mostViewed['0'])
                 <div class="col-lg-5 col-xl-6">
                     <div class="single-blog">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{url('images/magazine/8.jpg')}}" alt="">
+                            <img class="img-fluid"src="{{ asset('images/blog/'.$mostViewed['0']->image) }}" alt="">
                         </div>
                         <div class="short_details pad_25 ">
                             <div class="meta-top d-flex">
                                 <a href="#">Tours & Travel</a>
                             </div>
                             <a class="d-block" href="single-blog.html">
-                                <h4>Created face stars sixth forth
-                                Earth firmament</h4>
+                                <h4>{{ str_limit($mostViewed['0']->short_description, $limit = 50, $end = '...') }}</h4>
                             </a>
                             <div class="meta-bottom d-flex" >
                                 <a href="#">March 12 , 2019 . </a>
@@ -337,7 +343,9 @@
                         </div>
                     </div>    
                 </div>
+                @endif
                 <div class="col-lg-7 col-xl-6">
+                    @if($mostViewed['1'])
                     <div class="single-blog row no-gutters style-four m_b_30">
                         <div class="col-12 col-sm-7">
                             <div class="short_details padd_left_0">
@@ -345,24 +353,23 @@
                                     <a href="#">Tours & Travel</a>
                                 </div>
                                 <a class="d-block" href="single-blog.html">
-                                    <h4 class="font-20">Light that hath itself god
-                                        grass herb dark sea on
-                                    the hath dowe </h4>
+                                    <h4 class="font-20">{{ str_limit($mostViewed['1']->short_description, $limit = 150, $end = '...') }}</h4>
                                 </a>
-                                <p>Said spirit evening above good twes at  god midst deep a wherein very made he seas male very broug sad forth saying right.</p>
+                                <!-- <p>Said spirit evening above good twes at  god midst deep a wherein very made he seas male very broug sad forth saying right.</p> -->
                             </div>  
                         </div>  
                         <div class="col-12 col-sm-5">
                             <div class="thumb">
-                                <img class="img-fluid" src="{{url('images/magazine/9.jpg')}}" alt="">
+                                <img class="img-fluid" src="{{ asset('images/blog/'.$mostViewed['1']->image) }}" alt="">
                             </div>
                         </div>
                     </div> 
-
+                    @endif
+                    @if($mostViewed['2'])
                     <div class="single-blog row no-gutters style-four">
                         <div class="col-12 col-sm-5">
                             <div class="thumb">
-                                <img class="img-fluid" src="{{url('images/magazine/10.jpg')}}" alt="">
+                                <img class="img-fluid" src="{{ asset('images/blog/'.$mostViewed['2']->image) }}" alt="">
                             </div>
                         </div>
                         <div class="col-12 col-sm-7">
@@ -371,14 +378,13 @@
                                     <a href="#">Tours & Travel</a>
                                 </div>
                                 <a class="d-block" href="single-blog.html">
-                                    <h4 class="font-20">Light that hath itself god
-                                        grass herb dark sea on
-                                    the hath dowe </h4>
+                                    <h4 class="font-20">{{ str_limit($mostViewed['2']->short_description, $limit = 150, $end = '...') }}</h4>
                                 </a>
-                                <p>Said spirit evening above good twes at  god midst deep a wherein very made he seas male very broug sad forth saying right.</p>
+                                <!-- <p>Said spirit evening above good twes at  god midst deep a wherein very made he seas male very broug sad forth saying right.</p> -->
                             </div>  
                         </div>  
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -387,7 +393,7 @@
 
     <!--================ Video section start =================-->  
 
-    <div class="video-area background_one area-padding">
+    <!-- <div class="video-area background_one area-padding">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -400,7 +406,7 @@
                 <div class="col-lg-7">
                     <div class="single-blog video-style">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{url('images/magazine/11.jpg')}}" alt="">
+                            <img class="img-fluid" src="/images/magazine/11.jpg" alt="">
                             <div class="play_btn">
                                 <a class="play-video" href="https://www.youtube.com/watch?v=MrRvX5I8PyY" data-animate="zoomIn"
                                 data-duration="1.5s" data-delay="0.1s"><span class="ti-control-play"></span></a>
@@ -428,7 +434,7 @@
                 <div class="col-lg-5">
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-12 col-sm-5">
-                            <img class="img-fluid" src="{{url('images/magazine/12.jpg')}}" alt="">
+                            <img class="img-fluid" src="/images/magazine/12.jpg" alt="">
                             <div class="play_btn">
                                 <a class="play-video" href="https://www.youtube.com/watch?v=MrRvX5I8PyY" data-animate="zoomIn"
                                 data-duration="1.5s" data-delay="0.1s"><span class="ti-control-play"></span></a>
@@ -452,7 +458,7 @@
 
                     <div class="single-blog video-style small row m_b_30 ">
                         <div class="thumb col-12 col-sm-5">
-                            <img class="img-fluid" src="{{url('images/magazine/13.jpg')}}" alt="">
+                            <img class="img-fluid" src="/images/magazine/13.jpg" alt="">
                             <div class="play_btn">
                                 <a class="play-video" href="https://www.youtube.com/watch?v=MrRvX5I8PyY" data-animate="zoomIn"
                                 data-duration="1.5s" data-delay="0.1s"><span class="ti-control-play"></span></a>
@@ -476,7 +482,7 @@
 
                     <div class="single-blog video-style small row">
                         <div class="thumb col-12 col-sm-5">
-                            <img class="img-fluid" src="{{url('images/magazine/14.jpg')}}" alt="">
+                            <img class="img-fluid" src="/images/magazine/14.jpg" alt="">
                             <div class="play_btn">
                                 <a class="play-video" href="https://www.youtube.com/watch?v=MrRvX5I8PyY" data-animate="zoomIn"
                                 data-duration="1.5s" data-delay="0.1s"><span class="ti-control-play"></span></a>
@@ -501,7 +507,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <!--================ Video section end =================-->  
@@ -514,24 +520,24 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="area-heading">
-                        <h3>Featured Collections  <span> <a href="#" class="b_all genric-btn link-border circle">See All Collections <i class="fa fa-angle-double-right"></i></a> </span></h3>
+                        <h3>Recent Blogs  <span> <a href="#" class="b_all genric-btn link-border circle">See All Recent Blogs <i class="fa fa-angle-double-right"></i></a> </span></h3>
                     </div>
                 </div>
             </div>
             <div class="row">
+                @foreach($latest as $eachLatestBlog)
                 <div class="col-lg-4">
                     <div class="single-blog style-five">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{url('images/magazine/15.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{ asset('images/blog/'.$eachLatestBlog->image) }}" alt="">
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
                                 <a href="#">shoes</a>/
-                                <a href="#">March 15, 2019</a>
+                                <a href="#"><?php echo date("F j, Y",strtotime($eachLatestBlog->created_at) ); ?></a>
                             </div>
                             <a class="d-block" href="single-blog.html">
-                                <h4>Shall for rule whose toge one
-                                may heaven to dat</h4>
+                                <h4>{{ str_limit($eachLatestBlog->short_description, $limit = 50, $end = '...') }}</h4>
                             </a>
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-comment"></i>05 comment</a>
@@ -540,54 +546,11 @@
                         </div>
                     </div> 
 
-                </div> 
-
-                <div class="col-lg-4">
-                    <div class="single-blog style-five">
-                        <div class="thumb">
-                            <img class="img-fluid" src="{{url('images/magazine/16.jpg')}}" alt="">
-                        </div>
-                        <div class="short_details">
-                            <div class="meta-top d-flex">
-                                <a href="#">shoes</a>/
-                                <a href="#">March 15, 2019</a>
-                            </div>
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Shall for rule whose toge one
-                                may heaven to dat</h4>
-                            </a>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-comment"></i>05 comment</a>
-                                <a href="#"><i class="ti-heart"></i> 0 like</a>
-                            </div>
-                        </div>
-                    </div> 
-
-                </div> 
-
-                <div class="col-lg-4">
-                    <div class="single-blog style-five">
-                        <div class="thumb">
-                            <img class="img-fluid" src="{{url('images/magazine/17.jpg')}}" alt="">
-                        </div>
-                        <div class="short_details">
-                            <div class="meta-top d-flex">
-                                <a href="#">shoes</a>/
-                                <a href="#">March 15, 2019</a>
-                            </div>
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Shall for rule whose toge one
-                                may heaven to dat</h4>
-                            </a>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-comment"></i>05 comment</a>
-                                <a href="#"><i class="ti-heart"></i> 0 like</a>
-                            </div>
-                        </div>
-                    </div> 
-                </div> 
+                </div>
+                @endforeach 
             </div>
         </div>
     </div>
+</div>
 @endsection
 

@@ -1,7 +1,10 @@
 import VueRouter from 'vue-router';
 
 let routes=[
-				
+				{
+						path:'/home',
+						components:require('./pages/HomePage')
+				},
 				{
 						path:'/blog/add',
 						components:require('./pages/AddBlogStep1')

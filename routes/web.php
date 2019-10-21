@@ -43,7 +43,7 @@ Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUs
 
 
 
-Route::get('/test', 'Frontend\FrontendController@index')->name('test');
+Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 
 Route::get('/tests', 'Frontend\UserInterestController@testinterest')->name('test');
@@ -100,7 +100,7 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 
     Route::get('/home', 'Frontend\HomeController@index')->name('home');
-
+    Route::get('api/home', 'Frontend\HomeController@index')->name('api');
     Route::prefix('admin')->group(function()
     {
 

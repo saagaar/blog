@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\Notifications;
-
+use App\Repository\BlogInterface; 
 class HomeController extends FrontendController
 {
      use HasRoles;
@@ -29,10 +29,11 @@ class HomeController extends FrontendController
      * @return void
      */
    
-    function __construct(FollowerInterface $followInterface)
+    function __construct(FollowerInterface $followInterface,BlogInterface $blog)
     {
          parent::__construct();
          $this->followerList=$followInterface;
+         $this->blog=$blog;
     }
 
     /**
@@ -42,21 +43,37 @@ class HomeController extends FrontendController
      */
     public function index(Request $request)
     {
-        return view('frontend.layouts.app');
+        $featuredBlog = $this->blog->getAllFeaturedBlog();
+        $data['featuredBlog']=$featuredBlog;
+        $mostViewed =$this->blog->getAllBlogByViews();
+        $data['mostViewed'] = $mostViewed;
+        $latest =$this->blog->getLatestAllBlog();
+        $data['latest'] = $latest;
+         if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+            
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/home';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest));
+          }
+
+        }
+        return view('frontend.home.index')->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest));
     }
 
     public function test(Request $request)
     {
-        $code='user_registration';
-        $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
-        // print_r($data);exit;
-        $this->authUser->notify(new Notifications($code,$data));
-
-            // foreach ($this->authUser->unreadNotifications as $notification) {
-            //      echo $notification->data['message'];
-            // }
-            // exit;
-        return view('frontend.layouts.app');
+        $data= $this->blog->getAllBlogByViews();
+        print_r($data);
+        // return view('frontend.layouts.app');
     }
     public function dashboard()
     {
