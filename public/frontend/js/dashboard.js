@@ -8297,7 +8297,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -52300,9 +52299,17 @@ var render = function() {
                               _vm._v(" ")
                             ]),
                             _vm._v(" All Posts     "),
-                            _c("router-link", { attrs: { to: "/blog/add" } }, [
-                              _c("i", { staticClass: "fa fa-plus-circle" })
-                            ])
+                            _vm.$gate.allow("create")
+                              ? _c(
+                                  "router-link",
+                                  { attrs: { to: "/blog/add" } },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-plus-circle"
+                                    })
+                                  ]
+                                )
+                              : _vm._e()
                           ],
                           1
                         )
@@ -52708,25 +52715,31 @@ var render = function() {
                                         "div",
                                         { staticClass: "hidden_td_link" },
                                         [
-                                          _c(
-                                            "router-link",
-                                            {
-                                              attrs: {
-                                                to:
-                                                  "/blog/edit/" + eachblog.code
-                                              }
-                                            },
-                                            [_vm._v("Edit")]
-                                          ),
-                                          _vm._v(" "),
+                                          _vm.$gate.allow(
+                                            "update",
+                                            "blog",
+                                            eachblog
+                                          )
+                                            ? _c(
+                                                "router-link",
+                                                {
+                                                  attrs: {
+                                                    to:
+                                                      "/blog/edit/" +
+                                                      eachblog.code
+                                                  }
+                                                },
+                                                [_vm._v("Edit")]
+                                              )
+                                            : _vm._e(),
                                           _vm._v(
-                                            "\r\n                   | \r\n                  "
+                                            "\n                   | \n                  "
                                           ),
                                           _c("a", { attrs: { href: "#" } }, [
                                             _vm._v("Preview")
                                           ]),
                                           _vm._v(
-                                            "\r\n                   | \r\n                  "
+                                            "\n                   | \n                  "
                                           ),
                                           _c("a", { attrs: { href: "#" } }, [
                                             _vm._v("Delete")
@@ -52820,7 +52833,7 @@ var staticRenderFns = [
           }
         },
         [
-          _vm._v("\r\n                   All\r\n                   "),
+          _vm._v("\n                   All\n                   "),
           _c("i", { staticClass: "fa fa-angle-down " })
         ]
       )
@@ -52841,7 +52854,7 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v("\r\n                     Sort by\r\n                     "),
+        _vm._v("\n                     Sort by\n                     "),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
     )
@@ -52858,7 +52871,7 @@ var staticRenderFns = [
       },
       [
         _vm._v(
-          "\r\n                                     Filter by\r\n             "
+          "\n                                     Filter by\n             "
         ),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
@@ -53689,7 +53702,7 @@ var render = function() {
           )
         ])
       : _c("div", { staticClass: "friend-list fn_list_2" }, [
-          _vm._v("\r\n      No Records found\r\n    ")
+          _vm._v("\n      No Records found\n    ")
         ])
   ])
 }
@@ -53819,9 +53832,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "friend-list" }, [
       _c("div", { staticClass: "friend-card" }, [
         _c("div", { staticClass: "row card-info" }, [
-          _vm._v(
-            "\r\n              You haven't followed anyone!!\r\n            "
-          )
+          _vm._v("\n              You haven't followed anyone!!\n            ")
         ])
       ])
     ])
@@ -53945,7 +53956,7 @@ var render = function() {
         )
       ])
     : _c("div", { staticClass: "col-md-9 col-sm-9" }, [
-        _vm._v("\r\n   Sorry, No Category Found\r\n")
+        _vm._v("\n   Sorry, No Category Found\n")
       ])
 }
 var staticRenderFns = []
@@ -78041,11 +78052,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ckeditor/ckeditor5-vue */ "./node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js");
 /* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./mixins/PermissionCheck.mixin */ "./resources/assets/js/mixins/PermissionCheck.mixin.js");
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/index */ "./resources/assets/js/store/index.js");
-/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./config/config.js */ "./resources/assets/js/config/config.js");
-/* harmony import */ var _layouts_UserDashboard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layouts/UserDashboard */ "./resources/assets/js/layouts/UserDashboard.vue");
-/* harmony import */ var _layouts_Profile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./layouts/Profile */ "./resources/assets/js/layouts/Profile.vue");
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/index */ "./resources/assets/js/store/index.js");
+/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./config/config.js */ "./resources/assets/js/config/config.js");
+/* harmony import */ var _layouts_UserDashboard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./layouts/UserDashboard */ "./resources/assets/js/layouts/UserDashboard.vue");
+/* harmony import */ var _layouts_Profile__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layouts/Profile */ "./resources/assets/js/layouts/Profile.vue");
+/* harmony import */ var _services_Gate_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/Gate.js */ "./resources/assets/js/services/Gate.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -78060,8 +78071,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-
-Vue.mixin(_mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_5__["default"]);
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]);
 Vue.use(vuelidate__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.use(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_4___default.a);
@@ -78071,21 +78080,23 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
 
 
 
-Vue.component('default-layout', _layouts_UserDashboard__WEBPACK_IMPORTED_MODULE_8__["default"]);
-Vue.component('timeline-layout', _layouts_Profile__WEBPACK_IMPORTED_MODULE_9__["default"]);
+Vue.component('default-layout', _layouts_UserDashboard__WEBPACK_IMPORTED_MODULE_7__["default"]);
+Vue.component('timeline-layout', _layouts_Profile__WEBPACK_IMPORTED_MODULE_8__["default"]);
+
 var default_layout = "default";
 var app = new Vue({
   el: '#dashboard',
   router: _routes_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   data: function data() {
-    config: _config_config_js__WEBPACK_IMPORTED_MODULE_7__["default"];
+    config: _config_config_js__WEBPACK_IMPORTED_MODULE_6__["default"];
   },
-  store: _store_index__WEBPACK_IMPORTED_MODULE_6__["default"],
+  store: _store_index__WEBPACK_IMPORTED_MODULE_5__["default"],
   beforeCreate: function beforeCreate() {
     var userState = JSON.parse(window.__USER_STATE__) || {};
 
     if (userState) {
       this.$store.commit('ADD_ME', userState);
+      Vue.prototype.$gate = new _services_Gate_js__WEBPACK_IMPORTED_MODULE_9__["default"](userState);
     }
 
     this.$store.dispatch('checkLoginUser');
@@ -78985,6 +78996,65 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/policies/BlogPolicy.js":
+/*!****************************************************!*\
+  !*** ./resources/assets/js/policies/BlogPolicy.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BlogPolicy; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var BlogPolicy =
+/*#__PURE__*/
+function () {
+  function BlogPolicy() {
+    _classCallCheck(this, BlogPolicy);
+  }
+
+  _createClass(BlogPolicy, null, [{
+    key: "update",
+    // static create(user)
+    // {
+    //     return user.role === 'editor';
+    // }
+    // static view(user, post)
+    // {
+    //     return true;
+    // }
+    // static delete(user, post)
+    // {
+    //     return user.id === post.user_id;
+    // }
+    value: function update(user, blog) {
+      if (user.permissions.indexOf('edit all posts') !== -1) {
+        return user.username === blog.user.username;
+      }
+
+      if (user.permissions.indexOf('edit own posts') !== -1) {
+        return true;
+      }
+
+      if (user.permissions == 'edit posts more then his point') {
+        return false;
+      }
+    }
+  }]);
+
+  return BlogPolicy;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/routes.js":
 /*!***************************************!*\
   !*** ./resources/assets/js/routes.js ***!
@@ -79232,6 +79302,78 @@ function () {
 
 /***/ }),
 
+/***/ "./resources/assets/js/services/Gate.js":
+/*!**********************************************!*\
+  !*** ./resources/assets/js/services/Gate.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Gate; });
+/* harmony import */ var _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../policies/BlogPolicy */ "./resources/assets/js/policies/BlogPolicy.js");
+/* harmony import */ var _mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../mixins/PermissionCheck.mixin */ "./resources/assets/js/mixins/PermissionCheck.mixin.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+/**
+* This class is used to implement permission check same as laravel gate /policies
+* construct expects @object User
+**/
+
+var Gate =
+/*#__PURE__*/
+function () {
+  function Gate(user) {
+    _classCallCheck(this, Gate);
+
+    this.user = user;
+    this.policies = {
+      blog: _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__["default"]
+    };
+  }
+
+  _createClass(Gate, [{
+    key: "before",
+    value: function before() {
+      return this.user.roles === 'admin';
+    }
+  }, {
+    key: "allow",
+    value: function allow(action, type) {
+      var model = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+      if (this.before()) {
+        return true;
+      }
+
+      if (type == '' || type === undefined || model == '' || model === undefined) {
+        return this.user.permissions.indexOf(action) !== -1;
+      }
+
+      return this.policies[type][action](this.user, model);
+    }
+  }, {
+    key: "deny",
+    value: function deny(action, type) {
+      var model = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      return !this.allow(action, type, model);
+    }
+  }]);
+
+  return Gate;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/store/actions.js":
 /*!**********************************************!*\
   !*** ./resources/assets/js/store/actions.js ***!
@@ -79442,7 +79584,7 @@ var state = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\blog\resources\assets\js\dashboard.js */"./resources/assets/js/dashboard.js");
+module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/js/dashboard.js */"./resources/assets/js/dashboard.js");
 
 
 /***/ })

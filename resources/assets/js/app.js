@@ -42,6 +42,9 @@ Vue.component('main-nav', require('./components/MainNav/TheMainNav.vue').default
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+import Gate from './services/Gate.js';
+Vue.prototype.$gate = new Gate();
 import config from './config/config.js';
 import Home from './pages/Home';
 // import UserDashboard from './pages/UserDashboard';

@@ -49,7 +49,7 @@ class Blogs extends Model implements Auditable
     }
     public function user()
     {
-         return $this->belongsTo(Users::class,'id');
+         return $this->belongsTo(Users::class,'user_id');
     }
     public function getTagListAttribute(){
        return $this->tags->lists('id');

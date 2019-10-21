@@ -36,11 +36,11 @@ Class Blog implements BlogInterface
    * @param int
    */
   public function getBlogByUserId($userid){
-    return  $this->blog->where('user_id', $userid)->inRandomOrder();
+    return  $this->blog::with('user:id,username')->where('user_id', $userid)->orderByDesc('id');
   }
   
   public function getActiveBlogByUserId($userid){
-    return  $this->blog->where(['user_id'=>$userid,'save_method'=>'2'])->inRandomOrder();
+    return  $this->blog::with('user:id,username')->where(['user_id'=>$userid,'save_method'=>'2'])->orderByDesc('id');
   } 
      
   public function getAssociatedCategoryOfBlog($blogId){
