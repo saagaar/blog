@@ -6815,6 +6815,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -49331,10 +49332,18 @@ var render = function() {
           "div",
           _vm._l(_vm.followSuggestion, function(eachsuggestion) {
             return _c("div", { staticClass: "follow-user" }, [
-              _c("img", {
-                staticClass: "profile-photo-sm pull-left",
-                attrs: { src: "images/user-3.jpg", alt: "" }
-              }),
+              eachsuggestion.image
+                ? _c("img", {
+                    staticClass: "profile-photo-lg",
+                    attrs: {
+                      src: "/images/user-images/" + eachsuggestion.image,
+                      alt: "user"
+                    }
+                  })
+                : _c("img", {
+                    staticClass: "profile-photo-sm pull-left",
+                    attrs: { src: "images/user-images/default.png", alt: "" }
+                  }),
               _vm._v(" "),
               _c(
                 "div",
