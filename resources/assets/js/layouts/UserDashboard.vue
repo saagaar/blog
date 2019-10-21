@@ -4,11 +4,12 @@
 <TheTopNav></TheTopNav>
 <div class="mid_part" >
 <!--================Dashboard =================-->
+
   <section class="dashboard_sec">
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-3">
-               
+          
             <div id="sidebar">      
             <div class="profile-card">
                 <img v-if="me.image" :src="'/images/user-images/'+me.image" alt="user" class="profile-photo">
@@ -17,10 +18,12 @@
                   <router-link to="/followers" class="text-white">{{ me.followersCount}} followers</router-link>
                   <router-link to="/followings" class="text-white">{{ me.followingCount}} following</router-link>
                 <!-- <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> {{ me.followersCount}} followers &nbsp;{{ me.followingCount}} following</a> -->
+
             </div>
             <TheDashboardSideMenu></TheDashboardSideMenu>
           </div>
             </div>
+            
            <router-view></router-view>
             <div class="clearfix"></div>
 

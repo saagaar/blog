@@ -83,6 +83,7 @@
         </div>
 
     </section>
+    
       <TheLoginSignupModal></TheLoginSignupModal>
       </div>
     
@@ -95,7 +96,6 @@
 
 import LoginButton from './LoginButton.vue';
 import SignUpButton from './SignUpButton.vue';
-
 import TheLoginSignupModal from './TheLoginSignupModal';
 
     export default {
@@ -124,14 +124,16 @@ import TheLoginSignupModal from './TheLoginSignupModal';
                 $("#search_input_box").slideToggle();
                 $("#search_input").focus();
                 // this.$refs.search_input_box.slideToggle()
-            }
+            },
+           
          },
+
         components:{
 
             SignUpButton,
             LoginButton,
-            TheLoginSignupModal
-        },
+            TheLoginSignupModal,
+            },
        
         
       

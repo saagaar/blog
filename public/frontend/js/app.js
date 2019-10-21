@@ -6740,6 +6740,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7468,6 +7469,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -7596,7 +7598,8 @@ __webpack_require__.r(__webpack_exports__);
         maxLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["maxLength"])(150)
       },
       content: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["minLength"])(20)
       }
     }
   },
@@ -7606,13 +7609,17 @@ __webpack_require__.r(__webpack_exports__);
       this.form.content = value.blog.content;
     }
   },
+  computed: {
+    me: function me() {
+      return this.$store.getters.me;
+    }
+  },
   methods: {
     next: function next() {
       this.$v.form.$touch();
 
       if (!this.$v.form.$invalid) {
-        var postId = this.submitForm(true); // console.log(postId);
-        // this.$router.push({ path: '/blog/edit/'+postId+'/step2' })
+        var postId = this.submitForm(true);
       }
     },
     previewImage: function previewImage() {
@@ -7647,15 +7654,15 @@ __webpack_require__.r(__webpack_exports__);
         this.form.post(url).then(function (response) {
           if (response.data.status) {
             if (next === true) {
-              var blogId = response.data.blogId; // console.log(blogId);
+              var blogId = response.data.blogId;
 
               _this.$router.push({
                 path: '/blog/edit/' + blogId + '/step2'
               });
-            } else {} //success message
-            // return response.data.blogId;
-            // window.location.href="dashboard"
+            } else {
+              _this.$emit('handleSuccessErrorMessage', response.data); //success message
 
+            }
           } else {}
         })["catch"](function (e) {
           console.log(e);
@@ -7852,8 +7859,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.$v.form.$invalid) {
         this.form.post('/blog/edit/' + this.$route.params.blogId + '/step2').then(function (response) {
-          if (response.data.status) {
-            window.location.href = "/dashboard";
+          if (response.data.status) {// window.location.href="/dashboard"
           } else {}
         })["catch"](function (e) {
           console.log(e);
@@ -48222,47 +48228,42 @@ var render = function() {
       ? _c(
           "div",
           _vm._l(_vm.followSuggestion, function(eachsuggestion) {
-            return _c(
-              "div",
-              { staticClass: "follow-user" },
-              [
-                _vm.followSuggestion.image
-                  ? _c("img", {
-                      staticClass: "profile-photo",
-                      attrs: {
-                        src: "/images/user-images/" + eachsuggestion.image,
-                        alt: "user"
-                      }
-                    })
-                  : _c("img", {
-                      staticClass: "profile-photo",
-                      attrs: {
-                        src: "/images/user-images/default.png",
-                        alt: "user"
-                      }
-                    }),
-                _vm._v(" "),
-                _c("h5", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v(_vm._s(eachsuggestion.name))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("FollowButton", {
-                  attrs: {
-                    Buttonclass: "btn btn-sm btn-round btn-success",
-                    username: eachsuggestion.username,
-                    followSuggestionHead: _vm.followSuggestion.length
-                  },
-                  on: { clicked: _vm.userFollowed }
-                })
-              ],
-              1
-            )
+            return _c("div", { staticClass: "follow-user" }, [
+              _c("img", {
+                staticClass: "profile-photo-sm pull-left",
+                attrs: {
+                  src: eachsuggestion.image
+                    ? "/images/user-images/" + eachsuggestion.image
+                    : "images/user-images/default.png",
+                  alt: "user"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c("h5", [
+                    _c("a", { attrs: { href: "#" } }, [
+                      _vm._v(_vm._s(eachsuggestion.name))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("FollowButton", {
+                    attrs: {
+                      Buttonclass: "btn btn-sm btn-round btn-success",
+                      username: eachsuggestion.username,
+                      followSuggestionHead: _vm.followSuggestion.length
+                    },
+                    on: { clicked: _vm.userFollowed }
+                  })
+                ],
+                1
+              )
+            ])
           }),
           0
         )
-      : this.$store.getters.isLoading === true && !_vm.followSuggestion
+      : this.$store.getters.isLoading === true
       ? _c(
           "div",
           { staticClass: "follow-user" },
@@ -50250,7 +50251,11 @@ var render = function() {
                       attrs: { src: "img/p_image.png", alt: "" }
                     }),
                     _vm._v(" "),
-                    _vm._m(0),
+                    _c("span", [
+                      _vm._v("Posting as "),
+                      _c("b", [_vm._v(_vm._s(_vm.me.name))]),
+                      _vm._v("      ")
+                    ]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -50320,7 +50325,29 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "row" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-9 col-md-8 col-sm-8" }, [
+                _c("div", { staticClass: "tools add_btn" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-light",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.submitForm(false)
+                        }
+                      }
+                    },
+                    [_vm._v("Save")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" })
+            ]),
             _vm._v(" "),
             _c(
               "div",
@@ -50350,12 +50377,12 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      !_vm.$v.form.title.minLength
+                      !_vm.$v.form.content.minLength
                         ? _c("div", { staticClass: "error" }, [
                             _vm._v(
                               "Content must be at least " +
                                 _vm._s(
-                                  _vm.$v.form.title.$params.minLength.min
+                                  _vm.$v.form.content.$params.minLength.min
                                 ) +
                                 " letters."
                             )
@@ -50391,31 +50418,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", [
-      _vm._v("Posting as "),
-      _c("b", [_vm._v("Shanvi")]),
-      _vm._v("      ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-3 col-md-4 col-sm-4" }, [
-        _c("h4", { staticClass: "grey" }, [
-          _c("i", { staticClass: "fa fa-edit" }, [_vm._v(" ")]),
-          _vm._v("Main Content ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-9 col-md-8 col-sm-8" }, [
-        _c("div", { staticClass: "tools add_btn" }, [
-          _c("button", { staticClass: "btn btn-light" }, [_vm._v("Save")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "clearfix" })
+    return _c("div", { staticClass: "col-lg-3 col-md-4 col-sm-4" }, [
+      _c("h4", { staticClass: "grey" }, [
+        _c("i", { staticClass: "fa fa-edit" }, [_vm._v(" ")]),
+        _vm._v("Content")
+      ])
     ])
   }
 ]
@@ -50529,12 +50536,13 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      !_vm.$v.form.title.minLength
+                      !_vm.$v.form.short_description.minLength
                         ? _c("div", { staticClass: "error" }, [
                             _vm._v(
                               "Description must be at least " +
                                 _vm._s(
-                                  _vm.$v.form.title.$params.minLength.min
+                                  _vm.$v.form.short_description.$params
+                                    .minLength.min
                                 ) +
                                 " letters."
                             )
@@ -50686,7 +50694,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "grey" }, [
       _c("i", { staticClass: "fa fa-edit" }, [_vm._v(" ")]),
-      _vm._v("Description ")
+      _vm._v("Short Description ")
     ])
   },
   function() {
@@ -50695,7 +50703,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", [
       _c("i", { staticClass: "fa fa-globe" }, [_vm._v(" ")]),
-      _vm._v(" Post As Anonymous Only")
+      _vm._v(" Post As Anonymous")
     ])
   },
   function() {

@@ -16,14 +16,14 @@
                           </figure>
                           </div>
                         
-                        <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Description </h4>
+                        <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Short Description </h4>
 
                        <div class="form-group">
                         <textarea  class="form-control ckeditor" id="editor" rows="10" blur="$v.form.short_description.$touch()"  v-model="form.short_description"></textarea>
                          <div v-if="$v.form.short_description.$anyDirty">
                               <div class="error" v-if="!$v.form.short_description.required">This Field is required</div>
                               <div class="error" v-if="!$v.form.short_description.maxLength">Description must be less {{ $v.form.short_description.$params.maxLength.max }} letters.</div>
-                              <div class="error" v-if="!$v.form.title.minLength">Description must be at least {{ $v.form.title.$params.minLength.min }} letters.</div>
+                              <div class="error" v-if="!$v.form.short_description.minLength">Description must be at least {{ $v.form.short_description.$params.minLength.min }} letters.</div>
                             </div>
                      </div>
 
@@ -46,7 +46,7 @@
                         </div>
                       </div>
                       <div class="tgl-group">
-                          <span><i class="fa fa-globe">&nbsp;</i> Post As Anonymous Only</span>
+                          <span><i class="fa fa-globe">&nbsp;</i> Post As Anonymous</span>
                           <input class="tgl tgl-light"  name="isAnynomous" id="display-address" type="checkbox" v-model="form.isAnynomous">
                           <label class="tgl-btn" for="display-address"></label>
                       </div>
@@ -177,7 +177,7 @@ import Form from './../services/Form.js';
               this.form.post('/blog/edit/'+this.$route.params.blogId+'/step2').then(response => {
                if(response.data.status){
 
-                  window.location.href="/dashboard"
+                  // window.location.href="/dashboard"
                }
                else{
                   

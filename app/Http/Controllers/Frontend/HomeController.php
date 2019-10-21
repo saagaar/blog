@@ -63,7 +63,7 @@ class HomeController extends FrontendController
         if(\Auth::check())
         {
             $routeName= ROUTE::currentRouteName();
-            $suggestion='';//$this->getFollowSuggestions(3);
+            $suggestion=$this->getFollowSuggestions(3);
             $data['followSuggestion']=$suggestion;
           if($routeName=='api')
           {

@@ -24,12 +24,11 @@ class BlogPolicy
      */
     public function update(Users $user, Blogs $blog)
     {
-
         if ($user->can('edit own posts')) {
-            return $user->id != $blog->user_id;
+            return $user->id == $blog->user_id;
         }
         if ($user->can('edit all posts')) {
-            return false;
+            return true;
         }
         if ($user->can('edit posts more then his point')) {
             return false;
