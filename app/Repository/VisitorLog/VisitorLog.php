@@ -15,7 +15,8 @@ Class  VisitorLog implements VisitorLogInterface
 	}
 
      
-    public function getLogById($log_id){
+    public function getLogById($log_id)
+    {
       return $this->log->where('id', $log_id)->first();
     }
 
@@ -25,8 +26,11 @@ Class  VisitorLog implements VisitorLogInterface
      * @return mixed
     */
     public function getAll(){
-   	 return	$this->log->latest();
+   	 return	$this->log->latest()->toArray();
     }
+
+     
+    
     /**
      * create user logs
      */

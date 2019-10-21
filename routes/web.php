@@ -89,6 +89,7 @@ Auth::routes(['register' => false]);
 Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.dashboard');
 
 
+
     Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
     //admin users

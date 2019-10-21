@@ -38,6 +38,21 @@ Class Blog implements BlogInterface
   public function getBlogByUserId($userid){
     return  $this->blog->where('user_id', $userid)->first();
   }
+
+  public function countAllBlogUser()
+  {
+     return $this->blog->get()->count();
+  }
+
+   public function countPublishedBlog()
+  {
+     return $this->blog->where('save_method','=' ,'1')->count();
+  }
+
+  public function countSavedBlog()
+  {
+     return $this->blog->where('save_method','=' ,'2')->count();
+  }
      
      
   public function getAssociatedCategoryOfBlog($blogId){

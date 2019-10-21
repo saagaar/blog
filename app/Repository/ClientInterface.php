@@ -11,7 +11,7 @@ interface ClientInterface
     public function getById($member_id);
       
       /**
-     * Get all posts.
+     * Get all posts.s
      *
      * @return mixed
      */

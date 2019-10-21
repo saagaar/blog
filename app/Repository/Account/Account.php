@@ -19,6 +19,17 @@ Class Account implements AccountInterface
       return $this->account->where('id', $memberId)->first();
     }
 
+     public function countUserlogin(){
+        return $this->account->whereDate('last_login_date','=',date('Y-m-d'))->count();
+    }
+
+      public function countAllUser()
+      {
+       
+      return $this->account->get()->count();    
+      }
+
+
     public function getUserByUsername($username){
       return $this->account->where('username', $username)->first();
     }
