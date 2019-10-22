@@ -10,6 +10,7 @@ use App\Jobs\VisitorLog;
 use App\Repository\VisitorlogInterface;
 use App\Repository\PermissionInterface;
 use Illuminate\Support\Facades\Auth;
+
 class FrontendController extends BaseController
 {
     Protected $siteSettings;
@@ -90,8 +91,9 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {
+
         $permission = $this->getAllPermissionsAttribute();
-        print_r($permission);exit;
+        
         return view('frontend.home.index');
     }
     public function getAllPermissionsAttribute() {
@@ -113,8 +115,10 @@ class FrontendController extends BaseController
             $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
             $user->notifications=$this->authUser->unreadNotifications()->take(10)->get();
             $user->blogCount=$this->authUser->blogs()->count();
-            $user->permission= $this->getAllPermissionsAttribute();    
             $user=$user->toArray();
+           
+            $user['permissions']= $this->getAllPermissionsAttribute();    
+            // $user['roles']=$this->authUser->roles->first()->name;
             return $user;
         }
         else{

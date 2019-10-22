@@ -13,9 +13,9 @@
                             <div class="meta-top d-flex">
                                 <a href="/test">Tours & Travel</a>
                             </div>
-                            <a class="d-block" href="single-blog.html">
-                                <h5>{{ str_limit($featuredBlog['0']->short_description, $limit = 50, $end = '...') }} </h5>
-                                <!-- <h5>{{ $featuredBlog['0']->short_description }}</h5> -->
+                            <a class="d-block" href="{{ route('blog.detail' , $featuredBlog['0']->code)}}">
+                                <h5>{{ str_limit($featuredBlog['0']->title, $limit = 150, $end = '...') }} </h5>
+                                <!-- <h5>{{ $featuredBlog['0']->title }}</h5> -->
                             </a>
                             <div class="meta-bottom d-flex" >
                                 <a href="#">March 12 , 2019 . </a>
@@ -39,8 +39,8 @@
                                     <div class="meta-top d-flex justify-content-center">
                                         <a href="#">Lifestyle</a>
                                     </div>
-                                    <a class="d-block" href="single-blog.html">
-                                        <h5>{{ str_limit($featuredBlog['1']->short_description, $limit = 50, $end = '...') }} </h5>
+                                    <a class="d-block" href="{{ route('blog.detail' , $featuredBlog['1']->code)}}">
+                                        <h5>{{ str_limit($featuredBlog['1']->title, $limit = 150, $end = '...') }} </h5>
                                     </a>
                                 </div>
                             </div>
@@ -58,8 +58,8 @@
                                     <div class="meta-top d-flex justify-content-center">
                                         <a href="#">Lifestyle</a>
                                     </div>
-                                    <a class="d-block" href="single-blog.html">
-                                        <h5>{{ str_limit($featuredBlog['2']->short_description, $limit = 50, $end = '...') }} </h5>
+                                    <a class="d-block" href="{{ route('blog.detail' , $featuredBlog['2']->code)}}">
+                                        <h5>{{ str_limit($featuredBlog['2']->title, $limit = 150, $end = '...') }} </h5>
                                     </a>
                                 </div>
                             </div>    
@@ -80,8 +80,8 @@
                             <div class="meta-top d-flex justify-content-center">
                                 <a href="#">Tours & Travel</a>
                             </div>
-                            <a class="d-block" href="single-blog.html">
-                                <h5>{{ str_limit($featuredBlog['3']->short_description, $limit = 50, $end = '...') }} </h5>
+                            <a class="d-block" href="{{ route('blog.detail' , $featuredBlog['3']->code)}}">
+                                <h5>{{ str_limit($featuredBlog['3']->title, $limit = 150, $end = '...') }} </h5>
                             </a>
                             <div class="meta-bottom d-flex justify-content-center">
                                 <a href="#">March 12 , 2019 . </a>
@@ -333,8 +333,8 @@
                             <div class="meta-top d-flex">
                                 <a href="#">Tours & Travel</a>
                             </div>
-                            <a class="d-block" href="single-blog.html">
-                                <h4>{{ str_limit($mostViewed['0']->short_description, $limit = 50, $end = '...') }}</h4>
+                            <a class="d-block" href="{{ route('blog.detail' , $mostViewed['0']->code)}}">
+                                <h4>{{ str_limit($mostViewed['0']->title, $limit = 150, $end = '...') }}</h4>
                             </a>
                             <div class="meta-bottom d-flex" >
                                 <a href="#">March 12 , 2019 . </a>
@@ -352,8 +352,8 @@
                                 <div class="meta-top d-flex">
                                     <a href="#">Tours & Travel</a>
                                 </div>
-                                <a class="d-block" href="single-blog.html">
-                                    <h4 class="font-20">{{ str_limit($mostViewed['1']->short_description, $limit = 150, $end = '...') }}</h4>
+                                <a class="d-block" href="{{ route('blog.detail' , $mostViewed['1']->code)}}">
+                                    <h4 class="font-20">{{ str_limit($mostViewed['1']->title, $limit = 150, $end = '...') }}</h4>
                                 </a>
                                 <!-- <p>Said spirit evening above good twes at  god midst deep a wherein very made he seas male very broug sad forth saying right.</p> -->
                             </div>  
@@ -377,8 +377,8 @@
                                 <div class="meta-top d-flex">
                                     <a href="#">Tours & Travel</a>
                                 </div>
-                                <a class="d-block" href="single-blog.html">
-                                    <h4 class="font-20">{{ str_limit($mostViewed['2']->short_description, $limit = 150, $end = '...') }}</h4>
+                                <a class="d-block" href="{{ route('blog.detail' , $mostViewed['2']->code)}}">
+                                    <h4 class="font-20">{{ str_limit($mostViewed['2']->title, $limit = 150, $end = '...') }}</h4>
                                 </a>
                                 <!-- <p>Said spirit evening above good twes at  god midst deep a wherein very made he seas male very broug sad forth saying right.</p> -->
                             </div>  
@@ -536,12 +536,12 @@
                                 <a href="#">shoes</a>/
                                 <a href="#"><?php echo date("F j, Y",strtotime($eachLatestBlog->created_at) ); ?></a>
                             </div>
-                            <a class="d-block" href="single-blog.html">
-                                <h4>{{ str_limit($eachLatestBlog->short_description, $limit = 50, $end = '...') }}</h4>
+                            <a class="d-block" href="{{ route('blog.detail' , $eachLatestBlog->code)}}">
+                                <h4>{{ str_limit($eachLatestBlog->title, $limit = 150, $end = '...') }}</h4>
                             </a>
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-comment"></i>05 comment</a>
-                                <a href="#"><i class="ti-heart"></i> 0 like</a>
+                                <a href="#"><i class="ti-heart"></i> {{$eachLatestBlog->likes_count}} like</a>
                             </div>
                         </div>
                     </div> 

@@ -40,13 +40,13 @@ Class Blog implements BlogInterface
    * get latest blog 
    */
   public function getLatestAllBlog(){
-    return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->limit(3)->get();
+    return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->withCount('likes')->limit(3)->get();
   }
   /**
    * get blog by  blog code
    */
   public function getBlogByCode($blogCode){
-    return $this->blog->where('code', $blogCode)->with('tags')->first();
+    return $this->blog->where('code', $blogCode)->with('tags','user')->withCount('likes','comments')->first();
   }
    /**
    * Get  Blog by user id
@@ -54,11 +54,11 @@ Class Blog implements BlogInterface
    * @param int
    */
   public function getBlogByUserId($userid){
-    return  $this->blog->where('user_id', $userid)->inRandomOrder();
+    return  $this->blog::with('user:id,username')->where('user_id', $userid)->orderByDesc('id');
   }
   
   public function getActiveBlogByUserId($userid){
-    return  $this->blog->where(['user_id'=>$userid,'save_method'=>'2'])->inRandomOrder();
+    return  $this->blog::with('user:id,username')->where(['user_id'=>$userid,'save_method'=>'2'])->orderByDesc('id');
   } 
      
   public function getAssociatedCategoryOfBlog($blogId){

@@ -20,6 +20,8 @@ Route::get('/logincheck', function () {
 ]);
 });
 
+Route::get('/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
+Route::get('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
 
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');
@@ -46,7 +48,7 @@ Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUs
 Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 
-Route::get('/tests', 'Frontend\UserInterestController@testinterest')->name('test');
+// Route::get('/tests', 'Frontend\UserInteractionController@testinglike')->name('test');
 Route::get('/blogs','Frontend\HomeController@index')->name('home');
 
 

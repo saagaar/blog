@@ -8,12 +8,17 @@ use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 use App\Repository\TagInterface;
 use Validator,Redirect,Response,File;
+
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Repository\BlogInterface; 
 use App\Http\Requests\BlogRequest;
 class BlogController extends FrontendController
 {
     protected $data;
 	protected $blog;
+
+    use AuthorizesRequests;
+
     function __construct(BlogInterface $blog)
     {
         parent::__construct();
@@ -67,8 +72,8 @@ class BlogController extends FrontendController
             $routeName= Route::currentRouteName();
             $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
             $data['blog']   = $this->blog->getBlogByCode($blogCode);
-            if($this->authUser->can('UpdateBlog', $data['blog'])) 
-            {
+
+                 $this->authorize('update', $data['blog']);
                 if($routeName=='api')
                    {
                       return ($data);
@@ -97,11 +102,7 @@ class BlogController extends FrontendController
                     $user=$this->user_state_info();
                     return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
                 }
-          }
-          else
-          {
-               return response()->json(['status'=>false,'blogId'=>$blogCode,'message'=>'You have no permission to perform this operations']);
-          }
+         
             
         }
     public function updateBlogDetail(Request $request,$postId,TagInterface $tag)

@@ -44,6 +44,9 @@ Custom Imports goes here
  */
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(require('vue-moment'));
+
+import Gate from './services/Gate.js';
+Vue.prototype.$gate = new Gate();
 import config from './config/config.js';
 
 import TheTopNav from './components/TopNav/TheTopNav';

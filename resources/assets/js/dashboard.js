@@ -11,7 +11,6 @@ import router from './routes.js'
 import VueRouter from 'vue-router';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
-
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
 Vue.use( CKEditor );
@@ -23,7 +22,9 @@ import UserDashboard from './layouts/UserDashboard';
 import Profile from './layouts/Profile';
 Vue.component('default-layout',UserDashboard);
 Vue.component('timeline-layout', Profile);
-
+// import SuccessErrorMessage from './components/SuccessErrorMessage.vue';
+// Vue.use( SuccessErrorMessage );
+import Gate from './services/Gate.js';
 
 const default_layout="default";
 const app = new Vue({
@@ -38,6 +39,7 @@ const app = new Vue({
         let userState = JSON.parse(window.__USER_STATE__) || {};
         if (userState) {
            this.$store.commit('ADD_ME', userState)
+            Vue.prototype.$gate = new Gate(userState);
         }
             this.$store.dispatch('checkLoginUser');
     },
@@ -47,6 +49,5 @@ const app = new Vue({
          let layout=(this.$route.meta.layout || default_layout)+'-layout';
 	  	 return createElement(layout);
 	},
-
-
+   
 });

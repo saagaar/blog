@@ -3,7 +3,6 @@
 <script type="text/javascript">
 	 window.__USER_STATE__ = '{!! addslashes(json_encode($user)) !!}'
 	 window.__INITIAL_STATE__ = '{!! addslashes(json_encode($initialState)) !!}'
-	 
 </script>
 <!--================ Start Meta Elements and includes=================-->
 @include('frontend.common.header')

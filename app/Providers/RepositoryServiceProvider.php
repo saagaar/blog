@@ -66,6 +66,8 @@ use App\Repository\LogActivityInterface;
 use App\Repository\LogActivity\LogActivity;
 use App\Repository\UserInterestInterface;
 use App\Repository\UserInterest\UserInterest;
+use App\Repository\UserInteractionInterface;
+use App\Repository\UserInteraction\UserInteraction;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -117,5 +119,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(LogActivityInterface::class, LogActivity::class);
         $this->app->singleton(UserInterestInterface::class, UserInterest::class);
         $this->app->singleton(NotificationSettingInterface::class, NotificationSetting::class);
+        $this->app->singleton(UserInteractionInterface::class, UserInteraction::class);
     }
 }

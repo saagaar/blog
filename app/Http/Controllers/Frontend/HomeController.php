@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\Notifications;
-use App\Repository\BlogInterface; 
+use App\Repository\BlogInterface;
+use App\Repository\UserInteractionInterface; 
 class HomeController extends FrontendController
 {
      use HasRoles;
@@ -23,17 +24,19 @@ class HomeController extends FrontendController
      protected $userAccounts;
 
      protected $authUser;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
    
-    function __construct(FollowerInterface $followInterface,BlogInterface $blog)
+    function __construct(FollowerInterface $followInterface,BlogInterface $blog,UserInteractionInterface $userInteraction)
     {
          parent::__construct();
          $this->followerList=$followInterface;
          $this->blog=$blog;
+         $this->userInteraction=$userInteraction;
     }
 
     /**
@@ -49,6 +52,7 @@ class HomeController extends FrontendController
         $data['mostViewed'] = $mostViewed;
         $latest =$this->blog->getLatestAllBlog();
         $data['latest'] = $latest;
+        $user ='';
          if(\Auth::check())
         {
             $routeName= ROUTE::currentRouteName();
@@ -66,9 +70,33 @@ class HomeController extends FrontendController
           }
 
         }
-        return view('frontend.home.index')->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest));
+        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest));
     }
+    public function blogDetail($code){
+      $blogDetails = $this->blog->getBlogByCode($code);
+      $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
+      // echo "<pre>";
+      // print_r($blogComment);exit;
+      $user ='';
+         if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+            
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/home';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment));
+          }
 
+        }
+        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment));
+    }
     public function test(Request $request)
     {
         $data= $this->blog->getAllBlogByViews();
@@ -80,7 +108,7 @@ class HomeController extends FrontendController
         if(\Auth::check())
         {
             $routeName= ROUTE::currentRouteName();
-            $suggestion='';//$this->getFollowSuggestions(3);
+            $suggestion=$this->getFollowSuggestions(3);
             $data['followSuggestion']=$suggestion;
           if($routeName=='api')
           {

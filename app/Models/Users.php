@@ -29,7 +29,7 @@ class Users extends Authenticatable implements Auditable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'id','password', 'remember_token',
     ];
 
     // *
@@ -66,16 +66,19 @@ class Users extends Authenticatable implements Auditable
 
     public function blogs()
     {
-        return $this->hasMany(Blogs::class,'id','user_id');
+        return $this->hasMany(Blogs::class,'user_id');
     }
     public function userInterests()
     {
         return $this->belongsToMany(Categories::class,'user_interests','user_id','category_id');
     }
-    public function role()
+    public function comments()
     {
-        return $this->belongsToMany(Comments::class, 'role_user');
+        return $this->belongsToMany(Comments::class, 'comments');
     }
-
+    public function likes()
+    {
+        return $this->belongsToMany(Blogs::class,'likes','user_id','blog_id');
+    }
 }
     

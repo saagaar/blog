@@ -6740,6 +6740,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7468,6 +7469,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -7596,7 +7598,8 @@ __webpack_require__.r(__webpack_exports__);
         maxLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["maxLength"])(150)
       },
       content: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["minLength"])(20)
       }
     }
   },
@@ -7606,13 +7609,17 @@ __webpack_require__.r(__webpack_exports__);
       this.form.content = value.blog.content;
     }
   },
+  computed: {
+    me: function me() {
+      return this.$store.getters.me;
+    }
+  },
   methods: {
     next: function next() {
       this.$v.form.$touch();
 
       if (!this.$v.form.$invalid) {
-        var postId = this.submitForm(true); // console.log(postId);
-        // this.$router.push({ path: '/blog/edit/'+postId+'/step2' })
+        var postId = this.submitForm(true);
       }
     },
     previewImage: function previewImage() {
@@ -7647,15 +7654,15 @@ __webpack_require__.r(__webpack_exports__);
         this.form.post(url).then(function (response) {
           if (response.data.status) {
             if (next === true) {
-              var blogId = response.data.blogId; // console.log(blogId);
+              var blogId = response.data.blogId;
 
               _this.$router.push({
                 path: '/blog/edit/' + blogId + '/step2'
               });
-            } else {} //success message
-            // return response.data.blogId;
-            // window.location.href="dashboard"
+            } else {
+              _this.$emit('handleSuccessErrorMessage', response.data); //success message
 
+            }
           } else {}
         })["catch"](function (e) {
           console.log(e);
@@ -7852,8 +7859,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.$v.form.$invalid) {
         this.form.post('/blog/edit/' + this.$route.params.blogId + '/step2').then(function (response) {
-          if (response.data.status) {
-            window.location.href = "/dashboard";
+          if (response.data.status) {// window.location.href="/dashboard"
           } else {}
         })["catch"](function (e) {
           console.log(e);
@@ -7877,7 +7883,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
 /* harmony import */ var _components_ContentPlaceholder_PlaceHolderBlogList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/ContentPlaceholder/PlaceHolderBlogList */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderBlogList.vue");
-//
 //
 //
 //
@@ -49581,18 +49586,15 @@ var render = function() {
           "div",
           _vm._l(_vm.followSuggestion, function(eachsuggestion) {
             return _c("div", { staticClass: "follow-user" }, [
-              eachsuggestion.image
-                ? _c("img", {
-                    staticClass: "profile-photo-lg",
-                    attrs: {
-                      src: "/images/user-images/" + eachsuggestion.image,
-                      alt: "user"
-                    }
-                  })
-                : _c("img", {
-                    staticClass: "profile-photo-sm pull-left",
-                    attrs: { src: "images/user-images/default.png", alt: "" }
-                  }),
+              _c("img", {
+                staticClass: "profile-photo-sm pull-left",
+                attrs: {
+                  src: eachsuggestion.image
+                    ? "/images/user-images/" + eachsuggestion.image
+                    : "images/user-images/default.png",
+                  alt: "user"
+                }
+              }),
               _vm._v(" "),
               _c(
                 "div",
@@ -49618,7 +49620,7 @@ var render = function() {
           }),
           0
         )
-      : this.$store.getters.isLoading === true && !_vm.followSuggestion
+      : this.$store.getters.isLoading === true
       ? _c(
           "div",
           { staticClass: "follow-user" },
@@ -51606,7 +51608,11 @@ var render = function() {
                       attrs: { src: "img/p_image.png", alt: "" }
                     }),
                     _vm._v(" "),
-                    _vm._m(0),
+                    _c("span", [
+                      _vm._v("Posting as "),
+                      _c("b", [_vm._v(_vm._s(_vm.me.name))]),
+                      _vm._v("      ")
+                    ]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -51676,7 +51682,29 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "row" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-9 col-md-8 col-sm-8" }, [
+                _c("div", { staticClass: "tools add_btn" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-light",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.submitForm(false)
+                        }
+                      }
+                    },
+                    [_vm._v("Save")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" })
+            ]),
             _vm._v(" "),
             _c(
               "div",
@@ -51706,12 +51734,12 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      !_vm.$v.form.title.minLength
+                      !_vm.$v.form.content.minLength
                         ? _c("div", { staticClass: "error" }, [
                             _vm._v(
                               "Content must be at least " +
                                 _vm._s(
-                                  _vm.$v.form.title.$params.minLength.min
+                                  _vm.$v.form.content.$params.minLength.min
                                 ) +
                                 " letters."
                             )
@@ -51747,31 +51775,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", [
-      _vm._v("Posting as "),
-      _c("b", [_vm._v("Shanvi")]),
-      _vm._v("      ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-3 col-md-4 col-sm-4" }, [
-        _c("h4", { staticClass: "grey" }, [
-          _c("i", { staticClass: "fa fa-edit" }, [_vm._v(" ")]),
-          _vm._v("Main Content ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-9 col-md-8 col-sm-8" }, [
-        _c("div", { staticClass: "tools add_btn" }, [
-          _c("button", { staticClass: "btn btn-light" }, [_vm._v("Save")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "clearfix" })
+    return _c("div", { staticClass: "col-lg-3 col-md-4 col-sm-4" }, [
+      _c("h4", { staticClass: "grey" }, [
+        _c("i", { staticClass: "fa fa-edit" }, [_vm._v(" ")]),
+        _vm._v("Content")
+      ])
     ])
   }
 ]
@@ -51885,12 +51893,13 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      !_vm.$v.form.title.minLength
+                      !_vm.$v.form.short_description.minLength
                         ? _c("div", { staticClass: "error" }, [
                             _vm._v(
                               "Description must be at least " +
                                 _vm._s(
-                                  _vm.$v.form.title.$params.minLength.min
+                                  _vm.$v.form.short_description.$params
+                                    .minLength.min
                                 ) +
                                 " letters."
                             )
@@ -52042,7 +52051,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "grey" }, [
       _c("i", { staticClass: "fa fa-edit" }, [_vm._v(" ")]),
-      _vm._v("Description ")
+      _vm._v("Short Description ")
     ])
   },
   function() {
@@ -52051,7 +52060,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", [
       _c("i", { staticClass: "fa fa-globe" }, [_vm._v(" ")]),
-      _vm._v(" Post As Anonymous Only")
+      _vm._v(" Post As Anonymous")
     ])
   },
   function() {
@@ -52108,9 +52117,17 @@ var render = function() {
                               _vm._v(" ")
                             ]),
                             _vm._v(" All Posts     "),
-                            _c("router-link", { attrs: { to: "/blog/add" } }, [
-                              _c("i", { staticClass: "fa fa-plus-circle" })
-                            ])
+                            _vm.$gate.allow("create")
+                              ? _c(
+                                  "router-link",
+                                  { attrs: { to: "/blog/add" } },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-plus-circle"
+                                    })
+                                  ]
+                                )
+                              : _vm._e()
                           ],
                           1
                         )
@@ -52516,17 +52533,23 @@ var render = function() {
                                         "div",
                                         { staticClass: "hidden_td_link" },
                                         [
-                                          _c(
-                                            "router-link",
-                                            {
-                                              attrs: {
-                                                to:
-                                                  "/blog/edit/" + eachblog.code
-                                              }
-                                            },
-                                            [_vm._v("Edit")]
-                                          ),
-                                          _vm._v(" "),
+                                          _vm.$gate.allow(
+                                            "update",
+                                            "blog",
+                                            eachblog
+                                          )
+                                            ? _c(
+                                                "router-link",
+                                                {
+                                                  attrs: {
+                                                    to:
+                                                      "/blog/edit/" +
+                                                      eachblog.code
+                                                  }
+                                                },
+                                                [_vm._v("Edit")]
+                                              )
+                                            : _vm._e(),
                                           _vm._v(
                                             "\r\n                   | \r\n                  "
                                           ),
@@ -77667,10 +77690,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes.js */ "./resources/assets/js/routes.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/index */ "./resources/assets/js/store/index.js");
-/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./config/config.js */ "./resources/assets/js/config/config.js");
-/* harmony import */ var _components_TopNav_TheTopNav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/TopNav/TheTopNav */ "./resources/assets/js/components/TopNav/TheTopNav.vue");
-/* harmony import */ var _components_MainNav_TheMainNav__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/MainNav/TheMainNav */ "./resources/assets/js/components/MainNav/TheMainNav.vue");
-/* harmony import */ var _components_Footer_TheFooter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Footer/TheFooter */ "./resources/assets/js/components/Footer/TheFooter.vue");
+/* harmony import */ var _services_Gate_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/Gate.js */ "./resources/assets/js/services/Gate.js");
+/* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./config/config.js */ "./resources/assets/js/config/config.js");
+/* harmony import */ var _components_TopNav_TheTopNav__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/TopNav/TheTopNav */ "./resources/assets/js/components/TopNav/TheTopNav.vue");
+/* harmony import */ var _components_MainNav_TheMainNav__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/MainNav/TheMainNav */ "./resources/assets/js/components/MainNav/TheMainNav.vue");
+/* harmony import */ var _components_Footer_TheFooter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Footer/TheFooter */ "./resources/assets/js/components/Footer/TheFooter.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -77718,6 +77742,8 @@ Custom Imports goes here
 Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
 Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js"));
 
+Vue.prototype.$gate = new _services_Gate_js__WEBPACK_IMPORTED_MODULE_5__["default"]();
+
  // Vue.component('TheTopNav', require('./components/TopNav/TheTopNav.vue'));
 
  // Vue.component('TheMainNav', require('./components/MainNav/TheMainNav.vue'));
@@ -77729,7 +77755,7 @@ var app = new Vue({
   el: '#app',
   router: _routes_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   data: function data() {
-    config: _config_config_js__WEBPACK_IMPORTED_MODULE_5__["default"];
+    config: _config_config_js__WEBPACK_IMPORTED_MODULE_6__["default"];
   },
   store: _store_index__WEBPACK_IMPORTED_MODULE_4__["default"],
   beforeCreate: function beforeCreate() {
@@ -77742,9 +77768,9 @@ var app = new Vue({
     this.$store.dispatch('checkLoginUser');
   },
   components: {
-    'the-top-nav': _components_TopNav_TheTopNav__WEBPACK_IMPORTED_MODULE_6__["default"],
-    'the-main-nav': _components_MainNav_TheMainNav__WEBPACK_IMPORTED_MODULE_7__["default"],
-    'the-footer': _components_Footer_TheFooter__WEBPACK_IMPORTED_MODULE_8__["default"]
+    'the-top-nav': _components_TopNav_TheTopNav__WEBPACK_IMPORTED_MODULE_7__["default"],
+    'the-main-nav': _components_MainNav_TheMainNav__WEBPACK_IMPORTED_MODULE_8__["default"],
+    'the-footer': _components_Footer_TheFooter__WEBPACK_IMPORTED_MODULE_9__["default"]
   }
 });
 
@@ -78899,6 +78925,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/mixins/PermissionCheck.mixin.js":
+/*!*************************************************************!*\
+  !*** ./resources/assets/js/mixins/PermissionCheck.mixin.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    $can: function $can(permissionName) {
+      return Permissions.indexOf(permissionName) !== -1;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/pages/AddBlogStep1.vue":
 /*!****************************************************!*\
   !*** ./resources/assets/js/pages/AddBlogStep1.vue ***!
@@ -79625,6 +79670,65 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/policies/BlogPolicy.js":
+/*!****************************************************!*\
+  !*** ./resources/assets/js/policies/BlogPolicy.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BlogPolicy; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var BlogPolicy =
+/*#__PURE__*/
+function () {
+  function BlogPolicy() {
+    _classCallCheck(this, BlogPolicy);
+  }
+
+  _createClass(BlogPolicy, null, [{
+    key: "update",
+    // static create(user)
+    // {
+    //     return user.role === 'editor';
+    // }
+    // static view(user, post)
+    // {
+    //     return true;
+    // }
+    // static delete(user, post)
+    // {
+    //     return user.id === post.user_id;
+    // }
+    value: function update(user, blog) {
+      if (user.permissions.indexOf('edit all posts') !== -1) {
+        return user.username === blog.user.username;
+      }
+
+      if (user.permissions.indexOf('edit own posts') !== -1) {
+        return true;
+      }
+
+      if (user.permissions == 'edit posts more then his point') {
+        return false;
+      }
+    }
+  }]);
+
+  return BlogPolicy;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/routes.js":
 /*!***************************************!*\
   !*** ./resources/assets/js/routes.js ***!
@@ -79869,6 +79973,78 @@ function () {
   }]);
 
   return Form;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/services/Gate.js":
+/*!**********************************************!*\
+  !*** ./resources/assets/js/services/Gate.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Gate; });
+/* harmony import */ var _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../policies/BlogPolicy */ "./resources/assets/js/policies/BlogPolicy.js");
+/* harmony import */ var _mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../mixins/PermissionCheck.mixin */ "./resources/assets/js/mixins/PermissionCheck.mixin.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+/**
+* This class is used to implement permission check same as laravel gate /policies
+* construct expects @object User
+**/
+
+var Gate =
+/*#__PURE__*/
+function () {
+  function Gate(user) {
+    _classCallCheck(this, Gate);
+
+    this.user = user;
+    this.policies = {
+      blog: _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__["default"]
+    };
+  }
+
+  _createClass(Gate, [{
+    key: "before",
+    value: function before() {
+      return this.user.roles === 'admin';
+    }
+  }, {
+    key: "allow",
+    value: function allow(action, type) {
+      var model = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+      if (this.before()) {
+        return true;
+      }
+
+      if (type == '' || type === undefined || model == '' || model === undefined) {
+        return this.user.permissions.indexOf(action) !== -1;
+      }
+
+      return this.policies[type][action](this.user, model);
+    }
+  }, {
+    key: "deny",
+    value: function deny(action, type) {
+      var model = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      return !this.allow(action, type, model);
+    }
+  }]);
+
+  return Gate;
 }();
 
 
