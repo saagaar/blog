@@ -22,8 +22,7 @@ import UserDashboard from './layouts/UserDashboard';
 import Profile from './layouts/Profile';
 Vue.component('default-layout',UserDashboard);
 Vue.component('timeline-layout', Profile);
-// import SuccessErrorMessage from './components/SuccessErrorMessage.vue';
-// Vue.use( SuccessErrorMessage );
+
 import Gate from './services/Gate.js';
 
 const default_layout="default";

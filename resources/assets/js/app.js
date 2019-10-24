@@ -54,6 +54,9 @@ import TheTopNav from './components/TopNav/TheTopNav';
 import TheMainNav from './components/MainNav/TheMainNav';
 // Vue.component('TheMainNav', require('./components/MainNav/TheMainNav.vue'));
 import TheFooter from './components/Footer/TheFooter';
+import ListComment from './components/Comment/ListComment';
+import AddComment from './components/Comment/AddComment';
+import Comment from './components/Comment/Comment';
 // import UserDashboard from './pages/UserDashboard';
 const default_layout="default";
 const app = new Vue({
@@ -73,9 +76,12 @@ const app = new Vue({
     components:{
             'the-top-nav':TheTopNav,
             'the-main-nav':TheMainNav,
-            'the-footer':TheFooter
+            'the-footer':TheFooter,
+            'list-comment':ListComment,
+            'add-comment':AddComment,
+            'comment':Comment
           
-        },
+        }
     
 
 });

@@ -75,6 +75,8 @@ class HomeController extends FrontendController
     public function blogDetail($code){
       $blogDetails = $this->blog->getBlogByCode($code);
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
+      $data['blogDetails'] =$blogDetails;
+      $data['blogComment']  =$blogComment;
       // echo "<pre>";
       // print_r($blogComment);exit;
       $user ='';

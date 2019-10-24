@@ -9,8 +9,15 @@ export const checkLoginUser = ({ commit }) => {
           console.log(e);
       });
 }
-
-// export const lodingInitialData = ({ commit }) => {
-//     // show loading
-    
-// }
+export const createComments = ({ commit,getters },data) => {
+    // show loading
+    // let form=new Form();
+    data.form.post('/create/comment/'+data.code).then(response => {
+    	console.log(response.data);
+    	var comment = {comment:response.data,created_at:response.created_at,user:{'name':getters.me.name,'image':getters.me.image}};
+          commit('LIST_COMMENTS',comment);
+      }).catch(e => 
+      {
+          console.log(e);
+      });
+}

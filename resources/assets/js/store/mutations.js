@@ -20,3 +20,7 @@ export const TOGGLE_LOADING = state =>
 {
     state.isLoading = !state.isLoading
 }
+
+export const LIST_COMMENTS = (state, comments) => {
+    state.listComments = comments
+}

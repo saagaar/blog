@@ -16,6 +16,7 @@
 	<the-top-nav></the-top-nav>
 	<the-main-nav></the-main-nav>
 	 @yield('content')
+	 
 	<the-footer></the-footer>
 </div>
   
