@@ -7660,8 +7660,7 @@ __webpack_require__.r(__webpack_exports__);
                 path: '/blog/edit/' + blogId + '/step2'
               });
             } else {
-              _this.$emit('handleSuccessErrorMessage', response.data); //success message
-
+              _this.$store.commit('SETFLASHMESSAGE', response.data);
             }
           } else {}
         })["catch"](function (e) {
@@ -7787,6 +7786,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -7806,8 +7806,9 @@ __webpack_require__.r(__webpack_exports__);
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
         short_description: '',
         image: '',
-        tags: '',
-        isAnynomous: false
+        tags: {},
+        isAnynomous: '',
+        file: true
       })
     };
   },
@@ -7825,7 +7826,7 @@ __webpack_require__.r(__webpack_exports__);
     initialState: function initialState(value) {
       this.form.short_description = value.blog.short_description;
       this.form.tags = value.blog.tags;
-      this.form.isAnynomous = value.blog.anynomous;
+      this.form.isAnynomous = value.blog.anynomous == 1 ? true : false;
     }
   },
   // created: function(){
@@ -7835,6 +7836,19 @@ __webpack_require__.r(__webpack_exports__);
     onChangeEventHandler: function onChangeEventHandler() {
       console.log(options);
     },
+    checkTag: function (_checkTag) {
+      function checkTag() {
+        return _checkTag.apply(this, arguments);
+      }
+
+      checkTag.toString = function () {
+        return _checkTag.toString();
+      };
+
+      return checkTag;
+    }(function () {
+      alert(checkTag);
+    }),
     // next() {
     //   this.$v.form.$touch();
     //   if(!this.$v.form.$invalid)
@@ -7852,17 +7866,33 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
 
+      this.form.image = this.$refs.file.files[0];
       reader.readAsDataURL(event.target.files[0]);
     },
     submitForm: function submitForm() {
+      var _this = this;
+
       this.$v.form.$touch();
 
       if (!this.$v.form.$invalid) {
         this.form.post('/blog/edit/' + this.$route.params.blogId + '/step2').then(function (response) {
-          if (response.data.status) {// window.location.href="/dashboard"
-          } else {}
+          if (response.data.status) {// this.$store.commit('SETFLASHMESSAGE',response.data);
+          } else {
+            _this.$store.commit('SETFLASHMESSAGE', {
+              status: false,
+              message: response.data.status
+            });
+          }
         })["catch"](function (e) {
-          console.log(e);
+          console.log(e); // let test= Object.assign([], e.message);
+
+          if (e.status === false) _this.$store.commit('SETFLASHMESSAGE', {
+            status: false,
+            message: e.message
+          });else _this.$store.commit('SETFLASHMESSAGE', {
+            status: false,
+            message: e.message
+          });
         });
       }
     }
@@ -50468,6 +50498,7 @@ var render = function() {
                     { staticClass: "file-input btn btn-success btn-file" },
                     [
                       _c("input", {
+                        ref: "file",
                         staticClass: "upload",
                         attrs: { type: "file", name: "image", id: "file1" },
                         on: {
@@ -50562,26 +50593,34 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _vm.initialState.options
-                        ? _c("multiselect", {
-                            attrs: {
-                              "tag-placeholder": "Add this as new tag",
-                              placeholder: "Search a tag",
-                              label: "name",
-                              "track-by": "name",
-                              max: _vm.max,
-                              optionsLimit: _vm.optionsLimit,
-                              options: _vm.initialState.options,
-                              multiple: true,
-                              taggable: true
-                            },
-                            model: {
-                              value: _vm.form.tags,
-                              callback: function($$v) {
-                                _vm.$set(_vm.form, "tags", $$v)
+                        ? _c(
+                            "multiselect",
+                            {
+                              attrs: {
+                                "tag-placeholder": "Add this as new tag",
+                                placeholder: "Search a tag",
+                                label: "name",
+                                "track-by": "name",
+                                max: _vm.max,
+                                optionsLimit: _vm.optionsLimit,
+                                options: _vm.initialState.options,
+                                multiple: true,
+                                taggable: true
                               },
-                              expression: "form.tags"
-                            }
-                          })
+                              model: {
+                                value: _vm.form.tags,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.form, "tags", $$v)
+                                },
+                                expression: "form.tags"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                '\n                   Tag="checkTag"\n                   '
+                              )
+                            ]
+                          )
                         : _vm._e()
                     ],
                     1
@@ -74085,6 +74124,8 @@ var routes = [{
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Form; });
 /* harmony import */ var _config_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../config/config.js */ "./resources/assets/js/config/config.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -74135,13 +74176,90 @@ function () {
     key: "data",
     value: function data() {
       var data = {};
+      var form = this;
+      var ndata = this.originalData;
 
-      for (var property in this.originalData) {
-        data[property] = this[property];
+      if (this.originalData.file) {
+        var formdata = new FormData();
+
+        for (var property in ndata) {
+          if (form[property] instanceof Array) {
+            return this.createFormData(formdata, form[property], 'tags');
+          } else {
+            formdata.append(property, form[property]);
+          }
+        }
+      } else {
+        for (var _property in this.originalData) {
+          data[_property] = this[_property];
+        }
       }
 
       return data;
     }
+  }, {
+    key: "createFormData",
+    value: function createFormData(form, data, key) {
+      var fd = form;
+
+      if (_typeof(data) === 'object' && data !== null || Array.isArray(data)) {
+        for (var i in data) {
+          if (_typeof(data[i]) === 'object' && data[i] !== null || Array.isArray(data[i])) {
+            this.createFormData(fd, data[i], key + '[' + i + ']');
+          } else {
+            console.log(fd);
+            fd.append(key + '[' + i + ']', data[i]);
+          }
+        }
+      } else {
+        fd.append(key, data);
+      }
+
+      console.log(fd);
+      return fd;
+    } // toFormData(obj={}, form='', namespace='') {
+    //   var fd =form || new FormData();
+    //   var formKey;
+    //   // var obj=this.originalData;
+    //   for(let property in obj) {
+    //     // if(obj.hasOwnProperty(property) && obj[property]) {
+    //         formKey=property
+    //         if (this[property] instanceof Date) {
+    //           fd.append(formKey, this[property].toISOString());
+    //         } 
+    //         else if (this[property] instanceof Array) {
+    //           formKey = formKey + '[]'
+    //           this[property].forEach(element => {
+    //             console.log(formKey);
+    //             console.log(this[property]);
+    //             fd.append(formKey, JSON.stringify(this[property]))
+    //             // fd.append(formKey, this[property]);
+    //           })
+    //         } 
+    //         else if (typeof this[property] === 'object' && !(this[property] instanceof File)) {
+    //           this.toFormData(obj[property], fd, formKey);
+    //         } else { // if it's a string or a File object
+    //           fd.append(formKey, this[property]);
+    //         }
+    //          // if (namespace) {
+    //          //    formKey = namespace + '[' + property + ']';
+    //          //  } else {
+    //          //      formKey = property;
+    //          //  }
+    //          //  // if the property is an object, but not a File, use recursivity.
+    //          //  if (obj[property] instanceof Date) {
+    //          //    fd.append(formKey, obj[property].toISOString());
+    //          //  }
+    //          //  else if (typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
+    //          //    this.toFormData(obj[property], fd, formKey);
+    //          //  } else { // if it's a string or a File object
+    //          //    fd.append(formKey, obj[property]);
+    //          //  }
+    //     // }
+    //   }
+    //   return fd;
+    // };
+
   }, {
     key: "record",
     value: function record(errors) {
@@ -74217,8 +74335,10 @@ function () {
       return new Promise(function (resolve, reject) {
         window.axios.defaults.headers.common = {
           'X-Requested-With': 'XMLHttpRequest',
+          'Content-Type': 'multipart/form-data',
           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        };
+        }; //if form contains any file it must be form  data
+
         var fullUrl = _config_config_js__WEBPACK_IMPORTED_MODULE_0__["default"].ROOT_URL + '/' + url;
         window.axios[requestType](fullUrl, _this.data()).then(function (response) {
           _this.onSuccess(response.data);
@@ -74459,7 +74579,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*!************************************************!*\
   !*** ./resources/assets/js/store/mutations.js ***!
   \************************************************/
-/*! exports provided: UserLoggedIn, ADD_ME, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT, TOGGLE_LOADING */
+/*! exports provided: UserLoggedIn, ADD_ME, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT, TOGGLE_LOADING, SETFLASHMESSAGE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74471,6 +74591,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DECREMENT_FOLLOWERS_COUNT", function() { return DECREMENT_FOLLOWERS_COUNT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DECREMENT_FOLLOWING_COUNT", function() { return DECREMENT_FOLLOWING_COUNT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_LOADING", function() { return TOGGLE_LOADING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SETFLASHMESSAGE", function() { return SETFLASHMESSAGE; });
 var UserLoggedIn = function UserLoggedIn(state, user) {
   state.user.isLoggedIn = user;
 };
@@ -74491,6 +74612,9 @@ var DECREMENT_FOLLOWING_COUNT = function DECREMENT_FOLLOWING_COUNT(state, count)
 };
 var TOGGLE_LOADING = function TOGGLE_LOADING(state) {
   state.isLoading = !state.isLoading;
+};
+var SETFLASHMESSAGE = function SETFLASHMESSAGE(state, flashdata) {
+  state.flashMessage = flashdata;
 };
 
 /***/ }),
@@ -74530,6 +74654,7 @@ var state = {
   },
   openTweetDetails: null,
   isLoading: false,
+  flashMessage: {},
   appName: 'TheBloggersClub.com'
 };
 /* harmony default export */ __webpack_exports__["default"] = (state);

@@ -1,6 +1,7 @@
 export const UserLoggedIn = (state, user) => {
     state.user.isLoggedIn = user
 }
+
 export const ADD_ME = (state, user) => {
     state.me = user
 }
@@ -19,4 +20,8 @@ export const DECREMENT_FOLLOWING_COUNT = (state, count) => {
 export const TOGGLE_LOADING = state => 
 {
     state.isLoading = !state.isLoading
+}
+export const SETFLASHMESSAGE = (state, flashdata)=> 
+{
+    state.flashMessage = flashdata
 }

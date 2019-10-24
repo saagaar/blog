@@ -23,7 +23,7 @@ class Blogs extends Model implements Auditable
     ];
 
 
-    protected $hidden = array('user_id','id');
+    protected $hidden = array('user_id','id','pivot');
     /**
      * The attributes that should be hidden for arrays.
      *

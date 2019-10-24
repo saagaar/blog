@@ -28,7 +28,7 @@ Class Blog implements BlogInterface
    */
 
   public function getBlogByCode($blogCode){
-    return $this->blog->where('code', $blogCode)->with('tags')->first();
+    return $this->blog->where('code', $blogCode)->with('tags:name')->first();
   }
    /**
    * Get  Blog by user id
@@ -88,7 +88,6 @@ Class Blog implements BlogInterface
     public function addTag($postId,$tags){
       $blogData = $this->blog->where('code',$postId)->first();
       return $blogData->tags()->sync($tags);
-      
     }
 }
 ?>

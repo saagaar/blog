@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-3">
-          
+            <SuccessErrorMessage></SuccessErrorMessage>
             <div id="sidebar">      
             <div class="profile-card">
                 <img v-if="me.image" :src="'/images/user-images/'+me.image" alt="user" class="profile-photo">
@@ -37,6 +37,8 @@
 </div>
 </template>
 <script>
+import SuccessErrorMessage from './../components/SuccessErrorMessage.vue';
+
 import mixin  from './../mixins/LoadData.mixin.js';
 import TheTopNav from './../components/TopNav/TheTopNav';
 import TheDashboardSideMenu from './../components/Dashboard/TheDashboardSideMenu';
@@ -56,10 +58,12 @@ import TheFooter from './../components/Footer/TheFooter';
             
            
         },
+
         components:{
             TheTopNav,
             TheFooter,
-            TheDashboardSideMenu
+            TheDashboardSideMenu,
+            SuccessErrorMessage
         }
     }
 </script>
