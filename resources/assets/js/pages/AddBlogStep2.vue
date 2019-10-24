@@ -11,7 +11,7 @@
                           <figure> 
                               <img :src="'/images/upload.png'" id="image-field"/>
                               <span class="file-input btn btn-success btn-file">
-                                  <input type="file"  name="image" id="file1" class="upload" @change="previewImage(); $v.form.image.$touch()">
+                                  <input type="file" ref="file" name="image" id="file1" class="upload" @change="previewImage(); $v.form.image.$touch()">
                               </span>
                           </figure>
                           </div>
@@ -42,6 +42,7 @@
                            :options="initialState.options" 
                            :multiple="true" 
                            :taggable="true">
+                           Tag="checkTag"
                            </multiselect>
                         </div>
                       </div>
@@ -115,8 +116,9 @@ import Form from './../services/Form.js';
                 form:new Form({
                     short_description:'',
                     image:'',
-                    tags:'',
-                    isAnynomous:false
+                    tags:{},
+                    isAnynomous:'',
+                    file:true
                 }),
                  
             }
@@ -135,9 +137,9 @@ import Form from './../services/Form.js';
         },
         watch: {
         initialState: function (value) {
-            this.form.short_description=value.blog.short_description;        
+            this.form.short_description=value.blog.short_description;     
             this.form.tags=value.blog.tags;   
-            this.form.isAnynomous=value.blog.anynomous;
+            this.form.isAnynomous=(value.blog.anynomous==1)?true:false;
         },
       },
         // created: function(){
@@ -149,6 +151,9 @@ import Form from './../services/Form.js';
 
           onChangeEventHandler(){
             console.log(options);
+          },
+          checkTag(){
+            alert(checkTag);
           },
           // next() {
           //   this.$v.form.$touch();
@@ -166,7 +171,9 @@ import Form from './../services/Form.js';
                       imageField.src = reader.result;
                   }
               }
+              this.form.image = this.$refs.file.files[0];
               reader.readAsDataURL(event.target.files[0]);
+              
             },
 
 
@@ -176,14 +183,18 @@ import Form from './../services/Form.js';
             {
               this.form.post('/blog/edit/'+this.$route.params.blogId+'/step2').then(response => {
                if(response.data.status){
-
-                  // window.location.href="/dashboard"
+                 // this.$store.commit('SETFLASHMESSAGE',response.data);
                }
                else{
-                  
+                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.status});
                }
               }).catch(e => {
-                  console.log(e);
+                console.log(e);
+               // let test= Object.assign([], e.message);
+                  if(e.status===false)
+                     this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                    else
+                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
             }
           }

@@ -1,6 +1,7 @@
 export const UserLoggedIn = (state, user) => {
     state.user.isLoggedIn = user
 }
+
 export const ADD_ME = (state, user) => {
     state.me = user
 }
@@ -23,4 +24,8 @@ export const TOGGLE_LOADING = state =>
 
 export const LIST_COMMENTS = (state, comments) => {
     state.listComments = comments
+}
+export const SETFLASHMESSAGE = (state, flashdata)=> 
+{
+    state.flashMessage = flashdata
 }

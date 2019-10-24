@@ -58,21 +58,19 @@ class BlogController extends FrontendController
                     return response()->json(['status'=>true,'blogId'=>$created['code'],'message'=>'Blog saved successfully']);
                 }
             } 
-        }
-      $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
-      $initialState=json_encode($data);
-      $user=$this->user_state_info();
-      return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-   }
+          }
+          $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
+          $initialState=json_encode($data);
+          $user=$this->user_state_info();
+          return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+       }
         
    	}
     public function update(Request $request,$blogCode,TagInterface $tag)
     {
-       
             $routeName= Route::currentRouteName();
             $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
             $data['blog']   = $this->blog->getBlogByCode($blogCode);
-
                  $this->authorize('update', $data['blog']);
                 if($routeName=='api')
                    {
@@ -94,7 +92,7 @@ class BlogController extends FrontendController
                             }else{
                                     $input = $request->all();
                                     $this->blog->updateByCode($blogCode,$input);
-                                    return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'Blog updated successfully']);
+                                    return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'Blog Saved!']);
                             }
                             } 
                     }
@@ -108,23 +106,22 @@ class BlogController extends FrontendController
     public function updateBlogDetail(Request $request,$postId,TagInterface $tag)
     {
     $routeName= Route::currentRouteName();
+    $data['options'] = $tag->getTagsList();
+    $data['blog']   = $this->blog->getBlogByCode($postId);
     if($routeName=='api')
     {
-     
-        $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
-        $data['blog']   = $this->blog->getBlogByCode($postId);
         return ($data);
     }
     else
     {
         $data = [];
-        $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
-        $data['blog']   = $this->blog->getBlogByCode($postId);
         $data['path']='/blog/edit/'.$postId;
         if($request->method()=='POST'){
+            
             $validator = Validator::make($request->all(), [ 
             'short_description' => 'required',
-            'tags'              =>'required' 
+            'tags'              =>'required' ,
+            // 'image'             => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
             if($this->blogRequiresActivation=='N'){
                 return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
@@ -132,11 +129,16 @@ class BlogController extends FrontendController
                 if ($validator->fails()) {
                     return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
                 }else{
+                    if(request()->image)
+                    {
+                        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+                        request()->image->move(public_path('images/blog'), $imageName);
+                        $form['image']=$imageName;
+                    }
                     $form['short_description']=$request->short_description;
-                    $form['image']=$request->image;
-                    $form['save_method']='2';
+                    $form['save_method']='1';
                     $form['anynomous'] = $request->isAnynomous ? '1' : '2';
-                    $this->blog->updateByCode($postId,$form); 
+                    $this->blog->updateByCode($postId,$form);
                     $tagid = $tag->getTagByName($request->tags);
                     $this->blog->addTag($postId,$tagid);  
                     return response()->json(['status'=>true,'blogId'=>$postId,'message'=>'Blog updated successfully']);                

@@ -34,6 +34,9 @@ Class Tag implements TagInterface
       return $this->tag->whereIn('name',$tags)->select('id')->get();
     }
 
+    public function getTagsList(){
+      return $this->tag->where('status','1')->select('name')->get()->toArray();
+    }
  	  /**
      * create a 
      *

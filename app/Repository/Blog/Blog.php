@@ -1,7 +1,7 @@
 <?php 
 
 namespace App\Repository\Blog;
-
+use Illuminate\Database\Eloquent\Model;
 use App\Models\Blogs;
 use App\Repository\BlogInterface;
 use App\Repository\TagInterface;
@@ -41,6 +41,13 @@ Class Blog implements BlogInterface
    */
   public function getLatestAllBlog(){
     return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->withCount('likes')->limit(3)->get();
+  }
+  /**
+   * get blog bye following
+   */
+  public function getBlogOfFollowingUser($user){
+    $listofFollowings=$user->followings()->select('follow_id')->get()->pluck('follow_id')->toArray();
+    return $this->blog->whereIn('user_id', $listofFollowings)->latest()->get()->toArray();
   }
   /**
    * get blog by  blog code
@@ -106,7 +113,6 @@ Class Blog implements BlogInterface
     public function addTag($postId,$tags){
       $blogData = $this->blog->where('code',$postId)->first();
       return $blogData->tags()->sync($tags);
-      
     }
 }
 ?>

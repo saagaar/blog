@@ -24,6 +24,7 @@ const state = {
     },
     openTweetDetails: null,
     isLoading: false,
+    flashMessage:{},
     appName: 'TheBloggersClub.com'
 }
 export default state

@@ -124,6 +124,7 @@ import Form from './../services/Form.js';
           //   this.form.tags.push(tag)
           // },
           submitForm:function(next=false){
+          
               var url='/blog/add';
                 this.$v.form.$touch();
             if(!this.$v.form.$invalid)
@@ -140,8 +141,7 @@ import Form from './../services/Form.js';
                   }
                   else
                   {
-                    this.$emit('handleSuccessErrorMessage',response.data);
-                    //success message
+                    this.$store.commit('SETFLASHMESSAGE',response.data);
                   }
                  }
                  else{
