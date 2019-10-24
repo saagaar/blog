@@ -17,6 +17,9 @@ class Tags extends Model implements Auditable
     protected $fillable = [
         'name','status'
     ];
+    protected $hidden = [
+        'pivot'
+    ];
     public function blogs(){
     	return $this->belongsToMany(Blogs::class,'blogs_id');
     }

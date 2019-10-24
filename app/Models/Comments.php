@@ -12,7 +12,7 @@ class Comments extends Pivot
     protected $fillable = ['user_id','blog_id','comment','status'];
 
 
-    protected $hidden  = ['user_id','blog_id'];
+    protected $hidden  = ['id','user_id','blog_id'];
 
      public function user()
     {

@@ -8,7 +8,7 @@ const state = {
         followingsCount:0
     },
     feed: [],
-    listComments:{},
+    listComments:[],
     profilePage: {
         profile: {
             bio: ''
@@ -24,6 +24,7 @@ const state = {
     },
     openTweetDetails: null,
     isLoading: false,
+    flashMessage:{},
     appName: 'TheBloggersClub.com'
 }
 export default state

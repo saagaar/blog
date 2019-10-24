@@ -53,7 +53,7 @@ class UserInteractionController extends FrontendController
             $input['blog_id'] = $blogData->id;
             $input['created_at'] = $date->format('Y-m-d H:i:s');
             $this->userInteraction->createCommment($input);
-             return array('status'=>true,'message'=>'success','data'=>array('comment'=>$input['comment']),'created_at'=>$input['created_at']);
+             return array('status'=>true,'message'=>'success','data'=>array('comment'=>$input['comment'],'created_at'=>$input['created_at']));
         }
     }
     public function testinglike(){

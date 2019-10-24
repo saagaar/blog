@@ -74,9 +74,13 @@ class HomeController extends FrontendController
     }
     public function blogDetail($code){
       $blogDetails = $this->blog->getBlogByCode($code);
+      $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->orderBy('id','asc')->first();
+      $next = $this->blog->getAll()->where('id', '<', $blogDetails['id'])->orderBy('id','desc')->first();
+      // print_r($next);exit;
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $data['blogDetails'] =$blogDetails;
       $data['blogComment']  =$blogComment;
+      
       // echo "<pre>";
       // print_r($blogComment);exit;
       $user ='';
@@ -93,11 +97,11 @@ class HomeController extends FrontendController
               $data['path']='/home';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
-              return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment));
+              return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next));
           }
 
         }
-        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment));
+        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next));
     }
     public function test(Request $request)
     {
@@ -112,6 +116,8 @@ class HomeController extends FrontendController
             $routeName= ROUTE::currentRouteName();
             $suggestion=$this->getFollowSuggestions(3);
             $data['followSuggestion']=$suggestion;
+            $blogByFollowing =$this->blog->getBlogOfFollowingUser($this->authUser);
+            $data['blogByFollowing'] = $blogByFollowing;
           if($routeName=='api')
           {
             return ($data);

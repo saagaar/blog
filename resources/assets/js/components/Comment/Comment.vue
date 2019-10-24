@@ -1,16 +1,15 @@
 <template>
 <div>
 	<div class="comments-area white-box">
-        <h4> {{ blog.comments_count }} Comments</h4>
-        <ListComment :comment="getComments"></ListComment>
+        <h4> {{ commentsCount }} Comments</h4>
+        <ListComment ></ListComment>
     </div>
-    <AddComment :blogCode="blog.code" @commented="updateComment"></AddComment>
+    <AddComment :blogCode="blog.code"></AddComment>
 </div>
 </template>
 <script>
 import ListComment from './ListComment';
 import AddComment from './AddComment';
-import mixin  from './../../mixins/LoadData.mixin.js';
     export default {
     	props: {
     		blog:Object,
@@ -26,7 +25,6 @@ import mixin  from './../../mixins/LoadData.mixin.js';
             
           }
         },
-        mixins:[mixin],
         components:{
         	ListComment,
         	AddComment,
@@ -35,18 +33,14 @@ import mixin  from './../../mixins/LoadData.mixin.js';
             me:function(){
               return this.$store.getters.me
             },
-             getComments(){
-                return this.$store.getters.listComments;
+            commentsCount:function(){
+                return this.$store.getters.listComments.length;
             }
           
            
         },
         methods :{
-        	updateComment:function(data){
-        		var comment ={comment:data.comment,created_at:data.created_at,user:{name:this.me.name,image:this.me.image}};
-        		this.allcomment.push(comment);
-        		// console.log(this.allcomment);
-        	},
+        	
            
         },
  

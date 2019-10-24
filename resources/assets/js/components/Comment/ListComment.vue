@@ -1,9 +1,10 @@
 <template>
 <div>
-	<div class="comment-list" v-if="comment">
-		<div class="single-comment justify-content-between d-flex" v-for="eachComment in comment">
+	<div class="comment-list" v-if="comments.length>0">
+		<div class="single-comment justify-content-between d-flex" v-for="eachComment in comments">
 		    <div class="user justify-content-between d-flex">
 		        <div class="thumb">
+		       
 		            <img v-if="eachComment.user.image" :src="'/images/user-images/'+eachComment.user.image" alt="">
 		            <img v-else :src="'/images/user-images/default.png'" alt="">
 		        </div>
@@ -41,20 +42,17 @@
 <script>
 import mixin  from './../../mixins/LoadData.mixin.js';
     export default {
-    	props: {
-    		comment:Array
-    	},
-        mounted() {
-        	
-        },
+        
         data:function(){
           return {
             initialState:{}
             
           }
         },
-        mixins:[mixin],
-        components:{
+        computed: {
+        	  comments:function(){
+                return this.$store.getters.listComments;
+            }
         },
  
     }
