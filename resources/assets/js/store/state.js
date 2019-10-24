@@ -8,6 +8,7 @@ const state = {
         followingsCount:0
     },
     feed: [],
+    listComments:[],
     profilePage: {
         profile: {
             bio: ''

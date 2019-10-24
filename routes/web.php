@@ -20,6 +20,9 @@ Route::get('/logincheck', function () {
 ]);
 });
 
+Route::get('/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
+Route::get('api/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('api');
+Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
 
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');
@@ -43,10 +46,10 @@ Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUs
 
 
 
-Route::get('/test', 'Frontend\FrontendController@index')->name('test');
+Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 
-Route::get('/tests', 'Frontend\UserInterestController@testinterest')->name('test');
+// Route::get('/tests', 'Frontend\UserInteractionController@testinglike')->name('test');
 Route::get('/blogs','Frontend\HomeController@index')->name('home');
 
 
@@ -100,7 +103,7 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 
     Route::get('/home', 'Frontend\HomeController@index')->name('home');
-
+    Route::get('api/home', 'Frontend\HomeController@index')->name('api');
     Route::prefix('admin')->group(function()
     {
 

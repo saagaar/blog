@@ -54,4 +54,12 @@ class Blogs extends Model implements Auditable
     public function getTagListAttribute(){
        return $this->tags->lists('id');
     }
+    public function likes()
+    {
+        return $this->hasMany(Likes::class,'blog_id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comments::class,'blog_id');
+    }
 }

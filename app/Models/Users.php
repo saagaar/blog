@@ -72,6 +72,13 @@ class Users extends Authenticatable implements Auditable
     {
         return $this->belongsToMany(Categories::class,'user_interests','user_id','category_id');
     }
-
+    public function comments()
+    {
+        return $this->belongsToMany(Comments::class, 'comments');
+    }
+    public function likes()
+    {
+        return $this->belongsToMany(Blogs::class,'likes','user_id','blog_id');
+    }
 }
     

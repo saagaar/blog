@@ -24,11 +24,30 @@ Class Blog implements BlogInterface
     return  $this->blog->where('id', $blogId)->first();
   }
   /**
-   * 
+   * get blog for featured =1
    */
+  public function getAllFeaturedBlog(){
+    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->limit(4)->get();
+  }
 
+   /**
+   * get blog for most view
+   */
+  public function getAllBlogByViews(){
+    return $this->blog->where(['save_method'=>2])->orderBy('views','DESC')->limit(3)->get();
+  }
+   /**
+   * get latest blog 
+   */
+  public function getLatestAllBlog(){
+    return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->withCount('likes')->limit(3)->get();
+  }
+  /**
+   * get blog by  blog code
+   */
   public function getBlogByCode($blogCode){
-    return $this->blog->where('code', $blogCode)->with('tags:name')->first();
+
+    return $this->blog->where('code', $blogCode)->with('tags','user')->withCount('likes','comments')->first();
   }
    /**
    * Get  Blog by user id

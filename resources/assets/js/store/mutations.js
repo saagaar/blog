@@ -19,9 +19,16 @@ export const DECREMENT_FOLLOWING_COUNT = (state, count) => {
 }
 export const TOGGLE_LOADING = state => 
 {
-    state.isLoading = !state.isLoading
+    state.isLoading = !state.isLoading;
 }
 export const SETFLASHMESSAGE = (state, flashdata)=> 
 {
-    state.flashMessage = flashdata
+    state.flashMessage = flashdata;
+}
+
+export const LIST_COMMENTS = (state, comments) => {
+	if(state.listComments.length<1)
+		state.listComments=comments;
+	else
+    state.listComments.push(comments);
 }

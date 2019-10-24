@@ -118,7 +118,7 @@ class FrontendController extends BaseController
             $user=$user->toArray();
            
             $user['permissions']= $this->getAllPermissionsAttribute();    
-            $user['roles']=$this->authUser->roles->first()->name;
+            // $user['roles']=$this->authUser->roles->first()->name;
             return $user;
         }
         else{

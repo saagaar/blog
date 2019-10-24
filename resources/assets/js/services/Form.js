@@ -25,7 +25,7 @@ export default class Form {
                     this[field] = '';
                 }
 
-                this.errors.clear();
+                // this.errors.clear();
             }
 
         	/**
