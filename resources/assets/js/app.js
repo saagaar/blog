@@ -57,6 +57,7 @@ import TheFooter from './components/Footer/TheFooter';
 import ListComment from './components/Comment/ListComment';
 import AddComment from './components/Comment/AddComment';
 import Comment from './components/Comment/Comment';
+import IconCommentsCount from './components/Comment/IconCommentsCount';
 // import UserDashboard from './pages/UserDashboard';
 const default_layout="default";
 const app = new Vue({
@@ -79,7 +80,8 @@ const app = new Vue({
             'the-footer':TheFooter,
             'list-comment':ListComment,
             'add-comment':AddComment,
-            'comment':Comment
+            'comment':Comment,
+            'icon-comments-count':IconCommentsCount
           
         }
     

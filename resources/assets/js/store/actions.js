@@ -13,9 +13,15 @@ export const createComments = ({ commit,getters },data) => {
     // show loading
     // let form=new Form();
     data.form.post('/create/comment/'+data.code).then(response => {
-    	console.log(response.data);
-    	var comment = {comment:response.data,created_at:response.created_at,user:{'name':getters.me.name,'image':getters.me.image}};
-          commit('LIST_COMMENTS',comment);
+      if(response.data.status==true)
+      {
+          var res=response.data.data;
+          res.user={'name':getters.me.name,'image':getters.me.image};
+
+          commit('LIST_COMMENTS',res);
+          data.form.reset();
+      }
+    
       }).catch(e => 
       {
           console.log(e);

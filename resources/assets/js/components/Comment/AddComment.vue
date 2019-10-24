@@ -56,7 +56,7 @@ export default {
               // this.form.post('/create/comment/'+this.blogCode).then(response => {
               //  if(response.data.status){
               //  	// console.log(response);
-               	this.$emit('commented', {comment:this.form.comment,created_at:moment()});
+               	// this.$emit('commented', {comment:this.form.comment,created_at:moment()});
                	
               //     // window.location.href="/blog/detail/"+this.blogCode
               //  }

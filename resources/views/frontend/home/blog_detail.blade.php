@@ -19,7 +19,7 @@
                             <h2>{{ $blogDetails->title }}</h2>
                             <ul class="blog-info-link mt-3 mb-4">
                                 <li><a href="#"><i class="far fa-user"></i> {{$blogDetails->user->name}}</a></li>
-                                <li><a href="#"><i class="far fa-comments"></i> {{ $blogDetails->comments_count}} Comments</a></li>
+                                <li><icon-comments-count></icon-comments-count></li>
                             </ul>
                             <p class="excert">
                             	{!! $blogDetails->content !!}
@@ -30,7 +30,7 @@
                         <div class="d-sm-flex justify-content-between text-center">
                             <p class="like-info"><span class="align-middle"><i class="fa fa-heart" aria-hidden="true"></i></span>{{$blogDetails->likes_count}} people like this</p>
                             <div class="col-sm-4 text-center my-2 my-sm-0">
-                                <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> {{ $blogDetails->comments_count}} Comments</p>
+                                <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> <icon-comments-count></icon-comments-count></p>
                             </div>
                             <ul class="social-icons">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
