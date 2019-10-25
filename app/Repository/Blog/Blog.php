@@ -84,10 +84,38 @@ Class Blog implements BlogInterface
   public function getBlogByUserId($userid){
     return  $this->blog::with('user:id,username')->where('user_id', $userid)->orderByDesc('id');
   }
+
+
+  public function countAllBlogUser()
+  {
+     return $this->blog->get()->count();
+  }
+
+   public function countPublishedBlog()
+  {
+     return $this->blog->where('save_method','=' ,'2')->count();
+  }
+
+  public function countSavedBlog()
+  {
+     return $this->blog->where('save_method','=' ,'1')->count();
+  }
+   
+  public function countPublishedBlogsThisMonth()
+  {
+     return $this->blog->whereMonth('created_at','=',date('m'))->where('save_method','=','2')->count();
+  }
+
+  public function countTodaysPublishedBlogs()
+  {
+     return $this->blog->whereDate('created_at','=',date('Y-m-d'))->where('save_method','=','2')->count();
+  }
+
   
   public function getActiveBlogByUserId($userid){
     return  $this->blog::with('user:id,username')->where(['user_id'=>$userid,'save_method'=>'2'])->orderByDesc('id');
   } 
+
      
   public function getAssociatedCategoryOfBlog($blogId){
       return	$this->blog->where('id', $blogId)->first();

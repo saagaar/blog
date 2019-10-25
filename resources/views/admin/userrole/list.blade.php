@@ -22,7 +22,7 @@
                   <th>id</th>
                   <th>Name</th>
                   <th>Guard Name</th>
-                  <th>Roles</th>
+                  <th>Permission</th>
                   <th>Created at</th>
                   <th>Updated at</th>
                   <th colspan="3">Action</th>

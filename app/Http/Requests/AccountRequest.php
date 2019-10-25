@@ -56,7 +56,10 @@ class AccountRequest extends FormRequest
             'address'               =>'',
             'country'               =>'',
             'dob'                   =>'',
-            'image'                 => $image
+            'image'                 => $image,
+            'is_login'              =>'required',
+            'last_login_date'       =>'required'
+            
         ];
     }
 }

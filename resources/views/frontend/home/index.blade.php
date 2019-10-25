@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 @section('content')
 <section class="fullwidth-block area-padding-bottom">
+
         <div class="container-fluid">
             <div class="row">
                 @if($featuredBlog['0'])

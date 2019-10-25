@@ -48,6 +48,8 @@ Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUs
 
 Route::get('/test', 'Frontend\FrontendController@index')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
+Route::get('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
+
 
 // Route::get('/tests', 'Frontend\UserInteractionController@testinglike')->name('test');
 Route::get('/blogs','Frontend\HomeController@index')->name('home');
@@ -91,6 +93,7 @@ Auth::routes(['register' => false]);
 
 
 Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.dashboard');
+
 
 
     Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');

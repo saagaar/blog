@@ -97,6 +97,25 @@
                   <div class="alert alert-danger">{{ $errors->first('address') }}</div>
                   @endif
                   </div>
+
+                  <div class="form-group">
+                  <label for="is_login">Is Login:</label>
+                  <label><input type="radio" name="is_login" value="1" checked>Active</label>
+                  <label><input type="radio" name="is_login" value="2">Inactive</label>
+                    @if ($errors->has('is_login'))
+                <div class="alert alert-danger">{{ $errors->first('is_login') }}</div>
+                @endif
+                </div>
+
+                    <div class="form-group">
+                  <label for="last_login_date">Last login Date:</label>
+                  <label><input type="date" name="last_login_date"></label>
+                   @if ($errors->has('last_login_date'))
+                <div class="alert alert-danger">{{ $errors->first('last_login_date') }}</div>
+                @endif
+                 
+                </div>
+
                    <div class="form-group">
                      <label for="Country">Country</label>
                     <select name="country" class="form-control">

@@ -14,6 +14,8 @@ use Illuminate\Notifications\Notifiable;
 use App\Notifications\Notifications;
 use App\Repository\BlogInterface;
 use App\Repository\UserInteractionInterface; 
+use App\Repository\TagInterface;
+
 class HomeController extends FrontendController
 {
      use HasRoles;
@@ -22,7 +24,7 @@ class HomeController extends FrontendController
      protected $followerList;
 
      protected $userAccounts;
-
+     
      protected $authUser;
 
     /**
@@ -147,5 +149,19 @@ class HomeController extends FrontendController
     public function getFollowSuggestions($limit=1,$offset=0)
     {
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
+    }
+
+
+    public function getTagName(TagInterface $tag,Request $request)
+    {
+          
+           $search=$request->get('name');             
+            if($search){
+                print_r($tag->getTag($search));
+
+              }
+              
+
+             
     }
 }
