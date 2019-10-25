@@ -32,7 +32,7 @@ Class Blog implements BlogInterface
     return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->limit(4)->get();
   }
   public function getAllFeaturedForMember(){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->limit(5)->get();
+    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->limit(5)->get();
   }
 
    /**

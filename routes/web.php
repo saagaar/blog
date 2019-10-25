@@ -23,7 +23,7 @@ Route::get('/logincheck', function () {
 Route::get('/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
 Route::get('api/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('api');
 Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
-
+Route::post('/like/blog/{code}', 'Frontend\UserInteractionController@likeBlog')->name('like.blog');
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');
 
