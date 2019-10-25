@@ -90,10 +90,10 @@ class FrontendController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
+        $not = $this->authUser->unreadNotifications()->take(10)->get();
 
-        $permission = $this->getAllPermissionsAttribute();
-        
+        print_r($not);exit;        
         return view('frontend.home.index');
     }
     public function getAllPermissionsAttribute() {

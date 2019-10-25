@@ -46,7 +46,7 @@ Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUs
 
 
 
-Route::get('/test', 'Frontend\HomeController@test')->name('test');
+Route::get('/test', 'Frontend\FrontendController@index')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 
 // Route::get('/tests', 'Frontend\UserInteractionController@testinglike')->name('test');
