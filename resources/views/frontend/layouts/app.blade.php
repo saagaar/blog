@@ -15,9 +15,10 @@
 <div id="app">
 	<the-top-nav></the-top-nav>
 	<the-main-nav></the-main-nav>
+	<the-footer></the-footer>
 	 @yield('content')
 	 
-	<the-footer></the-footer>
+	
 </div>
   
 </div>

@@ -10,7 +10,7 @@
                             @if($featuredBlog['0']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
                             @endif
                            
                         </div>
@@ -23,7 +23,7 @@
                                 <!-- <h5>{{ $featuredBlog['0']->title }}</h5> -->
                             </a>
                             <div class="meta-bottom d-flex" >
-                                <a href="#">March 12 , 2019 . </a>
+                                <a href="#"><?php echo date("F j, Y",strtotime($featuredBlog['0']->created_at) ); ?> . </a>
                                 <a class="dark_font" href="#"> &nbsp; By Bikash Bhandari</a>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                                     @if($featuredBlog['1']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['1']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
                             @endif
                                 </div>
                                 <div class="short_details">
@@ -63,7 +63,7 @@
                                     @if($featuredBlog['2']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['2']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
                             @endif
                                 </div>
                                 <div class="short_details">
@@ -89,7 +89,7 @@
                             @if($featuredBlog['3']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['3']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
                             @endif
                         </div>
                         <div class="short_details text-center ">
@@ -101,7 +101,7 @@
                                 <h5>{{ str_limit($featuredBlog['3']->title, $limit = 150, $end = '...') }} </h5>
                             </a>
                             <div class="meta-bottom d-flex justify-content-center">
-                                <a href="#">March 12 , 2019 . </a>
+                                <a href="#"><?php echo date("F j, Y",strtotime($featuredBlog['3']->created_at) ); ?> . </a>
                                 <a href="#">&nbsp; By Bikash Bhandari</a>
                             </div>
                         </div>
@@ -130,118 +130,139 @@
                 </div>
             </div>
             <div class="row">
+                @if($featuredForMember['0'])
                 <div class="col-lg-6">
                     <div class="single-blog style-five">
                         <div class="thumb">
-                            <img class="img-fluid" src="/images/magazine/18.jpg" alt="">
+                            @if($featuredForMember['0']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredForMember['0']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                            @endif
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
                                 <a href="#">shoes</a>/
-                                <a href="#">March 15, 2019</a>
+                                <a href="#"><?php echo date("F j, Y",strtotime($featuredForMember['0']->created_at) ); ?></a>
                             </div>
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Brought dreepeth youll blessed
-                                from whose signs over</h4>
+                            <a class="d-block" href="{{ route('blog.detail' , $featuredForMember['0']->code)}}">
+                                <h4>{{$featuredForMember['0']->title}}</h4>
                             </a>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-comment"></i>05 comment</a>
+                                <a href="#"><i class="ti-comment"></i> {{$featuredForMember['0']->comments_count}} comment</a>
                                 <a href="#"><i class="ti-heart"></i> 0 like</a>
                             </div>
                         </div>
                     </div> 
 
                 </div> 
-
+                @endif
                 <div class="col-lg-6">
                     <div class="row">
+                        @if($featuredForMember['1'])
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="/images/magazine/19.jpg" alt="">
+                                    @if($featuredForMember['1']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredForMember['1']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                            @endif
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
                                         <a href="#">shoes</a>/
-                                        <a href="#">March 15, 2019</a>
+                                        <a href="#"><?php echo date("F j, Y",strtotime($featuredForMember['1']->created_at) ); ?></a>
                                     </div>
-                                    <a class="d-block" href="single-blog.html">
-                                        <h4>Shall for rule whoses
-                                        may heaven to</h4>
+                                    <a class="d-block" href="{ route('blog.detail' , $featuredForMember['1']->code)}}">
+                                        <h4>{{$featuredForMember['1']->title}}</h4>
                                     </a>
                                     <div class="meta-bottom d-flex">
-                                        <a href="#">March 15, 2019</a>
+                                        <a href="#"><?php echo date("F j, Y",strtotime($featuredForMember['1']->created_at) ); ?></a>
 
                                     </div>
                                 </div>
                             </div> 
                         </div>
-
+                        @endif
+                        @if($featuredForMember['2'])
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="/images/magazine/20.jpg" alt="">
+                                    @if($featuredForMember['2']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredForMember['2']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                            @endif
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
                                         <a href="#">shoes</a>/
-                                        <a href="#">March 15, 2019</a>
+                                        <a href="#"><?php echo date("F j, Y",strtotime($featuredForMember['2']->created_at) ); ?></a>
                                     </div>
-                                    <a class="d-block" href="single-blog.html">
-                                        <h4>Shall for rule whoses
-                                        may heaven to</h4>
+                                    <a class="d-block" href="{ route('blog.detail' , $featuredForMember['2']->code)}}">
+                                        <h4>{{$featuredForMember['2']->title}}</h4>
                                     </a>
                                     <div class="meta-bottom d-flex">
-                                        <a href="#">March 15, 2019</a>
+                                        <a href="#"><?php echo date("F j, Y",strtotime($featuredForMember['2']->created_at) ); ?></a>
 
                                     </div>
                                 </div>
                             </div> 
                         </div>
-
+                        @endif
+                        @if($featuredForMember['3'])
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="/images/magazine/21.jpg" alt="">
+                                    @if($featuredForMember['3']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredForMember['3']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                            @endif
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
                                         <a href="#">shoes</a>/
-                                        <a href="#">March 15, 2019</a>
+                                        <a href="#"><?php echo date("F j, Y",strtotime($featuredForMember['3']->created_at) ); ?></a>
                                     </div>
-                                    <a class="d-block" href="single-blog.html">
-                                        <h4>Shall for rule whoses
-                                        may heaven to</h4>
+                                    <a class="d-block" href="{ route('blog.detail' , $featuredForMember['3']->code)}}">
+                                        <h4>{{$featuredForMember['3']->title}}</h4>
                                     </a>
                                     <div class="meta-bottom d-flex">
-                                        <a href="#">March 15, 2019</a>
+                                        <a href="#"><?php echo date("F j, Y",strtotime($featuredForMember['3']->created_at) ); ?></a>
 
                                     </div>
                                 </div>
                             </div> 
                         </div>
-
+                        @endif
+                        @if($featuredForMember['4'])
                         <div class="col-lg-6">
                             <div class="single-blog style-five small">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="/images/magazine/22.jpg" alt="">
+                            @if($featuredForMember['4']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredForMember['4']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                            @endif
                                 </div>
                                 <div class="short_details">
                                     <div class="meta-top d-flex">
                                         <a href="#">shoes</a>/
-                                        <a href="#">March 15, 2019</a>
+                                        <a href="#"><?php echo date("F j, Y",strtotime($featuredForMember['4']->created_at) ); ?></a>
                                     </div>
-                                    <a class="d-block" href="single-blog.html">
-                                        <h4>Shall for rule whoses
-                                        may heaven to</h4>
+                                    <a class="d-block" href="{ route('blog.detail' , $featuredForMember['4']->code)}}">
+                                        <h4>{{$featuredForMember['4']->title}}</h4>
                                     </a>
                                     <div class="meta-bottom d-flex">
-                                        <a href="#">March 15, 2019</a>
+                                        <a href="#"><?php echo date("F j, Y",strtotime($featuredForMember['4']->created_at) ); ?></a>
 
                                     </div>
                                 </div>
                             </div> 
-                        </div>          
+                        </div>   
+                        @endif       
                     </div>               
                 </div> 
 
@@ -261,11 +282,16 @@
                 <h3>Popular on Blog Sagar (most engaged)  <span> <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a> </span></h3>
             </div>
             <div class="row">
+                @if($popular['0'])
                 <div class="col-lg-8 col-xl-6">
                     <div class="single-blog row no-gutters style-four border_one">
                         <div class="col-12 col-sm-5">
                             <div class="thumb">
-                                <img class="img-fluid" src="/images/magazine/5.jpg" alt="">
+                                @if($popular['0']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$popular['0']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                            @endif
                             </div>
                         </div>
                         <div class="col-12 col-sm-7">
@@ -273,56 +299,62 @@
                                 <div class="meta-top d-flex">
                                     <a href="#">Tours & Travel</a>
                                 </div>
-                                <a class="d-block" href="single-blog.html">
-                                    <h4>Brought all day domi
-                                        nion appear from
-                                        subdue dominion
-                                    firmament over face</h4>
+                                <a class="d-block" href="{ route('blog.detail' , $popular['0']->code)}}">
+                                    <h4>{{$popular['0']->title}}</h4>
                                 </a>
                                 <div class="meta-bottom d-flex" >
-                                    <a href="#">March 12 , 2019 . </a>
+                                    <a href="#"><?php echo date("F j, Y",strtotime($popular['0']->created_at) ); ?> . </a>
                                     <a class="dark_font" href="#">&nbsp; By Bikash Bhandari</a>
                                 </div>
                             </div>  
                         </div>  
                     </div>      
                 </div>
-
+                @endif
+                @if($popular['1'])
                 <div class="col-lg-4 col-xl-3">
                     <div class="single-blog style_five">
                         <div class="thumb">
-                            <img class="img-fluid" src="/images/magazine/6.jpg" alt="">
+                            @if($popular['1']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$popular['1']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                            @endif
                         </div>
                         <div class="short_details ">
 
                             <div class="meta-top d-flex">
                                 <a href="#">Tours & Travel</a>
                             </div>
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Abundantly forth late
-                                appear fourth us.</h4>
+                            <a class="d-block" href="{ route('blog.detail' , $popular['1']->code)}}">
+                                <h4>{{$popular['1']->title}}</h4>
                             </a>
                         </div>
                     </div>
                 </div>
-
+                @endif
+                @if($popular['2'])
                 <div class="col-lg-4 col-xl-3">
                     <div class="single-blog style_five">
                         <div class="thumb">
-                            <img class="img-fluid" src="/images/magazine/7.jpg" alt="">
+                            @if($popular['2']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$popular['2']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                            @endif 
                         </div>
                         <div class="short_details ">
 
                             <div class="meta-top d-flex">
                                 <a href="#">Tours & Travel</a>
                             </div>
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Abundantly forth late
-                                appear fourth us.</h4>
+                            <a class="d-block" href="{ route('blog.detail' , $popular['2']->code)}}">
+                                <h4>{{$popular['2']->title}}</h4>
                             </a>
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </section>
@@ -347,7 +379,7 @@
                             @if($mostViewed['0']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$mostViewed['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
                             @endif
                         </div>
                         <div class="short_details pad_25 ">
@@ -358,7 +390,7 @@
                                 <h4>{{ str_limit($mostViewed['0']->title, $limit = 150, $end = '...') }}</h4>
                             </a>
                             <div class="meta-bottom d-flex" >
-                                <a href="#">March 12 , 2019 . </a>
+                                <a href="#"><?php echo date("F j, Y",strtotime($mostViewed['0']->created_at) ); ?> . </a>
                                 <a class="dark_font" href="#">&nbsp; By Bikash Bhandari</a>
                             </div>
                         </div>
@@ -384,7 +416,7 @@
                                 @if($mostViewed['1']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$mostViewed['1']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
                             @endif
                             </div>
                         </div>
@@ -397,7 +429,7 @@
                                 @if($mostViewed['2']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$mostViewed['2']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
                             @endif
                             </div>
                         </div>
@@ -561,7 +593,7 @@
                             @if($eachLatestBlog->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$eachLatestBlog->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
                             @endif
                         </div>
                         <div class="short_details">
@@ -573,7 +605,7 @@
                                 <h4>{{ str_limit($eachLatestBlog->title, $limit = 150, $end = '...') }}</h4>
                             </a>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-comment"></i>05 comment</a>
+                                <a href="#"><i class="ti-comment"></i> {{$eachLatestBlog->comments_count}} comment</a>
                                 <a href="#"><i class="ti-heart"></i> {{$eachLatestBlog->likes_count}} like</a>
                             </div>
                         </div>
@@ -586,4 +618,5 @@
     </div>
 </div>
 @endsection
+
 

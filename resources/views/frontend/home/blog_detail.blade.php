@@ -11,7 +11,7 @@
                             @if($blogDetails->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$blogDetails->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
                             @endif
                         </div>
 
@@ -42,14 +42,15 @@
 
                         <div class="navigation-area">
                             <div class="row">
-                                @if($prev)
+                                
                                 <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                                    @if($prev)
                                     <div class="thumb">
                                         <a href="#">
                                             @if($prev->image)
                                                  <img class="img-fluid" src="{{ asset('images/blog/'.$prev->image) }}" width="60" height="60" alt="">
                                             @else
-                                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}"  width="60" height="60" alt="">
+                                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}"  width="60" height="60" alt="">
                                             @endif
                                         </a>
                                     </div>
@@ -64,32 +65,31 @@
                                             <h4>{{ $prev->title }}</h4>
                                         </a>
                                     </div>
+                                    @endif
                                 </div>
-                                @endif
-                                @if($next)
+                                
+                                
                                 <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                                    @if($next)
                                     <div class="detials">
                                         <p>Next Post</p>
-                                        <a href="#">
+                                        <a href="{{ route('blog.detail' , $next->code)}}">
                                             <h4>{{ $next->title }}</h4>
                                         </a>
                                     </div>
                                     <div class="arrow">
-                                        <a href="#">
+                                        <a href="{{ route('blog.detail' , $next->code)}}">
                                             <span class="lnr text-white lnr-arrow-right"></span>
                                         </a>
                                     </div>
                                     <div class="thumb">
-                                        <a href="#">
-                                            @if($next->image)
-                                                 <img class="img-fluid" src="{{ asset('images/blog/'.$next->image) }}"  width="60" height="60" alt="">
-                                            @else
-                                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}"  width="60" height="60" alt="">
-                                            @endif
+                                        <a href="{{ route('blog.detail' , $next->code)}}">
+                                            <i class="fas fa-arrow-right"></i>
                                         </a>
                                     </div>
+                                    @endif
                                 </div>
-                                @endif
+                                
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
 
-                        <aside class="single_sidebar_widget post_category_widget">
+                        <!-- <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Category</h4>
                             <ul class="list cat-list">
                                 <li>
@@ -156,46 +156,25 @@
                                     </a>
                                 </li>
                             </ul>
-                        </aside>
+                        </aside> -->
 
                         <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title"><i class="fa fa-star">&nbsp;</i> Recent Post</h3>
+                            <h3 class="widget_title"><i class="fa fa-star">&nbsp;</i> Related Post</h3>
+                            @foreach($relatedBlog as $eachRelatedBlog)
                             <div class="media post_item">
-                                <img src="img/blog/popular-post/post1.jpg" alt="post">
+                                @if($eachRelatedBlog->image)
+                                     <img src="{{ asset('images/blog/'.$eachRelatedBlog->image) }}" width="60" height="60" alt="">
+                                @else
+                                     <img src="{{ asset('images/blog/default.jpg') }}" width="60" height="60" alt="">
+                                @endif
                                 <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>From life was you fish...</h3>
+                                    <a href="{{ route('blog.detail' , $eachRelatedBlog->code)}}">
+                                        <h3>{{ str_limit($eachRelatedBlog->title, $limit = 25, $end = '...') }}</h3>
                                     </a>
                                     <p>January 12, 2019</p>
                                 </div>
                             </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post2.jpg" alt="post">                              
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post3.jpg" alt="post">                              
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post4.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </aside>
                         <aside class="single_sidebar_widget tag_cloud_widget">
                             <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Tag Clouds</h4>
