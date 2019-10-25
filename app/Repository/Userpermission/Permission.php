@@ -1,22 +1,22 @@
 <?php 
 
-namespace App\Repository\permission;
+namespace App\Repository\Userpermission;
 
-use App\Models\Permission;
+use App\Models\Permissions;
 use App\Repository\PermissionInterface;
 
-Class  Permissions implements permissionInterface
+Class Permission implements PermissionInterface
 {
 	protected $permission;
 
-	public function __construct(Permission $permission)
+	public function __construct(Permissions $permission)
 	{
 		$this->permission=$permission;
 	}
 
      
-    public function getById($permissionid){
-      return $this->permission->where('id', $permissionid)->first();
+    public function getById($permission_id){
+      return $this->permission->where('id', $permission_id)->first();
     }
 
       /**

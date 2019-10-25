@@ -61,5 +61,11 @@ Class Tag implements TagInterface
     public function delete($id){
       return $this->tag->find($id)->delete();
     }
+
+
+    public function getTag($search)
+    {
+         return $this->tag->where('name', 'like', '%' . $search . '%')->get()->toArray();
+    }
 }
 ?>

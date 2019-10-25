@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\Notifications;
+use App\Repository\TagInterface;
 
 class HomeController extends FrontendController
 {
@@ -21,7 +22,7 @@ class HomeController extends FrontendController
      protected $followerList;
 
      protected $userAccounts;
-
+     
      protected $authUser;
     /**
      * Create a new controller instance.
@@ -60,25 +61,10 @@ class HomeController extends FrontendController
     }
     public function dashboard()
     {
-
-        //     $role = Role::findByName('writer');
-        // $role->givePermissionTo('blog-edit');
-        // $permissions = [
-          // \Auth::user()->givePermissionTo('blog-create');
-        //    'blog-edit',
-        //    'blog-create',
-        //    'product-delete'
-        // ];
-
-
-        // foreach ($permissions as $permission) {
-        //      Permission::create(['name' => $permission]);
-        // }
-      
         if(\Auth::check())
         {
             $routeName= ROUTE::currentRouteName();
-            $suggestion=$this->getFollowSuggestions(3);
+            $suggestion='';//$this->getFollowSuggestions(3);
             $data['followSuggestion']=$suggestion;
           if($routeName=='api')
           {
@@ -102,5 +88,19 @@ class HomeController extends FrontendController
     public function getFollowSuggestions($limit=1,$offset=0)
     {
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
+    }
+
+
+    public function getTagName(TagInterface $tag,Request $request)
+    {
+          
+           $search=$request->get('name');             
+            if($search){
+                print_r($tag->getTag($search));
+
+              }
+              
+
+             
     }
 }

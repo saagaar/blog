@@ -26,7 +26,8 @@ class UserController extends FrontendController
     public function myBlogs(BlogInterface $blog,Request $request)
     { 
       // sleep(10);
-         
+      if(\Auth::check())
+        {
             $routeName= Route::currentRouteName();
             $myBlogs=$blog->getBlogByUserId($this->authUser->id);
 
@@ -55,6 +56,9 @@ class UserController extends FrontendController
               $user=$this->user_state_info();
               return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
            }
+        }else{
+           return redirect()->route('home'); 
+        } 
     }
    
     public function followings()
@@ -135,21 +139,42 @@ class UserController extends FrontendController
     {
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
-
-    public function profile()
-    {
+    public function profile(BlogInterface $blog,Request $request)
+    { 
+      if(\Auth::check())
+        {
+      // sleep(10);
             $routeName= Route::currentRouteName();
+            $myBlogs=$blog->getActiveBlogByUserId($this->authUser->id);
 
            if($routeName=='api')
            {
+              $search=$request->get('search');
+              // $filterBy=$request->get('filter_by');
+              $sortBy=$request->get('sort_by');
+              // if($filterBy)
+              //    $myBlogs=$myBlogs->where('save_method',$filterBy);
+              if($search)
+                $myBlogs=$myBlogs->where('title' ,'like','%'.$search.'%');
+              if($sortBy)
+                $myBlogs=$myBlogs->orderBy('created_at',strtoupper($sortBy));
+            
+                $data['blogList']=$myBlogs->paginate($this->perPage);
+              return ($data);
            }
            else
            {
-             
+              
+              $data['blogList']=$myBlogs->paginate($this->perPage);
+
               $data['path']='/profile';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
               return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
            }
+    }else{
+      return redirect()->route('home'); 
     }
+  }
+
 }

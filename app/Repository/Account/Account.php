@@ -2,7 +2,7 @@
 
 namespace App\Repository\Account;
 
-use App\Models\User;
+use App\Models\Users;
 use Spatie\Permission\Traits\HasRoles;
 use App\Repository\AccountInterface;
 
@@ -10,24 +10,54 @@ Class Account implements AccountInterface
 {
 	protected $user;
     use HasRoles;
-	public function __construct(User $user)
+
+	public function __construct(Users $user)
 	{
 		$this->account=$user;
+    
 	}
      
     public function getById($memberId){
       return $this->account->where('id', $memberId)->first();
     }
 
-     public function countUserlogin(){
+      public function countAllTodayLoggedInUsers()
+      {
         return $this->account->whereDate('last_login_date','=',date('Y-m-d'))->count();
-    }
+      }
 
-      public function countAllUser()
+      public function countAllUsers()
       {
        
-      return $this->account->get()->count();    
+        return $this->account->get()->count();    
       }
+
+       public function countAllTodaysRegisteredUsers()
+       
+       {
+       
+           return $this->account->whereDate('created_at','=',date('Y-m-d'))->count();   
+       }
+
+         public function countActiveUsers()
+       
+       {
+       
+          return $this->account->where('is_login','=','1')->whereDate('created_at','=',date('Y-m-d'))->count();   
+       }
+
+
+
+         public function countInActiveUsers()
+       
+       {
+       
+          return $this->account->where('is_login','=','2')->whereDate('created_at','=',date('Y-m-d'))->count();   
+       }
+
+
+      
+
 
 
     public function getUserByUsername($username){

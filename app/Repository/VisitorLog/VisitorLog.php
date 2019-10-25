@@ -1,17 +1,24 @@
 <?php 
-
-namespace App\Repository\Visitorlog;
+namespace App\Repository\VisitorLog;
 
 use App\Models\VisitorLogs;
+use App\Models\VisitorDetails;
+use App\Models\Users;
 use App\Repository\VisitorLogInterface;
 
 Class  VisitorLog implements VisitorLogInterface
 {
 	protected $log;
+    protected $users;
+    protected $visitor;
+    
 
-	public function __construct(VisitorLogs $websiteLog)
+	public function __construct(VisitorLogs $websiteLog, Users $users,VisitorDetails $visitor)
 	{
 		$this->log=$websiteLog;
+        $this->users=$users;
+         $this->visitor=$visitor;
+               
 	}
 
      
@@ -25,11 +32,29 @@ Class  VisitorLog implements VisitorLogInterface
      *
      * @return mixed
     */
-    public function getAll(){
+    public function getAll()
+    {
    	 return	$this->log->latest()->toArray();
     }
-
+ 
+     public function countTodayLoggedInVisitors()
+     {
+         return $this->users->whereDate('last_login_date','=',date('Y-m-d'))->count();
+     }
      
+
+    public function countAllVisitors()
+     {
+         return $this->log->get()->count();
+     }
+
+      public function countTodaysPageVisitors()
+     {
+         return $this->visitor->whereDate('visit_date','=',date('Y-m-d'))->count(); 
+     }
+
+
+         
     
     /**
      * create user logs

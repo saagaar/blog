@@ -48,23 +48,29 @@ class AdminController extends BaseController
 
     
     
-    public function dashboard(VisitorLogInterface $visitor,AccountInterface$user,BlogInterface $blog)
+    public function dashboard(VisitorLogInterface $visitor, AccountInterface $user,BlogInterface $blog)
     {
        
         $breadcrumb=['breadcrumbs' => [
                     'current_menu' => 'Dashboard',                       
                       ]];
            
-           $dashboard['allVisitors']=$visitor->countAllVisitors();            
-            $dashboard['allRegisteredUsers']=$user->countAllUser();
-            $dashboard['loginUsers']=$user->countUserlogin();
-            $dashboard['allBlogUsers']=$blog->countAllBlogUser();
-            $dashboard['publishedBlogs']=$blog->countPublishedBlog();
-            $dashboard['savedBlogs']=$blog->countSavedBlog();
+        $dashboard['allLoggedInVisitors']=$visitor->countTodayLoggedInVisitors();
+        $dashboard['allVisitors']=$visitor->countAllVisitors();
+        $dashboard['allRegisteredVisitors']=$visitor->countTodaysPageVisitors();             
+        $dashboard['allRegisteredUsers']=$user->countAllTodaysRegisteredUsers();
+        $dashboard['allUsers']=$user->countAllUsers();    
+        $dashboard['loggedinUsers']=$user->countAllTodayLoggedInUsers();
+        $dashboard['activeUsers']=$user->countActiveUsers();
+        $dashboard['inActiveUsers']=$user->countInActiveUsers();   
 
-
-             // print_r($dashboardSavedBlog);exit;
-            
+        $dashboard['allBlogUsers']=$blog->countAllBlogUser();
+        $dashboard['publishedBlogs']=$blog->countPublishedBlog();
+        $dashboard['savedBlogs']=$blog->countSavedBlog();
+        $dashboard['todayPublishedBlogs']=$blog->countTodaysPublishedBlogs();
+        $dashboard['publishedBlogsThisMonth']=$blog->countPublishedBlogsThisMonth();
+          
+                
         return view('admin.dashboard',compact('breadcrumb','dashboard'))->with(array('primary_menu'=>'dashboard.list'));
     }
    

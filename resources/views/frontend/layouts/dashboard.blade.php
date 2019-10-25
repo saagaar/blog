@@ -20,7 +20,6 @@
     <!-- ================ start footer Area ================= -->
 </div>
 
-
 <script src="{{ asset('frontend/js/dashboard.js') }}"></script>
 <script src="{{ asset('frontend/js/common.js') }}"></script>
 

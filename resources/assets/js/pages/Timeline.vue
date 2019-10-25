@@ -4,24 +4,21 @@
               <div id="main" class="">
                 <div class="white-box create-post">
                   <div class="row">
-                    <div class="col-md-8 col-sm-8">
-                      <div class="form-group"> <img src="/images/p_image.png" alt="Profile Image" class="profile-photo-md">
-                        <textarea name="texts" id="exampleTextarea" cols="60" rows="1" class="form-control" placeholder="Write Bikash Bhandari Wall"></textarea>
-                      </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 pad-left-0">
-                      <div class="tools">
-                        <ul class="publishing-tools list-inline">
-                          <li><a href="#"><i class="fa fa-edit"></i></a></li>
-                          <li><a href="#"><i class="fa fa-image"></i></a></li>
-                          <li><a href="#"><i class="fa fa-video"></i></a></li>
-                        </ul>
-                        <button class="btn btn-primary pull-right">Publish</button>
-                      </div>
+                    <div class="col-md-12 col-sm-12">
+                      <form>
+                         <div class="col-md-8 col-sm-8">
+                           <input type="text"  class="form-control" v-model.trim="search" cols="45" placeholder="Search Post"><button class="btn btn-primary pull-right" @click.prevent="searchPost" type="submit">Search</button>
+                         </div>
+                         <div  class="col-md-4 col-sm-4">
+                           
+                         </div>
+                       
+                      </form>
                     </div>
                   </div>
                 </div>
                 <div class="row">
+
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="single-blog video-style small row m_b_30">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="images/magazine/12.jpg" alt="Blog Image Name Goes Here"> </div>
@@ -34,6 +31,7 @@
                       </div>
                     </div>
                   </div>
+                </div>
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="single-blog video-style small row m_b_30 ">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="images/magazine/13.jpg" alt="Blog Image Name Goes Here"> </div>
@@ -49,17 +47,26 @@
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="single-blog video-style small row m_b_30">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="images/magazine/14.jpg" alt="Blog Image Name Goes Here"> </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true">
+                    
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList">
+                    <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
+                      <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" :src="'/images/blog/'+eachBlog.image" :alt="eachBlog.title"> </div>
+
                       <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
-                        <h4>Blessed night morning on
-                          them you great</h4>
+                        <h4>{{eachBlog.title}}</h4>
                         </a>
-                        <p>The idea that the Big Bang happened everywhere at once may apply to our Universe, but certainly ought not to apply to the vast majority of Universes existing in the Multiverse. Assuming that inflation is a quantum field, like all fields we know of, it must spread…</p>
-                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i>mar 12</a> <a href="#"><i class="ti-heart"></i> 0 like</a> <a href="#"><i class="ti-eye"></i> 1k view</a> </div>
+                        <p v-if="eachBlog.short_description.length<500" v-html="eachBlog.short_description"></p>
+                        <p v-else v-html="eachBlog.short_description.substring(0,500)+' ......' "></p>
+                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a> <a href="#"><i class="ti-heart"></i> 0 like</a> <a href="#"><i class="ti-eye"></i> 1k view</a> </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-else>
                     <div class="single-blog video-style small row m_b_30">
+
                       <div class="thumb col-lg-3 col-md-4 col-sm-5"> <img class="img-fluid" src="images/magazine/12.jpg" alt="Blog Image Name Goes Here"> </div>
                       <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
                         <h4>Blessed night morning on
@@ -67,11 +74,15 @@
                         </a>
                         <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part that is observable to us. If you look just at the portion of the Universe we can see, you can measure its spatial curvature, and find that it’s incredibly close to flat. No regions...</p>
                         <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i>mar 12</a> <a href="#"><i class="ti-heart"></i> 0 like</a> <a href="#"><i class="ti-eye"></i> 1k view</a> </div>
+
+                      <div class="short_details col-lg-12 col-md-12 col-sm-12">
+                        <h4 class="text-center d-block">No post available!!</h4>
+
                       </div>
                     </div>
                   </div>
                   
-                  <div class="col-md-12 text-center">
+                  <!-- <div class="col-md-12 text-center">
                     <div class="lds-ring">
                       <div></div>
                       <div></div>
@@ -79,34 +90,77 @@
                       <div></div>
                     </div>
                     <div class="clearfix"></div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div class="clearfix"></div>
               </div>
+            </div>
+          </div>
             
 </template>
 
 <script>
-import TheTopNav from './../components/TopNav/TheTopNav';
-import TheMainNav from './../components/MainNav/TheMainNav';
-import TheFooter from './../components/Footer/TheFooter';
+
+  import mixin  from './../mixins/LoadData.mixin.js';
+  import Form  from './../services/Form.js';
     export default {
-         data() {
+      mixins: [ mixin ],
+         data:function(){
     return {
-          myData: null
+            form:new Form(),
+            initialState:{},
+            sort_by:'',
+            filter_by:2,
+            search:'',
         }
       },
-        mounted() {
-             setTimeout(() => {
-              this.myData = 'Example Data';
-            }, 5000);
+      watch: {
+          filter_by: function () {
+            this.getResults();          
+          },
+          sort_by: function () {
+            this.getResults();          
+          },
+          search(newValue, oldValue) {
+           var newspacecount=newValue.split(' ').length;
+           var oldspacecount=oldValue.split(' ').length;
+            if(newspacecount!=oldspacecount)
+            {
+               this.getResults();
+            }
+            else if(newValue.trim()=='')
+            {
+              this.getResults();
+            }        
+          }
+      },
+       methods:{
+        getResults(page = 1) {
+          this.initialState.blogList={};
+          this.$store.commit('TOGGLE_LOADING');
+          this.form.get('api/profile?page='+page+'&search='+this.search+'&sort_by='+this.sort_by).then(response => {
+               this.$store.commit('TOGGLE_LOADING');
+               if(response.data)
+               {
+                this.initialState.blogList=response.data.blogList
+               }
+               else
+               {
+                  alert(response.data.message)
+               }
+              }).catch(e => 
+              {
+                 this.$store.commit('TOGGLE_LOADING');
+                  console.log(e);
+              });
         },
-
+        searchPost(){
+         this.getResults();
+        },
+      },
         components:{
-            TheTopNav,
-            TheMainNav,
-            TheFooter,
+          
         },
     }
 </script>

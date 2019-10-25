@@ -39,7 +39,7 @@
                   <td>{{ $eachblog->title }}</td>
                    <td>{{strip_tags($eachblog->short_description) }}</td>
                   <td>
-                   <input data-id="{{$eachblog->id}}" data-url="{{route('blog.changemethod')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Publish" data-off="Save"{{$eachblog->save_method ? 'checked' : '' }}>
+                   <input data-id="{{$eachblog->id}}" data-url="{{route('blog.changemethod')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Publish" data-off="Save"{{$eachblog->save_method==2 ? 'checked' : '' }}>
                   </td> 
                   <td><img src="{{ asset('images/blog/'.$eachblog['image']) }}" alt="Blog Image" height="42" width="42"></td>
                   <td>

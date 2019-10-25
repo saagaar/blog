@@ -27,7 +27,7 @@ use App\Repository\Role\Roles;
 use App\Repository\NotificationSettingInterface;
 use App\Repository\NotificationSetting\NotificationSetting;
 use App\Repository\PermissionInterface;
-use App\Repository\UserPermission\Permissions;
+use App\Repository\Userpermission\Permission;
 use App\Repository\CmsInterface;
 use App\Repository\Cms\Cmss;
 use App\Repository\TestimonialInterface;
@@ -96,7 +96,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(LocaleInterface::class, Locale::class);
         $this->app->singleton(AccountInterface::class, Account::class);
         $this->app->singleton(RoleInterface::class, Roles::class);
-        $this->app->singleton(PermissionInterface::class, Permissions::class);
+        $this->app->singleton(PermissionInterface::class, Permission::class);
         $this->app->singleton(CmsInterface::class, Cmss::class);
         $this->app->singleton(TestimonialInterface::class, Testimonial::class);
         $this->app->singleton(ServiceInterface::class, Service::class);

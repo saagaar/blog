@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Permission\Exceptions\PermissionAlreadyExists;
 use Spatie\Permission\Contracts\Permission as PermissionContract;
 
-class Permission extends Model implements PermissionContract,Auditable
+class Permissions extends Model implements PermissionContract,Auditable
 {
     use HasRoles;
     use RefreshesPermissionCache;

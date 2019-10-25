@@ -36,8 +36,9 @@ Class Blog implements BlogInterface
    * @param int
    */
   public function getBlogByUserId($userid){
-    return  $this->blog->where('user_id', $userid)->first();
+    return  $this->blog->where('user_id', $userid)->inRandomOrder();
   }
+
 
   public function countAllBlogUser()
   {
@@ -46,14 +47,29 @@ Class Blog implements BlogInterface
 
    public function countPublishedBlog()
   {
-     return $this->blog->where('save_method','=' ,'1')->count();
+     return $this->blog->where('save_method','=' ,'2')->count();
   }
 
   public function countSavedBlog()
   {
-     return $this->blog->where('save_method','=' ,'2')->count();
+     return $this->blog->where('save_method','=' ,'1')->count();
   }
-     
+   
+  public function countPublishedBlogsThisMonth()
+  {
+     return $this->blog->whereMonth('created_at','=',date('m'))->where('save_method','=','2')->count();
+  }
+
+  public function countTodaysPublishedBlogs()
+  {
+     return $this->blog->whereDate('created_at','=',date('Y-m-d'))->where('save_method','=','2')->count();
+  }
+
+  
+  public function getActiveBlogByUserId($userid){
+    return  $this->blog->where(['user_id'=>$userid,'save_method'=>'2'])->inRandomOrder();
+  } 
+
      
   public function getAssociatedCategoryOfBlog($blogId){
       return	$this->blog->where('id', $blogId)->first();

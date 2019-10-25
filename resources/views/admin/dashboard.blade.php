@@ -31,22 +31,22 @@
             <div class="row">
                 <div class="col-xs-4">
                    <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">30</span><br>
+                      <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">{{  $dashboard['allVisitors']}}</span><br>
                           TOTAL VISITORS
                       </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color: #3C8DBC;color:white;"><span style="font-size:35px;font-weight:bold;">10</span>
-                          <br>VISITORS LOGIN TODAY
+                      <div class="panel-body text-center" style="height:100px;background-color: #3C8DBC;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['allLoggedInVisitors']}}</span>
+                          <br>VISITORS LOGGED IN TODAY
                       </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color: #F26161;color:white;"><span style="font-size:35px;font-weight:bold;">12</span> 
-                          <br>REGISTERED TODAY
+                      <div class="panel-body text-center" style="height:100px;background-color: #F26161;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['allRegisteredVisitors']}}</span> 
+                          <br>PAGES VISITED TODAY
                       </div>
                     </div>
                 </div>
@@ -59,15 +59,15 @@
            <div class="row">
                 <div class="col-xs-4">
                    <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color:#00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">{{  $dashboard['allRegisteredUsers']}}</span> 
+                      <div class="panel-body text-center" style="height:100px;background-color:#00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">{{  $dashboard['allUsers']}}</span> 
                           <br>TOTAL USERS
                       </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color: #374850;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['loginUsers']}}</span> 
-                          <br>USERS LOGIN TODAY</div>
+                      <div class="panel-body text-center" style="height:100px;background-color: #374850;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['loggedinUsers']}}</span> 
+                          <br>USERS LOGGED IN TODAY</div>
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -80,9 +80,31 @@
 
             </div>
             <!-- row     -->
+            <h3><strong>Online Status</strong></h3>
+             <hr style="border-color:#E3E3E3;"> 
+            <div class="row">
+                <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">{{ $dashboard['activeUsers']}}</span> 
+                          <br> ACTIVE USERS
+                       </div>
+                    </div>
+                </div>
+
+                 <div class="col-xs-4">
+                   <div class="panel panel-default">
+                      <div class="panel-body text-center" style="height:100px;background-color: #F26161;color:white;"><span style="font-size:35px;font-weight:bold;">{{ $dashboard['inActiveUsers']}}</span> 
+                          <br> IN ACTIVE USERS
+                       </div>
+                    </div>
+                </div>
+                 
+
+            </div>
+            <!-- row -->
 
             <h3><strong>Blogs</strong></h3>
-              <hr style="border-color:#E3E3E3;"> 
+            <hr style="border-color:#E3E3E3;"> 
            <div class="row">
                 <div class="col-xs-4">  
                    <div class="panel panel-default">
@@ -100,7 +122,7 @@
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color:#00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['savedBlogs']}}</span>
+                      <div class="panel-body text-center" style="height:100px;background-color:#00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">{{ $dashboard['savedBlogs']}}</span>
                           <br>SAVED BLOGS
                       </div>
                     </div>
@@ -112,55 +134,20 @@
              <div class="row">
                 <div class="col-xs-4">
                    <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color: #3C8DBC;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['allBlogUsers']}}</span>
-                        <br>TOTAL BLOGS   
+                      <div class="panel-body text-center" style="height:100px;background-color: #3C8DBC;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['todayPublishedBlogs']}}</span>
+                        <br>PUBLISHED TODAY   
                       </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['publishedBlogs']}}</span><br>                       
-                            PUBLISHED BLOGS
+                      <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['publishedBlogsThisMonth']}}</span><br>                       
+                            PUBLISHED THIS MONTH
                       </div>
                     </div>
                 </div>
-                <div class="col-xs-4">
-                   <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color: #F26161; color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['savedBlogs']}}</span> <br>                       
-                          SAVED BLOGS
-                      </div>
-                    </div>
-                </div>
-
             </div>
             <!-- row -->
-
-              <div class="row">
-                <div class="col-xs-4">
-                   <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color:#00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['allBlogUsers']}}</span> <br>                       
-                          TOTAL BLOGS
-                      </div>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                   <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color: #374850;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['publishedBlogs']}}</span> <br>                       
-                          PUBLISHED BLOGS
-                      </div>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                   <div class="panel panel-default">
-                      <div class="panel-body text-center" style="height:100px;background-color: #3C8DBC;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['savedBlogs']}}</span><br>
-                          SAVED BLOGS
-                      </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- row -->
-
           </div>    
           <!-- box-body -->
     </div>

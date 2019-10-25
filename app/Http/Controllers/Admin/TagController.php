@@ -9,13 +9,14 @@ use App\Http\Requests\TagRequest;
 use App\Repository\TagInterface;
 class TagController extends AdminController
 {
-    protected $tag;
+     protected $tag;
      public function __construct(TagInterface $tag)
     {
          parent::__construct();
          $this->tag=$tag;
     }
-    /**
+
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

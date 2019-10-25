@@ -2,6 +2,7 @@
 @section('content')
 
 <section class="fullwidth-block area-padding-bottom">
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 col-lg-6 col-xl-5">

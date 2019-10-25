@@ -4,12 +4,15 @@
   <div class="col-md-9 col-sm-9 pad-left-0" v-if="this.$store.getters.isLoading===true">
       <PlaceHolderFollowings></PlaceHolderFollowings>
   </div>
-  <div class="col-md-9 col-sm-9 pad-left-0" v-else-if="initialState.followings">
+  <div class="col-md-9 col-sm-9 pad-left-0" v-else-if="initialState.followings.length>0">
         <div class="friend-list" v-for="eachFollowings in initialState.followings">
           <div class="friend-card">
             <div class="row card-info">
-              <div class="col-lg-3 col-md-4">
-                <img src="/images/user-3.jpg" alt="user" class="profile-photo-lg" />
+              <div class="col-lg-3 col-md-4" v-if="eachFollowings.image">
+                <img :src="'/images/user-images/'+eachFollowings.image" alt="user" class="profile-photo-lg" />
+              </div>
+              <div class="col-lg-3 col-md-4"v-else>
+                <img src="/images/user-images/default.png" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">
@@ -23,11 +26,11 @@
           </div>
         </div>
     </div>
-    <div class="col-md-9 col-sm-9 pad-left-0" v-else="isLoading===false && !initialState.followings">
+    <div class="col-md-9 col-sm-9 pad-left-0" v-else>
       <div class="friend-list">
           <div class="friend-card">
             <div class="row card-info">
-              Sorry! No Following found
+              You haven't followed anyone!!
             </div>
           </div>
         </div>
@@ -37,8 +40,8 @@
           <FollowSuggestionsList   :followSuggestion="followSuggestion"></FollowSuggestionsList>
               </div>
               <div class="clearfix"></div>
-              <div id="sidebar2" class="white-box mb20">
-              <!-- <div class="suggestions">
+              <!-- <div id="sidebar2" class="white-box mb20">
+              <div class="suggestions">
                 <h4 class="grey"><i class="fa fa-star"></i>  Add to your feed</h4>
                 <div class="follow-user">
                   <img src="img/user-1.jpg" alt="" class="profile-photo-sm pull-left">
@@ -75,8 +78,8 @@
                     <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
                   </div>
                 </div>
-          </div> -->
-      </div>
+          </div>
+      </div> -->
     </div>
     </div>
 

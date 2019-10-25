@@ -6767,6 +6767,8 @@ var action = '';
 
             _this.isFollowing = true;
           } else {
+            _this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
+
             _this.isFollowing = false;
           }
 
@@ -7847,6 +7849,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -7866,7 +7871,9 @@ __webpack_require__.r(__webpack_exports__);
   validations: {
     form: {
       title: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["minLength"])(4),
+        maxLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["maxLength"])(150)
       },
       content: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__["required"]
@@ -8051,6 +8058,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -8078,7 +8087,9 @@ __webpack_require__.r(__webpack_exports__);
   validations: {
     form: {
       short_description: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["minLength"])(4),
+        maxLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["maxLength"])(150)
       },
       image: {}
     }
@@ -8122,7 +8133,7 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.$v.form.$invalid) {
         this.form.post('/blog/edit/' + this.$route.params.blogId + '/step2').then(function (response) {
           if (response.data.status) {
-            window.location.href = "dashboard";
+            window.location.href = "/dashboard";
           } else {}
         })["catch"](function (e) {
           console.log(e);
@@ -8146,6 +8157,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
 /* harmony import */ var _components_ContentPlaceholder_PlaceHolderBlogList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/ContentPlaceholder/PlaceHolderBlogList */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderBlogList.vue");
+//
 //
 //
 //
@@ -8313,7 +8325,7 @@ __webpack_require__.r(__webpack_exports__);
       var newspacecount = newValue.split(' ').length;
       var oldspacecount = oldValue.split(' ').length;
 
-      if (newspacecount != oldspacecount) {
+      if (newspacecount = oldspacecount) {
         this.getResults();
       } else if (newValue.trim() == '') {
         this.getResults();
@@ -8808,6 +8820,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -8847,6 +8862,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Follows_FollowButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/Follows/FollowButton */ "./resources/assets/js/components/Follows/FollowButton.vue");
 /* harmony import */ var _components_Follows_FollowSuggestionsList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/Follows/FollowSuggestionsList */ "./resources/assets/js/components/Follows/FollowSuggestionsList.vue");
 /* harmony import */ var _components_ContentPlaceholder_PlaceHolderFollowings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../components/ContentPlaceholder/PlaceHolderFollowings */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderFollowings.vue");
+//
+//
+//
 //
 //
 //
@@ -9064,9 +9082,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_TopNav_TheTopNav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../components/TopNav/TheTopNav */ "./resources/assets/js/components/TopNav/TheTopNav.vue");
-/* harmony import */ var _components_MainNav_TheMainNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/MainNav/TheMainNav */ "./resources/assets/js/components/MainNav/TheMainNav.vue");
-/* harmony import */ var _components_Footer_TheFooter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/Footer/TheFooter */ "./resources/assets/js/components/Footer/TheFooter.vue");
+/* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
+/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
 //
 //
 //
@@ -9156,27 +9173,76 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
-      myData: null
+      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"](),
+      initialState: {},
+      sort_by: '',
+      filter_by: 2,
+      search: ''
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  watch: {
+    filter_by: function filter_by() {
+      this.getResults();
+    },
+    sort_by: function sort_by() {
+      this.getResults();
+    },
+    search: function search(newValue, oldValue) {
+      var newspacecount = newValue.split(' ').length;
+      var oldspacecount = oldValue.split(' ').length;
 
-    setTimeout(function () {
-      _this.myData = 'Example Data';
-    }, 5000);
+      if (newspacecount != oldspacecount) {
+        this.getResults();
+      } else if (newValue.trim() == '') {
+        this.getResults();
+      }
+    }
   },
-  components: {
-    TheTopNav: _components_TopNav_TheTopNav__WEBPACK_IMPORTED_MODULE_0__["default"],
-    TheMainNav: _components_MainNav_TheMainNav__WEBPACK_IMPORTED_MODULE_1__["default"],
-    TheFooter: _components_Footer_TheFooter__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }
+  methods: {
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.initialState.blogList = {};
+      this.$store.commit('TOGGLE_LOADING');
+      this.form.get('api/profile?page=' + page + '&search=' + this.search + '&sort_by=' + this.sort_by).then(function (response) {
+        _this.$store.commit('TOGGLE_LOADING');
+
+        if (response.data) {
+          _this.initialState.blogList = response.data.blogList;
+        } else {
+          alert(response.data.message);
+        }
+      })["catch"](function (e) {
+        _this.$store.commit('TOGGLE_LOADING');
+
+        console.log(e);
+      });
+    },
+    searchPost: function searchPost() {
+      this.getResults();
+    }
+  },
+  components: {}
 });
 
 /***/ }),
@@ -51769,6 +51835,30 @@ var render = function() {
                             ? _c("div", { staticClass: "error" }, [
                                 _vm._v("This Field is required")
                               ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.$v.form.title.maxLength
+                            ? _c("div", { staticClass: "error" }, [
+                                _vm._v(
+                                  "Title must be less " +
+                                    _vm._s(
+                                      _vm.$v.form.title.$params.maxLength.max
+                                    ) +
+                                    " letters."
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.$v.form.title.minLength
+                            ? _c("div", { staticClass: "error" }, [
+                                _vm._v(
+                                  "Title must be at least " +
+                                    _vm._s(
+                                      _vm.$v.form.title.$params.minLength.min
+                                    ) +
+                                    " letters."
+                                )
+                              ])
                             : _vm._e()
                         ])
                       : _vm._e()
@@ -51804,6 +51894,18 @@ var render = function() {
                       !_vm.$v.form.content.required
                         ? _c("div", { staticClass: "error" }, [
                             _vm._v("This Field is required")
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.$v.form.title.minLength
+                        ? _c("div", { staticClass: "error" }, [
+                            _vm._v(
+                              "Content must be at least " +
+                                _vm._s(
+                                  _vm.$v.form.title.$params.minLength.min
+                                ) +
+                                " letters."
+                            )
                           ])
                         : _vm._e()
                     ])
@@ -51959,6 +52061,31 @@ var render = function() {
                         ? _c("div", { staticClass: "error" }, [
                             _vm._v("This Field is required")
                           ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.$v.form.short_description.maxLength
+                        ? _c("div", { staticClass: "error" }, [
+                            _vm._v(
+                              "Description must be less " +
+                                _vm._s(
+                                  _vm.$v.form.short_description.$params
+                                    .maxLength.max
+                                ) +
+                                " letters."
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.$v.form.title.minLength
+                        ? _c("div", { staticClass: "error" }, [
+                            _vm._v(
+                              "Description must be at least " +
+                                _vm._s(
+                                  _vm.$v.form.title.$params.minLength.min
+                                ) +
+                                " letters."
+                            )
+                          ])
                         : _vm._e()
                     ])
                   : _vm._e()
@@ -52059,8 +52186,6 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(3),
-                _vm._v(" "),
                 _c("hr"),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
@@ -52080,7 +52205,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(4),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("div", { staticClass: "clearfix" })
                 ])
@@ -52118,27 +52243,6 @@ var staticRenderFns = [
     return _c("span", [
       _c("i", { staticClass: "fa fa-globe" }, [_vm._v(" ")]),
       _vm._v(" Post As Anonymous Only")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "autocomplete form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          id: "myInput",
-          type: "text",
-          name: "userName",
-          placeholder: "B"
-        }
-      }),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "autocomplete-items",
-        attrs: { id: "myInputautocomplete-list" }
-      })
     ])
   },
   function() {
@@ -52598,7 +52702,38 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _vm._m(3, true)
+                                    _c("div", { staticClass: "hidden_sec" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "hidden_td_link" },
+                                        [
+                                          _c(
+                                            "router-link",
+                                            {
+                                              attrs: {
+                                                to:
+                                                  "/blog/edit/" + eachblog.code
+                                              }
+                                            },
+                                            [_vm._v("Edit")]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._v(
+                                            "\r\n                   | \r\n                  "
+                                          ),
+                                          _c("a", { attrs: { href: "#" } }, [
+                                            _vm._v("Preview")
+                                          ]),
+                                          _vm._v(
+                                            "\r\n                   | \r\n                  "
+                                          ),
+                                          _c("a", { attrs: { href: "#" } }, [
+                                            _vm._v("Delete")
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ])
                                   ]),
                                   _vm._v(" "),
                                   _c(
@@ -52627,9 +52762,9 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _vm._m(4, true),
+                                  _vm._m(3, true),
                                   _vm._v(" "),
-                                  _vm._m(5, true),
+                                  _vm._m(4, true),
                                   _vm._v(" "),
                                   _c(
                                     "td",
@@ -52651,7 +52786,7 @@ var render = function() {
                               0
                             )
                           : this.$store.getters.isLoading === false
-                          ? _c("tbody", [_vm._m(6)])
+                          ? _c("tbody", [_vm._m(5)])
                           : _vm._e()
                       ]
                     )
@@ -52727,20 +52862,6 @@ var staticRenderFns = [
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "hidden_sec" }, [
-      _c("div", { staticClass: "hidden_td_link" }, [
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Edit")]),
-        _vm._v("\r\n                   | \r\n                  "),
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Preview")]),
-        _vm._v("\r\n                   | \r\n                  "),
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Delete")])
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -53503,7 +53624,25 @@ var render = function() {
               return _c("div", { staticClass: "col-md-6 col-sm-12" }, [
                 _c("div", { staticClass: "friend-card" }, [
                   _c("div", { staticClass: "row card-info" }, [
-                    _vm._m(0, true),
+                    eachFollowers.image
+                      ? _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                          _c("img", {
+                            staticClass: "profile-photo-lg",
+                            attrs: {
+                              src: "/images/user-images/" + eachFollowers.image,
+                              alt: "user"
+                            }
+                          })
+                        ])
+                      : _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                          _c("img", {
+                            staticClass: "profile-photo-lg",
+                            attrs: {
+                              src: "/images/user-images/default.png",
+                              alt: "user"
+                            }
+                          })
+                        ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-9 col-md-8" }, [
                       _c(
@@ -53553,19 +53692,7 @@ var render = function() {
         ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-md-4" }, [
-      _c("img", {
-        staticClass: "profile-photo-lg",
-        attrs: { src: "/images/user-3.jpg", alt: "user" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -53595,7 +53722,7 @@ var render = function() {
           [_c("PlaceHolderFollowings")],
           1
         )
-      : _vm.initialState.followings
+      : _vm.initialState.followings.length > 0
       ? _c(
           "div",
           { staticClass: "col-md-9 col-sm-9 pad-left-0" },
@@ -53603,7 +53730,25 @@ var render = function() {
             return _c("div", { staticClass: "friend-list" }, [
               _c("div", { staticClass: "friend-card" }, [
                 _c("div", { staticClass: "row card-info" }, [
-                  _vm._m(0, true),
+                  eachFollowings.image
+                    ? _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                        _c("img", {
+                          staticClass: "profile-photo-lg",
+                          attrs: {
+                            src: "/images/user-images/" + eachFollowings.image,
+                            alt: "user"
+                          }
+                        })
+                      ])
+                    : _c("div", { staticClass: "col-lg-3 col-md-4" }, [
+                        _c("img", {
+                          staticClass: "profile-photo-lg",
+                          attrs: {
+                            src: "/images/user-images/default.png",
+                            alt: "user"
+                          }
+                        })
+                      ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-lg-9 col-md-8" }, [
                     _c(
@@ -53647,7 +53792,7 @@ var render = function() {
           }),
           0
         )
-      : _c("div", { staticClass: "col-md-9 col-sm-9 pad-left-0" }, [_vm._m(1)]),
+      : _c("div", { staticClass: "col-md-9 col-sm-9 pad-left-0" }, [_vm._m(0)]),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-3 col-sm-3 pad-left-0" }, [
       _c(
@@ -53661,9 +53806,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "clearfix" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "white-box mb20", attrs: { id: "sidebar2" } })
+      _c("div", { staticClass: "clearfix" })
     ])
   ])
 }
@@ -53672,21 +53815,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-md-4" }, [
-      _c("img", {
-        staticClass: "profile-photo-lg",
-        attrs: { src: "/images/user-3.jpg", alt: "user" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "friend-list" }, [
       _c("div", { staticClass: "friend-card" }, [
         _c("div", { staticClass: "row card-info" }, [
-          _vm._v("\r\n              Sorry! No Following found\r\n            ")
+          _vm._v(
+            "\r\n              You haven't followed anyone!!\r\n            "
+          )
         ])
       ])
     ])
@@ -53835,334 +53969,381 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { attrs: { id: "main" } }, [
+      _c("div", { staticClass: "white-box create-post" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12 col-sm-12" }, [
+            _c("form", [
+              _c("div", { staticClass: "col-md-8 col-sm-8" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.search,
+                      expression: "search",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    cols: "45",
+                    placeholder: "Search Post"
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value.trim()
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                }),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary pull-right",
+                    attrs: { type: "submit" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.searchPost($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Search")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4 col-sm-4" })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" }, [
+        _c("div", { staticClass: "single-blog video-style small row m_b_30" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          this.$store.getters.isLoading === true
+            ? _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" })
+            : _vm.initialState.blogList
+            ? _c(
+                "div",
+                { staticClass: "col-lg-12 col-md-12 col-sm-12" },
+                _vm._l(_vm.initialState.blogList.data, function(eachBlog) {
+                  return _c(
+                    "div",
+                    { staticClass: "single-blog video-style small row m_b_30" },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "thumb col-lg-3 col-md-4 col-sm-5" },
+                        [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: {
+                              src: "/images/blog/" + eachBlog.image,
+                              alt: eachBlog.title
+                            }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "short_details col-lg-9 col-md-8 col-sm-7"
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "d-block",
+                              attrs: { href: "single-blog.html" }
+                            },
+                            [_c("h4", [_vm._v(_vm._s(eachBlog.title))])]
+                          ),
+                          _vm._v(" "),
+                          eachBlog.short_description.length < 500
+                            ? _c("p", {
+                                domProps: {
+                                  innerHTML: _vm._s(eachBlog.short_description)
+                                }
+                              })
+                            : _c("p", {
+                                domProps: {
+                                  innerHTML: _vm._s(
+                                    eachBlog.short_description.substring(
+                                      0,
+                                      500
+                                    ) + " ......"
+                                  )
+                                }
+                              }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "meta-bottom d-flex" }, [
+                            _c("a", { attrs: { href: "#" } }, [
+                              _c("i", { staticClass: "ti-time" }),
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm._f("moment")(
+                                      eachBlog.created_at,
+                                      "MMM DD"
+                                    )
+                                  ) +
+                                  " "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(3, true),
+                            _vm._v(" "),
+                            _vm._m(4, true)
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            : _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" }, [
+                _vm._m(5)
+              ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "clearfix" })
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { attrs: { id: "main" } }, [
-        _c("div", { staticClass: "white-box create-post" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-8 col-sm-8" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("img", {
-                  staticClass: "profile-photo-md",
-                  attrs: { src: "/images/p_image.png", alt: "Profile Image" }
-                }),
-                _vm._v(" "),
-                _c("textarea", {
-                  staticClass: "form-control",
-                  attrs: {
-                    name: "texts",
-                    id: "exampleTextarea",
-                    cols: "60",
-                    rows: "1",
-                    placeholder: "Write Bikash Bhandari Wall"
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4 col-sm-4 pad-left-0" }, [
-              _c("div", { staticClass: "tools" }, [
-                _c("ul", { staticClass: "publishing-tools list-inline" }, [
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-edit" })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-image" })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-video" })
-                    ])
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" }, [
+        _c("div", { staticClass: "single-blog video-style small row m_b_30" }, [
+          _c("div", { staticClass: "thumb col-lg-3 col-md-4 col-sm-5" }, [
+            _c("img", {
+              staticClass: "img-fluid",
+              attrs: {
+                src: "images/magazine/12.jpg",
+                alt: "Blog Image Name Goes Here"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "short_details col-lg-9 col-md-8 col-sm-7" },
+            [
+              _c(
+                "a",
+                { staticClass: "d-block", attrs: { href: "single-blog.html" } },
+                [
+                  _c("h4", [
+                    _vm._v(
+                      "Blessed night morning on\n                them you great"
+                    )
                   ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "Why must the Multiverse exist? Quite simply: there must be more Universe than the part that is observable to us. If you look just at the portion of the Universe we can see, you can measure its spatial curvature, and find that it’s incredibly close to flat..."
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "meta-bottom d-flex" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("i", { staticClass: "ti-time" }),
+                  _vm._v("mar 12")
                 ]),
                 _vm._v(" "),
-                _c("button", { staticClass: "btn btn-primary pull-right" }, [
-                  _vm._v("Publish")
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("i", { staticClass: "ti-heart" }),
+                  _vm._v(" 0 like")
+                ]),
+                _vm._v(" "),
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("i", { staticClass: "ti-eye" }),
+                  _vm._v(" 1k view")
                 ])
               ])
-            ])
-          ])
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" }, [
+      _c("div", { staticClass: "single-blog video-style small row m_b_30 " }, [
+        _c("div", { staticClass: "thumb col-lg-3 col-md-4 col-sm-5" }, [
+          _c("img", {
+            staticClass: "img-fluid",
+            attrs: {
+              src: "images/magazine/13.jpg",
+              alt: "Blog Image Name Goes Here"
+            }
+          })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" }, [
-            _c(
-              "div",
-              { staticClass: "single-blog video-style small row m_b_30" },
-              [
-                _c("div", { staticClass: "thumb col-lg-3 col-md-4 col-sm-5" }, [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: {
-                      src: "images/magazine/12.jpg",
-                      alt: "Blog Image Name Goes Here"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "short_details col-lg-9 col-md-8 col-sm-7" },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "d-block",
-                        attrs: { href: "single-blog.html" }
-                      },
-                      [
-                        _c("h4", [
-                          _vm._v(
-                            "Blessed night morning on\n              them you great"
-                          )
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Why must the Multiverse exist? Quite simply: there must be more Universe than the part that is observable to us. If you look just at the portion of the Universe we can see, you can measure its spatial curvature, and find that it’s incredibly close to flat..."
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "meta-bottom d-flex" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-time" }),
-                        _vm._v("mar 12")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-heart" }),
-                        _vm._v(" 0 like")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-eye" }),
-                        _vm._v(" 1k view")
-                      ])
-                    ])
-                  ]
+        _c("div", { staticClass: "short_details col-lg-9 col-md-8 col-sm-7" }, [
+          _c(
+            "a",
+            { staticClass: "d-block", attrs: { href: "single-blog.html" } },
+            [
+              _c("h4", [
+                _vm._v(
+                  "Blessed night morning on\n                them you great"
                 )
-              ]
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "Inflation did not occur at arbitrarily high energies. There’s an energy scale at which the laws of physics no longer make sense: the Planck scale, or about 1019 GeV. This is about 100 trillion times larger than the maximum energies the LHC achieves…"
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" }, [
-            _c(
-              "div",
-              { staticClass: "single-blog video-style small row m_b_30 " },
-              [
-                _c("div", { staticClass: "thumb col-lg-3 col-md-4 col-sm-5" }, [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: {
-                      src: "images/magazine/13.jpg",
-                      alt: "Blog Image Name Goes Here"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "short_details col-lg-9 col-md-8 col-sm-7" },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "d-block",
-                        attrs: { href: "single-blog.html" }
-                      },
-                      [
-                        _c("h4", [
-                          _vm._v(
-                            "Blessed night morning on\n              them you great"
-                          )
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Inflation did not occur at arbitrarily high energies. There’s an energy scale at which the laws of physics no longer make sense: the Planck scale, or about 1019 GeV. This is about 100 trillion times larger than the maximum energies the LHC achieves…"
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "meta-bottom d-flex" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-time" }),
-                        _vm._v("mar 12")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-heart" }),
-                        _vm._v(" 0 like")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-eye" }),
-                        _vm._v(" 1k view")
-                      ])
-                    ])
-                  ]
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" }, [
-            _c(
-              "div",
-              { staticClass: "single-blog video-style small row m_b_30" },
-              [
-                _c("div", { staticClass: "thumb col-lg-3 col-md-4 col-sm-5" }, [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: {
-                      src: "images/magazine/14.jpg",
-                      alt: "Blog Image Name Goes Here"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "short_details col-lg-9 col-md-8 col-sm-7" },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "d-block",
-                        attrs: { href: "single-blog.html" }
-                      },
-                      [
-                        _c("h4", [
-                          _vm._v(
-                            "Blessed night morning on\n              them you great"
-                          )
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "The idea that the Big Bang happened everywhere at once may apply to our Universe, but certainly ought not to apply to the vast majority of Universes existing in the Multiverse. Assuming that inflation is a quantum field, like all fields we know of, it must spread…"
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "meta-bottom d-flex" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-time" }),
-                        _vm._v("mar 12")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-heart" }),
-                        _vm._v(" 0 like")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-eye" }),
-                        _vm._v(" 1k view")
-                      ])
-                    ])
-                  ]
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12" }, [
-            _c(
-              "div",
-              { staticClass: "single-blog video-style small row m_b_30" },
-              [
-                _c("div", { staticClass: "thumb col-lg-3 col-md-4 col-sm-5" }, [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: {
-                      src: "images/magazine/12.jpg",
-                      alt: "Blog Image Name Goes Here"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "short_details col-lg-9 col-md-8 col-sm-7" },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "d-block",
-                        attrs: { href: "single-blog.html" }
-                      },
-                      [
-                        _c("h4", [
-                          _vm._v(
-                            "Blessed night morning on\n              them you great"
-                          )
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Why must the Multiverse exist? Quite simply: there must be more Universe than the part that is observable to us. If you look just at the portion of the Universe we can see, you can measure its spatial curvature, and find that it’s incredibly close to flat. No regions..."
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "meta-bottom d-flex" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-time" }),
-                        _vm._v("mar 12")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-heart" }),
-                        _vm._v(" 0 like")
-                      ]),
-                      _vm._v(" "),
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "ti-eye" }),
-                        _vm._v(" 1k view")
-                      ])
-                    ])
-                  ]
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12 text-center" }, [
-            _c("div", { staticClass: "lds-ring" }, [
-              _c("div"),
-              _vm._v(" "),
-              _c("div"),
-              _vm._v(" "),
-              _c("div"),
-              _vm._v(" "),
-              _c("div")
+          _c("div", { staticClass: "meta-bottom d-flex" }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "ti-time" }),
+              _vm._v("mar 12")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "clearfix" })
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "ti-heart" }),
+              _vm._v(" 0 like")
+            ]),
+            _vm._v(" "),
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "ti-eye" }),
+              _vm._v(" 1k view")
+            ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "clearfix" })
+      ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "thumb col-lg-3 col-md-4 col-sm-5" }, [
+      _c("img", {
+        staticClass: "img-fluid",
+        attrs: {
+          src: "images/magazine/14.jpg",
+          alt: "Blog Image Name Goes Here"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "ti-heart" }),
+      _vm._v(" 0 like")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "ti-eye" }),
+      _vm._v(" 1k view")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "single-blog video-style small row m_b_30" },
+      [
+        _c("div", { staticClass: "thumb col-lg-3 col-md-4 col-sm-5" }, [
+          _c("img", {
+            staticClass: "img-fluid",
+            attrs: {
+              src: "images/magazine/12.jpg",
+              alt: "Blog Image Name Goes Here"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "short_details col-lg-9 col-md-8 col-sm-7" }, [
+          _c(
+            "a",
+            { staticClass: "d-block", attrs: { href: "single-blog.html" } },
+            [
+              _c("h4", [
+                _vm._v(
+                  "Blessed night morning on\n                them you great"
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "Why must the Multiverse exist? Quite simply: there must be more Universe than the part that is observable to us. If you look just at the portion of the Universe we can see, you can measure its spatial curvature, and find that it’s incredibly close to flat. No regions..."
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "meta-bottom d-flex" }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "ti-time" }),
+              _vm._v("mar 12")
+            ]),
+            _vm._v(" "),
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "ti-heart" }),
+              _vm._v(" 0 like")
+            ]),
+            _vm._v(" "),
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "ti-eye" }),
+              _vm._v(" 1k view")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "short_details col-lg-12 col-md-12 col-sm-12" },
+            [
+              _c("h4", { staticClass: "text-center d-block" }, [
+                _vm._v("No post available!!")
+              ])
+            ]
+          )
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true

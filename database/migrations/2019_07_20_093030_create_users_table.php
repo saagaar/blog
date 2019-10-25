@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('invalid_login')->default(0);
             $table->enum('status',['1','2','3','4'])->comment('1=active,2=inactive,3-closed,4=suspended')->default('1');
             $table->enum('is_login',['1','2'])->comment('1=active,2=inactive');
-            $table->date('last_login_date')->nullable();
+            $table->datetime('last_login_date')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->unsignedBigInteger('country')->nullable();
