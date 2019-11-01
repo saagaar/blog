@@ -58,6 +58,7 @@ import ListComment from './components/Comment/ListComment';
 import AddComment from './components/Comment/AddComment';
 import Comment from './components/Comment/Comment';
 import IconCommentsCount from './components/Comment/IconCommentsCount';
+import Likes from './components/Likes/Likes';
 // import UserDashboard from './pages/UserDashboard';
 const default_layout="default";
 const app = new Vue({
@@ -81,6 +82,7 @@ const app = new Vue({
             'list-comment':ListComment,
             'add-comment':AddComment,
             'comment':Comment,
+            'likes':Likes,
             'icon-comments-count':IconCommentsCount
           
         }

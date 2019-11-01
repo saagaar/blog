@@ -92,6 +92,24 @@
                   <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
                   @endif
                   </div>
+
+                  <div class="form-group">
+                  <label for="is_login">Is Login:</label>
+                  <label><input type="radio" name="is_login" value="1" {{ $accounts->is_login == '1' ? 'checked' : ''}} checked>Active</label>
+                  <label><input type="radio" name="is_login" value="2" {{ $accounts->is_login == '2' ? 'checked' : ''}}>Inactive</label>
+                    @if ($errors->has('is_login'))
+                    <div class="alert alert-danger">{{ $errors->first('is_login') }}</div>
+                    @endif
+                    </div>
+
+                <div class="form-group">
+                  <label for="last_login_date">Last login Date:</label>
+                  <label><input type="date" name="last_login_date" value="{{$accounts->last_login_date}}"></label>
+                   @if ($errors->has('last_login_date'))
+                <div class="alert alert-danger">{{ $errors->first('last_login_date') }}</div>
+                @endif
+                 
+
                   <div class="form-group">
                     <label for="address">Address</label>
                     <input type="text" class="form-control" name="address" value="{{$accounts->address}}" id="address"  placeholder="Enter Address">

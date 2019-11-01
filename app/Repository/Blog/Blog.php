@@ -23,11 +23,16 @@ Class Blog implements BlogInterface
   public function getBlogById($blogId){
     return  $this->blog->where('id', $blogId)->first();
   }
+
   /**
    * get blog for featured =1
    */
+
   public function getAllFeaturedBlog(){
     return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->limit(4)->get();
+  }
+  public function getAllFeaturedForMember(){
+    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->limit(5)->get();
   }
 
    /**
@@ -40,7 +45,10 @@ Class Blog implements BlogInterface
    * get latest blog 
    */
   public function getLatestAllBlog(){
-    return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->withCount('likes')->limit(3)->get();
+    return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->withCount('likes','comments')->limit(3)->get();
+  }
+  public function getPopularBlog(){
+    return $this->blog->where(['save_method'=>2])->orderBy('likes_count','DESC')->withCount('likes','comments')->limit(3)->get();
   }
   /**
    * get blog bye following
@@ -48,6 +56,19 @@ Class Blog implements BlogInterface
   public function getBlogOfFollowingUser($user){
     $listofFollowings=$user->followings()->select('follow_id')->get()->pluck('follow_id')->toArray();
     return $this->blog->whereIn('user_id', $listofFollowings)->latest()->get()->toArray();
+  }
+
+  /**
+   * get retaled blog
+   */
+  public function relatedBlogBycode($blogCode){
+    $blogData=$this->blog->where('code', $blogCode)->first();
+    $related =$this->blog->whereHas('tags', function ($q) use ($blogData) {
+    return $q->whereIn('name', $blogData->tags()->pluck('name')); 
+    })
+    ->where('id', '!=', $blogData->id) // So you won't fetch same post
+    ->get();
+    return $related;
   }
   /**
    * get blog by  blog code
@@ -63,10 +84,38 @@ Class Blog implements BlogInterface
   public function getBlogByUserId($userid){
     return  $this->blog::with('user:id,username')->where('user_id', $userid)->orderByDesc('id');
   }
+
+
+  public function countAllBlogUser()
+  {
+     return $this->blog->get()->count();
+  }
+
+   public function countPublishedBlog()
+  {
+     return $this->blog->where('save_method','=' ,'2')->count();
+  }
+
+  public function countSavedBlog()
+  {
+     return $this->blog->where('save_method','=' ,'1')->count();
+  }
+   
+  public function countPublishedBlogsThisMonth()
+  {
+     return $this->blog->whereMonth('created_at','=',date('m'))->where('save_method','=','2')->count();
+  }
+
+  public function countTodaysPublishedBlogs()
+  {
+     return $this->blog->whereDate('created_at','=',date('Y-m-d'))->where('save_method','=','2')->count();
+  }
+
   
   public function getActiveBlogByUserId($userid){
     return  $this->blog::with('user:id,username')->where(['user_id'=>$userid,'save_method'=>'2'])->orderByDesc('id');
   } 
+
      
   public function getAssociatedCategoryOfBlog($blogId){
       return	$this->blog->where('id', $blogId)->first();

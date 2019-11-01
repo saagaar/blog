@@ -10,6 +10,9 @@ use App\Services\NotificationCommander;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Route;
 use App\Repository\AdminPermissionInterface;
+use App\Repository\VisitorLogInterface;
+use App\Repository\AccountInterface;
+use App\Repository\BlogInterface;
 
 use Auth;
 use Session;
@@ -20,7 +23,11 @@ class AdminController extends BaseController
     protected $admin;
 
     protected $RolePermission;
-    
+    protected $visitor;
+     protected $user;
+     protected $blog;
+
+
      /**
     *User object Global
     *@var obj
@@ -38,26 +45,38 @@ class AdminController extends BaseController
         $this->middleware('check_user_permission');
         // $this->user = $User;
     }
-    public function dashboard()
+
+    
+    
+    public function dashboard(VisitorLogInterface $visitor, AccountInterface $user,BlogInterface $blog)
     {
        
         $breadcrumb=['breadcrumbs' => [
-                    'current_menu' => 'Dashboard',
-                    
+                    'current_menu' => 'Dashboard',                       
                       ]];
-        // print_r();
-       // echo '<pre>';
-       //  $routes= Route::getRoutes()->getByName('checkpermission');
-       //       print_r($routes->getAction());exit;
-       
+           
+        $dashboard['allLoggedInVisitors']=$visitor->countTodayLoggedInVisitors();
+        $dashboard['allVisitors']=$visitor->countAllVisitors();
+        $dashboard['allRegisteredVisitors']=$visitor->countTodaysPageVisitors();             
+        $dashboard['allRegisteredUsers']=$user->countAllTodaysRegisteredUsers();
+        $dashboard['allUsers']=$user->countAllUsers();    
+        $dashboard['loggedinUsers']=$user->countAllTodayLoggedInUsers();
+        $dashboard['activeUsers']=$user->countActiveUsers();
+        $dashboard['inActiveUsers']=$user->countInActiveUsers();   
 
-        // $role=$rolepermission->getModuleByRoleId($this->User->role_id);
-        // print_r($this->User);exit;
-        // print_r($this->user);
-        // $data=($this->user->getAll());
-        // dd($data->username);
-        return view('admin.dashboard',compact('breadcrumb'))->with(array('primary_menu'=>'dashboard.list'));
+        $dashboard['allBlogUsers']=$blog->countAllBlogUser();
+        $dashboard['publishedBlogs']=$blog->countPublishedBlog();
+        $dashboard['savedBlogs']=$blog->countSavedBlog();
+        $dashboard['todayPublishedBlogs']=$blog->countTodaysPublishedBlogs();
+        $dashboard['publishedBlogsThisMonth']=$blog->countPublishedBlogsThisMonth();
+          
+                
+        return view('admin.dashboard',compact('breadcrumb','dashboard'))->with(array('primary_menu'=>'dashboard.list'));
     }
+   
+
+         // return view('admin.dashboard.list')->with(array('banner'=>$banner,'breadcrumb'=>$breadcrumb));
+   
     
    
     public function ImportModules(AdminPermissionInterface $module)

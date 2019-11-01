@@ -134,7 +134,7 @@ window.setTimeout(function() {
     $('.toggle-class').change(function() {
         var status = $(this).prop('checked') == true ? 1 : 2;
         var paymentmode = $(this).prop('checked') == true ? 1 : 0;
-        var savemethod = $(this).prop('checked') == true ? 1 : 0;
+        var savemethod = $(this).prop('checked') == true ? 2 : 1;
         var id = $(this).data('id');
         var url = $(this).data('url');  
         $.ajax({

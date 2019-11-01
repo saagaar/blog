@@ -39,20 +39,21 @@
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachNotification->title }}</td>
-                   <td>{{ $eachNotification->code }}</td>
+                  <td>{{ $eachNotification->code }}</td>
                   <td>
-                   <input data-id="{{$eachNotification->id}}" data-url="{{route('notification.changestatus')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachNotification->active ? 'checked' : '' }}>
+                   <input data-id="{{$eachNotification->id}}" data-url="{{route('notification.changestatus')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachNotification->active==1 ? 'checked' : '' }}>
                   </td>
                   <td>{{ $eachNotification->subject }}</td>
                   <td>{{ $eachNotification->view }}</td>
-
-
                   <td>@foreach($eachNotification->notification_type as $each)
-                      <span class="label label-info label-large">{{$each}}</span>
-
-
-                  @endforeach
-
+                        @if($each=='sms')
+                       <span class="label label-warning label-large">{{$each}}</span>
+                       @elseif($each=='database')
+                        <span class="label label-primary label-large">{{$each}}</span>
+                        @elseif($each=='mail')
+                         <span class="label label-info label-large">{{$each}}</span>
+                        @endif
+                      @endforeach
                   </td>
                   <td>{{$eachNotification->created_at}}</td>
                   <td><a href="{{route('notification.edit', $eachNotification->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>

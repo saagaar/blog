@@ -29,7 +29,7 @@
             <div class="box-body">
             <form action="{{route('blog.create')}}" method="POST" enctype="multipart/form-data">
               @csrf
-              <div class="box-body">
+              <div class="box-body">  
                 <div class="form-group">
                   <label for="name">Title</label>
                   <input type="text" class="form-control" name="title" id="name" value="{{ old('title') }}" placeholder="Enter Title">
@@ -97,11 +97,11 @@
                   <div class="form-group col-md-4">
                   <label for="Save Method">Save Method: </label>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="0" checked>
+                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="1" checked>
                         <label class="custom-control-label" for="defaultChecked">Save</label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="1" >
+                        <input type="radio" class="custom-control-input flat-red" name="save_method"  value="2" >
                         <label class="custom-control-label" for="defaultChecked">Publish</label>
                       </div>
                   @if ($errors->has('save_method'))
