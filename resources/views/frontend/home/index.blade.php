@@ -7,7 +7,12 @@
                 <div class="col-md-6 col-lg-6 col-xl-5">
                     <div class="single-blog  wow fadeInUp" data-wow-duration="2s" data-wow-delay=".2s">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['0']->image) }}" alt="">
+                            @if($featuredBlog['0']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['0']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                            @endif
+                           
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">
@@ -32,7 +37,11 @@
                         <div class="col-12 col-md-6 col-lg-6 col-xl-12">
                             <div class="single-blog style-three m_b_30">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['1']->image) }}" alt="">
+                                    @if($featuredBlog['1']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['1']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                            @endif
                                 </div>
                                 <div class="short_details">
 
@@ -51,7 +60,11 @@
                         <div class="col-12 col-md-6 col-lg-6 col-xl-12">
                             <div class="single-blog style-three">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['2']->image) }}" alt="">
+                                    @if($featuredBlog['2']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['2']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                            @endif
                                 </div>
                                 <div class="short_details">
 
@@ -73,7 +86,11 @@
                 <div class="col-md-6 col-lg-6 col-xl-4">
                     <div class="single-blog style_two">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['0']->image) }}" alt="">
+                            @if($featuredBlog['3']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['3']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                            @endif
                         </div>
                         <div class="short_details text-center ">
 
@@ -327,7 +344,11 @@
                 <div class="col-lg-5 col-xl-6">
                     <div class="single-blog">
                         <div class="thumb">
-                            <img class="img-fluid"src="{{ asset('images/blog/'.$mostViewed['0']->image) }}" alt="">
+                            @if($mostViewed['0']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$mostViewed['0']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                            @endif
                         </div>
                         <div class="short_details pad_25 ">
                             <div class="meta-top d-flex">
@@ -360,7 +381,11 @@
                         </div>  
                         <div class="col-12 col-sm-5">
                             <div class="thumb">
-                                <img class="img-fluid" src="{{ asset('images/blog/'.$mostViewed['1']->image) }}" alt="">
+                                @if($mostViewed['1']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$mostViewed['1']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                            @endif
                             </div>
                         </div>
                     </div> 
@@ -369,7 +394,11 @@
                     <div class="single-blog row no-gutters style-four">
                         <div class="col-12 col-sm-5">
                             <div class="thumb">
-                                <img class="img-fluid" src="{{ asset('images/blog/'.$mostViewed['2']->image) }}" alt="">
+                                @if($mostViewed['2']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$mostViewed['2']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                            @endif
                             </div>
                         </div>
                         <div class="col-12 col-sm-7">
@@ -529,7 +558,11 @@
                 <div class="col-lg-4">
                     <div class="single-blog style-five">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{ asset('images/blog/'.$eachLatestBlog->image) }}" alt="">
+                            @if($eachLatestBlog->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$eachLatestBlog->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                            @endif
                         </div>
                         <div class="short_details">
                             <div class="meta-top d-flex">

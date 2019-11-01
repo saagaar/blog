@@ -133,12 +133,12 @@ class BlogController extends FrontendController
                     {
                         $imageName = time().'.'.request()->image->getClientOriginalExtension();
                         request()->image->move(public_path('images/blog'), $imageName);
+                        $form['image']=$imageName;
                     }
                     $form['short_description']=$request->short_description;
                     $form['save_method']='1';
                     $form['anynomous'] = $request->isAnynomous ? '1' : '2';
                     $this->blog->updateByCode($postId,$form);
-                    print_r(json_decode($request->tags));exit;
                     $tagid = $tag->getTagByName($request->tags);
                     $this->blog->addTag($postId,$tagid);  
                     return response()->json(['status'=>true,'blogId'=>$postId,'message'=>'Blog updated successfully']);                

@@ -21,6 +21,7 @@ export const TOGGLE_LOADING = state =>
 {
     state.isLoading = !state.isLoading;
 }
+
 export const SETFLASHMESSAGE = (state, flashdata)=> 
 {
     state.flashMessage = flashdata;

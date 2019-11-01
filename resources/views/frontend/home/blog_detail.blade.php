@@ -8,7 +8,11 @@
                 <div class="col-lg-8 posts-list pad-right-0">
                     <div class="white-box single-post">
                         <div class="feature-img">
-                            <img class="img-fluid" src="{{ asset('images/blog/'.$blogDetails->image) }}" alt="">
+                            @if($blogDetails->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$blogDetails->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}" alt="">
+                            @endif
                         </div>
 
                         <div class="blog_details">
@@ -26,7 +30,7 @@
                         <div class="d-sm-flex justify-content-between text-center">
                             <p class="like-info"><span class="align-middle"><i class="fa fa-heart" aria-hidden="true"></i></span>{{$blogDetails->likes_count}} people like this</p>
                             <div class="col-sm-4 text-center my-2 my-sm-0">
-                                <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> {{ $blogDetails->comments_count}} Comments</p>
+                                <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> <icon-comments-count></icon-comments-count></p>
                             </div>
                             <ul class="social-icons">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -38,10 +42,15 @@
 
                         <div class="navigation-area">
                             <div class="row">
+                                @if($prev)
                                 <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                                     <div class="thumb">
                                         <a href="#">
-                                            <img class="img-fluid" src="img/blog/prev.jpg" alt="">
+                                            @if($prev->image)
+                                                 <img class="img-fluid" src="{{ asset('images/blog/'.$prev->image) }}" width="60" height="60" alt="">
+                                            @else
+                                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}"  width="60" height="60" alt="">
+                                            @endif
                                         </a>
                                     </div>
                                     <div class="arrow">
@@ -52,15 +61,17 @@
                                     <div class="detials">
                                         <p>Prev Post</p>
                                         <a href="#">
-                                            <h4>Space The Final Frontier</h4>
+                                            <h4>{{ $prev->title }}</h4>
                                         </a>
                                     </div>
                                 </div>
+                                @endif
+                                @if($next)
                                 <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
                                     <div class="detials">
                                         <p>Next Post</p>
                                         <a href="#">
-                                            <h4>Learning Technologies </h4>
+                                            <h4>{{ $next->title }}</h4>
                                         </a>
                                     </div>
                                     <div class="arrow">
@@ -70,10 +81,15 @@
                                     </div>
                                     <div class="thumb">
                                         <a href="#">
-                                            <img class="img-fluid" src="img/blog/next.jpg" alt="">
+                                            @if($next->image)
+                                                 <img class="img-fluid" src="{{ asset('images/blog/'.$next->image) }}"  width="60" height="60" alt="">
+                                            @else
+                                                 <img class="img-fluid" src="{{ asset('images/blog/defaut.jpg') }}"  width="60" height="60" alt="">
+                                            @endif
                                         </a>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
