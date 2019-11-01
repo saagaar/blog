@@ -10,14 +10,55 @@ Class Account implements AccountInterface
 {
 	protected $user;
     use HasRoles;
+
 	public function __construct(Users $user)
 	{
 		$this->account=$user;
+    
 	}
      
     public function getById($memberId){
       return $this->account->where('id', $memberId)->first();
     }
+
+      public function countAllTodayLoggedInUsers()
+      {
+        return $this->account->whereDate('last_login_date','=',date('Y-m-d'))->count();
+      }
+
+      public function countAllUsers()
+      {
+       
+        return $this->account->get()->count();    
+      }
+
+       public function countAllTodaysRegisteredUsers()
+       
+       {
+       
+           return $this->account->whereDate('created_at','=',date('Y-m-d'))->count();   
+       }
+
+         public function countActiveUsers()
+       
+       {
+       
+          return $this->account->where('is_login','=','1')->whereDate('created_at','=',date('Y-m-d'))->count();   
+       }
+
+
+
+         public function countInActiveUsers()
+       
+       {
+       
+          return $this->account->where('is_login','=','2')->whereDate('created_at','=',date('Y-m-d'))->count();   
+       }
+
+
+      
+
+
 
     public function getUserByUsername($username){
       return $this->account->where('username', $username)->first();

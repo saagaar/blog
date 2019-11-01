@@ -58,9 +58,20 @@
                   <label for="permissions">permissions</label>
                   <!-- value="{{ $permissions }}" -->
                     <select multiple="multiple" class="form-control js-example-basic-multiple"  name="permission[]" id="permission">
-                      @foreach ($permissions as $values)
-                      <option value="{{ $values->name }}"> {{ $values->name }}  </option>
+
+                          @foreach ($permissions as $values)
+                        <?php if(!$role->permissions()->pluck('id')){ ?>
+                        <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                        <?php }else{ ?>
+                          @foreach ($role->permissions()->pluck('id') as $permission)
+                          <option value="{{ $values->id }}" @if($values->id==$permission) selected @endif > {{ $values->name }}  </option>
+                          @endforeach
+                        <?php } ?>
                       @endforeach
+
+                      <!-- @foreach ($permissions as $values)
+                      <option value="{{ $values->name }}"> {{ $values->name }}  </option>
+                      @endforeach -->
                     </select>
                     <p class="help-block"></p>
                     @if($errors->has('permission'))

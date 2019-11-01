@@ -47,9 +47,16 @@ class BlogController extends AdminController
             ]);  
             $requestObj=app(BlogRequest::class);
             $validatedData = $requestObj->validated();
+             // dd($validatedData);
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             request()->image->move(public_path('images/blog'), $imageName);
             $validatedData['image'] = $imageName;
+            //  if($request->hasFile('image') ){
+            //     $image = $request->file('image'); 
+            //     $image->fit(200,200);               
+            // }
+
+            // $validatedData['image']->fit(200, 200);
             $validatedData['user_id'] = Auth()->user()->id;
             $created = $this->blog->create($validatedData); 
             $code= uniqid();
