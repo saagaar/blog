@@ -1,8 +1,11 @@
 <template>
+	<div>
          <a href="" @click.prevent="toggleLike" class="appreciate">
          	<img v-if="isChecked" src="/images/appreciate-active.gif" width="25" height="25" class="img-fluid">
         	<img v-else src="/images/appreciate.png" width="25" height="25" class="img-fluid">
    		</a>
+   		<span>{{ count }} people like this</span>
+   	</div>
 </template>
 
 <script>
@@ -15,19 +18,21 @@ let action='';
         data: function() {
             return {
                 isChecked:'',
+                count:''
             }
         },
 
         mounted() {
-            var indexval=(this.likes.indexOf(this.currentblog));
-            console.log(indexval);
+            var indexval=(this.likes.indexOf(this.currentblog.id));
             if(indexval==-1)
             {
                 this.isChecked=false;
             }else{
                 this.isChecked=true;
             }
+            this.count=this.currentblog.likes_count;
         },
+       
         methods: {
             toggleLike:function(){
                 if(this.isChecked)
@@ -41,7 +46,7 @@ let action='';
                 action='/like/blog/'+this.blogcode;
                     var form=new Form();
                     form.post(action).then(response => {
-                        if (true) {
+                        if (response.data.status) {
                         	
                         }
 

@@ -27,7 +27,9 @@ Class Blog implements BlogInterface
   /**
    * get blog for featured =1
    */
-
+  public function getLikesOfBlogByUser($user){
+    return $user->likes()->get();
+  }
   public function getAllFeaturedBlog(){
     return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->limit(4)->get();
   }

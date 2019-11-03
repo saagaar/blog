@@ -29,10 +29,12 @@
                     <div class="white-box  navigation-top">
                         <div class="d-sm-flex justify-content-between text-center">
                             <p class="like-info"><span class="align-middle">
-                                <likes v-bind:currentBlog="{{$blogDetails->id}}" v-bind:blogCode="'{{$blogDetails->code}}'" v-bind:likes="{{$likes}}"></likes>
-                            </span>{{$blogDetails->likes_count}} people like this</p>
+                                @if($likes)
+                                <likes v-bind:currentBlog="{{$blogDetails}}" v-bind:blogCode="'{{$blogDetails->code}}'" v-bind:likes="{{$likes}}"></likes>
+                                @endif
+                            <!-- </span>{{$blogDetails->likes_count}} people like this</p> -->
                             <div class="col-sm-4 text-center my-2 my-sm-0">
-                                <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> <icon-comments-count></icon-comments-count></p>
+                                <p class="comment-count"><span class="align-middle"></span> <icon-comments-count></icon-comments-count></p>
                             </div>
                             <ul class="social-icons">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>

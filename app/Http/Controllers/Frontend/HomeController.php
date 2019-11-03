@@ -58,10 +58,11 @@ class HomeController extends FrontendController
         $data['popular'] = $popular;
         $featuredForMember = $this->blog->getAllFeaturedForMember();
         $data['featuredForMember']=$featuredForMember;
-        $likes=$this->authUser->likes()->get();
+        $likes='';
         $user ='';
          if(\Auth::check())
         {
+          $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
             $routeName= ROUTE::currentRouteName();
             
           if($routeName=='api')
@@ -86,7 +87,7 @@ class HomeController extends FrontendController
       // print_r($next);exit;
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $relatedBlog = $this->blog->relatedBlogBycode($code);
-      $likes=$this->authUser->likes()->get();
+      $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
       $data['blogDetails'] =$blogDetails;
       $data['blogComment']  =$blogComment;
       
