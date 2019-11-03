@@ -77,6 +77,15 @@
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>
                 @endif
                 </div>
+
+                <div class="form-group">
+                  <label for="show_in_home">Show in Home:</label>
+                  <label><input type="radio" name="show_in_home" value="1" @if($category->show_in_home=='1') checked @endif >Active</label>
+                  <label><input type="radio" name="show_in_home" value="2" @if($category->show_in_home=='2') checked @endif >Inactive</label>
+                  @if ($errors->has('show_in_home'))
+                <div class="alert alert-danger">{{ $errors->first('show_in_home') }}</div>
+                @endif
+                </div>
                 <div class="form-group">
                   <label for="banner_image">Image Upload</label>
                   <img src="{{ asset('frontend/images/categories-images/'.$category['banner_image']) }}" alt="Image" height="42" width="42">

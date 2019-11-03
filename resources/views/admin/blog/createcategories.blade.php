@@ -90,6 +90,16 @@
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>
                 @endif
                 </div>
+
+                  <div class="form-group">
+                  <label for="show_in_home">Show in Home:</label>
+                  <label><input type="radio" name="show_in_home" value="1">Active</label>
+                  <label><input type="radio" name="show_in_home" value="2">Inactive</label>
+                  @if ($errors->has('show_in_home'))
+                <div class="alert alert-danger">{{ $errors->first('show_in_home') }}</div>
+                @endif
+                </div>
+
                 <div class="form-group">
                   <label for="banner_image">Image Upload</label>
                   <input type="file" class="form-control" name="banner_image" id="banner_image">

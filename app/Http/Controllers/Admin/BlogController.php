@@ -7,7 +7,7 @@ use App\Repository\LocaleInterface;
 use App\Repository\TagInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
-use Illuminate\Support\Facades\File;
+use s\Support\Facades\File;
 use App;
 class BlogController extends AdminController
 {
@@ -49,7 +49,7 @@ class BlogController extends AdminController
             $validatedData = $requestObj->validated();
              // dd($validatedData);
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/blog'), $imageName);
+            request()->image->move(public_path('images/blog/blog-images'), $imageName);
             $validatedData['image'] = $imageName;
             //  if($request->hasFile('image') ){
             //     $image = $request->file('image'); 

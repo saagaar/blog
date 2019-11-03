@@ -97,10 +97,11 @@ class CategoryController extends AdminController
                     $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
                     request()->banner_image->move(public_path('frontend/images/categories-images/'), $imageName);
                     $validatedData['banner_image'] = $imageName;
-                }else {
+                }else
+                 {
                     $validatedData['banner_image'] = $category->banner_image;
                 }
-                $updated = $this->blog->update($id,$validatedData);
+                 $updated = $this->blog->update($id,$validatedData);
                  $updated->tags()->sync($validatedData['tags']);
                 return redirect()->route('adminblogcategory.list')
                             ->with('success','Category Updated Successfully.');

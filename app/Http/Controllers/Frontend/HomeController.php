@@ -94,8 +94,10 @@ class HomeController extends FrontendController
     public function getTagName(TagInterface $tag,Request $request)
     {
           
-           $search=$request->get('name');             
-            if($search){
+           $search=$request->get('name'); 
+
+            if($search)
+            {
                 print_r($tag->getTag($search));
 
               }
