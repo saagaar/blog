@@ -9,7 +9,7 @@
                           <div class="form-group upload_img">
                           <label><i class="fa fa-image"></i> Upload Image</label>
                           <figure> 
-                              <img :src="'/images/upload.png'" id="image-field"/>
+                              <img :src="form.image" id="image-field"/>
                               <span class="file-input btn btn-success btn-file">
                                   <input type="file" ref="file" name="image" id="file1" class="upload" @change="previewImage(); $v.form.image.$touch()">
                               </span>
@@ -33,14 +33,17 @@
                           <label class="typo__label">Tags</label>
                           <multiselect v-if="initialState.options"
                            v-model="form.tags" 
-                           tag-placeholder="Add this as new tag" 
                            placeholder="Search a tag" 
                            label="name" 
+                           :loading="isLoading"
+                           @search-change="searchTags"
                            track-by="name" 
                            :max="max"
                            :optionsLimit="optionsLimit"
                            :options="initialState.options" 
                            :multiple="true" 
+                           open-direction="bottom"
+                           :internal-search="false"
                            :taggable="true">
                            Tag="checkTag"
                            </multiselect>
@@ -109,13 +112,15 @@ import Form from './../services/Form.js';
         mixins:[mixin],
       data:function(){
           return {
+                isLoading: false,
                 editor: ClassicEditor,
                 max:3,
                 optionsLimit:5,
+                options:[],
                 initialState:{},
                 form:new Form({
                     short_description:'',
-                    image:'',
+                    image:'/images/upload.png',
                     tags:{},
                     isAnynomous:'',
                     file:true
@@ -138,8 +143,12 @@ import Form from './../services/Form.js';
         watch: {
         initialState: function (value) {
             this.form.short_description=value.blog.short_description;     
-            this.form.tags=value.blog.tags;   
+            // this.form.tags=value.blog.tags;   
             this.form.isAnynomous=(value.blog.anynomous==1)?true:false;
+
+            if(value.blog.image && value.blog.image!='null')
+            this.form.image='/images/blog/'+value.blog.image;
+
         },
       },
         // created: function(){
@@ -149,8 +158,9 @@ import Form from './../services/Form.js';
 
         methods:{
 
-          onChangeEventHandler(){
-            console.log(options);
+          searchTags(serchQuery,){
+            this.isLoading = true
+         // alert('here');
           },
           checkTag(){
             alert(checkTag);
