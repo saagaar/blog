@@ -13,9 +13,9 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info profile_pic_upload">
-                  <figure><img src="images/user-6.jpg" alt="Profile Image" class="img-responsive profile-photo" id="profileImage" />
+                  <figure><img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'" alt="Profile Image" class="img-responsive profile-photo" id="profileImage" />
                     <div class="profile_img_change"> <span class="file-input btn btn-success btn-file"> <i class="fa fa-camera"></i>
-                      <input type="file"  name="file" id="file1" class="upload" onchange="viewimage(event)" multiple>
+                      <input type="file"  name="profileimage" id="file1" class="upload" onchange="viewimage(event)" >
                       </span> </div>
                   </figure>
                   <h3>Bikash Bhandari</h3>
@@ -92,7 +92,9 @@ import TheFooter from './../components/Footer/TheFooter';
     export default {
         data() {
           return {
-           
+            form:new Form({
+              profileimage:'',
+            })
            }
         },
         // name:UserDashboard,
@@ -112,17 +114,18 @@ import TheFooter from './../components/Footer/TheFooter';
     }
 
 
-     function viewimage(event) {
-                          
-                          var reader = new FileReader();
-                          var imageField = document.getElementById("profileImage")
-                          reader.onload = function () {
-                              if (reader.readyState == 2) {
-                                  imageField.src = reader.result;
-                              }
-                          }
-                          reader.readAsDataURL(event.target.files[0]);
-                      }
+     function viewimage(event) 
+     {
+        var reader = new FileReader();
+        var imageField = document.getElementById("profileImage")
+        reader.onload = function () {
+            if (reader.readyState == 2) {
+                imageField.src = reader.result;
+            }
+        }
+        reader.readAsDataURL(event.target.files[0]);
+
+     }
 
 
 

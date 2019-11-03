@@ -4,21 +4,23 @@
         <div class="col-md-9 col-sm-9">
                 <div id="main" class="">
               <div class="white-box add_blog">
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data" disabled="">
                     <div>
                           <div class="form-group upload_img">
                           <label><i class="fa fa-image"></i> Upload Image</label>
+
                           <figure> 
-                              <img :src="form.image" id="image-field"/>
+                              <img :src="image" id="image-field"/>
                               <span class="file-input btn btn-success btn-file">
                                   <input type="file" ref="file" name="image" id="file1" class="upload" @change="previewImage(); $v.form.image.$touch()">
                               </span>
                           </figure>
                           </div>
                         
-                        <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Short Description </h4>
 
                        <div class="form-group">
+                        <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Short Description </h4>
+
                         <textarea  class="form-control ckeditor" id="editor" rows="10" blur="$v.form.short_description.$touch()"  v-model="form.short_description"></textarea>
                          <div v-if="$v.form.short_description.$anyDirty">
                               <div class="error" v-if="!$v.form.short_description.required">This Field is required</div>
@@ -29,23 +31,27 @@
 
                       <div class=" pad-box">
                       <div class="form-group">
+                          <h4 class="grey"><i class="fa fa-tag">&nbsp;</i>Tags</h4>
+
                         <div>
-                          <label class="typo__label">Tags</label>
                           <multiselect v-if="initialState.options"
                            v-model="form.tags" 
-                           placeholder="Search a tag" 
+                           placeholder="Search  tag" 
                            label="name" 
                            :loading="isLoading"
                            @search-change="searchTags"
                            track-by="name" 
                            :max="max"
                            :optionsLimit="optionsLimit"
-                           :options="initialState.options" 
+                           :options="options" 
                            :multiple="true" 
                            open-direction="bottom"
                            :internal-search="false"
-                           :taggable="true">
+                           :show-no-results="false"
+                         
+                           :taggable="false">
                            Tag="checkTag"
+                           <template slot="noOptions">No tags</template>
                            </multiselect>
                         </div>
                       </div>
@@ -54,31 +60,10 @@
                           <input class="tgl tgl-light"  name="isAnynomous" id="display-address" type="checkbox" v-model="form.isAnynomous">
                           <label class="tgl-btn" for="display-address"></label>
                       </div>
-
-
-                      <!-- <div class="autocomplete form-group">
-                          <input id="myInput" type="text" name="userName" class="form-control" placeholder="B">
-                          <div id="myInputautocomplete-list" class="autocomplete-items">
-                              <div><strong>B</strong>Bikash
-                                  <input type="hidden" value="Bikash">
-                              </div>
-                               <div>
-                                   <strong>B</strong>Bipin<input type="hidden" value="Bipin">
-                                  </div>
-                                  <div>
-                                      <strong>B</strong>Bisal<input type="hidden" value="Bisal">
-                                  </div>
-                              </div>
-                      </div>
-
-
-                      </div> -->
-
                       <hr/>
-
                       <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4">
-                          <button @click.prevent="submitForm" class="btn btn-primary ml-30">Publish</button>
+                          <button type="button" @click.prevent="submitForm"  class="btn btn-primary ml-30" :disabled="this.$store.state.isLoading"><Loader></Loader>&nbsp;Publish</button>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8">
                           <div class="tools add_btn">
@@ -102,12 +87,14 @@
 import mixin  from './../mixins/LoadData.mixin.js';
 
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Loader from './../components/Loader';
 import Multiselect from 'vue-multiselect'
 import { required, between ,email , minLength,maxLength } from 'vuelidate/lib/validators';
 import Form from './../services/Form.js';
     export default {
        components:{
-          Multiselect
+          Multiselect,
+          Loader
         },
         mixins:[mixin],
       data:function(){
@@ -115,16 +102,20 @@ import Form from './../services/Form.js';
                 isLoading: false,
                 editor: ClassicEditor,
                 max:3,
+                image:'/images/upload.png',
                 optionsLimit:5,
                 options:[],
                 initialState:{},
                 form:new Form({
                     short_description:'',
-                    image:'/images/upload.png',
-                    tags:{},
+                    image:'',
+                    tags:[],
                     isAnynomous:'',
                     file:true
                 }),
+                searchTagform:new Form({
+                  name:'',
+                })
                  
             }
          },
@@ -143,23 +134,45 @@ import Form from './../services/Form.js';
         watch: {
         initialState: function (value) {
             this.form.short_description=value.blog.short_description;     
-            // this.form.tags=value.blog.tags;   
+            this.form.tags=value.blog.tags;   
             this.form.isAnynomous=(value.blog.anynomous==1)?true:false;
 
             if(value.blog.image && value.blog.image!='null')
-            this.form.image='/images/blog/'+value.blog.image;
+            this.image='/images/blog/'+value.blog.image;
 
         },
       },
-        // created: function(){
-
-        //   console.log(this.initialState.option);
-        // },
-
+        computed:{
+          isLoading(){
+            return this.$store.state.isLoading ;
+          }
+        },
         methods:{
 
-          searchTags(serchQuery,){
-            this.isLoading = true
+          searchTags(searchQuery){
+            let curObject=this;
+            this.searchTagform.name=searchQuery;
+            if(searchQuery.length>2)
+            {
+             curObject.isLoading=true;
+             curObject.searchTagform.post('blog/getTagName').then(response => {
+              if(response.data.status){
+                 curObject.isLoading = false;
+                 curObject.options=response.data.data;
+               }
+               else{
+                   curObject.isLoading = false;
+                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.status});
+               }
+              }).catch(e => {
+                 curObject.isLoading = false;
+                  if(e.status===false)
+                     this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                    else
+                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+              });
+            }
+            // 
          // alert('here');
           },
           checkTag(){
@@ -188,23 +201,26 @@ import Form from './../services/Form.js';
 
 
           submitForm:function(){
-                this.$v.form.$touch();
+            let curObject=this;
+            curObject.$store.commit('TOGGLE_LOADING');
+            this.$v.form.$touch();
             if(!this.$v.form.$invalid)
             {
               this.form.post('/blog/edit/'+this.$route.params.blogId+'/step2').then(response => {
                if(response.data.status){
-                 // this.$store.commit('SETFLASHMESSAGE',response.data);
+                 curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
+                 curObject.$store.commit('TOGGLE_LOADING');
                }
                else{
-                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.status});
+                 curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
+                  curObject.$store.commit('TOGGLE_LOADING');
                }
               }).catch(e => {
-                console.log(e);
-               // let test= Object.assign([], e.message);
+                   curObject.$store.commit('TOGGLE_LOADING');
                   if(e.status===false)
-                     this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                     curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
                     else
-                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                   curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
             }
           }

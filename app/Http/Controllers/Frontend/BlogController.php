@@ -101,8 +101,10 @@ class BlogController extends FrontendController
     }
     public function updateBlogDetail(Request $request,$postId,TagInterface $tag)
     {
+
         $routeName= Route::currentRouteName();
         $data['options'] = $tag->getTagsList();
+        $user=$this->user_state_info();
         $data['blog']   = $this->blog->getBlogByCode($postId);
         if($routeName=='api')
         {
@@ -140,7 +142,7 @@ class BlogController extends FrontendController
                     }
                 } 
             }
-              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>'']);
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
         }
     }   
 }

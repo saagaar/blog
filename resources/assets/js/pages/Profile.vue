@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info profile_pic_upload">
-                  <figure><img src="img/user-6.jpg" alt="Profile Image" class="img-responsive profile-photo" id="profileImage" />
+                  <figure><img src="/images/system-images/default-profile.png" alt="Profile Image" class="img-responsive profile-photo" id="profileImage" />
                     <div class="profile_img_change"> <span class="file-input btn btn-success btn-file"> <i class="fa fa-camera"></i>
                       <input type="file"  name="file" id="file1" class="upload" onchange="viewimage(event)" multiple>
                       </span> </div>

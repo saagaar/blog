@@ -75,7 +75,6 @@ export default class Form {
                 } else {
                     fd.append(key, data);
                 }
-                 console.log(fd);
                 return fd;
             }
 

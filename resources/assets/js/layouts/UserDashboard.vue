@@ -12,8 +12,7 @@
             <SuccessErrorMessage></SuccessErrorMessage>
             <div id="sidebar">      
             <div class="profile-card">
-                <img v-if="me.image" :src="'/images/user-images/'+me.image" alt="user" class="profile-photo">
-                <img v-else src="/images/user-images/default.png" alt="user" class="profile-photo">
+                <img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'" :alt="me.name" class="profile-photo">
                 <h5><router-link to="/profile"  class="text-white">{{ me.name}}</router-link></h5>
                   <router-link to="/followers" class="text-white">{{ me.followersCount}} followers</router-link>
                   <router-link to="/followings" class="text-white">{{ me.followingCount}} following</router-link>
