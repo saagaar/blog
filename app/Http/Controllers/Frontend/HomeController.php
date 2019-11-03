@@ -120,6 +120,7 @@ class HomeController extends FrontendController
     }
     public function blogByCategory($slug){
       $blogByCategory = $this->blog->getBlogByCategory($slug);
+      // $blogCount = $this->blog->getBlogCount($slug);
       $category =$this->category->getCatBySlug($slug);
       $navCategory=$this->category->getCategoryByShowInHome();
        $user ='';

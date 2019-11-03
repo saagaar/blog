@@ -37,6 +37,17 @@ Class Blog implements BlogInterface
     ->withCount('likes','comments')->get();
     return $blogByCategoryTags;
   }
+   public function getBlogCount(){
+    $cats = $this->category->getCategoryByShowInHome();
+    // echo "<pre>";
+    // print_r($cats);exit;
+    // $blogByCategoryTags =$this->blog->whereHas('tags', function ($q) use ($cats) {
+    // return $q->whereIn('tags_id', $cats->tags()->pluck('tags_id')); 
+    // })
+    // ->count();
+    // print_r($blogByCategoryTags);exit;
+    return $blogByCategoryTags;
+  }
 
   /**
    * get blog for featured =1

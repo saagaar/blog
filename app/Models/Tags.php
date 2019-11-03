@@ -21,7 +21,7 @@ class Tags extends Model implements Auditable
         'pivot'
     ];
     public function blogs(){
-    	return $this->belongsToMany(Blogs::class,'blogs_id');
+    	return $this->belongsToMany(Blogs::class,'blog_tags','tags_id','blogs_id');
     }
     public function categories(){
     	return $this->belongsToMany(Categories::class,'categories_id');
