@@ -141,7 +141,7 @@ window.setTimeout(function() {
             type: "GET",
             dataType: "json",
             url: url,
-            data: {'status': status,'mode': paymentmode,'save_method':savemethod,'display':status,'id': id},
+            data: {'status': status,'mode': paymentmode,'save_method':savemethod,'display':status,'show_in_home':status,'id': id},
              success: function(data){
               console.log(data.success)
             }           
