@@ -18,6 +18,9 @@ Class Tag implements TagInterface
       return $this->tag->where('id', $tagsid)->first();
     }
 
+    public function getTagWithBlog(){
+        return $this->tag::has('blogs')->get()->toArray();
+    }
       /**
      * Get's all posts.
      *

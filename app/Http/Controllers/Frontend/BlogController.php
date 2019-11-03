@@ -101,7 +101,6 @@ class BlogController extends FrontendController
     }
     public function updateBlogDetail(Request $request,$postId,TagInterface $tag)
     {
-
         $routeName= Route::currentRouteName();
         $data['options'] = $tag->getTagsList();
         $user=$this->user_state_info();
@@ -122,6 +121,7 @@ class BlogController extends FrontendController
                 ]);
                 if($this->blogRequiresActivation=='N'){
                     return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
+
                 }else{
                     if ($validator->fails()) {
                         return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
