@@ -5,14 +5,16 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Blogs;
 use App\Repository\BlogInterface;
 use App\Repository\TagInterface;
+use App\Repository\CategoryInterface;
 Class Blog implements BlogInterface
 {
 	protected $blog;
   protected $tag;
-	public function __construct(Blogs $blog,TagInterface $tag)
+	public function __construct(Blogs $blog,TagInterface $tag,CategoryInterface $category)
 	{
 		$this->blog=$blog;
     $this->tag=$tag;
+    $this->category=$category;
 	}
 
   /**
@@ -22,6 +24,29 @@ Class Blog implements BlogInterface
    */
   public function getBlogById($blogId){
     return  $this->blog->where('id', $blogId)->first();
+  }
+
+  /**
+   * get blog by category
+   */
+  public function getBlogByCategory($slug){
+    $tagsIds = $this->category->getTagsIdByCatSlug($slug);
+    $blogByCategoryTags =$this->blog->whereHas('tags', function ($q) use ($tagsIds) {
+    return $q->whereIn('tags_id', $tagsIds); 
+    })
+    ->withCount('likes','comments')->get();
+    return $blogByCategoryTags;
+  }
+   public function getBlogCount(){
+    $cats = $this->category->getCategoryByShowInHome();
+    // echo "<pre>";
+    // print_r($cats);exit;
+    // $blogByCategoryTags =$this->blog->whereHas('tags', function ($q) use ($cats) {
+    // return $q->whereIn('tags_id', $cats->tags()->pluck('tags_id')); 
+    // })
+    // ->count();
+    // print_r($blogByCategoryTags);exit;
+    return $blogByCategoryTags;
   }
 
   /**
@@ -115,7 +140,7 @@ Class Blog implements BlogInterface
 
   
   public function getActiveBlogByUserId($userid){
-    return  $this->blog::with('user:id,username')->where(['user_id'=>$userid,'save_method'=>'2'])->orderByDesc('id');
+    return  $this->blog::with('user:id,username')->where(['user_id'=>$userid,'save_method'=>'2'])->withCount('likes')->orderByDesc('id');
   } 
 
      

@@ -47,7 +47,7 @@ let action='';
                     var form=new Form();
                     form.post(action).then(response => {
                         if (response.data.status) {
-                        	
+                        	return this.count = response.data.likes['0'].likes_count; 
                         }
 
                   }).catch(e => {

@@ -35,10 +35,21 @@
                         </a>
                         <p v-if="eachBlog.short_description.length<500" v-html="eachBlog.short_description"></p>
                         <p v-else v-html="eachBlog.short_description.substring(0,500)+' ......' "></p>
-                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a> <a href="#"><i class="ti-heart"></i> 0 like</a> <a href="#"><i class="ti-eye"></i> 1k view</a> </div>
+                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a> <a href="#"><i class="ti-heart"></i> {{eachBlog.likes_count}} like</a> <a href="#"><i class="ti-eye"></i> {{ eachBlog.views }} view</a> </div>
                       </div>
                     </div>
+                    <div class="align-right">
+                      <pagination :data="initialState.blogList"  :limit="-1" :show-disabled="true"  @pagination-change-page="getResults">
+                   <span slot="prev-nav"><li>
+                      <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
+                    </li></span>
+                   <span slot="next-nav"> <li>
+                      <a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
+                    </li></span>
+                 </pagination>
+                    </div>
                   </div>
+
               </div>
               <div class="clearfix"></div>
               </div>

@@ -151,9 +151,7 @@
                             </a>
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-comment"></i> {{$featuredForMember['0']->comments_count}} comment</a>
-                                @if($likes)
-                                <likes v-bind:currentBlog="{{$featuredForMember['0']->id}}" v-bind:blogCode="'{{$featuredForMember['0']->code}}'" v-bind:likes="{{$likes}}"></likes>
-                                @endif
+                                
                                 {{$featuredForMember['0']->likes_count}} like</a>
                             </div>
                         </div>

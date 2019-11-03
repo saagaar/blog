@@ -31,13 +31,12 @@ class UserInteractionController extends FrontendController
         // print_r($isLiked);exit;
          if(empty($isLiked))
          {
-            $data=true;
             $this->userInteraction->likeBlog($this->authUser,$code);
          }else{
-            $data =false;
          	$this->userInteraction->unlikeBlog($this->authUser,$code);
          }
-         return array('status'=>true,'message'=>'success','data'=>$data);
+         $data = $this->userInteraction->getLikeByBlog($code);
+         return array('status'=>true,'message'=>'success','likes'=>$data);
     }
     
     public function likeCount($code){
