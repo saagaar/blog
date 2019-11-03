@@ -16,7 +16,6 @@ class BlogController extends FrontendController
 {
     protected $data;
 	protected $blog;
-
     use AuthorizesRequests;
 
     function __construct(BlogInterface $blog)
@@ -24,12 +23,10 @@ class BlogController extends FrontendController
         parent::__construct();
         $this->blog=$blog;
     }
-    
    	public function create(Request $request,TagInterface $tag){
         $routeName= Route::currentRouteName();
         if($routeName=='api')
            {
-             
             $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
               return ($data);
            }
@@ -64,7 +61,6 @@ class BlogController extends FrontendController
           $user=$this->user_state_info();
           return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
        }
-        
    	}
     public function update(Request $request,$blogCode,TagInterface $tag)
     {
@@ -102,50 +98,49 @@ class BlogController extends FrontendController
                 }
          
             
-        }
+    }
     public function updateBlogDetail(Request $request,$postId,TagInterface $tag)
     {
-    $routeName= Route::currentRouteName();
-    $data['options'] = $tag->getTagsList();
-    $data['blog']   = $this->blog->getBlogByCode($postId);
-    if($routeName=='api')
-    {
-        return ($data);
-    }
-    else
-    {
-        $data = [];
-        $data['path']='/blog/edit/'.$postId;
-        if($request->method()=='POST'){
-            
-            $validator = Validator::make($request->all(), [ 
-            'short_description' => 'required',
-            'tags'              =>'required' ,
-            // 'image'             => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-            if($this->blogRequiresActivation=='N'){
-                return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
-            }else{
-                if ($validator->fails()) {
-                    return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
-                }else{
-                    if(request()->image)
-                    {
-                        $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                        request()->image->move(public_path('images/blog'), $imageName);
-                        $form['image']=$imageName;
-                    }
-                    $form['short_description']=$request->short_description;
-                    $form['save_method']='1';
-                    $form['anynomous'] = $request->isAnynomous ? '1' : '2';
-                    $this->blog->updateByCode($postId,$form);
-                    $tagid = $tag->getTagByName($request->tags);
-                    $this->blog->addTag($postId,$tagid);  
-                    return response()->json(['status'=>true,'blogId'=>$postId,'message'=>'Blog updated successfully']);                
-                }
-            } 
+        $routeName= Route::currentRouteName();
+        $data['options'] = $tag->getTagsList();
+        $data['blog']   = $this->blog->getBlogByCode($postId);
+        if($routeName=='api')
+        {
+            return ($data);
         }
-          return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>'']);
-    }
-    }
+        else
+        {
+            $data = [];
+            $data['path']='/blog/edit/'.$postId;
+            if($request->method()=='POST'){
+                $validator = Validator::make($request->all(), [ 
+                'short_description' => 'required',
+                'tags'              =>'required' ,
+                // 'image'             => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+                if($this->blogRequiresActivation=='N'){
+                    return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
+                }else{
+                    if ($validator->fails()) {
+                        return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+                    }else{
+                        if(request()->image)
+                        {
+                            $imageName = time().'.'.request()->image->getClientOriginalExtension();
+                            request()->image->move(public_path('images/blog'), $imageName);
+                            $form['image']=$imageName;
+                        }
+                        $form['short_description']=$request->short_description;
+                        $form['save_method']='1';
+                        $form['anynomous'] = $request->isAnynomous ? '1' : '2';
+                        $this->blog->updateByCode($postId,$form);
+                        $tagid = $tag->getTagByName($request->tags);
+                        $this->blog->addTag($postId,$tagid);  
+                        return response()->json(['status'=>true,'blogId'=>$postId,'message'=>'Blog updated successfully']);                
+                    }
+                } 
+            }
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>'']);
+        }
+    }   
 }
