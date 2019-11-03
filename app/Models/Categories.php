@@ -37,7 +37,9 @@ class Categories extends Model implements Auditable
     public function tags(){
        return $this->belongsToMany(Tags::class,'categories_tags');
     }
-
+    public function blogs(){
+       return $this->belongsToMany(Blogs::class,'blog_categories','category_id','blog_id');
+    }
     public function categories()
     {
         return $this->hasMany(Categories::class,'parent_id');

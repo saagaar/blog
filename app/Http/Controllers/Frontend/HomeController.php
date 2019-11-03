@@ -13,6 +13,7 @@ use App\Mail\SendMailable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\Notifications;
 use App\Repository\BlogInterface;
+use App\Repository\CategoryInterface;
 use App\Repository\UserInteractionInterface; 
 use App\Repository\TagInterface;
 
@@ -33,11 +34,12 @@ class HomeController extends FrontendController
      * @return void
      */
    
-    function __construct(FollowerInterface $followInterface,BlogInterface $blog,UserInteractionInterface $userInteraction)
+    function __construct(FollowerInterface $followInterface,BlogInterface $blog,CategoryInterface $category,UserInteractionInterface $userInteraction)
     {
          parent::__construct();
          $this->followerList=$followInterface;
          $this->blog=$blog;
+         $this->category=$category;
          $this->userInteraction=$userInteraction;
     }
 
@@ -49,15 +51,17 @@ class HomeController extends FrontendController
     public function index(Request $request)
     {
         $featuredBlog = $this->blog->getAllFeaturedBlog();
-        $data['featuredBlog']=$featuredBlog;
+        // $data['featuredBlog']=$featuredBlog;
         $mostViewed =$this->blog->getAllBlogByViews();
-        $data['mostViewed'] = $mostViewed;
+        // $data['mostViewed'] = $mostViewed;
         $latest =$this->blog->getLatestAllBlog();
-        $data['latest'] = $latest;
+        // $data['latest'] = $latest;
         $popular =$this->blog->getPopularBlog();
-        $data['popular'] = $popular;
+        // $data['popular'] = $popular;
         $featuredForMember = $this->blog->getAllFeaturedForMember();
-        $data['featuredForMember']=$featuredForMember;
+        // $data['featuredForMember']=$featuredForMember;
+        $navCategory=$this->category->getCategoryByShowInHome();
+        // print_r($navCategory);exit;
         $likes='';
         $user ='';
          if(\Auth::check())
@@ -74,11 +78,11 @@ class HomeController extends FrontendController
               $data['path']='/home';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
-              return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes));
+              return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
           }
 
         }
-        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes));
+        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
     }
     public function blogDetail($code){
       $blogDetails = $this->blog->getBlogByCode($code);
@@ -87,6 +91,7 @@ class HomeController extends FrontendController
       // print_r($next);exit;
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $relatedBlog = $this->blog->relatedBlogBycode($code);
+      $navCategory=$this->category->getCategoryByShowInHome();
       $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
       $data['blogDetails'] =$blogDetails;
       $data['blogComment']  =$blogComment;
@@ -107,11 +112,34 @@ class HomeController extends FrontendController
               $data['path']='/home';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
-              return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes));
+              return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes,'navCategory'=>$navCategory));
           }
 
         }
-        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlo,'likes'=>$likesg));
+        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlo,'likes'=>$likes,'navCategory'=>$navCategory));
+    }
+    public function blogByCategory($slug){
+      $blogByCategory = $this->blog->getBlogByCategory($slug);
+      $category =$this->category->getCatBySlug($slug);
+      $navCategory=$this->category->getCategoryByShowInHome();
+       $user ='';
+         if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+            
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/home';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory));
+          }
+        }
+       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory));
     }
     public function test(Request $request)
     {

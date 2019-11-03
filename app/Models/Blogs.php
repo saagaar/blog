@@ -38,7 +38,7 @@ class Blogs extends Model implements Auditable
      */
     public function categories()
     {
-        return $this->belongsToMany(Categories::class)->using(BlogCategories::class);
+        return $this->belongsToMany(Categories::class,'blog_categories','blog_id','category_id')->using(BlogCategories::class);
     }
 
     public function locale(){

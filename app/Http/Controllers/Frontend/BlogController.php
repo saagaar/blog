@@ -123,6 +123,7 @@ class BlogController extends FrontendController
             'tags'              =>'required' ,
             // 'image'             => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
+            // dd($request->image);
             if($this->blogRequiresActivation=='N'){
                 return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
             }else{
