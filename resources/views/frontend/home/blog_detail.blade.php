@@ -34,7 +34,7 @@
                                 @endif
                             <!-- </span>{{$blogDetails->likes_count}} people like this</p> -->
                             <div class="col-sm-4 text-center my-2 my-sm-0">
-                                <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> <icon-comments-count></icon-comments-count></p>
+                                <p class="comment-count"><span class="align-middle"></span> <icon-comments-count></icon-comments-count></p>
                             </div>
                             <ul class="social-icons">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
