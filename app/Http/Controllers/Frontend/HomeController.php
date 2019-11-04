@@ -64,6 +64,7 @@ class HomeController extends FrontendController
         // print_r($navCategory);exit;
         $likes='';
         $user ='';
+        $data['path']='/home';
          if(\Auth::check())
         {
           $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
