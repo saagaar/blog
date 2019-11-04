@@ -48,7 +48,8 @@ Route::get('/api/categories', 'Frontend\UserInterestController@categories')->nam
 Route::get('/api/remove/userinterest/{slug}','Frontend\UserInterestController@removeUserInterest');
 Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUserInterest');
 
-Route::get('/blogbycategory/{slug}','Frontend\HomeController@blogByCategory')->name('blogbycategory');
+Route::get('/category/{slug}','Frontend\HomeController@blogByCategory')->name('blogbycategory');
+Route::get('/getblogbycategory/{slug}','Frontend\HomeController@getBlogByCategory')->name('getblogbycategory');
 
 
 Route::get('/test', 'Frontend\FrontendController@index')->name('test');

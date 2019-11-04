@@ -29,23 +29,18 @@ Class Blog implements BlogInterface
   /**
    * get blog by category
    */
-  public function getBlogByCategory($slug){
+  public function getBlogByCategory($slug,$limit=10,$offset=0){
     $tagsIds = $this->category->getTagsIdByCatSlug($slug);
     $blogByCategoryTags =$this->blog->whereHas('tags', function ($q) use ($tagsIds) {
     return $q->whereIn('tags_id', $tagsIds); 
     })
-    ->withCount('likes','comments')->get();
+    ->withCount('likes','comments')->take($limit)->skip($offset)->get();
     return $blogByCategoryTags;
   }
-   public function getBlogCount(){
-    $cats = $this->category->getCategoryByShowInHome();
-    // echo "<pre>";
-    // print_r($cats);exit;
-    // $blogByCategoryTags =$this->blog->whereHas('tags', function ($q) use ($cats) {
-    // return $q->whereIn('tags_id', $cats->tags()->pluck('tags_id')); 
-    // })
-    // ->count();
-    // print_r($blogByCategoryTags);exit;
+  public function getBlogCount(){
+    $data=$this->category->blogs()->get()->toArray();
+    echo '<pre>';
+    print_r($data);exit;
     return $blogByCategoryTags;
   }
 
