@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Traits\HasRoles;
 use App\Repository\AccountInterface; 
 use App\Repository\BlogInterface; 
+use Illuminate\Support\Facades\File;
 use App\Repository\FollowerInterface; 
 class UserController extends FrontendController
 {
@@ -176,5 +177,51 @@ class UserController extends FrontendController
       return redirect()->route('home'); 
     }
   }
+  public function changeProfile(Request $request)
+  {
+    if(\Auth::check())
+    {
+      // $form='';
 
+      if(request()->hasFile('image'))
+      {
+        $dir = 'images/user-images/';
+          if ($this->authUser->image != '' && File::exists($dir . $this->authUser->image)){
+            File::delete($dir . $this->authUser->image);
+          }
+          $imageName = time().'.'.request()->image->getClientOriginalExtension();
+          request()->image->move(public_path('/images/user-images/'), $imageName);
+          $form['image']=$imageName;
+      }
+      $this->user->update($this->authUser->id,$form);
+      return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
+    }else{
+      return redirect()->route('home'); 
+    }
+  }
+  public function changeAddress(Request $request)
+  {
+    if(\Auth::check())
+    {
+      // $form='';
+      $form['address'] = $request->address;
+      $form['country'] = $request->country;
+      $this->user->update($this->authUser->id,$form);
+      return array('status'=>true,'message'=>'Address Changed Successfully','data'=>array('addressName'=>$form['address'],'countryName'=>$form['country']));
+    }else{
+      return redirect()->route('home'); 
+    }
+  }
+  public function changeBio(Request $request)
+  {
+    if(\Auth::check())
+    {
+      // $form='';
+      $form['bio'] = $request->bio;
+      $this->user->update($this->authUser->id,$form);
+      return array('status'=>true,'message'=>'Bio Changed Successfully','data'=>array('bioName'=>$form['bio']));
+    }else{
+      return redirect()->route('home'); 
+    }
+  }
 }

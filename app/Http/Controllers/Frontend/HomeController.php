@@ -50,6 +50,8 @@ class HomeController extends FrontendController
      */
     public function index(Request $request)
     {
+      // echo "<pre>";
+      // print_r($this->authUser->id);exit;
         $featuredBlog = $this->blog->getAllFeaturedBlog();
         // $data['featuredBlog']=$featuredBlog;
         $mostViewed =$this->blog->getAllBlogByViews();

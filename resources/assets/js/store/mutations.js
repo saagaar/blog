@@ -5,6 +5,18 @@ export const UserLoggedIn = (state, user) => {
 export const ADD_ME = (state, user) => {
     state.me = user
 }
+export const UPDATE_PROFILE = (state, imageName) => {
+    state.me.image = imageName
+}
+export const UPDATE_ADDRESS = (state, addressName) => {
+    state.me.address = addressName
+}
+export const UPDATE_COUNTRY = (state, countryName) => {
+    state.me.country = countryName
+}
+export const UPDATE_BIO = (state, bioName) => {
+    state.me.bio = bioName
+}
 export const INCREMENT_FOLLOWERS_COUNT = (state, count) => {
    	state.me.followerCount += count;
 }

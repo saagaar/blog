@@ -21,7 +21,7 @@
 
                 </div>
 
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true && initialState.blogList>0">
                     
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList">

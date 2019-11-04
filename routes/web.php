@@ -33,6 +33,10 @@ Route::get('api/dashboard','Frontend\HomeController@dashboard')->name('api');
 
 Route::get('api/profile','Frontend\UserController@profile')->name('api');
 Route::get('/profile','Frontend\UserController@profile')->name('profile');
+Route::post('/user/changeprofile', 'Frontend\UserController@changeProfile');
+
+Route::post('/user/change/address', 'Frontend\UserController@changeAddress');
+Route::post('/user/change/bio', 'Frontend\UserController@changeBio');
 
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 

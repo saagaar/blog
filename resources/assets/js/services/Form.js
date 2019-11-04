@@ -42,12 +42,13 @@ export default class Form {
                     
                     for(let property in ndata) {
                         if(form[property] instanceof Array) {
-                            return this.createFormData(formdata,form[property],'tags');
+                             this.createFormData(formdata,form[property],property);
                         }
                         else{
                              formdata.append(property, form[property]);
                         }
                     }
+                    return formdata;
                    }
                    else{
                           for (let property in this.originalData) {
