@@ -142,7 +142,7 @@ class BlogController extends FrontendController
                     }
                 } 
             }
-              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
         }
     }   
 }

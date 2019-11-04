@@ -36,10 +36,7 @@ class Blogs extends Model implements Auditable
      *
      * @var array
      */
-    public function categories()
-    {
-        return $this->belongsToMany(Categories::class,'categories_tags','tags_id','categories_id');
-    }
+  
 
     public function locale(){
        return $this->belongsTo(Locales::class,'locale_id');
@@ -62,4 +59,9 @@ class Blogs extends Model implements Auditable
     {
         return $this->hasMany(Comments::class,'blog_id');
     }
+    public function categories()
+    {
+        return $this->hasManyThrough(Categories::class,BlogTags::class,'categories_id','blogs_id');
+    }
+ 
 }

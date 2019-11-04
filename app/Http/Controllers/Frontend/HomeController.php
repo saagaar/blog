@@ -50,6 +50,8 @@ class HomeController extends FrontendController
      */
     public function index(Request $request)
     {
+        $data=array();
+
         $featuredBlog = $this->blog->getAllFeaturedBlog();
         // $data['featuredBlog']=$featuredBlog;
         $mostViewed =$this->blog->getAllBlogByViews();
@@ -61,7 +63,6 @@ class HomeController extends FrontendController
         $featuredForMember = $this->blog->getAllFeaturedForMember();
         // $data['featuredForMember']=$featuredForMember;
         $navCategory=$this->category->getCategoryByShowInHome();
-        // print_r($navCategory);exit;
         $likes='';
         $user ='';
          if(\Auth::check())
@@ -141,6 +142,22 @@ class HomeController extends FrontendController
           }
         }
        return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory));
+    }
+    public function getBlogByCategory($slug=false,Request $request){
+      try{
+        if(!$slug)
+            throw new Exception("No Categories Selected", 1);
+          $limit=$this->perPage;
+          $offset=$request->get('offset');
+          $blogByCategory = $this->blog->getBlogByCategory($slug,$limit,$offset);
+          return $blogByCategory;
+        
+      }
+      catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
     }
     public function test(Request $request)
     {
