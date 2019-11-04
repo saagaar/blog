@@ -120,6 +120,7 @@ class HomeController extends FrontendController
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlo,'likes'=>$likes,'navCategory'=>$navCategory));
     }
     public function blogByCategory($slug){
+      $data=array();
       $blogByCategory = $this->blog->getBlogByCategory($slug);
       // $blogCount = $this->blog->getBlogCount($slug);
       $category =$this->category->getCatBySlug($slug);
@@ -148,9 +149,9 @@ class HomeController extends FrontendController
         if(!$slug)
             throw new Exception("No Categories Selected", 1);
           $limit=$this->perPage;
-          $offset=$request->get('offset');
+          $offset=$request->get('page')*$limit+$request->get('page');
           $blogByCategory = $this->blog->getBlogByCategory($slug,$limit,$offset);
-          return $blogByCategory;
+          return array('status'=>true,'data'=>$blogByCategory,'message'=>'');
         
       }
       catch(Exception $e)

@@ -55,7 +55,6 @@
         </div>
     </section>
 
-
     <div class="background_one area-padding all_blog_listiing">
         <div class="container">
             <div class="row">
@@ -75,12 +74,12 @@
                                 <a href="#">{{ $eachTags->name }}</a>
                                 @endforeach
                             </div>
-                            <a class="d-block" href="single-blog.html">
+                            <a class="d-block" href="{{ route('blog.detail' , $eachBlog->code)}}">
                                 <h4> {{ $eachBlog->title }}</h4>
                             </a>
                             <p>{!! str_limit($eachBlog->short_description, $limit = 50, $end = '...') !!}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($eachBlog->created_at) ); ?></a>
+                                <a href="#"><i class="ti-time"></i>{{ $eachBlog->created_at->diffForHumans() }}</a>
                                 <a href="#"><i class="ti-heart"></i> {{ $eachBlog->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i> {{ $eachBlog->views }} view</a>
                             </div>
@@ -88,6 +87,7 @@
                     </div>
                 </div>
                 @endforeach
+                <blog-loading></blog-loading>
             </div>
         </div>
     </div>
