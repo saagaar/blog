@@ -16,7 +16,7 @@
 <script>
     export default 
     {
-         data:function(){
+        data:function(){
            return {
                 message:false,
                 status:false
@@ -24,28 +24,27 @@
         },  
         computed:{
               flashMessage() { 
-                
-
-                return this.$store.state.flashMessage },
+                return this.$store.state.flashMessage 
+              },
             },
-            watch: {
-              flashMessage(newValue) {
-               this.message=newValue.message;
-               if(newValue.status) this.status='success';
-               else this.status='error';
-                this.removeFlashMessageData();
-              }
+        watch: {
+          flashMessage(newValue) {
+           this.message=newValue.message;
+           if(newValue.status) this.status='success';
+           else this.status='error';
+            this.removeFlashMessageData();
+          }
 
-            },
-            methods:{
-              removeFlashMessageData(){
-                var self = this;
-                 setTimeout(function(){
-                      self.message=false;
-                      self.status=false;
-                 },3000);
-              }
-            }
+        },
+        methods:{
+          removeFlashMessageData(){
+            var self = this;
+             setTimeout(function(){
+                  self.message=false;
+                  self.status=false;
+             },3000);
+          }
+        }
 
     }
 </script>

@@ -44,7 +44,6 @@ const app = new Vue({
     },
     render: function (createElement) 
     {
-    
          let layout=(this.$route.meta.layout || default_layout)+'-layout';
 	  	 return createElement(layout);
 	},

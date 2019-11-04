@@ -95,7 +95,7 @@
                 <input type="checkbox" class="mail-checkbox" @click="select" v-model="postIds" :value="eachblog.code">
               </td>
               <td class="view-message">
-                <div><a href="#" class="sort_info_link">{{ eachblog.title}}</a></div>
+                <div><router-link :to="'/blog/edit/'+eachblog.code" v-if="$gate.allow('update', 'blog', eachblog)">{{ eachblog.title}}</router-link></div>
                 <div class="hidden_sec">
                   <div class="hidden_td_link">
                     <router-link :to="'/blog/edit/'+eachblog.code" v-if="$gate.allow('update', 'blog', eachblog)">Edit</router-link>

@@ -30,46 +30,46 @@
                 <FollowSuggestionsList   :followSuggestion="followSuggestion"></FollowSuggestionsList>
             </div>
             <div class="clearfix"></div>
-            <div id="sidebar2" class="white-box mb20">
-            <div class="suggestions">
-              <h4 class="grey"><i class="fa fa-star"></i>  Add to your feed</h4>
-              <div class="follow-user">
-                <img src="images/user-1.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Sangita Dhital</a></h5>
-                  <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
+            <!--  <div id="sidebar2" class="white-box mb20">
+             <div class="suggestions">
+                <h4 class="grey"><i class="fa fa-star"></i>  Add to your feed</h4>
+                <div class="follow-user">
+                  <img src="images/user-1.jpg" alt="" class="profile-photo-sm pull-left">
+                  <div>
+                    <h5><a href="timeline.html">Sangita Dhital</a></h5>
+                    <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
+                  </div>
+                </div>
+                <div class="follow-user">
+                  <img src="images/user-2.jpg" alt="" class="profile-photo-sm pull-left">
+                  <div>
+                    <h5><a href="timeline.html">Sagar Chapagain</a></h5>
+                    <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
+                  </div>
+                </div>
+                <div class="follow-user">
+                  <img src="images/user-3.jpg" alt="" class="profile-photo-sm pull-left">
+                  <div>
+                    <h5><a href="timeline.html">Binita Thakur</a></h5>
+                    <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
+                  </div>
+                </div>
+                <div class="follow-user">
+                  <img src="images/user-4.jpg" alt="" class="profile-photo-sm pull-left">
+                  <div>
+                    <h5><a href="timeline.html">Biswas Shrestha</a></h5>
+                    <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
+                  </div>
+                </div>
+                <div class="follow-user">
+                  <img src="images/user-6.jpg" alt="" class="profile-photo-sm pull-left">
+                  <div>
+                    <h5><a href="timeline.html">Bikash Bhandari</a></h5>
+                    <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
+                  </div>
                 </div>
               </div>
-              <div class="follow-user">
-                <img src="images/user-2.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Sagar Chapagain</a></h5>
-                  <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/user-3.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Binita Thakur</a></h5>
-                  <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/user-4.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Biswas Shrestha</a></h5>
-                  <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/user-6.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Bikash Bhandari</a></h5>
-                  <a href="#" class="text-green"><i class="fa fa-plus">&nbsp;</i> Follow</a>
-                </div>
-              </div>
-            </div>
-            </div>
+            </div> -->
             </div>
             <div class="clearfix"></div>
             </div>

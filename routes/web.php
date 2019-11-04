@@ -49,7 +49,7 @@ Route::get('/blogbycategory/{slug}','Frontend\HomeController@blogByCategory')->n
 
 Route::get('/test', 'Frontend\FrontendController@index')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
-Route::get('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
+Route::post('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
 
 
 // Route::get('/tests', 'Frontend\UserInteractionController@testinglike')->name('test');

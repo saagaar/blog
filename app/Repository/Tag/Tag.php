@@ -27,7 +27,7 @@ Class Tag implements TagInterface
      * @return mixed
      */
     public function getAll(){
-   	 return	$this->tag->latest();
+   	 return	$this->tag->select('name')->latest();
     }
  	/**
      * Get tag by name 
@@ -71,7 +71,7 @@ Class Tag implements TagInterface
 
     public function getTag($search)
     {
-         return $this->tag->where('name', 'like', '%' . $search . '%')->get()->toArray();
+         return $this->tag->where('name', 'like', '%' . $search . '%')->where('status','1')->select('name')->get()->toArray();
     }
 }
 ?>

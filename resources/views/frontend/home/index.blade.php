@@ -1,5 +1,9 @@
 @extends('frontend.layouts.app')
 @section('content')
+
+ <div class="spinner-border text-primary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
 <section class="fullwidth-block area-padding-bottom">
 
         <div class="container-fluid">
@@ -11,7 +15,7 @@
                             @if($featuredBlog['0']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
                             @endif
                            
                         </div>

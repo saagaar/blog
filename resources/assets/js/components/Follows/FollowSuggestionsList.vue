@@ -6,7 +6,7 @@
                   <div v-if="followSuggestion.length>0">
                    <div class="follow-user" v-for="eachsuggestion in followSuggestion" >
 
-                    <img :src="eachsuggestion.image? '/images/user-images/'+eachsuggestion.image:'images/user-images/default.png'" alt="user" class="profile-photo-sm pull-left" />
+                    <img :src="eachsuggestion.image? '/images/user-images/'+eachsuggestion.image:'/images/system-images/default-profile.png'" alt="user" class="profile-photo-sm pull-left" />
                     <div>
                       <h5><a href="#">{{ eachsuggestion.name}}</a></h5>
                       <FollowButton  @clicked="userFollowed" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
