@@ -29,7 +29,7 @@
                                {{ str_limit($featuredBlog['0']->short_description, $limit = 150, $end = '...') }}
                             </p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i><?php echo date("F j",strtotime($featuredBlog['0']->created_at) ); ?> </a>
+                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($featuredBlog['0']->created_at) ); ?> </a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i> {{$featuredBlog['0']->likes_count }} like</a>
@@ -62,7 +62,7 @@
                             </a>
                             <p>{{ str_limit($eachFeaturedBlog->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i><?php echo date("F j",strtotime($eachFeaturedBlog->created_at) ); ?> </a>
+                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($eachFeaturedBlog->created_at) ); ?> </a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i> {{$eachFeaturedBlog->likes_count }} like</a>
@@ -97,109 +97,68 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6">
+            	@if($featuredForMember['0'])
+               <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
                         <div class="thumb">
                             <a href="#">
-                                <img class="img-fluid" src="img/magazine/18.jpg" alt="">
+                                @if($featuredForMember['0']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredForMember['0']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                            @endif
                             </a>
                         </div>
                         <div class="short_details">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Created face stars sixth forth fow
-                                Earth firmament meat</h4>
+                            <a class="d-block"  href="{{ route('blog.detail' , $featuredForMember['0']->code)}}">
+                                <h4>{{ str_limit($featuredForMember['0']->title, $limit = 150, $end = '...') }}</h4>
                             </a>
                             <p>
-                               The idea that the Big Bang happened everywhere at once may apply to our Universe, but certainly ought not to apply to the vast majority of Universes existing in the Multiverse. Assuming that inflation is a quantum field, like all fields we know of, it must spread out over time, meaning that in any region of space, it has a probability of...
+                               {{ str_limit($featuredForMember['0']->short_description, $limit = 150, $end = '...') }}
                             </p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
+                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($featuredForMember['0']->created_at) ); ?> </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
+                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                </i> {{$featuredForMember['0']->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i> {{$featuredForMember['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div> 
-
                 </div> 
-
+                @endif
+                <?php unset($featuredForMember['0']); ?>
                 <div class="col-lg-6 col-md-6">
+                    @foreach($featuredForMember as $eachFeaturedForMember)
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-md-4 col-sm-5 col-12">
                             <figure>
                                 <a href="#">
-                                    <img class="img-fluid" src="img/magazine/6.jpg" alt="">
+                                    @if($eachFeaturedForMember->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$eachFeaturedForMember->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                            @endif
                                 </a>
                             </figure>
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
+                            <a class="d-block"  href="{{ route('blog.detail' , $eachFeaturedForMember->code)}}">
+                                <h4>{{ str_limit($eachFeaturedForMember->title, $limit = 150, $end = '...') }}</h4>
                             </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
+                            <p>{{ str_limit($eachFeaturedForMember->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
+                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($eachFeaturedForMember->created_at) ); ?> </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
+                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                </i> {{$eachFeaturedForMember->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i> {{$eachFeaturedForMember->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div> 
-
-                    <div class="single-blog video-style small row m_b_30 ">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/5.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single-blog video-style small row">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/7.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
 
                     <div class="text-right">
                         <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
@@ -219,112 +178,73 @@
     <section class="first_block area-padding-top area-padding-bottom">
         <div class="container">
             <div class="area-heading">
-                <h3>Popular on Blog Sagar</h3>
+                <h3>Popular</h3>
             </div>
             <div class="row">
+            	@if($popular['0'])
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
                         <div class="thumb">
                             <a href="#">
-                                <img class="img-fluid" src="img/magazine/8.jpg" alt="">
+                                @if($popular['0']->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$popular['0']->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                            @endif
                             </a>
                         </div>
                         <div class="short_details">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Created face stars sixth forth fow
-                                Earth firmament meat</h4>
+                            <a class="d-block"  href="{{ route('blog.detail' , $popular['0']->code)}}">
+                                <h4>{{ str_limit($popular['0']->title, $limit = 150, $end = '...') }}</h4>
                             </a>
                             <p>
-                               The idea that the Big Bang happened everywhere at once may apply to our Universe, but certainly ought not to apply to the vast majority of Universes existing in the Multiverse. Assuming that inflation is a quantum field, like all fields we know of, it must spread out over time, meaning that in any region of space, it has a probability of...
+                               {{ str_limit($popular['0']->short_description, $limit = 150, $end = '...') }}
                             </p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
+                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($popular['0']->created_at) ); ?> </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
+                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                </i> {{$popular['0']->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i> {{$popular['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div> 
 
                 </div> 
-
+                @endif
+                <?php unset($popular['0']); ?>
                 <div class="col-lg-6 col-md-6">
+                	@foreach($popular as $eachPopular)
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-md-4 col-sm-5 col-12">
                             <figure>
                                 <a href="#">
-                                    <img class="img-fluid" src="img/magazine/9.jpg" alt="">
+                                    @if($eachPopular->image)
+                                 <img class="img-fluid" src="{{ asset('images/blog/'.$eachPopular->image) }}" alt="">
+                            @else
+                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                            @endif
                                 </a>
                             </figure>
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
+                            <a class="d-block"  href="{{ route('blog.detail' , $eachPopular->code)}}">
+                                <h4>{{ str_limit($eachPopular->title, $limit = 150, $end = '...') }}</h4>
                             </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
+                            <p>{{ str_limit($eachPopular->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
+                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($eachPopular->created_at) ); ?> </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
+                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                </i> {{$eachPopular->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i> {{$eachPopular->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div> 
-
-                    <div class="single-blog video-style small row m_b_30 ">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/10.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single-blog video-style small row">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/14.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                    
 
                     <div class="text-right">
                         <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
@@ -343,485 +263,43 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="area-heading">
-                        <h3>Featured Collections</h3>
+                        <h3>Recent</h3>
                     </div>
                 </div>
             </div>
 
             <div class="row">
+            	@foreach($latest as $eachLatest)
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-md-4 col-sm-5 col-12">
                             <figure>
                                 <a href="#">
-                                    <img class="img-fluid" src="img/magazine/12.jpg" alt="">
+                                @if($eachLatest->image)
+	                                <img class="img-fluid" src="{{ asset('images/blog/'.$eachLatest->image) }}" alt="">
+	                            @else
+	                                <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+	                            @endif
                                 </a>
                             </figure>
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
+                            <a class="d-block"  href="{{ route('blog.detail' , $eachPopular->code)}}">
+                                <h4>{{ str_limit($eachLatest->title, $limit = 150, $end = '...') }}</h4>
                             </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
+                            <p>{{ str_limit($eachLatest->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
+                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($eachLatest->created_at) ); ?> </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
+                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                </i> {{$eachLatest->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i> {{$eachLatest->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30 ">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/13.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/14.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/15.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30 ">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/16.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/17.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/18.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30 ">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/19.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/20.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/21.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30 ">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/22.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/2.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/15.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30 ">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/16.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/17.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/15.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row m_b_30 ">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/16.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style small row">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
-                            <figure>
-                                <a href="#">
-                                    <img class="img-fluid" src="img/magazine/17.jpg" alt="">
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block" href="single-blog.html">
-                                <h4>Blessed night morning on
-                                them you great</h4>
-                            </a>
-                            <p>Why must the Multiverse exist? Quite simply: there must be more Universe than the part...</p>
-                            <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>mar 12</a>
-                                <a href="#" class="appreciate"><i>
-                                    <img src="img/appreciate-active.gif" class="img-fluid">
-                                </i> 0 like</a>
-                                <a href="#"><i class="ti-eye"></i> 1k view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
