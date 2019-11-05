@@ -82,6 +82,15 @@
                         </p>
                     @endif
                 </div>
+
+                <div class="form-group">
+                  <label for="priority">Priority</label>
+                  <input type="number" class="form-control" name="priority" id="priority" placeholder="" value="{{old('priority')}}">
+                  @if ($errors->has('priority'))
+                  <div class="alert alert-danger">{{ $errors->first('priority') }}</div>
+                  @endif
+                </div>
+
                 <div class="form-group">
                   <label for="status">Display:</label>
                   <label><input type="radio" name="status" value="1">Active</label>
@@ -91,13 +100,13 @@
                 @endif
                 </div>
 
-                  <div class="form-group">
+                <div class="form-group">
                   <label for="show_in_home">Show in Home:</label>
                   <label><input type="radio" name="show_in_home" value="1">Active</label>
                   <label><input type="radio" name="show_in_home" value="2">Inactive</label>
                   @if ($errors->has('show_in_home'))
-                <div class="alert alert-danger">{{ $errors->first('show_in_home') }}</div>
-                @endif
+                  <div class="alert alert-danger">{{ $errors->first('show_in_home') }}</div>
+                  @endif
                 </div>
 
                 <div class="form-group">

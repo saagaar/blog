@@ -39,7 +39,9 @@ class BlogRequest extends FormRequest
                 'save_method'=> 'required',
                 'image' => $image,
                 'tags'  =>'required',
-                'short_description'=>'required|max:155'
+                'short_description'=>'required|max:155',
+                'type'  =>'required',
+                'show_in_home'=>'required',
         ];
     }
 }

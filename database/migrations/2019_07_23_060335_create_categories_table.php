@@ -23,6 +23,7 @@ class CreateCategoriesTable extends Migration
             $table->string('slug')->unique();
             $table->string('banner_image')->nullable();
             $table->enum('show_in_home',['1', '2'])->comment('1->Active,2->Inactive');
+            $table->integer('priority')->default(0);
            $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');
             $table->timestamps();
         });

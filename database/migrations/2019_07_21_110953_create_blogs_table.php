@@ -28,8 +28,10 @@ class CreateBlogsTable extends Migration
                     ->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->enum('save_method',['1','2'])->comment('1=Save to draft,2-Publish')->default('1');
+            $table->enum('show_in_home',['1', '2'])->comment('1->Active,2->Inactive');
             $table->enum('featured',['1','2'])->comment('1=yes,2=no');
             $table->enum('anynomous',['1','2'])->comment('1=yes,2-No');
+            $table->enum('type',['1','2'])->comment('1=private,2=public');
             $table->string('image')->nullable();
             $table->timestamps();
         });

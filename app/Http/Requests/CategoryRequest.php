@@ -38,7 +38,8 @@ class CategoryRequest extends FormRequest
                 'status'   => 'required',
                 'slug'      => $slug,
                 'tags'      =>'required',
-                'show_in_home'  =>'required'
+                'show_in_home'  =>'required',
+                'priority'  =>'required'
 
               
         ];

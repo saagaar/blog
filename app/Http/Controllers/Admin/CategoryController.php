@@ -45,7 +45,6 @@ class CategoryController extends AdminController
         if ($request->method()=='POST') {
             $requestobj=app(CategoryRequest::class);
             $validatedData = $requestobj->validated();
-            // dd($validatedData);
             $this->validate($request, [
                 'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000',
                 ]);
@@ -89,6 +88,7 @@ class CategoryController extends AdminController
                 'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000',
                 ]);
                 $validatedData = $requestobj->validated();
+              
                 $this->categories->update($id,$validatedData);
                 if ($request->hasFile('banner_image')) {
                     $dir = 'frontend/images/categories-images/';
@@ -103,8 +103,9 @@ class CategoryController extends AdminController
                  {
                     $validatedData['banner_image'] = $category->banner_image;
                 }
-                 $updated = $this->blog->update($id,$validatedData);
-                 $updated->tags()->sync($validatedData['tags']);
+                
+                $updated = $this->categories->update($id,$validatedData);
+                $updated->tags()->sync($validatedData['tags']);            
                 return redirect()->route('adminblogcategory.list')
                             ->with('success','Category Updated Successfully.');
             }
