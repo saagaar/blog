@@ -12,19 +12,20 @@
                 <img :src="'/images/user-images/'+eachFollowings.image" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-3 col-md-4"v-else>
-                <img src="/images/user-images/default.png" alt="user" class="profile-photo-lg" />
+                <img src="/images/system-images/default-profile.png" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">
                   <h5><a href="timeline.html" class="profile-link">{{eachFollowings.name}}</a></h5>
                  <!--  <a href="#" class="float-right text-green btn">Unfollow</a> -->
-                 <FollowButton  @clicked="userFollowed" :following="true" :Buttonclass="'float-right   '" :username="eachFollowings.username" :followSuggestionHead="followSuggestion.length" ></FollowButton>
+                 <FollowButton  @clicked="userFollowed" :following="true" :Buttonclass="'float-right'" :username="eachFollowings.username" :followSuggestionHead="followSuggestion.length" ></FollowButton>
                   <p>{{eachFollowings.followers_count}}  Followers</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <FollowingLoading :followSuggestion="followSuggestion"></FollowingLoading>
     </div>
     <div class="col-md-9 col-sm-9 pad-left-0" v-else>
       <div class="friend-list">
@@ -91,6 +92,7 @@
   import FollowButton from './../components/Follows/FollowButton';
   import FollowSuggestionsList from './../components/Follows/FollowSuggestionsList';
   import PlaceHolderFollowings  from './../components/ContentPlaceholder/PlaceHolderFollowings';
+    import FollowingLoading from './../components/BlogLoading/FollowingLoading';
     export default {
       mixins: [ mixin ],
          data:function(){
@@ -117,7 +119,8 @@
         components:{
           FollowButton,
           FollowSuggestionsList,
-          PlaceHolderFollowings
+          PlaceHolderFollowings,
+          FollowingLoading
           
         },
     }

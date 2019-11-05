@@ -27,6 +27,7 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
+                  <li><router-link to="/dashboard">Dashboard</router-link></li>
                   <li><router-link to="/profile">Timeline</router-link></li>
                   
                   <li><router-link to="/followings">Followings({{ me.followingCount}} )</router-link></a></li>
@@ -103,7 +104,6 @@ import Form from './../services/Form.js';
             })
            }
         },
-        // name:UserDashboard,
         mixin,
         computed:{
             me:function(){

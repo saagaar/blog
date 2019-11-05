@@ -67,7 +67,7 @@ import { required, minLength,maxLength } from 'vuelidate/lib/validators';
                if(response.data.status){
                	this.isClicked=false;
                  curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
-                 curObject.$store.commit('TOGGLE_LOADING');
+                 // curObject.$store.commit('TOGGLE_LOADING');
                  curObject.$store.commit('UPDATE_BIO',response.data.data.bioName);
                }
                else{

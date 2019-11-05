@@ -112,7 +112,7 @@ class FrontendController extends BaseController
             $user =$this->authUser;
             $user->followersCount=$followerList->getFollowersCount($this->authUser);
             $user->followingCount=$followerList->getFollowingsCount($this->authUser);
-            $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
+            $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count();
             $user->notifications=$this->authUser->unreadNotifications()->take(10)->get();
             $user->blogCount=$this->authUser->blogs()->count();
             $user=$user->toArray();

@@ -31,6 +31,7 @@ class CreateBlogsTable extends Migration
             $table->enum('featured',['1','2'])->comment('1=yes,2=no');
             $table->enum('anynomous',['1','2'])->comment('1=yes,2-No');
             $table->string('image')->nullable();
+            $table->integer('views')->default('0');
             $table->timestamps();
         });
     }

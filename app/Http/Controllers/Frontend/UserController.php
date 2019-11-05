@@ -118,6 +118,34 @@ class UserController extends FrontendController
              return redirect()->route('home'); 
         }
     }
+    public function getFollowers(Request $request){
+      try{
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $allFollowers = $this->followerList->getAllFollowers($this->authUser,$limit,$offset);
+          return array('status'=>true,'data'=>$allFollowers,'message'=>'');
+        
+      }
+      catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
+    public function getFollowings(Request $request){
+      try{
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $allFollowings = $this->followerList->getAllFollowings($this->authUser,$limit,$offset);
+          return array('status'=>true,'data'=>$allFollowings,'message'=>'');
+        
+      }
+      catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
     public function followUser($username,$offset=false)
     {
         $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);

@@ -51,6 +51,9 @@ Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUs
 Route::get('/category/{slug}','Frontend\HomeController@blogByCategory')->name('blogbycategory');
 Route::get('/getblogbycategory/{slug}','Frontend\HomeController@getBlogByCategory')->name('getblogbycategory');
 Route::get('/api/getlatestblog','Frontend\HomeController@getLatestBlog')->name('getlatestblog');
+Route::get('/api/getfollowers','Frontend\UserController@getFollowers')->name('getfollowers');
+Route::get('/api/getfollowings','Frontend\UserController@getFollowings')->name('getfollowings');
+
 
 Route::get('/test', 'Frontend\FrontendController@index')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');

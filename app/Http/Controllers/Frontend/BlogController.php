@@ -104,7 +104,8 @@ class BlogController extends FrontendController
         $routeName= Route::currentRouteName();
         $data['options'] = $tag->getTagsList();
         $user=$this->user_state_info();
-        $data['blog']   = $this->blog->getBlogByCode($postId);
+        $blogData   = $this->blog->getBlogByCode($postId);
+        $data['blog'] = $blogData;
         if($routeName=='api')
         {
             return ($data);
@@ -128,6 +129,10 @@ class BlogController extends FrontendController
                     }else{
                         if(request()->image)
                         {
+                            $dir = 'images/user-images/';
+                            if ($blogData->image != '' && File::exists($dir . $blogData->image)){
+                                File::delete($dir . $blogData->image);
+                            }
                             $imageName = time().'.'.request()->image->getClientOriginalExtension();
                             request()->image->move(public_path('images/blog'), $imageName);
                             $form['image']=$imageName;

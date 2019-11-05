@@ -210,6 +210,7 @@ import Form from './../services/Form.js';
                if(response.data.status){
                  curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                  curObject.$store.commit('TOGGLE_LOADING');
+                 this.$router.push({path : '/blog/list'});
                }
                else{
                  curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
