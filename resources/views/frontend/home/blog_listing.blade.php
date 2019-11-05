@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 @endforeach
-                <blog-loading :category="{{ $category->slug }}"></blog-loading>
+                <blog-loading :category="'{{ $category->slug }}'"></blog-loading>
             </div>
         </div>
     </div>
