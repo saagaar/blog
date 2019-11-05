@@ -34,7 +34,6 @@
            else this.status='error';
             this.removeFlashMessageData();
           }
-
         },
         methods:{
           removeFlashMessageData(){

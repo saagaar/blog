@@ -41,6 +41,7 @@ class FrontendController extends BaseController
     Protected $contactEmail;
 
     Protected $perPage=10;
+    Protected $apiPerPage=8;
     public function __construct()
     {
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
@@ -91,7 +92,7 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {   
-        $not = $this->authUser->unreadNotifications()->take(10)->get();
+        $not = $this->authUser->Notifications()->take(10)->get();
 
         print_r($not);exit;        
         return view('frontend.home.index');
@@ -107,13 +108,14 @@ class FrontendController extends BaseController
     }
     public function user_state_info(){
        $followerList = app()->make('App\Repository\FollowerInterface');
+       $account = app()->make('App\Repository\AccountInterface');
         if(\Auth::check())
         {
             $user =$this->authUser;
             $user->followersCount=$followerList->getFollowersCount($this->authUser);
             $user->followingCount=$followerList->getFollowingsCount($this->authUser);
             $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
-            $user->notifications=$this->authUser->unreadNotifications()->take(10)->get();
+            $user->notifications=$account->getUsersNotification($this->authUser,$this->apiPerPage);
             $user->blogCount=$this->authUser->blogs()->count();
             $user=$user->toArray();
            

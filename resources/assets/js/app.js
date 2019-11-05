@@ -59,8 +59,8 @@ import AddComment from './components/Comment/AddComment';
 import Comment from './components/Comment/Comment';
 import IconCommentsCount from './components/Comment/IconCommentsCount';
 import Likes from './components/Likes/Likes';
-import BlogLoading from './components/BlogLoading/BlogLoading';
-import LatestBlogLoading from './components/BlogLoading/LatestBlogLoading';
+import BlogLoading from './components/InfiniteLoading/BlogLoading';
+import LatestBlogLoading from './components/InfiniteLoading/LatestBlogLoading';
 // import UserDashboard from './pages/UserDashboard';
 const default_layout="default";
 const app = new Vue({

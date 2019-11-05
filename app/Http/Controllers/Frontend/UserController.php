@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -61,7 +60,6 @@ class UserController extends FrontendController
            return redirect()->route('home'); 
         } 
     }
-   
     public function followings()
     {
         if(\Auth::check())
@@ -144,7 +142,6 @@ class UserController extends FrontendController
     { 
       if(\Auth::check())
         {
-      // sleep(10);
             $routeName= Route::currentRouteName();
             $myBlogs=$blog->getActiveBlogByUserId($this->authUser->id);
 
@@ -173,7 +170,9 @@ class UserController extends FrontendController
               $user=$this->user_state_info();
               return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
            }
-    }else{
+    }
+    else
+    {
       return redirect()->route('home'); 
     }
   }
@@ -219,9 +218,37 @@ class UserController extends FrontendController
       // $form='';
       $form['bio'] = $request->bio;
       $this->user->update($this->authUser->id,$form);
-      return array('status'=>true,'message'=>'Bio Changed Successfully','data'=>array('bioName'=>$form['bio']));
+      return array('status'=>true,'message'=>'Bio Updated Successfully','data'=>array('bioName'=>$form['bio']));
     }else{
       return redirect()->route('home'); 
     }
+  }
+  public function notifications(Request $request)
+  {
+    if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+           $data=array();
+          if($routeName=='api')
+          {
+            $limit=$this->apiPerPage;;
+            $offset=$limit*$request->post('page');
+            $data['notifications']=$this->user->getUsersNotification($this->authUser,$limit,$offset);
+            return array('status'=>true,'data'=>$data,'message'=>'Success');
+          }
+          else
+          {
+              $limit=$this->perPage;
+              $data['notifications']=$this->user->getUsersNotification($this->authUser,$limit);
+              $data['path']='/users/notifications';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+          }
+        }
+        else
+        {
+             return redirect()->route('home'); 
+        }
   }
 }
