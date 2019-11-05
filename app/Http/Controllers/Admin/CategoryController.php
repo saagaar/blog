@@ -96,11 +96,13 @@ class CategoryController extends AdminController
                     $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
                     request()->banner_image->move(public_path('frontend/images/categories-images/'), $imageName);
                     $validatedData['banner_image'] = $imageName;
-                }else {
+                }else
+
+                 {
                     $validatedData['banner_image'] = $category->banner_image;
                 }
                 $updated = $this->categories->update($id,$validatedData);
-                 $updated->tags()->sync($validatedData['tags']);
+                $updated->tags()->sync($validatedData['tags']);            
                 return redirect()->route('adminblogcategory.list')
                             ->with('success','Category Updated Successfully.');
             }
@@ -114,7 +116,7 @@ class CategoryController extends AdminController
     {
         $category = $this->categories->getCatById($request->id);
         $status = $request->status;
-        $category->update(array('status'=>$status));  
+        $category->update(array('show_in_home'=>$status,'status'=>$status));  
        return redirect()->route('adminblogcategory.list')
                         ->with('success','Status change successfully.');
     }

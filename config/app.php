@@ -163,6 +163,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+
+
         /*
          * Package Service Providers...
          */
@@ -180,6 +183,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
         \App\Providers\SettingsServiceProvider::class,
+        
 
     ],
 
@@ -233,7 +237,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Helper' => App\Helper::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-       
+       'Image' => 'Intervention\Image\Facades\Image'
     ],
 
 ];

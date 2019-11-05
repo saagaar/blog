@@ -69,12 +69,30 @@
                 <div class="alert alert-danger">{{ $errors->first('slug') }}</div>
                 @endif
                 </div>
+                
+                <div class="form-group">
+                  <label for="priority">Priority</label>
+                  <input type="number" class="form-control" name="priority" id="priority" placeholder="" value="{{$category->priority}}">
+                  @if ($errors->has('priority'))
+                  <div class="alert alert-danger">{{ $errors->first('priority') }}</div>
+                  @endif
+                </div>
+
                 <div class="form-group">
                   <label for="status">Display:</label>
                   <label><input type="radio" name="status" value="1" @if($category->status=='1') checked @endif >Active</label>
                   <label><input type="radio" name="status" value="2" @if($category->status=='2') checked @endif >Inactive</label>
                   @if ($errors->has('status'))
                 <div class="alert alert-danger">{{ $errors->first('status') }}</div>
+                @endif
+                </div>
+
+                <div class="form-group">
+                  <label for="show_in_home">Show in Home:</label>
+                  <label><input type="radio" name="show_in_home" value="1" @if($category->show_in_home=='1') checked @endif >Active</label>
+                  <label><input type="radio" name="show_in_home" value="2" @if($category->show_in_home=='2') checked @endif >Inactive</label>
+                  @if ($errors->has('show_in_home'))
+                <div class="alert alert-danger">{{ $errors->first('show_in_home') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
@@ -88,12 +106,13 @@
                 <div class="form-group">
                   <label for="tags">tags</label>
                   <!-- value="{{ $tags }}" -->
-                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
+                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tag">
                       
                       @foreach ($tags as $values)
                         <?php if(!$category->tags()->pluck('tags_id')){ ?>
                         <option value="{{ $values->id }}"> {{ $values->name }}  </option>
-                        <?php }else{ ?>
+                        <?php }else
+                        { ?>
                           @foreach ($category->tags()->pluck('tags_id') as $tag)
                           <option value="{{ $values->id }}" @if($values->id==$tag) selected @endif > {{ $values->name }}  </option>
                           @endforeach

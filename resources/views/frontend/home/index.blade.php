@@ -8,6 +8,7 @@
 
     <section class="fullwidth-block area-padding-bottom area-padding-top">
         <div class="container">
+             @if(count($featuredBlog) >0)
             <div class="row">
             	@if($featuredBlog['0'])
                 <div class="col-lg-6 col-md-6">
@@ -41,7 +42,9 @@
 
                 </div> 
                 @endif
+               
                 <?php unset($featuredBlog['0']); ?>
+               
                 <div class="col-lg-6 col-md-6">
                 	@foreach($featuredBlog as $eachFeaturedBlog)
                     <div class="single-blog video-style small row m_b_30">
@@ -80,6 +83,7 @@
 
                 </div>
             </div>
+             @endif
         </div>
     </section>
 
@@ -96,6 +100,7 @@
                     </div>
                 </div>
             </div>
+            @if(count($featuredForMember) > 0)
             <div class="row">
             	@if($featuredForMember['0'])
                <div class="col-lg-6 col-md-6">
@@ -128,7 +133,9 @@
                     </div> 
                 </div> 
                 @endif
+                
                 <?php unset($featuredForMember['0']); ?>
+                
                 <div class="col-lg-6 col-md-6">
                     @foreach($featuredForMember as $eachFeaturedForMember)
                     <div class="single-blog video-style small row m_b_30">
@@ -166,6 +173,7 @@
 
                 </div>
             </div>
+            @endif
         </div>
     </div>
 
@@ -181,6 +189,7 @@
                 <h3>Popular</h3>
             </div>
             <div class="row">
+                @if(count($popular)>0)
             	@if($popular['0'])
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
@@ -252,6 +261,7 @@
                     </div>
 
                 </div>
+                @endif
             </div>
         </div>
     </section>
@@ -270,6 +280,7 @@
             </div>
 
             <div class="row">
+                @if(count($latest)>0)
             	@foreach($latest as $eachLatest)
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style small row m_b_30">
@@ -302,6 +313,7 @@
                     </div>
                 </div>
                 @endforeach
+                @endif
                 <latest-blog-loading></latest-blog-loading>
             </div>
         </div>
