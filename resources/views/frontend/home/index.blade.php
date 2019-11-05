@@ -29,11 +29,11 @@
                                {{ str_limit($featuredBlog['0']->short_description, $limit = 150, $end = '...') }}
                             </p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($featuredBlog['0']->created_at) ); ?> </a>
+                                <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredBlog['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
-                                </i> {{$featuredBlog['0']->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i> {{$featuredBlog['0']->views }} view</a>
+                                </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
@@ -62,11 +62,11 @@
                             </a>
                             <p>{{ str_limit($eachFeaturedBlog->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($eachFeaturedBlog->created_at) ); ?> </a>
+                                <a href="#"><i class="ti-time"></i>&nbsp;{{ $eachFeaturedBlog->created_at->diffForHumans() }}</a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
-                                </i> {{$eachFeaturedBlog->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i> {{$eachFeaturedBlog->views }} view</a>
+                                </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
@@ -117,11 +117,11 @@
                                {{ str_limit($featuredForMember['0']->short_description, $limit = 150, $end = '...') }}
                             </p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($featuredForMember['0']->created_at) ); ?> </a>
+                                <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredForMember['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
-                                </i> {{$featuredForMember['0']->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i> {{$featuredForMember['0']->views }} view</a>
+                                </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
@@ -149,11 +149,11 @@
                             </a>
                             <p>{{ str_limit($eachFeaturedForMember->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($eachFeaturedForMember->created_at) ); ?> </a>
+                                <a href="#"><i class="ti-time"></i>&nbsp;{{ $eachFeaturedForMember->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
-                                </i> {{$eachFeaturedForMember->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i> {{$eachFeaturedForMember->views }} view</a>
+                                &nbsp;</i>{{$eachFeaturedForMember->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
@@ -201,11 +201,11 @@
                                {{ str_limit($popular['0']->short_description, $limit = 150, $end = '...') }}
                             </p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($popular['0']->created_at) ); ?> </a>
+                                <a href="#"><i class="ti-time"></i>&nbsp;{{ $popular['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
-                                </i> {{$popular['0']->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i> {{$popular['0']->views }} view</a>
+                                &nbsp;</i>{{$popular['0']->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
@@ -234,11 +234,12 @@
                             </a>
                             <p>{{ str_limit($eachPopular->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($eachPopular->created_at) ); ?> </a>
+                                <a href="#"><i class="ti-time"></i>&nbsp;
+                                {{ $eachPopular->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
-                                </i> {{$eachPopular->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i> {{$eachPopular->views }} view</a>
+                                &nbsp;</i>{{$eachPopular->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
@@ -289,17 +290,19 @@
                             </a>
                             <p>{{ str_limit($eachLatest->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i><?php echo date("M j",strtotime($eachLatest->created_at) ); ?> </a>
+                                <a href="#"><i class="ti-time"></i>&nbsp;
+                                {{ $eachLatest->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
-                                </i> {{$eachLatest->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i> {{$eachLatest->views }} view</a>
+                                &nbsp;</i>{{$eachLatest->likes_count }} like</a>
+                                <a href="#"><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
+                <latest-blog-loading></latest-blog-loading>
             </div>
         </div>
     </div>

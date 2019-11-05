@@ -66,8 +66,8 @@ Class Blog implements BlogInterface
    /**
    * get latest blog 
    */
-  public function getLatestAllBlog(){
-    return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->withCount('likes','comments')->get();
+  public function getLatestAllBlog($limit=10,$offset=0){
+    return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
   public function getPopularBlog(){
     return $this->blog->where(['save_method'=>2])->orderBy('likes_count','DESC')->withCount('likes','comments')->limit(4)->get();

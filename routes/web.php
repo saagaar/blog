@@ -50,7 +50,7 @@ Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUs
 
 Route::get('/category/{slug}','Frontend\HomeController@blogByCategory')->name('blogbycategory');
 Route::get('/getblogbycategory/{slug}','Frontend\HomeController@getBlogByCategory')->name('getblogbycategory');
-
+Route::get('/api/getlatestblog','Frontend\HomeController@getLatestBlog')->name('getlatestblog');
 
 Route::get('/test', 'Frontend\FrontendController@index')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');

@@ -34,7 +34,7 @@ Class Category implements CategoryInterface
       // return  $this->cat->where('slug', $slug)->first()->blogs()->withCount('likes','comments')->get();
     }
   public function getCategoryByShowInHome($limit=8){
-    $data=$this->cat->orderBy('priority', 'ASC')->limit($limit)->get();
+    $data=$this->cat->orderByRaw('FIELD(priority,NULL) ASC')->limit($limit)->get();
     return $data;
   }
       /**

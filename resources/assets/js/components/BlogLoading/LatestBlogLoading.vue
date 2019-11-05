@@ -18,8 +18,8 @@
                 <div class="meta-bottom d-flex">
                     <a href="#"><i class="ti-time"></i>{{ items.created_at | moment("from", "now")}}</a>
                     <a href="#" class="appreciate"><i>
-                        <img src="img/appreciate-active.gif" class="img-fluid">
-                    </i> {{items.likes_count}} like</a>
+                        <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                    </i>&nbsp; {{items.likes_count}} like</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                 </div>
@@ -37,9 +37,6 @@ import InfiniteLoading from 'vue-infinite-loading';
 import Form from './../../services/Form.js';
 
 export default {
-  props:{
-    category: String,
-  },
   components: {
     InfiniteLoading,
   },
@@ -53,7 +50,7 @@ export default {
   methods: {
     infiniteHandler($state) {
        
-        this.form.get('/getblogbycategory/'+this.category+'?page='+this.offset).then(response => 
+        this.form.get('/api/getlatestblog?page='+this.offset).then(response => 
         {
                if(response.data.data.length)
                {
@@ -70,22 +67,6 @@ export default {
                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
         },
-
-       
-
-      // axios.get(api, {
-      //   params: {
-      //     page: this.page,
-      //   },
-      // }).then(({ data }) => {
-      //   if (data.hits.length) {
-      //     this.page += 1;
-      //     this.list.push(...data.hits);
-      //     $state.loaded();
-      //   } else {
-      //     $state.complete();
-      //   }
-      // });
     },
  
 };

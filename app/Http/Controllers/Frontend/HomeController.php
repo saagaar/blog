@@ -149,9 +149,23 @@ class HomeController extends FrontendController
         if(!$slug)
             throw new Exception("No Categories Selected", 1);
           $limit=$this->perPage;
-          $offset=$request->get('page')*$limit+$request->get('page');
+          $offset=$request->get('page')*$limit;
           $blogByCategory = $this->blog->getBlogByCategory($slug,$limit,$offset);
           return array('status'=>true,'data'=>$blogByCategory,'message'=>'');
+        
+      }
+      catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
+    public function getLatestBlog(Request $request){
+      try{
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $latest = $this->blog->getLatestAllBlog($limit,$offset);
+          return array('status'=>true,'data'=>$latest,'message'=>'');
         
       }
       catch(Exception $e)
