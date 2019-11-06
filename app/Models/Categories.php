@@ -19,7 +19,7 @@ class Categories extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'parent_id','name','status','slug','banner_image'
+        'parent_id','name','status','slug','banner_image','show_in_home','priority'
     ];
 
     /**

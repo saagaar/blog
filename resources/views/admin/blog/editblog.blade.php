@@ -67,6 +67,22 @@
                 <div class="alert alert-danger">{{ $errors->first('save_methods') }}</div>
                 @endif
                 </div>
+                 
+            <div class="form-group col-md-4">
+               <label for="show_in_home">Show in Home:</label>
+              <div class="custom-control custom-radio">
+                 <input type="radio" class="custom-control-input flat-red" name="show_in_home"  value="1" @if($blog->show_in_home =='1') checked @endif>
+                <label class="custom-control-label" for="defaultChecked">Active</label>
+              </div>
+                <div class="custom-control custom-radio">
+                 <input type="radio" class="custom-control-input flat-red" name="show_in_home"  value="2" @if($blog->show_in_home =='2') checked @endif>
+                <label class="custom-control-label" for="defaultChecked">Inactive</label>
+              </div>
+                  @if ($errors->has('show_in_home'))
+                  <div class="alert alert-danger">{{ $errors->first('show_in_home') }}</div>
+                  @endif
+            </div>
+
                 <div class="form-group col-md-4">
                   <label for="featured">Featured: </label>
                     <div class="custom-control custom-radio">
@@ -112,6 +128,21 @@
                   @if ($errors->has('short_description'))
                   <div class="alert alert-danger">{{ $errors->first('short_description')}}</div>
                   @endif
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="type">Type: </label>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input flat-red" name="type"  value="1" @if($blog->type =='1') checked @endif>
+                        <label class="custom-control-label" for="defaultChecked">Private</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input flat-red" name="type"  value="2" @if($blog->type =='2') checked @endif>
+                        <label class="custom-control-label" for="defaultChecked">Public</label>
+                      </div>
+                  @if ($errors->has('type'))
+                <div class="alert alert-danger">{{ $errors->first('type') }}</div>
+                @endif
                 </div>
 
 
