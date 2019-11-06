@@ -13,7 +13,7 @@
                 <img :src="'/images/user-images/'+eachFollowers.image" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-3 col-md-4"v-else>
-                <img src="/images/user-images/default.png" alt="user" class="profile-photo-lg" />
+                <img src="/images/system-images/default-profile.png" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">
@@ -25,6 +25,7 @@
             </div>
           </div>
       </div>
+      <FollowerLoading :following="initialState.followings"></FollowerLoading>
     </div> 
     </div>
     <div class="friend-list fn_list_2" v-else>
@@ -37,6 +38,7 @@
   import mixin  from './../mixins/LoadData.mixin.js';
   import FollowButton from './../components/Follows/FollowButton';
   import PlaceHolderFollowers  from './../components/ContentPlaceholder/PlaceHolderFollowers';
+  import FollowerLoading from './../components/BlogLoading/FollowerLoading';
 
     export default {
       mixins: [ mixin ],
@@ -56,7 +58,8 @@
         },
         components:{
           FollowButton,
-          PlaceHolderFollowers
+          PlaceHolderFollowers,
+          FollowerLoading
           
         },
     }

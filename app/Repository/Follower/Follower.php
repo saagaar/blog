@@ -35,8 +35,8 @@ Class  Follower implements FollowerInterface
     /**
      * 
      */
- 	public function getAllFollowers($user){
-      return $user->followers()->withCount('followers')->get();
+ 	public function getAllFollowers($user,$limit=10,$offset=0){
+      return $user->followers()->withCount('followers')->take($limit)->skip($offset)->get();
     }
 
     public function getFollowersCount($user){
@@ -53,8 +53,8 @@ Class  Follower implements FollowerInterface
      * @return mixed
      */
 
-     public function getAllFollowings($user){
-        return $user->followings()->withCount('followers')->get();
+     public function getAllFollowings($user,$limit=10,$offset=0){
+        return $user->followings()->withCount('followers')->take($limit)->skip($offset)->get();
      }
  	  /**
      * Insert follower

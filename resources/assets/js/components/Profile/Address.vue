@@ -19,7 +19,7 @@
                               <div class="error" v-if="!$v.form.country.minLength">country must be at least {{ $v.form.country.$params.minLength.min }} letters.</div>
                             </div>
                             <br>
-				<button type="button" class="btn btn-primary ml-15" @click.prevent="updateAddress">Update</button>
+				<button type="button" class="btn btn-primary ml-15" @click.prevent="updateAddress"><Loader></Loader>Update</button>
         <button type="button" class="btn btn-light ml-15" @click.prevent="cancel">Cancel</button>
 			</form>
 		</div>
@@ -32,6 +32,7 @@
 </template>
 <script>
 import Form from './../../services/Form.js';
+import Loader from './../../components/Loader';
 import { required, minLength,maxLength } from 'vuelidate/lib/validators';
     export default {
          data() {
@@ -81,7 +82,7 @@ import { required, minLength,maxLength } from 'vuelidate/lib/validators';
                if(response.data.status){
                  curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                  this.isClicked=false;
-                 curObject.$store.commit('TOGGLE_LOADING');
+                 // curObject.$store.commit('TOGGLE_LOADING');
                  curObject.$store.commit('UPDATE_ADDRESS',response.data.data.addressName);
                  curObject.$store.commit('UPDATE_COUNTRY',response.data.data.countryName);
                }
