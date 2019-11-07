@@ -38,7 +38,7 @@
                   <td>{{ ++$i }}</td>
                   <td>{{$data->title}}</td>
                    <td>{{strip_tags(str_replace('&nbsp;','',$data->content))}}</td>
-                   <td><img src="{{asset('images/banner-images/'.$data->image) }}" alt="Banner Image" height="42" width="42"></td>
+                   <td><img src="{{asset('uploads/banner-images/'.$data->image) }}" alt="Banner Image" height="42" width="42"></td>
                    <td>{{$data->display_order }}</td>
                   <td>
                        <input data-id="{{$data->id}}" data-url="{{route('banner.changestatus')}}" style="size: 12px;"  data-width="100" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Publish" data-off="Unpublish"{{ $data->status==1 ? 'checked' : '' }}>

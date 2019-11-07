@@ -49,7 +49,7 @@ class CategoryController extends AdminController
                 'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000',
                 ]);
             $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-            request()->banner_image->move(public_path('frontend/images/categories-images/'), $imageName);
+            request()->banner_image->move(public_path('uploads/categories-images/'), $imageName);
             $validatedData['banner_image'] = $imageName;
         $created = $this->categories->create($validatedData);
         $created->tags()->attach($validatedData['tags']);
@@ -62,7 +62,7 @@ class CategoryController extends AdminController
     {
         $category =$this->categories->getcatById($id);
         if( $category){
-            $dir = 'frontend/images/categories-images/';
+            $dir = 'uploads/categories-images/';
             if ($category->banner_image != '' && File::exists($dir . $category->banner_image)){
                 File::delete($dir . $category->banner_image);
             }
@@ -91,12 +91,12 @@ class CategoryController extends AdminController
               
                 $this->categories->update($id,$validatedData);
                 if ($request->hasFile('banner_image')) {
-                    $dir = 'frontend/images/categories-images/';
+                    $dir = 'uploads/categories-images/';
                     if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
                     File::delete($dir . $category->banner_image);
 
                     $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-                    request()->banner_image->move(public_path('frontend/images/categories-images/'), $imageName);
+                    request()->banner_image->move(public_path('uploads/categories-images/'), $imageName);
                     $validatedData['banner_image'] = $imageName;
                 }else
 

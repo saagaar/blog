@@ -43,6 +43,7 @@ class HomeController extends FrontendController
      */
     public function index(Request $request)
     {
+      
         return view('frontend.layouts.app');
     }
 

@@ -56,20 +56,34 @@ class BlogController extends AdminController
         $part2=substr($code, 7,-1);
         $created['code']= $part1.$part2;
         $created->save();
-        $created->tags()->attach($validatedData['tags']);
-        
+        $created->tags()->attach($validatedData['tags']);        
         $extension = request()->image->getClientOriginalExtension();
-        // echo $extension;exit;
-        $imageName = time().'.'.$extension;              
+        $imageName = time().'.'.$extension;
         $dir=public_path(). '/images/blog/'.$created['code'];
         File::makeDirectory($dir);
-
-        $tmpImg = request()->image->move($dir,$imageName);
-         // echo $tmpImg;exit;
-         // File::copy($tmp_img,$dir.'/thumbnail.jpeg');
-           $img = Image::make($tmpImg);          
-           $img->resize(100, null, function ($constraint) 
-           {
+        $originalImg= request()->image->move($dir,$imageName);
+        // File::delete($originalImg);
+        // $originalImg= request()->image->move($dir,$imageName);              
+        $img =Image::make($originalImg);
+        list($width, $height) = getimagesize($originalImg);       
+        if ($width > 1000 && $height < 1000)
+        {
+                  
+            $img->resize(1000,null, function ($constraint) 
+            {
+            $constraint->aspectRatio();
+             })->save($dir.'/'.time().'.'.$extension);            
+        }
+         else if($width < 1000 && $height > 1000)
+        {
+             $img->resize(null,1000, function ($constraint) 
+            {
+            $constraint->aspectRatio();
+             })->save($dir.'/'.time().'.'.$extension);
+        }        
+                 
+           $img->resize(100,null, function ($constraint) 
+            {
             $constraint->aspectRatio();
              })->save($dir.'/'.time().'-thumbnail.'.$extension);
            $data['image'] = $imageName;
@@ -99,27 +113,44 @@ class BlogController extends AdminController
                 ]);  
                 $requestObj=app(BlogRequest::class);
                 $validatedData = $requestObj->validated();          
-
                 if ($request->hasFile('image')) 
                 {
-                $extension = request()->image->getClientOriginalExtension();
-                $imageName = time().'.'.$extension;              
-                $dir=public_path(). '/images/blog/'.$blog->code.'/';
+                              
+                $dir=public_path(). '/images/blog/'.$blog->code;
+
                  if ($blog->image != '' && File::exists($dir,$blog->image))
                 {
                 File::deleteDirectory($dir);
                  }
                 File::makeDirectory($dir);
+                $extension = request()->image->getClientOriginalExtension();
+                $imageName = time().'.'.$extension;
+                $originalImg =request()->image->move($dir,$imageName);
+                $img = Image::make($originalImg);
+                list($width, $height) = getimagesize($originalImg);  
 
-                $tmpImg =request()->image->move($dir,$imageName);
-                $img = Image::make($tmpImg);         
+                if ($width > 1000 && $height < 1000)
+                {
+                          
+                    $img->resize(1000,null, function ($constraint) 
+                    {
+                    $constraint->aspectRatio();
+                     })->save($dir.'/'.time().'.'.$extension);            
+                }
+                 else if($width < 1000 && $height > 1000)
+                {
+                     $img->resize(null,1000, function ($constraint) 
+                    {
+                    $constraint->aspectRatio();
+                     })->save($dir.'/'.time().'.'.$extension);
+                } 
+
+                // **************resizing the image of thumbnail******************//
                $img->resize(100, null, function ($constraint) 
-               {
+                {
                  $constraint->aspectRatio();
                 }
                 )->save($dir.'/'.time().'-thumbnail.'.$extension);
-
-                    
                     
                   $validatedData['image'] = $imageName;
                 }

@@ -45,7 +45,7 @@ class TeamController extends AdminController
            $requestObj=app(TeamRequest::class);
             $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/team-images'), $imageName);
+            request()->image->move(public_path('uploads/team-images'), $imageName);
             $validatedData['image'] = $imageName;
             $this->team->create($validatedData);
             return redirect()->route('team.list')    
@@ -69,11 +69,11 @@ class TeamController extends AdminController
                $requestObj=app(TeamRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')) {
-                    $dir = 'images/team-images/';
+                    $dir = 'uploads/team-images/';
                     if ($team->image != '' && File::exists($dir . $team->image))
                     File::delete($dir . $team->image);
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/team-images'), $imageName);
+                    request()->image->move(public_path('uploads/team-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }else {
                     $validatedData['image'] = $team->image;
@@ -88,7 +88,7 @@ class TeamController extends AdminController
     {
        $team =$this->team->getById($id);
         if($team){
-            $dir = 'images/team-images/';
+            $dir = 'uploads/team-images/';
             if ($team->image != '' && File::exists($dir . $team->image)){
                 File::delete($dir . $team->image);
             }

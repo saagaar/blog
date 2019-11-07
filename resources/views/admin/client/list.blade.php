@@ -37,7 +37,7 @@
                   <td>{{ ++$i }}</td>
                   <td>{{$member->title}}</td>
                    <td>{{$member->url }}</td>
-                   <td><img src="{{asset('images/client-images/'.$member->logo) }}" alt="Client Image" height="42" width="42"></td>
+                   <td><img src="{{asset('uploads/client-images/'.$member->logo) }}" alt="Client Image" height="42" width="42"></td>
                   <td>
                      <input data-id="{{$member->id}}" data-url="{{route('client.changestatus')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$member->status==1 ? 'checked' : '' }}>
                   </td>             

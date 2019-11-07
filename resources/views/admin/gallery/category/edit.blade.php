@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                   <label for="banner_image">Image Upload</label>
-                 <img src='/images/gallery-cat-images/{{$category->banner_image}}' width="50"/>
+                 <img src='/uploads/gallery-cat-images/{{$category->banner_image}}' width="50"/>
                   <input type="file" class="form-control" name="banner_image" id="banner_image" value="{{$category->banner_image}}">
                   @if ($errors->has('banner_image'))
                 <div class="alert alert-danger">{{$errors->first('banner_image') }}</div>
