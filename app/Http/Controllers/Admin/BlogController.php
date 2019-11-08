@@ -41,7 +41,7 @@ class BlogController extends AdminController
                       'All Blogs' => route('blog.list'),
                       'current_menu'  =>'Create Blog',
                     ]];
-    $tagList = $tag->getAll()->get();
+    $tagList = $tag->getAllTags()->get();
     if ($request->method()=='POST') 
     {
          $request->validate([
@@ -89,7 +89,7 @@ class BlogController extends AdminController
                         'All Blogs' => route('blog.list'),
                         'current_menu'=>'Edit Blog',
                           ]];
-                          $taglist = $tag->getAll()->get();
+                          $taglist = $tag->getAllTags()->get();
 
             $blog =$this->blog->GetBlogById($id);
             if ($request->method()=='POST') 

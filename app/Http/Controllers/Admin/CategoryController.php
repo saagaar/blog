@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\CategoryRequest;
 use App;
+
 class CategoryController extends AdminController
 {
     protected $categories;
@@ -40,19 +41,22 @@ class CategoryController extends AdminController
                     'Category' => route('adminblogcategory.list'),
                     'current_menu'=>'Create Category',
                       ]];
-        $tagList = $tag->getAll()->get();
+        $tagList = $tag->getAllTags()->get();
         $blogcategory = $this->categories->getAll()->where('parent_id',NULL)->get();
         if ($request->method()=='POST') {
             $requestobj=app(CategoryRequest::class);
             $validatedData = $requestobj->validated();
-            $this->validate($request, [
-                'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000',
-                ]);
-            $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-            request()->banner_image->move(public_path('frontend/images/categories-images/'), $imageName);
-            $validatedData['banner_image'] = $imageName;
+            if($request->hasFile('banner_image')){
+                $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
+                request()->banner_image->move(public_path('frontend/images/categories-images/'), $imageName);
+                $validatedData['banner_image'] = $imageName;
+            }else{
+                $validatedData['banner_image'] = '';
+            }
         $created = $this->categories->create($validatedData);
-        $created->tags()->attach($validatedData['tags']);
+        if($request->has('tags')){
+            $created->tags()->attach($validatedData['tags']);
+        }
         return redirect()->route('adminblogcategory.list')
                             ->with(array('success'=>'Category created successfully.','breadcrumb'=>$breadcrumb));
         }
@@ -78,15 +82,15 @@ class CategoryController extends AdminController
                     'Category' => route('adminblogcategory.list'),
                     'current_menu'=>'Edit Category',
                       ]];
-        $tagList = $tag->getAll()->get();
+        $tagList = $tag->getAllTags()->get();
         $blogcategory = $this->categories->getAll()->where('parent_id',NULL)->get();
         $category =$this->categories->getCatById($id);
         if ($request->method()=='POST') 
         {           
                 $requestobj=app(CategoryRequest::class);
-                $this->validate($request, [
-                'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000',
-                ]);
+                // $this->validate($request, [
+                // 'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000',
+                // ]);
                 $validatedData = $requestobj->validated();
                 if ($request->hasFile('banner_image')) {
                     $dir = 'frontend/images/categories-images/';
@@ -101,8 +105,11 @@ class CategoryController extends AdminController
                  {
                     $validatedData['banner_image'] = $category->banner_image;
                 }
+                // print_r($validatedData['tags']);exit;
                 $updated = $this->categories->update($id,$validatedData);
-                $updated->tags()->sync($validatedData['tags']);            
+                if($request->has('tags')){
+                    $category->tags()->sync($validatedData['tags']);            
+                }
                 return redirect()->route('adminblogcategory.list')
                             ->with('success','Category Updated Successfully.');
             }
