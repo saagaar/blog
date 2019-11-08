@@ -8,7 +8,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 use App\Repository\TagInterface;
 use Validator,Redirect,Response,File;
-
+use Image;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Repository\BlogInterface; 
 use App\Http\Requests\BlogRequest;
@@ -129,13 +129,23 @@ class BlogController extends FrontendController
                     }else{
                         if(request()->image)
                         {
-                            $dir = 'images/user-images/';
-                            if ($blogData->image != '' && File::exists($dir . $blogData->image)){
-                                File::delete($dir . $blogData->image);
+                            $extension = request()->image->getClientOriginalExtension();
+                            $imageName = time().'.'.$extension;              
+                            $dir=public_path(). '/images/blog/'.$postId.'/';
+                             if ($blogData->image != '' && File::exists($dir,$blogData->image))
+                            {
+                            File::deleteDirectory($dir);
+                             }
+                            File::makeDirectory($dir);
+
+                            $tmpImg =request()->image->move($dir,$imageName);
+                            $img = Image::make($tmpImg);         
+                           $img->resize(100, null, function ($constraint) 
+                           {
+                             $constraint->aspectRatio();
                             }
-                            $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                            request()->image->move(public_path('images/blog'), $imageName);
-                            $form['image']=$imageName;
+                            )->save($dir.'/'.time().'-thumbnail.'.$extension);
+                            $validatedData['image'] = $imageName;
                         }
                         $form['short_description']=$request->short_description;
                         $form['save_method']='1';

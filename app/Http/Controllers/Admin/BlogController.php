@@ -48,10 +48,7 @@ class BlogController extends AdminController
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);  
         $requestObj=app(BlogRequest::class);
-        $validatedData = $requestObj->validated();
-        
-
-        
+        $validatedData = $requestObj->validated();       
         $validatedData['user_id'] = Auth()->user()->id;
         $created = $this->blog->create($validatedData); 
         $code= uniqid();
@@ -64,22 +61,21 @@ class BlogController extends AdminController
         $extension = request()->image->getClientOriginalExtension();
         // echo $extension;exit;
         $imageName = time().'.'.$extension;              
-        $folder=public_path(). '/images/blog/'.$created['code'];
-        File::makeDirectory($folder);
+        $dir=public_path(). '/images/blog/'.$created['code'];
+        File::makeDirectory($dir);
 
-        $tmpImg = request()->image->move($folder,$imageName);
+        $tmpImg = request()->image->move($dir,$imageName);
          // echo $tmpImg;exit;
-         // File::copy($tmp_img,$folder.'/thumbnail.jpeg');
-                       
+         // File::copy($tmp_img,$dir.'/thumbnail.jpeg');
            $img = Image::make($tmpImg);          
            $img->resize(100, null, function ($constraint) 
            {
             $constraint->aspectRatio();
-             })->save($folder.'/'.time().'-thumbnail.'.$extension);
+             })->save($dir.'/'.time().'-thumbnail.'.$extension);
            $data['image'] = $imageName;
            $this->blog->update($created->id,$data);
-        return redirect()->route('blog.list')
-                         ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
+           return redirect()->route('blog.list')
+                          ->with(array('success'=>'Blog created successfully.','breadcrumb'=>$breadcrumb));
     }
     
     $localeList=$locale->getActiveLocale()->toArray();
@@ -108,19 +104,20 @@ class BlogController extends AdminController
                 {
                     $extension = request()->image->getClientOriginalExtension();
                     $imageName = time().'.'.$extension;              
-                    $folder=public_path(). '/images/blog/'.$blog->code.'/';
-                    $tmpImg =request()->image->move($folder,$imageName);
+                    $dir=public_path(). '/images/blog/'.$blog->code.'/';
+                     if ($blog->image != '' && File::exists($dir,$blog->image))
+                    {
+                    File::deleteDirectory($dir);
+                     }
+                    File::makeDirectory($dir);
+
+                    $tmpImg =request()->image->move($dir,$imageName);
                     $img = Image::make($tmpImg);         
                    $img->resize(100, null, function ($constraint) 
                    {
                      $constraint->aspectRatio();
                     }
-                    )->save($folder.'/'.time().'-thumbnail.'.$extension);
-
-                    if ($blog->image != '' && File::exists($folder . $blog->image))
-                    {
-                     File::delete($folder . $blog->image);
-                    }
+                    )->save($dir.'/'.time().'-thumbnail.'.$extension);
                     $validatedData['image'] = $imageName;
                 }
                 else 
