@@ -21,45 +21,26 @@ Class Account implements AccountInterface
       return $this->account->where('id', $memberId)->first();
     }
 
-      public function countAllTodayLoggedInUsers()
-      {
-        return $this->account->whereDate('last_login_date','=',date('Y-m-d'))->count();
-      }
+    public function countAllTodayLoggedInUsers()
+    {
+      return $this->account->whereDate('last_login_date','=',date('Y-m-d'))->count();
+    }
 
-      public function countAllUsers()
-      {
-       
-        return $this->account->get()->count();    
-      }
+    public function countAllUsers(){
+      return $this->account->get()->count();    
+    }
 
-       public function countAllTodaysRegisteredUsers()
-       
-       {
-       
-           return $this->account->whereDate('created_at','=',date('Y-m-d'))->count();   
-       }
+    public function countAllTodaysRegisteredUsers(){
+         return $this->account->whereDate('created_at','=',date('Y-m-d'))->count();   
+     }
 
-         public function countActiveUsers()
-       
-       {
-       
-          return $this->account->where('is_login','=','1')->whereDate('created_at','=',date('Y-m-d'))->count();   
-       }
-
-
-
-         public function countInActiveUsers()
-       
-       {
-       
-          return $this->account->where('is_login','=','2')->whereDate('created_at','=',date('Y-m-d'))->count();   
-       }
-
-
-      
-
-
-
+    public function countActiveUsers(){
+        return $this->account->where('is_login','=','1')->whereDate('created_at','=',date('Y-m-d'))->count();   
+     }
+    public function countInActiveUsers(){
+        return $this->account->where('is_login','=','2')->whereDate('created_at','=',date('Y-m-d'))->count();   
+     }
+    
     public function getUserByUsername($username){
       return $this->account->where('username', $username)->first();
     }
@@ -103,13 +84,8 @@ Class Account implements AccountInterface
       return $this->account->find($id)->delete();
     }
 
-    // public function getBlogsByUser($username)
-    // {
-    //     echo '<pre>';
-    //     $data=$this->account->where('username',$username)->first()->toArray();
-    //       $comments = Comment::where('post_id', $postId)->with('user')->paginate(15);
-    //     print_r($data);
-    //   return $data;
-    // }
+    public function getUsersNotification($user,$limit=10,$offset=0){
+      return $user->notifications()->limit($limit)->offset($offset)->get();
+    }
 }
 ?>
