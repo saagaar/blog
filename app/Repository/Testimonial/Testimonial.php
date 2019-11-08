@@ -54,5 +54,12 @@ Class Testimonial implements TestimonialInterface
     public function delete($id){
       return $this->testimonial->find($id)->delete();
     }
+
+    public function getActiveTestimonial(){
+      return $this->testimonial->where('status','1')->get();
+    }
+
+
+
 }
 ?>

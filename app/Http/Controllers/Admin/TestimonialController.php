@@ -25,6 +25,7 @@ class TestimonialController extends AdminController
         $search = $request->get('search');
         if($search){
             $testimonial = $this->testimony->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+           
         }else{
             $testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }

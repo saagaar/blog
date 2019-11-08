@@ -13,6 +13,8 @@ use App\Mail\SendMailable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\Notifications;
 use App\Repository\TagInterface;
+use App\Repository\TestimonialInterface;
+
 
 class HomeController extends FrontendController
 {
@@ -41,10 +43,10 @@ class HomeController extends FrontendController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function landingPage()
     {
-      
-        return view('frontend.layouts.app');
+
+        return view('frontend.home.landing-page');
     }
 
     public function test(Request $request)
@@ -102,8 +104,16 @@ class HomeController extends FrontendController
                 print_r($tag->getTag($search));
 
               }
-              
-
              
     }
+
+    public function testimonialDetails(TestimonialInterface $TestimonialInterface)
+    {
+        
+
+       $testimonialDetails= $TestimonialInterface->getActiveTestimonial();
+         // print_r($testimonialDetails);exit;
+
+      return view('frontend.home.landing-page')->with(array('testimonialDetails'=>$testimonialDetails));
+  }
 }

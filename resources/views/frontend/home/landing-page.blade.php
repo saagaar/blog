@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">a
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
     <!-- SEO Meta Tags -->
     <meta name="description" content="Free mobile app HTML landing page template to help you build a great online presence for your app which will convert visitors into users">
     <meta name="author" content="Inovatik">
@@ -18,19 +17,18 @@
     <meta property="og:type" content="article" />
 
     <!-- Website Title -->
-    <title>Blog Sagar - Social Media</title>
-    
+    <title>Blog Sagar - Social Media</title>    
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <!-- <link href="css/fontawesome-all.css" rel="stylesheet"> -->
-    <link href="css/themify-icons.css" rel="stylesheet">
-    <link href="css/slick.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="{{ asset('landing-page/assets/css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{ asset('landing-page/assets/css/themify-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('landing-page/assets/css/slick.css')}}" rel="stylesheet">
+    <link href="{{asset('landing-page/assets/css/animate.css')}}" rel="stylesheet">
+    <link href="{{asset('landing-page/assets/css/styles.css')}}" rel="stylesheet">
     <!-- Favicon  -->
-    <link rel="icon" href="images/favicon.png">
+
+    <link rel="icon" href="{{asset('landing-page/assets/images/favicon.png')}}">
 </head>
 <body>
 
@@ -38,7 +36,7 @@
 <section class="fixed-top navigation">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>
+      <a class="navbar-brand" href="index.html"><img src="landing-page/assets/images/logo.png" alt="logo"></a>
       <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -67,7 +65,7 @@
 <!-- /navigation -->
 
 <!-- hero area -->
-<section class="hero-section" data-background="" style="background-image: url(images/hero-area/banner-bg.png);">
+<section class="hero-section" data-background="" style="background-image: url(landing-page/assets/images/hero-area/banner-bg.png);">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
@@ -76,7 +74,7 @@
         <p class="mb-4">Join our Blog Sagar team and get paid if you have access to a larger audience and can persuade others by virtue of your authenticity and reach.</p>
         <a href="" class="btn btn-secondary btn-lg mb-5">explore us</a>
         <!-- banner image -->
-        <img class="img-fluid" src="images/hero-area/banner.png" alt="banner-img">
+        <img class="img-fluid" src="landing-page/assets/images/hero-area/banner.png" alt="banner-img">
       </div>
     </div>
   </div>
@@ -145,8 +143,8 @@
       </div>
     </div>
   </div>
-  <img class="feature-bg-1" src="images/background-shape/feature-bg-1.png" alt="bg-shape">
-  <img class="feature-bg-2" src="images/background-shape/feature-bg-2.png" alt="bg-shape">
+  <img class="feature-bg-1" src="landing-page/assets/images/background-shape/feature-bg-1.png" alt="bg-shape">
+  <img class="feature-bg-2" src="landing-page/assets/images/background-shape/feature-bg-2.png" alt="bg-shape">
 </section>
 <!-- /feature -->
 
@@ -155,7 +153,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <img class="img-fluid" src="images/marketing/marketing.png" alt="form-img">
+        <img class="img-fluid" src="landing-page/assets/images/marketing/marketing.png" alt="form-img">
       </div>
       <div class="col-md-5">
         <h2 class="section-title">A Complete Range Of Blog Services!</h2>
@@ -169,11 +167,11 @@
     </div>
   </div>
   <!-- background image -->
-  <img class="img-fluid seo-bg" src="images/backgrounds/seo-bg.png" alt="seo-bg">
+  <img class="img-fluid seo-bg" src="landing-page/assets/images/backgrounds/seo-bg.png" alt="seo-bg">
   <!-- background-shape -->
-  <img class="seo-bg-shape-1" src="images/background-shape/seo-ball-1.png" alt="bg-shape">
-  <img class="seo-bg-shape-2" src="images/background-shape/seo-half-cycle.png" alt="bg-shape">
-  <img class="seo-bg-shape-3" src="images/background-shape/seo-ball-2.png" alt="bg-shape">
+  <img class="seo-bg-shape-1" src="landing-page/assets/images/background-shape/seo-ball-1.png" alt="bg-shape">
+  <img class="seo-bg-shape-2" src="landing-page/assets/images/background-shape/seo-half-cycle.png" alt="bg-shape">
+  <img class="seo-bg-shape-3" src="landing-page/assets/images/background-shape/seo-ball-2.png" alt="bg-shape">
 </section>
 <!-- /marketing -->
 
@@ -195,15 +193,15 @@
         </ul>
       </div>
       <div class="col-md-6 order-1 order-md-2">
-        <img class="img-fluid" src="images/service/service.png" alt="service">
+        <img class="img-fluid" src="landing-page/assets/images/service/service.png" alt="service">
       </div>
     </div>
   </div>
   <!-- background image -->
-  <img class="img-fluid service-bg" src="images/backgrounds/service-bg.png" alt="service-bg">
+  <img class="img-fluid service-bg" src="landing-page/assets/images/backgrounds/service-bg.png" alt="service-bg">
   <!-- background shapes -->
-  <img class="service-bg-shape-1" src="images/background-shape/service-half-cycle.png" alt="background-shape">
-  <img class="service-bg-shape-2" src="images/background-shape/feature-bg-2.png" alt="background-shape">
+  <img class="service-bg-shape-1" src="landing-page/assets/images/background-shape/service-half-cycle.png" alt="background-shape">
+  <img class="service-bg-shape-2" src="landing-page/assets/images/background-shape/feature-bg-2.png" alt="background-shape">
 </section>
 <!-- /service -->
 
@@ -222,39 +220,39 @@
         <div class="team-member">
           <div class="d-flex mb-4">
             <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="images/team/team-1.jpg" alt="team-member">
+              <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-1.jpg" alt="team-member">
             </div>
             <div class="align-self-center">
-              <h4>Girish Khatiwada</h4>
-              <h6 class="text-color">Rapper/Vlogger</h6>
+               @foreach ($testimonialDetails as $eachDetails)
+              
+              <h4>{{$eachDetails->name}}</h4>
+              <h6 class="text-color">{{$eachDetails->position}}</h6>
+               
             </div>
           </div>
-          <p>" The friendly people at Uptrendly spread a lot of youthfulness and energy. I've always loved working with them. "
-                </p>
+          <p>{{$eachDetails->description}}</p>
         </div>
         <!-- team-member -->
         <div class="team-member">
           <div class="d-flex mb-4">
             <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="images/team/team-2.jpg" alt="team-member">
+              <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-2.jpg" alt="team-member">
             </div>
             <div class="align-self-center">
-              <h4>Malik Kumar Subba</h4>
-              <h6 class="text-color">Miss Nepal 2002</h6>
+              <h4>{{$eachDetails->name}}</h4>
+              <h6 class="text-color">{{$eachDetails->position}}</h6>
             </div>
           </div>
-          <p>" It has been great working with Uptrendly. Super professional and thorough with their work.
-Looking forward to working more. "
-                </p>
+          <p>{{$eachDetails->description}}</p>
         </div>
         <!-- team-member -->
         <div class="team-member">
           <div class="d-flex mb-4">
             <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="images/team/team-3.jpg" alt="team-member">
+              <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-3.jpg" alt="team-member">
             </div>
             <div class="align-self-center">
-              <h4>Sadichha Shrestha</h4>
+              <h4></h4>
               <h6 class="text-color">Miss Nepal 2010</h6>
             </div>
           </div>
@@ -265,11 +263,11 @@ Looking forward to working more. "
         <div class="team-member">
           <div class="d-flex mb-4">
             <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="images/team/team-1.jpg" alt="team-member">
+              <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-1.jpg" alt="team-member">
             </div>
             <div class="align-self-center">
-              <h4>Sagar Chapagain</h4>
-              <h6 class="text-color">Programmer</h6>
+              <h4>dsl;fk</h4>
+              <h6 class="text-color">lk</h6>
             </div>
           </div>
           <p>"It has been great working with Uptrendly. Super professional and thorough with their work of our team."</p>
@@ -278,25 +276,26 @@ Looking forward to working more. "
         <div class="team-member">
           <div class="d-flex mb-4">
             <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="images/team/team-2.jpg" alt="team-member">
+              <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-2.jpg" alt="team-member">
             </div>
             <div class="align-self-center">
-              <h4>Bikash Bhandari</h4>
+              <h4>name</h4>
               <h6 class="text-color">web developer</h6>
             </div>
           </div>
           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. S eparated they</p>
+           @endforeach
         </div>
       </div>
     </div>
   </div>
   <!-- backgound image -->
-  <img src="images/backgrounds/team-bg.png" alt="team-bg" class="img-fluid team-bg">
+  <img src="landing-page/assets/images/backgrounds/team-bg.png" alt="team-bg" class="img-fluid team-bg">
   <!-- background shapes -->
-  <img class="team-bg-shape-1" src="images/background-shape/seo-ball-1.png" alt="background-shape">
-  <img class="team-bg-shape-2" src="images/background-shape/seo-ball-1.png" alt="background-shape">
-  <img class="team-bg-shape-3" src="images/background-shape/team-bg-triangle.png" alt="background-shape">
-  <img class="team-bg-shape-4 img-fluid" src="images/background-shape/team-bg-dots.png" alt="background-shape">
+  <img class="team-bg-shape-1" src="landing-page/assets/images/background-shape/seo-ball-1.png" alt="background-shape">
+  <img class="team-bg-shape-2" src="landing-page/assets/images/background-shape/seo-ball-1.png" alt="background-shape">
+  <img class="team-bg-shape-3" src="landing-page/assets/images/background-shape/team-bg-triangle.png" alt="background-shape">
+  <img class="team-bg-shape-4 img-fluid" src="landing-page/assets/images/background-shape/team-bg-dots.png" alt="background-shape">
 </section>
 <!-- /team -->
 
@@ -304,16 +303,16 @@ Looking forward to working more. "
 <section class="section">
   <div class="container">
       <div class="client-logo-slider align-self-center">
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-1.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-2.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-3.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-4.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-5.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-1.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-2.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-3.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-4.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-5.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-1.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-2.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-3.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-4.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-5.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-1.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-2.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-3.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-4.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-5.png" alt="client-logo"></a>
       </div>
   </div>
 </section>
@@ -338,18 +337,18 @@ Looking forward to working more. "
     </div>
   </div>
   <!-- background shapes -->
-  <img class="newsletter-bg-shape" src="images/background-shape/seo-ball-2.png" alt="background-shape">
+  <img class="newsletter-bg-shape" src="landing-page/assets/images/background-shape/seo-ball-2.png" alt="background-shape">
 </section>
 <!-- /newsletter -->
 
 <!-- footer -->
-<footer class="section-lg footer pb-100" style="background-image: url(images/backgrounds/footer-bg.png);">
+<footer class="section-lg footer pb-100" style="background-image: url(landing-page/assets/images/backgrounds/footer-bg.png);">
   <div class="container">
     <div class="row">
       <div class="col-lg-3 text-center text-lg-left mb-4 mb-lg-0">
         <!-- logo -->
         <a href="index.html">
-          <img class="img-fluid" src="images/logo.png" alt="logo">
+          <img class="img-fluid" src="landing-page/assets/images/logo.png" alt="logo">
         </a>
       </div>
       <!-- footer menu -->
@@ -382,10 +381,10 @@ Looking forward to working more. "
 
 
     <!-- Scripts -->
-    <script src="js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
-    <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
-    <script src="js/slick.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/scripts.js"></script> <!-- Custom scripts -->
+    <script src="{{ asset('landing-page/assets/js/jquery.min.js')}}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="{{ asset('landing-page/assets/js/bootstrap.min.js')}}"></script> <!-- Bootstrap framework -->
+    <script src="{{ asset('landing-page/assets/js/slick.min.js')}}"></script>
+    <script src="{{ asset('landing-page/assets/js/wow.min.js')}}"></script>
+    <script src="{{ asset('landing-page/assets/js/scripts.js')}}"></script> <!-- Custom scripts -->
 </body>
 </html>

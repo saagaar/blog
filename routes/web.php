@@ -10,9 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('frontend.welcome');
-});
+Route::get('/','Frontend\HomeController@landingPage')->name('landing.page');
+Route::get('/','Frontend\HomeController@testimonialDetails')->name('testimonial.details');
 
 Route::get('/logincheck', function () {
     return response()->json([
