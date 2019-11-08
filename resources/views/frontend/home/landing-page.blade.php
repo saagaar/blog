@@ -217,75 +217,23 @@
     <div class="col-12">
       <div class="team-slider">
         <!-- team-member -->
-        <div class="team-member">
+        @foreach ($testimonialDetails as $eachDetails)
+        <div class="team-member">        
           <div class="d-flex mb-4">
             <div class="mr-3">
               <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-1.jpg" alt="team-member">
             </div>
-            <div class="align-self-center">
-               @foreach ($testimonialDetails as $eachDetails)
-              
+            <div class="align-self-center">                            
               <h4>{{$eachDetails->name}}</h4>
-              <h6 class="text-color">{{$eachDetails->position}}</h6>
-               
+              <h6 class="text-color">{{$eachDetails->position}}</h6>              
             </div>
           </div>
-          <p>{{$eachDetails->description}}</p>
+          <p>{{$eachDetails->description}}</p>        
         </div>
+        @endforeach
+
         <!-- team-member -->
-        <div class="team-member">
-          <div class="d-flex mb-4">
-            <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-2.jpg" alt="team-member">
-            </div>
-            <div class="align-self-center">
-              <h4>{{$eachDetails->name}}</h4>
-              <h6 class="text-color">{{$eachDetails->position}}</h6>
-            </div>
-          </div>
-          <p>{{$eachDetails->description}}</p>
-        </div>
-        <!-- team-member -->
-        <div class="team-member">
-          <div class="d-flex mb-4">
-            <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-3.jpg" alt="team-member">
-            </div>
-            <div class="align-self-center">
-              <h4></h4>
-              <h6 class="text-color">Miss Nepal 2010</h6>
-            </div>
-          </div>
-          <p>" Being a part of Uptrendly has been a lot of fun. They have given me an opportunity to connect with different brands. "
-                </p>
-        </div>
-        <!-- team-member -->
-        <div class="team-member">
-          <div class="d-flex mb-4">
-            <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-1.jpg" alt="team-member">
-            </div>
-            <div class="align-self-center">
-              <h4>dsl;fk</h4>
-              <h6 class="text-color">lk</h6>
-            </div>
-          </div>
-          <p>"It has been great working with Uptrendly. Super professional and thorough with their work of our team."</p>
-        </div>
-        <!-- team-member -->
-        <div class="team-member">
-          <div class="d-flex mb-4">
-            <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-2.jpg" alt="team-member">
-            </div>
-            <div class="align-self-center">
-              <h4>name</h4>
-              <h6 class="text-color">web developer</h6>
-            </div>
-          </div>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. S eparated they</p>
-           @endforeach
-        </div>
+        
       </div>
     </div>
   </div>
