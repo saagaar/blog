@@ -32,7 +32,7 @@ class AdminuserRequest extends FormRequest
                 $password              = '';
                 $password_confirmation = '';
             }
-          if ($routeName == 'adminblogcategory.edit')
+          if ($this->method() == 'POST')
           {
             // Update operation, exclude the record with id from the validation:
             $email_rule = 'required|email|unique:admin_users,email,' . $this->id;
