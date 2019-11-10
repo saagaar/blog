@@ -41,7 +41,7 @@
                       
                       <td><a href="{{route('seo.edit',$eachseo->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                       <td>
-                       <a href="{{route('seo.delete',$eachseo->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                       <a onClick="return ConfirmDelete();" href="{{route('seo.delete',$eachseo->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                      </td>
                 </tr>
                 @endforeach

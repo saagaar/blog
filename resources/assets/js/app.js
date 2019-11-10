@@ -31,8 +31,8 @@ Custom Imports goes here
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('top-nav', require('./components/TopNav/TheTopNav.vue').default);
-Vue.component('main-nav', require('./components/MainNav/TheMainNav.vue').default);
+// Vue.component('top-nav', require('./components/TopNav/TheTopNav.vue').default);
+// Vue.component('main-nav', require('./components/MainNav/TheMainNav.vue').default);
 // Vue.component('footer', require('./components/Footer/Footer.vue').default);
 
 // Vue.component('Home', require('./components/Home.vue').default);
@@ -42,9 +42,27 @@ Vue.component('main-nav', require('./components/MainNav/TheMainNav.vue').default
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.use(require('vue-moment'));
+
+import Gate from './services/Gate.js';
+Vue.prototype.$gate = new Gate();
 import config from './config/config.js';
-import Home from './pages/Home';
+
+import TheTopNav from './components/TopNav/TheTopNav';
+// Vue.component('TheTopNav', require('./components/TopNav/TheTopNav.vue'));
+import TheMainNav from './components/MainNav/TheMainNav';
+// Vue.component('TheMainNav', require('./components/MainNav/TheMainNav.vue'));
+import TheFooter from './components/Footer/TheFooter';
+import ListComment from './components/Comment/ListComment';
+import AddComment from './components/Comment/AddComment';
+import Comment from './components/Comment/Comment';
+import IconCommentsCount from './components/Comment/IconCommentsCount';
+import Likes from './components/Likes/Likes';
+import BlogLoading from './components/InfiniteLoading/BlogLoading';
+import LatestBlogLoading from './components/InfiniteLoading/LatestBlogLoading';
 // import UserDashboard from './pages/UserDashboard';
+const default_layout="default";
 const app = new Vue({
     el: '#app',
     router,
@@ -53,16 +71,25 @@ const app = new Vue({
     },
     store,
     beforeCreate() {
+            let userState = JSON.parse(window.__USER_STATE__) || {};
+        if (userState) {
+           this.$store.commit('ADD_ME', userState)
+        }
             this.$store.dispatch('checkLoginUser');
         },
-
-    render: function (createElement) 
-    {
-    	// this.$store.dispatch('checkLoginUser');
-  //   	if(this.$store.getters.user.isLoggedIn)
-	 //  	    return createElement(Home);
-		// else
-	 	  return createElement(Home);
-	},
+    components:{
+            'the-top-nav':TheTopNav,
+            'the-main-nav':TheMainNav,
+            'the-footer':TheFooter,
+            'list-comment':ListComment,
+            'add-comment':AddComment,
+            'comment':Comment,
+            'likes':Likes,
+            'icon-comments-count':IconCommentsCount,
+            'blog-loading':BlogLoading,
+            'latest-blog-loading':LatestBlogLoading
+          
+        }
+    
 
 });

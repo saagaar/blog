@@ -29,9 +29,9 @@ class TagController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $tags = $this->tag->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $tags = $this->tag->getAllTags()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $tags = $this->tag->getAll()->paginate($this->PerPage);
+            $tags = $this->tag->getAllTags()->paginate($this->PerPage);
         }
         return view('admin.tag.list')->with(array('tags'=>$tags,'breadcrumb'=>$breadcrumb,'menu'=>'Tags List','primary_menu'=>'tag.list'));
     }

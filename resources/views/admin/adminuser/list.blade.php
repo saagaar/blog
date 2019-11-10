@@ -46,8 +46,9 @@
                   <td>{{$adminUser->role_id}}</td>
                   <td>{{$adminUser->created_at}}</td>
                   <td>{{$adminUser->updated_at}}</td>                
-                      <td><a href="{{route('adminuser.edit', $adminUser->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                      <td><a href="{{route('adminuser.delete', $adminUser->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  <td><a href="{{route('adminuser.edit', $adminUser->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+
+                  <td><a onClick="return ConfirmDelete();" href="{{route('adminuser.delete', $adminUser->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                      </td>
                 </tr>
                 @endforeach

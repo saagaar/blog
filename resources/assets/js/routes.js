@@ -1,7 +1,10 @@
 import VueRouter from 'vue-router';
 
 let routes=[
-				
+				{
+						path:'/home',
+						components:require('./pages/HomePage')
+				},
 				{
 						path:'/blog/add',
 						components:require('./pages/AddBlogStep1')
@@ -47,6 +50,10 @@ let routes=[
 				{
 						path:'/change-password',
 						components:require('./pages/ChangePassword')
+				},
+				{
+						path:'/users/notifications',
+						components:require('./pages/AllNotifications')
 				},
 
 		   ];

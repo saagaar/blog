@@ -39,9 +39,6 @@ class TeamController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-             $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);  
            $requestObj=app(TeamRequest::class);
             $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
@@ -63,9 +60,6 @@ class TeamController extends AdminController
             $team =$this->team->getById($id);    
             if ($request->method()=='POST')
             {
-            $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-              ]);
                $requestObj=app(TeamRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')) {

@@ -28,10 +28,8 @@ class CreateUsersTable extends Migration
             $table->datetime('last_login_date')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->unsignedBigInteger('country')->nullable();
-            $table->foreign('country')
-                    ->references('id')->on('countries')
-                    ->onDelete('cascade');
+            $table->string('country')->nullable();
+            $table->string('bio')->nullable();
             $table->date('dob')->nullable();
             $table->string('image')->nullable();
 

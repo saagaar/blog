@@ -44,8 +44,8 @@
                     </td>
                   <td>{{$item->created_at}}</td>
                   <td>{{$item->updated_at}}</td>
-                  <td><a href="{{route('gallery.edit',[ $item->id])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('gallery.delete', $item->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('gallery.edit',[$item->id])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                  <td><a onClick="return ConfirmDelete();" href="{{route('gallery.delete', $item->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
                 @else

@@ -5,7 +5,7 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="images/logo.png" alt="">
+                        <img src="images/system-images/logo.png" alt="">
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
@@ -19,36 +19,18 @@
                         </ul>
                          <ul v-else>
                         <li><a id="search" @click="OpenSearchBox" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
-                       <!--  <li class="nitify dropdown">
-                            <a  href="javascript:void(0)" class="dropdown-toggle top_icon" data-toggle="dropdown" role="button" aria-haspopup="true" 
-                            aria-expanded="false"  title="Messaging"><i class="fas fa-envelope"></i> <span>Messaging</span> <em>28</em></a>
-
-                            <ul class="dropdown-menu">
-                                <li><a href="#">New Stories</a></li>
-                                <li><a href="#">Stories</a></li>
-                                <hr>
-                               
-                            </ul>
-                        </li> -->
+                      
                         <li class="nitify dropdown">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
                             aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ me.unReadNotificationsCount }}</em></a>
 
-                            <ul class="dropdown-menu" v-if="me.notifications">
-
-                                <li v-for="eachNotifications in me.notifications"><a href="#">{{eachNotifications.data.message}}</a>
-                                    <hr>
-                                </li>
-                              
+                               <NotificationsLoading :notificationList="topnotifications" :type="'nav'" ></NotificationsLoading>
                                 
-                               
-                            </ul>
-
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
-                            <figure><img src="img/p_image.png"></figure> {{ me.name}}</a>
+                            <figure><img :src="'/images/user-images/'+me.image"></figure> {{ me.name}}</a>
                             <ul class="dropdown-menu">
                                 <li><a href="/dashboard">My Profile</a></li>
                             
@@ -83,6 +65,7 @@
         </div>
 
     </section>
+    
       <TheLoginSignupModal></TheLoginSignupModal>
       </div>
     
@@ -95,15 +78,15 @@
 
 import LoginButton from './LoginButton.vue';
 import SignUpButton from './SignUpButton.vue';
-
 import TheLoginSignupModal from './TheLoginSignupModal';
-
+import NotificationsLoading  from './../../components/InfiniteLoading/NotificationsLoading.vue';
     export default {
        
         data() {
-           return {}
+           return {
+            topnotifications:[]
+           }
         },
-
         computed:{
             isUserloggedIn:function(){
               return this.$store.getters.user.isLoggedIn
@@ -112,32 +95,28 @@ import TheLoginSignupModal from './TheLoginSignupModal';
                return this.$store.getters.config;
             },
             me:function(){
+              this.topnotifications=this.$store.getters.me.notifications
               return this.$store.getters.me
              
             },
            
         },
-
+        
         methods:{
              OpenSearchBox:function()
             {
                 $("#search_input_box").slideToggle();
                 $("#search_input").focus();
-                // this.$refs.search_input_box.slideToggle()
-            }
+            },
          },
         components:{
-
-            SignUpButton,
-            LoginButton,
-            TheLoginSignupModal
-        },
-       
-        
-      
+                SignUpButton,
+                LoginButton,
+                TheLoginSignupModal,
+                NotificationsLoading,
+            },
     }
 </script>
-
 <style type="text/css " scoped>
     #search_input_box{
         display: none

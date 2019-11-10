@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -7,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Traits\HasRoles;
 use App\Repository\AccountInterface; 
 use App\Repository\BlogInterface; 
+use Illuminate\Support\Facades\File;
 use App\Repository\FollowerInterface; 
 class UserController extends FrontendController
 {
@@ -60,7 +60,6 @@ class UserController extends FrontendController
            return redirect()->route('home'); 
         } 
     }
-   
     public function followings()
     {
         if(\Auth::check())
@@ -117,6 +116,34 @@ class UserController extends FrontendController
              return redirect()->route('home'); 
         }
     }
+    public function getFollowers(Request $request){
+      try{
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $allFollowers = $this->followerList->getAllFollowers($this->authUser,$limit,$offset);
+          return array('status'=>true,'data'=>$allFollowers,'message'=>'');
+        
+      }
+      catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
+    public function getFollowings(Request $request){
+      try{
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $allFollowings = $this->followerList->getAllFollowings($this->authUser,$limit,$offset);
+          return array('status'=>true,'data'=>$allFollowings,'message'=>'');
+        
+      }
+      catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
     public function followUser($username,$offset=false)
     {
         $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
@@ -143,7 +170,6 @@ class UserController extends FrontendController
     { 
       if(\Auth::check())
         {
-      // sleep(10);
             $routeName= Route::currentRouteName();
             $myBlogs=$blog->getActiveBlogByUserId($this->authUser->id);
 
@@ -172,9 +198,85 @@ class UserController extends FrontendController
               $user=$this->user_state_info();
               return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
            }
+    }
+    else
+    {
+      return redirect()->route('home'); 
+    }
+  }
+  public function changeProfile(Request $request)
+  {
+    if(\Auth::check())
+    {
+      // $form='';
+
+      if(request()->hasFile('image'))
+      {
+        $dir = 'images/user-images/';
+          if ($this->authUser->image != '' && File::exists($dir . $this->authUser->image)){
+            File::delete($dir . $this->authUser->image);
+          }
+          $imageName = time().'.'.request()->image->getClientOriginalExtension();
+          request()->image->move(public_path('/images/user-images/'), $imageName);
+          $form['image']=$imageName;
+      }
+      $this->user->update($this->authUser->id,$form);
+      return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
     }else{
       return redirect()->route('home'); 
     }
   }
-
+  public function changeAddress(Request $request)
+  {
+    if(\Auth::check())
+    {
+      // $form='';
+      $form['address'] = $request->address;
+      $form['country'] = $request->country;
+      $this->user->update($this->authUser->id,$form);
+      return array('status'=>true,'message'=>'Address Changed Successfully','data'=>array('addressName'=>$form['address'],'countryName'=>$form['country']));
+    }else{
+      return redirect()->route('home'); 
+    }
+  }
+  public function changeBio(Request $request)
+  {
+    if(\Auth::check())
+    {
+      // $form='';
+      $form['bio'] = $request->bio;
+      $this->user->update($this->authUser->id,$form);
+      return array('status'=>true,'message'=>'Bio Updated Successfully','data'=>array('bioName'=>$form['bio']));
+    }else{
+      return redirect()->route('home'); 
+    }
+  }
+  public function notifications(Request $request)
+  {
+    if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+           $data=array();
+          if($routeName=='api')
+          {
+            $limit=$this->apiPerPage;;
+            $offset=$limit*$request->post('page');
+            $data['notifications']=$this->user->getUsersNotification($this->authUser,$limit,$offset);
+            return array('status'=>true,'data'=>$data,'message'=>'Success');
+          }
+          else
+          {
+              $limit=$this->perPage;
+              $data['notifications']=$this->user->getUsersNotification($this->authUser,$limit);
+              $data['path']='/users/notifications';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+          }
+        }
+        else
+        {
+             return redirect()->route('home'); 
+        }
+  }
 }

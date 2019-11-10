@@ -23,7 +23,7 @@ class Blogs extends Model implements Auditable
     ];
 
 
-    protected $hidden = array('user_id','id');
+    protected $hidden = array('user_id','id','pivot');
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -36,10 +36,7 @@ class Blogs extends Model implements Auditable
      *
      * @var array
      */
-    public function categories()
-    {
-        return $this->belongsToMany(Categories::class)->using(BlogCategories::class);
-    }
+  
 
     public function locale(){
        return $this->belongsTo(Locales::class,'locale_id');
@@ -49,9 +46,22 @@ class Blogs extends Model implements Auditable
     }
     public function user()
     {
-         return $this->belongsTo(Users::class,'id');
+         return $this->belongsTo(Users::class,'user_id');
     }
     public function getTagListAttribute(){
        return $this->tags->lists('id');
     }
+    public function likes()
+    {
+        return $this->hasMany(Likes::class,'blog_id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comments::class,'blog_id');
+    }
+    public function categories()
+    {
+        return $this->hasManyThrough(Categories::class,BlogTags::class,'categories_id','blogs_id');
+    }
+ 
 }

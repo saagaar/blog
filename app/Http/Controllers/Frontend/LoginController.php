@@ -36,7 +36,7 @@ class LoginController extends FrontendController
             if($user['status']==true){
                 auth()->login($user['userData']); 
             }else{
-                return response()->json($user['message']);
+                return response()->json(['status'=>false,'data'=>'','message'=>$user['message']], 401);
             }
         }else{
             auth()->login($userData); 
@@ -62,12 +62,12 @@ class LoginController extends FrontendController
              'name'     => $getInfo->name,
              'email'    => $getInfo->email,
              'username'     =>$infoUsername,
-             'status'        =>'2',
+             'status'        =>'1',
              'provider'     =>$provider,
              'provider_id'  => $getInfo->id,
-             'image'        =>$getInfo->avatar_original,
              'token'        =>$getInfo->token,
          ]);
+
           return array('status'=>true,'userData'=>$userData,'message'=>'Registered successfully!'); 
         }else{
             return array('status'=>false,'userData'=>'','message'=>'Email Already Exist!'); 
@@ -75,7 +75,7 @@ class LoginController extends FrontendController
         
     }
     public function login(){
-        if(Auth::guard('web')->attempt(['email' => request('email'), 'password' => request('password')]))
+        if(auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'),'status'=>1 ]))
         { 
             $user = Auth()->user()->toArray();
 
@@ -96,7 +96,7 @@ class LoginController extends FrontendController
             'repassword' => 'required|min:6|same:password', 
         ]);
         if ($validator->fails()) { 
-            return response()->json(['status'=>false,'error'=>$validator->errors()], 401);            
+            return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
         }
         $input = $request->all(); 
         $input['password'] = bcrypt($input['password']); 
@@ -122,10 +122,10 @@ class LoginController extends FrontendController
     public function isEmailAlreadyRegistered($email){
         $user = $this->account->getAll()->where('email',$email)->first();
         if($user) {
-           return response()->json(['status'=>false]); 
+           return response()->json(false); 
             }
         else{
-           return response()->json(['status'=>true]); 
+           return response()->json(true); 
         }
            
     } 

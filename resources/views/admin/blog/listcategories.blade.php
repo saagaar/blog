@@ -48,7 +48,7 @@
                   <td>{{$category->created_at}}</td>
                   <td>{{$category->updated_at}}</td>
                   <td><a href="{{route('adminblogcategory.edit', $category->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('adminblogcategory.delete', $category->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td><a onClick="return ConfirmDelete();" href="{{route('adminblogcategory.delete', $category->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
                 @else

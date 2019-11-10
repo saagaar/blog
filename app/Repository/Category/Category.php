@@ -15,9 +15,28 @@ Class Category implements CategoryInterface
 
      
   public function getCatById($blogcat_id){
-      return	$this->cat->where('id', $blogcat_id)->first();
+      return	$this->cat->where('id', $blogcat_id)->with('tags')->first();
     }
+  /**
+   * get category by slug
+   */
+  public function getCatBySlug($slug){
+      return $this->cat->where('slug', $slug)->first();
+    }
+    /**
+     * get tagsid by cat slug
+     */
+  public function getTagsIdByCatSlug($slug){
+    $category = $this->cat->where('slug', $slug)->first();
+    $tagsId = $category->tags()->select('tags_id')->get()->pluck('tags_id');
 
+    return $tagsId;
+      // return  $this->cat->where('slug', $slug)->first()->blogs()->withCount('likes','comments')->get();
+    }
+  public function getCategoryByShowInHome($limit=8){
+    $data=$this->cat->orderByRaw('FIELD(priority,NULL) ASC')->limit($limit)->get();
+    return $data;
+  }
       /**
      * Get's all posts.
      *

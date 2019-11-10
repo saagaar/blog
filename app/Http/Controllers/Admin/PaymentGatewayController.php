@@ -39,9 +39,7 @@ class PaymentGatewayController extends AdminController
                     ]];
         if ($request->method()=='POST')
         {
-            $request->validate([
-           'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-           ]); 
+            
             $requestObj=app(PaymentGatewayRequest::class);
             $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
@@ -63,9 +61,7 @@ class PaymentGatewayController extends AdminController
             $paymentGateway =$this->paymentGateway->getById($id);    
             if ($request->method()=='POST')
             {
-                $request->validate([
-               'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                ]); 
+                
                 $requestObj=app(PaymentGatewayRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')) {

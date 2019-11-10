@@ -46,7 +46,7 @@
                   <td>{{$data->created_at}}</td>
                   <td>{{$data->updated_at}}</td>
                   <td><a href="{{route('banner.edit',$data->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('banner.delete', $data->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td><a onClick="return ConfirmDelete();" href="{{route('banner.delete', $data->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr> 
                 @endforeach
                 @else

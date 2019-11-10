@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\Notifications;
+use App\Repository\BlogInterface;
+use App\Repository\CategoryInterface;
+use App\Repository\UserInteractionInterface; 
 use App\Repository\TagInterface;
 use App\Repository\TestimonialInterface;
 
@@ -26,16 +29,20 @@ class HomeController extends FrontendController
      protected $userAccounts;
      
      protected $authUser;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
    
-    function __construct(FollowerInterface $followInterface)
+    function __construct(FollowerInterface $followInterface,BlogInterface $blog,CategoryInterface $category,UserInteractionInterface $userInteraction)
     {
          parent::__construct();
          $this->followerList=$followInterface;
+         $this->blog=$blog;
+         $this->category=$category;
+         $this->userInteraction=$userInteraction;
     }
 
     /**
@@ -46,29 +53,150 @@ class HomeController extends FrontendController
     public function landingPage()
     {
 
+
         return view('frontend.home.landing-page');
+
+        $data=array();
+        $featuredBlog = $this->blog->getAllFeaturedBlog();
+        // $data['featuredBlog']=$featuredBlog;
+        $mostViewed =$this->blog->getAllBlogByViews();
+        // $data['mostViewed'] = $mostViewed;
+        $latest =$this->blog->getLatestAllBlog();
+        // $data['latest'] = $latest;
+        $popular =$this->blog->getPopularBlog();
+        // $data['popular'] = $popular;
+        $featuredForMember = $this->blog->getAllFeaturedForMember();
+        // $data['featuredForMember']=$featuredForMember;
+        $navCategory=$this->category->getCategoryByShowInHome();
+        $likes='';
+        $user ='';
+        $data['path']='/home';
+         if(\Auth::check())
+        {
+          $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+            $routeName= ROUTE::currentRouteName();
+            
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/home';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
+          }
+
+        }
+        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
     }
 
+    public function blogDetail($code){
+      $blogDetails = $this->blog->getBlogByCode($code);
+      $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->orderBy('id','asc')->first();
+      $next = $this->blog->getAll()->where('id', '<', $blogDetails['id'])->orderBy('id','desc')->first();
+      // print_r($next);exit;
+      $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
+      $relatedBlog = $this->blog->relatedBlogBycode($code);
+      $navCategory=$this->category->getCategoryByShowInHome();
+      $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+      $data['blogDetails'] =$blogDetails;
+      $data['blogComment']  =$blogComment;
+      
+      // echo "<pre>";
+      // print_r($blogComment);exit;
+      $user ='';
+         if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+            
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/home';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes,'navCategory'=>$navCategory));
+          }
+
+        }
+        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlo,'likes'=>$likes,'navCategory'=>$navCategory));
+
+    }
+    public function blogByCategory($slug){
+      $data=array();
+      $blogByCategory = $this->blog->getBlogByCategory($slug);
+      // $blogCount = $this->blog->getBlogCount($slug);
+      $category =$this->category->getCatBySlug($slug);
+      $navCategory=$this->category->getCategoryByShowInHome();
+       $user ='';
+         if(\Auth::check())
+        {
+            $routeName= ROUTE::currentRouteName();
+            
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/home';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory));
+          }
+        }
+       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory));
+    }
+    public function getBlogByCategory($slug=false,Request $request){
+      try{
+        if(!$slug)
+            throw new Exception("No Categories Selected", 1);
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $blogByCategory = $this->blog->getBlogByCategory($slug,$limit,$offset);
+          return array('status'=>true,'data'=>$blogByCategory,'message'=>'');
+        
+      }
+      catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
+    public function getLatestBlog(Request $request){
+      try{
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $latest = $this->blog->getLatestAllBlog($limit,$offset);
+          return array('status'=>true,'data'=>$latest,'message'=>'');
+        
+      }
+      catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
     public function test(Request $request)
     {
-        $code='user_registration';
-        $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
-        // print_r($data);exit;
-        $this->authUser->notify(new Notifications($code,$data));
-
-            // foreach ($this->authUser->unreadNotifications as $notification) {
-            //      echo $notification->data['message'];
-            // }
-            // exit;
-        return view('frontend.layouts.app');
+        $data= $this->blog->getAllBlogByViews();
+        print_r($data);
+        // return view('frontend.layouts.app');
     }
     public function dashboard()
     {
         if(\Auth::check())
         {
             $routeName= ROUTE::currentRouteName();
-            $suggestion='';//$this->getFollowSuggestions(3);
+            $suggestion=$this->getFollowSuggestions(3);
             $data['followSuggestion']=$suggestion;
+            $blogByFollowing =$this->blog->getBlogOfFollowingUser($this->authUser);
+            $data['blogByFollowing'] = $blogByFollowing;
           if($routeName=='api')
           {
             return ($data);
@@ -96,6 +224,7 @@ class HomeController extends FrontendController
 
     public function getTagName(TagInterface $tag,Request $request)
     {
+
           
            $search=$request->get('name'); 
 
@@ -105,15 +234,29 @@ class HomeController extends FrontendController
 
               }
              
+
+         $search=$request->post('name');             
+         if($search){
+            $searchedTags=$tag->getTag($search);
+            return response()->json(['status'=>true,'data'=>$searchedTags,'message'=>'Tag Data Received']);    
+          }
+          else{
+           return response()->json(['status'=>false,'message'=>'No Tags found']);    
+          }
+
     }
 
     public function testimonialDetails(TestimonialInterface $TestimonialInterface)
     {
         
-
        $testimonialDetails= $TestimonialInterface->getActiveTestimonial();
          // print_r($testimonialDetails);exit;
 
       return view('frontend.home.landing-page')->with(array('testimonialDetails'=>$testimonialDetails));
+  }
+
+  public function getInTouch()
+  {
+    
   }
 }

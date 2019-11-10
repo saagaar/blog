@@ -23,8 +23,7 @@ class AdminuserRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->method() == 'POST')
-          {
+        
             // dd(request()->password);
             if (request()->password) {
                 $password              = 'min:6';
@@ -33,6 +32,8 @@ class AdminuserRequest extends FormRequest
                 $password              = '';
                 $password_confirmation = '';
             }
+          if ($routeName == 'adminblogcategory.edit')
+          {
             // Update operation, exclude the record with id from the validation:
             $email_rule = 'required|email|unique:admin_users,email,' . $this->id;
             $username = 'required|unique:admin_users,username,'. $this->id;

@@ -41,8 +41,7 @@ class ServiceController extends AdminController
                     ]];
         if ($request->method()=='POST')
         {
-          $request->validate([
-          'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', ]);
+    
             $requestObj=app(ServicesRequest::class);
             $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->icon->getClientOriginalExtension();
@@ -64,9 +63,7 @@ class ServiceController extends AdminController
             $service =$this->service->getById($id);    
             if ($request->method()=='POST')
             {
-                 $request->validate([
-                'icon' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                ]);  
+                
                 $requestObj=app(servicesRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('icon')) {

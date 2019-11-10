@@ -11,7 +11,7 @@
       <div class="inbox-head">
         <div class="row">
             <div class="col-sm-6">
-                <h3> <i class="fa fa-mail-bulk">&nbsp;</i> All Posts &nbsp;&nbsp;&nbsp; <router-link to="/blog/add"><i class="fa fa-plus-circle"></i></router-link></h3>
+                <h3> <i class="fa fa-mail-bulk">&nbsp;</i> All Posts &nbsp;&nbsp;&nbsp; <router-link to="/blog/add" v-if="$gate.allow('create')"><i class="fa fa-plus-circle"></i></router-link></h3>
             </div>
             <div class="col-sm-6">
                 <form class="position text-right">
@@ -95,11 +95,10 @@
                 <input type="checkbox" class="mail-checkbox" @click="select" v-model="postIds" :value="eachblog.code">
               </td>
               <td class="view-message">
-                <div><a href="#" class="sort_info_link">{{ eachblog.title}}</a></div>
+                <div><router-link :to="'/blog/edit/'+eachblog.code" v-if="$gate.allow('update', 'blog', eachblog)">{{ eachblog.title}}</router-link></div>
                 <div class="hidden_sec">
                   <div class="hidden_td_link">
-                    <router-link :to="'/blog/edit/'+eachblog.code">Edit</router-link>
-                  <!-- <a router-link to="/blog/edit/:eachblog.code">Edit</a> -->
+                    <router-link :to="'/blog/edit/'+eachblog.code" v-if="$gate.allow('update', 'blog', eachblog)">Edit</router-link>
                   &nbsp;|&nbsp;
                   <a href="#">Preview</a>
                   &nbsp;|&nbsp;

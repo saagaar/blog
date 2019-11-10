@@ -39,9 +39,7 @@ class BannerController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-           $request->validate([
-           'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-           ]); 
+          
         $requestObj=app(BannerRequest::class);
         $validatedData = $requestObj->validated();
         $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
@@ -63,9 +61,7 @@ class BannerController extends AdminController
             $banner =$this->banner->getById($id);    
             if ($request->method()=='POST')
             {
-                $request->validate([
-               'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-               ]);   
+               
                 $requestObj=app(BannerRequest::class);
                 $validatedData = $requestObj->validated();
                 if($request->hasFile('image')){

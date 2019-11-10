@@ -33,6 +33,7 @@ class CreateBlogsTable extends Migration
             $table->enum('anynomous',['1','2'])->comment('1=yes,2-No');
             $table->enum('type',['1','2'])->comment('1=private,2=public');
             $table->string('image')->nullable();
+            $table->integer('views')->default('0');
             $table->timestamps();
         });
     }

@@ -8,7 +8,6 @@ use App\Repository\TagInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 use Illuminate\Support\Facades\File;
- // use Intervention\Image\Facades\Image;
  use Image;
 use App;
 class BlogController extends AdminController
@@ -41,12 +40,12 @@ class BlogController extends AdminController
                       'All Blogs' => route('blog.list'),
                       'current_menu'  =>'Create Blog',
                     ]];
-    $tagList = $tag->getAll()->get();
+    $tagList = $tag->getAllTags()->get();
     if ($request->method()=='POST') 
     {
-         $request->validate([
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);  
+        //  $request->validate([
+        // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);  
         $requestObj=app(BlogRequest::class);
         $validatedData = $requestObj->validated();       
         $validatedData['user_id'] = Auth()->user()->id;
@@ -103,21 +102,19 @@ class BlogController extends AdminController
                         'All Blogs' => route('blog.list'),
                         'current_menu'=>'Edit Blog',
                           ]];
-                          $taglist = $tag->getAll()->get();
+                          $taglist = $tag->getAllTags()->get();
 
             $blog =$this->blog->GetBlogById($id);
             if ($request->method()=='POST') 
             {
-                 $request->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                ]);  
+                //  $request->validate([
+                // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                // ]);  
                 $requestObj=app(BlogRequest::class);
                 $validatedData = $requestObj->validated();          
-                if ($request->hasFile('image')) 
-                {
-                              
-                $dir=public_path(). '/images/blog/'.$blog->code;
-
+            if ($request->hasFile('image')) 
+            {                              
+                $dir=public_path(). '/images/blog/'.$blog->code.'/';
                  if ($blog->image != '' && File::exists($dir,$blog->image))
                 {
                 File::deleteDirectory($dir);
@@ -153,7 +150,8 @@ class BlogController extends AdminController
                 )->save($dir.'/'.time().'-thumbnail.'.$extension);
                     
                   $validatedData['image'] = $imageName;
-                }
+
+            }
                 else 
                 {
                     $validatedData['image'] = $blog->image;

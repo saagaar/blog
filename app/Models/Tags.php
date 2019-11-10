@@ -17,10 +17,13 @@ class Tags extends Model implements Auditable
     protected $fillable = [
         'name','status'
     ];
+    protected $hidden = [
+        'pivot','id','updated_at','status','created_at'
+    ];
     public function blogs(){
-    	return $this->belongsToMany(Blogs::class,'blogs_id');
+    	return $this->belongsToMany(Blogs::class,'blog_tags','tags_id','blogs_id');
     }
     public function categories(){
-    	return $this->belongsToMany(Categories::class,'categories_id');
+    	return $this->belongsToMany(Categories::class,'categories_tags','categories_id');
     }
 }

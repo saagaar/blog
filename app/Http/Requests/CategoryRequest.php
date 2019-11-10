@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 class CategoryRequest extends FormRequest
 {
     /**
@@ -21,25 +22,46 @@ class CategoryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        if ($this->method() == 'POST')
+        $routeName= ROUTE::currentRouteName();
+        if ($routeName == 'adminblogcategory.edit')
           {
-            // Update operation, exclude the record with id from the validation:
+            $banner = 'image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+           
             $slug = 'required|min:2|max:255|unique:categories,slug,'. $this->id;
+            if($request->parent_id==''){
+                $tags='';
+            }
+            else{
+                $tags='required';
+            }
           }
+          
           else
           {
+            
             $slug = 'required|min:2|max:255|unique:categories,slug';
+            if($request->parent_id==''){
+                $tags='';
+                $banner = 'image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+            }
+            else{
+                $tags='required';
+                $banner = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+            }
           }
+        
         return [
                 'parent_id'   => '',
                 'name'      => 'required|min:2|max:255',
                 'status'   => 'required',
                 'slug'      => $slug,
-                'tags'      =>'required',
+                'tags'      =>$tags,
+                'banner_image' => $banner,
                 'show_in_home'  =>'required',
-                'priority'  =>'required'
+                'priority'  =>'required',
+                'description'  =>'required'
 
               
         ];

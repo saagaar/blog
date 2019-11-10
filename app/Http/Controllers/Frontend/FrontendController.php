@@ -10,6 +10,7 @@ use App\Jobs\VisitorLog;
 use App\Repository\VisitorlogInterface;
 use App\Repository\PermissionInterface;
 use Illuminate\Support\Facades\Auth;
+
 class FrontendController extends BaseController
 {
     Protected $siteSettings;
@@ -40,6 +41,7 @@ class FrontendController extends BaseController
     Protected $contactEmail;
 
     Protected $perPage=10;
+    Protected $apiPerPage=8;
     public function __construct()
     {
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
@@ -89,9 +91,10 @@ class FrontendController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $permission = $this->getAllPermissionsAttribute();
-        print_r($permission);exit;
+    {   
+        $not = $this->authUser->Notifications()->take(10)->get();
+
+        print_r($not);exit;        
         return view('frontend.home.index');
     }
     public function getAllPermissionsAttribute() {
@@ -105,16 +108,20 @@ class FrontendController extends BaseController
     }
     public function user_state_info(){
        $followerList = app()->make('App\Repository\FollowerInterface');
+       $account = app()->make('App\Repository\AccountInterface');
         if(\Auth::check())
         {
             $user =$this->authUser;
             $user->followersCount=$followerList->getFollowersCount($this->authUser);
             $user->followingCount=$followerList->getFollowingsCount($this->authUser);
             $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
-            $user->notifications=$this->authUser->unreadNotifications()->take(10)->get();
+            $user->notifications=$account->getUsersNotification($this->authUser,$this->apiPerPage);
+
             $user->blogCount=$this->authUser->blogs()->count();
-            $user->permission= $this->getAllPermissionsAttribute();    
             $user=$user->toArray();
+           
+            $user['permissions']= $this->getAllPermissionsAttribute();    
+            // $user['roles']=$this->authUser->roles->first()->name;
             return $user;
         }
         else{

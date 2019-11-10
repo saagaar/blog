@@ -13,17 +13,21 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info profile_pic_upload">
-                  <figure><img src="images/user-6.jpg" alt="Profile Image" class="img-responsive profile-photo" id="profileImage" />
+                  <form>
+                  <figure><img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'" alt="Profile Image" class="img-responsive profile-photo" id="profileimage" /><Loader></Loader>
                     <div class="profile_img_change"> <span class="file-input btn btn-success btn-file"> <i class="fa fa-camera"></i>
-                      <input type="file"  name="file" id="file1" class="upload" onchange="viewimage(event)" multiple>
+                      <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
+                      <!-- <input type="file"  name="image" id="file1" class="upload" @change="changeImage()" > -->
                       </span> </div>
                   </figure>
-                  <h3>Bikash Bhandari</h3>
+                  </form>
+                  <h3>{{me.name}}</h3>
                 </div>
             
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
+                  <li><router-link to="/dashboard">Dashboard</router-link></li>
                   <li><router-link to="/profile">Timeline</router-link></li>
                   
                   <li><router-link to="/followings">Followings({{ me.followingCount}} )</router-link></a></li>
@@ -47,14 +51,11 @@
               <TheDashboardSideMenu></TheDashboardSideMenu>
               </div> -->
                 <div class="bio">
-                <h4><i class="fa fa-info-circle">&nbsp;</i> Info</h4>
-                <p class="text-center">Add a short bio to tell people more about yourself.</p>
-                <a href="#" class="text-center" data-toggle="modal" data-target="#bioModal"> Edit Bio</a>
+                <Bio></Bio>
                 <hr/>
-                <h4><i class="fa fa-map-marked">&nbsp;</i> Address</h4>
-                <p class="text-center"> Gokarneshwor Nagarpalika -3, Kathmandu Nepal,</p>
-                <a href="#" class="text-center" data-toggle="modal" data-target="#addressModal"> Edit Address</a> </div>
-              <div id="chat-block" class="" style="">
+                <Address></Address>
+                 </div>
+              <!-- <div id="chat-block" class="" style="">
                 <div class="title">Chat online</div>
                 <ul class="online-users list-inline">
                   <li><a href="#" title="Sagar Chapagain"><img src="/images/user-2.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
@@ -67,7 +68,7 @@
                   <li><a href="#" title="Anu Khatri"><img src="images/user-9.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
                   <li><a href="#" title="Pratima Kuinkel"><img src="images/user-1.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
                 </ul>
-              </div>
+              </div> -->
             </div>
              <div class="col-md-9 col-sm-9">
                <router-view></router-view>
@@ -89,13 +90,20 @@ import mixin  from './../mixins/LoadData.mixin.js';
 import TheTopNav from './../components/TopNav/TheTopNav';
 import TheDashboardSideMenu from './../components/Dashboard/TheDashboardSideMenu';
 import TheFooter from './../components/Footer/TheFooter';
+import Address from './../components/Profile/Address';
+import Bio from './../components/Profile/Bio';
+import Loader from './../components/Loader';
+import Form from './../services/Form.js';
     export default {
         data() {
           return {
-           
+            isLoading:false,
+            form:new Form({
+              image:'',
+              file:true
+            })
            }
         },
-        // name:UserDashboard,
         mixin,
         computed:{
             me:function(){
@@ -104,25 +112,45 @@ import TheFooter from './../components/Footer/TheFooter';
             
            
         },
+        methods:{
+          changeImage:function() 
+          {
+            this.form.image = this.$refs.file.files[0];
+            // console.log(this.form.image);
+            let curObject=this;
+            this.form.post('/user/changeprofile').then(response => {
+               if(response.data.status){
+                 curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
+                 // curObject.$store.commit('TOGGLE_LOADING');
+                 curObject.$store.commit('UPDATE_PROFILE',response.data.data.imageName);
+               }
+               else{
+                 curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
+                  curObject.$store.commit('TOGGLE_LOADING');
+               }
+              }).catch(e => {
+                   curObject.$store.commit('TOGGLE_LOADING');
+                  if(e.status===false)
+                     curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                    else
+                   curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+              });
+
+     }
+        },
         components:{
             TheTopNav,
             TheFooter,
-            TheDashboardSideMenu
-        }
+            TheDashboardSideMenu,
+            Loader,
+            Address,
+            Bio
+        },
+
     }
 
 
-     function viewimage(event) {
-                          
-                          var reader = new FileReader();
-                          var imageField = document.getElementById("profileImage")
-                          reader.onload = function () {
-                              if (reader.readyState == 2) {
-                                  imageField.src = reader.result;
-                              }
-                          }
-                          reader.readAsDataURL(event.target.files[0]);
-                      }
+     
 
 
 

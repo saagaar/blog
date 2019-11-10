@@ -41,9 +41,6 @@ class ClientController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-             $request->validate([
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
             $requestObj=app(ClientRequest::class);
             $validatedData = $requestObj->validated();
             $logoName = time().'.'.request()->logo->getClientOriginalExtension();
@@ -65,9 +62,6 @@ class ClientController extends AdminController
             $client =$this->client->getById($id);    
             if ($request->method()=='POST')
             {
-                  $request->validate([
-                  'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                  ]);  
                 $requestObj=app(ClientRequest::class);
                 $validatedData = $requestObj->validated();
                 if($request->hasFile('logo')) {

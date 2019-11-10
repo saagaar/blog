@@ -46,7 +46,7 @@
                   <td>{{$testimonial->created_at}}</td>
                   <td>{{$testimonial->updated_at}}</td>
                   <td><a href="{{route('testimonial.edit',$testimonial->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('testimonial.delete', $testimonial->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td><a onClick="return ConfirmDelete();" href="{{route('testimonial.delete', $testimonial->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr> 
                 @endforeach
                 @else

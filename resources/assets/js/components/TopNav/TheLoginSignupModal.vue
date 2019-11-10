@@ -228,19 +228,27 @@ import Form from './../../services/Form.js'
             }
           },
           submitSignUpForm:function(){
+            let curObject=this;
             this.$v.signUpForm.$touch();
             if(!this.$v.signUpForm.$invalid)
             {
               this.signUpForm.post('blog/register').then(response => {
                if(response.data.status){
-
+                curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
+                 curObject.$store.commit('TOGGLE_LOADING');
                   // window.location.href="dashboard"
                }
                else{
-                  alert(response.data.message)
+                curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
+                  curObject.$store.commit('TOGGLE_LOADING');
+                  // alert(response.data.message)
                }
               }).catch(e => {
-                  console.log(e);
+                   curObject.$store.commit('TOGGLE_LOADING');
+                  if(e.status===false)
+                     curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                    else
+                   curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
             }
           },

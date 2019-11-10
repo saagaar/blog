@@ -44,7 +44,7 @@
                   <td>{{$lang->created_at}}</td>
                   <td>{{$lang->updated_at}}</td>
                   <td><a href="{{route('language.edit',$lang->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('language.delete', $lang->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td><a onClick="return ConfirmDelete();" href="{{route('language.delete', $lang->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr> 
                 @endforeach
                 @else

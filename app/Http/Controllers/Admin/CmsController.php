@@ -53,13 +53,13 @@ class CmsController extends AdminController
         }
         return view('admin.cms.create')->with(array('breadcrumb'=>$breadcrumb,'primary_menu'=>'cms.list'));
     }
-    public function edit(Request $request, $id)
+    public function edit(Request $request,$id)
     {
             $breadcrumb=['breadcrumbs' => [
                         'Dashboard' => route('admin.dashboard'),
                         'All cms' => route('cms.list'),
                         'current_menu'=>'Edit Cms',
-                         ]];
+                         ]];  
             $cms =$this->cms->getCmsById($id);
             if ($request->method()=='POST') 
             {
@@ -85,6 +85,7 @@ class CmsController extends AdminController
     }
      public function changeStatus(Request $request)
     {
+
         $cms = $this->cms->getCmsById($request->id);
         $status = $request->status;
         $cms->update(array('status'=>$status));  

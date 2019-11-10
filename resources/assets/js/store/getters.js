@@ -27,3 +27,5 @@ export const isLoading = state => state.isLoading
 export const appName = state => state.appName
 
 export const config = state => state.settings
+
+export const listComments = state => state.listComments

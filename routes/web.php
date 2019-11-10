@@ -19,7 +19,10 @@ Route::get('/logincheck', function () {
 ]);
 });
 
-
+Route::get('/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
+Route::get('api/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('api');
+Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
+Route::post('/like/blog/{code}', 'Frontend\UserInteractionController@likeBlog')->name('like.blog');
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');
 
@@ -29,6 +32,10 @@ Route::get('api/dashboard','Frontend\HomeController@dashboard')->name('api');
 
 Route::get('api/profile','Frontend\UserController@profile')->name('api');
 Route::get('/profile','Frontend\UserController@profile')->name('profile');
+Route::post('/user/changeprofile', 'Frontend\UserController@changeProfile');
+
+Route::post('/user/change/address', 'Frontend\UserController@changeAddress');
+Route::post('/user/change/bio', 'Frontend\UserController@changeBio');
 
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 
@@ -40,14 +47,19 @@ Route::get('/api/categories', 'Frontend\UserInterestController@categories')->nam
 Route::get('/api/remove/userinterest/{slug}','Frontend\UserInterestController@removeUserInterest');
 Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUserInterest');
 
+Route::get('/category/{slug}','Frontend\HomeController@blogByCategory')->name('blogbycategory');
+Route::get('/getblogbycategory/{slug}','Frontend\HomeController@getBlogByCategory')->name('getblogbycategory');
+Route::get('/api/getlatestblog','Frontend\HomeController@getLatestBlog')->name('getlatestblog');
+Route::get('/api/getfollowers','Frontend\UserController@getFollowers')->name('getfollowers');
+Route::get('/api/getfollowings','Frontend\UserController@getFollowings')->name('getfollowings');
 
 
 Route::get('/test', 'Frontend\FrontendController@index')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
-Route::get('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
+Route::post('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
 
 
-Route::get('/tests', 'Frontend\UserInterestController@testinterest')->name('test');
+// Route::get('/tests', 'Frontend\UserInteractionController@testinglike')->name('test');
 Route::get('/blogs','Frontend\HomeController@index')->name('home');
 
 
@@ -69,7 +81,7 @@ Route::match(['get','post'],'api/blog/edit/{postid}', 'Frontend\BlogController@u
 Route::match(['get','post'],'blog/edit/{postid}/step2', 'Frontend\BlogController@updateBlogDetail');
 Route::match(['get','post'],'/blog/edit/{postid}', 'Frontend\BlogController@update');
 Route::match(['get','post'],'api/blog/add', 'Frontend\BlogController@create')->name('api');
-
+Route::match(['get','post'],'api/blog/add', 'Frontend\BlogController@create')->name('api');
 /**
  * for user
  */
@@ -80,7 +92,8 @@ Route::get('/followings','Frontend\UserController@followings')->name('followings
 Route::get('api/followers','Frontend\UserController@followers')->name('api');
 Route::get('/followers','Frontend\UserController@followers')->name('followers');
 
-
+Route::get('users/notifications','Frontend\UserController@notifications')->name('user.notification');
+Route::get('api/users/notifications','Frontend\UserController@notifications')->name('api');
 Auth::routes();
 
 Route::get('/logout/{guard}', 'Controller@logout')->name('logout');
@@ -102,7 +115,7 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 
     Route::get('/home', 'Frontend\HomeController@index')->name('home');
-
+    Route::get('api/home', 'Frontend\HomeController@index')->name('api');
     Route::prefix('admin')->group(function()
     {
 

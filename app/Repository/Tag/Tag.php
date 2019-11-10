@@ -18,13 +18,19 @@ Class Tag implements TagInterface
       return $this->tag->where('id', $tagsid)->first();
     }
 
+    public function getTagWithBlog(){
+        return $this->tag::has('blogs')->get()->toArray();
+    }
       /**
      * Get's all posts.
      *
      * @return mixed
      */
+    public function getAllTags(){
+     return $this->tag->latest();
+    }
     public function getAll(){
-   	 return	$this->tag->latest();
+   	 return	$this->tag->select('name')->latest();
     }
  	/**
      * Get tag by name 
@@ -34,6 +40,9 @@ Class Tag implements TagInterface
       return $this->tag->whereIn('name',$tags)->select('id')->get();
     }
 
+    public function getTagsList(){
+      return $this->tag->where('status','1')->select('name')->get()->toArray();
+    }
  	  /**
      * create a 
      *
@@ -65,7 +74,7 @@ Class Tag implements TagInterface
 
     public function getTag($search)
     {
-         return $this->tag->where('name', 'like', '%' . $search . '%')->get()->toArray();
+         return $this->tag->where('name', 'like', '%' . $search . '%')->where('status','1')->select('name')->get()->toArray();
     }
 }
 ?>

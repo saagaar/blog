@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Route;
 
 class GalleryRequest extends FormRequest
 {
@@ -23,12 +24,20 @@ class GalleryRequest extends FormRequest
      */
     public function rules()
     {
+        $routeName= ROUTE::currentRouteName();
+        if ($routeName == 'gallery.edit')
+          {
+            
+            $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+          }
+          else
+          {
+            $image = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+          }
         return [
             'title'     =>'required',
-            // 'image' => 'required',
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'categories_id'     =>'required'
- 
+            'image' => $image,
+            'categories_id' =>'required' 
         ];
     }
 }
