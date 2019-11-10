@@ -30,7 +30,8 @@
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
-                            <figure><img :src="'/images/user-images/'+me.image"></figure> {{ me.name}}</a>
+                            <figure><img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'"></figure> {{ me.name}}
+                        </a>
                             <ul class="dropdown-menu">
                                 <li><a href="/dashboard">My Profile</a></li>
                             

@@ -52,6 +52,10 @@ let routes=[
 						components:require('./pages/ChangePassword')
 				},
 				{
+						path:'/settings',
+						components:require('./pages/EditProfile')
+				},
+				{
 						path:'/users/notifications',
 						components:require('./pages/AllNotifications')
 				},

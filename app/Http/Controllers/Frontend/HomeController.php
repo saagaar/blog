@@ -121,7 +121,8 @@ class HomeController extends FrontendController
     }
     public function blogByCategory($slug){
       $data=array();
-      $blogByCategory = $this->blog->getBlogByCategory($slug);
+      $tagsIds = $this->category->getTagsIdByCatSlug($slug);
+      $blogByCategory = $this->blog->getBlogByCategory($tagsIds);
       // $blogCount = $this->blog->getBlogCount($slug);
       $category =$this->category->getCatBySlug($slug);
       $navCategory=$this->category->getCategoryByShowInHome();
@@ -150,7 +151,8 @@ class HomeController extends FrontendController
             throw new Exception("No Categories Selected", 1);
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
-          $blogByCategory = $this->blog->getBlogByCategory($slug,$limit,$offset);
+          $tagsIds = $this->category->getTagsIdByCatSlug($slug);
+          $blogByCategory = $this->blog->getBlogByCategory($tagsIds,$limit,$offset);
           return array('status'=>true,'data'=>$blogByCategory,'message'=>'');
         
       }

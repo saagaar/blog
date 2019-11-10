@@ -8,6 +8,8 @@ use App\Repository\AccountInterface;
 use App\Repository\BlogInterface; 
 use Illuminate\Support\Facades\File;
 use App\Repository\FollowerInterface; 
+use Illuminate\Support\Facades\Hash;
+use Validator;
 class UserController extends FrontendController
 {
     /**
@@ -278,5 +280,77 @@ class UserController extends FrontendController
         {
              return redirect()->route('home'); 
         }
+  }
+  public function settings(Request $request){
+    if(\Auth::check())
+        {
+            $routeName= Route::currentRouteName();
+            $data['path']='/profile';
+           if($routeName=='api')
+           {
+              
+              return ($data);
+           }
+           else
+           {
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+           }
+    }
+    else
+    {
+      return redirect()->route('home'); 
+    }
+  }
+  public function changeDetails(Request $request)
+  {
+    if(\Auth::check())
+    {
+      // $form='';
+      $form[$request->inputName]=$request->inputParams;
+      $this->user->update($this->authUser->id,$form);
+      $user =$this->user->getUserByUsername($this->authUser->username);
+      return array('status'=>true,'message'=>'Changed','data'=>array('me'=>$user));
+    }else{
+      return redirect()->route('home'); 
+    }
+  }
+  public function emailAvailabilityForUpdate($email){
+        $user = $this->user->getAll()->where('email',$email)->first();
+        if($user) {
+            if($this->authUser->email==$email){
+                return response()->json(true); 
+            }else
+                 return response()->json(false); 
+        }
+        else{
+           return response()->json(true); 
+        }
+           
+    } 
+    public function changePassword(Request $request)
+  {
+    if(\Auth::check())
+    {
+      if(Hash::check($request->oldpassword,$this->authUser->password)){
+        $validator = Validator::make($request->all(), [ 
+            'password' => 'required|min:6', 
+            'repassword' => 'required|min:6|same:password', 
+        ]);
+        if ($validator->fails()) { 
+            return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+        }
+        $form['password']=Hash::make($request->password);
+        $this->user->update($this->authUser->id,$form);
+        $user =$this->user->getUserByUsername($this->authUser->username);
+        return array('status'=>true,'message'=>'Password Changed','data'=>array('me'=>$user));
+      }else{
+        return array('status'=>false,'message'=>'old Password incorrect','data'=>'');
+      }
+      
+    }else{
+      return redirect()->route('home'); 
+    }
   }
 }

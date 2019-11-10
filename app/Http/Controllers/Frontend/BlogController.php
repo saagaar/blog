@@ -160,4 +160,19 @@ class BlogController extends FrontendController
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
         }
     }   
+    public function delete($blogCode){
+        $blogData = $this->blog->getBlogByCode($blogCode);
+        if( $blogData)
+        {
+            $dir = public_path(). '/images/blog/'.$blogData->code.'/';
+            if ($blogData->image != '' && File::exists($dir,$blogData->image))
+            {
+                File::deleteDirectory($dir);
+            }
+            $blogData->delete();
+            return response()->json(['status'=>true,'data'=>'','message'=>'Blog Deleted successfully']);
+        }
+        return response()->json(['status'=>false,'data'=>'','message'=>'Something went wrong!!']);
+
+    }
 }

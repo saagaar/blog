@@ -12,7 +12,7 @@
                               <div class="error" v-if="!$v.form.bio.minLength">bio must be at least {{ $v.form.bio.$params.minLength.min }} letters.</div>
                             </div>
 				<br>
-				<button type="button" class="btn btn-primary ml-15" @click.prevent="updateBio">Update</button>
+				<button type="button" class="btn btn-primary ml-15" @click.prevent="updateBio"><Loader></Loader>Update</button>
 				<button type="button" class="btn btn-light ml-15" @click.prevent="cancel">Cancel</button>
 			</form>
 		</div>
@@ -25,6 +25,7 @@
 </template>
 <script>
 import Form from './../../services/Form.js';
+import Loader from './../../components/Loader';
 import { required, minLength,maxLength } from 'vuelidate/lib/validators';
     export default {
          data() {
@@ -85,7 +86,7 @@ import { required, minLength,maxLength } from 'vuelidate/lib/validators';
         	}
         },
         components:{
- 
+          Loader
         },
     }
 </script>

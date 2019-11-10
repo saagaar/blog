@@ -122,8 +122,11 @@ class LoginController extends FrontendController
     public function isEmailAlreadyRegistered($email){
         $user = $this->account->getAll()->where('email',$email)->first();
         if($user) {
-           return response()->json(false); 
-            }
+            if($this->authUser->email==$email){
+                return response()->json(true); 
+            }else
+                 return response()->json(false); 
+        }
         else{
            return response()->json(true); 
         }
