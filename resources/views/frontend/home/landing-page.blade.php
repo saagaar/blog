@@ -90,57 +90,20 @@
         <p class="mb-100">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br>Excepteur sint occaecat cupidatat non proident</p>
       </div>
       <!-- feature item -->
+      @foreach($services as $eachService)     
       <div class="col-md-6 mb-80">
         <div class="d-flex feature-item">
-          <div>
-            <i class="ti-ruler-pencil feature-icon mr-4"></i>
+          <div class="pr-4">
+             <img src="{{asset('uploads/services-images/'.$eachService->icon) }}" alt="Blog Image" height="120" width="100">
           </div>
           <div>
-            <h4>Awesome Design</h4>
-            <p>Consectetur adipiscing elit donec tempus
-              pellentesque dui.</p>
+            <h4>{{$eachService->title}}</h4>
+            <p>{{$eachService->description}}</p>
           </div>
         </div>
       </div>
+      @endforeach      
       <!-- feature item -->
-      <div class="col-md-6 mb-80">
-        <div class="d-flex feature-item">
-          <div>
-            <i class="ti-layout-cta-left feature-icon mr-4"></i>
-          </div>
-          <div>
-            <h4>Easy Customize</h4>
-            <p>Consectetur adipiscing elit donec tempus
-              pellentesque dui.</p>
-          </div>
-        </div>
-      </div>
-      <!-- feature item -->
-      <div class="col-md-6 mb-80">
-        <div class="d-flex feature-item">
-          <div>
-            <i class="ti-split-v-alt feature-icon mr-4"></i>
-          </div>
-          <div>
-            <h4>Bug free Code</h4>
-            <p>Consectetur adipiscing elit donec tempus
-              pellentesque dui.</p>
-          </div>
-        </div>
-      </div>
-      <!-- feature item -->
-      <div class="col-md-6 mb-80">
-        <div class="d-flex feature-item">
-          <div>
-            <i class="ti-layers-alt feature-icon mr-4"></i>
-          </div>
-          <div>
-            <h4>Organized Layouts</h4>
-            <p>Consectetur adipiscing elit donec tempus
-              pellentesque dui.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   <img class="feature-bg-1" src="landing-page/assets/images/background-shape/feature-bg-1.png" alt="bg-shape">
@@ -151,7 +114,7 @@
 <!-- marketing -->
 <section class="section-lg seo">
   <div class="container">
-    <div class="row">
+    <div class="row"> 
       <div class="col-md-6">
         <img class="img-fluid" src="landing-page/assets/images/marketing/marketing.png" alt="form-img">
       </div>
@@ -221,7 +184,7 @@
         <div class="team-member">        
           <div class="d-flex mb-4">
             <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="landing-page/assets/images/team/team-1.jpg" alt="team-member">
+              <img class="rounded-circle img-fluid" src="{{asset('uploads/testimonial-images/'.$eachDetails->image) }}"  width="100" height="100" style=" border-radius: 50%;" alt="team-member">
             </div>
             <div class="align-self-center">                            
               <h4>{{$eachDetails->name}}</h4>
@@ -299,12 +262,12 @@
           <img class="img-fluid" src="landing-page/assets/images/logo.png" alt="logo">
         </a>
       </div>
+
       <!-- footer menu -->
       <nav class="col-lg-5 align-self-center mb-5">
         <h4>Get In Touch</h4>
-        <p>Blogsagar Towers 3th Floor, Kumarapati Lalitpur, Nepal
-+977-9810099062, +977-9843743649 <a href="#"> hi@blogsagar.com </a></p>
-      </nav>
+        <p>{{$getInTouch->address}} <a href="#"> hi@blogsagar.com </a></p>
+      </nav>  
       <!-- footer social icon -->
       <nav class="col-lg-4">
         <ul class="list-inline text-lg-right text-center social-icon">

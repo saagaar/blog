@@ -16,8 +16,9 @@ use App\Repository\BlogInterface;
 use App\Repository\CategoryInterface;
 use App\Repository\UserInteractionInterface; 
 use App\Repository\TagInterface;
-use App\Repository\TestimonialInterface;
-
+use App\Repository\TestimonialInterface;  
+use App\Repository\ServiceInterface;
+use App\Repository\SiteoptionInterface;
 
 class HomeController extends FrontendController
 {
@@ -29,6 +30,7 @@ class HomeController extends FrontendController
      protected $userAccounts;
      
      protected $authUser;
+
 
     /**
      * Create a new controller instance.
@@ -52,10 +54,16 @@ class HomeController extends FrontendController
      */
     public function landingPage()
     {
+        
+        $services=$this->services();
+        $testimonialDetails=$this->testimonialDetails();
+        $getInTouch=$this->getInTouch();
 
+        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'getInTouch'=>$getInTouch));
+    }
 
-        return view('frontend.home.landing-page');
-
+    public function index(Request $request)
+    {
         $data=array();
         $featuredBlog = $this->blog->getAllFeaturedBlog();
         // $data['featuredBlog']=$featuredBlog;
@@ -232,9 +240,7 @@ class HomeController extends FrontendController
             {
                 print_r($tag->getTag($search));
 
-              }
-             
-
+              }             
          $search=$request->post('name');             
          if($search){
             $searchedTags=$tag->getTag($search);
@@ -243,20 +249,29 @@ class HomeController extends FrontendController
           else{
            return response()->json(['status'=>false,'message'=>'No Tags found']);    
           }
-
     }
 
-    public function testimonialDetails(TestimonialInterface $TestimonialInterface)
+   public function services()
     {
-        
-       $testimonialDetails= $TestimonialInterface->getActiveTestimonial();
-         // print_r($testimonialDetails);exit;
 
-      return view('frontend.home.landing-page')->with(array('testimonialDetails'=>$testimonialDetails));
-  }
+      $serviceInterface = app()->make('App\Repository\ServiceInterface');
+      $service=$serviceInterface->getServicesDetails();
+      return $service;
+    }
 
-  public function getInTouch()
-  {
+    public function testimonialDetails()
+    { 
+      $testimonialInterface = app()->make('App\Repository\TestimonialInterface');
+      $testimonialDetails= $testimonialInterface->getActiveTestimonial();
+      return $testimonialDetails;
+  }  
+
+   public function getInTouch()
+   {
     
-  }
+    $siteSettingInterface = app()->make('App\Repository\SiteoptionInterface');
+    $siteDetails=$siteSettingInterface->getSiteInfo();
+    return $siteDetails;    
+    
+   }
 }

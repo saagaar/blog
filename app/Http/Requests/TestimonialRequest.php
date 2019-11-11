@@ -28,7 +28,7 @@ class TestimonialRequest extends FormRequest
         return 
         [
             'name'=>'required',
-            'description'=>'required',
+            'description'=>'required|max:200',
             'status'=>'required',
             'position'=>'required',
             'image'=>$image

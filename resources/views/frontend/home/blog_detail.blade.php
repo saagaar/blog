@@ -52,7 +52,7 @@
                                     <div class="thumb">
                                         <a href="#">
                                             @if($prev->image)
-                                                 <img class="img-fluid" src="{{ asset('images/blog/'.$prev->image) }}" width="60" height="60" alt="">
+                                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$prev->image) }}" width="60" height="60" alt="">
                                             @else
                                                  <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}"  width="60" height="60" alt="">
                                             @endif
@@ -75,7 +75,7 @@
                                 
                                 <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
                                     @if($next)
-                                    <div class="detials">
+                                    <div class="details">
                                         <p>Next Post</p>
                                         <a href="{{ route('blog.detail' , $next->code)}}">
                                             <h4>{{ $next->title }}</h4>
@@ -167,9 +167,9 @@
                             @foreach($relatedBlog as $eachRelatedBlog)
                             <div class="media post_item">
                                 @if($eachRelatedBlog->image)
-                                     <img src="{{ asset('images/blog/'.$eachRelatedBlog->image) }}" width="60" height="60" alt="">
+                                     <img src="{{ asset('uploads/blog/'.$eachRelatedBlog->image) }}" width="60" height="60" alt="">
                                 @else
-                                     <img src="{{ asset('images/blog/default.jpg') }}" width="60" height="60" alt="">
+                                     <img src="{{ asset('uploads/blog/default.jpg') }}" width="60" height="60" alt="">
                                 @endif
                                 <div class="media-body">
                                     <a href="{{ route('blog.detail' , $eachRelatedBlog->code)}}">

@@ -58,7 +58,7 @@ class BlogController extends AdminController
         $created->tags()->attach($validatedData['tags']);        
         $extension = request()->image->getClientOriginalExtension();
         $imageName = time().'.'.$extension;
-        $dir=public_path(). '/images/blog/'.$created['code'];
+        $dir=public_path(). '/uploads/blog/'.$created['code'];
         File::makeDirectory($dir);
         $originalImg= request()->image->move($dir,$imageName);
         // File::delete($originalImg);
@@ -107,14 +107,12 @@ class BlogController extends AdminController
             $blog =$this->blog->GetBlogById($id);
             if ($request->method()=='POST') 
             {
-                //  $request->validate([
-                // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                // ]);  
+               
                 $requestObj=app(BlogRequest::class);
                 $validatedData = $requestObj->validated();          
             if ($request->hasFile('image')) 
             {                              
-                $dir=public_path(). '/images/blog/'.$blog->code.'/';
+                $dir=public_path(). '/uploads/blog/'.$blog->code.'/';
                  if ($blog->image != '' && File::exists($dir,$blog->image))
                 {
                 File::deleteDirectory($dir);
@@ -171,7 +169,7 @@ class BlogController extends AdminController
        $blog =$this->blog->GetBlogById($id);      
         if( $blog)
         {
-            $dir = public_path(). '/images/blog/'.$blog->code.'/';
+            $dir = public_path(). '/uploads/blog/'.$blog->code.'/';
             if ($blog->image != '' && File::exists($dir,$blog->image))
             {
                 File::deleteDirectory($dir);

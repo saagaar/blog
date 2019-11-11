@@ -148,8 +148,8 @@
 
                 <div class="form-group">
                   <label for="image">Image Upload</label>
-                 <img src='/images/blog/{{$blog->image}}' width="50"/>
                   <input type="file" class="form-control" name="image" id="image">
+                 <img src="{{asset('uploads/blog/'.$blog->code.'/'.$blog->image) }}" alt="Blog Image" height="42" width="42">
                   @if ($errors->has('image'))
                 <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                 @endif
