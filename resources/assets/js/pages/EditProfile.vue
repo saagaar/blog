@@ -18,8 +18,10 @@
           <EmailEdit :formName="'My Email'" :inputName="'email'" :value="me.email"></EmailEdit>
           </div>
           <div class="col-sm-6">
-          <label>Date Of Birth</label>
-          <div class="row">  
+            <DobEdit :formName="'Date of birth'" :inputName="'dob'" :value="me.dob"></DobEdit>
+          <!-- <label>Date Of Birth</label>
+           -->
+          <!-- <div class="row">  
             <div class="form-group col-sm-3 col-xs-6">
               <label for="month" class="sr-only"></label>
               <select class="form-control" id="day">
@@ -51,10 +53,10 @@
               </select>
             </div>
             <div class="clearfix"></div>
-          </div>
+          </div> -->
           </div>
 
-          <div class="col-sm-12">
+          <!-- <div class="col-sm-12">
               <div class="form-group gender">
                 <span class="custom-label"><strong>I am a: </strong></span>
                 <label class="radio-inline">
@@ -64,7 +66,7 @@
                   <input type="radio" name="optradio">Female
                 </label>
               </div>
-          </div>
+          </div> -->
 
           <div class="col-sm-6 form-group">
           <TextEdit :formName="'Address'" :inputName="'address'" :value="me.address"></TextEdit>
@@ -74,13 +76,13 @@
           </div>
 
           <div class="col-sm-12 form-group upload_img">
-              <label><i class="fa fa-image"></i> Profile Photo</label>
+              <label><i class="fa fa-image"></i> Profile Photo <span class="file-input btn btn-success btn-file">
+                      <button class="btn btn-success">Chnage Profile Picture</button> 
+                      <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
+                  </span></label>
               <figure> <img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'" id="image-field"/> </figure>
                
-                    <span class="file-input btn btn-success btn-file">
-                      Browse 
-                      <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
-                  </span>
+                    
                 
                 </div>
 
@@ -109,7 +111,9 @@
 import TextEdit from './../components/Settings/TextEdit';
 import ChangePassword from './../components/Settings/ChangePassword';
 import EmailEdit from './../components/Settings/EmailEdit';
+import DobEdit from './../components/Settings/DobEdit';
 import Form from './../services/Form.js';
+
     export default {
          data() {
           return {
@@ -157,7 +161,8 @@ import Form from './../services/Form.js';
             
             TextEdit,
             EmailEdit,
-            ChangePassword
+            ChangePassword,
+            DobEdit
         },
     }
 </script>

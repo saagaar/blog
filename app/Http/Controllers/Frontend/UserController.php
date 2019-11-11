@@ -308,7 +308,12 @@ class UserController extends FrontendController
     if(\Auth::check())
     {
       // $form='';
-      $form[$request->inputName]=$request->inputParams;
+      
+      if($request->inputName=='dob'){
+        $form['dob']=date('Y-m-d',strtotime($request->inputParams));
+      }else{
+        $form[$request->inputName]=$request->inputParams;
+      }
       $this->user->update($this->authUser->id,$form);
       $user =$this->user->getUserByUsername($this->authUser->username);
       return array('status'=>true,'message'=>'Changed','data'=>array('me'=>$user));

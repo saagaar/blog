@@ -33,19 +33,21 @@
                             <figure><img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'"></figure> {{ me.name}}
                         </a>
                             <ul class="dropdown-menu">
-                                <li><a href="/dashboard">My Profile</a></li>
-                            
+                                <li><a href="/dashboard">Dashboard</a></li>
+
+                                <li><a href="/profile">My Profile</a></li>
+                                
                                 <li><a href="#">New Stories</a></li>
-                                <li><a href="#">Stories</a></li>
+                                <li><a href="/blog/list">Stories</a></li>
                                 <hr>
                                 <li><a href="#">BlogSagar Partner Program</a></li>
                                 <li><a href="#">Bookmarks</a></li>
                                 <li><a href="#">Publications</a></li>
-                                <li><a href="#">Customize your interest</a></li>
+                                <li><a href="/categories">Customize your interest</a></li>
                                 <hr>
-                                <li><a href="#">Settings</a></li>
+                                <li><a href="/settings">Settings</a></li>
                                 <li><a href="#">Help</a></li>
-                                <li><a href="#">Change Password</a></li>
+                                <!-- <li><a href="#">Change Password</a></li> -->
                                 <li><a v-bind:href="config.ROOT_URL+'logout/user'">Log Out</a></li>
                             </ul>
                         </li>
