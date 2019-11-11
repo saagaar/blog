@@ -131,12 +131,12 @@ class BlogController extends FrontendController
                         {
                             $extension = request()->image->getClientOriginalExtension();
                             $imageName = time().'.'.$extension;              
-                            $dir=public_path(). '/images/blog/'.$postId.'/';
+                            $dir=public_path().'/images/blog/'.$postId.'/';
                              if ($blogData->image != '' && File::exists($dir,$blogData->image))
                             {
                             File::deleteDirectory($dir);
-                             }
-                            File::makeDirectory($dir);
+                             }else{}
+                                File::makeDirectory($dir);
 
                             $tmpImg =request()->image->move($dir,$imageName);
                             $img = Image::make($tmpImg);         

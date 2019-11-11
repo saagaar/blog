@@ -18,7 +18,7 @@
                                 @if($featuredBlog['0']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$featuredBlog['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                             </a>
                         </div>
@@ -54,7 +54,7 @@
                                     @if($eachFeaturedBlog->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$eachFeaturedBlog->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                                 </a>
                             </figure>
@@ -78,7 +78,7 @@
                     
 
                     <div class="text-right">
-                        <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
+                        <a href="{{ route('bloglistbyslug' , 'all-featured')}}" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
                     </div>
 
                 </div>
@@ -110,7 +110,7 @@
                                 @if($featuredForMember['0']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$featuredForMember['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                             </a>
                         </div>
@@ -145,7 +145,7 @@
                                     @if($eachFeaturedForMember->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$eachFeaturedForMember->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                                 </a>
                             </figure>
@@ -168,7 +168,7 @@
                     @endforeach
 
                     <div class="text-right">
-                        <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
+                        <a href="{{ route('bloglistbyslug' , 'featured-for-member')}}" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
                     </div>
 
                 </div>
@@ -198,7 +198,7 @@
                                 @if($popular['0']->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$popular['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                             </a>
                         </div>
@@ -232,7 +232,7 @@
                                     @if($eachPopular->image)
                                  <img class="img-fluid" src="{{ asset('images/blog/'.$eachPopular->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                                 </a>
                             </figure>
@@ -257,7 +257,7 @@
                     
 
                     <div class="text-right">
-                        <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
+                        <a href="{{ route('bloglistbyslug' , 'popular')}}" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
                     </div>
 
                 </div>
@@ -290,7 +290,7 @@
                                 @if($eachLatest->image)
 	                                <img class="img-fluid" src="{{ asset('images/blog/'.$eachLatest->image) }}" alt="">
 	                            @else
-	                                <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+	                                <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
 	                            @endif
                                 </a>
                             </figure>

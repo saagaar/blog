@@ -18,7 +18,7 @@
 
                     <div class="single-blog video-style small m_b_30 ">
                       <div class="short_details">
-                            <a class="d-block" href="single-blog.html">
+                            <a class="d-block" href="#">
                                 <h4 class="lt_ttl">{{ $category->name }}</h4>
                             </a>
                             <p>
@@ -65,7 +65,7 @@
                         	@if($eachBlog->image)
                             	<img class="img-fluid" src="{{ asset('/images/blog/'.$eachBlog->image) }}" alt="{{ $eachBlog->title }}">
                             @else
-                            	<img class="img-fluid" src="/images/system-images/default-post.jpg }}" alt="{{ $eachBlog->title }}">
+                            	<img class="img-fluid" src="/images/system-images/default-post.jpg" alt="{{ $eachBlog->title }}">
                             @endif
                         </div>
                         <div class="short_details col-lg-8 col-md-7 col-sm-12">
@@ -80,7 +80,9 @@
                             <p>{!! str_limit($eachBlog->short_description, $limit = 50, $end = '...') !!}</p>
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>{{ $eachBlog->created_at->diffForHumans() }}</a>
-                                <a href="#"><i class="ti-heart"></i> {{ $eachBlog->likes_count }} like</a>
+                                <a href="#" class="appreciate"><i>
+                                    <img src="/images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                </i>&nbsp;&nbsp;{{$eachBlog->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i> {{ $eachBlog->views }} view</a>
                             </div>
                         </div>

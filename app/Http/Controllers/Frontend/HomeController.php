@@ -51,16 +51,16 @@ class HomeController extends FrontendController
     public function index(Request $request)
     {
         $data=array();
-        $featuredBlog = $this->blog->getAllFeaturedBlog();
+        $featuredBlog = $this->blog->getAllFeaturedBlog(4);
         // $data['featuredBlog']=$featuredBlog;
-        $mostViewed =$this->blog->getAllBlogByViews();
+        // $mostViewed =$this->blog->getAllBlogByViews();
         // $data['mostViewed'] = $mostViewed;
+        $popular =$this->blog->getPopularBlog(4);
+        // $data['popular'] = $popular;
+        $featuredForMember = $this->blog->getAllFeaturedForMember(4);
+        // $data['featuredForMember']=$featuredForMember;
         $latest =$this->blog->getLatestAllBlog();
         // $data['latest'] = $latest;
-        $popular =$this->blog->getPopularBlog();
-        // $data['popular'] = $popular;
-        $featuredForMember = $this->blog->getAllFeaturedForMember();
-        // $data['featuredForMember']=$featuredForMember;
         $navCategory=$this->category->getCategoryByShowInHome();
         $likes='';
         $user ='';
@@ -79,11 +79,11 @@ class HomeController extends FrontendController
               $data['path']='/home';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
-              return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
+              return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
           }
 
         }
-        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
+        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
     }
     public function blogDetail($code){
       $blogDetails = $this->blog->getBlogByCode($code);
@@ -168,6 +168,64 @@ class HomeController extends FrontendController
           $offset=$request->get('page')*$limit;
           $latest = $this->blog->getLatestAllBlog($limit,$offset);
           return array('status'=>true,'data'=>$latest,'message'=>'');
+        
+      }
+      catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
+    public function blogListBySlug($slug,Request $request)
+    {
+        $data=array();
+        $blog=array();
+        if($slug=='all-featured')
+          $blog = $this->blog->getAllFeaturedBlog();
+        elseif($slug=='popular')
+          $blog =$this->blog->getPopularBlog();
+        elseif($slug=='featured-for-member')
+          $blog = $this->blog->getAllFeaturedForMember();
+        $navCategory=$this->category->getCategoryByShowInHome();
+        $likes='';
+        $user ='';
+        $data['path']='/home';
+         if(\Auth::check())
+        {
+          $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+            $routeName= ROUTE::currentRouteName();
+            
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/home';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+          }
+
+        }
+        return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory));
+    }
+    public function getBlogListBySlug($slug=false,Request $request){
+      try{
+        if(!$slug)
+            throw new Exception("No Categories Selected", 1);
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $blog=array();
+          if($slug=='all-featured'){
+            $blog = $this->blog->getAllFeaturedBlog($limit,$offset);
+          }
+          elseif($slug=='popular'){
+            $blog =$this->blog->getPopularBlog($limit,$offset);
+          }
+          elseif($slug=='featured-for-member'){
+            $blog = $this->blog->getAllFeaturedForMember($limit,$offset);
+          }
+          return array('status'=>true,'data'=>$blog,'message'=>'');
         
       }
       catch(Exception $e)
