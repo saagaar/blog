@@ -41,10 +41,11 @@
                                 <li><a href="#">Bookmarks</a></li>
                                 <li><a href="#">Publications</a></li>
                                 <li><router-link to="/categories">Customize your interest</router-link></li>
+
                                 <hr>
-                                <li><a href="#">Settings</a></li>
+                                <li><a href="/settings">Settings</a></li>
                                 <li><a href="#">Help</a></li>
-                                <li><a href="#">Change Password</a></li>
+                                <!-- <li><a href="#">Change Password</a></li> -->
                                 <li><a v-bind:href="config.ROOT_URL+'logout/user'">Log Out</a></li>
                             </ul>
                         </li>

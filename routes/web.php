@@ -34,9 +34,13 @@ Route::get('api/dashboard','Frontend\HomeController@dashboard')->name('api');
 Route::get('api/profile','Frontend\UserController@profile')->name('api');
 Route::get('/profile','Frontend\UserController@profile')->name('profile');
 Route::post('/user/changeprofile', 'Frontend\UserController@changeProfile');
+Route::get('/settings','Frontend\UserController@settings')->name('settings');
 
 Route::post('/user/change/address', 'Frontend\UserController@changeAddress');
 Route::post('/user/change/bio', 'Frontend\UserController@changeBio');
+Route::post('/user/change/details', 'Frontend\UserController@changeDetails');
+Route::post('/user/change/password', 'Frontend\UserController@changePassword');
+
 
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 
@@ -71,7 +75,7 @@ Route::post('/blog/login', 'Frontend\LoginController@login')->name('login');
 Route::post('/blog/register', 'Frontend\LoginController@register')->name('register');
 
 Route::get('/blog/isemailregistered/{email}', 'Frontend\LoginController@isEmailAlreadyRegistered')->name('useremail');
-
+Route::get('/user/emailupdatecheck/{email}', 'Frontend\UserController@emailAvailabilityForUpdate')->name('useremailupdate');
 
 /**
  * for blog
@@ -83,6 +87,7 @@ Route::match(['get','post'],'blog/edit/{postid}/step2', 'Frontend\BlogController
 Route::match(['get','post'],'/blog/edit/{postid}', 'Frontend\BlogController@update');
 Route::match(['get','post'],'api/blog/add', 'Frontend\BlogController@create')->name('api');
 Route::match(['get','post'],'api/blog/add', 'Frontend\BlogController@create')->name('api');
+Route::get('api/blog/deleteBlog/{code}', 'Frontend\BlogController@delete');
 /**
  * for user
  */

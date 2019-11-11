@@ -27,6 +27,9 @@ Class Tag implements TagInterface
      *
      * @return mixed
      */
+    public function getAllTags(){
+     return $this->tag->latest();
+    }
     public function getAll(){
    	 return	$this->tag->latest();
     }

@@ -34,6 +34,12 @@
                   <i class="fa fa-user-plus"></i>
                   <div><a href="#">Who's viewed your profile <span>14</span></a></div>
               </li>
+              <li>
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                  <div>
+                     <router-link to="/settings">Settings</router-link>
+                  </div>
+              </li>
             </ul>
       </template>
       <script>

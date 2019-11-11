@@ -15,7 +15,7 @@ Class Category implements CategoryInterface
 
      
   public function getCatById($blogcat_id){
-      return	$this->cat->where('id', $blogcat_id)->first();
+      return	$this->cat->where('id', $blogcat_id)->with('tags')->first();
     }
   /**
    * get category by slug

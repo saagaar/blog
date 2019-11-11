@@ -4,17 +4,12 @@ namespace App\Repository\Blog;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Blogs;
 use App\Repository\BlogInterface;
-use App\Repository\TagInterface;
-use App\Repository\CategoryInterface;
 Class Blog implements BlogInterface
 {
 	protected $blog;
-  protected $tag;
-	public function __construct(Blogs $blog,TagInterface $tag,CategoryInterface $category)
+	public function __construct(Blogs $blog)
 	{
 		$this->blog=$blog;
-    $this->tag=$tag;
-    $this->category=$category;
 	}
 
   /**
@@ -29,8 +24,7 @@ Class Blog implements BlogInterface
   /**
    * get blog by category
    */
-  public function getBlogByCategory($slug,$limit=10,$offset=0){
-    $tagsIds = $this->category->getTagsIdByCatSlug($slug);
+  public function getBlogByCategory($tagsIds,$limit=10,$offset=0){
     $blogByCategoryTags =$this->blog->whereHas('tags', function ($q) use ($tagsIds) {
     return $q->whereIn('tags_id', $tagsIds); 
     })
@@ -41,6 +35,7 @@ Class Blog implements BlogInterface
     $data=$this->category->blogs()->get()->toArray();
     return $blogByCategoryTags;
   }
+
 
   /**
    * get blog for featured =1

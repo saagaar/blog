@@ -95,14 +95,16 @@
                 <input type="checkbox" class="mail-checkbox" @click="select" v-model="postIds" :value="eachblog.code">
               </td>
               <td class="view-message">
-                <div><router-link :to="'/blog/edit/'+eachblog.code" v-if="$gate.allow('update', 'blog', eachblog)">{{ eachblog.title}}</router-link></div>
+                <div>
+                  <router-link :to="'/blog/edit/'+eachblog.code" v-if="$gate.allow('update', 'blog', eachblog)">{{ eachblog.title}}</router-link>
+                </div>
                 <div class="hidden_sec">
                   <div class="hidden_td_link">
                     <router-link :to="'/blog/edit/'+eachblog.code" v-if="$gate.allow('update', 'blog', eachblog)">Edit</router-link>
                   &nbsp;|&nbsp;
                   <a href="#">Preview</a>
                   &nbsp;|&nbsp;
-                  <a href="#">Delete</a>
+                  <a href="" v-if="$gate.allow('delete', 'blog', eachblog)" @click.prevent="deleteBlog(eachblog.code)">Delete</a>
                   </div>
                 </div>
               </td>
@@ -236,7 +238,35 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             this.allSelected=selected;
             this.postIds=postids;
         },
-      
+        deleteBlog:function(code){
+              var reconfirm = confirm("Are you sure you want to Delete this ");
+              if (reconfirm) {
+                  let curObject=this;
+          this.form.get('api/blog/deleteBlog/'+code).then(response => {
+               this.$store.commit('TOGGLE_LOADING');
+               if(response.data)
+               {
+                curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
+                 curObject.$store.commit('TOGGLE_LOADING');
+                this.getResults();
+               }
+               else
+               {
+                curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
+                  curObject.$store.commit('TOGGLE_LOADING');
+               }
+              }).catch(e => {
+                   curObject.$store.commit('TOGGLE_LOADING');
+                  if(e.status===false)
+                     curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                    else
+                   curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+              });
+              } else {
+                  return false;
+              }
+          
+        },
         select: function() {
             // this.allSelected = false;
         }

@@ -34,5 +34,17 @@ class BlogPolicy
             return false;
         }
     }
+    public function delete(Users $user, Blogs $blog)
+    {
+        if ($user->can('delete own posts')) {
+            return $user->id == $blog->user_id;
+        }
+        if ($user->can('delete all posts')) {
+            return true;
+        }
+        if ($user->can('delete posts more then his point')) {
+            return false;
+        }
+    }
 
 }
