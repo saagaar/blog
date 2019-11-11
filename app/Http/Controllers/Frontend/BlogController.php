@@ -129,16 +129,16 @@ class BlogController extends FrontendController
                     }else{
                         if(request()->image)
                         {
-                            $dir = 'images/user-images/';
+                            $dir = 'uploads/blog/'.$blogData->code.'/';
                             if ($blogData->image != '' && File::exists($dir . $blogData->image)){
                                 File::delete($dir . $blogData->image);
                             }
                             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                            request()->image->move(public_path('images/blog'), $imageName);
+                            request()->image->move(public_path('uploads/blog/'.$blogData->code.'/'), $imageName);
                             $form['image']=$imageName;
                         }
                         $form['short_description']=$request->short_description;
-                        $form['save_method']='1';
+                        $form['save_method']=$request->save_method?$request->save_method:'1';
                         $form['anynomous'] = $request->isAnynomous ? '1' : '2';
                         $this->blog->updateByCode($postId,$form);
                         $tagid = $tag->getTagByName($request->tags);

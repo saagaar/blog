@@ -12,7 +12,7 @@
             <SuccessErrorMessage></SuccessErrorMessage>
             <div id="sidebar">      
             <div class="profile-card">
-                <img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'" :alt="me.name" class="profile-photo">
+                <img :src="getProfileUrl()" :alt="me.name" class="profile-photo">
                 <h5><router-link to="/profile"  class="text-white">{{ me.name}}</router-link></h5>
                   <router-link to="/followers" class="text-white">{{ me.followersCount}} followers</router-link>
                   <router-link to="/followings" class="text-white">{{ me.followingCount}} following</router-link>
@@ -54,15 +54,27 @@ import TheFooter from './../components/Footer/TheFooter';
             me:function(){
               return this.$store.getters.me
             },
-            
-           
         },
-
         components:{
             TheTopNav,
             TheFooter,
             TheDashboardSideMenu,
             SuccessErrorMessage
+        },
+        methods:{
+          getProfileUrl(){
+              let url=this.me.image;
+              console.log('we are here');
+              if(url===''){
+                return 'frontend/images/elements/default-profile.png';
+              }
+              else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
+                return url;
+              }
+              else{
+                return '/uploads/user-images/'+url;
+              }
+           }
         }
     }
 </script>

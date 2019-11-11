@@ -51,9 +51,9 @@ export default {
         {
                if(response.data.data.notifications.length>0)
                {
-                console.log(cur.$data.allNotifications);
                  this.offset+=1;
                  cur.$data.allNotifications.push(...response.data.data.notifications);
+                  this.$store.commit('UPDATE_UNREAD_NOTIFICATION_COUNT',response.data.data.unReadNotificationsCount);
                  $state.loaded();
                }
                else

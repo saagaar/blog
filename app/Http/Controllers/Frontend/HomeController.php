@@ -93,13 +93,13 @@ class HomeController extends FrontendController
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $relatedBlog = $this->blog->relatedBlogBycode($code);
       $navCategory=$this->category->getCategoryByShowInHome();
+      //What is the use of this line
       $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
       $data['blogDetails'] =$blogDetails;
       $data['blogComment']  =$blogComment;
       
-      // echo "<pre>";
-      // print_r($blogComment);exit;
       $user ='';
+      //Why do we need api for frontend route???
          if(\Auth::check())
         {
             $routeName= ROUTE::currentRouteName();
@@ -117,7 +117,7 @@ class HomeController extends FrontendController
           }
 
         }
-        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlo,'likes'=>$likes,'navCategory'=>$navCategory));
+        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes,'navCategory'=>$navCategory));
     }
     public function blogByCategory($slug){
       $data=array();

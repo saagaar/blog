@@ -64,8 +64,9 @@ class BlogController extends AdminController
         $extension = request()->image->getClientOriginalExtension();
         // echo $extension;exit;
         $imageName = time().'.'.$extension;              
-        $folder=public_path(). '/images/blog/'.$created['code'];
-        File::makeDirectory($folder);
+        $folder=public_path(). '/uploads/blog/'.$created['code'];
+        if(!is_dir($folder))
+            File::makeDirectory($folder, 0755, true);
 
         $tmpImg = request()->image->move($folder,$imageName);
          // echo $tmpImg;exit;
@@ -108,7 +109,7 @@ class BlogController extends AdminController
                 {
                     $extension = request()->image->getClientOriginalExtension();
                     $imageName = time().'.'.$extension;              
-                    $folder=public_path(). '/images/blog/'.$blog->code.'/';
+                    $folder=public_path(). '/images/users-upload/blog/'.$blog->code.'/';
                     $tmpImg =request()->image->move($folder,$imageName);
                     $img = Image::make($tmpImg);         
                    $img->resize(100, null, function ($constraint) 
@@ -142,7 +143,7 @@ class BlogController extends AdminController
        $blog =$this->blog->GetBlogById($id);      
         if( $blog)
         {
-            $dir = public_path(). '/images/blog/'.$blog->code.'/';
+            $dir = public_path(). '/images/users-upload/blog/'.$blog->code.'/';
             if ($blog->image != '' && File::exists($dir,$blog->image))
             {
                 File::deleteDirectory($dir);

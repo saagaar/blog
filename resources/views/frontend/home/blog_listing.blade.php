@@ -8,14 +8,12 @@
                     <div class="single-blog video-style">
                         <div class="thumb">
                             <a href="#">
-                                <img class="img-fluid" src="{{ asset('frontend/images/categories-images/'.$category->banner_image) }}" alt="">
+                                <img class="img-fluid" src="{{ asset('uploads/categories-images/'.$category->banner_image) }}" alt="">
                             </a>
                         </div>
                     </div> 
                 </div> 
-
                 <div class="col-lg-4 col-md-5">
-
                     <div class="single-blog video-style small m_b_30 ">
                       <div class="short_details">
                             <a class="d-block" href="single-blog.html">
@@ -27,12 +25,6 @@
                             <div class="meta-bottom d-flex meta-author mt-30">
 
                                 <div class="author">
-                                   <!--  <figure>
-                                    <a href="#">
-                                        <img src="img/user-3.jpg" alt="" class="profile-photo-sm pull-left">
-                                    </a>
-                                    </figure> -->
-
                                     <div class="meta-author-content">
                                         <h6>
                                             <a href="#">Admin</a>
@@ -42,14 +34,12 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-
                                 <a href="#" class="btn btn-round btn-light">
                                     <i class="ti-twitter-alt"></i> Follow
                                 </a>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -91,6 +81,5 @@
             </div>
         </div>
     </div>
-
     <!--================ All Blog section end =================-->  
 @endsection

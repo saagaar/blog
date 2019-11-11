@@ -233,14 +233,13 @@ import Form from './../../services/Form.js'
             {
               this.signUpForm.post('blog/register').then(response => {
                if(response.data.status){
-
-                  // window.location.href="dashboard"
+                  this.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                }
                else{
-                  alert(response.data.message)
+                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
                }
               }).catch(e => {
-                  console.log(e);
+                    this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
               });
             }
           },

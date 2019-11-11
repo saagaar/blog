@@ -12,7 +12,7 @@
             <div id="sidebar">      
             <div class="profile-card">
             
-                <img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'" :alt="user" class="profile-photo">
+                <img :src="getProfileUrl()" :alt="user" class="profile-photo">
                 <h5><router-link to="/profile"><!-- <a href="timeline.html" class="text-white"> -->{{ me.name}}</router-link></h5>
                 <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> {{ me.followersCount}} followers &nbsp;{{ me.followingCount}} following</a>
             </div>
@@ -48,13 +48,26 @@ import TheFooter from './../components/Footer/TheFooter';
             me:function(){
               return this.$store.getters.me
             },
-            
-           
         },
         components:{
             TheTopNav,
             TheFooter,
             TheDashboardSideMenu
+        },
+        methods:{
+          getProfileUrl(){
+              let url=this.me.image;
+              console.log('we are here');
+              if(url===''){
+                return 'frontend/images/elements/default-profile.png';
+              }
+              else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
+                return url;
+              }
+              else{
+                return '/uploads/user-images/'+url;
+              }
+           }
         }
     }
 </script>

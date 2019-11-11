@@ -102,7 +102,7 @@ import Form from './../services/Form.js';
                 isLoading: false,
                 editor: ClassicEditor,
                 max:3,
-                image:'/images/upload.png',
+                image:'/frontend/images/elements/upload.png',
                 optionsLimit:5,
                 options:[],
                 initialState:{},
@@ -138,7 +138,7 @@ import Form from './../services/Form.js';
             this.form.isAnynomous=(value.blog.anynomous==1)?true:false;
 
             if(value.blog.image && value.blog.image!='null')
-            this.image='/images/blog/'+value.blog.image;
+            this.image='/uploads/blog/'+value.blog.code+'/'+value.blog.image;
 
         },
       },

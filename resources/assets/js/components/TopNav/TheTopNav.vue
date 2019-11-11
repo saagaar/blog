@@ -20,7 +20,7 @@
                          <ul v-else>
                         <li><a id="search" @click="OpenSearchBox" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
                       
-                        <li class="nitify dropdown">
+                        <li class="nitify dropdown" @click="updateNotificationStatus">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
                             aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ me.unReadNotificationsCount }}</em></a>
@@ -30,17 +30,17 @@
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
-                            <figure><img :src="'/images/user-images/'+me.image"></figure> {{ me.name}}</a>
+                            <figure><img :src="getProfileUrl()"></figure> {{ me.name}}</a>
                             <ul class="dropdown-menu">
-                                <li><a href="/dashboard">My Profile</a></li>
+                                <li><a href="/dashboard">My Dashboard</a></li>
                             
-                                <li><a href="#">New Stories</a></li>
-                                <li><a href="#">Stories</a></li>
+                                <li><router-link to="/profile">Profile</router-link></li>
+                                <li><router-link to="/followers">Followers</router-link></li>
                                 <hr>
-                                <li><a href="#">BlogSagar Partner Program</a></li>
+                                <li><router-link to="/blog/list">My Blog</router-link></li>
                                 <li><a href="#">Bookmarks</a></li>
                                 <li><a href="#">Publications</a></li>
-                                <li><a href="#">Customize your interest</a></li>
+                                <li><router-link to="/categories">Customize your interest</router-link></li>
                                 <hr>
                                 <li><a href="#">Settings</a></li>
                                 <li><a href="#">Help</a></li>
@@ -75,7 +75,7 @@
 
 <script>
 
-
+import Form from './../../services/Form.js';
 import LoginButton from './LoginButton.vue';
 import SignUpButton from './SignUpButton.vue';
 import TheLoginSignupModal from './TheLoginSignupModal';
@@ -84,7 +84,8 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
        
         data() {
            return {
-            topnotifications:[]
+            topnotifications:[],
+            readNotification:false
            }
         },
         computed:{
@@ -97,17 +98,51 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
             me:function(){
               this.topnotifications=this.$store.getters.me.notifications
               return this.$store.getters.me
-             
             },
            
         },
-        
         methods:{
              OpenSearchBox:function()
             {
                 $("#search_input_box").slideToggle();
                 $("#search_input").focus();
             },
+            updateNotificationStatus:function()
+            {
+                if(!this.readNotification)
+                {
+
+                   let cur=this;
+                   var form=new Form();
+                       form.get('/api/update-notification-status').then(response => 
+                        {
+                           if(response.data.status)
+                           {
+                             cur.readNotification=true;
+                              this.$store.commit('UPDATE_UNREAD_NOTIFICATION_COUNT',response.data.data.unReadNotificationsCount);
+                           }
+                           else
+                           {
+                            
+                           }
+                          }).catch(e => 
+                          {
+                             this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                          });
+                }
+            },
+            getProfileUrl(){
+              let url=this.me.image;
+              if(url===''){
+                return 'frontend/images/elements/default-profile.png';
+              }
+              else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
+                return url;
+              }
+              else{
+                return '/uploads/user-images/'+url;
+              }
+           }
          },
         components:{
                 SignUpButton,

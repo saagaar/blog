@@ -9,12 +9,11 @@
                     <div class="white-box single-post">
                         <div class="feature-img">
                             @if($blogDetails->image)
-                                 <img class="img-fluid" src="{{ asset('images/blog/'.$blogDetails->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/frontend/images/elements/default-post.jpg') }}" alt="">
                             @endif
                         </div>
-
                         <div class="blog_details">
                             <h2>{{ $blogDetails->title }}</h2>
                             <ul class="blog-info-link mt-3 mb-4">
@@ -30,7 +29,7 @@
                         <div class="d-sm-flex justify-content-between text-center">
                             <p class="like-info"><span class="align-middle">
                                 @if($likes)
-                                <likes v-bind:currentBlog="{{$blogDetails}}" v-bind:blogCode="'{{$blogDetails->code}}'" v-bind:likes="{{$likes}}"></likes>
+                                <likes v-bind:currentBlog="{{$blogDetails}}" :blogCode="'{{$blogDetails->code}}'" :likes="{{$likes}}"></likes>
                                 @endif
                             <!-- </span>{{$blogDetails->likes_count}} people like this</p> -->
                             <div class="col-sm-4 text-center my-2 my-sm-0">
@@ -52,9 +51,9 @@
                                     <div class="thumb">
                                         <a href="#">
                                             @if($prev->image)
-                                                 <img class="img-fluid" src="{{ asset('images/blog/'.$prev->image) }}" width="60" height="60" alt="">
+                                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$prev->code.'/'.$prev->image) }}" width="60" height="60" alt="">
                                             @else
-                                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}"  width="60" height="60" alt="">
+                                                 <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}"  width="60" height="60" alt="">
                                             @endif
                                         </a>
                                     </div>
@@ -167,9 +166,9 @@
                             @foreach($relatedBlog as $eachRelatedBlog)
                             <div class="media post_item">
                                 @if($eachRelatedBlog->image)
-                                     <img src="{{ asset('images/blog/'.$eachRelatedBlog->image) }}" width="60" height="60" alt="">
+                                     <img src="{{ asset('uploads/blog/'.$eachRelatedBlog->code.'/'.$eachRelatedBlog->image) }}" width="60" height="60" alt="">
                                 @else
-                                     <img src="{{ asset('images/blog/default.jpg') }}" width="60" height="60" alt="">
+                                     <img src="{{ asset('frontend/images/elements/default-post.jpg') }}" width="60" height="60" alt="">
                                 @endif
                                 <div class="media-body">
                                     <a href="{{ route('blog.detail' , $eachRelatedBlog->code)}}">

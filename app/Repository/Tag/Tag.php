@@ -18,6 +18,7 @@ Class Tag implements TagInterface
       return $this->tag->where('id', $tagsid)->first();
     }
 
+
     public function getTagWithBlog(){
         return $this->tag::has('blogs')->get()->toArray();
     }
@@ -27,14 +28,14 @@ Class Tag implements TagInterface
      * @return mixed
      */
     public function getAll(){
-   	 return	$this->tag->select('name')->latest();
+   	 return	$this->tag->latest();
     }
  	/**
      * Get tag by name 
      * @return id
      */
     public function getTagByName($tags){
-      return $this->tag->whereIn('name',$tags)->select('id')->get();
+      return $this->tag->whereIn('name',$tags)->get();
     }
 
     public function getTagsList(){

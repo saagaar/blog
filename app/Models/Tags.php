@@ -15,10 +15,10 @@ class Tags extends Model implements Auditable
      * Tags belongs to many blogs and blogs categories
      */
     protected $fillable = [
-        'name','status'
+        'name','status','updated_at','created_at'
     ];
     protected $hidden = [
-        'pivot','id','updated_at','status','created_at'
+        'pivot','id'
     ];
     public function blogs(){
     	return $this->belongsToMany(Blogs::class,'blog_tags','tags_id','blogs_id');

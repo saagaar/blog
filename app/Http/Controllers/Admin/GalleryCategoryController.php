@@ -45,7 +45,7 @@ class GalleryCategoryController extends AdminController
             $requestobj=app(GallerycatRequest::class);
             $validatedData = $requestobj->validated();
            $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-            request()->banner_image->move(public_path('images/gallery-cat-images'), $imageName);
+            request()->banner_image->move(public_path('uploads/gallery-cat-images'), $imageName);
             $validatedData['banner_image'] = $imageName;
             $this->categories->create($validatedData);
             return redirect()->route('gallerycategory.list')
@@ -67,7 +67,7 @@ class GalleryCategoryController extends AdminController
             $requestObj=app(GallerycatRequest::class);
             $validatedData = $requestObj->validated();
                 if ($request->hasFile('banner_image')){
-                    $dir = 'images/gallery-cat-images/';
+                    $dir = 'uploads/gallery-cat-images/';
                     if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
                     $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
                     request()->banner_image->move(public_path('images/gallery-cat-images'), $imageName);

@@ -55,7 +55,7 @@
                                
                 <div class="form-group">
                   <label for="Content">Content:</label>
-                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
+                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here..">{{ old('content') }}</textarea>
                   @if ($errors->has('content'))
                 <div class="alert alert-danger">{{ $errors->first('content') }}</div>
                 @endif

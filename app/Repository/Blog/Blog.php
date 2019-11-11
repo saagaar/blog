@@ -39,8 +39,6 @@ Class Blog implements BlogInterface
   }
   public function getBlogCount(){
     $data=$this->category->blogs()->get()->toArray();
-    echo '<pre>';
-    print_r($data);exit;
     return $blogByCategoryTags;
   }
 
@@ -48,10 +46,10 @@ Class Blog implements BlogInterface
    * get blog for featured =1
    */
   public function getLikesOfBlogByUser($user){
-    return $user->likes()->get();
+    return $this->blog->likes('id:user_id')->get();
   }
   public function getAllFeaturedBlog(){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->limit(4)->get();
+    return $this->blog->where(['featured'=> '1','save_method'=>2])->with('tags')->withCount('likes')->limit(4)->get();
   }
   public function getAllFeaturedForMember(){
     return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->limit(4)->get();

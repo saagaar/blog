@@ -22,11 +22,11 @@
                     <div class="single-category">
                         <div class="thumb" v-if="subCategory.banner_image">
                            <a href="#"> <img class="img-fluid" 
-                            :src="'frontend/images/categories-images/'+subCategory.banner_image" alt=""></a>
+                            :src="'uploads/categories-images/'+subCategory.banner_image" alt=""></a>
                         </div>
                         <div class="thumb" v-else>
                            <a href="#"> <img class="img-fluid" 
-                            :src="'frontend/images/categories-images/icon-no-image.svg'" alt=""></a>
+                            :src="'uploads/categories-images/icon-no-image.svg'" alt=""></a>
                         </div>
                         <div class="short_details">
                             <a class="d-block" href="single-blog.html">
@@ -60,7 +60,8 @@ import mixin  from './../mixins/LoadData.mixin.js';
         },
         data:function(){
           return {
-            initialState:{}
+            initialState:{},
+            isLoading:false
            // allCategories:[],
            //  userInterest:[],
             
@@ -72,11 +73,12 @@ import mixin  from './../mixins/LoadData.mixin.js';
         },
         method:{
             isLoading:function()
-        {
-          this.form.isLoading=this.$store.getters.isLoading
-          return this.$store.getters.isLoading;
+            {
 
-        },
+              // this.form.isLoading=this.$store.getters.isLoading
+              return this.isLoading=this.$store.getters.isLoading;
+
+            },
         },
  
     }
