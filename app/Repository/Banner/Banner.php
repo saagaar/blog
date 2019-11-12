@@ -54,5 +54,12 @@ Class Banner implements BannerInterface
     public function delete($id){
       return $this->Banner->find($id)->delete();
     }
+
+    public function getBannerTagLine()
+    {
+        return $this->Banner->get();
+    }
+
+
 }
 ?>

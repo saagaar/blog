@@ -17,6 +17,6 @@ class Banners extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'title','content','image','display_order','status',
+        'title','content','image','display_order','status','type'
     ];
 }

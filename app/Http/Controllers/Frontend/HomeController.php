@@ -19,6 +19,8 @@ use App\Repository\TagInterface;
 use App\Repository\TestimonialInterface;  
 use App\Repository\ServiceInterface;
 use App\Repository\SiteoptionInterface;
+use App\Repository\ClientInterface;
+use App\Repository\BannerInterface;
 
 class HomeController extends FrontendController
 {
@@ -58,8 +60,10 @@ class HomeController extends FrontendController
         $services=$this->services();
         $testimonialDetails=$this->testimonialDetails();
         $getInTouch=$this->getInTouch();
-
-        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'getInTouch'=>$getInTouch));
+        $client=$this->client();
+        $banner=$this->bannerTagLine();       
+               
+        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'getInTouch'=>$getInTouch,'client'=>$client,'banner'=>$banner));
     }
 
     public function index(Request $request)
@@ -261,17 +265,30 @@ class HomeController extends FrontendController
 
     public function testimonialDetails()
     { 
-      $testimonialInterface = app()->make('App\Repository\TestimonialInterface');
-      $testimonialDetails= $testimonialInterface->getActiveTestimonial();
+      $testimonial = app()->make('App\Repository\TestimonialInterface');
+      $testimonialDetails= $testimonial->getActiveTestimonial();
       return $testimonialDetails;
   }  
 
    public function getInTouch()
    {
     
-    $siteSettingInterface = app()->make('App\Repository\SiteoptionInterface');
-    $siteDetails=$siteSettingInterface->getSiteInfo();
-    return $siteDetails;    
-    
+    $siteSetting = app()->make('App\Repository\SiteoptionInterface');
+    $siteDetails=$siteSetting->getSiteInfo();
+    return $siteDetails;        
    }
-}
+
+   public function client()
+   {
+     $client= app()->make('App\Repository\ClientInterface');
+     $clientDetails=$client->getClients();
+     return $clientDetails;
+   }
+
+   public function bannerTagLine()
+   {
+     $banner= app()->make('App\Repository\BannerInterface');
+     $bannerDetails=$banner->getBannerTagLine();
+     return $bannerDetails;
+   }
+} 

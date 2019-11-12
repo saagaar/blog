@@ -67,15 +67,16 @@
 <!-- hero area -->
 <section class="hero-section" data-background="" style="background-image: url(landing-page/assets/images/hero-area/banner-bg.png);">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h1 class="mb-3">Welcome to your<br>
-          professional community</h1>
-        <p class="mb-4">Join our Blog Sagar team and get paid if you have access to a larger audience and can persuade others by virtue of your authenticity and reach.</p>
+    <div class="row"> 
+    @foreach($banner as $eachBanner)    
+      <div class="col-lg-12 text-center">        
+        <h1 class="mb-3">{{$eachBanner->title}}</h1>
+        <p class="mb-4">{{$eachBanner->type}}</p>
         <a href="" class="btn btn-secondary btn-lg mb-5">explore us</a>
         <!-- banner image -->
-        <img class="img-fluid" src="landing-page/assets/images/hero-area/banner.png" alt="banner-img">
+        <img class="img-fluid" src="{{asset('uploads/banner-images/'.$eachBanner->image) }}" alt="banner-img">        
       </div>
+      @endforeach
     </div>
   </div>
 </section>
@@ -213,18 +214,13 @@
 <!-- client logo slider -->
 <section class="section">
   <div class="container">
+    
       <div class="client-logo-slider align-self-center">
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-1.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-2.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-3.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-4.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-5.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-1.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-2.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-3.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-4.png" alt="client-logo"></a>
-          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="landing-page/assets/images/clients-logo/client-logo-5.png" alt="client-logo"></a>
+        @foreach($client as $eachClient)
+          <a href="{{$eachClient->url}}" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="{{asset('uploads/client-images/'.$eachClient->logo) }}" style="height:60px; width:120px;" alt="client-logo"></a>
+           @endforeach         
       </div>
+     
   </div>
 </section>
 <!-- /client logo slider -->
@@ -253,32 +249,33 @@
 <!-- /newsletter -->
 
 <!-- footer -->
-<footer class="section-lg footer pb-100" style="background-image: url(landing-page/assets/images/backgrounds/footer-bg.png);">
+
+<footer class="section-lg footer pb-100" style="background-image:url(landing-page/assets/images/backgrounds/footer-bg.png);">
   <div class="container">
     <div class="row">
       <div class="col-lg-3 text-center text-lg-left mb-4 mb-lg-0">
         <!-- logo -->
         <a href="index.html">
           <img class="img-fluid" src="landing-page/assets/images/logo.png" alt="logo">
-        </a>
-      </div>
+                </div>
 
       <!-- footer menu -->
       <nav class="col-lg-5 align-self-center mb-5">
         <h4>Get In Touch</h4>
-        <p>{{$getInTouch->address}} <a href="#"> hi@blogsagar.com </a></p>
+        <a href="{{$getInTouch->facebook_id}}" >{{$getInTouch->site_name}}</a><br>
+        <p>{{$getInTouch->address}}<br><a href="#">hi@blogsagar.com </a></p>
       </nav>  
       <!-- footer social icon -->
       <nav class="col-lg-4">
         <ul class="list-inline text-lg-right text-center social-icon">
           <li class="list-inline-item">
-            <a class="facebook" href="#"><i class="ti-facebook"></i></a>
+            <a class="facebook" href="{{$getInTouch->facebook_id}}"><i class="ti-facebook"></i></a>
           </li>
           <li class="list-inline-item">
-            <a class="twitter" href="#"><i class="ti-twitter-alt"></i></a>
+            <a class="twitter" href="{{$getInTouch->twitter_id}}"><i class="ti-twitter-alt"></i></a>
           </li>
           <li class="list-inline-item">
-            <a class="linkedin" href="#"><i class="ti-linkedin"></i></a>
+            <a class="linkedin" href="{{$getInTouch->linkedin_id}}"><i class="ti-linkedin"></i></a>
           </li>
         </ul>
       </nav>
