@@ -88,15 +88,13 @@ class CategoryController extends AdminController
                     'Category' => route('adminblogcategory.list'),
                     'current_menu'=>'Edit Category',
                       ]];
-        $tagList = $tag->getAllTags()->get();
-        $blogcategory = $this->categories->getAll()->where('parent_id',NULL)->get();
+        $tagList = $tag->getAllTags()->get()->toArray();
+        $blogcategory = $this->categories->getAll()->where('parent_id',NULL)->get(); 
+        // print_r($blogcategory);exit; 
         $category =$this->categories->getCatById($id);
         if ($request->method()=='POST') 
         {           
                 $requestobj=app(CategoryRequest::class);
-                // $this->validate($request, [
-                // 'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000',
-                // ]);
                 $validatedData = $requestobj->validated();
                 if ($request->hasFile('banner_image')) {
                     $dir = 'uploads/categories-images/';

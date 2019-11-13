@@ -71,10 +71,10 @@
     @foreach($banner as $eachBanner)    
       <div class="col-lg-12 text-center">        
         <h1 class="mb-3">{{$eachBanner->title}}</h1>
-        <p class="mb-4">{{$eachBanner->type}}</p>
+        <p class="mb-4">{{$eachBanner->description}}</p>
         <a href="" class="btn btn-secondary btn-lg mb-5">explore us</a>
         <!-- banner image -->
-        <img class="img-fluid" src="{{asset('uploads/banner-images/'.$eachBanner->image) }}" alt="banner-img">        
+        <img class="img-fluid" src="landing-page/assets/images/hero-area/banner.png" alt="banner-img">        
       </div>
       @endforeach
     </div>
@@ -185,7 +185,7 @@
         <div class="team-member">        
           <div class="d-flex mb-4">
             <div class="mr-3">
-              <img class="rounded-circle img-fluid" src="{{asset('uploads/testimonial-images/'.$eachDetails->image) }}"  width="100" height="100" style=" border-radius: 50%;" alt="team-member">
+              <img class="rounded-circle" src="{{asset('uploads/testimonial-images/'.$eachDetails->image) }}"  width="100" height="100" alt="Testimonial image">
             </div>
             <div class="align-self-center">                            
               <h4>{{$eachDetails->name}}</h4>
@@ -253,17 +253,18 @@
 <footer class="section-lg footer pb-100" style="background-image:url(landing-page/assets/images/backgrounds/footer-bg.png);">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 text-center text-lg-left mb-4 mb-lg-0">
+      @foreach($banner as $eachBanner)
+       <div class="col-lg-3 text-center text-lg-left mb-4 mb-lg-0">
         <!-- logo -->
         <a href="index.html">
-          <img class="img-fluid" src="landing-page/assets/images/logo.png" alt="logo">
-                </div>
-
+          <img class="img-fluid" src="{{ asset('uploads/banner-images/'.$eachBanner->image) }}" alt="logo" style="width:150px;height:100px;">
+        </div>
+      @endforeach
       <!-- footer menu -->
       <nav class="col-lg-5 align-self-center mb-5">
         <h4>Get In Touch</h4>
-        <a href="{{$getInTouch->facebook_id}}" >{{$getInTouch->site_name}}</a><br>
-        <p>{{$getInTouch->address}}<br><a href="#">hi@blogsagar.com </a></p>
+        <a href="{{$getInTouch->url}}">{{$getInTouch->site_name}}</a><br>
+        <p>{{$getInTouch->address}}<br>{{$getInTouch->contact_number}}<br><a href="#">hi@blogsagar.com </a></p>
       </nav>  
       <!-- footer social icon -->
       <nav class="col-lg-4">

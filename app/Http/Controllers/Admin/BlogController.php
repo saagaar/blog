@@ -43,9 +43,6 @@ class BlogController extends AdminController
     $tagList = $tag->getAllTags()->get();
     if ($request->method()=='POST') 
     {
-        //  $request->validate([
-        // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);  
         $requestObj=app(BlogRequest::class);
         $validatedData = $requestObj->validated();       
         $validatedData['user_id'] = Auth()->user()->id;
@@ -65,7 +62,7 @@ class BlogController extends AdminController
         // $originalImg= request()->image->move($dir,$imageName);              
         $img =Image::make($originalImg);
         list($width, $height) = getimagesize($originalImg);       
-        if ($width > 1000 && $height < 1000)
+        if($width > 1000 && $height < 1000)
         {
                   
             $img->resize(1000,null, function ($constraint) 

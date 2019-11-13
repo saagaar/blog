@@ -31,7 +31,9 @@ class BannerRequest extends FormRequest
             'display_order'=>'required',
             'status'=>'required',
             'image'=>$image,
-            'type'=>'required'
+            'type'=>'required',
+            'description'=>'required',
+            'url'=>'required'
         ];
     }
 }

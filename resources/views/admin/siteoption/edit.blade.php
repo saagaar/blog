@@ -31,6 +31,14 @@
                         <div class="alert alert-danger">{{ $errors->first('site_name') }}</div>
                         @endif
                       </div>
+
+                   <div class="form-group col-md-4">
+                    <label for="url">Site URL</label>
+                    <input type="text" class="form-control" name="url" id="url" value="{{ $site->url}}" placeholder="Site Name">
+                    @if ($errors->has('url'))
+                    <div class="alert alert-danger">{{ $errors->first('url') }}</div>
+                    @endif
+                  </div>
                   <div class="form-group col-md-4">
                     <label for="contact_email">Contact Email</label>
                     <input type="text" class="form-control" name="contact_email" id="contact_email" value="{{ $site->contact_email}}" placeholder="Contact Email">
