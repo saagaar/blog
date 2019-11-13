@@ -96,7 +96,6 @@ class HomeController extends FrontendController
       //What is the use of this line
       $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
       $data['blogDetails'] =$blogDetails;
-      $data['blogComment']  =$blogComment;
       
       $user ='';
       //Why do we need api for frontend route???
@@ -119,6 +118,22 @@ class HomeController extends FrontendController
         }
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes,'navCategory'=>$navCategory));
     }
+
+     public function resizeImage($code,$width,$name)
+    {
+        $imagePath=public_path(). '/uploads/blog/'.$code.'/'.$name;
+        if(File::exists($imagePath))
+        {
+           $img = Image::make($imagePath);
+          $img->resize($width, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+          return $img->response('jpg'); 
+        }
+       abort(404);
+      
+    }
+
     public function blogByCategory($slug){
       $data=array();
       $tagsIds = $this->category->getTagsIdByCatSlug($slug);

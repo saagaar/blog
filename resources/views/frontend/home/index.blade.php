@@ -224,7 +224,6 @@
 
                 ?>
                 @if(count($popular)>0)
-                {{count($popular)}}
                 <div class="col-lg-6 col-md-6">
                 	@foreach($popular as $eachPopular)
                     <div class="single-blog video-style small row m_b_30">

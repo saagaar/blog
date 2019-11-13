@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 use Illuminate\Support\Facades\File;
  // use Intervention\Image\Facades\Image;
- use Image;
+use Image;
 use App;
 class BlogController extends AdminController
 {
@@ -137,6 +137,8 @@ class BlogController extends AdminController
             $localeList=$Locale->getActiveLocale()->toArray();
             return view('admin.blog.editblog')->with(array('blog'=>$blog,'tags'=>$taglist,'breadcrumb'=>$breadcrumb,'localelist'=>$localeList,'primary_menu'=>'blog.list'));
     }
+
+  
     public function delete($id)
     {
        $blog =$this->blog->GetBlogById($id);      

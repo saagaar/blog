@@ -217,7 +217,7 @@ class UserController extends FrontendController
             File::delete($dir . $this->authUser->image);
           }
           $imageName = time().'.'.request()->image->getClientOriginalExtension();
-          request()->image->move(public_path('/images/user-images/'), $imageName);
+          request()->image->move(public_path('/uploads/user-images/'), $imageName);
           $form['image']=$imageName;
       }
       $this->user->update($this->authUser->id,$form);

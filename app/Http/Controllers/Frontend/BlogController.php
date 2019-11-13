@@ -62,6 +62,22 @@ class BlogController extends FrontendController
           return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
        }
    	}
+
+    public function resizeImage($code,$width,$name)
+    {
+        $imagePath=public_path(). '/uploads/blog/'.$code.'/'.$name;
+        if(File::exists($imagePath))
+        {
+           $img = Image::make($imagePath);
+          $img->resize($width, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+          return $img->response('jpg'); 
+        }
+       abort(404);
+      
+    }
     public function update(Request $request,$blogCode,TagInterface $tag)
     {
             $routeName= Route::currentRouteName();
@@ -138,22 +154,14 @@ class BlogController extends FrontendController
                             // $form['image']=$imageName;
                             $extension = request()->image->getClientOriginalExtension();
                             $imageName = time().'.'.$extension;              
-                            $dir=public_path(). '/images/blog/'.$postId.'/';
+                            $dir=public_path(). '/uploads/blog/'.$postId.'/';
                              if ($blogData->image != '' && File::exists($dir,$blogData->image))
                             {
-                            File::deleteDirectory($dir);
-                             }
-                            File::makeDirectory($dir);
-
-                            $tmpImg =request()->image->move($dir,$imageName);
-                            $img = Image::make($tmpImg);         
-                           $img->resize(100, null, function ($constraint) 
-                           {
-                             $constraint->aspectRatio();
+                             File::deleteDirectory($dir);
                             }
-                            )->save($dir.'/'.time().'-thumbnail.'.$extension);
-                            $validatedData['image'] = $imageName;
->>>>>>> 6d8894aed4c25617015202178b881cc8942fe9c1
+                            File::makeDirectory($dir, 0755, true,true);
+                            $tmpImg =request()->image->move($dir,$imageName);
+                            $form['image'] = $imageName;
                         }
                         $form['short_description']=$request->short_description;
                         $form['save_method']=$request->save_method?$request->save_method:'1';
