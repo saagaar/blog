@@ -1,6 +1,12 @@
 @extends('frontend.layouts.app')
 @section('content')
 	<div class="mid_part">
+    <meta property="og:url"           content="/share/{{ $blogDetails->code }}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{ $blogDetails->title }}" />
+    <meta property="og:description"   content="{{ $blogDetails->short_description }}" />
+    <meta property="og:image"         content="{{ asset('images/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}" />
+
         <!--================Blog Area =================-->
     <section class="blog_area single-post-area">
         <div class="container">
@@ -37,7 +43,11 @@
                                 <p class="comment-count"><span class="align-middle"></span> <icon-comments-count></icon-comments-count></p>
                             </div>
                             <ul class="social-icons">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                @php($url=url('https://thebloggersclub.com/blog/share/'.$blogDetails->code))
+                 
+                                <a href="javascript:void(0);" onclick="fb_share('{{ $url }}', '{{ $blogDetails->title }}')"><i class="fab fa-facebook-f"></i></a>
+
+                                <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
                                 <li><a href="#"><i class="fab fa-instagram"></i></a></li>

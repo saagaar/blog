@@ -85,7 +85,7 @@ class HomeController extends FrontendController
         }
         return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
     }
-    public function blogDetail($code){
+    public function blogDetail($code,Request $request){
       $blogDetails = $this->blog->getBlogByCode($code);
       $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->orderBy('id','asc')->first();
       $next = $this->blog->getAll()->where('id', '<', $blogDetails['id'])->orderBy('id','desc')->first();
@@ -113,11 +113,16 @@ class HomeController extends FrontendController
               $data['path']='/home';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
-              return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes,'navCategory'=>$navCategory));
           }
 
         }
-        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlo,'likes'=>$likes,'navCategory'=>$navCategory));
+        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes,'navCategory'=>$navCategory,'open_graph' => [
+                'title' => $blogDetails->title,
+                'image' => asset('images/logo.jpeg'),
+                'url' => $request->url(),
+                'description' => $blogDetails->content,
+                'keywords' =>  $blogDetails->short_description,
+            ],));
     }
     public function blogByCategory($slug){
       $data=array();

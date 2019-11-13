@@ -145,7 +145,7 @@ class BlogController extends FrontendController
                              $constraint->aspectRatio();
                             }
                             )->save($dir.'/'.time().'-thumbnail.'.$extension);
-                            $validatedData['image'] = $imageName;
+                            $form['image'] = $imageName;
                         }
                         $form['short_description']=$request->short_description;
                         $form['save_method']='1';
