@@ -60,6 +60,7 @@ import Comment from './components/Comment/Comment';
 import IconCommentsCount from './components/Comment/IconCommentsCount';
 import Likes from './components/Likes/Likes';
 import BlogLoading from './components/InfiniteLoading/BlogLoading';
+import BlogLoadingBySlug from './components/InfiniteLoading/BlogLoadingBySlug';
 import LatestBlogLoading from './components/InfiniteLoading/LatestBlogLoading';
 // import UserDashboard from './pages/UserDashboard';
 const default_layout="default";
@@ -87,6 +88,7 @@ const app = new Vue({
             'likes':Likes,
             'icon-comments-count':IconCommentsCount,
             'blog-loading':BlogLoading,
+            'blog-slug-loading':BlogLoadingBySlug,
             'latest-blog-loading':LatestBlogLoading
           
         }

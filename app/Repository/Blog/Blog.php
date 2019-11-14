@@ -4,17 +4,12 @@ namespace App\Repository\Blog;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Blogs;
 use App\Repository\BlogInterface;
-use App\Repository\TagInterface;
-use App\Repository\CategoryInterface;
 Class Blog implements BlogInterface
 {
 	protected $blog;
-  protected $tag;
-	public function __construct(Blogs $blog,TagInterface $tag,CategoryInterface $category)
+	public function __construct(Blogs $blog)
 	{
 		$this->blog=$blog;
-    $this->tag=$tag;
-    $this->category=$category;
 	}
 
   /**
@@ -29,18 +24,11 @@ Class Blog implements BlogInterface
   /**
    * get blog by category
    */
-  public function getBlogByCategory($slug,$limit=10,$offset=0){
-    $tagsIds = $this->category->getTagsIdByCatSlug($slug);
+  public function getBlogByCategory($tagsIds,$limit=10,$offset=0){
     $blogByCategoryTags =$this->blog->whereHas('tags', function ($q) use ($tagsIds) {
     return $q->whereIn('tags_id', $tagsIds); 
     })
     ->withCount('likes','comments')->take($limit)->skip($offset)->get();
-    return $blogByCategoryTags;
-  }
-  public function getBlogCount(){
-    $data=$this->category->blogs()->get()->toArray();
-    echo '<pre>';
-    print_r($data);exit;
     return $blogByCategoryTags;
   }
 
@@ -50,11 +38,11 @@ Class Blog implements BlogInterface
   public function getLikesOfBlogByUser($user){
     return $user->likes()->get();
   }
-  public function getAllFeaturedBlog(){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->limit(4)->get();
+  public function getAllFeaturedBlog($limit=10,$offset=0){
+    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->take($limit)->skip($offset)->get();
   }
-  public function getAllFeaturedForMember(){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->limit(4)->get();
+  public function getAllFeaturedForMember($limit=10,$offset=0){
+    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->take($limit)->skip($offset)->get();
   }
 
    /**
@@ -69,8 +57,8 @@ Class Blog implements BlogInterface
   public function getLatestAllBlog($limit=10,$offset=0){
     return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
-  public function getPopularBlog(){
-    return $this->blog->where(['save_method'=>2])->orderBy('likes_count','DESC')->withCount('likes','comments')->limit(4)->get();
+  public function getPopularBlog($limit=10,$offset=0){
+    return $this->blog->where(['save_method'=>2])->orderBy('likes_count','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
   /**
    * get blog bye following

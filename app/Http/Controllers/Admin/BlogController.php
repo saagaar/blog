@@ -100,8 +100,9 @@ class BlogController extends AdminController
                         'current_menu'=>'Edit Blog',
                           ]];
                           $taglist = $tag->getAllTags()->get();
-
+           
             $blog =$this->blog->GetBlogById($id);
+            
             if ($request->method()=='POST') 
             {
                

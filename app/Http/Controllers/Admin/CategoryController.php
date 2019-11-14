@@ -88,10 +88,13 @@ class CategoryController extends AdminController
                     'Category' => route('adminblogcategory.list'),
                     'current_menu'=>'Edit Category',
                       ]];
-        $tagList = $tag->getAllTags()->get()->toArray();
-        $blogcategory = $this->categories->getAll()->where('parent_id',NULL)->get(); 
-        // print_r($blogcategory);exit; 
+
+        $tagList = $tag->getAllTags()->get();
+        // $selectedTags = $this->categories->tags();
+        
+        $blogcategory = $this->categories->getAll()->where('parent_id',NULL)->get();
         $category =$this->categories->getCatById($id);
+        // print_r($category->tags()->pluck('tags_id'));exit;
         if ($request->method()=='POST') 
         {           
                 $requestobj=app(CategoryRequest::class);

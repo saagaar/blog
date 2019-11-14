@@ -5,7 +5,7 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="images/system-images/logo.png" alt="">
+                        <img src="/images/system-images/logo.png" alt="">
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
@@ -30,21 +30,24 @@
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
-                            <figure><img :src="'/images/user-images/'+me.image"></figure> {{ me.name}}</a>
+                            <figure><img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'"></figure> {{ me.name}}
+                        </a>
                             <ul class="dropdown-menu">
-                                <li><a href="/dashboard">My Profile</a></li>
-                            
+                                <li><a href="/dashboard">Dashboard</a></li>
+
+                                <li><a href="/profile">My Profile</a></li>
+                                
                                 <li><a href="#">New Stories</a></li>
-                                <li><a href="#">Stories</a></li>
+                                <li><a href="/blog/list">Stories</a></li>
                                 <hr>
                                 <li><a href="#">BlogSagar Partner Program</a></li>
                                 <li><a href="#">Bookmarks</a></li>
                                 <li><a href="#">Publications</a></li>
-                                <li><a href="#">Customize your interest</a></li>
+                                <li><a href="/categories">Customize your interest</a></li>
                                 <hr>
-                                <li><a href="#">Settings</a></li>
+                                <li><a href="/settings">Settings</a></li>
                                 <li><a href="#">Help</a></li>
-                                <li><a href="#">Change Password</a></li>
+                                <!-- <li><a href="#">Change Password</a></li> -->
                                 <li><a v-bind:href="config.ROOT_URL+'logout/user'">Log Out</a></li>
                             </ul>
                         </li>

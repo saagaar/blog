@@ -18,9 +18,9 @@
                         <div class="thumb">
                             <a href="#">
                                 @if($featuredBlog['0']->image)
-                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredBlog->code.'/'.$featuredBlog['0']->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$featuredBlog->code.'/'.$featuredBlog['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                             </a>
                         </div>
@@ -54,9 +54,9 @@
                             <figure>
                                 <a href="#">
                                     @if($eachFeaturedBlog->image)
-                                 <img class="img-fluid" src="{{ asset('images/blog/'.$eachFeaturedBlog->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachFeaturedBlog->code.'/'.$eachFeaturedBlog->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                                 </a>
                             </figure>
@@ -80,7 +80,7 @@
                     
 
                     <div class="text-right">
-                        <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
+                        <a href="{{ route('bloglistbyslug' , 'all-featured')}}" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
                     </div>
 
                 </div>
@@ -110,9 +110,9 @@
                         <div class="thumb">
                             <a href="#">
                                 @if($featuredForMember['0']->image)
-                                 <img class="img-fluid" src="{{ asset('images/blog/'.$featuredForMember['0']->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                             </a>
                         </div>
@@ -145,9 +145,9 @@
                             <figure>
                                 <a href="#">
                                     @if($eachFeaturedForMember->image)
-                                 <img class="img-fluid" src="{{ asset('images/blog/'.$eachFeaturedForMember->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachFeaturedForMember->code.'/'.$eachFeaturedForMember->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                                 </a>
                             </figure>
@@ -170,7 +170,7 @@
                     @endforeach
 
                     <div class="text-right">
-                        <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
+                        <a href="{{ route('bloglistbyslug' , 'featured-for-member')}}" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
                     </div>
 
                 </div>
@@ -198,9 +198,9 @@
                         <div class="thumb">
                             <a href="#">
                                 @if($popular['0']->image)
-                                 <img class="img-fluid" src="{{ asset('images/blog/'.$popular['0']->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$popular['0']->code.'/'.$popular['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                             </a>
                         </div>
@@ -232,9 +232,9 @@
                             <figure>
                                 <a href="#">
                                     @if($eachPopular->image)
-                                 <img class="img-fluid" src="{{ asset('images/blog/'.$eachPopular->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachPopular->code.'/'.$eachPopular->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                                 </a>
                             </figure>
@@ -259,7 +259,7 @@
                     
 
                     <div class="text-right">
-                        <a href="#" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
+                        <a href="{{ route('bloglistbyslug' , 'popular')}}" class="b_all genric-btn link-border circle">See All <i class="fa fa-angle-double-right"></i></a>
                     </div>
 
                 </div>
@@ -290,9 +290,9 @@
                             <figure>
                                 <a href="#">
                                 @if($eachLatest->image)
-	                                <img class="img-fluid" src="{{ asset('images/blog/'.$eachLatest->image) }}" alt="">
+	                                <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachLatest->code.'/'.$eachLatest->image) }}" alt="">
 	                            @else
-	                                <img class="img-fluid" src="{{ asset('images/system-images/default-post.jpg') }}" alt="">
+	                                <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
 	                            @endif
                                 </a>
                             </figure>
