@@ -131,13 +131,13 @@ class BlogController extends FrontendController
                         {
                             $extension = request()->image->getClientOriginalExtension();
                             $imageName = time().'.'.$extension;              
-                            $dir=public_path().'/images/blog/'.$postId.'/';
+                            $dir=public_path().'/uploads/blog/'.$postId.'/';
                              if ($blogData->image != '' && File::exists($dir,$blogData->image))
                             {
                             File::deleteDirectory($dir);
-                             }else{}
+                             }else{
                                 File::makeDirectory($dir);
-
+                            }
                             $tmpImg =request()->image->move($dir,$imageName);
                             $img = Image::make($tmpImg);         
                            $img->resize(100, null, function ($constraint) 
@@ -164,7 +164,7 @@ class BlogController extends FrontendController
         $blogData = $this->blog->getBlogByCode($blogCode);
         if( $blogData)
         {
-            $dir = public_path(). '/images/blog/'.$blogData->code.'/';
+            $dir = public_path(). '/uploads/blog/'.$blogData->code.'/';
             if ($blogData->image != '' && File::exists($dir,$blogData->image))
             {
                 File::deleteDirectory($dir);

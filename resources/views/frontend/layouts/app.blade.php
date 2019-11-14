@@ -85,9 +85,34 @@ function fb_share(dynamic_link,dynamic_title) {
 }
 </script>
 
-
-
+<script>
+    $(function(){
+  $('.fb-share').click(function(){
+    var url=$(this).data('url');
+      FB.ui({
+      method: 'share',
+      href: url,
+    }, function(response){
+        if(response!==undefined)
+        {
+             jQuery.ajax({
+                        type: "POST",
+                        url: '/blog/detail/share',
+                        data:{url:url,media:'facebook'},
+                        datatype: 'json',
+                        success: function(datajson) 
+                        {
+                            $('.img-loader').addClass('hidden');
+                             // data = jQuery.parseJSON(datajson);
+                            
+                        }
+                    });       
+        }
+    });
+  })
+})
 </script>
+
 
 <script type="text/javascript">
     $(document).ready(function(){
