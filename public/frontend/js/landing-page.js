@@ -86,7 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-<<<<<<< HEAD
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -49474,14 +49473,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-=======
->>>>>>> avi
 /***/ "./resources/assets/js/landing-page.js":
 /*!*********************************************!*\
   !*** ./resources/assets/js/landing-page.js ***!
   \*********************************************/
 /*! no exports provided */
-<<<<<<< HEAD
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49563,7 +49559,7 @@ var app = new Vue({
       colorItemIndex: undefined,
       colorItems: [// ['#d99cd1', '#c99cd1', '#b99cd1', '#a99cd1'],
       // ['#403030', '#f97a7a'],
-      ['#31a50d', '#d1b022', '#74482a'] // ['#ffd077', '#3bc4c7', '#3a9eea', '#ff4e69', '#461e47'],
+      ['#31a50d', '#d1b022', '#74482a', '#779cc1'] // ['#ffd077', '#3bc4c7', '#3a9eea', '#ff4e69', '#461e47'],
       ],
       drawer: true,
       fontFamily: undefined,
@@ -49820,11 +49816,6 @@ var app = new Vue({
     }
   }
 });
-=======
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/var/www/html/blog/resources/assets/js/landing-page.js'");
->>>>>>> avi
 
 /***/ }),
 

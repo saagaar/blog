@@ -32,13 +32,16 @@
                         </ul>
                         @else
                          <ul>
-                        <li><a id="search" onclick="OpenSearchBox" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                        <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
                       
                         <li class="nitify dropdown">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
-                            aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ auth()->user()->unreadNotifications()->count() }}</em></a>
-                               <notification-loading :notificationList="[]" :loadType="'fullload'" :type="'nav'" ></notification-loading>
+                            aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i>@if(auth()->user()->unreadNotifications()->count()>0)  
+                            <em >{{ auth()->user()->unreadNotifications()->count() }}</em>
+                            @endif
+                            </a>
+                               <notification-loading :notificationlist="[]" :loadtype="'fullload'" :type="'nav'" ></notification-loading>
                                 
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -49,25 +52,23 @@
                               @else
                                 <img src="/images/system-images/default-profile.png">
                               @endif
-                            </figure> {{ auth()->user()->name }}
+                            </figure><?php  
+                            $name=auth()->user()->name;
+                            $allNameArray=explode(' ',$name);
+                            ?> {{ $allNameArray['0'] }}
                         </a>
                             <ul class="dropdown-menu">
-                                <li><a href="/dashboard">Dashboard</a></li>
-
-                                <li><a href="/profile">My Profile</a></li>
-                                
-                                <li><a href="/blog/add">New Stories</a></li>
-                                <li><a href="/blog/list">Stories</a></li>
-                                <hr>
-                                <li><a href="#">BlogSagar Partner Program</a></li>
-                                <li><a href="#">Bookmarks</a></li>
-                                <li><a href="#">Publications</a></li>
-                                <li><a href="/categories">Customize your interest</a></li>
-                                <hr>
+                                <li><a href="/dashboard"> My Dashboard</a></li>
+                                <li><a href="/profile"> Profile</a></li>
+                                <li><a href="/categories">Choose your interest</a></li>
+                                  <hr/>
+                                <li><a href="/blog/add">New Article</a></li>
+                                <li><a href="/blog/list">My Articles</a></li>
+                                  <hr/>
                                 <li><a href="/settings">Settings</a></li>
-                                <li><a href="#">Help</a></li>
+                                <!-- <li><a href="#">Help</a></li> -->
                                 <!-- <li><a href="#">Change Password</a></li> -->
-                                <li><a href="logout/user">Log Out</a></li>
+                                <li><a href="/logout/user">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -76,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <div class="search_input" id="search_input_box" ref="search_input_box" >
+    <!--     <div class="search_input" id="search_input_box" ref="search_input_box" >
             <div class="container ">
                 <form class="d-flex justify-content-between search-inner">
                     <input type="text" class="form-control" id="search_input" placeholder="Search Here">
@@ -84,7 +85,7 @@
                     <span class="ti-close" id="close_search" title="Close Search"></span>
                 </form>
             </div>
-        </div>
+        </div> -->
 
     </section>
     

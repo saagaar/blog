@@ -28,11 +28,8 @@
                     <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5">
                        <img v-if="eachBlog.image" class="img-fluid" :src="'/uploads/blog/'+eachBlog.code+'/'+eachBlog.image" :alt="eachBlog.title">
-<<<<<<< HEAD
                        <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="eachBlog.title">
-=======
-                       <img v-else class="img-fluid" :src="'/images/system-images/default-post.jpg'" :alt="eachBlog.title">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+
                         </div>
                       <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
                         <h4>{{eachBlog.title}}</h4>

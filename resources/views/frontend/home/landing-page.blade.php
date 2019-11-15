@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80347372-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-80347372-2');
+</script>
 <script type="text/javascript">
    window.__allCategory__ = '{!! addslashes(json_encode($CategoryByWeight)) !!}'
 </script>
@@ -74,7 +82,7 @@
     @foreach($banner as $eachBanner)    
       <div class="col-lg-12 text-center">        
         <h1 class="mb-3">{{$eachBanner->title}}</h1>
-        <p class="mb-4">{{$eachBanner->content}}</p>
+        <p class="mb-4">{{$eachBanner->description}}</p>
         <a href="" class="btn btn-secondary btn-lg mb-5">explore us</a>
         <!-- banner image -->
         <img class="img-fluid" src="landing-page/assets/images/hero-area/banner.png" alt="banner-img">        
@@ -334,20 +342,13 @@
 <footer class="section-lg footer pb-100" style="background-image:url(landing-page/assets/images/backgrounds/footer-bg.png);">
   <div class="container">
     <div class="row">
-      @foreach($banner as $eachBanner)
        <div class="col-lg-3 text-center text-lg-left mb-4 mb-lg-0">
-        <!-- logo -->
         <a href="index.html">
-<<<<<<< HEAD
           <img class="img-fluid" src="landing-page/assets/images/logo.png" alt="logo">
           </a>
                 </div>
 
-=======
-          <img class="img-fluid" src="{{ asset('uploads/banner-images/'.$eachBanner->image) }}" alt="logo" style="width:150px;height:100px;">
-        </div>
-      @endforeach
->>>>>>> avi
+
       <!-- footer menu -->
       <nav class="col-lg-5 align-self-center mb-5">
         <h4>Get In Touch</h4>
