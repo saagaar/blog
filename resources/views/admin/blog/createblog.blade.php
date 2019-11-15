@@ -60,13 +60,13 @@
                   </div>
                   @endif
                  </div>
-                  <div class="form-group">
+                <div class="form-group">
                   <label for="short_description">Short Description: </label>
                     <textarea name="short_description" class="form-control" rows="5" placeholder="Short Description here..">{{old('short_description')}}</textarea>
                   @if ($errors->has('short_description'))
-                <div class="alert alert-danger">{{ $errors->first('short_description') }}
-                </div>
-                @endif
+                  <div class="alert alert-danger">{{ $errors->first('short_description') }}
+                  </div>
+                  @endif
                 </div>
                  <div class="form-group">
                   <label for="image">Image Upload</label>
@@ -128,6 +128,7 @@
                     <div class="custom-control custom-radio">
                         <input type="radio" class="custom-control-input flat-red" name="featured"  value="1" >
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
+                    
                       </div>
                   @if ($errors->has('featured'))
                 <div class="alert alert-danger">{{ $errors->first('featured') }}</div>

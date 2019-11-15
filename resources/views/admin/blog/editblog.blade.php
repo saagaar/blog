@@ -26,7 +26,7 @@
               <h3 class="box-title">Edit Blog</h3>
             </div>
           <!-- Form Element sizes -->
-          <div class="box ">
+          <div class="box">
             <div class="box-body">
             <form action="{{route('blog.edit',[$blog->id,str_slug($blog->title)])}}" method="POST" enctype="multipart/form-data">
               @csrf
