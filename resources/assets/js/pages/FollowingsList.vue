@@ -25,7 +25,10 @@
             </div>
           </div>
         </div>
-        <FollowingLoading :followSuggestion="followSuggestion"></FollowingLoading>
+           <InfiniteLoading @infinite="infiniteHandler" spinner="spiral">
+            <div slot="no-more"></div>
+            <div slot="no-results"><hr></div>
+          </InfiniteLoading>
     </div>
     <div class="col-md-9 col-sm-9 pad-left-0" v-else>
       <div class="friend-list">
@@ -92,13 +95,16 @@
   import FollowButton from './../components/Follows/FollowButton';
   import FollowSuggestionsList from './../components/Follows/FollowSuggestionsList';
   import PlaceHolderFollowings  from './../components/ContentPlaceholder/PlaceHolderFollowings';
-    import FollowingLoading from './../components/BlogLoading/FollowingLoading';
+  import InfiniteLoading from 'vue-infinite-loading';
+  import Form from './../services/Form.js';
     export default {
       mixins: [ mixin ],
          data:function(){
     return {
             initialState:{},
             followSuggestion:'',
+            offset: 1,
+            form:new Form()
         }
       },
         watch:{
@@ -110,18 +116,35 @@
           userFollowed:function(user){
            var index=this.initialState.followings.filter(p => p.username == user);
                // remove after 1 second
-              
                 // (this.initialState.followings.splice(index, 1));
             
           },
+          infiniteHandler($state) {
+            this.form.get('/api/getfollowings?page='+this.offset).then(response => 
+            {
+                   if(response.data.data.length)
+                   {
+                     this.offset+=1;
+                     this.initialState.followings.push(...response.data.data);
+                     $state.loaded();
+                   }
+                   else
+                   {
+                     $state.complete();
+                   }
+                  }).catch(e => 
+                  {
+                     this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                  });
+            },
+       
           
         },
         components:{
           FollowButton,
           FollowSuggestionsList,
           PlaceHolderFollowings,
-          FollowingLoading
-          
+          InfiniteLoading
         },
     }
 </script>

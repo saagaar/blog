@@ -27,7 +27,6 @@
             <div class="box-header with-border">
               <h3 class="box-title">Edit user</h3>
             </div>
-          
           <!-- Form Element sizes -->
           <div class="box box-success">
             <div class="box-body">
@@ -82,7 +81,7 @@
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone number</label>
-                    <input type="text" class="form-control" name="phone" value="{{$accounts->email}}" id="phone" placeholder="Phone Number">
+                    <input type="text" class="form-control" name="phone" value="{{$accounts->phone}}" id="phone" placeholder="Phone Number">
                     @if ($errors->has('phone'))
                   <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
                   @endif
@@ -140,8 +139,11 @@
                   <div class="form-group">
                   <label for="image">Profile Picture</label>
                     <div class="text-left">
+                      @if($accounts->image)
                       <img src="{{ asset('uploads/user-images/'.$accounts->image) }}" class="avatar img-circle" alt="Profile Picture" height="90" width="90">
-                  
+                     @else
+                       <img src="{{asset('images/default-profile-icon-24.jpg') }}" class="avatar img-circle" alt="Profile Picture" height="90" width="90">   
+                      @endif
                       <h6>Upload a different photo...</h6>
                       <input type="file" class="form-control" name="image" id="image">
                     </div>

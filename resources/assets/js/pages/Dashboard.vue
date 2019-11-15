@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-md-9 col-sm-9">
 
-            <div class="col-lg-12 col-md-12 col-sm-12" v-if="initialState.blogByFollowing">
+            <div class="col-lg-12 col-md-12 col-sm-12" v-if="initialState.blogByFollowing.length>0">
               <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogByFollowing">
                 <div class="thumb col-lg-3 col-md-4 col-sm-5">
                  <img  v-if="eachBlog.image" class="img-fluid" :src="'/uploads/blog/'+eachBlog.code+'/'+eachBlog.image" :alt="eachBlog.title">
@@ -23,7 +23,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12" v-else>
               <div class="single-blog video-style small row m_b_30">
                 <div class="short_details col-lg-12 col-md-12 col-sm-12">
-                  <h4 class="text-center d-block">No post available!!</h4>
+                  <h4 class="text-center d-block">No post From your followings !!</h4>
                 </div>
               </div>
             </div>

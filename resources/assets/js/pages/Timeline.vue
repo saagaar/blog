@@ -24,7 +24,7 @@
                   <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true && initialState.blogList>0">
                     
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList.length>0">
                     <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5">
                        <img v-if="eachBlog.image" class="img-fluid" :src="'/uploads/blog/'+eachBlog.code+'/'+eachBlog.image" :alt="eachBlog.title">
@@ -50,6 +50,13 @@
                  </pagination>
                     </div>
                   </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12" v-else>
+                    <div class="single-blog video-style small row m_b_30">
+                      <div class="short_details col-lg-12 col-md-12 col-sm-12">
+                        <h4 class="text-center d-block">No Published post!!</h4>
+                      </div>
+                    </div>
+                    </div>
 
               </div>
               <div class="clearfix"></div>

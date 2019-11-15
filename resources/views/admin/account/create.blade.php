@@ -92,7 +92,7 @@
                   </div>
                    <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" value="{{ old('address') }}" id="address"  placeholder="Enter Address">
+                    <input type="text" class="form-control" name="address" value="{{ old('address')}}" id="address"  placeholder="Enter Address">
                     @if ($errors->has('address'))
                   <div class="alert alert-danger">{{ $errors->first('address') }}</div>
                   @endif

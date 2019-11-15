@@ -129,9 +129,8 @@
                   <div class="alert alert-danger">{{ $errors->first('short_description')}}</div>
                   @endif
                 </div>
-
                 <div class="form-group col-md-4">
-                  <label for="type">Type: </label>
+                  <label for="type">Type:</label>
                     <div class="custom-control custom-radio">
                         <input type="radio" class="custom-control-input flat-red" name="type"  value="1" @if($blog->type =='1') checked @endif>
                         <label class="custom-control-label" for="defaultChecked">Private</label>
@@ -144,14 +143,12 @@
                 <div class="alert alert-danger">{{ $errors->first('type') }}</div>
                 @endif
                 </div>
-
-
-                <div class="form-group">
-                  <label for="image">Image Upload</label>
+               <div class="form-group">                  
+                  <label for="image">Image Upload</label>                  
                   <input type="file" class="form-control" name="image" id="image">
-                 <img src="{{asset('uploads/blog/'.$blog->code.'/'.$blog->image) }}" alt="Blog Image" height="42" width="42">
+                   <img src="{{asset('uploads/blog/'.$blog->code.'/'.$blog->image) }}" alt="Blog Image" height="42" width="42">
                   @if ($errors->has('image'))
-                <div class="alert alert-danger">{{$errors->first('image') }}</div>
+                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
