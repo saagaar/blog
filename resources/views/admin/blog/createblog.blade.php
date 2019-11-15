@@ -11,7 +11,7 @@
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
                 <li><a href="{{route('blog.list')}}"><span class="glyphicon glyphicon-minus"></span> All blogs</a></li>
-                <li class="{{ (request()->is('create/blog')) ? 'active' : '' }}"><a href="{{route('blog.create')}}"><span class="glyphicon glyphicon-plus"></span> Create Blog</a></li>
+                <li class="{{ (request()->is('create/blog')) ? 'active' : '' }}"><a href="{{route('blog.create')}}"><span class="glyphicon glyphicon-plus"></span>Create Blog</a></li>
               </ul>
             </div>
           <!-- /.box-body -->
@@ -40,9 +40,9 @@
                 <div class="form-group">
                   <label for="language">Language</label>
                   <select class="form-control" name="locale_id">
-                    @if(!empty($localelist))
-                      @foreach($localelist as $eachlocale)
-                      <option value="{{$eachlocale['id']}}">{{$eachlocale['lang_name']}}
+                    @if(!empty($localeList))
+                      @foreach($localeList as $eachLocale)
+                      <option value="{{$eachLocale['id']}}">{{$eachLocale['lang_name']}}
                       </option>
                       @endforeach
                     @endif
@@ -56,10 +56,10 @@
                   <label for="Content">Content:</label>
                     <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
                   @if ($errors->has('content'))
-                <div class="alert alert-danger">{{ $errors->first('content') }}</div>
-                @endif
-                </div>
-
+                  <div class="alert alert-danger">{{ $errors->first('content') }}
+                  </div>
+                  @endif
+                 </div>
                   <div class="form-group">
                   <label for="short_description">Short Description: </label>
                     <textarea name="short_description" class="form-control" rows="5" placeholder="Short Description here..">{{old('short_description')}}</textarea>
@@ -85,9 +85,9 @@
                     </select>
                     <p class="help-block"></p>
                     @if($errors->has('tags'))
-                        <p class="help-block">
+                       <div class="alert alert-danger"> 
                             {{ $errors->first('tags') }}
-                        </p>
+                        </div>
                     @endif
                 </div>
                 <div class="col-md-12">
@@ -104,12 +104,11 @@
                   @if ($errors->has('save_method'))
                 <div class="alert alert-danger">{{ $errors->first('save_methods') }}</div>
                 @endif
-                </div>
-                
-            <div class="form-group col-md-4">
+                </div>                
+             <div class="form-group col-md-4">
               <label for="show_in_home">Show in Home:</label>
                <div class="custom-control custom-radio">
-                 <input type="radio" class="custom-control-input flat-red" name="show_in_home"  value="1" checked>
+                 <input type="radio" class="custom-control-input flat-red" name="show_in_home" value="1" checked>
                  <label class="custom-control-label" for="defaultChecked">Active</label>
                </div>
              <div class="custom-control custom-radio">

@@ -43,13 +43,12 @@ class BlogController extends AdminController
     $tagList = $tag->getAllTags()->get();
     if ($request->method()=='POST') 
     {
-        request()->validate([
-
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
-        ]);
+       
         $requestObj=app(BlogRequest::class);
-        $validatedData = $requestObj->validated();      
+        $validatedData = $requestObj->validated();
+        //  request()->validate([
+        // 'image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //  ]);           
         $created = $this->blog->create($validatedData);
         $uniqid= uniqid();
         $part1=substr($uniqid,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
@@ -65,8 +64,7 @@ class BlogController extends AdminController
         $img =Image::make($originalImg);
         list($width, $height) = getimagesize($originalImg);       
         if($width > 1000 && $height < 1000)
-        {
-                  
+        {                  
             $img->resize(1000,null, function ($constraint) 
             {
             $constraint->aspectRatio();
@@ -91,9 +89,8 @@ class BlogController extends AdminController
     }
     
     $localeList=$locale->getActiveLocale()->toArray();
-    return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'tags'=>$tagList,'localelist'=>$localeList,'primary_menu'=>'blog.list'));
-
-    }
+    return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'tags'=>$tagList,'localeList'=>$localeList,'primary_menu'=>'blog.list'));
+ }
     public function edit(Request $request, $id,$slug,LocaleInterface $Locale,TagInterface $tag)
     {
             $breadcrumb=['breadcrumbs' => [
@@ -106,13 +103,13 @@ class BlogController extends AdminController
             $blog =$this->blog->GetBlogById($id);            
             if ($request->method()=='POST') 
             {    
-                 request()->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                 ]);     
+                //  request()->validate([
+                // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                //  ]);     
                 $requestObj=app(BlogRequest::class);
                 $validatedData = $requestObj->validated();          
-             if($request->hasFile('image')) 
-             {     
+             if ($request->hasFile('image')) 
+              {     
                 $uniqid= uniqid();                        
                 $dir=public_path(). '/uploads/blog/'.$blog->code.'/';
                  if ($blog->image != '' && File::exists($dir,$blog->image))
@@ -125,10 +122,8 @@ class BlogController extends AdminController
                 $originalImg =request()->image->move($dir,$imageName);
                 $img = Image::make($originalImg);
                 list($width, $height) = getimagesize($originalImg);  
-
                 if ($width > 1000 && $height < 1000)
-                {
-                          
+                {                          
                     $img->resize(1000,null, function ($constraint) 
                     {
                     $constraint->aspectRatio();
@@ -143,15 +138,15 @@ class BlogController extends AdminController
                 } 
 
                 //**************resizing the image of thumbnail******************//
-               $img->resize(100, null, function ($constraint) 
+                $img->resize(100, null, function ($constraint) 
                 {
                  $constraint->aspectRatio();
                 }
                 )->save($dir.'/'.$uniqid.'-thumbnail.'.$extension);
                     
                   $validatedData['image'] = $imageName;
-            }
-                else 
+              }
+            else 
                 {
                     $validatedData['image'] = $blog->image;
                 }
