@@ -10,7 +10,6 @@ class VisitorDetails extends Model implements Auditable
 	use Auditables;
 	protected $table='visitor_details';
 
-
     protected $fillable = [
        'referer_url','user_agent','redirected_to','visit_date'
     ];

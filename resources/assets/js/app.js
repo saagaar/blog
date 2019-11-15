@@ -62,6 +62,11 @@ import Likes from './components/Likes/Likes';
 import BlogLoading from './components/InfiniteLoading/BlogLoading';
 import BlogLoadingBySlug from './components/InfiniteLoading/BlogLoadingBySlug';
 import LatestBlogLoading from './components/InfiniteLoading/LatestBlogLoading';
+
+import LoginButton from './components/TopNav/LoginButton.vue';
+import SignUpButton from './components/TopNav/SignUpButton.vue';
+import TheLoginSignupModal from './components/TopNav/TheLoginSignupModal';
+import NotificationsLoading  from './components/InfiniteLoading/NotificationsLoading';
 // import UserDashboard from './pages/UserDashboard';
 const default_layout="default";
 const app = new Vue({
@@ -89,7 +94,11 @@ const app = new Vue({
             'icon-comments-count':IconCommentsCount,
             'blog-loading':BlogLoading,
             'blog-slug-loading':BlogLoadingBySlug,
-            'latest-blog-loading':LatestBlogLoading
+            'latest-blog-loading':LatestBlogLoading,
+            'login-button':LoginButton,
+            'signup-button':SignUpButton,
+            'the-login-signup-modal':TheLoginSignupModal,
+            'notification-loading':NotificationsLoading
           
         }
     

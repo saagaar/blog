@@ -8,7 +8,7 @@
                 <div class="col-lg-8 posts-list pad-right-0">
                     <div class="white-box single-post">
                         <div class="feature-img">
-                            <img class="img-fluid" src="{{ asset('images/blog/'.$blogDetails->image) }}" alt="">
+                            <img class="img-fluid" src="{{ asset('uploads/blog/'.$blog->code.'/'.$blogDetails->image) }}" alt="">
                         </div>
 
                         <div class="blog_details">
@@ -99,9 +99,9 @@
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
                                     	@if($eachComment->user->image)
-                                        <img src="{{asset('images/user-images/'.$eachComment->user->image)}}" alt="">
+                                        <img src="{{asset('uploads/user-images/'.$eachComment->user->image)}}" alt="">
                                         @else
-                                        <img src="{{asset('images/user-images/default.png')}}" alt="">
+                                        <img src="{{asset('uploads/user-images/default.png')}}" alt="">
                                         @endif
                                     </div>
                                     <div class="desc">

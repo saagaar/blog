@@ -41,12 +41,11 @@ class ServiceController extends AdminController
                     ]];
         if ($request->method()=='POST')
         {
-          $request->validate([
-          'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', ]);
+    
             $requestObj=app(ServicesRequest::class);
             $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->icon->getClientOriginalExtension();
-            request()->icon->move(public_path('images/services-images'), $imageName);
+            request()->icon->move(public_path('uploads/services-images'), $imageName);
             $validatedData['icon'] = $imageName;
             $this->service->create($validatedData);
             return redirect()->route('services.list')    
@@ -64,17 +63,15 @@ class ServiceController extends AdminController
             $service =$this->service->getById($id);    
             if ($request->method()=='POST')
             {
-                 $request->validate([
-                'icon' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                ]);  
+                
                 $requestObj=app(servicesRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('icon')) {
-                    $dir = 'images/services-images/';
+                    $dir = 'uploads/services-images/';
                     if ($service->icon != '' && File::exists($dir . $service->icon))
                     File::delete($dir . $service->icon);
                     $iconName = time().'.'.request()->icon->getClientOriginalExtension();
-                    request()->icon->move(public_path('images/services-images'), $iconName);
+                    request()->icon->move(public_path('uploads/services-images'), $iconName);
                     $validatedData['icon'] = $iconName;
                 }else {
                     $validatedData['icon'] = $service->icon;
@@ -89,7 +86,7 @@ class ServiceController extends AdminController
     {
        $services=$this->service->getById($id);
         if($services){
-            $dir = 'images/services-images/';
+            $dir = 'uploads/services-images/';
             if ($services->icon != '' && File::exists($dir . $services->icon)){
                 File::delete($dir . $services->icon);
             }   

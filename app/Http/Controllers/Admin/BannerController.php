@@ -39,13 +39,11 @@ class BannerController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-           $request->validate([
-           'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-           ]); 
+          
         $requestObj=app(BannerRequest::class);
         $validatedData = $requestObj->validated();
         $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('images/banner-images'), $imageName);
+        request()->image->move(public_path('uploads/banner-images'), $imageName);
         $validatedData['image'] = $imageName;
         $this->banner->create($validatedData);
         return redirect()->route('banner.list')    
@@ -63,16 +61,14 @@ class BannerController extends AdminController
             $banner =$this->banner->getById($id);    
             if ($request->method()=='POST')
             {
-                $request->validate([
-               'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-               ]);   
+               
                 $requestObj=app(BannerRequest::class);
                 $validatedData = $requestObj->validated();
                 if($request->hasFile('image')){
-                    $dir = 'images/banner-images/';
+                    $dir = 'uploads/banner-images/';
                 if ($banner->image != '' && File::exists($dir . $banner->image)){           File::delete($dir . $banner->image);}
                     $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/banner-images'), $imageName);
+                    request()->image->move(public_path('uploads/banner-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }
                 else 
@@ -90,7 +86,7 @@ class BannerController extends AdminController
     {
        $banner =$this->banner->getById($id);       
         if($banner){
-            $dir = 'images/banner-images/';
+            $dir = 'uploads/banner-images/';
             if ($banner->image != '' && File::exists($dir . $banner->image)){
                 File::delete($dir . $banner->image);
             }

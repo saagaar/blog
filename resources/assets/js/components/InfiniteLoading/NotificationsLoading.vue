@@ -14,7 +14,11 @@
                      <div slot="no-results">-------------</div>
                   </InfiniteLoading>
                   <li v-if="type=='nav'" class="media">
-                        <p class=" text-center"><router-link to="/users/notifications"> See All</router-link></p>
+                        <p class=" text-center">
+                          
+                          <a v-if="loadType=='fullload'" href="/users/notifications">See All</a>
+                          <router-link v-else to="/users/notifications"> See All</router-link>
+                        </p>
                     </li>
              </ul>
 </template>
@@ -25,8 +29,10 @@ import Form from './../../services/Form.js';
 
 export default {
   props: {
-    notificationList:Array,
-    type:{type:String,default:'fullPage'}
+    notificationList:{type:Array,default: function () { return [] }},
+    type:{type:String,default:'fullPage'},
+    loadType:{type:String,default:'noload'},
+
   },
   components: {
     InfiniteLoading,
@@ -38,8 +44,15 @@ export default {
       form:new Form()
     };
   },
+  created(){
+    if(window.__NOTIFICATION__!==undefined){
+      let notifications=JSON.parse(window.__NOTIFICATION__) || {};
+      this.allNotifications=notifications;
+    }
+  },
   watch:{
     notificationList:function(newValue){
+      // alert('here');
        this.allNotifications=newValue
     }
   },
@@ -65,6 +78,11 @@ export default {
                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
         },
+        notifications(){
+          let notifications=JSON.parse(window.__NOTIFICATION__) || {};
+          console.log(notifications);
+          return notifications;
+        }
     },
  
 };

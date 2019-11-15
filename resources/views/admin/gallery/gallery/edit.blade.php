@@ -58,7 +58,8 @@
                 
                 <div class="form-group">
                   <label for="image">Image Upload</label>
-                  <img src="{{ asset('/images/gallery/'.$gallery['image']) }}" alt="{{ $gallery->title }}" height="42" width="42">
+                   <img src='/uploads/gallery/{{$gallery->image}}' width="50"/>
+                 
                   <input type="file" class="form-control" name="image" id="image" multiple>
                   @if ($errors->has('image'))
                   <div class="alert alert-danger">{{ $errors->first('image') }}</div>

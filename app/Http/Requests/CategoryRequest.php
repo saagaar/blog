@@ -28,7 +28,7 @@ class CategoryRequest extends FormRequest
         if ($routeName == 'adminblogcategory.edit')
           {
             $banner = 'image|mimes:jpeg,png,jpg,gif,svg|max:1000';
-            // Update operation, exclude the record with id from the validation:
+           
             $slug = 'required|min:2|max:255|unique:categories,slug,'. $this->id;
             if($request->parent_id==''){
                 $tags='';
@@ -37,6 +37,7 @@ class CategoryRequest extends FormRequest
                 $tags='required';
             }
           }
+          
           else
           {
             
@@ -59,7 +60,8 @@ class CategoryRequest extends FormRequest
                 'tags'      =>$tags,
                 'banner_image' => $banner,
                 'show_in_home'  =>'required',
-                'priority'  =>'required'
+                'priority'  =>'required',
+                'description'  =>'required'
 
               
         ];

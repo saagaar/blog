@@ -37,7 +37,6 @@ class Blogs extends Model implements Auditable
      * @var array
      */
   
-
     public function locale(){
        return $this->belongsTo(Locales::class,'locale_id');
     }

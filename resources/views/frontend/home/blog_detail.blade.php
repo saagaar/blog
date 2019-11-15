@@ -15,9 +15,9 @@
                     <div class="white-box single-post">
                         <div class="feature-img">
                             @if($blogDetails->image)
-                                 <img class="img-fluid" src="{{ asset('images/blog/'.$blogDetails->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{asset('asset('/images/system-images/default-post.jpg') }}" alt="">
                             @endif
                         </div>
 
@@ -62,9 +62,9 @@
                                     <div class="thumb">
                                         <a href="#">
                                             @if($prev->image)
-                                                 <img class="img-fluid" src="{{ asset('images/blog/'.$prev->image) }}" width="60" height="60" alt="">
+                                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$prev->code.'/'.$prev->image) }}" width="60" height="60" alt="">
                                             @else
-                                                 <img class="img-fluid" src="{{ asset('images/blog/default.jpg') }}"  width="60" height="60" alt="">
+                                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg')}}"  width="60" height="60" alt="">
                                             @endif
                                         </a>
                                     </div>
@@ -73,7 +73,7 @@
                                             <span class="lnr text-white lnr-arrow-left"></span>
                                         </a>
                                     </div>
-                                    <div class="detials">
+                                    <div class="details">
                                         <p>Prev Post</p>
                                         <a href="#">
                                             <h4>{{ $prev->title }}</h4>
@@ -85,7 +85,7 @@
                                 
                                 <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
                                     @if($next)
-                                    <div class="detials">
+                                    <div class="details">
                                         <p>Next Post</p>
                                         <a href="{{ route('blog.detail' , $next->code)}}">
                                             <h4>{{ $next->title }}</h4>
@@ -177,9 +177,9 @@
                             @foreach($relatedBlog as $eachRelatedBlog)
                             <div class="media post_item">
                                 @if($eachRelatedBlog->image)
-                                     <img src="{{ asset('images/blog/'.$eachRelatedBlog->image) }}" width="60" height="60" alt="">
+                                     <img src="{{ asset('/uploads/blog/'.$eachRelatedBlog->code.'/'.$eachRelatedBlog->image) }}" width="60" height="60" alt="">
                                 @else
-                                     <img src="{{ asset('images/blog/default.jpg') }}" width="60" height="60" alt="">
+                                     <img src="{{ asset('/images/system-images/default-post.jpg')}}" width="60" height="60" alt="">
                                 @endif
                                 <div class="media-body">
                                     <a href="{{ route('blog.detail' , $eachRelatedBlog->code)}}">

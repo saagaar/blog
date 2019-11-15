@@ -25,7 +25,7 @@
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
                             aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ me.unReadNotificationsCount }}</em></a>
 
-                               <NotificationsLoading :notificationList="topnotifications" :type="'nav'" ></NotificationsLoading>
+                               <NotificationsLoading :notificationList="topnotifications" :loadType="'noload'" :type="'nav'" ></NotificationsLoading>
                                 
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -37,7 +37,7 @@
 
                                 <li><a href="/profile">My Profile</a></li>
                                 
-                                <li><a href="#">New Stories</a></li>
+                                <li><a href="/blog/add">New Stories</a></li>
                                 <li><a href="/blog/list">Stories</a></li>
                                 <hr>
                                 <li><a href="#">BlogSagar Partner Program</a></li>

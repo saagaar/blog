@@ -13,7 +13,7 @@ Class Service implements ServiceInterface
 	{
 		$this->Services=$services;
 	}
- 
+
     public function getById($servicesid){
       return $this->Services->where('id', $servicesid)->first();
     }
@@ -53,6 +53,10 @@ Class Service implements ServiceInterface
      */
     public function delete($id){
       return $this->Services->find($id)->delete();
+    }
+
+    public function getServicesDetails(){
+     return $this->Services->where('status','1')->get();
     }
 }
 ?>

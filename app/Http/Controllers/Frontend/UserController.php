@@ -214,12 +214,12 @@ class UserController extends FrontendController
 
       if(request()->hasFile('image'))
       {
-        $dir = 'images/user-images/';
+        $dir = 'uploads/user-images/';
           if ($this->authUser->image != '' && File::exists($dir . $this->authUser->image)){
             File::delete($dir . $this->authUser->image);
           }
           $imageName = time().'.'.request()->image->getClientOriginalExtension();
-          request()->image->move(public_path('/images/user-images/'), $imageName);
+          request()->image->move(public_path('/uploads/user-images/'), $imageName);
           $form['image']=$imageName;
       }
       $this->user->update($this->authUser->id,$form);

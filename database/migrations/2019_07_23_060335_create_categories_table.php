@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
                     ->onDelete('cascade');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('name');
+            $table->String('description')->nullable();
             $table->string('slug')->unique();
             $table->string('banner_image')->nullable();
             $table->enum('show_in_home',['1', '2'])->comment('1->Active,2->Inactive');

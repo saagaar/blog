@@ -23,10 +23,7 @@
                   <th>Name</th>
                   <th>Display</th>
                   <th>slug</th>
-                  <th>Show in Home</th>
-                  <th>Created at</th>
-                  <th>updated at</th>
-                  
+                  <th>Show in Home</th>                  
                   <th colspan="2">Action</th>
                 </tr>
                 </thead>
@@ -44,11 +41,8 @@
                   <td>{{$category->slug}}</td>
 
                   <td> <input data-id="{{$category->id}}" data-url="{{route('adminblogcategory.changestatus')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$category->show_in_home==1 ? 'checked' : '' }}></td>
-                  
-                  <td>{{$category->created_at}}</td>
-                  <td>{{$category->updated_at}}</td>
                   <td><a href="{{route('adminblogcategory.edit', $category->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('adminblogcategory.delete', $category->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td><a onClick="return ConfirmDelete();" href="{{route('adminblogcategory.delete', $category->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
                 @else

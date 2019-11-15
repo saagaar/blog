@@ -23,7 +23,7 @@
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-lg-4 col-md-5 col-sm-12">
                         	@if($eachBlog->image)
-                            	<img class="img-fluid" src="{{ asset('/images/blog/'.$eachBlog->image) }}" alt="{{ $eachBlog->title }}">
+                            	<img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachBlog->code.'/'.$eachBlog->image) }}" alt="{{ $eachBlog->title }}">
                             @else
                             	<img class="img-fluid" src="/images/system-images/default-post.jpg" alt="{{ $eachBlog->title }}">
                             @endif

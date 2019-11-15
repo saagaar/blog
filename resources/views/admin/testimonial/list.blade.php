@@ -39,14 +39,14 @@
                   <td>{{$testimonial->name}}</td>
                    <td>{{$testimonial->position }}</td>
                    <td>{{$testimonial->description }}</td>
-                   <td><img src="{{asset('images/testimonial-images/'.$testimonial->image) }}" alt="Testimonial Image" height="42" width="42"></td>
+                   <td><img src="{{asset('uploads/testimonial-images/'.$testimonial->image) }}" alt="Testimonial Image" height="42" width="42"></td>
                   <td>
                     <input data-id="{{$testimonial->id}}" data-url="{{route('testimonial.changestatus')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$testimonial->status==1 ? 'checked' : ''}}>
                       </td>             
                   <td>{{$testimonial->created_at}}</td>
                   <td>{{$testimonial->updated_at}}</td>
                   <td><a href="{{route('testimonial.edit',$testimonial->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('testimonial.delete', $testimonial->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td><a onClick="return ConfirmDelete();" href="{{route('testimonial.delete', $testimonial->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr> 
                 @endforeach
                 @else
