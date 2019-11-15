@@ -60,7 +60,7 @@
                     <select multiple="multiple" class="form-control js-example-basic-multiple"  name="permission[]" id="permission">
 
                       
-                          @foreach ($permissions as $values)
+                        @foreach ($permissions as $values)
                         <?php if(!$role->permissions()->pluck('id')){ ?>
                         <option value="{{ $values->id }}"> {{ $values->name }}  </option>
                         <?php }else{ ?>

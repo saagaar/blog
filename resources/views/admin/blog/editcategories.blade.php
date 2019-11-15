@@ -57,9 +57,10 @@
                 <div class="form-group">
                   <label for="parent_id">Parent</label>
                     <select class="form-control"  name="parent_id" id="parent_id">
-                      <?php print_r($blogcategory); ?>
-                      @foreach ($blogcategory as $values)
+                      <!-- <?php print_r($blogcategory); ?> -->
                       <option value="">none</option>
+                      @foreach ($blogcategory as $values)
+                      
                       <option value="{{ $values->id }}" @if($values->id==$category->parent_id) selected @endif > {{ $values->name }}  </option>
                       @endforeach
                     </select>
@@ -79,11 +80,19 @@
                 </div>
                 <div class="form-group">
                   <label for="tags">Tags</label>
-                  <!-- value="{{ $tags }}" -->
                     <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
-                      @foreach ($tags as $values)
-                            <option value="{{ $values->id }}"> {{ $values->name }}  </option>
-                      @endforeach
+                      @if(!($category->tags()->pluck('tags_id'))->isEmpty())
+                        @foreach ($tags as $values)
+                          @foreach($category->tags()->pluck('tags_id') as $tagsid)
+                            <option value="{{ $values->id }}" @if($values->id == $tagsid) selected @endif> {{ $values->name }}  </option>
+                          @endforeach
+                        @endforeach
+                      @else
+                        @foreach ($tags as $values)
+                         <option value="{{ $values->id }}">{{ $values->name }}</option>
+                         @endforeach
+                      @endif
+                      
                     </select>
                     <p class="help-block"></p>
                     @if($errors->has('tags'))

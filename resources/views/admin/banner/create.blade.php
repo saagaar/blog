@@ -39,7 +39,14 @@
                        <div class="alert alert-danger">{{ $errors->first('title') }}</div>
                        @endif
                     </div>
-                
+                  <div class="form-group">
+                    <label for="description">Description: </label>
+                     <textarea name="description" class="form-control" rows="5" placeholder="Enter Description">{{old('description')}}</textarea>
+                      @if ($errors->has('description'))
+                      <div class="alert alert-danger">{{ $errors->first('description') }}</div>
+                      @endif
+                  </div>  
+                    
                   <div class="form-group">
                     <label for="content">Content:</label>
                     <textarea name="content" class="form-control" id="contenteditor" placeholder="Banner Content here..">
@@ -56,6 +63,13 @@
                    <div class="alert alert-danger">{{ $errors->first('type') }}</div>
                    @endif
                 </div>
+                <div class="form-group">
+                       <label for="url">URL</label>
+                       <input type="text" class="form-control" name="url" id="url" value="{{ old('url') }}" placeholder="Enter URL">
+                       @if ($errors->has('url'))
+                       <div class="alert alert-danger">{{ $errors->first('url') }}</div>
+                       @endif
+                    </div>
                                
                 <div class="form-group">
                   <label for="display_order">Display Order</label>

@@ -23,6 +23,7 @@
 	    </div>
         <InfiniteLoading @infinite="infiniteHandler" spinner="spiral">
           <div slot="no-more"></div>
+          <div slot="no-results"><hr></div>
         </InfiniteLoading>
 </div>
 </template>

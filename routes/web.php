@@ -53,6 +53,9 @@ Route::get('/api/update-notification-status','Frontend\UserController@updateNoti
 Route::get('/category/{slug}','Frontend\HomeController@blogByCategory')->name('blogbycategory');
 Route::get('/getblogbycategory/{slug}','Frontend\HomeController@getBlogByCategory')->name('getblogbycategory');
 Route::get('/api/getlatestblog','Frontend\HomeController@getLatestBlog')->name('getlatestblog');
+Route::get('/bloglist/{slug}','Frontend\HomeController@blogListBySlug')->name('bloglistbyslug');
+Route::get('api/getbloglistbyslug/{slug}','Frontend\HomeController@getBlogListBySlug')->name('getbloglistbyslug');
+
 Route::get('/api/getfollowers','Frontend\UserController@getFollowers')->name('getfollowers');
 Route::get('/api/getfollowings','Frontend\UserController@getFollowings')->name('getfollowings');
 

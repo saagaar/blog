@@ -39,9 +39,9 @@
                   </td>
                   <td>{{ $tag->created_at}}</td>
                   <td>{{ $tag->updated_at}}</td>
-                  <td><a href="{{route('tags.delete',$tag->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                  <td><a onClick="return ConfirmDelete();" href="{{route('tags.delete',$tag->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
 
+                  <td><a href="{{route('tags.edit', $tag->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                  <td><a onClick="return ConfirmDelete();" href="{{route('tags.delete', $tag->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
                 @else

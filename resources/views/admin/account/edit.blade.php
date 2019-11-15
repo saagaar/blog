@@ -8,11 +8,6 @@
           <div class="box box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">User Account</h3>
-
-              <!-- <div class="box-tools">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div> -->
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
@@ -145,7 +140,7 @@
                   <div class="form-group">
                   <label for="image">Profile Picture</label>
                     <div class="text-left">
-                      <img src="{{ asset('images/user-images/'.$accounts['image']) }}" class="avatar img-circle" alt="Profile Picture" height="42" width="42">
+                      <img src="{{ asset('uploads/user-images/'.$accounts->image) }}" class="avatar img-circle" alt="Profile Picture" height="90" width="90">
                   
                       <h6>Upload a different photo...</h6>
                       <input type="file" class="form-control" name="image" id="image">

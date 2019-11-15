@@ -5,8 +5,8 @@
             <div class="thumb col-md-4 col-sm-5 col-12">
                 <figure>
                     <a href="#">
-                         <img v-if="items.image" class="img-fluid" :src="'/images/blog/'+items.image" :alt="items.title">
-                       <img v-else class="img-fluid" :src="'/images/blog/default.jpg'" :alt="items.title">
+                         <img v-if="items.image" class="img-fluid" :src="'/uploads/blog/'+items.code+'/'+items.image" :alt="items.title">
+                       <img v-else class="img-fluid" :src="'/images/system-images/default-post.jpg'" :alt="items.title">
                     </a>
                 </figure>
             </div>
@@ -18,7 +18,7 @@
                 <div class="meta-bottom d-flex">
                     <a href="#"><i class="ti-time"></i>{{ items.created_at | moment("from", "now")}}</a>
                     <a href="#" class="appreciate"><i>
-                        <img src="img/appreciate-active.gif" class="img-fluid">
+                        <img src="/images/appreciate-active.gif" class="img-fluid">
                     </i> {{items.likes_count}} like</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -28,6 +28,7 @@
         </div>
         <InfiniteLoading @infinite="infiniteHandler" spinner="spiral">
           <div slot="no-more"></div>
+          <div slot="no-results"><hr></div>
         </InfiniteLoading>
 </div>
 </template>

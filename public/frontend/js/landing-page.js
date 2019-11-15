@@ -86,6 +86,7 @@
 /************************************************************************/
 /******/ ({
 
+<<<<<<< HEAD
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -49473,11 +49474,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+=======
+>>>>>>> avi
 /***/ "./resources/assets/js/landing-page.js":
 /*!*********************************************!*\
   !*** ./resources/assets/js/landing-page.js ***!
   \*********************************************/
 /*! no exports provided */
+<<<<<<< HEAD
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49816,6 +49820,11 @@ var app = new Vue({
     }
   }
 });
+=======
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/var/www/html/blog/resources/assets/js/landing-page.js'");
+>>>>>>> avi
 
 /***/ }),
 

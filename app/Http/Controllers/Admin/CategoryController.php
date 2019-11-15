@@ -102,15 +102,16 @@ class CategoryController extends AdminController
                     'Category' => route('adminblogcategory.list'),
                     'current_menu'=>'Edit Category',
                       ]];
+
         $tagList = $tag->getAllTags()->get();
+        // $selectedTags = $this->categories->tags();
+        
         $blogcategory = $this->categories->getAll()->where('parent_id',NULL)->get();
         $category =$this->categories->getCatById($id);
+        // print_r($category->tags()->pluck('tags_id'));exit;
         if ($request->method()=='POST') 
         {           
                 $requestobj=app(CategoryRequest::class);
-                // $this->validate($request, [
-                // 'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000',
-                // ]);
                 $validatedData = $requestobj->validated();
 
 
