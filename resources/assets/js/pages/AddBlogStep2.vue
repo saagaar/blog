@@ -138,7 +138,7 @@ import Form from './../services/Form.js';
             this.form.isAnynomous=(value.blog.anynomous==1)?true:false;
 
             if(value.blog.image && value.blog.image!='null')
-            this.image='/images/blog/'+value.blog.image;
+            this.image='/images/blog/'+value.blog.code+'/'+value.blog.image;
 
         },
       },

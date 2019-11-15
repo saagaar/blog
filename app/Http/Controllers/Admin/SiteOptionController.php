@@ -22,6 +22,7 @@ class SiteOptionController extends AdminController
     }
     public function edit(Request $request)
     {   
+
         $site =$this->siteOptions->getSiteInfo();
         $breadcrumb=array('breadcrumbs'=>array('Dashboard' => route('admin.dashboard'),
                           'current_menu' => 'Site Settings',

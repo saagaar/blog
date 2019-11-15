@@ -101,7 +101,7 @@ import { required, minLength,maxLength } from 'vuelidate/lib/validators';
         	}
         },
         components:{
- 
+          Loader
         },
     }
 </script>

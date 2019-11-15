@@ -26,7 +26,7 @@ class CreateBlogsTable extends Migration
             $table->foreign('user_id')
                     ->references('id')->on('users')
                     ->onDelete('cascade');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->enum('save_method',['1','2'])->comment('1=Save to draft,2-Publish')->default('1');
             $table->enum('show_in_home',['1', '2'])->comment('1->Active,2->Inactive');
             $table->enum('featured',['1','2'])->comment('1=yes,2=no');

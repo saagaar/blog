@@ -41,31 +41,35 @@ class GalleryController extends AdminController
                     'current_menu'=>'Create Gallery',
                       ]];
         $category = $this->category->getAll()->get();
-        if ($request->method()=='POST') {
+        if ($request->method()=='POST') 
+        {
             $requestObj=app(GalleryRequest::class);
             $validatedData = $requestObj->validated();
             $allowedFileExtension=['jpg','png','jpeg','gif','svg'];
-               if ($request->file('image')) {
-           		foreach ($request->image as $item){
+               if ($request->file('image'))
+                {
+           		   foreach ($request->image as $item){
            			$filename = $item->getClientOriginalName();
                     $extension = $item->getClientOriginalExtension();
                     $check=in_array($extension,$allowedFileExtension);
                         if($check)
                         {
-           			$dir = 'uploads/gallery/';
-                    $imageName = uniqid().'.'.$item->getClientOriginalExtension();
-                    $item->move(public_path($dir), $imageName);
-                    $currentDateTime = date('Y-m-d H:i:s');
-                    $galleryData[] = array('title'=>$validatedData['title'],'categories_id'=>$validatedData['categories_id'],'image'=>$imageName,"created_at"=>$currentDateTime,"updated_at"=>$currentDateTime);
-                    }
-                    else {
+                   			$dir = 'uploads/gallery/';
+                            $imageName = uniqid().'.'.$item->getClientOriginalExtension();
+                            $item->move(public_path($dir), $imageName);
+                            $currentDateTime = date('Y-m-d H:i:s');
+                            $galleryData[] = array('title'=>$validatedData['title'],'categories_id'=>$validatedData['categories_id'],'image'=>$imageName,"created_at"=>$currentDateTime,"updated_at"=>$currentDateTime);
+                        }
+                        else 
+                        {
                         return redirect()->route('gallery.list')
-                            ->with(array('error'=>'Sorry Only Upload png , jpg , doc','breadcrumb'=>$breadcrumb));
+                        ->with(array('error'=>'Sorry Only Upload png , jpg , doc','breadcrumb'=>$breadcrumb));
                     }
 
            		}
             }
-        $this->gallery->create($galleryData);
+
+       $this->gallery->create($galleryData);
        return redirect()->route('gallery.list')
                             ->with(array('success'=>'Gallery created successfully','breadcrumb'=>$breadcrumb));
         }

@@ -46,6 +46,7 @@ class SiteoptionsRequest extends FormRequest
             'city'                          =>'required|min:6|max:50',
             'state'                         =>'required',
             'country'                       =>'required',
+            'url'                           =>'required'
         ];
     }
 }

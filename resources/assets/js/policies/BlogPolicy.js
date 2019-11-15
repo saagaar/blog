@@ -32,4 +32,18 @@ export default class BlogPolicy
             return false;
         }
     }
+    static delete(user, blog)
+    {
+        if(user.permissions.indexOf('delete all posts')!==-1)
+        {
+            return user.username === blog.user.username;
+        }
+         if(user.permissions.indexOf('delete own posts')!==-1)
+        {
+           return true;
+        }
+        if (user.permissions=='delete posts more then his point') {
+            return false;
+        }
+    }
 }

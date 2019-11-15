@@ -19,10 +19,10 @@ class UserSeed extends Seeder
             'status'   =>'1',
             'invalid_login' =>'0',
             'phone' => '9813953180',
-            'password' => bcrypt('123456'),
+            'password' => bcrypt('123456'),  
+            'address'=>'kumaripati,lalitpur', 
             'created_at' => date("Y-m-d H:i:s")
         ]);
-
         
     }
 }

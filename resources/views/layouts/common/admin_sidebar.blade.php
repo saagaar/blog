@@ -39,7 +39,7 @@
       </span>
       </a>
           <ul class="treeview-menu">
-            <li @if($primary_menu=="account.list") class="active" @endif><a href="{{route('account.list')}}"><i class="fa  fa-paint-brush"></i>Accounts</a></li>
+            <li @if($primary_menu=="account.list") class="active" @endif><a href="{{route('account.list')}}"><i class="fa fa-user-circle"></i>Accounts</a></li>
             <li @if($primary_menu=="role.list") class="active" @endif><a href="{{route('roles.list')}}"><i class="fa fa-group"></i> User Roles</a></li>
             <li @if($primary_menu=="permission.list") class="active" @endif><a href="{{route('permission.list')}}"><i class="glyphicon glyphicon-lock"></i> User Permissions</a></li>
           </ul>

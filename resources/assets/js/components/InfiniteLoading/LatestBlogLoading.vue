@@ -5,8 +5,8 @@
             <div class="thumb col-md-4 col-sm-5 col-12">
                 <figure>
                     <a href="#">
-                         <img v-if="items.image" class="img-fluid" :src="'/images/blog/'+items.image" :alt="items.title">
-                       <img v-else class="img-fluid" :src="'/images/blog/default.jpg'" :alt="items.title">
+                         <img v-if="items.image" class="img-fluid" :src="'/images/blog/'+items.code+'/'+items.image" :alt="items.title">
+                       <img v-else class="img-fluid" :src="'/images/system-images/default-post.jpg'" :alt="items.title">
                     </a>
                 </figure>
             </div>
@@ -28,6 +28,7 @@
         </div>
         <InfiniteLoading @infinite="infiniteHandler" spinner="spiral">
           <div slot="no-more"></div>
+          <div slot="no-results"><hr></div>
         </InfiniteLoading>
 </div>
 </template>

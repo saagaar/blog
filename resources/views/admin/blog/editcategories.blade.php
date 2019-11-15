@@ -79,10 +79,16 @@
                 </div>
                 <div class="form-group">
                   <label for="tags">Tags</label>
-                  <!-- value="{{ $tags }}" -->
                     <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
                       @foreach ($tags as $values)
-                            <option value="{{ $values->id }}"> {{ $values->name }}  </option>
+                      @if((!$category->tags()->pluck('tags_id')))->isEmpty()
+                      @foreach($category->tags()->pluck('tags_id') as $tagsid)
+                            <option value="{{ $values->id }}" @if($values->id == $tagsid) selected @endif> {{ $values->name }}  </option>
+                            @endforeach
+                      @else
+                         <option value="{{ $values->id }}">{{ $values->name }}</option>
+
+                      @endif
                       @endforeach
                     </select>
                     <p class="help-block"></p>

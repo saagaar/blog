@@ -46,7 +46,7 @@ class LoginController extends FrontendController
     
     public function registerUser($getInfo,$provider)
     {
-        $emailCheck = $this->isEmailAlreadyRegistered($getInfo->email);
+        $emailCheck = $this->checkEmailAvailability($getInfo->email);
         if($emailCheck==true){
             $emailParts = explode('@', $getInfo->email);
         $username = $emailParts[0];
@@ -122,10 +122,23 @@ class LoginController extends FrontendController
     public function isEmailAlreadyRegistered($email){
         $user = $this->account->getAll()->where('email',$email)->first();
         if($user) {
-           return response()->json(false); 
-            }
+            if($this->authUser->email==$email){
+                return response()->json(true); 
+            }else
+                 return response()->json(false); 
+        }
         else{
            return response()->json(true); 
+        }
+           
+    } 
+    public function checkEmailAvailability($email){
+        $user = $this->account->getAll()->where('email',$email)->first();
+        if($user) {
+           return false; 
+            }
+        else{
+           return true; 
         }
            
     } 

@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-lg-3 col-md-4">
         <div class="footer-logo">
-            <img src="images/system-images/logo.png" alt="">
+            <img src="/images/system-images/logo.png" alt="">
         </div>
     </div>
     <div class="col-lg-9 col-md-8">
