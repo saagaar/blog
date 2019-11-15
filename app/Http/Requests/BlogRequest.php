@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Route;
 
 class BlogRequest extends FormRequest
 {
@@ -22,9 +21,11 @@ class BlogRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-        if ($this->method() == 'POST')
+    {   
+        $routeName= ROUTE::currentRouteName();
+        if($routeName == 'blog.edit')
           {
+
             // Update operation, exclude the record with id from the validation:
             $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
           }

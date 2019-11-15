@@ -41,13 +41,10 @@ class ClientController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-             $request->validate([
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
             $requestObj=app(ClientRequest::class);
             $validatedData = $requestObj->validated();
             $logoName = time().'.'.request()->logo->getClientOriginalExtension();
-            request()->logo->move(public_path('images/client-images'), $logoName);
+            request()->logo->move(public_path('uploads/client-images'), $logoName);
             $validatedData['logo'] = $logoName;
             $this->client->create($validatedData);
             return redirect()->route('client.list')    
@@ -65,16 +62,13 @@ class ClientController extends AdminController
             $client =$this->client->getById($id);    
             if ($request->method()=='POST')
             {
-                  $request->validate([
-                  'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                  ]);  
                 $requestObj=app(ClientRequest::class);
                 $validatedData = $requestObj->validated();
                 if($request->hasFile('logo')) {
-                    $dir = 'images/client-images/';
+                    $dir = 'uploads/client-images/';
                 if ($client->logo != '' && File::exists($dir . $client->logo))             File::delete($dir . $client->logo);
                     $logoName = time().'.'.request()->logo->getClientOriginalExtension();
-                    request()->logo->move(public_path('images/client-images'), $logoName);
+                    request()->logo->move(public_path('uploads/client-images'), $logoName);
                     $validatedData['logo'] = $logoName;
                 }
                 else 
@@ -92,7 +86,7 @@ class ClientController extends AdminController
     {
        $client =$this->client->getById($id);       
         if($client){
-            $dir = 'images/client-images/';
+            $dir = 'uploads/client-images/';
             if ($client->logo != '' && File::exists($dir . $client->logo)){
                 File::delete($dir . $client->logo);
             }

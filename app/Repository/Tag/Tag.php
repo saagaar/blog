@@ -52,6 +52,10 @@ Class Tag implements TagInterface
     public function create(array $data){
       return $this->tag->create($data);
     }
+     public function save(array $data){
+      return $this->tag->insertGetId($data);
+    }
+    
      /**
      * Updates a post.
      *

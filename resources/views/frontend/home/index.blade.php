@@ -1,11 +1,13 @@
 @extends('frontend.layouts.app')
 @section('content')
 
+<section class="fullwidth-block area-padding-bottom">
+
+
  <div class="spinner-border text-primary" role="status">
   <span class="sr-only">Loading...</span>
 </div>
  <!--================Fullwidth block Area =================-->
-
     <section class="fullwidth-block area-padding-bottom area-padding-top">
         <div class="container">
              @if(count($featuredBlog) >0)
@@ -17,6 +19,7 @@
                             <a href="#">
                                 @if($featuredBlog['0']->image)
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$featuredBlog['0']->image) }}" alt="">
+
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
                             @endif
@@ -119,12 +122,13 @@
                                 <h4>{{ str_limit($featuredForMember['0']->title, $limit = 150, $end = '...') }}</h4>
                             </a>
                             <p>
-                               {{ str_limit($featuredForMember['0']->short_description, $limit = 150, $end = '...') }}
+                               {{str_limit($featuredForMember['0']->short_description, $limit = 150, $end = '...') }}
                             </p>
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredForMember['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
+
                                 </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>

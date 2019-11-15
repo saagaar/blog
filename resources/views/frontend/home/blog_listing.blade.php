@@ -17,7 +17,7 @@
                     <div class="single-blog video-style small m_b_30 ">
                       <div class="short_details">
                             <a class="d-block" href="single-blog.html">
-                                <h4 class="lt_ttl">{{ $category->name }}</h4>
+                                <h4 class="lt_ttl">{{$category->name }}</h4>
                             </a>
                             <p>
                                The idea that the Big Bang happened everywhere
@@ -53,7 +53,7 @@
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-lg-4 col-md-5 col-sm-12">
                         	@if($eachBlog->image)
-                            	<img class="img-fluid" src="{{ asset('/images/blog/'.$eachBlog->image) }}" alt="{{ $eachBlog->title }}">
+                            	<img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachBlog->code.'/'.$eachBlog->image) }}" alt="{{ $eachBlog->title }}">
                             @else
                             	<img class="img-fluid" src="/images/system-images/default-post.jpg }}" alt="{{ $eachBlog->title }}">
                             @endif

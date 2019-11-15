@@ -38,6 +38,5 @@ interface ServiceInterface
      * @param int
      */
     public function delete($id);
-
     
 }

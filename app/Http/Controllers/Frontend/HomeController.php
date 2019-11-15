@@ -16,6 +16,11 @@ use App\Repository\BlogInterface;
 use App\Repository\CategoryInterface;
 use App\Repository\UserInteractionInterface; 
 use App\Repository\TagInterface;
+use App\Repository\TestimonialInterface;  
+use App\Repository\ServiceInterface;
+use App\Repository\SiteoptionInterface;
+use App\Repository\ClientInterface;
+use App\Repository\BannerInterface;
 
 class HomeController extends FrontendController
 {
@@ -27,6 +32,7 @@ class HomeController extends FrontendController
      protected $userAccounts;
      
      protected $authUser;
+
 
     /**
      * Create a new controller instance.
@@ -48,6 +54,20 @@ class HomeController extends FrontendController
      *
      * @return \Illuminate\Http\Response
      */
+    public function landingPage()
+    {
+        
+        $services=$this->services();
+        $category=$this->category->getCategoryByWeight();
+        $CategoryByWeight=$category->pluck('cat')->toArray();
+        $testimonialDetails=$this->testimonialDetails();
+        $getInTouch=$this->getInTouch();
+        $client=$this->client();
+        $banner=$this->bannerTagLine();       
+               
+        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'getInTouch'=>$getInTouch,'CategoryByWeight'=>$CategoryByWeight,'client'=>$client,'banner'=>$banner));
+    }
+
     public function index(Request $request)
     {
         $data=array();
@@ -85,6 +105,7 @@ class HomeController extends FrontendController
         }
         return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
     }
+
     public function blogDetail($code){
       $blogDetails = $this->blog->getBlogByCode($code);
       $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->orderBy('id','asc')->first();
@@ -96,7 +117,6 @@ class HomeController extends FrontendController
       //What is the use of this line
       $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
       $data['blogDetails'] =$blogDetails;
-      
       $user ='';
       //Why do we need api for frontend route???
          if(\Auth::check())
@@ -114,12 +134,11 @@ class HomeController extends FrontendController
               $user=$this->user_state_info();
               return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes,'navCategory'=>$navCategory));
           }
-
         }
-        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes,'navCategory'=>$navCategory));
+        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlo,'likes'=>$likes,'navCategory'=>$navCategory));
     }
 
-     public function resizeImage($code,$width,$name)
+    public function resizeImage($code,$width,$name)
     {
         $imagePath=public_path(). '/uploads/blog/'.$code.'/'.$name;
         if(File::exists($imagePath))
@@ -131,7 +150,6 @@ class HomeController extends FrontendController
           return $img->response('jpg'); 
         }
        abort(404);
-      
     }
 
     public function blogByCategory($slug){
@@ -144,8 +162,7 @@ class HomeController extends FrontendController
        $user ='';
          if(\Auth::check())
         {
-            $routeName= ROUTE::currentRouteName();
-            
+          $routeName= ROUTE::currentRouteName();
           if($routeName=='api')
           {
             return ($data);
@@ -217,7 +234,6 @@ class HomeController extends FrontendController
               $user=$this->user_state_info();
               return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
           }
-
         }
         else
         {
@@ -230,16 +246,56 @@ class HomeController extends FrontendController
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
 
-
     public function getTagName(TagInterface $tag,Request $request)
     {
+         $search=$request->get('name'); 
+          if($search)
+          {
+              print_r($tag->getTag($search));
+
+          }             
          $search=$request->post('name');             
-         if($search){
-            $searchedTags=$tag->getTag($search);
-            return response()->json(['status'=>true,'data'=>$searchedTags,'message'=>'Tag Data Received']);    
-          }
-          else{
-           return response()->json(['status'=>false,'message'=>'No Tags found']);    
-          }
+        if($search)
+        {
+          $searchedTags=$tag->getTag($search);
+          return response()->json(['status'=>true,'data'=>$searchedTags,'message'=>'Tag Data Received']);    
+        }
+        else
+        {
+          return response()->json(['status'=>false,'message'=>'No Tags found']);    
+        }
     }
-}
+    public function services()
+    {
+
+      $serviceInterface = app()->make('App\Repository\ServiceInterface');
+      $service=$serviceInterface->getServicesDetails();
+      return $service;
+    }
+   public function testimonialDetails()
+    { 
+      $testimonial = app()->make('App\Repository\TestimonialInterface');
+      $testimonialDetails= $testimonial->getActiveTestimonial();
+      return $testimonialDetails;
+   }  
+   public function getInTouch()
+   {
+    
+    $siteSetting = app()->make('App\Repository\SiteoptionInterface');
+    $siteDetails=$siteSetting->getSiteInfo();
+    return $siteDetails;        
+   }
+
+   public function client()
+   {
+     $client= app()->make('App\Repository\ClientInterface');
+     $clientDetails=$client->getClients();
+     return $clientDetails;
+   }
+   public function bannerTagLine()
+   {
+     $banner= app()->make('App\Repository\BannerInterface');
+     $bannerDetails=$banner->getBannerTagLine();
+     return $bannerDetails;
+   }
+} 

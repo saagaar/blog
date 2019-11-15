@@ -49,7 +49,14 @@
                     <div class="alert alert-danger">{{ $errors->first('content') }}</div>
                     @endif
                   </div>  
-               
+                <div class="form-group">
+                       <label for="type">Type</label>
+                       <input type="text" class="form-control" name="type" id="type" value="{{$banner->type}}" placeholder="Enter Type">
+                       @if ($errors->has('type'))
+                       <div class="alert alert-danger">{{ $errors->first('type') }}</div>
+                       @endif
+                    </div>
+
                 <div class="form-group">
                   <label for="display_order">Display Order</label>
                   <input type="number" class="form-control" name="display_order" id="display_order" placeholder="Enter the display order" value="{{$banner->display_order}}">
@@ -61,7 +68,7 @@
               <div class="form-group">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
-                  <img src='/images/banner-images/{{$banner->image}}' width="50"/>
+                  <img src='/uploads/banner-images/{{$banner->image}}' width="50"/>
                   @if ($errors->has('image'))
                   <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                   @endif  

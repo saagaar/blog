@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Route;
 
 class ServicesRequest extends FormRequest
 {
@@ -23,11 +24,22 @@ class ServicesRequest extends FormRequest
      */
     public function rules()
     {
+
+        $routeName= ROUTE::currentRouteName();
+        if ($routeName == 'services.edit')
+          {
+            $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+          }
+          else
+          {
+            $image = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+          }
         return 
         [
             'title'=>'required',
             'description'=>'required',            
-            'status'=>'required',            
+            'status'=>'required',  
+            'icon'=>$image          
         ];
     }
 }

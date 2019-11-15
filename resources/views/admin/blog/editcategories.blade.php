@@ -46,6 +46,14 @@
                 <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                 @endif
                 </div>
+                  <div class="form-group">
+                  <label for="description">Meta Description: </label>
+                    <textarea name="description" class="form-control" rows="5" placeholder="Enter Description here..">{{ $category->description }}</textarea>
+
+                  @if ($errors->has('description'))
+                  <div class="alert alert-danger">{{ $errors->first('description') }}</div>
+                  @endif
+                </div>
                 <div class="form-group">
                   <label for="parent_id">Parent</label>
                     <select class="form-control"  name="parent_id" id="parent_id">

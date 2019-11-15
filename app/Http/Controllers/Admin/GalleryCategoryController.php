@@ -70,7 +70,7 @@ class GalleryCategoryController extends AdminController
                     $dir = 'uploads/gallery-cat-images/';
                     if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
                     $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-                    request()->banner_image->move(public_path('images/gallery-cat-images'), $imageName);
+                    request()->banner_image->move(public_path('uploads/gallery-cat-images'), $imageName);
                     $validatedData['banner_image'] = $imageName;
 
                 }
@@ -90,7 +90,7 @@ class GalleryCategoryController extends AdminController
     {
         $category =$this->categories->getByCatId($id);
         if( $category){
-            $dir = 'images/gallerycat-images/';
+            $dir = 'uploads/gallerycat-images/';
             if ($category->image != '' && File::exists($dir . $category->image)){
                 File::delete($dir . $category->image);
             }

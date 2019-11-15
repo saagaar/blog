@@ -16,7 +16,7 @@ class TeamRequest extends FormRequest
          $routeName= ROUTE::currentRouteName();
         if ($routeName == 'team.edit')
           {
-            // Update operation, exclude the record with id from the validation:
+            
             $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
           }
           else

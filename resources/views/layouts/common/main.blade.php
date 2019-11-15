@@ -106,6 +106,18 @@ function showSmsFunction() {
   }
 }
 </script>
+
+<script type="text/javascript">
+ function ConfirmDelete() {
+    var reconfirm = confirm("Are you sure you want to Delete?");
+    if (reconfirm) {
+        return true;
+    } else {
+        return false;
+    }
+}   
+</script>
+
 <script type="text/javascript">
   $('#datetimepicker').datetimepicker({
     format: 'yyyy-mm-dd hh:ii'
@@ -116,7 +128,11 @@ function showSmsFunction() {
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
+    $('.js-example-basic-multiple').select2({
+      tags: true,
+     
+    
+  });
 });
 $(document).ready(function () {
  

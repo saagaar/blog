@@ -26,5 +26,6 @@ Class SiteOption implements SiteoptionInterface
       $id=1;
       return	$this->siteSettings->find($id)->update($data);
   }
+
 }
 ?>

@@ -212,7 +212,7 @@ class UserController extends FrontendController
     {
       if(request()->hasFile('image'))
       {
-        $dir = 'images/user-images/';
+        $dir = 'uploads/user-images/';
           if ($this->authUser->image != '' && File::exists($dir . $this->authUser->image)){
             File::delete($dir . $this->authUser->image);
           }

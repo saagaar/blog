@@ -53,7 +53,7 @@
                       <td><a href="{{route('cms.edit',$eachCms->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                       <td>
                       @if($eachCms->deletable=='Y')
-                       <a href="{{route('cms.delete',$eachCms->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                       <a onClick="return ConfirmDelete();" href="{{route('cms.delete',$eachCms->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                       @endif  
                      </td>
                 </tr>

@@ -12,13 +12,11 @@ Class Banner implements BannerInterface
 	{
 		$this->Banner=$member;
 	}
-
-     
     public function getById($memberid){
       return $this->Banner->where('id', $memberid)->first();
     }
 
-      /**
+     /**
      * Get id in banner.
      *
      * @return mixed
@@ -26,8 +24,7 @@ Class Banner implements BannerInterface
     public function getAll(){
    	 return	$this->Banner->latest();
     }
- 	
- 	  /**
+ 	/**
      * create a post of banner
      *
      * @return mixed
@@ -41,11 +38,9 @@ Class Banner implements BannerInterface
      * @param int
      * @param array
      */
-
     public function update( $id,array $data){
          return $this->Banner->find($id)->update($data);
     }
-
       /**
      * Delete a banner's data.
      *
@@ -54,5 +49,12 @@ Class Banner implements BannerInterface
     public function delete($id){
       return $this->Banner->find($id)->delete();
     }
+
+    public function getBannerTagLine()
+    {
+        return $this->Banner->where('type','banner')->get();
+    }
+
+
 }
 ?>

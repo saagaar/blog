@@ -58,7 +58,6 @@ class AccountRequest extends FormRequest
             'dob'                   =>'',
             'image'                 => $image,
             'is_login'              =>'required',
-            'last_login_date'       =>'required'
             
         ];
     }
