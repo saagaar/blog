@@ -16,6 +16,11 @@ use App\Repository\BlogInterface;
 use App\Repository\CategoryInterface;
 use App\Repository\UserInteractionInterface; 
 use App\Repository\TagInterface;
+use App\Repository\TestimonialInterface;  
+use App\Repository\ServiceInterface;
+use App\Repository\SiteoptionInterface;
+use App\Repository\ClientInterface;
+use App\Repository\BannerInterface;
 
 class HomeController extends FrontendController
 {
@@ -27,6 +32,7 @@ class HomeController extends FrontendController
      protected $userAccounts;
      
      protected $authUser;
+
 
     /**
      * Create a new controller instance.
@@ -48,19 +54,31 @@ class HomeController extends FrontendController
      *
      * @return \Illuminate\Http\Response
      */
+    public function landingPage()
+    {
+        
+        $services=$this->services();
+        $testimonialDetails=$this->testimonialDetails();
+        $getInTouch=$this->getInTouch();
+        $client=$this->client();
+        $banner=$this->bannerTagLine();       
+               
+        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'getInTouch'=>$getInTouch,'client'=>$client,'banner'=>$banner));
+    }
+
     public function index(Request $request)
     {
         $data=array();
-        $featuredBlog = $this->blog->getAllFeaturedBlog();
+        $featuredBlog = $this->blog->getAllFeaturedBlog(4);
         // $data['featuredBlog']=$featuredBlog;
-        $mostViewed =$this->blog->getAllBlogByViews();
+        // $mostViewed =$this->blog->getAllBlogByViews();
         // $data['mostViewed'] = $mostViewed;
+        $popular =$this->blog->getPopularBlog(4);
+        // $data['popular'] = $popular;
+        $featuredForMember = $this->blog->getAllFeaturedForMember(4);
+        // $data['featuredForMember']=$featuredForMember;
         $latest =$this->blog->getLatestAllBlog();
         // $data['latest'] = $latest;
-        $popular =$this->blog->getPopularBlog();
-        // $data['popular'] = $popular;
-        $featuredForMember = $this->blog->getAllFeaturedForMember();
-        // $data['featuredForMember']=$featuredForMember;
         $navCategory=$this->category->getCategoryByShowInHome();
         $likes='';
         $user ='';
@@ -79,13 +97,16 @@ class HomeController extends FrontendController
               $data['path']='/home';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
-              return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
+              // return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
           }
 
         }
-        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'mostViewed'=>$mostViewed,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
+        
+        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
     }
-    public function blogDetail($code){
+
+    public function blogDetail($code,Request $request){
+
       $blogDetails = $this->blog->getBlogByCode($code);
       $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->orderBy('id','asc')->first();
       $next = $this->blog->getAll()->where('id', '<', $blogDetails['id'])->orderBy('id','desc')->first();
@@ -98,10 +119,12 @@ class HomeController extends FrontendController
       $data['blogDetails'] =$blogDetails;
       $data['blogComment']  =$blogComment;
       
+
       $user ='';
       //Why do we need api for frontend route???
          if(\Auth::check())
         {
+          $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
             $routeName= ROUTE::currentRouteName();
             
           if($routeName=='api')
@@ -113,11 +136,11 @@ class HomeController extends FrontendController
               $data['path']='/home';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
-              return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes,'navCategory'=>$navCategory));
           }
 
         }
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'likes'=>$likes,'navCategory'=>$navCategory));
+
     }
     public function blogByCategory($slug){
       $data=array();
@@ -176,6 +199,64 @@ class HomeController extends FrontendController
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
+    public function blogListBySlug($slug,Request $request)
+    {
+        $data=array();
+        $blog=array();
+        if($slug=='all-featured')
+          $blog = $this->blog->getAllFeaturedBlog();
+        elseif($slug=='popular')
+          $blog =$this->blog->getPopularBlog();
+        elseif($slug=='featured-for-member')
+          $blog = $this->blog->getAllFeaturedForMember();
+        $navCategory=$this->category->getCategoryByShowInHome();
+        $likes='';
+        $user ='';
+        $data['path']='/home';
+         if(\Auth::check())
+        {
+          $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+            $routeName= ROUTE::currentRouteName();
+            
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/home';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+          }
+
+        }
+        return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory));
+    }
+    public function getBlogListBySlug($slug=false,Request $request){
+      try{
+        if(!$slug)
+            throw new Exception("No Categories Selected", 1);
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $blog=array();
+          if($slug=='all-featured'){
+            $blog = $this->blog->getAllFeaturedBlog($limit,$offset);
+          }
+          elseif($slug=='popular'){
+            $blog =$this->blog->getPopularBlog($limit,$offset);
+          }
+          elseif($slug=='featured-for-member'){
+            $blog = $this->blog->getAllFeaturedForMember($limit,$offset);
+          }
+          return array('status'=>true,'data'=>$blog,'message'=>'');
+        
+      }
+      catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
     public function test(Request $request)
     {
         $data= $this->blog->getAllBlogByViews();
@@ -218,6 +299,15 @@ class HomeController extends FrontendController
 
     public function getTagName(TagInterface $tag,Request $request)
     {
+
+          
+           $search=$request->get('name'); 
+
+            if($search)
+            {
+                print_r($tag->getTag($search));
+
+              }             
          $search=$request->post('name');             
          if($search){
             $searchedTags=$tag->getTag($search);
@@ -227,4 +317,41 @@ class HomeController extends FrontendController
            return response()->json(['status'=>false,'message'=>'No Tags found']);    
           }
     }
-}
+
+   public function services()
+    {
+
+      $serviceInterface = app()->make('App\Repository\ServiceInterface');
+      $service=$serviceInterface->getServicesDetails();
+      return $service;
+    }
+
+    public function testimonialDetails()
+    { 
+      $testimonial = app()->make('App\Repository\TestimonialInterface');
+      $testimonialDetails= $testimonial->getActiveTestimonial();
+      return $testimonialDetails;
+  }  
+
+   public function getInTouch()
+   {
+    
+    $siteSetting = app()->make('App\Repository\SiteoptionInterface');
+    $siteDetails=$siteSetting->getSiteInfo();
+    return $siteDetails;        
+   }
+
+   public function client()
+   {
+     $client= app()->make('App\Repository\ClientInterface');
+     $clientDetails=$client->getClients();
+     return $clientDetails;
+   }
+
+   public function bannerTagLine()
+   {
+     $banner= app()->make('App\Repository\BannerInterface');
+     $bannerDetails=$banner->getBannerTagLine();
+     return $bannerDetails;
+   }
+} 

@@ -13,7 +13,7 @@ class CategorySeeder extends Seeder
     {
         $category = array(
         	array('parent_id'=>NULL,'name'=>'Engineering and Technology',		'status'=>'1',			'slug'=>'engineering&technology',		'banner_image'=>'Engineering.jpg'),
-            array('parent_id'=>NULL,'name'=>'Education',                         'status'=>'1',         'slug'=>'education',        'banner_image'=>'Education.jpg'),
+            array('parent_id'=>NULL,'name'=>'Education',                         'status'=>'1',         'slug'=>'education','banner_image'=>'Education.jpg'),
         	array('parent_id'=>NULL,'name'=>'Politics',                          'status'=>'1',			'slug'=>'politics',		'banner_image'=>'Politics.jpg'),
         	
         	array('parent_id'=>NULL,'name'=>'Science',		                     'status'=>'1',		    'slug'=>'science',		'banner_image'=>'Science.jpg'),

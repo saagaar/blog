@@ -15,7 +15,7 @@ class GalleryController extends AdminController
     function __construct(GalleryInterface $gallery,GallerycatInterface $category)
     {
         parent::__construct();
-        $this->gallery=$gallery;
+       $this->gallery=$gallery;
        $this->category=$category;
     }
     public function list(Request $request)
@@ -52,7 +52,7 @@ class GalleryController extends AdminController
                     $check=in_array($extension,$allowedFileExtension);
                         if($check)
                         {
-           			$dir = 'images/gallery/';
+           			$dir = 'uploads/gallery/';
                     $imageName = uniqid().'.'.$item->getClientOriginalExtension();
                     $item->move(public_path($dir), $imageName);
                     $currentDateTime = date('Y-m-d H:i:s');
@@ -92,7 +92,7 @@ class GalleryController extends AdminController
                     $check=in_array($extension,$allowedFileExtension);
                     if($check)
                     {
-                    $dir = 'images/gallery/';
+                    $dir = 'uploads/gallery/';
                     if ($gallery->image != '' && File::exists($dir . $gallery->image)){
                     File::delete($dir . $gallery->image);}
                     $imageName = uniqid().'.'.request()->image->getClientOriginalExtension();
@@ -121,7 +121,7 @@ class GalleryController extends AdminController
     {
         $gallery =$this->gallery->getByImgId($id);
         if( $gallery){
-            $dir = 'images/gallery/';
+            $dir = 'uploads/gallery/';
             if ($gallery->image != '' && File::exists($dir . $gallery->image)){
                 File::delete($dir . $gallery->image);
             }

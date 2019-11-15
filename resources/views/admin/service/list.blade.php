@@ -37,14 +37,14 @@
                   <td>{{ ++$i }}</td>
                   <td>{{$member->title}}</td>
                    <td>{{$member->description }}</td>
-                   <td><img src="{{asset('images/services-images/'.$member->icon) }}" alt="Services Image" height="42" width="42"></td> 
+                   <td><img src="{{asset('uploads/services-images/'.$member->icon)}}" alt="Services Image" height="42" width="42"></td> 
                   <td>
                     <input data-id="{{$member->id}}" data-url="{{route('services.changestatus')}}" style="size: 12px;"  data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$member->status==1 ? 'checked' : '' }}>
                   </td>              
                   <td>{{$member->created_at}}</td>
                   <td>{{$member->updated_at}}</td>
                   <td><a href="{{route('services.edit',$member->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('services.delete', $member->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td><a onClick="return ConfirmDelete();" href="{{route('services.delete', $member->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr> 
                 @endforeach
                 @else

@@ -54,5 +54,11 @@ Class Client implements ClientInterface
     public function delete($id){
       return $this->Client->find($id)->delete();
     }
+
+    public function getClients()
+    {
+        return $this->Client->where('status','1')->get();
+    }
+
 }
 ?>

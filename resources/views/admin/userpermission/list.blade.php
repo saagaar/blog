@@ -41,7 +41,7 @@
                   <td>{{$permission->updated_at}}</td>
                   
                       <td><a href="{{route('permission.edit',$permission->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                      <td><a href="{{route('permission.delete', $permission->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      <td><a onClick="return ConfirmDelete();" href="{{route('permission.delete', $permission->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                      </td>
                 </tr>
                 @endforeach

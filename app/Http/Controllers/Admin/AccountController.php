@@ -62,7 +62,7 @@ class AccountController extends AdminController{
             $validatedData['dob'] = date("Y-m-d", strtotime($validatedData['dob']));
             $validatedData['password']= (Hash::make($validatedData['password']));
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/user-images'), $imageName);
+            request()->image->move(public_path('uploads/user-images'), $imageName);
             $validatedData['image'] = $imageName;
             $emailParts = explode('@', $validatedData['email']);
 
@@ -101,12 +101,12 @@ class AccountController extends AdminController{
           $validatedData['password']= (Hash::make($validatedData['password']));
             if ($request->hasFile('image')) 
             {
-                    $dir = 'images/user-images/';
+                    $dir = 'uploads/user-images/';
                     if ($accounts->image != '' && File::exists($dir . $accounts->image)){
                     File::delete($dir . $accounts->image);}
 
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/user-images'), $imageName);
+                    request()->image->move(public_path('uploads/user-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }
             else 
@@ -140,7 +140,7 @@ class AccountController extends AdminController{
         $accounts =$this->account->getById($id);
         
         if($accounts){
-            $dir = 'images/user-images/';
+            $dir = 'uploads/user-images/';
             if ($accounts->image != '' && File::exists($dir . $accounts->image)){
                 File::delete($dir . $accounts->image);
             }

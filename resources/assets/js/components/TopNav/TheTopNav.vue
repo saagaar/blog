@@ -5,7 +5,7 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="images/system-images/logo.png" alt="">
+                        <img src="/images/system-images/logo.png" alt="">
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
@@ -25,17 +25,26 @@
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
                             aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ me.unReadNotificationsCount }}</em></a>
 
-                               <NotificationsLoading :notificationList="topnotifications" :type="'nav'" ></NotificationsLoading>
+                               <NotificationsLoading :notificationList="topnotifications" :loadType="'noload'" :type="'nav'" ></NotificationsLoading>
                                 
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
                             <figure><img :src="getProfileUrl()"></figure> {{ me.name}}</a>
                             <ul class="dropdown-menu">
+<<<<<<< HEAD
                                 <li><a href="/dashboard">My Dashboard</a></li>
                             
                                 <li><router-link to="/profile">Profile</router-link></li>
                                 <li><router-link to="/followers">Followers</router-link></li>
+=======
+                                <li><a href="/dashboard">Dashboard</a></li>
+
+                                <li><a href="/profile">My Profile</a></li>
+                                
+                                <li><a href="/blog/add">New Stories</a></li>
+                                <li><a href="/blog/list">Stories</a></li>
+>>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
                                 <hr>
                                 <li><router-link to="/blog/list">My Blog</router-link></li>
                                 <li><a href="#">Bookmarks</a></li>

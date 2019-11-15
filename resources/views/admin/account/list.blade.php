@@ -59,7 +59,7 @@
                   <td>{{$user->updated_at}}</td>
                   <td><a href="{{route('account.view',$user->id)}}"><i class="fa fa-eye"  aria-hidden="true"></i></a></td>
                    <td><a href="{{route('account.edit',$user->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                    <td><a href="{{route('account.delete', $user->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <td><a onClick="return ConfirmDelete();" href="{{route('account.delete', $user->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                      </td>
                       
                 </tr>

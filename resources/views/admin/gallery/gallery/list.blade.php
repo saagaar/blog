@@ -36,7 +36,7 @@
                   <td>{{ ++$i }}</td>
                   <td>{{ $item->title }}</td>
                    <td>
-                   	<img src="{{ asset('images/gallery/'.$item['image']) }}" alt="Gallery Image" height="42" width="42"></td>
+                   	<img src="{{ asset('uploads/gallery/'.$item['image']) }}" alt="Gallery Image" height="42" width="42"></td>
                    	<td>
                        @foreach ($item->categories()->pluck('title') as $category)
                                         <span class="label label-info label-large">{{ $category }}</span>
@@ -44,8 +44,8 @@
                     </td>
                   <td>{{$item->created_at}}</td>
                   <td>{{$item->updated_at}}</td>
-                  <td><a href="{{route('gallery.edit',[ $item->id])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('gallery.delete', $item->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                  <td><a href="{{route('gallery.edit',[$item->id])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                  <td><a onClick="return ConfirmDelete();" href="{{route('gallery.delete', $item->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
                 @else

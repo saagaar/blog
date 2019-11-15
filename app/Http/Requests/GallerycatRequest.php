@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Route;
 class GallerycatRequest extends FormRequest
 {
     /**
@@ -23,9 +23,10 @@ class GallerycatRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->method() == 'POST')
+        $routeName= ROUTE::currentRouteName();
+        if ($routeName == 'gallerycategory.edit')
           {
-            // Update operation, exclude the record with id from the validation:
+            
             $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
           }
           else

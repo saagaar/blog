@@ -28,7 +28,8 @@ class SiteoptionSeeder extends Seeder
         'address'           =>'kumaripati',
         'state'             =>'3',
         'country'           =>'126',
-        'city'              =>'lalitpur', 
+        'city'              =>'lalitpur',
+        'url'               =>'https://idata.com.np/',
             'created_at' => date("Y-m-d H:i:s")
         ]);
     }

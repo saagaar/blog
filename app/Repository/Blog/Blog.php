@@ -43,11 +43,12 @@ Class Blog implements BlogInterface
   public function getLikesOfBlogByUser($user){
     return $this->blog->likes('id:user_id')->get();
   }
-  public function getAllFeaturedBlog(){
-    return $this->blog->where(['featured'=> '1','save_method'=>2])->with('tags')->withCount('likes')->limit(4)->get();
+
+  public function getAllFeaturedBlog($limit=10,$offset=0){
+    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->take($limit)->skip($offset)->get();
   }
-  public function getAllFeaturedForMember(){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->limit(4)->get();
+  public function getAllFeaturedForMember($limit=10,$offset=0){
+    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->take($limit)->skip($offset)->get();
   }
 
    /**
@@ -62,8 +63,8 @@ Class Blog implements BlogInterface
   public function getLatestAllBlog($limit=10,$offset=0){
     return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
-  public function getPopularBlog(){
-    return $this->blog->where(['save_method'=>2])->orderBy('likes_count','DESC')->withCount('likes','comments')->limit(4)->get();
+  public function getPopularBlog($limit=10,$offset=0){
+    return $this->blog->where(['save_method'=>2])->orderBy('likes_count','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
   /**
    * get blog bye following

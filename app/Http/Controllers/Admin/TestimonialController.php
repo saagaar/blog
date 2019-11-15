@@ -25,6 +25,7 @@ class TestimonialController extends AdminController
         $search = $request->get('search');
         if($search){
             $testimonial = $this->testimony->getAll()->where('name', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+           
         }else{
             $testimonial = $this->testimony->getAll()->paginate($this->PerPage);
         }
@@ -40,13 +41,11 @@ class TestimonialController extends AdminController
                     ]];
         if ($request->method()=='POST') 
         {
-             $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);  
+ 
             $requestObj=app(TestimonialRequest::class);
             $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/testimonial-images'), $imageName);
+            request()->image->move(public_path('uploads/testimonial-images'), $imageName);
             $validatedData['image'] = $imageName;
             $this->testimony->create($validatedData);
             return redirect()->route('testimonial.list')    
@@ -64,18 +63,16 @@ class TestimonialController extends AdminController
             $testimony =$this->testimony->getById($id);    
             if ($request->method()=='POST')
             {
-               $request->validate([
-               'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-              ]);  
+              
                 $requestObj=app(TestimonialRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')){
 
-                    $dir = 'images/testimonial-images/';
+                    $dir = 'uploads/testimonial-images/';
                     if ($testimony->image != '' && File::exists($dir . $testimony->image))
                           File::delete($dir . $testimony->image);
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/testimonial-images'), $imageName);
+                    request()->image->move(public_path('uploads/testimonial-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }
                 else {
@@ -91,7 +88,7 @@ class TestimonialController extends AdminController
     {
        $testimony =$this->testimony->getById($id);
         if($testimony){
-            $dir = 'images/testimonial-images/';
+            $dir = 'uploads/testimonial-images/';
             if ($testimony->image != '' && File::exists($dir . $testimony->image)){
                 File::delete($dir . $testimony->image);
             }

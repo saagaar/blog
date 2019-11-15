@@ -47,11 +47,11 @@
                   <div class="alert alert-danger">{{ $errors->first('url') }}</div>
                   @endif
                 </div>
-
+                
               <div class="form-group">
                   <label for="logo">Image Upload</label>
                   <input type="file" class="form-control" name="logo" id="logo">
-                 <img src='/images/client-images/{{$client->logo}}' width="50"/>
+                 <img src='/uploads/client-images/{{$client->logo}}' width="50"/>
                   @if ($errors->has('logo'))
                   <div class="alert alert-danger">{{ $errors->first('logo') }}</div>
                   @endif

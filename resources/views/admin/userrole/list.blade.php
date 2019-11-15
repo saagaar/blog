@@ -46,7 +46,7 @@
                     <td>{{$role->updated_at}}</td>
                     
                         <td><a href="{{route('roles.edit', $role->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                        <td><a href="{{route('roles.delete', $role->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <td><a onClick="return ConfirmDelete();" href="{{route('roles.delete', $role->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                        </td>
                   </tr>
                   @endforeach

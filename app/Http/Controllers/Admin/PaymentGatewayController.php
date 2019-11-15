@@ -39,13 +39,11 @@ class PaymentGatewayController extends AdminController
                     ]];
         if ($request->method()=='POST')
         {
-            $request->validate([
-           'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-           ]); 
+            
             $requestObj=app(PaymentGatewayRequest::class);
             $validatedData = $requestObj->validated();
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/paymentgateway-images'), $imageName);
+            request()->image->move(public_path('uploads/paymentgateway-images'), $imageName);
             $validatedData['image'] = $imageName;
             $this->paymentGateway->create($validatedData);
             return redirect()->route('paymentgateway.list')    
@@ -63,17 +61,15 @@ class PaymentGatewayController extends AdminController
             $paymentGateway =$this->paymentGateway->getById($id);    
             if ($request->method()=='POST')
             {
-                $request->validate([
-               'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                ]); 
+                
                 $requestObj=app(PaymentGatewayRequest::class);
                 $validatedData = $requestObj->validated();
                 if ($request->hasFile('image')) {
-                    $dir = 'images/paymentgateway-images/';
+                    $dir = 'uploads/paymentgateway-images/';
                     if ($paymentGateway->image != '' && File::exists($dir . $paymentGateway->image))
                     File::delete($dir . $paymentGateway->image);
                     $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                    request()->image->move(public_path('images/paymentgateway-images'), $imageName);
+                    request()->image->move(public_path('uploads/paymentgateway-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }else 
                 {
@@ -89,7 +85,7 @@ class PaymentGatewayController extends AdminController
     {
        $paymentGateway =$this->paymentGateway->getById($id);       
         if($paymentGateway){
-            $dir = 'images/paymentgateway-images/';
+            $dir = 'uploads/paymentgateway-images/';
             if ($paymentGateway->image != '' && File::exists($dir . $paymentGateway->image)){
                 File::delete($dir . $paymentGateway->image);
             }

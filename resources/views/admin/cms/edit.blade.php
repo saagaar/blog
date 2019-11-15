@@ -99,7 +99,6 @@
                   <textarea class="form-control rounded-0" name="page_title" placeholder="Enter page title" rows="6">
                     {{$cms->page_title}}
                   </textarea>
-                  <!-- <input type="text" class="form-control" name="page_title" id="page_title"> -->
                   @if ($errors->has('page_title'))
                 <div class="alert alert-danger">{{ $errors->first('page_title') }}</div>
                 @endif

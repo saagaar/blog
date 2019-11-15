@@ -8,8 +8,8 @@
 /*----------------------------------------------------*/
 html, body {
     height: 100%;
-}
-.wrapper {
+ }
+.wrapper{
     min-height: 100%;
     position: relative;
     padding-bottom: 2rem;

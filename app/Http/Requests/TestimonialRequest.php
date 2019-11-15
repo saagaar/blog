@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Route;
 
 class TestimonialRequest extends FormRequest
 {
@@ -14,21 +15,23 @@ class TestimonialRequest extends FormRequest
     public function rules()
     {
 
-         // if ($this->method() == 'POST')
-         //  {
-         //    $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
-         //  }
-         //  else
-         //  {
-         //    $image = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
-         //  }
-
+        $routeName= ROUTE::currentRouteName();
+         if ($routeName == 'testimonial.edit')
+          {
+            $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+        }
+        else
+        {
+            $image = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+        }
+         
         return 
         [
             'name'=>'required',
-            'description'=>'required',
+            'description'=>'required|max:200',
             'status'=>'required',
             'position'=>'required',
+            'image'=>$image
         ];
     }
 }

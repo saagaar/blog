@@ -51,7 +51,7 @@
                       
                       <td><a href="{{route('blocklist.edit',$ipValue->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                       <td>
-                       <a href="{{route('blocklist.delete',$ipValue->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                       <a onClick="return ConfirmDelete();" href="{{route('blocklist.delete',$ipValue->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                      </td>
                 </tr>
                 @endforeach

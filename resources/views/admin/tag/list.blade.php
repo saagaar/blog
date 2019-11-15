@@ -46,8 +46,12 @@
                   <td>{{$tag->created_at}}</td>
                   <td>{{$tag->updated_at}}</td>
                   <td><a href="{{route('tags.edit',$tag->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+<<<<<<< HEAD
                   <td><a href="{{route('tags.delete',$tag->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
 >>>>>>> 6d8894aed4c25617015202178b881cc8942fe9c1
+=======
+                  <td><a onClick="return ConfirmDelete();" href="{{route('tags.delete',$tag->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+>>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
                 </tr>
                 @endforeach
                 @else

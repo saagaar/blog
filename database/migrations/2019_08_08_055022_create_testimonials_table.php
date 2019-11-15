@@ -17,7 +17,7 @@ class CreateTestimonialsTable extends Migration
              $table->bigIncrements('id');
              $table->string('name');
              $table->string('position');
-              $table->string('description');
+             $table->string('description');
              $table->string('image');
              $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');
              $table->timestamps();

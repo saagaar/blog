@@ -45,7 +45,7 @@
                     
                          <td><a href="{{route('adminrole.managepermission', $adminRole->id)}}"><i class="fa fa-gears"  aria-hidden="true"></i></a></td>
                         <td><a href="{{route('adminrole.edit', $adminRole->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                        <td><a href="{{route('adminrole.delete', $adminRole->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <td><a onClick="return ConfirmDelete();" href="{{route('adminrole.delete', $adminRole->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                        </td>
                   </tr>
                   @endforeach
