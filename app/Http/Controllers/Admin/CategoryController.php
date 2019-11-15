@@ -44,6 +44,7 @@ class CategoryController extends AdminController
         $tagList = $tag->getAllTags()->get();
         $blogcategory = $this->categories->getAll()->where('parent_id',NULL)->get();
         if ($request->method()=='POST') {
+
             $requestobj=app(CategoryRequest::class);
             $validatedData = $requestobj->validated(); 
             if($request->hasFile('banner_image'))
@@ -93,8 +94,10 @@ class CategoryController extends AdminController
         // $selectedTags = $this->categories->tags();
         
         $blogcategory = $this->categories->getAll()->where('parent_id',NULL)->get();
+        
         $category =$this->categories->getCatById($id);
-        // print_r($category->tags()->pluck('tags_id'));exit;
+            
+                // print_r($category->tags()->pluck('tags_id'));exit;
         if ($request->method()=='POST') 
         {           
                 $requestobj=app(CategoryRequest::class);

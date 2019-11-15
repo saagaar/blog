@@ -26,14 +26,15 @@
           <!-- /. box -->
         </div>
         <div class="col-md-9">
-
           <!-- Profile Image -->
           <div class="box box-body">
             <div class="box-body box-profile">
+              @if($account->image)
               <img class="profile-user-img img-responsive img-circle" src="{{ asset('uploads/user-images/'.$account['image']) }}" alt="User profile picture">
-
+              @else
+              <img class="profile-user-img img-responsive img-circle" src="{{ asset('images/default-profile-icon-24.jpg/') }}" alt="User profile picture">
+             @endif
               <h3 class="profile-username text-center">{{$account->name}}</h3>
-
               <p class="text-muted text-center">
               	@foreach ($account->roles()->pluck('name') as $role)
 	                <span class="label label-info label-many">{{ $role }}</span>
@@ -56,7 +57,6 @@
             <!-- /.box-header -->
             <div class="box-body">
               <strong><i class="fa fa-birthday-cake margin-r-5"></i> Date Of Birth</strong>
-
               <p class="text-muted">
                 <?php echo date('F j, Y', strtotime($account->dob)); ?>
               </p>
