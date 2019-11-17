@@ -278,7 +278,7 @@ class UserController extends FrontendController
               return view('frontend.layouts.dashboard',['initialState'=>$initialState,'user'=>$user]);
           }
         }
-        else
+        else 
         {
              return redirect()->route('home'); 
         }

@@ -4,15 +4,15 @@
   <div class="col-md-9 col-sm-9 pad-left-0" v-if="this.$store.getters.isLoading===true">
       <PlaceHolderFollowings></PlaceHolderFollowings>
   </div>
-  <div class="col-md-9 col-sm-9 pad-left-0" v-else-if="initialState.followings.length>0">
+  <div class="col-md-9 col-sm-9 pad-left-0" v-else-if="Object.entries(initialState.followings).length>0">
         <div class="friend-list" v-for="eachFollowings in initialState.followings">
           <div class="friend-card">
             <div class="row card-info">
               <div class="col-lg-3 col-md-4" v-if="eachFollowings.image">
-                <img :src="'/images/user-images/'+eachFollowings.image" alt="user" class="profile-photo-lg" />
+                <img :src="'/uploads/user-images/'+eachFollowings.image" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-3 col-md-4"v-else>
-                <img src="/images/system-images/default-profile.png" alt="user" class="profile-photo-lg" />
+                <img src="/frontend/images/elements/default-profile.png" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">

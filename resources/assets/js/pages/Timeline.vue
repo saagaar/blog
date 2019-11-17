@@ -21,11 +21,11 @@
 
                 </div>
 
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true && initialState.blogList>0">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true && initialState.  blogList>0">
                     
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList.length>0">
-                    <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList &&initialState.blogList.data.length>0">
+                    <div class="singlObject.entries(initialState.followings).length-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5">
                        <img v-if="eachBlog.image" class="img-fluid" :src="'/uploads/blog/'+eachBlog.code+'/'+eachBlog.image" :alt="eachBlog.title">
                        <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="eachBlog.title">
