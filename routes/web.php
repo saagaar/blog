@@ -15,7 +15,7 @@ Route::get('/logincheck', function () {
     return response()->json([
    'status'=> \Auth::check()
 ]);
-});
+});    
 
 Route::get('/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
 Route::get('api/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('api');
