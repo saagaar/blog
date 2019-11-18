@@ -1,6 +1,6 @@
 <template>
 <div>
-	<div  class="friend-list fn_list_2" >
+	<div class="friend-list fn_list_2" >
 	    <div class="col-md-6 col-sm-12" v-if="lists.length>0" v-for="items in lists">
 	        <div class="friend-card">
 	            <div class="row card-info">

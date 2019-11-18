@@ -25,7 +25,7 @@ $factory->define(AdminRoles::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Users::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'username' => $faker->unique()->username,
