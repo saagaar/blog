@@ -168,6 +168,7 @@ function fb_share(dynamic_link,dynamic_title) {
 <script>
     $(function(){
   $('.fb-share').click(function(){
+    var code=$(this).data('code');
     var url=$(this).data('url');
       FB.ui({
       method: 'share',
@@ -178,7 +179,7 @@ function fb_share(dynamic_link,dynamic_title) {
              jQuery.ajax({
                         type: "POST",
                         url: '/blog/detail/share',
-                        data:{url:url,media:'facebook'},
+                        data:{code:code,media:'facebook'},
                         datatype: 'json',
                         success: function(datajson) 
                         {

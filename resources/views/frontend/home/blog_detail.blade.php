@@ -48,7 +48,7 @@
                             <ul class="social-icons">
                                 @php($url=url('https://thebloggersclub.com/blog/share/'.$blogDetails->code))
                  
-                                <a href="javascript:void(0);" data-url="{{$url}}" onclick="fb_share('{{ $url }}', '{{ $blogDetails->title }}')"><i class="fab fa-facebook-f"></i></a>
+                                <a class="fb-share" href="javascript:void(0);" data-code="{{$blogDetails->code}}" data-url="{{$url}}" onclick="fb_share('{{ $url }}', '{{ $blogDetails->title }}')"><i class="fab fa-facebook-f"></i></a>
 
                                 <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
