@@ -181,11 +181,8 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
           }
       },
      mounted: function(){
-
-          
-        },
-      methods: {
-
+     },
+     methods: {
         getResults(page = 1) 
         {
           this.initialState.blogList={};

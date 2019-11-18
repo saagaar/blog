@@ -14523,7 +14523,7 @@ box-shadow: 2px 2px 2px 0px #eee;*/}
   .header_area.navbar_fixed .main_menu .navbar .nav .nav-item .nav-link {
     line-height: 50px; }
 
-    .header-top .right-button li.nitify ul.dropdown-menu{min-width: 500px;}
+    .header-top .right-button li.nitify ul.dropdown-menu{min-width: 500px;min-height: }
 
     .header-top.navbar_fixed{
   position: fixed;
@@ -17730,7 +17730,7 @@ h6 {
 /*============== footer-area css ===============*/
 .footer-area {
     padding-top: 5px; border-top: 1px solid #ddd; background: #fcfdff; 
-    background: url(/images/system-images/white-pattern.png) repeat scroll center center;}
+    background: url(../images/elements/white-pattern.png) repeat scroll center center;}
   @media (max-width: 991px) {
     .footer-area {
       padding: 60px 0px; } }
@@ -17915,8 +17915,7 @@ font-size: 18px;}
 #loginModal .modal-dialog .modal-content{background-image: url(../images/background/banner-bg.png); background-repeat: no-repeat;
 background-size: cover;}
 #regModal .modal-dialog .modal-content, #bioModal .modal-dialog .modal-content,
-#addressModal .modal-dialog .modal-content
-{background-image: url(../images/background/banner-bg-2.png); 
+#addressModal .modal-dialog .modal-content{background-image: url(../images/background/banner-bg-2.png); 
   background-repeat: no-repeat; background-size: cover;}
 /*.log-modal{padding-top: 32px;}*/
 .log-modal .btn-primary{min-width: 100px;}
@@ -18040,7 +18039,7 @@ URL: bhandaribikash.com.np*/
 
 /*Profile Card CSS*/
 .profile-card{
-  background: linear-gradient(to bottom, rgba(39,170,225,.8), rgba(28,117,188,.8)), url(../images/covers/1.jpg) no-repeat;
+  background: linear-gradient(to bottom, rgba(39,170,225,.8), rgba(28,117,188,.8)), url(../system-images/elements/1.jpg) no-repeat;
   background-size: cover;
   width: 100%;
   min-height: 90px;
@@ -18536,7 +18535,7 @@ padding: 15px 40px 10px 10px !important;}
 .edit_profile .area-heading h3{font-size: 24px;}
 .edit_profile .area-heading h3:after{left: 6.5%;}
 .edit_profile select.form-control {
-    background: rgba(0, 0, 0, 0) url(../images/down-arrow.png) no-repeat scroll calc(100% - 10px) center / 8px auto;
+    background: rgba(0, 0, 0, 0) url(../images/elements/down-arrow.png) no-repeat scroll calc(100% - 10px) center / 8px auto;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -18700,7 +18699,7 @@ input:focus, .form-control:focus{border-color: #4cb748;}
 /*Registration and Loginb css start here*/
 
 #lp-register{
-  background: linear-gradient(to right, rgba(0,0,0, 0.7) , rgba(0,0,0, 0.7)), url(../images/bg-3.jpg) fixed no-repeat;
+  background: linear-gradient(to right, rgba(0,0,0, 0.7) , rgba(0,0,0, 0.7)), url(../images/background/bg-3.jpg) fixed no-repeat;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -18870,7 +18869,7 @@ input:focus, .form-control:focus{border-color: #4cb748;}
 }
 
 #registration_form select.form-control{
-  background: rgba(0, 0, 0, 0) url("../images/down-arrow.png") no-repeat scroll calc(100% - 10px) center / 8px auto;
+  background: rgba(0, 0, 0, 0) url("../images/elements/down-arrow.png") no-repeat scroll calc(100% - 10px) center / 8px auto;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -18909,7 +18908,7 @@ input:focus, .form-control:focus{border-color: #4cb748;}
   ==================================================*/
 .timeline{margin-top: -35px;}
 .timeline-cover{
-  background: url("../images/covers/8.jpg") no-repeat;
+  background: url("../images/background/8.jpg") no-repeat;
   background-position: center;
   background-size: cover;
   min-height: 260px;
@@ -19355,13 +19354,13 @@ ul.album-photos li img{
     vertical-align: middle;
 }
 .em-blush {
-    background-image: url(../images/blush.png);
+    background-image: url(../images/elements/blush.png);
 }
 .em-expressionless {
-    background-image: url(../images/expressionless.png);
+    background-image: url(../images/elements/expressionless.png);
 }
 .em-hand {
-    background-image: url(../images/hand.png);
+    background-image: url(../images/elements/hand.png);
 }
 
 /*CSS for custom scrollbar*/
@@ -19466,6 +19465,47 @@ ul.notifications_list li a:hover{background: #edf2fa;}
 {font-size: 16px; color: #006699;}
 .single-blog.video-style.small h4.lt_ttl{font-size: 30px; 
   font-weight: bold; line-height: 36px;}
+
+  /*11/07/2019*/
+.timeline-cover{
+  background: -moz-linear-gradient(top,  rgb(218, 234, 228) 0%, rgba(255,255,255,0) 100%);
+background: -webkit-linear-gradient(top, rgb(218, 234, 228) 0%,rgba(255,255,255,0) 100%);
+background: linear-gradient(to bottom,  rgb(218, 234, 228) 0%,rgba(255,255,255,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9facca', endColorstr='#00ffffff',GradientType=0 );
+
+}
+.timeline-cover .btn-primary{padding: 2px 25px;}
+.timeline-quote{text-align: center; position: relative;}
+.timeline-quote .collen{text-align: center; width: 42%;
+margin-left: auto; margin-right: auto; padding-top: 30px; 
+position: relative;}
+.timeline-quote p{font-size: 30px; color: #000999; line-height: 42px; 
+font-family: "Josefin Sans", sans-serif; font-weight: 600;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+.timeline-quote .collen::before, .timeline-quote .collen::after {
+    top: 15px;
+    height: 19px;
+    width: 25px;
+    position: absolute;
+}
+.timeline-quote .collen::before {
+    content: url(../images/elements/collen1.png);
+    left: -30px;
+}
+.timeline-quote .collen::after {
+    content: url(../images/elements/collen2.png);
+    right: -30px;
+    top: auto;
+    bottom: 0px;
+}
+
+.blur{ filter: blur(20px) };
+
+.LQplaceholder{
+  min-width: 100% !impo
+}
+
 @media (max-width:1619px){
 	/* Main Menu Area css
 	============================================================================================ */

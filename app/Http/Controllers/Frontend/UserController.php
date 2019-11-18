@@ -210,8 +210,6 @@ class UserController extends FrontendController
   {
     if(\Auth::check())
     {
-      // $form='';
-
       if(request()->hasFile('image'))
       {
         $dir = 'uploads/user-images/';
@@ -257,29 +255,48 @@ class UserController extends FrontendController
   {
     if(\Auth::check())
         {
-            $routeName= ROUTE::currentRouteName();
+           $routeName= ROUTE::currentRouteName();
            $data=array();
           if($routeName=='api')
           {
             $limit=$this->apiPerPage;;
             $offset=$limit*$request->post('page');
             $data['notifications']=$this->user->getUsersNotification($this->authUser,$limit,$offset);
+            // print_r($data['notifications']);exit;
+            $this->user->markNotificationsToRead($data['notifications']);
+            $data['unReadNotificationsCount']=$this->user->countUnreadNotifications($this->authUser) ;
             return array('status'=>true,'data'=>$data,'message'=>'Success');
           }
           else
           {
               $limit=$this->perPage;
               $data['notifications']=$this->user->getUsersNotification($this->authUser,$limit);
+              $this->user->markNotificationsToRead($data['notifications']);
               $data['path']='/users/notifications';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
-              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+              return view('frontend.layouts.dashboard',['initialState'=>$initialState,'user'=>$user]);
           }
         }
-        else
+        else 
         {
              return redirect()->route('home'); 
         }
+  }
+  public function updateNotificationStatus(){
+   if(\Auth::check())
+      {
+        $data=array();
+        $notifications=$this->user->getUsersNotification($this->authUser,$this->apiPerPage);
+        $this->user->markNotificationsToRead($notifications);
+
+        $data['unReadNotificationsCount']=$this->user->countUnreadNotifications($this->authUser) ;
+        return  array('status'=>true,'data'=>$data,'message'=>'Success');
+      }
+     else
+      {
+         return  array('status'=>false,'message'=>'User not logged in!!');
+      }
   }
   public function settings(Request $request){
     if(\Auth::check())
@@ -333,8 +350,8 @@ class UserController extends FrontendController
            return response()->json(true); 
         }
            
-    } 
-    public function changePassword(Request $request)
+  } 
+  public function changePassword(Request $request)
   {
     if(\Auth::check())
     {

@@ -102,7 +102,7 @@ import Form from './../services/Form.js';
                 isLoading: false,
                 editor: ClassicEditor,
                 max:3,
-                image:'/images/upload.png',
+                image:'/frontend/images/elements/upload.png',
                 optionsLimit:5,
                 options:[],
                 initialState:{},

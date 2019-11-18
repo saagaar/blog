@@ -31,7 +31,7 @@
 <script>
 import FollowButton from './../../components/Follows/FollowButton';
 import InfiniteLoading from 'vue-infinite-loading';
-import Form from './../../services/Form.js';
+import Form from './../services/Form.js';
 
 export default {
   props:{

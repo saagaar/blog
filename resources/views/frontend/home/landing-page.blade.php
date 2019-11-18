@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80347372-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-80347372-2');
+</script>
+<script type="text/javascript">
+   window.__allCategory__ = '{!! addslashes(json_encode($CategoryByWeight)) !!}'
+</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- SEO Meta Tags -->
     <meta name="description" content="Free mobile app HTML landing page template to help you build a great online presence for your app which will convert visitors into users">
     <meta name="author" content="Inovatik">
-
+     <meta name="csrf-token" content="{{ csrf_token()}}">
     <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
     <meta property="og:site_name" content="" /> <!-- website name -->
     <meta property="og:site" content="" /> <!-- website link -->
@@ -21,17 +32,14 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
-    <link href="{{ asset('landing-page/assets/css/bootstrap.css')}}" rel="stylesheet">
-    <link href="{{ asset('landing-page/assets/css/themify-icons.css')}}" rel="stylesheet">
-    <link href="{{asset('landing-page/assets/css/slick.css')}}" rel="stylesheet">
-    <link href="{{asset('landing-page/assets/css/animate.css')}}" rel="stylesheet">
-    <link href="{{asset('landing-page/assets/css/styles.css')}}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/landing-page.css')}}" rel="stylesheet">
+
     <!-- Favicon  -->
 
     <link rel="icon" href="{{asset('landing-page/assets/images/favicon.png')}}">
 </head>
 <body>
-
+<div id="landing-page">
    <!-- navigation -->
 <section class="fixed-top navigation">
   <div class="container">
@@ -45,19 +53,19 @@
       <div class="collapse navbar-collapse text-center" id="navbar">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html"><b>Home</b></a>
+            <a class="nav-link" href="#home"><b>Home</b></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link page-scroll" href="#feature"><b>Feature</b></a>
+            <a class="nav-link page-scroll" href="#feature  "><b>Feature  </b></a>
           </li>
           <li class="nav-item">
             <a class="nav-link page-scroll" href="#team"><b>Testimonials</b></a>
           </li>
-          <li class="nav-item">
+         <!--  <li class="nav-item">
             <a class="nav-link" href="login.html"><b>Login</b></a>
-          </li>
+          </li> -->
         </ul>
-        <a href="#" class="btn btn-primary ml-lg-3 primary-shadow">Join Now</a>
+        <a href="/home" class="btn btn-primary ml-lg-3 primary-shadow">Join Now</a>
       </div>
     </nav>
   </div>
@@ -65,9 +73,12 @@
 <!-- /navigation -->
 
 <!-- hero area -->
-<section class="hero-section" data-background="" style="background-image: url(landing-page/assets/images/hero-area/banner-bg.png);">
+
+
+<section class="hero-section" data-background="" id="home" style="background-image: url(landing-page/assets/images/hero-area/banner-bg.png);">
   <div class="container">
-    <div class="row"> 
+    <div class="row">
+    @if(count($banner)>0 && is_object($banner))
     @foreach($banner as $eachBanner)    
       <div class="col-lg-12 text-center">        
         <h1 class="mb-3">{{$eachBanner->title}}</h1>
@@ -77,13 +88,23 @@
         <img class="img-fluid" src="landing-page/assets/images/hero-area/banner.png" alt="banner-img">        
       </div>
       @endforeach
+      @else
+         <div class="col-lg-12 text-center">        
+        <h1 class="mb-3">Update Title From Backend</h1>
+        <p class="mb-4"> </p>
+        <a href="{{$eachBanner->link}}" class="btn btn-secondary btn-lg mb-5">explore us</a>
+        <!-- banner image -->
+      </div>
+      @endif
+
     </div>
   </div>
 </section>
 <!-- /hero-area -->
 
-<!-- feature -->
-<section class="section feature mb-0" id="feature">
+<!-- feature   -->
+ @if(count($services)>0 && is_object($services))
+<section class="section    mb-0" id="feature">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
@@ -110,23 +131,34 @@
   <img class="feature-bg-1" src="landing-page/assets/images/background-shape/feature-bg-1.png" alt="bg-shape">
   <img class="feature-bg-2" src="landing-page/assets/images/background-shape/feature-bg-2.png" alt="bg-shape">
 </section>
+@endif
 <!-- /feature -->
 
 <!-- marketing -->
 <section class="section-lg seo">
   <div class="container">
     <div class="row"> 
-      <div class="col-md-6">
-        <img class="img-fluid" src="landing-page/assets/images/marketing/marketing.png" alt="form-img">
+        <div class="col-md-6 order-2 order-md-1">
+        <h2 class="section-title">Powerful & Elegant Layout From Top To Bottom Of The Design</h2>
+        <p class="mb-4">Far far away, behind the word mountains,
+          far from the countries Vokalia and Consonantia,
+          there live the blind texts. Separated they
+          live in Bookmarksgrove right at the coast of the
+          Semantics, a large language ocean.</p>
+        <ul class="pl-0 service-list">
+          <li><i class="ti-layout-tab-window"></i>Responsive on any device</li>
+          <li><i class="ti-layout-placeholder"></i>Very easy to customize</li>
+          <li><i class="ti-support"></i>Effective support</li>
+        </ul>
       </div>
       <div class="col-md-5">
-        <h2 class="section-title">A Complete Range Of Blog Services!</h2>
-        <p>Far far away, behind the word mountains, far
+        <h2 class="section-title"></h2>
+       <!--  <p>Far far away, behind the word mountains, far
           from the countries Vokalia and Consonantia.<br>
           There live the blind texts. Separated they
           live in Bookmarksgrove right at the coast of
           the Semantics, a large language ocean.
-        </p>
+        </p> -->
       </div>
     </div>
   </div>
@@ -143,7 +175,64 @@
 <section class="section-lg service">
   <div class="container">
     <div class="row">
-      <div class="col-md-6 order-2 order-md-1">
+
+   <div
+              :style="(progressVisible && progress)
+                ? {
+                  filter: 'blur(8px)',
+                  opacity: 0.3,
+                  pointerEvents: 'none',
+                  transform: 'scale(0.7,0.7)',
+                }
+                : {}
+              "
+              style="
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                right: 0;
+                top: 0;
+                transition-duration: 0s;
+              "
+            >
+              <vue-word-cloud
+                :animation-duration="5"
+                :animation-easing="animationEasing"
+                :animation-overlap="animationOverlap"
+                :color="color"
+                :enter-animation="'rotate'"
+                :font-family="fontFamily"
+                :font-size-ratio="fontSizeRatio"
+                :leave-animation="leaveAnimation"
+                :load-font="loadFont"
+                :progress.sync="progress"
+                :rotation="rotation"
+                :spacing="spacing"
+                :words="words"
+              >
+                
+              </vue-word-cloud>
+              </div>
+            <!-- <v-scale-transition> -->
+              <v-progress-bar
+                v-if="progressVisible && progress "
+                :percentcompleted="Math.round(progress.completedWords / progress.totalWords) * 100"
+                :totalwords="progress.totalWords"
+                style="
+                  bottom: 0;
+                  left: 0;
+                  margin: auto;
+                  position: absolute;
+                  right: 0;
+                  top: 0;
+                "
+              >
+             </v-progress-bar>
+
+            
+
+            
+     <!--  <div class="col-md-6 order-2 order-md-1">
         <h2 class="section-title">Powerful & Elegant Layout From Top To Bottom Of The Design</h2>
         <p class="mb-4">Far far away, behind the word mountains,
           far from the countries Vokalia and Consonantia,
@@ -157,8 +246,8 @@
         </ul>
       </div>
       <div class="col-md-6 order-1 order-md-2">
-        <img class="img-fluid" src="landing-page/assets/images/service/service.png" alt="service">
-      </div>
+        <img class="img-fluid" src="slanding-page/assets/images/service/service.png" alt="service">
+      </div> -->
     </div>
   </div>
   <!-- background image -->
@@ -253,13 +342,13 @@
 <footer class="section-lg footer pb-100" style="background-image:url(landing-page/assets/images/backgrounds/footer-bg.png);">
   <div class="container">
     <div class="row">
-      @foreach($banner as $eachBanner)
        <div class="col-lg-3 text-center text-lg-left mb-4 mb-lg-0">
-        <!-- logo -->
         <a href="index.html">
-          <img class="img-fluid" src="{{ asset('uploads/banner-images/'.$eachBanner->image) }}" alt="logo" style="width:150px;height:100px;">
-        </div>
-      @endforeach
+          <img class="img-fluid" src="landing-page/assets/images/logo.png" alt="logo">
+          </a>
+                </div>
+
+
       <!-- footer menu -->
       <nav class="col-lg-5 align-self-center mb-5">
         <h4>Get In Touch</h4>
@@ -283,17 +372,16 @@
     </div>
   </div>
 </footer>
+</div>
 <!-- /footer -->
 
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.16/chance.min.js"></script>
 
 
     <!-- Scripts -->
-    <script src="{{ asset('landing-page/assets/js/jquery.min.js')}}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
-    <script src="{{ asset('landing-page/assets/js/bootstrap.min.js')}}"></script> <!-- Bootstrap framework -->
-    <script src="{{ asset('landing-page/assets/js/slick.min.js')}}"></script>
-    <script src="{{ asset('landing-page/assets/js/wow.min.js')}}"></script>
-    <script src="{{ asset('landing-page/assets/js/scripts.js')}}"></script> <!-- Custom scripts -->
+    <script src="{{ asset('frontend/js/landing-page.js')}}"></script> 
+
 </body>
 </html>

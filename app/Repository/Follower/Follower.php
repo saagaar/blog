@@ -80,7 +80,7 @@ Class  Follower implements FollowerInterface
         $followcollection=array();
        
         $followers=$user->followings()->get()->pluck('pivot')->pluck('follow_id');
-        return  $getfollowuser=$this->user->select('username','name')->whereNotIn('id',array($user->id))->whereNotIn('id',$followers)->skip($head-1)->take($limit)->get();
+        return  $getfollowuser=$this->user->select('username','name','image')->whereNotIn('id',array($user->id))->whereNotIn('id',$followers)->skip($head-1)->take($limit)->get();
     }
 }
 ?>

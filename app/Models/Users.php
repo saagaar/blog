@@ -22,7 +22,7 @@ class Users extends Authenticatable implements Auditable
     protected $fillable = [
         'name','username','bio','email','status','image','phone','address','dob','country', 'password','provider_id','token','provider','is_login','last_login_date'
     ];
-
+     
     /**
      * The attributes that should be hidden for arrays.
      *

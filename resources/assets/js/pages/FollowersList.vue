@@ -4,16 +4,16 @@
      <PlaceHolderFollowers></PlaceHolderFollowers>
     </div>         
     <!-- ==== Friend List ==== -->
-    <div v-else-if="initialState.followers">
+    <div v-else-if="Object.entries(initialState.followers)>0">
     <div class="friend-list fn_list_2" >
       <div class="col-md-6 col-sm-12"  v-for="eachFollowers in initialState.followers">
         <div class="friend-card">
             <div class="row card-info">
               <div class="col-lg-3 col-md-4" v-if="eachFollowers.image">
-                <img :src="'/images/user-images/'+eachFollowers.image" alt="user" class="profile-photo-lg" />
+                <img :src="'/uploads/user-images/'+eachFollowers.image" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-3 col-md-4"v-else>
-                <img src="/images/system-images/default-profile.png" alt="user" class="profile-photo-lg" />
+                <img src="/frontend/images/elements/default-profile.png" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">
@@ -25,11 +25,15 @@
             </div>
           </div>
       </div>
-      <FollowerLoading :following="initialState.followings"></FollowerLoading>
+       <InfiniteLoading @infinite="infiniteHandler" spinner="spiral">
+          <div slot="no-more"></div>
+          <div slot="no-results"><hr></div>
+      </InfiniteLoading>
     </div> 
+   
     </div>
     <div class="friend-list fn_list_2" v-else>
-      No Records found
+     Sorry No followers yet!!
     </div>               
 </div>
 </template>
@@ -38,14 +42,16 @@
   import mixin  from './../mixins/LoadData.mixin.js';
   import FollowButton from './../components/Follows/FollowButton';
   import PlaceHolderFollowers  from './../components/ContentPlaceholder/PlaceHolderFollowers';
-  import FollowerLoading from './../components/BlogLoading/FollowerLoading';
-
+  import InfiniteLoading from 'vue-infinite-loading';
+  import Form from './../services/Form.js';
     export default {
       mixins: [ mixin ],
          data:function(){
     return {
             initialState:{},
-            isFollowing:false
+            isFollowing:false,
+            offset: 1,
+            form:new Form()
         }
       },
       
@@ -54,12 +60,29 @@
            var index=this.initialState.followers.filter(p => p.username == user);
                // remove after 1 second
           },
-          
-        },
-        components:{
+          infiniteHandler($state) {
+              this.form.get('/api/getfollowers?page='+this.offset).then(response => 
+              {
+                     if(response.data.data.length)
+                     {
+                       this.offset+=1;
+                       this.initialState.followers.push(...response.data.data);
+                       $state.loaded();
+                     }
+                     else
+                     {
+                       $state.complete();
+                     }
+              }).catch(e => 
+              {
+                 this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+              });
+              },
+         },
+         components:{
           FollowButton,
           PlaceHolderFollowers,
-          FollowerLoading
+          InfiniteLoading
           
         },
     }

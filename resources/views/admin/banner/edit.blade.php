@@ -45,7 +45,7 @@
                        <textarea name="description" class="form-control" rows="5" placeholder="Enter Description">{{$banner->description}}</textarea>
                         @if ($errors->has('description'))
                         <div class="alert alert-danger">{{ $errors->first('description') }}</div>
-                        @endifs
+                        @endif
                     </div>  
                   <div class="form-group">
                     <label for="content">Content:</label>

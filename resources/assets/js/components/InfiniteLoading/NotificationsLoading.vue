@@ -16,7 +16,7 @@
                   <li v-if="type=='nav'" class="media">
                         <p class=" text-center">
                           
-                          <a v-if="loadType=='fullload'" href="/users/notifications">See All</a>
+                          <a v-if="loadtype=='fullload'" href="/users/notifications">See All</a>
                           <router-link v-else to="/users/notifications"> See All</router-link>
                         </p>
                     </li>
@@ -29,9 +29,9 @@ import Form from './../../services/Form.js';
 
 export default {
   props: {
-    notificationList:{type:Array,default: function () { return [] }},
+    notificationlist:{type:Array,default: function () { return [] }},
     type:{type:String,default:'fullPage'},
-    loadType:{type:String,default:'noload'},
+    loadtype:{type:String,default:'noload'},
 
   },
   components: {
@@ -40,7 +40,7 @@ export default {
  data:function(){
     return {
       offset: 1,
-      allNotifications:this.notificationList,
+      allNotifications:this.notificationlist,
       form:new Form()
     };
   },
@@ -64,9 +64,9 @@ export default {
         {
                if(response.data.data.notifications.length>0)
                {
-                console.log(cur.$data.allNotifications);
                  this.offset+=1;
                  cur.$data.allNotifications.push(...response.data.data.notifications);
+                  this.$store.commit('UPDATE_UNREAD_NOTIFICATION_COUNT',response.data.data.unReadNotificationsCount);
                  $state.loaded();
                }
                else

@@ -1,6 +1,5 @@
 @extends('layouts.common.main')
 @section('content') 
-
 <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -14,10 +13,10 @@
               </div>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body no-padding">
              @component('layouts.components.search' )
              @endcomponent  
-             <table id="example2" class="table table-bordered table-hover">
+             <table id="example2" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -62,7 +61,7 @@
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="9" align="center" style="background-color: #d2d6de;"> No PaymentGateway lists Found </td>
+                    <td colspan="10" align="center" style="background-color: #d2d6de;"> No PaymentGateway lists Found </td>
                   </tr>
                   @endif
                 </tbody>

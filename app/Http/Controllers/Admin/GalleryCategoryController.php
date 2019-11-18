@@ -44,7 +44,7 @@ class GalleryCategoryController extends AdminController
 
             $requestobj=app(GallerycatRequest::class);
             $validatedData = $requestobj->validated();
-           $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
+            $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
             request()->banner_image->move(public_path('uploads/gallery-cat-images'), $imageName);
             $validatedData['banner_image'] = $imageName;
             $this->categories->create($validatedData);

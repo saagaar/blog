@@ -8,7 +8,9 @@ use App\Repository\TagInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 use Illuminate\Support\Facades\File;
- use Image;
+ // use Intervention\Image\Facades\Image;
+use Image;
+
 use App;
 class BlogController extends AdminController
 {
@@ -43,23 +45,30 @@ class BlogController extends AdminController
     $tagList = $tag->getAllTags()->get();
     if ($request->method()=='POST') 
     {
+        request()->validate([
+
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
         $requestObj=app(BlogRequest::class);
-        $validatedData = $requestObj->validated();       
-        $validatedData['user_id'] = Auth()->user()->id;
-        $created = $this->blog->create($validatedData); 
-        $code= uniqid();
-        $part1=substr($code,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
-        $part2=substr($code, 7,-1);
+        $validatedData = $requestObj->validated();      
+        $created = $this->blog->create($validatedData);
+        $uniqid= uniqid();
+        $part1=substr($uniqid,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
+        $part2=substr($uniqid, 7,-1);
         $created['code']= $part1.$part2;
         $created->save();
         $created->tags()->attach($validatedData['tags']);        
         $extension = request()->image->getClientOriginalExtension();
+
         $imageName = time().'.'.$extension;
         $dir=public_path(). '/uploads/blog/'.$created['code'];
-        File::makeDirectory($dir);
+        if(!is_dir($folder))
+            File::makeDirectory($folder, 0755, true);
         $originalImg= request()->image->move($dir,$imageName);
         // File::delete($originalImg);
         // $originalImg= request()->image->move($dir,$imageName);              
+
         $img =Image::make($originalImg);
         list($width, $height) = getimagesize($originalImg);       
         if($width > 1000 && $height < 1000)
@@ -68,20 +77,20 @@ class BlogController extends AdminController
             $img->resize(1000,null, function ($constraint) 
             {
             $constraint->aspectRatio();
-             })->save($dir.'/'.time().'.'.$extension);            
+             })->save($dir.'/'.$uniqid.'.'.$extension);            
         }
          else if($width < 1000 && $height > 1000)
         {
              $img->resize(null,1000, function ($constraint) 
             {
             $constraint->aspectRatio();
-             })->save($dir.'/'.time().'.'.$extension);
+             })->save($dir.'/'.$uniqid.'.'.$extension);
         }        
                  
            $img->resize(100,null, function ($constraint) 
             {
             $constraint->aspectRatio();
-             })->save($dir.'/'.time().'-thumbnail.'.$extension);
+             })->save($dir.'/'.$uniqid.'-thumbnail.'.$extension);
            $data['image'] = $imageName;
            $this->blog->update($created->id,$data);
            return redirect()->route('blog.list')
@@ -101,23 +110,25 @@ class BlogController extends AdminController
                           ]];
                           $taglist = $tag->getAllTags()->get();
            
-            $blog =$this->blog->GetBlogById($id);
-            
+            $blog =$this->blog->GetBlogById($id);            
             if ($request->method()=='POST') 
-            {
-               
+            {    
+                 request()->validate([
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                 ]);     
                 $requestObj=app(BlogRequest::class);
                 $validatedData = $requestObj->validated();          
-            if ($request->hasFile('image')) 
-            {                              
+             if($request->hasFile('image')) 
+             {     
+                $uniqid= uniqid();                        
                 $dir=public_path(). '/uploads/blog/'.$blog->code.'/';
                  if ($blog->image != '' && File::exists($dir,$blog->image))
                 {
                 File::deleteDirectory($dir);
-                 }
+                }
                 File::makeDirectory($dir);
                 $extension = request()->image->getClientOriginalExtension();
-                $imageName = time().'.'.$extension;
+                $imageName = $uniqid.'.'.$extension;
                 $originalImg =request()->image->move($dir,$imageName);
                 $img = Image::make($originalImg);
                 list($width, $height) = getimagesize($originalImg);  
@@ -128,31 +139,29 @@ class BlogController extends AdminController
                     $img->resize(1000,null, function ($constraint) 
                     {
                     $constraint->aspectRatio();
-                     })->save($dir.'/'.time().'.'.$extension);            
+                     })->save($dir.'/'.$uniqid.'.'.$extension);            
                 }
                  else if($width < 1000 && $height > 1000)
                 {
                      $img->resize(null,1000, function ($constraint) 
                     {
                     $constraint->aspectRatio();
-                     })->save($dir.'/'.time().'.'.$extension);
+                     })->save($dir.'/'.$uniqid.'.'.$extension);
                 } 
 
-                // **************resizing the image of thumbnail******************//
+                //**************resizing the image of thumbnail******************//
                $img->resize(100, null, function ($constraint) 
                 {
                  $constraint->aspectRatio();
                 }
-                )->save($dir.'/'.time().'-thumbnail.'.$extension);
+                )->save($dir.'/'.$uniqid.'-thumbnail.'.$extension);
                     
                   $validatedData['image'] = $imageName;
-
             }
                 else 
                 {
                     $validatedData['image'] = $blog->image;
                 }
-                $validatedData['user_id'] = Auth()->user()->id;
                 $updated = $this->blog->update($id,$validatedData);
                 $blog->tags()->sync($validatedData['tags']);
                 return redirect()->route('blog.list')
@@ -162,11 +171,14 @@ class BlogController extends AdminController
             $localeList=$Locale->getActiveLocale()->toArray();
             return view('admin.blog.editblog')->with(array('blog'=>$blog,'tags'=>$taglist,'breadcrumb'=>$breadcrumb,'localelist'=>$localeList,'primary_menu'=>'blog.list'));
     }
+
+  
     public function delete($id)
     {
        $blog =$this->blog->GetBlogById($id);      
         if( $blog)
         {
+
             $dir = public_path(). '/uploads/blog/'.$blog->code.'/';
             if ($blog->image != '' && File::exists($dir,$blog->image))
             {

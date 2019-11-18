@@ -18,37 +18,36 @@
                             
                         </ul>
                          <ul v-else>
-                        <li><a id="search" @click="OpenSearchBox" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                        <li><router-link to="/blog/add" title="Create Article"><i class="fa fa-plus-square" ></i></router-link></li>
                       
-                        <li class="nitify dropdown">
+                        <li class="nitify dropdown" @click="updateNotificationStatus">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
-                            aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ me.unReadNotificationsCount }}</em></a>
+                            aria-expanded="false" title="Notifications"><i  class="fas fa-bell"></i> <em v-if="me.unReadNotificationsCount>0">{{ me.unReadNotificationsCount }}</em></a>
 
-                               <NotificationsLoading :notificationList="topnotifications" :loadType="'noload'" :type="'nav'" ></NotificationsLoading>
+                               <NotificationsLoading :notificationlist="topnotifications" :loadtype="'noload'" :type="'nav'" ></NotificationsLoading>
                                 
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
-                            <figure><img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'"></figure> {{ me.name}}
-                        </a>
+                            <figure><img :src="getProfileUrl()"></figure> {{getFirstName()}}</a>
                             <ul class="dropdown-menu">
-                                <li><a href="/dashboard">Dashboard</a></li>
+                                <li><router-link to="/dashboard">My Dashboard</router-link></li>
 
-                                <li><a href="/profile">My Profile</a></li>
-                                
-                                <li><a href="/blog/add">New Stories</a></li>
-                                <li><a href="/blog/list">Stories</a></li>
-                                <hr>
-                                <li><a href="#">BlogSagar Partner Program</a></li>
-                                <li><a href="#">Bookmarks</a></li>
-                                <li><a href="#">Publications</a></li>
-                                <li><a href="/categories">Customize your interest</a></li>
-                                <hr>
-                                <li><a href="/settings">Settings</a></li>
-                                <li><a href="#">Help</a></li>
+                            
+                                <li><router-link to="/profile">Profile</router-link></li>
+                                <li><router-link to="/categories">Choose your interest</router-link></li>
+                                 <hr>
+                                <li><router-link to="/blog/add">New Article</router-link></li>
+                               
+                                <li><router-link to="/blog/list">My Articles</router-link></li>
+                                 <hr>
+                               
+
+                                <li><router-link to="/settings">Settings</router-link></li>
+                                <!-- <li><a href="#">Help</a></li> -->
                                 <!-- <li><a href="#">Change Password</a></li> -->
-                                <li><a v-bind:href="config.ROOT_URL+'logout/user'">Log Out</a></li>
+                                <li><a href="/logout/user">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -78,7 +77,7 @@
 
 <script>
 
-
+import Form from './../../services/Form.js';
 import LoginButton from './LoginButton.vue';
 import SignUpButton from './SignUpButton.vue';
 import TheLoginSignupModal from './TheLoginSignupModal';
@@ -87,7 +86,8 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
        
         data() {
            return {
-            topnotifications:[]
+            topnotifications:[],
+            readNotification:false
            }
         },
         computed:{
@@ -100,17 +100,55 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
             me:function(){
               this.topnotifications=this.$store.getters.me.notifications
               return this.$store.getters.me
-             
             },
            
         },
-        
         methods:{
              OpenSearchBox:function()
             {
                 $("#search_input_box").slideToggle();
                 $("#search_input").focus();
             },
+            updateNotificationStatus:function()
+            {
+                if(!this.readNotification)
+                {
+
+                   let cur=this;
+                   var form=new Form();
+                       form.get('/api/update-notification-status').then(response => 
+                        {
+                           if(response.data.status)
+                           {
+                             cur.readNotification=true;
+                              this.$store.commit('UPDATE_UNREAD_NOTIFICATION_COUNT',response.data.data.unReadNotificationsCount);
+                           }
+                           else
+                           {
+                            
+                           }
+                          }).catch(e => 
+                          {
+                             this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                          });
+                }
+            },
+            getProfileUrl(){
+              let url=this.me.image;
+              if(url===''){
+                return 'frontend/images/elements/default-profile.png';
+              }
+              else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
+                return url;
+              }
+              else{
+                return '/uploads/user-images/'+url;
+              }
+           },
+           getFirstName(){
+             let first = this.me.name.split(' ').slice(0, -1).join(' ');; 
+             return first;
+           }
          },
         components:{
                 SignUpButton,

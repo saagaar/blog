@@ -46,7 +46,6 @@
                       </option>
                       @endforeach
                     @endif
-
                   </select>
                   @if ($errors->has('locale_id')) 
                 <div class="alert alert-danger">{{ $errors->first('locale_id') }}</div>
@@ -55,7 +54,7 @@
                                
                 <div class="form-group">
                   <label for="Content">Content:</label>
-                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
+                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here..">{{ old('content') }}</textarea>
                   @if ($errors->has('content'))
                 <div class="alert alert-danger">{{ $errors->first('content') }}</div>
                 @endif
@@ -69,14 +68,12 @@
                 </div>
                 @endif
                 </div>
-
-
-                <div class="form-group">
+                 <div class="form-group">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
                   @if ($errors->has('image'))
-                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
-                @endif
+                  <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                  @endif
                 </div>
                 <div class="form-group">
                   <label for="tags">Tags</label>

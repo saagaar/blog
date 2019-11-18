@@ -36,7 +36,7 @@ class UserInterestController extends FrontendController
            {
             $data['allCategories'] = $this->category->getAll()->where('parent_id', NULL)->with('categories')->get()->toArray();
             $data['userInterest'] = $this->getUserInterest();
-            $user = $this->authUser;
+            $user=$this->user_state_info();
             $data['path']='/categories';
             $initialState=json_encode($data);
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
