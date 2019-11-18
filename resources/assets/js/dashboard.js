@@ -11,6 +11,15 @@ import router from './routes.js'
 import VueRouter from 'vue-router';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
+import helpers from './helpers/global';
+Vue.use({
+    install() {
+        Vue.helpers = helpers;
+        Vue.prototype.$helpers = helpers;
+    }
+});
+
+
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
 Vue.use( CKEditor );

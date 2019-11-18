@@ -7235,7 +7235,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -45885,26 +45884,13 @@ var staticRenderFns = [
             staticClass: "btn btn-secondary btn-round",
             attrs: {
               type: "button",
+              href: "/social-login/google",
               "data-toggle": "tooltip",
               "data-placement": "top",
               title: "Google"
             }
           },
           [_c("i", { staticClass: "fab fa-google" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-secondary btn-round",
-            attrs: {
-              type: "button",
-              "data-toggle": "tooltip",
-              "data-placement": "top",
-              title: "Twitter"
-            }
-          },
-          [_c("i", { staticClass: "fab fa-twitter" })]
         ),
         _vm._v(" "),
         _c(
@@ -46006,31 +45992,17 @@ var staticRenderFns = [
       { staticClass: "d-flex justify-content-center social-buttons" },
       [
         _c(
-          "button",
+          "a",
           {
             staticClass: "btn btn-secondary btn-round",
             attrs: {
-              type: "button",
+              href: "/social-login/google",
               "data-toggle": "tooltip",
               "data-placement": "top",
               title: "Google"
             }
           },
           [_c("i", { staticClass: "fab fa-google" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-secondary btn-round",
-            attrs: {
-              type: "button",
-              "data-toggle": "tooltip",
-              "data-placement": "top",
-              title: "Twitter"
-            }
-          },
-          [_c("i", { staticClass: "fab fa-twitter" })]
         ),
         _vm._v(" "),
         _c(
@@ -65971,7 +65943,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONFIG = {
-  ROOT_URL: 'http://localhost:8000/'
+  ROOT_URL: 'https://thebloggersclub.com/'
 };
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 

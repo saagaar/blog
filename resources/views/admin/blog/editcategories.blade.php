@@ -81,27 +81,19 @@
                 <div class="form-group">
                   <label for="tags">Tags</label>
                     <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
-<<<<<<< HEAD
+
                       @if(!($category->tags()->pluck('tags_id'))->isEmpty())
                         @foreach ($tags as $values)
                           @foreach($category->tags()->pluck('tags_id') as $tagsid)
-=======
-                      @foreach ($tags as $values)
-                      @if((!$category->tags()->pluck('tags_id')))->isEmpty()
-                      @foreach($category->tags()->pluck('tags_id') as $tagsid)
->>>>>>> kshitiz
+
                             <option value="{{ $values->id }}" @if($values->id == $tagsid) selected @endif> {{ $values->name }}  </option>
                           @endforeach
                         @endforeach
                       @else
                         @foreach ($tags as $values)
                          <option value="{{ $values->id }}">{{ $values->name }}</option>
-<<<<<<< HEAD
                          @endforeach
-=======
-
->>>>>>> kshitiz
-                      @endif
+    @endif
                       
                     </select>
                     <p class="help-block"></p>

@@ -379,9 +379,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.16/chance.min.js"></script>
 
-
     <!-- Scripts -->
+    <script src="{{ asset('frontend/js/landing.support.js')}}"></script> 
     <script src="{{ asset('frontend/js/landing-page.js')}}"></script> 
-
+    
 </body>
 </html>

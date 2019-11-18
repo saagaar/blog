@@ -9,7 +9,7 @@
                     <img :src="eachsuggestion.image? '/uploads/user-images/'+eachsuggestion.image:'/frontend/images/elements/default-profile.png'" alt="user" class="profile-photo-sm pull-left" />
                     <div>
                       <h5><a href="#">{{ eachsuggestion.name}}</a></h5>
-                      <FollowButton  @clicked="userFollowed" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
+                      <FollowButton  @clicked="userFollowed" :following="following" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
                     </div>
                    </div>
                    </div>
@@ -32,24 +32,31 @@ import PlaceHolderDashboardFeed  from './../ContentPlaceholder/PlaceHolderDashbo
         	return {
               followSuggestionStart: '',
               isLoading:'',
+              following:false,
+              newUser:{name:'',username:'',image:''}
            }
         },
-        
+        watch:{
+          'newUser.username':
+          {
+            handler: function (after, before) {
+              this.followSuggestion.push(this.newUser)
+            },
+            deep: true
+          }         
+        },
         methods:{
           userFollowed:function(toRemoveUser,toAddUser){
+
+              var index = this.followSuggestion.findIndex(obj => {
+              return obj.username === toRemoveUser
+            })                               
           
-            var index=this.followSuggestion.filter(p => p.username == toRemoveUser);
-            console.log(index);
             this.followSuggestion.splice(index, 1);
-            console.log(this.followSuggestion);
             if(toAddUser[0]!==  undefined)
             {
-              this.followSuggestion.push(toAddUser[0]);
-            }
-               // remove after 1 second
-            //    console.log(this.followSuggestion);
-            // console.log(this.followSuggestion);
-            
+              this.newUser=toAddUser[0];
+            } 
           }
         },
         components:{

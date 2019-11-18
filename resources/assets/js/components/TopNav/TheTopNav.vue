@@ -135,15 +135,7 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
             },
             getProfileUrl(){
               let url=this.me.image;
-              if(url===''){
-                return 'frontend/images/elements/default-profile.png';
-              }
-              else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
-                return url;
-              }
-              else{
-                return '/uploads/user-images/'+url;
-              }
+              return this.$helpers.getProfileUrl(url);
            },
            getFirstName(){
              let first = this.me.name.split(' ').slice(0, -1).join(' ');; 

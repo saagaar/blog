@@ -14,12 +14,12 @@ const mix = require('laravel-mix');
     mix.js('resources/assets/js/dashboard.js','public/frontend/js');
     mix.js('resources/assets/js/landing-page.js','public/frontend/js');
   
-  mix.scripts([
+  mix.scripts(
+    [
+        'resources/assets/landing-page/js/jquery.min.js',
+        'resources/assets/landing-page/js/bootstrap.min.js',
         'resources/assets/landing-page/js/slick.min.js',
-        // 'resources/assets/landing-page/js/wow.min.js',
-        
         'resources/assets/landing-page/js/scripts.js',
-
     ], 'public/frontend/js/landing.support.js');
 
     mix.scripts([
@@ -30,7 +30,7 @@ const mix = require('laravel-mix');
    mix.sass('resources/assets/sass/style.scss', 'public/frontend/css')
      .copyDirectory('resources/assets/images', 'public/frontend/images');
  
-mix.styles([
+    mix.styles([
     // 'resources/assets/vendors/fontawesome/css/all.min.css',
 	'resources/assets/css/bootstrap.css',
     'resources/assets/css/about.css',

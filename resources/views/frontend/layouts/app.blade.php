@@ -50,9 +50,9 @@
                             <small>Welcome !</small>
                             <figure>
                               @if(auth()->user()->image)
-                                <img src="'/images/user-images/'.auth()->user()->image">
+                                <img src="'uploads/user-images/'.auth()->user()->image">
                               @else
-                                <img src="/images/system-images/default-profile.png">
+                                <img src="/frontend/images/elements/default-profile.png">
                               @endif
                             </figure><?php  
                             $name=auth()->user()->name;

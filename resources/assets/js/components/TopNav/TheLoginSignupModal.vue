@@ -54,12 +54,12 @@
           
           <div class="text-center text-muted delimiter">or use a social network</div>
           <div class="d-flex justify-content-center social-buttons">
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google">
+            <button type="button"  href="/social-login/google" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google">
               <i class="fab fa-google"></i>
             </button>
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
+            <!-- <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
               <i class="fab fa-twitter"></i>
-            </button>
+            </button> -->
             <a href="/social-login/facebook" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
               <i class="fab fa-facebook"></i>
             </a>
@@ -114,12 +114,11 @@
           
           <div class="text-center text-muted delimiter">or use a social network</div>
           <div class="d-flex justify-content-center social-buttons">
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google">
+            
+            <a href="/social-login/google"  class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google">
               <i class="fab fa-google"></i>
-            </button>
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
-              <i class="fab fa-twitter"></i>
-            </button>
+            </a>
+         
             <a href="/social-login/facebook" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
               <i class="fab fa-facebook"></i>
             </a>
