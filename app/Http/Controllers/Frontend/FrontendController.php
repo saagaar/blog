@@ -117,6 +117,8 @@ class FrontendController extends BaseController
             $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
             $user->notifications=$account->getUsersNotification($this->authUser,$this->apiPerPage);
             $user->blogCount=$this->authUser->blogs()->count();
+            $user->root_url=url('/');
+            
             $user=$user->toArray();
             $user['permissions']= $this->getAllPermissionsAttribute();    
             // $user['roles']=$this->authUser->roles->first()->name;

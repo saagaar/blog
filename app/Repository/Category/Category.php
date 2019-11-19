@@ -43,7 +43,7 @@ Class Category implements CategoryInterface
      * @return mixed
      */
     public function getAll(){
-   	 return	$this->cat->first();
+   	 return	$this->cat;
     }
 
     public function getCategoryByWeight(){

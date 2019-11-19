@@ -16,10 +16,9 @@ const mix = require('laravel-mix');
   
   mix.scripts(
     [
-        'resources/assets/landing-page/js/jquery.min.js',
-        'resources/assets/landing-page/js/bootstrap.min.js',
-        'resources/assets/landing-page/js/slick.min.js',
         'resources/assets/landing-page/js/scripts.js',
+    
+        'resources/assets/landing-page/js/slick.min.js',
     ], 'public/frontend/js/landing.support.js');
 
     mix.scripts([
