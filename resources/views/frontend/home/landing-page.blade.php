@@ -44,7 +44,7 @@
 <section class="fixed-top navigation">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="index.html"><img src="landing-page/assets/images/logo.png" alt="logo"></a>
+      <a class="navbar-brand" href="/"><img src="landing-page/assets/images/logo.png" alt="logo"></a>
       <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -53,7 +53,7 @@
       <div class="collapse navbar-collapse text-center" id="navbar">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#home"><b>Home</b></a>
+            <a class="nav-link" href="/home"><b>Home</b></a>
           </li>
           <li class="nav-item">
             <a class="nav-link page-scroll" href="#feature  "><b>Feature  </b></a>
@@ -343,7 +343,7 @@
   <div class="container">
     <div class="row">
        <div class="col-lg-3 text-center text-lg-left mb-4 mb-lg-0">
-        <a href="index.html">
+        <a href="/">
           <img class="img-fluid" src="landing-page/assets/images/logo.png" alt="logo">
           </a>
                 </div>
