@@ -23,7 +23,7 @@ import NotificationsLoading  from './../components/InfiniteLoading/Notifications
           },
           watch:{
              initialState:function(newValue){
-              this.totalNotifications=newValue.notifications
+              this.totalNotifications=newValue.data.notifications
             },
           }
        

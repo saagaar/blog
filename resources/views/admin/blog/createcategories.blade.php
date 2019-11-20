@@ -77,16 +77,16 @@
                 <div class="form-group">
                   <label for="tags">Tags</label>
                   <!-- value="{{ $tags }}" -->
-                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
+                    <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags" placeholder="Enter Tags">
                       @foreach ($tags as $values)
                       <option value="{{ $values->id }}"> {{ $values->name }}  </option>
                       @endforeach
                     </select>
-                    <p class="help-block"></p>
+                   
                     @if($errors->has('tags'))
-                        <p class="help-block">
+                       <div class="alert alert-danger">
                             {{ $errors->first('tags') }}
-                        </p>
+                        </div>
                     @endif
                 </div>
 

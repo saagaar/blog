@@ -128,7 +128,11 @@ function showSmsFunction() {
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
+    $('.js-example-basic-multiple').select2({
+      tags: true,
+     
+    
+  });
 });
 $(document).ready(function () {
  

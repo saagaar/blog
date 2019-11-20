@@ -45,6 +45,10 @@ Class Category implements CategoryInterface
     public function getAll(){
    	 return	$this->cat->latest();
     }
+
+    public function getCategoryByWeight(){
+     return $this->cat->selectRaw('CONCAT(name," ",10-priority*2) as cat')->get();
+    }
  	
  	  /**
      * create a 

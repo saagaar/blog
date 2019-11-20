@@ -4,7 +4,7 @@
          	<img v-if="isChecked" src="/images/appreciate-active.gif" width="25" height="25" class="img-fluid">
         	<img v-else src="/images/appreciate.png" width="25" height="25" class="img-fluid">
    		</a>
-   		<span>{{ count }} people like this</span>
+   		<span>{{ count }} people Appreciate this</span>
    	</div>
 </template>
 

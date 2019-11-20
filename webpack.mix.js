@@ -12,6 +12,15 @@ const mix = require('laravel-mix');
  */
     mix.js('resources/assets/js/app.js','public/frontend/js');
     mix.js('resources/assets/js/dashboard.js','public/frontend/js');
+    mix.js('resources/assets/js/landing-page.js','public/frontend/js');
+  
+  mix.scripts([
+        'resources/assets/landing-page/js/slick.min.js',
+        // 'resources/assets/landing-page/js/wow.min.js',
+        
+        'resources/assets/landing-page/js/scripts.js',
+
+    ], 'public/frontend/js/landing.support.js');
 
     mix.scripts([
         'resources/assets/vendors/popup/jquery.magnific-popup.min.js',
@@ -33,3 +42,15 @@ mix.styles([
     'resources/assets/css/responsive.css',
     ], 'public/frontend/css/app.css')
 	.copyDirectory('resources/assets/font', 'public/frontend/fonts');
+
+    mix.styles([
+    'resources/assets/landing-page/css/bootstrap.css',
+    'resources/assets/vendors/fontawesome/css/all.min.css',
+
+    'resources/assets/landing-page/css/themify-icons.css',
+    'resources/assets/landing-page/css/slick.css',
+    'resources/assets/landing-page/animate.css',
+    'resources/assets/landing-page/css/styles.css',
+    ], 'public/frontend/css/landing-page.css')
+
+   

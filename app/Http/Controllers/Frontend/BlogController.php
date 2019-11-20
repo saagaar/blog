@@ -62,6 +62,22 @@ class BlogController extends FrontendController
           return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
        }
    	}
+
+    public function resizeImage($code,$width,$name)
+    {
+        $imagePath=public_path(). '/uploads/blog/'.$code.'/'.$name;
+        if(File::exists($imagePath))
+        {
+           $img = Image::make($imagePath);
+          $img->resize($width, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+          return $img->response('jpg'); 
+        }
+       abort(404);
+      
+    }
     public function update(Request $request,$blogCode,TagInterface $tag)
     {
             $routeName= Route::currentRouteName();
@@ -129,16 +145,23 @@ class BlogController extends FrontendController
                     }else{
                         if(request()->image)
                         {
+                            // $dir = 'uploads/blog/'.$blogData->code.'/';
+                            // if ($blogData->image != '' && File::exists($dir . $blogData->image)){
+                            //     File::delete($dir . $blogData->image);
+                            // }
+                            // $imageName = time().'.'.request()->image->getClientOriginalExtension();
+                            // request()->image->move(public_path('uploads/blog/'.$blogData->code.'/'), $imageName);
+                            // $form['image']=$imageName;
                             $extension = request()->image->getClientOriginalExtension();
                             $imageName = time().'.'.$extension;              
-
-                            $dir=public_path().'/images/blog/'.$postId.'/';
+                            $dir=public_path().'/uploads/blog/'.$postId.'/';
                              if ($blogData->image != '' && File::exists($dir,$blogData->image))
                             {
-                            File::deleteDirectory($dir);
-                             }else{}
-                                File::makeDirectory($dir);
 
+                            File::deleteDirectory($dir);
+                             }else{
+                                File::makeDirectory($dir);
+                            }
                             $tmpImg =request()->image->move($dir,$imageName);
                             $img = Image::make($tmpImg);         
                            $img->resize(100, null, function ($constraint) 
@@ -146,10 +169,11 @@ class BlogController extends FrontendController
                              $constraint->aspectRatio();
                             }
                             )->save($dir.'/'.time().'-thumbnail.'.$extension);
+
                             $form['image'] = $imageName;
                         }
                         $form['short_description']=$request->short_description;
-                        $form['save_method']='1';
+                        $form['save_method']=$request->save_method?$request->save_method:'1';
                         $form['anynomous'] = $request->isAnynomous ? '1' : '2';
                         $this->blog->updateByCode($postId,$form);
                         $tagid = $tag->getTagByName($request->tags);
@@ -165,7 +189,7 @@ class BlogController extends FrontendController
         $blogData = $this->blog->getBlogByCode($blogCode);
         if( $blogData)
         {
-            $dir = public_path(). '/images/blog/'.$blogData->code.'/';
+            $dir = public_path(). '/uploads/blog/'.$blogData->code.'/';
             if ($blogData->image != '' && File::exists($dir,$blogData->image))
             {
                 File::deleteDirectory($dir);

@@ -8,7 +8,9 @@ use App\Repository\TagInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 use Illuminate\Support\Facades\File;
- use Image;
+
+use Image;
+ // use Intervention\Image\Facades\Image;
 use App;
 class BlogController extends AdminController
 {
@@ -43,47 +45,45 @@ class BlogController extends AdminController
     $tagList = $tag->getAllTags()->get();
     if ($request->method()=='POST') 
     {
-        request()->validate([
-
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
-        ]);
+       
         $requestObj=app(BlogRequest::class);
-        $validatedData = $requestObj->validated();      
+        $validatedData = $requestObj->validated();
+        // dd($validatedData);
+        //  request()->validate([
+        // 'image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //  ]);           
         $created = $this->blog->create($validatedData);
-        $uniqid= uniqid();
-        $part1=substr($uniqid,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
-        $part2=substr($uniqid, 7,-1);
+        $uniqId= uniqid();
+        $part1=substr($uniqId,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
+        $part2=substr($uniqId, 7,-1);
         $created['code']= $part1.$part2;
         $created->save();
         $created->tags()->attach($validatedData['tags']);        
         $extension = request()->image->getClientOriginalExtension();
-        $imageName = $uniqid.'.'.$extension;
+        $imageName = $uniqId.'.'.$extension;
         $dir=public_path(). '/uploads/blog/'.$created['code'];
-        File::makeDirectory($dir);
-        $originalImg= request()->image->move($dir,$imageName);            
+        $originalImg= request()->image->move($dir,$imageName);           
         $img =Image::make($originalImg);
-        list($width, $height) = getimagesize($originalImg);       
+        list($width,$height) = getimagesize($originalImg);       
         if($width > 1000 && $height < 1000)
-        {
-                  
+        {                  
             $img->resize(1000,null, function ($constraint) 
             {
             $constraint->aspectRatio();
-             })->save($dir.'/'.$uniqid.'.'.$extension);            
+             })->save($dir.'/'.$uniqId.'.'.$extension);            
         }
          else if($width < 1000 && $height > 1000)
         {
              $img->resize(null,1000, function ($constraint) 
             {
             $constraint->aspectRatio();
-             })->save($dir.'/'.$uniqid.'.'.$extension);
+             })->save($dir.'/'.$uniqId.'.'.$extension);
         }        
                  
            $img->resize(100,null, function ($constraint) 
             {
             $constraint->aspectRatio();
-             })->save($dir.'/'.$uniqid.'-thumbnail.'.$extension);
+            })->save($dir.'/'.$uniqId.'-thumbnail.'.$extension);
            $data['image'] = $imageName;
            $this->blog->update($created->id,$data);
            return redirect()->route('blog.list')
@@ -91,9 +91,8 @@ class BlogController extends AdminController
     }
     
     $localeList=$locale->getActiveLocale()->toArray();
-    return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'tags'=>$tagList,'localelist'=>$localeList,'primary_menu'=>'blog.list'));
-
-    }
+    return view('admin.blog.createblog')->with(array('breadcrumb'=>$breadcrumb,'tags'=>$tagList,'localeList'=>$localeList,'primary_menu'=>'blog.list'));
+ }
     public function edit(Request $request, $id,$slug,LocaleInterface $Locale,TagInterface $tag)
     {
             $breadcrumb=['breadcrumbs' => [
@@ -106,14 +105,14 @@ class BlogController extends AdminController
             $blog =$this->blog->GetBlogById($id);            
             if ($request->method()=='POST') 
             {    
-                 request()->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                 ]);     
+                //  request()->validate([
+                // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                //  ]);     
                 $requestObj=app(BlogRequest::class);
                 $validatedData = $requestObj->validated();          
-             if($request->hasFile('image')) 
-             {     
-                $uniqid= uniqid();                        
+             if ($request->hasFile('image')) 
+              {     
+                $uniqId= uniqid();                        
                 $dir=public_path(). '/uploads/blog/'.$blog->code.'/';
                  if ($blog->image != '' && File::exists($dir,$blog->image))
                 {
@@ -121,37 +120,34 @@ class BlogController extends AdminController
                 }
                 File::makeDirectory($dir);
                 $extension = request()->image->getClientOriginalExtension();
-                $imageName = $uniqid.'.'.$extension;
+                $imageName = $uniqId.'.'.$extension;
                 $originalImg =request()->image->move($dir,$imageName);
                 $img = Image::make($originalImg);
                 list($width, $height) = getimagesize($originalImg);  
-
                 if ($width > 1000 && $height < 1000)
-                {
-                          
+                {                          
                     $img->resize(1000,null, function ($constraint) 
                     {
                     $constraint->aspectRatio();
-                     })->save($dir.'/'.$uniqid.'.'.$extension);            
+                     })->save($dir.'/'.$uniqId.'.'.$extension);            
                 }
                  else if($width < 1000 && $height > 1000)
                 {
                      $img->resize(null,1000, function ($constraint) 
                     {
                     $constraint->aspectRatio();
-                     })->save($dir.'/'.$uniqid.'.'.$extension);
+                     })->save($dir.'/'.$uniqId.'.'.$extension);
                 } 
-
                 //**************resizing the image of thumbnail******************//
-               $img->resize(100, null, function ($constraint) 
+                $img->resize(100, null, function ($constraint) 
                 {
                  $constraint->aspectRatio();
                 }
-                )->save($dir.'/'.$uniqid.'-thumbnail.'.$extension);
+                )->save($dir.'/'.$uniqId.'-thumbnail.'.$extension);
                     
                   $validatedData['image'] = $imageName;
-            }
-                else 
+              }
+            else 
                 {
                     $validatedData['image'] = $blog->image;
                 }
@@ -164,11 +160,14 @@ class BlogController extends AdminController
             $localeList=$Locale->getActiveLocale()->toArray();
             return view('admin.blog.editblog')->with(array('blog'=>$blog,'tags'=>$taglist,'breadcrumb'=>$breadcrumb,'localelist'=>$localeList,'primary_menu'=>'blog.list'));
     }
+
+  
     public function delete($id)
     {
        $blog =$this->blog->GetBlogById($id);      
         if( $blog)
         {
+
             $dir = public_path(). '/uploads/blog/'.$blog->code.'/';
             if ($blog->image != '' && File::exists($dir,$blog->image))
             {
@@ -183,8 +182,8 @@ class BlogController extends AdminController
      public function changeSaveMethod(Request $request)
     {
         $blog = $this->blog->GetBlogById($request->id);
-        $changemethod= $request->save_method;  
-        $blog->update(array('save_method'=>$changemethod));  
+        $changeMethod= $request->save_method;  
+        $blog->update(array('save_method'=>$changeMethod));  
         return redirect()->route('blog.list')
                         ->with('success','Status change successfully.');
     }

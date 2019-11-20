@@ -5,7 +5,7 @@
             <div class="thumb col-md-4 col-sm-5 col-12">
                 <figure>
                     <a href="#">
-                         <img v-if="items.image" class="img-fluid" :src="'/images/blog/'+items.code+'/'+items.image" :alt="items.title">
+                         <img v-if="items.image" class="img-fluid" :src="'/uploads/blog/'+items.code+'/'+items.image" :alt="items.title">
                        <img v-else class="img-fluid" :src="'/images/system-images/default-post.jpg'" :alt="items.title">
                     </a>
                 </figure>

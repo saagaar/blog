@@ -18,7 +18,7 @@ use App\Repository\SiteOption\SiteOption;
 use App\Repository\BlogInterface;
 use App\Repository\Blog\Blog;
 use App\Repository\LocaleInterface;
-use App\Repository\locale\Locale;
+use App\Repository\Locale\Locale;
 use Illuminate\Support\ServiceProvider;
 use App\Repository\AccountInterface;
 use App\Repository\Account\Account;

@@ -2,8 +2,6 @@
 @section('content')
 
 <section class="fullwidth-block area-padding-bottom">
-
-
  <div class="spinner-border text-primary" role="status">
   <span class="sr-only">Loading...</span>
 </div>
@@ -17,10 +15,12 @@
                     <div class="single-blog video-style">
                         <div class="thumb">
                             <a href="#">
-                                @if($featuredBlog['0']->image)
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$featuredBlog->code.'/'.$featuredBlog['0']->image) }}" alt="">
+                             @if($featuredBlog['0']->image)
+
+                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$featuredBlog['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
+                           
                             @endif
                             </a>
                         </div>
@@ -34,7 +34,7 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredBlog['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -54,9 +54,10 @@
                             <figure>
                                 <a href="#">
                                     @if($eachFeaturedBlog->image)
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachFeaturedBlog->code.'/'.$eachFeaturedBlog->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachFeaturedBlog->code.'/'.$eachFeaturedBlog->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
+
                             @endif
                                 </a>
                             </figure>
@@ -69,7 +70,7 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $eachFeaturedBlog->created_at->diffForHumans() }}</a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -110,9 +111,10 @@
                         <div class="thumb">
                             <a href="#">
                                 @if($featuredForMember['0']->image)
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember['0']->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
+
                             @endif
                             </a>
                         </div>
@@ -126,7 +128,8 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredForMember['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                 <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
+
                                 </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -145,9 +148,10 @@
                             <figure>
                                 <a href="#">
                                     @if($eachFeaturedForMember->image)
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachFeaturedForMember->code.'/'.$eachFeaturedForMember->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachFeaturedForMember->code.'/'.$eachFeaturedForMember->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
+
                             @endif
                                 </a>
                             </figure>
@@ -160,7 +164,7 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $eachFeaturedForMember->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachFeaturedForMember->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -184,7 +188,6 @@
 
 
     <!--================ First block section start =================-->      
-
     <section class="first_block area-padding-top area-padding-bottom">
         <div class="container">
             <div class="area-heading">
@@ -192,15 +195,16 @@
             </div>
             <div class="row">
                 @if(count($popular)>0)
-            	@if($popular['0'])
+            	
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
                         <div class="thumb">
                             <a href="#">
                                 @if($popular['0']->image)
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$popular['0']->code.'/'.$popular['0']->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$popular['0']->code.'/'.$popular['0']->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
+
                             @endif
                             </a>
                         </div>
@@ -214,7 +218,7 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $popular['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$popular['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -223,8 +227,10 @@
                     </div> 
 
                 </div> 
-                @endif
-                <?php unset($popular['0']); ?>
+                <?php unset($popular['0']); 
+
+                ?>
+                @if(count($popular)>0)
                 <div class="col-lg-6 col-md-6">
                 	@foreach($popular as $eachPopular)
                     <div class="single-blog video-style small row m_b_30">
@@ -232,9 +238,10 @@
                             <figure>
                                 <a href="#">
                                     @if($eachPopular->image)
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachPopular->code.'/'.$eachPopular->image) }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachPopular->code.'/'.$eachPopular->image) }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
+
                             @endif
                                 </a>
                             </figure>
@@ -248,7 +255,7 @@
                                 <a href="#"><i class="ti-time"></i>&nbsp;
                                 {{ $eachPopular->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachPopular->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -263,6 +270,7 @@
                     </div>
 
                 </div>
+                @endif
                 @endif
             </div>
         </div>
@@ -290,15 +298,16 @@
                             <figure>
                                 <a href="#">
                                 @if($eachLatest->image)
-	                                <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachLatest->code.'/'.$eachLatest->image) }}" alt="">
+	                                <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachLatest->code.'/'.$eachLatest->image) }}" alt="">
 	                            @else
-	                                <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
+	                                <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
+
 	                            @endif
                                 </a>
                             </figure>
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block"  href="{{ route('blog.detail' , $eachPopular->code)}}">
+                            <a class="d-block"  href="">
                                 <h4>{{ str_limit($eachLatest->title, $limit = 150, $end = '...') }}</h4>
                             </a>
                             <p>{{ str_limit($eachLatest->short_description, $limit = 150, $end = '...') }}</p>
@@ -306,7 +315,7 @@
                                 <a href="#"><i class="ti-time"></i>&nbsp;
                                 {{ $eachLatest->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachLatest->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>

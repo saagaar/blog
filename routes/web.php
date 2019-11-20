@@ -11,12 +11,14 @@
 |
 */
 Route::get('/','Frontend\HomeController@landingPage')->name('landing.page');
+
 Route::get('/logincheck', function () {
     return response()->json([
    'status'=> \Auth::check()
 ]);
-});
+});    
 
+Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
 Route::get('api/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('api');
 Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
@@ -48,7 +50,7 @@ Route::get('/api/categories', 'Frontend\UserInterestController@categories')->nam
 
 Route::get('/api/remove/userinterest/{slug}','Frontend\UserInterestController@removeUserInterest');
 Route::get('/api/add/userinterest/{slug}','Frontend\UserInterestController@addUserInterest');
-
+Route::get('/api/update-notification-status','Frontend\UserController@updateNotificationStatus')->name('update-notification-status');
 Route::get('/category/{slug}','Frontend\HomeController@blogByCategory')->name('blogbycategory');
 Route::get('/getblogbycategory/{slug}','Frontend\HomeController@getBlogByCategory')->name('getblogbycategory');
 Route::get('/api/getlatestblog','Frontend\HomeController@getLatestBlog')->name('getlatestblog');
@@ -175,7 +177,7 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::get('/list/tags','Admin\TagController@list')->name('tags.list');
 	Route::match(['get','post'],'/create/tags','Admin\TagController@create')->name('tags.create');
 	Route::match(['get','post'],'/edit/tags/{id}','Admin\TagController@edit')->name('tags.edit');
-	Route::get('/delete/tags/{id}','Admin\TagController@delete')->name('tags.delete');
+	Route::get('/delete/tags/{name}','Admin\TagController@delete')->name('tags.delete');
 	Route::get('changestatus/tags', 'Admin\TagController@changeStatus')->name('tags.changestatus');
 	/**
 	*Routes for Creating Blog

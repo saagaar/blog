@@ -14,7 +14,11 @@
                      <div slot="no-results">-------------</div>
                   </InfiniteLoading>
                   <li v-if="type=='nav'" class="media">
-                        <p class=" text-center"><router-link to="/users/notifications"> See All</router-link></p>
+                        <p class=" text-center">
+                          
+                          <a v-if="loadtype=='fullload'" href="/users/notifications">See All</a>
+                          <router-link v-else to="/users/notifications"> See All</router-link>
+                        </p>
                     </li>
              </ul>
 </template>
@@ -25,8 +29,10 @@ import Form from './../../services/Form.js';
 
 export default {
   props: {
-    notificationList:Array,
-    type:{type:String,default:'fullPage'}
+    notificationlist:{type:Array,default: function () { return [] }},
+    type:{type:String,default:'fullPage'},
+    loadtype:{type:String,default:'noload'},
+
   },
   components: {
     InfiniteLoading,
@@ -34,12 +40,19 @@ export default {
  data:function(){
     return {
       offset: 1,
-      allNotifications:this.notificationList,
+      allNotifications:this.notificationlist,
       form:new Form()
     };
   },
+  created(){
+    if(window.__NOTIFICATION__!==undefined){
+      let notifications=JSON.parse(window.__NOTIFICATION__) || {};
+      this.allNotifications=notifications;
+    }
+  },
   watch:{
     notificationList:function(newValue){
+      // alert('here');
        this.allNotifications=newValue
     }
   },
@@ -51,9 +64,9 @@ export default {
         {
                if(response.data.data.notifications.length>0)
                {
-                console.log(cur.$data.allNotifications);
                  this.offset+=1;
                  cur.$data.allNotifications.push(...response.data.data.notifications);
+                  this.$store.commit('UPDATE_UNREAD_NOTIFICATION_COUNT',response.data.data.unReadNotificationsCount);
                  $state.loaded();
                }
                else
@@ -65,6 +78,11 @@ export default {
                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
         },
+        notifications(){
+          let notifications=JSON.parse(window.__NOTIFICATION__) || {};
+          console.log(notifications);
+          return notifications;
+        }
     },
  
 };

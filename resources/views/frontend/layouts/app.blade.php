@@ -1,19 +1,98 @@
 <!doctype html>
 <html lang="en">
+@if(auth()->user())
 <script type="text/javascript">
 	 window.__USER_STATE__ = '{!! addslashes(json_encode($user)) !!}'
-	 window.__INITIAL_STATE__ = '{!! addslashes(json_encode($initialState)) !!}'
+	 window.__NOTIFICATION__ = '{!! addslashes(json_encode($user["notifications"])) !!}'
 	 
 </script>
+@endif
 <!--================ Start Meta Elements an
 <!--================ Start Meta Elements and includes=================-->
 @include('frontend.common.header')
 <!--================ End of Meta Elements and includes=================-->
-
 <body>
 <div class="wrapper" >
 <div id="app">
-	<the-top-nav></the-top-nav>
+	<section class="header-top">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
+                    <a href="/blog" class="logo">
+                        <img src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}"alt='logo' style="height:55px;width:150px;">
+                    </a>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
+                    <div class="right-button">
+                        @if(!auth()->user())
+                        <ul>
+                            <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                            <li><login-button></login-button></li>
+                            <li><signup-button></signup-button></li>
+                            
+                        </ul>
+                        @else
+                         <ul>
+                        <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                      
+                        <li class="nitify dropdown">
+                            <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
+                            data-toggle="dropdown" role="button" aria-haspopup="true" 
+                            aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i>@if(auth()->user()->unreadNotifications()->count()>0)  
+                            <em >{{ auth()->user()->unreadNotifications()->count() }}</em>
+                            @endif
+                            </a>
+                               <notification-loading :notificationlist="[]" :loadtype="'fullload'" :type="'nav'" ></notification-loading>
+                                
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <small>Welcome !</small>
+                            <figure>
+                              @if(auth()->user()->image)
+                                <img src="'/images/user-images/'.auth()->user()->image">
+                              @else
+                                <img src="/images/system-images/default-profile.png">
+                              @endif
+                            </figure><?php  
+                            $name=auth()->user()->name;
+                            $allNameArray=explode(' ',$name);
+                            ?> {{ $allNameArray['0'] }}
+                        </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/dashboard"> My Dashboard</a></li>
+                                <li><a href="/profile"> Profile</a></li>
+                                <li><a href="/categories">Choose your interest</a></li>
+                                  <hr/>
+                                <li><a href="/blog/add">New Article</a></li>
+                                <li><a href="/blog/list">My Articles</a></li>
+                                  <hr/>
+                                <li><a href="/settings">Settings</a></li>
+                                <!-- <li><a href="#">Help</a></li> -->
+                                <!-- <li><a href="#">Change Password</a></li> -->
+                                <li><a href="/logout/user">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--     <div class="search_input" id="search_input_box" ref="search_input_box" >
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div> -->
+
+    </section>
+    
+      <the-login-signup-modal></the-login-signup-modal>
+    
+
 	<header id="header" class="header_area">
         <div class="main_menu">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -85,9 +164,34 @@ function fb_share(dynamic_link,dynamic_title) {
 }
 </script>
 
-
-
+<script>
+    $(function(){
+  $('.fb-share').click(function(){
+    var url=$(this).data('url');
+      FB.ui({
+      method: 'share',
+      href: url,
+    }, function(response){
+        if(response!==undefined)
+        {
+             jQuery.ajax({
+                        type: "POST",
+                        url: '/blog/detail/share',
+                        data:{url:url,media:'facebook'},
+                        datatype: 'json',
+                        success: function(datajson) 
+                        {
+                            $('.img-loader').addClass('hidden');
+                             // data = jQuery.parseJSON(datajson);
+                            
+                        }
+                    });       
+        }
+    });
+  })
+})
 </script>
+<script type="text/javascript"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){

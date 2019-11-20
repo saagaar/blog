@@ -57,9 +57,10 @@
                 <div class="form-group">
                   <label for="parent_id">Parent</label>
                     <select class="form-control"  name="parent_id" id="parent_id">
-                      <?php print_r($blogcategory); ?>
-                      @foreach ($blogcategory as $values)
+                      <!-- <?php print_r($blogcategory); ?> -->
                       <option value="">none</option>
+                      @foreach ($blogcategory as $values)
+                      
                       <option value="{{ $values->id }}" @if($values->id==$category->parent_id) selected @endif > {{ $values->name }}  </option>
                       @endforeach
                     </select>
@@ -80,16 +81,20 @@
                 <div class="form-group">
                   <label for="tags">Tags</label>
                     <select multiple="multiple" class="form-control js-example-basic-multiple"  name="tags[]" id="tags">
-                      @foreach ($tags as $values)
-                      @if((!$category->tags()->pluck('tags_id')))->isEmpty()
-                      @foreach($category->tags()->pluck('tags_id') as $tagsid)
+
+                      @if(!($category->tags()->pluck('tags_id'))->isEmpty())
+                        @foreach ($tags as $values)
+                          @foreach($category->tags()->pluck('tags_id') as $tagsid)
                             <option value="{{ $values->id }}" @if($values->id == $tagsid) selected @endif> {{ $values->name }}  </option>
-                            @endforeach
+                          @endforeach
+                        @endforeach
                       @else
+                        @foreach ($tags as $values)
                          <option value="{{ $values->id }}">{{ $values->name }}</option>
 
+                         @endforeach
                       @endif
-                      @endforeach
+                      
                     </select>
                     <p class="help-block"></p>
                     @if($errors->has('tags'))
@@ -125,8 +130,8 @@
                 </div>
                 <div class="form-group">
                   <label for="banner_image">Image Upload</label>
-                  <img src="{{ asset('frontend/images/categories-images/'.$category['banner_image']) }}" alt="Image" height="42" width="42">
                   <input type="file" class="form-control" name="banner_image" id="banner_image" value="{{$category->banner_image}}">
+                   <img src="{{ asset('uploads/categories-images/'.$category['banner_image']) }}" alt="Image" height="60" width="60">
                   @if ($errors->has('banner_image'))
                 <div class="alert alert-danger">{{$errors->first('banner_image') }}</div>
                 @endif
