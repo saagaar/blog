@@ -21,6 +21,7 @@ use App\Repository\ServiceInterface;
 use App\Repository\SiteoptionInterface;
 use App\Repository\ClientInterface;
 use App\Repository\BannerInterface;
+use Session;
 
 class HomeController extends FrontendController
 {
@@ -56,7 +57,6 @@ class HomeController extends FrontendController
      */
     public function landingPage()
     {
-        
         $services=$this->services();
         $category=$this->category->getCategoryByWeight();
         $CategoryByWeight=$category->pluck('cat')->toArray();
@@ -87,9 +87,8 @@ class HomeController extends FrontendController
         $data['path']='/home';
          if(\Auth::check())
         {
-          $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
-            $routeName= ROUTE::currentRouteName();
-            
+           $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+           $routeName= ROUTE::currentRouteName();
           if($routeName=='api')
           {
             return ($data);
@@ -101,9 +100,7 @@ class HomeController extends FrontendController
               $user=$this->user_state_info();
               // return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
           }
-
         }
-        
         return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
     }
 
@@ -153,7 +150,6 @@ class HomeController extends FrontendController
           return $img->response('jpg'); 
         }
        abort(404);
-
     }
 
     public function blogByCategory($slug){
@@ -190,7 +186,6 @@ class HomeController extends FrontendController
           $tagsIds = $this->category->getTagsIdByCatSlug($slug);
           $blogByCategory = $this->blog->getBlogByCategory($tagsIds,$limit,$offset);
           return array('status'=>true,'data'=>$blogByCategory,'message'=>'');
-        
       }
       catch(Exception $e)
       {
@@ -246,7 +241,8 @@ class HomeController extends FrontendController
         return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory));
     }
     public function getBlogListBySlug($slug=false,Request $request){
-      try{
+      try
+      {
         if(!$slug)
             throw new Exception("No Categories Selected", 1);
           $limit=$this->perPage;
@@ -307,7 +303,6 @@ class HomeController extends FrontendController
     {
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
-
     public function getTagName(TagInterface $tag,Request $request)
     {
          $search=$request->post('name');             

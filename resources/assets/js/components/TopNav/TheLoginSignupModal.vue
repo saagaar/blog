@@ -68,7 +68,7 @@
             </a>
           </div>
         </div>
-        <div class="signup-section text-center">Already have an account? <a href="#a" class="text-info"> Sign Up</a>.</div>
+        <div class="signup-section text-center">Already have an account? <a href="#a" class="text-info" @click="openSignInModal"> Sign In</a>.</div>
       </div>
       <div class="modal-footer text-center">
         <div class="popup_btm">To make BlogSagar work, Click “Sign In” above to accept BlogSagar's <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy.</a></div>
@@ -91,7 +91,7 @@
       <div class="modal-body">
         <div class="form-title text-center">
           <h3>Welcome </h3>
-          <p>Sign in to get personalized view your choices,recommendations, follow the topics you love.</p>
+          <p>Sign in to read ,write and  follow the topics and people you would like to hear about.</p>
         </div>
         <div class="d-flex flex-column text-center">
           <form method="post" autocomplete="none">
@@ -112,7 +112,7 @@
             <button type="submit" @click.prevent="submitLoginForm"  class="btn btn-primary btn-round">Login</button>
           </form>
           
-          <div class="text-center text-muted delimiter">or use a social network</div>
+          <div class="text-center text-muted delimiter">or use a social network instead</div>
           <div class="d-flex justify-content-center social-buttons">
             
             <a href="/social-login/google"  class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google">
@@ -127,10 +127,10 @@
             </a>
           </div>
         </div>
-        <div class="signup-section text-center">Not a member yet? <button  class="submit text-info"> Sign Up</button>.</div>
+        <div class="signup-section text-center">Not a member yet? <a href="#" class=" text-info"   @click="openSignUpModal" > Sign Up</a>.</div>
       </div>
       <div class="modal-footer text-center">
-        <div class="popup_btm">To make BlogSagar work, Click “Sign In” above to accept BlogSagar's <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy.</a></div>
+        <div class="popup_btm">To make TheBloggersClub work  , Click “Sign In” above to accept <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy.</a></div>
       </div>
   </div>
 </div>
@@ -178,10 +178,8 @@ import Form from './../../services/Form.js'
               email,
                async isUnique(value) {
                 if (value === '') return true
-                    
                         const response = await fetch('/blog/isemailregistered/'+value)
                        return Boolean(await response.json())
-                    
               }
             },
             name: 
@@ -191,38 +189,33 @@ import Form from './../../services/Form.js'
             },
             password: 
             {
-              required,
+               required,
                minLength: minLength(6)
             },
             repassword: 
             {
-              required,
+               required,
                minLength: minLength(6),
                sameAsPassword: sameAs("password")
- 
             }
           }
-          
         },
 
         methods:{
-
           submitLoginForm:function(){
-
           let curObject=this; 
             this.$v.loginForm.$touch();
             if(!this.$v.loginForm.$invalid)
             {
               this.loginForm.post('blog/login').then(response => {
                if(response.data.status){
-                curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
+                 curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                  curObject.$store.commit('TOGGLE_LOADING');
                   window.location.href="dashboard"
                }
                else{
-                curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
-                  curObject.$store.commit('TOGGLE_LOADING');
-                  alert(response.data.message)
+                 curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
+                 curObject.$store.commit('TOGGLE_LOADING');
                }
               }).catch(e => {
                    curObject.$store.commit('TOGGLE_LOADING');
@@ -241,7 +234,7 @@ import Form from './../../services/Form.js'
               this.signUpForm.post('blog/register').then(response => {
                if(response.data.status){
 
-                curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
+                 curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                  curObject.$store.commit('TOGGLE_LOADING');
                }
                else{
@@ -257,6 +250,17 @@ import Form from './../../services/Form.js'
               });
             }
           },
+          openSignUpModal()
+          {
+              $('.modal').modal('hide');
+              $('#SignUpModal').modal('show');
+          },
+          openSignInModal()
+          {
+              $('.modal').modal('hide');
+              $('#loginModal').modal('show');
+
+          }
 
         }
 

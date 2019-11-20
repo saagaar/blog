@@ -12,6 +12,7 @@
 @include('frontend.common.header')
 <!--================ End of Meta Elements and includes=================-->
 <body>
+
 <div class="wrapper" >
 <div id="app">
 	<section class="header-top">
@@ -19,7 +20,7 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="/frontend/images/elements/logo-4.png" alt="">
+                        <img src="/frontend/images/elements/logo-6.png" alt="">
                         
                     </a>
                 </div>
@@ -79,6 +80,8 @@
                 </div>
             </div>
         </div>
+<success-error-message></success-error-message>
+        
     <!--     <div class="search_input" id="search_input_box" ref="search_input_box" >
             <div class="container ">
                 <form class="d-flex justify-content-between search-inner">

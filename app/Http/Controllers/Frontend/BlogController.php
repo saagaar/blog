@@ -160,7 +160,7 @@ class BlogController extends FrontendController
 
                             File::deleteDirectory($dir);
                              }else{
-                                File::makeDirectory($dir);
+                                File::makeDirectory($dir, 0777, true, true);
                             }
                             $tmpImg =request()->image->move($dir,$imageName);
                             $img = Image::make($tmpImg);         

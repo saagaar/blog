@@ -15,6 +15,8 @@ import LoginMixin from './../../mixins/Login.mixins';
         	return {
            }
         },
-        mixins:[LoginMixin]
+        mixins:[LoginMixin],
+       
+
     }
 </script>

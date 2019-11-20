@@ -5,10 +5,12 @@ export default {
 		{
 			  openLoginModal:function()
 			  {
+			    $('.modal').modal('hide');
 	            $('#loginModal').modal('show');
 	          },
 	          openSignUpModal:function()
 	          {
+			    $('.modal').modal('hide');
 	            $('#SignUpModal').modal()
 	          }
 		}

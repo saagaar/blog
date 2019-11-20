@@ -71,14 +71,14 @@ class FrontendController extends BaseController
         // $this->save_visitor_info();
        
         date_default_timezone_set('Asia/Kathmandu');
-       
-        if($this->websiteMode=='3')
-        {
-            exit('Sorry we are maintaining..It is a regular maintainence');
-        }
-        if($this->websiteMode=='2'){
-            exit('sorry we currently offline');
-        }
+        
+        // if($this->websiteMode=='3')
+        // {
+        //     exit('Sorry we are maintaining..It is a regular maintainence');
+        // }
+        // if($this->websiteMode=='2'){
+        //     exit('sorry we currently offline');
+        // }
         $this->middleware(function ($request, $next) {
         $this->authUser= \Auth::user();
             return $next($request);
@@ -128,6 +128,8 @@ class FrontendController extends BaseController
             return redirect()->route('home'); 
         }
     }
+
+    // public function 
 
     public function save_visitor_info()
     {

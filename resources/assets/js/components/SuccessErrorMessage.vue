@@ -41,7 +41,7 @@
              setTimeout(function(){
                   self.message=false;
                   self.status=false;
-             },3000);
+             },5000);
           }
         }
 
