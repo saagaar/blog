@@ -93,8 +93,7 @@
                         @foreach ($tags as $values)
                          <option value="{{ $values->id }}">{{ $values->name }}</option>
                          @endforeach
-    @endif
-                      
+                      @endif
                     </select>
                     <p class="help-block"></p>
                     @if($errors->has('tags'))
@@ -130,8 +129,8 @@
                 </div>
                 <div class="form-group">
                   <label for="banner_image">Image Upload</label>
-                  <img src="{{ asset('frontend/images/categories-images/'.$category['banner_image']) }}" alt="Image" height="42" width="42">
                   <input type="file" class="form-control" name="banner_image" id="banner_image" value="{{$category->banner_image}}">
+                   <img src="{{ asset('uploads/categories-images/'.$category['banner_image']) }}" alt="Image" height="60" width="60">
                   @if ($errors->has('banner_image'))
                 <div class="alert alert-danger">{{$errors->first('banner_image') }}</div>
                 @endif

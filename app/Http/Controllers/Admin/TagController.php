@@ -66,14 +66,15 @@ class TagController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($name,Request $request)
+    public function edit(Request $request,$id)
     {
+
             $breadcrumb=['breadcrumbs' => [
                         'Dashboard' => route('admin.dashboard'),
                         'All Tags' => route('tags.list'),
                         'current_menu'=>'Edit tags',
-                          ]];
-            $tag =$this->tag->getTagByName($name);    
+                 ]];                    
+            $tag=$this->tag->getTagById($id);
             if ($request->method()=='POST')
             {
                 $requestObj=app(TagRequest::class);

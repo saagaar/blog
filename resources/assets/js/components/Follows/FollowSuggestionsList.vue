@@ -19,7 +19,6 @@
                    <div v-else class="follow-user">
                     No New suggestions
                    </div>
-                   
             </div>
 </template>
 

@@ -20,8 +20,8 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="/frontend/images/elements/logo-6.png" alt="">
-                        
+
+                        <img src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}"alt='logo' style="height:55px;width:150px;">
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">

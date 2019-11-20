@@ -57,21 +57,31 @@ class HomeController extends FrontendController
      */
     public function landingPage()
     {
+        $address= $this->address;
+        $websiteLogo= $this->websiteLogo;
+        $siteName=$this->siteName;
+        $address=$this->address;
+        $contactNumber=$this->contactNumber;
+        $facebookId=$this->facebookId;
+        $twitterId=$this->twitterId;
+        $linkedinId=$this->linkedinId;
+        $websiteUrl=$this->websiteUrl;
         $services=$this->services();
         $category=$this->category->getCategoryByWeight();
         $CategoryByWeight=$category->pluck('cat')->toArray();
         $testimonialDetails=$this->testimonialDetails();
-        $getInTouch=$this->getInTouch();
         $client=$this->client();
-        $banner=$this->bannerTagLine();       
-               
-        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'getInTouch'=>$getInTouch,'CategoryByWeight'=>$CategoryByWeight,'client'=>$client,'banner'=>$banner));
+        $banner=$this->bannerTagLine(); 
+
+        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'siteName'=>$siteName,'contactNumber'=>$contactNumber,'address'=>$address,'CategoryByWeight'=>$CategoryByWeight,'client'=>$client,'banner'=>$banner,'websiteLogo'=>$websiteLogo,'facebookId'=>$facebookId,'twitterId'=>$twitterId,'linkedinId'=>$linkedinId,'websiteUrl'=>$websiteUrl));
     }
 
     public function index(Request $request)
     {
-        $data=array();
+      
+         $data=array();
         $featuredBlog = $this->blog->getAllFeaturedBlog(4);
+        $websiteLogo=$this->websiteLogo;
         // $data['featuredBlog']=$featuredBlog;
         // $mostViewed =$this->blog->getAllBlogByViews();
         // $data['mostViewed'] = $mostViewed;
@@ -101,7 +111,9 @@ class HomeController extends FrontendController
               // return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
           }
         }
-        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory));
+
+        
+        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo));
     }
 
     public function blogDetail($code,Request $request){
@@ -272,6 +284,7 @@ class HomeController extends FrontendController
         print_r($data);
         // return view('frontend.layouts.app');
     }
+
     public function dashboard()
     {
         if(\Auth::check())
@@ -329,14 +342,7 @@ class HomeController extends FrontendController
       $testimonialDetails= $testimonial->getActiveTestimonial();
       return $testimonialDetails;
    }  
-   public function getInTouch()
-   {
-    
-    $siteSetting = app()->make('App\Repository\SiteoptionInterface');
-    $siteDetails=$siteSetting->getSiteInfo();
-    return $siteDetails;        
-   }
-
+  
    public function client()
    {
      $client= app()->make('App\Repository\ClientInterface');

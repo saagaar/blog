@@ -111,7 +111,8 @@ import Form from './../services/Form.js';
                     image:'',
                     tags:[],
                     isAnynomous:'',
-                    file:true
+                    file:true,
+                    saveMethod:'1'
                 }),
                 searchTagform:new Form({
                   name:'',

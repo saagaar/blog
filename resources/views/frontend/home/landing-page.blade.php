@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80347372-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -32,7 +33,7 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
-    <link href="{{ asset('frontend/css/landing-page.css')}}" rel="stylesheet">
+    <link href="{{asset('frontend/css/landing-page.css')}}" rel="stylesheet">
 
     <!-- Favicon  -->
 
@@ -44,7 +45,8 @@
 <section class="fixed-top navigation">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="/"><img src="frontend/images/elements/logo-9.png" alt="logo"></a>
+
+      <a class="navbar-brand" href="index.html"><img src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}" style="height:90px;width:150px;" alt="logo"></a>
       <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -267,6 +269,7 @@
         <p class="mb-100">INFLUENCER SAYS ?</p>
       </div>
     </div>
+
     <div class="col-12">
       <div class="team-slider">
         <!-- team-member -->
@@ -284,12 +287,11 @@
           <p>{{$eachDetails->description}}</p>        
         </div>
         @endforeach
-
-        <!-- team-member -->
-        
+        <!-- team-member -->       
       </div>
     </div>
   </div>
+ 
   <!-- backgound image -->
   <img src="landing-page/assets/images/backgrounds/team-bg.png" alt="team-bg" class="img-fluid team-bg">
   <!-- background shapes -->
@@ -343,29 +345,29 @@
   <div class="container">
     <div class="row">
        <div class="col-lg-3 text-center text-lg-left mb-4 mb-lg-0">
-        <a href="/">
-          <img class="img-fluid" src="frontend/images/elements/logo-6.png" alt="logo">
-          </a>
-                </div>
 
+        <a href="index.html">
+          <img class="img-fluid" src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}" style="height:70px;width:150px;" alt="logo">
+          </a>
+        </div>
 
       <!-- footer menu -->
       <nav class="col-lg-5 align-self-center mb-5">
         <h4>Get In Touch</h4>
-        <a href="{{$getInTouch->url}}">{{$getInTouch->site_name}}</a><br>
-        <p>{{$getInTouch->address}}<br>{{$getInTouch->contact_number}}<br><a href="#">hi@blogsagar.com </a></p>
+        <a href="{{$websiteUrl}}">{{$siteName}}</a><br>
+        <p>{{$address}}<br>{{$contactNumber}}<br><a href="#">hi@blogsagar.com </a></p>
       </nav>  
       <!-- footer social icon -->
       <nav class="col-lg-4">
         <ul class="list-inline text-lg-right text-center social-icon">
           <li class="list-inline-item">
-            <a class="facebook" href="{{$getInTouch->facebook_id}}"><i class="ti-facebook"></i></a>
+            <a class="facebook" href="{{$facebookId}}"><i class="ti-facebook"></i></a>
           </li>
           <li class="list-inline-item">
-            <a class="twitter" href="{{$getInTouch->twitter_id}}"><i class="ti-twitter-alt"></i></a>
+            <a class="twitter" href="{{$twitterId}}"><i class="ti-twitter-alt"></i></a>
           </li>
           <li class="list-inline-item">
-            <a class="linkedin" href="{{$getInTouch->linkedin_id}}"><i class="ti-linkedin"></i></a>
+            <a class="linkedin" href="{{$linkedinId}}"><i class="ti-linkedin"></i></a>
           </li>
         </ul>
       </nav>

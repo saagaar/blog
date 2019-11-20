@@ -1,5 +1,4 @@
 <?php 
-
 namespace App\Repository\SiteOption;
 use Illuminate\Contracts\Cache\Factory;
 use App\Models\SiteOptions;
@@ -15,7 +14,7 @@ Class SiteOption implements SiteoptionInterface
 	}
   public function getSiteInfo()
   {
-      return	$this->siteSettings->latest()->first();                                                                                                            
+      return	$this->siteSettings->latest()->first();                                                                            
   }
 
   public function update( array $data)
