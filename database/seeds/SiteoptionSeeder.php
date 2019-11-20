@@ -30,6 +30,7 @@ class SiteoptionSeeder extends Seeder
         'country'           =>'126',
         'city'              =>'lalitpur',
         'url'               =>'https://idata.com.np/',
+        'image'             =>'',
         'created_at' => date("Y-m-d H:i:s")
         ]);
     }

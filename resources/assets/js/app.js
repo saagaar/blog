@@ -9,13 +9,10 @@ fontawesome.config = { autoReplaceSvg: false }
 require('./bootstrap');
 window.Vue = require('vue');
 import Vuelidate from 'vuelidate'
-import router from './routes.js'
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
 Vue.use(Vuelidate);
 // Vue.use(window.Vuelidate.default)
 
-import store from './store/index'
+// import store from './store/index'
 
 /**
 Custom Imports goes here
@@ -42,16 +39,16 @@ Custom Imports goes here
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-Vue.component('pagination', require('laravel-vue-pagination'));
+// Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(require('vue-moment'));
 
-import Gate from './services/Gate.js';
-Vue.prototype.$gate = new Gate();
-import config from './config/config.js';
+// import Gate from './services/Gate.js';
+// Vue.prototype.$gate = new Gate();
+// import config from './config/config.js';
 
-import TheTopNav from './components/TopNav/TheTopNav';
+// import TheTopNav from './components/TopNav/TheTopNav';
 // Vue.component('TheTopNav', require('./components/TopNav/TheTopNav.vue'));
-import TheMainNav from './components/MainNav/TheMainNav';
+// import TheMainNav from './components/MainNav/TheMainNav';
 // Vue.component('TheMainNav', require('./components/MainNav/TheMainNav.vue'));
 import TheFooter from './components/Footer/TheFooter';
 import ListComment from './components/Comment/ListComment';
@@ -62,25 +59,21 @@ import Likes from './components/Likes/Likes';
 import BlogLoading from './components/InfiniteLoading/BlogLoading';
 import BlogLoadingBySlug from './components/InfiniteLoading/BlogLoadingBySlug';
 import LatestBlogLoading from './components/InfiniteLoading/LatestBlogLoading';
+
+import LoginButton from './components/TopNav/LoginButton.vue';
+import SignUpButton from './components/TopNav/SignUpButton.vue';
+import TheLoginSignupModal from './components/TopNav/TheLoginSignupModal';
+import NotificationsLoading  from './components/InfiniteLoading/NotificationsLoading';
 // import UserDashboard from './pages/UserDashboard';
 const default_layout="default";
 const app = new Vue({
     el: '#app',
-    router,
     data(){
-        config:config
+        // config:config
     },
-    store,
-    beforeCreate() {
-            let userState = JSON.parse(window.__USER_STATE__) || {};
-        if (userState) {
-           this.$store.commit('ADD_ME', userState)
-        }
-            this.$store.dispatch('checkLoginUser');
-        },
     components:{
-            'the-top-nav':TheTopNav,
-            'the-main-nav':TheMainNav,
+            // 'the-top-nav':TheTopNav,
+            // 'the-main-nav':TheMainNav,
             'the-footer':TheFooter,
             'list-comment':ListComment,
             'add-comment':AddComment,
@@ -89,7 +82,11 @@ const app = new Vue({
             'icon-comments-count':IconCommentsCount,
             'blog-loading':BlogLoading,
             'blog-slug-loading':BlogLoadingBySlug,
-            'latest-blog-loading':LatestBlogLoading
+            'latest-blog-loading':LatestBlogLoading,
+            'login-button':LoginButton,
+            'signup-button':SignUpButton,
+            'the-login-signup-modal':TheLoginSignupModal,
+            'notification-loading':NotificationsLoading
           
         }
     

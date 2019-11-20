@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Repository\SiteoptionInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\SiteoptionsRequest;
+use Illuminate\Support\Facades\File;
 use App;
+
 class SiteOptionController extends AdminController
 {
     /**
@@ -31,8 +33,28 @@ class SiteOptionController extends AdminController
         {
             $requestObj=app(SiteoptionsRequest::class);
             $validatedData = $requestObj->validated();
-            $this->siteOptions->update($validatedData);
-            return redirect()->route('sitesetting')
+            request()->validate([
+            'image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             ]);
+               if ($request->hasFile('image')) 
+               {
+                 $extension = request()->image->getClientOriginalExtension();
+                 $imageName = time().'.'.$extension;
+                 request()->image->move(public_path('uploads/sitesettings-images'), $imageName);
+                 $dir = 'uploads/sitesettings-images/';
+                 if($site->image != '' && File::exists($dir . $site->image))
+                    {
+                    File::delete($dir . $site->image);
+                    }
+                   $validatedData['image'] = $imageName;        
+                }  
+               else
+               {
+                 $validatedData['image'] = $site->image;
+               }
+             
+               $this->siteOptions->update($validatedData);
+               return redirect()->route('sitesetting')
                             ->with('success','Site Settings Updated Successfully.');
         }
         return view('admin.siteoption.edit')->with(array('site'=>$site,'breadcrumb'=>$breadcrumb,'primary_menu'=>'siteoption.list'));

@@ -8,7 +8,9 @@ use App\Repository\TagInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 use Illuminate\Support\Facades\File;
+
 use Image;
+ // use Intervention\Image\Facades\Image;
 use App;
 class BlogController extends AdminController
 {
@@ -46,6 +48,7 @@ class BlogController extends AdminController
        
         $requestObj=app(BlogRequest::class);
         $validatedData = $requestObj->validated();
+        // dd($validatedData);
         //  request()->validate([
         // 'image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         //  ]);           
@@ -59,10 +62,9 @@ class BlogController extends AdminController
         $extension = request()->image->getClientOriginalExtension();
         $imageName = $uniqId.'.'.$extension;
         $dir=public_path(). '/uploads/blog/'.$created['code'];
-        File::makeDirectory($dir);
-        $originalImg= request()->image->move($dir,$imageName);            
+        $originalImg= request()->image->move($dir,$imageName);           
         $img =Image::make($originalImg);
-        list($width, $height) = getimagesize($originalImg);       
+        list($width,$height) = getimagesize($originalImg);       
         if($width > 1000 && $height < 1000)
         {                  
             $img->resize(1000,null, function ($constraint) 
@@ -158,11 +160,14 @@ class BlogController extends AdminController
             $localeList=$Locale->getActiveLocale()->toArray();
             return view('admin.blog.editblog')->with(array('blog'=>$blog,'tags'=>$taglist,'breadcrumb'=>$breadcrumb,'localelist'=>$localeList,'primary_menu'=>'blog.list'));
     }
+
+  
     public function delete($id)
     {
        $blog =$this->blog->GetBlogById($id);      
         if( $blog)
         {
+
             $dir = public_path(). '/uploads/blog/'.$blog->code.'/';
             if ($blog->image != '' && File::exists($dir,$blog->image))
             {

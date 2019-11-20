@@ -1,5 +1,4 @@
 <?php 
-
 namespace App\Repository\Blog;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Blogs;
@@ -11,7 +10,6 @@ Class Blog implements BlogInterface
 	{
 		$this->blog=$blog;
 	}
-
   /**
    * Get  Blog by id
    *
@@ -20,7 +18,6 @@ Class Blog implements BlogInterface
   public function getBlogById($blogId){
     return  $this->blog->where('id', $blogId)->first();
   }
-
   /**
    * get blog by category
    */
@@ -31,20 +28,23 @@ Class Blog implements BlogInterface
     ->withCount('likes','comments')->take($limit)->skip($offset)->get();
     return $blogByCategoryTags;
   }
-
+  public function getBlogCount(){
+    $data=$this->category->blogs()->get()->toArray();
+    return $blogByCategoryTags;
+  }
   /**
    * get blog for featured =1
    */
   public function getLikesOfBlogByUser($user){
-    return $user->likes()->get();
+    return $this->blog->likes('id:user_id')->get();
   }
+
   public function getAllFeaturedBlog($limit=10,$offset=0){
     return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->take($limit)->skip($offset)->get();
   }
   public function getAllFeaturedForMember($limit=10,$offset=0){
     return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->take($limit)->skip($offset)->get();
   }
-
    /**
    * get blog for most view
    */
@@ -57,6 +57,7 @@ Class Blog implements BlogInterface
   public function getLatestAllBlog($limit=10,$offset=0){
     return $this->blog->where(['save_method'=>2])->orderBy('created_at','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
+
   public function getPopularBlog($limit=10,$offset=0){
     return $this->blog->where(['save_method'=>2])->orderBy('likes_count','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
@@ -67,7 +68,6 @@ Class Blog implements BlogInterface
     $listofFollowings=$user->followings()->select('follow_id')->get()->pluck('follow_id')->toArray();
     return $this->blog->whereIn('user_id', $listofFollowings)->latest()->get()->toArray();
   }
-
   /**
    * get retaled blog
    */
@@ -95,37 +95,29 @@ Class Blog implements BlogInterface
     return  $this->blog::with('user:id,username')->where('user_id', $userid)->orderByDesc('id');
   }
 
-
-  public function countAllBlogUser()
-  {
+  public function countAllBlogUser(){
      return $this->blog->get()->count();
   }
 
-   public function countPublishedBlog()
-  {
+  public function countPublishedBlog(){
      return $this->blog->where('save_method','=' ,'2')->count();
   }
 
-  public function countSavedBlog()
-  {
+  public function countSavedBlog(){
      return $this->blog->where('save_method','=' ,'1')->count();
   }
    
-  public function countPublishedBlogsThisMonth()
-  {
+  public function countPublishedBlogsThisMonth(){
      return $this->blog->whereMonth('created_at','=',date('m'))->where('save_method','=','2')->count();
   }
 
-  public function countTodaysPublishedBlogs()
-  {
+  public function countTodaysPublishedBlogs(){
      return $this->blog->whereDate('created_at','=',date('Y-m-d'))->where('save_method','=','2')->count();
   }
-
   
   public function getActiveBlogByUserId($userid){
     return  $this->blog::with('user:id,username')->where(['user_id'=>$userid,'save_method'=>'2'])->withCount('likes')->orderByDesc('id');
   } 
-
      
   public function getAssociatedCategoryOfBlog($blogId){
       return	$this->blog->where('id', $blogId)->first();
@@ -136,18 +128,18 @@ Class Blog implements BlogInterface
      *
      * @return mixed
      */
-    public function getAll(){
-   	 return	$this->blog->latest();
-    }
+  public function getAll(){
+   return	$this->blog->latest();
+  }
  	
  	  /**
      * create a 
      *
      * @return mixed
      */
-    public function create(array $data){
-      return	$this->blog->create($data);
-    }
+  public function create(array $data){
+    return	$this->blog->create($data);
+  }
      /**
      * Updates a post.
      *
@@ -155,23 +147,23 @@ Class Blog implements BlogInterface
      * @param array
      */
 
-    public function update( $id,array $data){
-      return	$this->blog->find($id)->update($data);
-    }
-    public function updateByCode( $code,array $data){
-      return $this->blog->where('code', $code)->update($data);
-    }
+  public function update( $id,array $data){
+    return	$this->blog->find($id)->update($data);
+  }
+  public function updateByCode( $code,array $data){
+    return $this->blog->where('code', $code)->update($data);
+  }
       /**
      * Deletes a post.
      *
      * @param int
      */
-    public function delete($id){
-      return	$this->blog->find($id)->delete();
-    }
-    public function addTag($postId,$tags){
-      $blogData = $this->blog->where('code',$postId)->first();
-      return $blogData->tags()->sync($tags);
-    }
+  public function delete($id){
+    return	$this->blog->find($id)->delete();
+  }
+  public function addTag($postId,$tags){
+    $blogData = $this->blog->where('code',$postId)->first();
+    return $blogData->tags()->sync($tags);
+  }
 }
 ?>

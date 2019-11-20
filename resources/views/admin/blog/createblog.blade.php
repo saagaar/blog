@@ -54,15 +54,16 @@
                                
                 <div class="form-group">
                   <label for="Content">Content:</label>
-                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here.."></textarea>
+                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here..">{{ old('content') }}</textarea>
                   @if ($errors->has('content'))
-                  <div class="alert alert-danger">{{ $errors->first('content') }}
-                  </div>
+                  <div class="alert alert-danger">{{  $errors->first('content')}}
+                 </div>
                   @endif
                  </div>
                 <div class="form-group">
                   <label for="short_description">Short Description: </label>
-                    <textarea name="short_description" class="form-control" rows="5" placeholder="Short Description here..">{{old('short_description')}}</textarea>
+                    <textarea name="short_description" class="form-control" rows="5" placeholder="Short Description here..">{{ old('short_description')}}
+                    </textarea> 
                   @if ($errors->has('short_description'))
                   <div class="alert alert-danger">{{ $errors->first('short_description') }}
                   </div>
@@ -122,7 +123,7 @@
                  <div class="form-group col-md-4">
                   <label for="featured">Featured: </label>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input flat-red" name="featured"  value="0" checked>
+                        <input type="radio" class="custom-control-input flat-red" name="featured"  value="2" checked>
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
                     <div class="custom-control custom-radio">
@@ -137,7 +138,7 @@
                  <div class="form-group col-md-4">
                   <label for="anynomous">Be Anynomous: </label>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input flat-red" name="anynomous"  value="0" checked>
+                        <input type="radio" class="custom-control-input flat-red" name="anynomous"  value="2" checked>
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
                     <div class="custom-control custom-radio">
@@ -145,7 +146,7 @@
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
                       </div>
                   @if ($errors->has('anynomous'))
-                <div class="alert alert-danger">{{ $errors->first('anynomouss') }}</div>
+                <div class="alert alert-danger">{{ $errors->first('anynomous') }}</div>
                 @endif
                 </div>
 

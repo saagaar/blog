@@ -46,7 +46,7 @@ class TagController extends AdminController
         $breadcrumb=['breadcrumbs'=> 
                     [
                       'Dashboard'  => route('admin.dashboard'),
-                      'All tagss' => route('tags.list'),
+                      'All tags' => route('tags.list'),
                       'current_menu'  =>'Create Tags',
                     ]];
         if ($request->method()=='POST') 
@@ -66,14 +66,15 @@ class TagController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request,$id)
     {
+
             $breadcrumb=['breadcrumbs' => [
                         'Dashboard' => route('admin.dashboard'),
                         'All Tags' => route('tags.list'),
                         'current_menu'=>'Edit tags',
-                          ]];
-            $tag =$this->tag->getTagById($id);    
+                 ]];                    
+            $tag=$this->tag->getTagById($id);
             if ($request->method()=='POST')
             {
                 $requestObj=app(TagRequest::class);
@@ -92,9 +93,9 @@ class TagController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function delete($name)
     {
-       $tag =$this->tag->getTagById($id);
+       $tag =$this->tag->getTagByName($name);
         if($tag){
             $tag->delete();
         }

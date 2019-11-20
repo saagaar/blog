@@ -47,6 +47,7 @@ class CategoryController extends AdminController
 
             $requestobj=app(CategoryRequest::class);
             $validatedData = $requestobj->validated(); 
+
             if($request->hasFile('banner_image'))
             {              
             $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
@@ -57,11 +58,24 @@ class CategoryController extends AdminController
             else{
                 $validatedData['banner_image'] = '';
             }
-
         $created = $this->categories->create($validatedData);
+
         if($request->has('tags'))
         {
-            $created->tags()->attach($validatedData['tags']);
+           foreach ($validatedData['tags'] as $key => $value) {
+                        if(intval($value))
+                        {
+                            $newarraofTags[]=$value;
+                        }
+                        else
+                        {
+                            $newTags['name']=$value;
+                            $id=$tag->save($newTags);
+                            $newarraofTags[]=$id;
+                        }
+                    }
+                    
+                    $created->tags()->attach($newarraofTags);   
         }
         return redirect()->route('adminblogcategory.list')
                             ->with('success','Category created successfully');
@@ -102,6 +116,8 @@ class CategoryController extends AdminController
         {           
                 $requestobj=app(CategoryRequest::class);
                 $validatedData = $requestobj->validated();
+
+
                 if ($request->hasFile('banner_image')) {
                     $dir = 'uploads/categories-images/';
                     if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
@@ -117,8 +133,23 @@ class CategoryController extends AdminController
                 }
                 // print_r($validatedData['tags']);exit;
                 $updated = $this->categories->update($id,$validatedData);
+                $newTags=array();
+                $newarraofotherTags=array();
                 if($request->has('tags')){
-                    $category->tags()->sync($validatedData['tags']);            
+                    foreach ($validatedData['tags'] as $key => $value) {
+                        if(intval($value))
+                        {
+                            $newarraofTags[]=$value;
+                        }
+                        else
+                        {
+                            $newTags['name']=$value;
+                            $id=$tag->save($newTags);
+                            $newarraofTags[]=$id;
+                        }
+                    }
+                    
+                    $category->tags()->sync($newarraofTags);            
                 }
                 return redirect()->route('adminblogcategory.list')
                             ->with('success','Category Updated Successfully.');

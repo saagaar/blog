@@ -60,8 +60,7 @@ class BannerController extends AdminController
                           ]];
             $banner =$this->banner->getById($id);    
             if ($request->method()=='POST')
-            {
-               
+            {               
                 $requestObj=app(BannerRequest::class);
                 $validatedData = $requestObj->validated();
                 if($request->hasFile('image')){

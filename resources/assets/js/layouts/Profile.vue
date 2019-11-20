@@ -9,12 +9,17 @@
          <div class="timeline">
         <div class="timeline-cover"> 
           
+        <div class="timeline-quote">
+          <div class="collen">
+            <p>{{me.bio}}</p>
+          </div>
+        </div>
           <div class="timeline-nav-bar hidden-sm hidden-xs">
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info profile_pic_upload">
                   <form>
-                  <figure><img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'" alt="Profile Image" class="img-responsive profile-photo" id="profileimage" /><Loader></Loader>
+                  <figure><img :src="getProfileUrl()" alt="Profile Image" class="img-responsive profile-photo" id="profileimage" /><Loader></Loader>
                     <div class="profile_img_change"> <span class="file-input btn btn-success btn-file"> <i class="fa fa-camera"></i>
                       <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
                       <!-- <input type="file"  name="image" id="file1" class="upload" @change="changeImage()" > -->
@@ -113,30 +118,40 @@ import Form from './../services/Form.js';
            
         },
         methods:{
-          changeImage:function() 
-          {
-            this.form.image = this.$refs.file.files[0];
-            // console.log(this.form.image);
-            let curObject=this;
-            this.form.post('/user/changeprofile').then(response => {
-               if(response.data.status){
-                 curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
-                 // curObject.$store.commit('TOGGLE_LOADING');
-                 curObject.$store.commit('UPDATE_PROFILE',response.data.data.imageName);
-               }
-               else{
-                 curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
-                  curObject.$store.commit('TOGGLE_LOADING');
-               }
-              }).catch(e => {
-                   curObject.$store.commit('TOGGLE_LOADING');
-                  if(e.status===false)
+            changeImage:function() 
+            {
+              this.form.image = this.$refs.file.files[0];
+              let curObject=this;
+              this.form.post('/user/changeprofile').then(response => {
+                 if(response.data.status){
+                   curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
+                   curObject.$store.commit('UPDATE_PROFILE',response.data.data.imageName);
+                 }
+                 else{
+                   curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
+                    curObject.$store.commit('TOGGLE_LOADING');
+                 }
+                }).catch(e => {
+                     curObject.$store.commit('TOGGLE_LOADING');
+                    if(e.status===false)
+                       curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                      else
                      curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
-                    else
-                   curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
-              });
+                });
 
-     }
+            },
+            getProfileUrl(){
+                let url=this.me.image;
+                if(url==='' || url==null){
+                  return 'frontend/images/elements/default-profile.png';
+                }
+                else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
+                  return url;
+                }
+                else{
+                  return '/uploads/user-images/'+url;
+                }
+             }
         },
         components:{
             TheTopNav,

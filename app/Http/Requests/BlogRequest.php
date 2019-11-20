@@ -41,7 +41,10 @@ class BlogRequest extends FormRequest
                 'image'=>$image,
                 'short_description'=>'required|max:155',
                 'type' =>'required',
-                'show_in_home'=>'required'                        
+                'show_in_home'=>'required',
+                'featured'=>'required',
+                'anynomous'=>'required'
+
         ];
     }
 }

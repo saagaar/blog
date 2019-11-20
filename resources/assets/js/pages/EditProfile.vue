@@ -80,7 +80,7 @@
                       <button class="btn btn-success">Chnage Profile Picture</button> 
                       <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
                   </span></label>
-              <figure> <img :src="me.image? '/images/user-images/'+me.image:'/images/system-images/default-profile.png'" id="image-field"/> </figure>
+              <figure> <img :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'" id="image-field"/> </figure>
                
                     
                 
