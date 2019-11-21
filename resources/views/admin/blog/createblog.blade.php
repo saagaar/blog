@@ -11,7 +11,7 @@
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
                 <li><a href="{{route('blog.list')}}"><span class="glyphicon glyphicon-minus"></span> All blogs</a></li>
-                <li class="{{ (request()->is('create/blog')) ? 'active' : '' }}"><a href="{{route('blog.create')}}"><span class="glyphicon glyphicon-plus"></span> Create Blog</a></li>
+                <li class="{{ (request()->is('create/blog')) ? 'active' : '' }}"><a href="{{route('blog.create')}}"><span class="glyphicon glyphicon-plus"></span>Create Blog</a></li>
               </ul>
             </div>
           <!-- /.box-body -->
@@ -40,13 +40,12 @@
                 <div class="form-group">
                   <label for="language">Language</label>
                   <select class="form-control" name="locale_id">
-                    @if(!empty($localelist))
-                      @foreach($localelist as $eachlocale)
-                      <option value="{{$eachlocale['id']}}">{{$eachlocale['lang_name']}}
+                    @if(!empty($localeList))
+                      @foreach($localeList as $eachLocale)
+                      <option value="{{$eachLocale['id']}}">{{$eachLocale['lang_name']}}
                       </option>
                       @endforeach
                     @endif
-
                   </select>
                   @if ($errors->has('locale_id')) 
                 <div class="alert alert-danger">{{ $errors->first('locale_id') }}</div>
@@ -57,26 +56,25 @@
                   <label for="Content">Content:</label>
                     <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here..">{{ old('content') }}</textarea>
                   @if ($errors->has('content'))
-                <div class="alert alert-danger">{{ $errors->first('content') }}</div>
-                @endif
-                </div>
-
-                  <div class="form-group">
-                  <label for="short_description">Short Description: </label>
-                    <textarea name="short_description" class="form-control" rows="5" placeholder="Short Description here..">{{old('short_description')}}</textarea>
-                  @if ($errors->has('short_description'))
-                <div class="alert alert-danger">{{ $errors->first('short_description') }}
-                </div>
-                @endif
-                </div>
-
-
+                  <div class="alert alert-danger">{{  $errors->first('content')}}
+                 </div>
+                  @endif
+                 </div>
                 <div class="form-group">
+                  <label for="short_description">Short Description: </label>
+                    <textarea name="short_description" class="form-control" rows="5" placeholder="Short Description here..">{{ old('short_description')}}
+                    </textarea> 
+                  @if ($errors->has('short_description'))
+                  <div class="alert alert-danger">{{ $errors->first('short_description') }}
+                  </div>
+                  @endif
+                </div>
+                 <div class="form-group">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
                   @if ($errors->has('image'))
-                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
-                @endif
+                  <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                  @endif
                 </div>
                 <div class="form-group">
                   <label for="tags">Tags</label>
@@ -88,9 +86,9 @@
                     </select>
                     <p class="help-block"></p>
                     @if($errors->has('tags'))
-                        <p class="help-block">
+                       <div class="alert alert-danger"> 
                             {{ $errors->first('tags') }}
-                        </p>
+                        </div>
                     @endif
                 </div>
                 <div class="col-md-12">
@@ -107,12 +105,11 @@
                   @if ($errors->has('save_method'))
                 <div class="alert alert-danger">{{ $errors->first('save_methods') }}</div>
                 @endif
-                </div>
-                
-            <div class="form-group col-md-4">
+                </div>                
+             <div class="form-group col-md-4">
               <label for="show_in_home">Show in Home:</label>
                <div class="custom-control custom-radio">
-                 <input type="radio" class="custom-control-input flat-red" name="show_in_home"  value="1" checked>
+                 <input type="radio" class="custom-control-input flat-red" name="show_in_home" value="1" checked>
                  <label class="custom-control-label" for="defaultChecked">Active</label>
                </div>
              <div class="custom-control custom-radio">
@@ -126,12 +123,13 @@
                  <div class="form-group col-md-4">
                   <label for="featured">Featured: </label>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input flat-red" name="featured"  value="0" checked>
+                        <input type="radio" class="custom-control-input flat-red" name="featured"  value="2" checked>
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
                     <div class="custom-control custom-radio">
                         <input type="radio" class="custom-control-input flat-red" name="featured"  value="1" >
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
+                    
                       </div>
                   @if ($errors->has('featured'))
                 <div class="alert alert-danger">{{ $errors->first('featured') }}</div>
@@ -140,7 +138,7 @@
                  <div class="form-group col-md-4">
                   <label for="anynomous">Be Anynomous: </label>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input flat-red" name="anynomous"  value="0" checked>
+                        <input type="radio" class="custom-control-input flat-red" name="anynomous"  value="2" checked>
                         <label class="custom-control-label" for="defaultChecked">No</label>
                     </div>
                     <div class="custom-control custom-radio">
@@ -148,7 +146,7 @@
                         <label class="custom-control-label" for="defaultChecked">Yes</label>
                       </div>
                   @if ($errors->has('anynomous'))
-                <div class="alert alert-danger">{{ $errors->first('anynomouss') }}</div>
+                <div class="alert alert-danger">{{ $errors->first('anynomous') }}</div>
                 @endif
                 </div>
 

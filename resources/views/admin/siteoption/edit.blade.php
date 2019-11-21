@@ -2,7 +2,7 @@
 @section('content') 
 
   <section class="content">
-  <form action="{{route('sitesetting')}}" method="POST">
+  <form action="{{route('sitesetting')}}" method="POST" enctype="multipart/form-data">
               @csrf
       <div class="row">
         <div class="col-md-12">
@@ -39,6 +39,17 @@
                     <div class="alert alert-danger">{{ $errors->first('url') }}</div>
                     @endif
                   </div>
+                   
+              <div class="form-group col-md-4">
+                  <label for="image">Image Upload</label>
+                  <input type="file" class="form-control" name="image" id="image">
+                  <img src='/uploads/sitesettings-images/{{$site->image}}' width="50"/>
+                  @if ($errors->has('image'))
+                  <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                  @endif  
+                </div>      
+
+
                   <div class="form-group col-md-4">
                     <label for="contact_email">Contact Email</label>
                     <input type="text" class="form-control" name="contact_email" id="contact_email" value="{{ $site->contact_email}}" placeholder="Contact Email">

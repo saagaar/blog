@@ -17,8 +17,7 @@ Class Tag implements TagInterface
     public function getTagById($tagsid){
       return $this->tag->where('id', $tagsid)->first();
     }
-
-
+    
     public function getTagWithBlog(){
         return $this->tag::has('blogs')->get()->toArray();
     }
@@ -39,7 +38,7 @@ Class Tag implements TagInterface
      */
     public function getTagByName($tags){
       return $this->tag->whereIn('name',$tags)->get();
-    }
+    }   
 
     public function getTagsList(){
       return $this->tag->where('status','1')->select('name')->get()->toArray();
@@ -52,6 +51,10 @@ Class Tag implements TagInterface
     public function create(array $data){
       return $this->tag->create($data);
     }
+     public function save(array $data){
+      return $this->tag->insertGetId($data);
+    }
+    
      /**
      * Updates a post.
      *
@@ -59,7 +62,7 @@ Class Tag implements TagInterface
      * @param array
      */
 
-    public function update( $id,array $data){
+    public function update($id,array $data){
          return $this->tag->find($id)->update($data);
     }
 

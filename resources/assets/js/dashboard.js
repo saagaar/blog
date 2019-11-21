@@ -4,12 +4,20 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import '@fortawesome/fontawesome-free/js/all.js';
-require('./bootstrap');
 window.Vue = require('vue');
 import Vuelidate from 'vuelidate'
 import router from './routes.js'
 import VueRouter from 'vue-router';
 import CKEditor from '@ckeditor/ckeditor5-vue';
+
+import helpers from './helpers/global';
+Vue.use({
+    install() {
+        Vue.helpers = helpers;
+        Vue.prototype.$helpers = helpers;
+    }
+});
+
 
 Vue.use(VueRouter);
 Vue.use(Vuelidate);

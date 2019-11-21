@@ -23,6 +23,11 @@ return [
         'client_secret' => env('LINKEDIN_SECRET'),
         'redirect' => 'http://localhost:8000/dashboard/linkedin'
     ],
+     'google' => [
+        'client_id' => env('GOOGLE_KEY'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect' => 'http://localhost:8000/dashboard/linkedin'
+    ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

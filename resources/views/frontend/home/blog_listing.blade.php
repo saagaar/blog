@@ -8,11 +8,8 @@
                     <div class="single-blog video-style">
                         <div class="thumb">
                             <a href="#">
-<<<<<<< HEAD
-                                <img class="img-fluid" src="{{ asset('uploads/categories-images/'.$category->banner_image) }}" alt="">
-=======
+
                                 <img class="img-fluid" src="{{ asset('/uploads/categories-images/'.$category->banner_image) }}" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
                             </a>
                         </div>
                     </div> 

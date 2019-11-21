@@ -15,15 +15,13 @@
                     <div class="white-box single-post">
                         <div class="feature-img">
                             @if($blogDetails->image)
-<<<<<<< HEAD
-                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}" alt="">
+                                  <!-- <img class="img-fluid " src="{{ asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}"  alt=""> -->
+
+                                   <img class="img-fluid  image-placeholder blur" src="{{ '/image/'.$blogDetails->code.'/10/'.$blogDetails->image }}" data-src="{{ '/image/'.$blogDetails->code.'/500/'.$blogDetails->image }}" alt="" style="min-width: 100%">
+
                             @else
                                  <img class="img-fluid" src="{{ asset('/frontend/images/elements/default-post.jpg') }}" alt="">
-=======
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}" alt="">
-                            @else
-                                 <img class="img-fluid" src="{{asset('asset('/images/system-images/default-post.jpg') }}" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+
                             @endif
                         </div>
                         <div class="blog_details">
@@ -48,9 +46,9 @@
                                 <p class="comment-count"><span class="align-middle"></span> <icon-comments-count></icon-comments-count></p>
                             </div>
                             <ul class="social-icons">
-                                @php($url=url('https://thebloggersclub.com/blog/share/'.$blogDetails->code))
+                                @php($url=url('https://thebloggersclub.com/blog/detail/'.$blogDetails->code))
                  
-                                <a href="javascript:void(0);" data-url="{{$url}}" onclick="fb_share('{{ $url }}', '{{ $blogDetails->title }}')"><i class="fab fa-facebook-f"></i></a>
+                                <a class="fb-share" href="javascript:void(0);" data-code="{{$blogDetails->code}}" data-url="{{$url}}" onclick="fb_share('{{ $url }}', '{{ $blogDetails->title }}')"><i class="fab fa-facebook-f"></i></a>
 
                                 <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -67,15 +65,10 @@
                                     <div class="thumb">
                                         <a href="#">
                                             @if($prev->image)
-<<<<<<< HEAD
+
                                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$prev->code.'/'.$prev->image) }}" width="60" height="60" alt="">
                                             @else
                                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}"  width="60" height="60" alt="">
-=======
-                                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$prev->code.'/'.$prev->image) }}" width="60" height="60" alt="">
-                                            @else
-                                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg')}}"  width="60" height="60" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
                                             @endif
                                         </a>
                                     </div>
@@ -188,15 +181,10 @@
                             @foreach($relatedBlog as $eachRelatedBlog)
                             <div class="media post_item">
                                 @if($eachRelatedBlog->image)
-<<<<<<< HEAD
                                      <img src="{{ asset('uploads/blog/'.$eachRelatedBlog->code.'/'.$eachRelatedBlog->image) }}" width="60" height="60" alt="">
                                 @else
                                      <img src="{{ asset('frontend/images/elements/default-post.jpg') }}" width="60" height="60" alt="">
-=======
-                                     <img src="{{ asset('/uploads/blog/'.$eachRelatedBlog->code.'/'.$eachRelatedBlog->image) }}" width="60" height="60" alt="">
-                                @else
-                                     <img src="{{ asset('/images/system-images/default-post.jpg')}}" width="60" height="60" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+
                                 @endif
                                 <div class="media-body">
                                     <a href="{{ route('blog.detail' , $eachRelatedBlog->code)}}">

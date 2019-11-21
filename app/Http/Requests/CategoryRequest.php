@@ -62,7 +62,6 @@ class CategoryRequest extends FormRequest
                 'show_in_home'  =>'required',
                 'priority'  =>'required',
                 'description'  =>'required'
-
               
         ];
     }

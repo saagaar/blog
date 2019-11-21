@@ -34,7 +34,7 @@ Class Category implements CategoryInterface
       // return  $this->cat->where('slug', $slug)->first()->blogs()->withCount('likes','comments')->get();
     }
   public function getCategoryByShowInHome($limit=8){
-    $data=$this->cat->orderByRaw('FIELD(priority,NULL) ASC')->limit($limit)->get();
+    $data=$this->cat->where(['show_in_home'=>'1','status'=>'1'])->orderByRaw('FIELD(priority,NULL) ASC')->limit($limit)->get();
     return $data;
   }
       /**
@@ -43,7 +43,11 @@ Class Category implements CategoryInterface
      * @return mixed
      */
     public function getAll(){
-   	 return	$this->cat->latest();
+   	 return	$this->cat;
+    }
+
+    public function getCategoryByWeight(){
+     return $this->cat->selectRaw('CONCAT(name," ",10-priority*2) as cat')->get();
     }
  	
  	  /**

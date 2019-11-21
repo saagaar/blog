@@ -64,16 +64,7 @@ import TheFooter from './../components/Footer/TheFooter';
         methods:{
           getProfileUrl(){
               let url=this.me.image;
-              console.log('we are here');
-              if(url===''){
-                return 'frontend/images/elements/default-profile.png';
-              }
-              else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
-                return url;
-              }
-              else{
-                return '/uploads/user-images/'+url;
-              }
+              return this.$helpers.getProfileUrl(url);
            }
         }
     }

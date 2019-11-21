@@ -2,8 +2,6 @@
 @section('content')
 
 <section class="fullwidth-block area-padding-bottom">
-
-
  <div class="spinner-border text-primary" role="status">
   <span class="sr-only">Loading...</span>
 </div>
@@ -17,16 +15,12 @@
                     <div class="single-blog video-style">
                         <div class="thumb">
                             <a href="#">
-                                @if($featuredBlog['0']->image)
-<<<<<<< HEAD
+                             @if($featuredBlog['0']->image)
+
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$featuredBlog['0']->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
-=======
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$featuredBlog->code.'/'.$featuredBlog['0']->image) }}" alt="">
-                            @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+                           
                             @endif
                             </a>
                         </div>
@@ -60,15 +54,10 @@
                             <figure>
                                 <a href="#">
                                     @if($eachFeaturedBlog->image)
-<<<<<<< HEAD
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachFeaturedBlog->code.'/'.$eachFeaturedBlog->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
-=======
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachFeaturedBlog->code.'/'.$eachFeaturedBlog->image) }}" alt="">
-                            @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+
                             @endif
                                 </a>
                             </figure>
@@ -122,15 +111,10 @@
                         <div class="thumb">
                             <a href="#">
                                 @if($featuredForMember['0']->image)
-<<<<<<< HEAD
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember['0']->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
-=======
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember['0']->image) }}" alt="">
-                            @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+
                             @endif
                             </a>
                         </div>
@@ -144,11 +128,8 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredForMember['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-<<<<<<< HEAD
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
-=======
-                                 <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+
                                 </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -167,15 +148,10 @@
                             <figure>
                                 <a href="#">
                                     @if($eachFeaturedForMember->image)
-<<<<<<< HEAD
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachFeaturedForMember->code.'/'.$eachFeaturedForMember->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
-=======
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachFeaturedForMember->code.'/'.$eachFeaturedForMember->image) }}" alt="">
-                            @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+
                             @endif
                                 </a>
                             </figure>
@@ -225,15 +201,10 @@
                         <div class="thumb">
                             <a href="#">
                                 @if($popular['0']->image)
-<<<<<<< HEAD
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$popular['0']->code.'/'.$popular['0']->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
-=======
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$popular['0']->code.'/'.$popular['0']->image) }}" alt="">
-                            @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+
                             @endif
                             </a>
                         </div>
@@ -260,7 +231,6 @@
 
                 ?>
                 @if(count($popular)>0)
-                {{count($popular)}}
                 <div class="col-lg-6 col-md-6">
                 	@foreach($popular as $eachPopular)
                     <div class="single-blog video-style small row m_b_30">
@@ -268,15 +238,10 @@
                             <figure>
                                 <a href="#">
                                     @if($eachPopular->image)
-<<<<<<< HEAD
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachPopular->code.'/'.$eachPopular->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
-=======
-                                 <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachPopular->code.'/'.$eachPopular->image) }}" alt="">
-                            @else
-                                 <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+
                             @endif
                                 </a>
                             </figure>
@@ -333,15 +298,10 @@
                             <figure>
                                 <a href="#">
                                 @if($eachLatest->image)
-<<<<<<< HEAD
 	                                <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachLatest->code.'/'.$eachLatest->image) }}" alt="">
 	                            @else
 	                                <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
-=======
-	                                <img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachLatest->code.'/'.$eachLatest->image) }}" alt="">
-	                            @else
-	                                <img class="img-fluid" src="{{ asset('/images/system-images/default-post.jpg') }}" alt="">
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+
 	                            @endif
                                 </a>
                             </figure>

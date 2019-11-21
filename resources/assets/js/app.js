@@ -6,12 +6,8 @@
 import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
 fontawesome.config = { autoReplaceSvg: false }
 
-require('./bootstrap');
 window.Vue = require('vue');
 import Vuelidate from 'vuelidate'
-import router from './routes.js'
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
 Vue.use(Vuelidate);
 // Vue.use(window.Vuelidate.default)
 
@@ -42,18 +38,19 @@ Custom Imports goes here
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-Vue.component('pagination', require('laravel-vue-pagination'));
+// Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(require('vue-moment'));
 
-import Gate from './services/Gate.js';
-Vue.prototype.$gate = new Gate();
-import config from './config/config.js';
+// import Gate from './services/Gate.js';
+// Vue.prototype.$gate = new Gate();
+// import config from './config/config.js';
 
-import TheTopNav from './components/TopNav/TheTopNav';
+// import TheTopNav from './components/TopNav/TheTopNav';
 // Vue.component('TheTopNav', require('./components/TopNav/TheTopNav.vue'));
-import TheMainNav from './components/MainNav/TheMainNav';
+// import TheMainNav from './components/MainNav/TheMainNav';
 // Vue.component('TheMainNav', require('./components/MainNav/TheMainNav.vue'));
 import TheFooter from './components/Footer/TheFooter';
+import SuccessErrorMessage from './components/SuccessErrorMessage.vue';
 import ListComment from './components/Comment/ListComment';
 import AddComment from './components/Comment/AddComment';
 import Comment from './components/Comment/Comment';
@@ -71,21 +68,13 @@ import NotificationsLoading  from './components/InfiniteLoading/NotificationsLoa
 const default_layout="default";
 const app = new Vue({
     el: '#app',
-    router,
     data(){
-        config:config
+        // config:config
     },
     store,
-    beforeCreate() {
-            let userState = JSON.parse(window.__USER_STATE__) || {};
-        if (userState) {
-           this.$store.commit('ADD_ME', userState)
-        }
-            this.$store.dispatch('checkLoginUser');
-        },
     components:{
-            'the-top-nav':TheTopNav,
-            'the-main-nav':TheMainNav,
+            // 'the-top-nav':TheTopNav,
+            // 'the-main-nav':TheMainNav,
             'the-footer':TheFooter,
             'list-comment':ListComment,
             'add-comment':AddComment,
@@ -98,7 +87,8 @@ const app = new Vue({
             'login-button':LoginButton,
             'signup-button':SignUpButton,
             'the-login-signup-modal':TheLoginSignupModal,
-            'notification-loading':NotificationsLoading
+            'notification-loading':NotificationsLoading,
+            'success-error-message':SuccessErrorMessage
           
         }
     

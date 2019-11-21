@@ -37,21 +37,11 @@
                   <td>{{ $tag->name }}</td>
                   <td><input data-id="{{$tag->id}}" data-url="{{route('tags.changestatus')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{$tag->status==1 ? 'checked' : ''}}>
                   </td>
-<<<<<<< HEAD
                   <td>{{ $tag->created_at}}</td>
                   <td>{{ $tag->updated_at}}</td>
-                  <td><a href="{{route('tags.edit', $tag->name)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-                  <td><a href="{{route('tags.delete', $tag->name)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-=======
-                  <td>{{$tag->created_at}}</td>
-                  <td>{{$tag->updated_at}}</td>
+
                   <td><a href="{{route('tags.edit',$tag->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
-<<<<<<< HEAD
-                  <td><a href="{{route('tags.delete',$tag->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
->>>>>>> 6d8894aed4c25617015202178b881cc8942fe9c1
-=======
-                  <td><a onClick="return ConfirmDelete();" href="{{route('tags.delete',$tag->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
+                  <td><a onClick="return ConfirmDelete();" href="{{route('tags.delete', $tag->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach
                 @else

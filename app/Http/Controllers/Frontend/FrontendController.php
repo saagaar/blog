@@ -67,18 +67,22 @@ class FrontendController extends BaseController
         $this->state = config('settings.state'); 
         $this->country = config('settings.country');
         $this->websiteMode=config('settings.mode');
+        $this->websiteLogo=config('settings.image');
+        $this->websiteUrl=config('settings.url');
+
+
 
         // $this->save_visitor_info();
        
         date_default_timezone_set('Asia/Kathmandu');
-       
-        if($this->websiteMode=='3')
-        {
-            exit('Sorry we are maintaining..It is a regular maintainence');
-        }
-        if($this->websiteMode=='2'){
-            exit('sorry we currently offline');
-        }
+        
+        // if($this->websiteMode=='3')
+        // {
+        //     exit('Sorry we are maintaining..It is a regular maintainence');
+        // }
+        // if($this->websiteMode=='2'){
+        //     exit('sorry we currently offline');
+        // }
         $this->middleware(function ($request, $next) {
         $this->authUser= \Auth::user();
             return $next($request);
@@ -116,10 +120,10 @@ class FrontendController extends BaseController
             $user->followingCount=$followerList->getFollowingsCount($this->authUser);
             $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
             $user->notifications=$account->getUsersNotification($this->authUser,$this->apiPerPage);
-
             $user->blogCount=$this->authUser->blogs()->count();
+            $user->root_url=url('/');
+            
             $user=$user->toArray();
-           
             $user['permissions']= $this->getAllPermissionsAttribute();    
             // $user['roles']=$this->authUser->roles->first()->name;
             return $user;
@@ -128,6 +132,8 @@ class FrontendController extends BaseController
             return redirect()->route('home'); 
         }
     }
+
+    // public function 
 
     public function save_visitor_info()
     {

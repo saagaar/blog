@@ -17,7 +17,7 @@
           <!-- /.box-body -->
           </div>
         </div>
-        <!-- <?php  print_r($errors->all()); ?> -->
+         <!-- <?php  print_r($errors->all()); ?> -->
         <!-- left column -->
         <div class="col-md-9">
           <!-- general form elements -->

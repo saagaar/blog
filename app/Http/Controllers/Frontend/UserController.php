@@ -106,6 +106,7 @@ class UserController extends FrontendController
           }
           else
           {
+        
               $data['path']='/followers';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
@@ -278,7 +279,7 @@ class UserController extends FrontendController
               return view('frontend.layouts.dashboard',['initialState'=>$initialState,'user'=>$user]);
           }
         }
-        else
+        else 
         {
              return redirect()->route('home'); 
         }

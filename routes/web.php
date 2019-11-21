@@ -11,12 +11,14 @@
 |
 */
 Route::get('/','Frontend\HomeController@landingPage')->name('landing.page');
+
 Route::get('/logincheck', function () {
     return response()->json([
    'status'=> \Auth::check()
 ]);
-});
+});    
 
+Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
 Route::get('api/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('api');
 Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
@@ -59,10 +61,10 @@ Route::get('/api/getfollowers','Frontend\UserController@getFollowers')->name('ge
 Route::get('/api/getfollowings','Frontend\UserController@getFollowings')->name('getfollowings');
 
 
-Route::get('/test', 'Frontend\FrontendController@index')->name('test');
+Route::get('/test', 'Frontend\HomeController@test')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 Route::post('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
-
+Route::post('/blog/detail/share','Frontend\HomeController@share')->name('share');
 
 // Route::get('/tests', 'Frontend\UserInteractionController@testinglike')->name('test');
 Route::get('/blogs','Frontend\HomeController@index')->name('home');
@@ -70,6 +72,7 @@ Route::get('/blogs','Frontend\HomeController@index')->name('home');
 
 Route::get('/dashboard/{provider}','Frontend\LoginController@dashboard')->name('dashboard');
 Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->name('social.login');
+
 // Route::match(['get','post'],'/admin/login','AdminController@login');
 Route::post('/blog/login', 'Frontend\LoginController@login')->name('login');
 Route::post('/blog/register', 'Frontend\LoginController@register')->name('register');

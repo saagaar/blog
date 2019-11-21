@@ -62,6 +62,22 @@ class BlogController extends FrontendController
           return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
        }
    	}
+
+    public function resizeImage($code,$width,$name)
+    {
+        $imagePath=public_path(). '/uploads/blog/'.$code.'/'.$name;
+        if(File::exists($imagePath))
+        {
+           $img = Image::make($imagePath);
+          $img->resize($width, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+          return $img->response('jpg'); 
+        }
+       abort(404);
+      
+    }
     public function update(Request $request,$blogCode,TagInterface $tag)
     {
             $routeName= Route::currentRouteName();
@@ -141,9 +157,10 @@ class BlogController extends FrontendController
                             $dir=public_path().'/uploads/blog/'.$postId.'/';
                              if ($blogData->image != '' && File::exists($dir,$blogData->image))
                             {
+
                             File::deleteDirectory($dir);
                              }else{
-                                File::makeDirectory($dir);
+                                File::makeDirectory($dir, 0777, true, true);
                             }
                             $tmpImg =request()->image->move($dir,$imageName);
                             $img = Image::make($tmpImg);         
@@ -152,12 +169,8 @@ class BlogController extends FrontendController
                              $constraint->aspectRatio();
                             }
                             )->save($dir.'/'.time().'-thumbnail.'.$extension);
-<<<<<<< HEAD
-                            $validatedData['image'] = $imageName;
->>>>>>> 6d8894aed4c25617015202178b881cc8942fe9c1
-=======
+
                             $form['image'] = $imageName;
->>>>>>> ec9eb1c766a379950a174bed6e2224af95588ffe
                         }
                         $form['short_description']=$request->short_description;
                         $form['save_method']=$request->save_method?$request->save_method:'1';

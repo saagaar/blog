@@ -6,10 +6,10 @@
                   <div v-if="followSuggestion.length>0">
                    <div class="follow-user" v-for="eachsuggestion in followSuggestion" >
 
-                    <img :src="eachsuggestion.image? '/images/user-images/'+eachsuggestion.image:'/images/system-images/default-profile.png'" alt="user" class="profile-photo-sm pull-left" />
+                    <img :src="eachsuggestion.image? '/uploads/user-images/'+eachsuggestion.image:'/frontend/images/elements/default-profile.png'" alt="user" class="profile-photo-sm pull-left" />
                     <div>
                       <h5><a href="#">{{ eachsuggestion.name}}</a></h5>
-                      <FollowButton  @clicked="userFollowed" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
+                      <FollowButton  @clicked="userFollowed" :following="following" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
                     </div>
                    </div>
                    </div>
@@ -19,7 +19,6 @@
                    <div v-else class="follow-user">
                     No New suggestions
                    </div>
-                   
             </div>
 </template>
 
@@ -32,21 +31,31 @@ import PlaceHolderDashboardFeed  from './../ContentPlaceholder/PlaceHolderDashbo
         	return {
               followSuggestionStart: '',
               isLoading:'',
+              following:false,
+              newUser:{name:'',username:'',image:''}
            }
         },
-        
+        watch:{
+          'newUser.username':
+          {
+            handler: function (after, before) {
+              this.followSuggestion.push(this.newUser)
+            },
+            deep: true
+          }         
+        },
         methods:{
           userFollowed:function(toRemoveUser,toAddUser){
-           var index=this.followSuggestion.filter(p => p.username == toRemoveUser);
 
+              var index = this.followSuggestion.findIndex(obj => {
+              return obj.username === toRemoveUser
+            })                               
+          
+            this.followSuggestion.splice(index, 1);
             if(toAddUser[0]!==  undefined)
             {
-              this.followSuggestion.push(toAddUser[0]);
-            }
-               // remove after 1 second
-              
-                (this.followSuggestion.splice(index, 1));
-            
+              this.newUser=toAddUser[0];
+            } 
           }
         },
         components:{
