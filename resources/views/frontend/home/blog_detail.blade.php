@@ -46,7 +46,7 @@
                                 <p class="comment-count"><span class="align-middle"></span> <icon-comments-count></icon-comments-count></p>
                             </div>
                             <ul class="social-icons">
-                                @php($url=url('https://thebloggersclub.com/blog/share/'.$blogDetails->code))
+                                @php($url=url('https://thebloggersclub.com/blog/detail/'.$blogDetails->code))
                  
                                 <a class="fb-share" href="javascript:void(0);" data-code="{{$blogDetails->code}}" data-url="{{$url}}" onclick="fb_share('{{ $url }}', '{{ $blogDetails->title }}')"><i class="fab fa-facebook-f"></i></a>
 
