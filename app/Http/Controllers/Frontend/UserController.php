@@ -106,6 +106,7 @@ class UserController extends FrontendController
           }
           else
           {
+        
               $data['path']='/followers';
               $initialState=json_encode($data);
               $user=$this->user_state_info();

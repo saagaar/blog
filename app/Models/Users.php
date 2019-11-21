@@ -29,7 +29,7 @@ class Users extends Authenticatable implements Auditable
      * @var array
      */
     protected $hidden = [
-        'id','password', 'remember_token',
+        'id','password', 'remember_token','pivot'
     ];
 
     // *
