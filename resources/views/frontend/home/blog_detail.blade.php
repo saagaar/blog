@@ -205,45 +205,6 @@
                                 @endforeach
                             </ul>
                         </aside>
-
-
-                        <aside class="single_sidebar_widget instagram_feeds">
-                            <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Instagram Feeds</h4>
-                            <ul class="instagram_row flex-wrap">
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i1.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i2.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i3.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i4.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i5.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i6.png" alt="">
-                                    </a>
-                                </li>
-                            </ul>
-                        </aside>
-
-
                         <aside class="single_sidebar_widget newsletter_widget">
                             <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Newsletter</h4>
 
