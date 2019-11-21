@@ -49,9 +49,13 @@
                                 @php($url=url('https://thebloggersclub.com/blog/detail/'.$blogDetails->code))
                  
                                 <a class="fb-share" href="javascript:void(0);" data-code="{{$blogDetails->code}}" data-url="{{$url}}" onclick="fb_share('{{ $url }}', '{{ $blogDetails->title }}')"><i class="fab fa-facebook-f"></i></a>
-
+                                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                                 <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a class="twitter-share-button"
+                                      href="https://twitter.com/intent/tweet"
+                                      data-text="{{$blogDetails->title}}"
+                                      data-url="{{$url}}&amp;type=twitter"
+                                      data-hashtags="share"><i class="fab fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
                                 <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                             </ul>
