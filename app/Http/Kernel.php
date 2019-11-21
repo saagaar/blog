@@ -14,11 +14,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
+        \App\Http\Middleware\CheckForMaintenanceMode::class
      
 
     ];
@@ -63,9 +63,11 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'check_user_permission' => \App\Http\Middleware\CheckUserPermission::class,  
+
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+        'check.maintainence.mode'=> \App\Http\Middleware\CheckForMaintenanceMode::class,
     ];
 
     /**
@@ -81,7 +83,8 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\Authenticate::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        \App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Auth\Middleware\Authorize::class,
-        \App\Middleware\CheckUserPermission::class
+        \App\Middleware\CheckUserPermission::class,
     ];
 }

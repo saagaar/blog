@@ -29,6 +29,11 @@ let action='';
                this.buttonDesign='text-green'
               else 
                this.buttonDesign='btn-success'   
+          },
+          username:function(val)
+          {
+            if(val)
+              this.isFollowing=false;
           }
         },
         mounted() {

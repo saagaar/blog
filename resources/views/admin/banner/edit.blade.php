@@ -11,7 +11,7 @@
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
                 <li><a href="{{route('banner.list')}}"><span class="glyphicon glyphicon-minus"></span> All Banners list</a></li>
-                <li class="{{ (request()->is('create/banner')) ? 'active' : '' }}"><a href="{{route('banner.create')}}"><span class="glyphicon glyphicon-plus"></span> Create Banner</a></li>
+                <li class="{{ (request()->is('create/banner')) ? 'active' : '' }}"><a href="{{  route('banner.create')}}"><span class="glyphicon glyphicon-plus"></span> Create Banner</a></li>
               </ul>
             </div>
           <!-- /.box-body -->
@@ -47,7 +47,7 @@
                         <div class="alert alert-danger">{{ $errors->first('description') }}</div>
                         @endif
                     </div>  
-                  <div class="form-group">
+                <div class="form-group">
                     <label for="content">Content:</label>
                     <textarea name="content" class="form-control" id="contenteditor" placeholder="Banner Content here..">
                     {{$banner->content}}
@@ -118,5 +118,5 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
-          @endsection
+ @endsection
       

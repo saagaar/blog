@@ -5,7 +5,7 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="/images/system-images/logo.png" alt="">
+                        <img src="/frontend/images/elements/logo-6.png" alt="">
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
@@ -134,16 +134,9 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
                 }
             },
             getProfileUrl(){
+              
               let url=this.me.image;
-              if(url===''){
-                return 'frontend/images/elements/default-profile.png';
-              }
-              else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
-                return url;
-              }
-              else{
-                return '/uploads/user-images/'+url;
-              }
+              return this.$helpers.getProfileUrl(url);
            },
            getFirstName(){
              let first = this.me.name.split(' ').slice(0, -1).join(' ');; 

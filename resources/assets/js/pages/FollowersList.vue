@@ -4,7 +4,7 @@
      <PlaceHolderFollowers></PlaceHolderFollowers>
     </div>         
     <!-- ==== Friend List ==== -->
-    <div v-else-if="Object.entries(initialState.followers)>0">
+    <div v-else-if="Object.entries(initialState.followers).length>0">
     <div class="friend-list fn_list_2" >
       <div class="col-md-6 col-sm-12"  v-for="eachFollowers in initialState.followers">
         <div class="friend-card">

@@ -65,7 +65,6 @@ class AccountController extends AdminController{
             request()->image->move(public_path('uploads/user-images'), $imageName);
             $validatedData['image'] = $imageName;
             $emailParts = explode('@', $validatedData['email']);
-
             $username = $emailParts[0];
             $check = $this->account->getAll()->where('username',$username)->first();
             if (!$check) {

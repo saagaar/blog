@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('country')->nullable();
             $table->string('bio')->nullable();
             $table->date('dob')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image',300)->nullable();
             $table->string('token',1000)->nullable();
             $table->rememberToken();
             $table->timestamps();

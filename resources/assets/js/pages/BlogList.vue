@@ -97,6 +97,8 @@
               <td class="view-message">
                 <div>
                   <router-link :to="'/blog/edit/'+eachblog.code" v-if="$gate.allow('update', 'blog', eachblog)">{{ eachblog.title}}</router-link>
+                  <a href="#" v-else>{{ eachblog.title}}</a>
+
                 </div>
                 <div class="hidden_sec">
                   <div class="hidden_td_link">

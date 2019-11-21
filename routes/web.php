@@ -11,11 +11,12 @@
 |
 */
 Route::get('/','Frontend\HomeController@landingPage')->name('landing.page');
+
 Route::get('/logincheck', function () {
     return response()->json([
    'status'=> \Auth::check()
 ]);
-});
+});    
 
 Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('blog.detail');

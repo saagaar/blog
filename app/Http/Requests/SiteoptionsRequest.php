@@ -23,6 +23,7 @@ class SiteoptionsRequest extends FormRequest
      */
     public function rules()
     {
+       
         return [
             'site_name'                     =>'required|min:6|max:50',
             'log_admin_activity'            =>'required',
@@ -47,6 +48,8 @@ class SiteoptionsRequest extends FormRequest
             'state'                         =>'required',
             'country'                       =>'required',
             'url'                           =>'required'
+
+            
         ];
     }
 }

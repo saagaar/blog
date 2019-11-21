@@ -52,7 +52,7 @@ Class Banner implements BannerInterface
 
     public function getBannerTagLine()
     {
-        return $this->Banner->where('type','banner')->where('status','1')->get();
+        return $this->Banner->where('status','1')->get();
     }
 
 

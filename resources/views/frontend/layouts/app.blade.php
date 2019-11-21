@@ -12,6 +12,7 @@
 @include('frontend.common.header')
 <!--================ End of Meta Elements and includes=================-->
 <body>
+
 <div class="wrapper" >
 <div id="app">
 	<section class="header-top">
@@ -19,8 +20,8 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="/frontend/images/elements/logo-4.png" alt="">
-                        
+
+                        <img src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}"alt='logo' style="height:55px;width:150px;">
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
@@ -50,9 +51,9 @@
                             <small>Welcome !</small>
                             <figure>
                               @if(auth()->user()->image)
-                                <img src="'/images/user-images/'.auth()->user()->image">
+                                <img src="'uploads/user-images/'.auth()->user()->image">
                               @else
-                                <img src="/images/system-images/default-profile.png">
+                                <img src="/frontend/images/elements/default-profile.png">
                               @endif
                             </figure><?php  
                             $name=auth()->user()->name;
@@ -79,6 +80,8 @@
                 </div>
             </div>
         </div>
+<success-error-message></success-error-message>
+        
     <!--     <div class="search_input" id="search_input_box" ref="search_input_box" >
             <div class="container ">
                 <form class="d-flex justify-content-between search-inner">

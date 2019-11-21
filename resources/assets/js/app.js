@@ -6,13 +6,12 @@
 import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
 fontawesome.config = { autoReplaceSvg: false }
 
-require('./bootstrap');
 window.Vue = require('vue');
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate);
 // Vue.use(window.Vuelidate.default)
 
-// import store from './store/index'
+import store from './store/index'
 
 /**
 Custom Imports goes here
@@ -51,6 +50,7 @@ Vue.use(require('vue-moment'));
 // import TheMainNav from './components/MainNav/TheMainNav';
 // Vue.component('TheMainNav', require('./components/MainNav/TheMainNav.vue'));
 import TheFooter from './components/Footer/TheFooter';
+import SuccessErrorMessage from './components/SuccessErrorMessage.vue';
 import ListComment from './components/Comment/ListComment';
 import AddComment from './components/Comment/AddComment';
 import Comment from './components/Comment/Comment';
@@ -71,6 +71,7 @@ const app = new Vue({
     data(){
         // config:config
     },
+    store,
     components:{
             // 'the-top-nav':TheTopNav,
             // 'the-main-nav':TheMainNav,
@@ -86,7 +87,8 @@ const app = new Vue({
             'login-button':LoginButton,
             'signup-button':SignUpButton,
             'the-login-signup-modal':TheLoginSignupModal,
-            'notification-loading':NotificationsLoading
+            'notification-loading':NotificationsLoading,
+            'success-error-message':SuccessErrorMessage
           
         }
     

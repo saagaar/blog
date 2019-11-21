@@ -63,11 +63,11 @@
                       <hr/>
                       <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4">
-                          <button type="button" @click.prevent="submitForm"  class="btn btn-primary ml-30" :disabled="this.$store.state.isLoading"><Loader></Loader>&nbsp;Publish</button>
+                          <button type="button" @click.prevent="submitForm('2')"  class="btn btn-primary ml-30" :disabled="this.$store.state.isLoading"><Loader></Loader>&nbsp;Publish</button>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8">
                           <div class="tools add_btn">
-                              <button class="btn btn-light">Save</button>
+                              <button class="btn btn-light" @click.prevent="submitForm('1')">Save</button>
                               <button class="btn btn-light">Preview</button>
                               <button class="btn btn-light">Close</button>
                           </div>
@@ -111,7 +111,8 @@ import Form from './../services/Form.js';
                     image:'',
                     tags:[],
                     isAnynomous:'',
-                    file:true
+                    file:true,
+                    save_method:'1'
                 }),
                 searchTagform:new Form({
                   name:'',
@@ -143,9 +144,9 @@ import Form from './../services/Form.js';
         },
       },
         computed:{
-          isLoading(){
-            return this.$store.state.isLoading ;
-          }
+          // isLoading(){
+          //   return this.$store.state.isLoading ;
+          // }
         },
         methods:{
 
@@ -175,9 +176,7 @@ import Form from './../services/Form.js';
             // 
          // alert('here');
           },
-          checkTag(){
-            alert(checkTag);
-          },
+        
           // next() {
           //   this.$v.form.$touch();
           //   if(!this.$v.form.$invalid)
@@ -200,7 +199,8 @@ import Form from './../services/Form.js';
             },
 
 
-          submitForm:function(){
+          submitForm:function(save_method='1'){
+            this.form.save_method=save_method;
             let curObject=this;
             curObject.$store.commit('TOGGLE_LOADING');
             this.$v.form.$touch();

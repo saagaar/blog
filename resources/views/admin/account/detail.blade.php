@@ -32,7 +32,7 @@
               @if($account->image)
               <img class="profile-user-img img-responsive img-circle" src="{{ asset('uploads/user-images/'.$account['image']) }}" alt="User profile picture">
               @else
-              <img class="profile-user-img img-responsive img-circle" src="{{ asset('images/default-profile-icon-24.jpg/') }}" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="{{ asset('uploads/default-profile-icon-24.jpg/') }}" alt="User profile picture">
              @endif
               <h3 class="profile-username text-center">{{$account->name}}</h3>
               <p class="text-muted text-center">

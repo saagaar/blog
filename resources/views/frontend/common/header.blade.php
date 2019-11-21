@@ -64,7 +64,7 @@
                 "telephone" : "+977-9810099062",
                 "contactType" : "Call Service"
               }],
-              "logo" : "https://thebloggersclub.com/images/logo.png",
+              "logo" : "https://thebloggersclub.com/images/logo-6.png",
               "sameAs" : 
               [
                 "https://www.facebook.com/The-Bloggers-Club-102453021098785/"
