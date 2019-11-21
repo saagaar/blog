@@ -1,5 +1,5 @@
 const CONFIG = {
-  ROOT_URL: 'https://thebloggersclub.com/',
+  ROOT_URL: 'http://localhost:8000/',
 }
 
 export default CONFIG;
