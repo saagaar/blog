@@ -6,7 +6,6 @@
 import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
 fontawesome.config = { autoReplaceSvg: false }
 
-require('./bootstrap');
 window.Vue = require('vue');
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate);

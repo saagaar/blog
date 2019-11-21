@@ -2,6 +2,8 @@
 @section('content')
 
 <section class="fullwidth-block area-padding-bottom">
+
+
  <div class="spinner-border text-primary" role="status">
   <span class="sr-only">Loading...</span>
 </div>
@@ -15,12 +17,11 @@
                     <div class="single-blog video-style">
                         <div class="thumb">
                             <a href="#">
-                             @if($featuredBlog['0']->image)
-
+                                @if($featuredBlog['0']->image)
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$featuredBlog['0']->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
-                           
+
                             @endif
                             </a>
                         </div>
@@ -37,8 +38,7 @@
                                     <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
-                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
-                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{ $featuredBlog['0']->comments_count }}</a>
+                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div> 
@@ -74,8 +74,7 @@
                                     <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
-                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
-                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{$eachFeaturedBlog->comments_count }}</a>
+                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div> 
@@ -114,7 +113,6 @@
                             <a href="#">
                                 @if($featuredForMember['0']->image)
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember['0']->image) }}" alt="">
-                            @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
                             @endif
@@ -131,11 +129,9 @@
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredForMember['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
-
                                 </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
-                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
-                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{$featuredForMember['0']->comments_count }}</a>
+                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div> 
@@ -150,7 +146,7 @@
                         <div class="thumb col-md-4 col-sm-5 col-12">
                             <figure>
                                 <a href="#">
-                                    @if($eachFeaturedForMember->image)
+                            @if($eachFeaturedForMember->image)
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachFeaturedForMember->code.'/'.$eachFeaturedForMember->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
@@ -170,8 +166,7 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachFeaturedForMember->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
-                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
-                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{$eachFeaturedForMember->comments_count }}</a>
+                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div> 
@@ -225,8 +220,7 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$popular['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
-                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
-                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{$popular['0']->comments_count }}</a>
+                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div> 
@@ -236,6 +230,7 @@
 
                 ?>
                 @if(count($popular)>0)
+                {{count($popular)}}
                 <div class="col-lg-6 col-md-6">
                 	@foreach($popular as $eachPopular)
                     <div class="single-blog video-style small row m_b_30">
@@ -263,8 +258,7 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachPopular->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
-                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
-                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{$eachPopular->comments_count }}</a>
+                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div> 
@@ -324,7 +318,7 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachLatest->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
-                                <a href="#"><i class="fa fa-comments"></i> {{$eachLatest->comments_count }}</a>
+                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
                             </div>
                         </div>
                     </div>

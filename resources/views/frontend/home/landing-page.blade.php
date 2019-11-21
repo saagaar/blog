@@ -94,7 +94,7 @@
          <div class="col-lg-12 text-center">        
         <h1 class="mb-3">Update Title From Backend</h1>
         <p class="mb-4"> </p>
-        <a href="{{$eachBanner->link}}" class="btn btn-secondary btn-lg mb-5">explore us</a>
+        <a href="#" class="btn btn-secondary btn-lg mb-5">explore us</a>
         <!-- banner image -->
       </div>
       @endif

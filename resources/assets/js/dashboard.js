@@ -4,7 +4,6 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import '@fortawesome/fontawesome-free/js/all.js';
-require('./bootstrap');
 window.Vue = require('vue');
 import Vuelidate from 'vuelidate'
 import router from './routes.js'

@@ -13,6 +13,7 @@ use App\Mail\SendMailable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\Notifications;
 use App\Repository\BlogInterface;
+use App\Repository\ShareInterface;
 use App\Repository\CategoryInterface;
 use App\Repository\UserInteractionInterface; 
 use App\Repository\TagInterface;
@@ -279,11 +280,27 @@ class HomeController extends FrontendController
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
-    public function test(Request $request)
+    public function test(ShareInterface $share)
     {
-        $data= $this->blog->getAllBlogByViews();
+       $blogCode='5da95a60500cc2da';
+       $data = $share->incrementFbShare($blogCode);
         print_r($data);
         // return view('frontend.layouts.app');
+    }
+    public function share(Request $request,ShareInterface $share){
+      try{
+        $blogCode = $request->code;
+        $media=$request->media;
+        if($media=='facebook'){
+          $share->incrementFbShare($blogCode);
+          return array('status'=>true,'data'=>'','message'=>'Shared successfully');
+        }
+      }catch(Exception $e)
+      {
+
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+      // print_r($blogCode);exit;
     }
 
     public function dashboard()

@@ -5,7 +5,6 @@
  */
 // import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
 
-require('./bootstrap');
 window.Vue = require('vue');
 import VueWordCloud from 'vuewordcloud';
 Vue.component(VueWordCloud.name, VueWordCloud);
