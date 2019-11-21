@@ -19465,6 +19465,47 @@ ul.notifications_list li a:hover{background: #edf2fa;}
 {font-size: 16px; color: #006699;}
 .single-blog.video-style.small h4.lt_ttl{font-size: 30px; 
   font-weight: bold; line-height: 36px;}
+
+  /*11/07/2019*/
+.timeline-cover{
+  background: -moz-linear-gradient(top,  rgb(218, 234, 228) 0%, rgba(255,255,255,0) 100%);
+background: -webkit-linear-gradient(top, rgb(218, 234, 228) 0%,rgba(255,255,255,0) 100%);
+background: linear-gradient(to bottom,  rgb(218, 234, 228) 0%,rgba(255,255,255,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9facca', endColorstr='#00ffffff',GradientType=0 );
+
+}
+.timeline-cover .btn-primary{padding: 2px 25px;}
+.timeline-quote{text-align: center; position: relative;}
+.timeline-quote .collen{text-align: center; width: 42%;
+margin-left: auto; margin-right: auto; padding-top: 30px; 
+position: relative;}
+.timeline-quote p{font-size: 30px; color: #000999; line-height: 42px; 
+font-family: "Josefin Sans", sans-serif; font-weight: 600;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+.timeline-quote .collen::before, .timeline-quote .collen::after {
+    top: 15px;
+    height: 19px;
+    width: 25px;
+    position: absolute;
+}
+.timeline-quote .collen::before {
+    content: url(../images/elements/collen1.png);
+    left: -30px;
+}
+.timeline-quote .collen::after {
+    content: url(../images/elements/collen2.png);
+    right: -30px;
+    top: auto;
+    bottom: 0px;
+}
+
+.blur{ filter: blur(20px) };
+
+.LQplaceholder{
+  min-width: 100% !impo
+}
+
 @media (max-width:1619px){
 	/* Main Menu Area css
 	============================================================================================ */
