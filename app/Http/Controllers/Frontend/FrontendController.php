@@ -69,7 +69,8 @@ class FrontendController extends BaseController
         $this->websiteMode=config('settings.mode');
         $this->websiteLogo=config('settings.image');
         $this->websiteUrl=config('settings.url');
-
+        $this->message=config('settings.message');
+        $this->duration=config('settings.duration');
 
 
         // $this->save_visitor_info();

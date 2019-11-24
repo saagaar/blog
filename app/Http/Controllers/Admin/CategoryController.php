@@ -109,8 +109,7 @@ class CategoryController extends AdminController
         
         $blogcategory = $this->categories->getAll()->where('parent_id',NULL)->get();
         
-        $category =$this->categories->getCatById($id);
-            
+        $category =$this->categories->getCatById($id);           
                 // print_r($category->tags()->pluck('tags_id'));exit;
         if ($request->method()=='POST') 
         {           
