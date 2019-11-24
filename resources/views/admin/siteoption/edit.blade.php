@@ -23,7 +23,7 @@
               <!-- /. tools -->
             </div>
             <!-- /.box-header -->
-            <div class="box-body pad">
+                <div class="box-body pad">
                       <div class="form-group col-md-4">
                         <label for="site_name">Site Name</label>
                         <input type="text" class="form-control" name="site_name" id="site_name" value="{{ $site->site_name}}" placeholder="Site Name">
@@ -39,8 +39,8 @@
                     <div class="alert alert-danger">{{ $errors->first('url') }}</div>
                     @endif
                   </div>
-                   
-              <div class="form-group col-md-4">
+                                  
+               <div class="form-group col-md-4">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
                   <img src='/uploads/sitesettings-images/{{$site->image}}' width="50"/>
@@ -127,17 +127,32 @@
                           <div class="alert alert-danger">{{ $errors->first('mode') }}</div>
                         @endif
                         </div>
-                        <div class="form-group col-md-4">
-                      <label for="maintainence">Maintainence</label>
+                      <div class="form-group col-md-4">
+                      <label for="maintainence">Maintainence Key</label>
                       <input type="text" class="form-control" name="maintainence" id="maintainence" value="{{ $site->maintainence}}" placeholder="Enter Google Analytics">
                       @if ($errors->has('maintainence'))
                     <div class="alert alert-danger">{{ $errors->first('maintainence') }}</div>
                     @endif
-                    </div>   
+                    </div>
 
-            </div>
-
-          </div>
+                   <div class="form-group col-md-4">
+                    <label for="message">Message: </label>
+                    <textarea name="message" class="form-control" rows="5" placeholder="Enter Your Message here..">{{ $site->message}}</textarea>
+                     @if ($errors->has('message'))
+                    <div class="alert alert-danger">{{ $errors->first('message') }}
+                    </div>
+                    @endif
+                    </div>
+                 
+                 <div class="form-group col-md-4">
+                      <label for="duration">Duration</label>
+                      <input type="text" class="form-control" name="duration" id="duration" value="{{ $site->duration}}" placeholder="Enter Duration">
+                      @if ($errors->has('duration'))
+                    <div class="alert alert-danger">{{ $errors->first('duration') }}</div>
+                    @endif
+                    </div>     
+               </div>
+             </div>
           <!-- /.box -->
 
           <div class="box box-info">

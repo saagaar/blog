@@ -23,7 +23,7 @@ class SiteoptionsRequest extends FormRequest
      */
     public function rules()
     {
-       
+     
         return [
             'site_name'                     =>'required|min:6|max:50',
             'log_admin_activity'            =>'required',
@@ -47,9 +47,12 @@ class SiteoptionsRequest extends FormRequest
             'city'                          =>'required|min:6|max:50',
             'state'                         =>'required',
             'country'                       =>'required',
-            'url'                           =>'required'
-
+            'url'                           =>'required',
+            'message'                       =>'required',
+            'duration'                      =>'required|integer|between:1,30' 
             
         ];
     }
+
+
 }

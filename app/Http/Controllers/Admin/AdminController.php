@@ -13,7 +13,6 @@ use App\Repository\AdminPermissionInterface;
 use App\Repository\VisitorLogInterface;
 use App\Repository\AccountInterface;
 use App\Repository\BlogInterface;
-
 use Auth;
 use Session;
 class AdminController extends BaseController
@@ -43,7 +42,6 @@ class AdminController extends BaseController
     {
         $this->middleware('auth:admin');
         $this->middleware('check_user_permission');
-        // $this->user = $User;
     }
 
     
@@ -54,7 +52,7 @@ class AdminController extends BaseController
         $breadcrumb=['breadcrumbs' => [
                     'current_menu' => 'Dashboard',                       
                       ]];
-           
+        $dashboard=array(); 
         $dashboard['allLoggedInVisitors']=$visitor->countTodayLoggedInVisitors();
         $dashboard['allVisitors']=$visitor->countAllVisitors();
         $dashboard['allRegisteredVisitors']=$visitor->countTodaysPageVisitors();             
@@ -69,15 +67,9 @@ class AdminController extends BaseController
         $dashboard['savedBlogs']=$blog->countSavedBlog();
         $dashboard['todayPublishedBlogs']=$blog->countTodaysPublishedBlogs();
         $dashboard['publishedBlogsThisMonth']=$blog->countPublishedBlogsThisMonth();
-          
-                
+                          
         return view('admin.dashboard',compact('breadcrumb','dashboard'))->with(array('primary_menu'=>'dashboard.list'));
-    }
-   
-
-         // return view('admin.dashboard.list')->with(array('banner'=>$banner,'breadcrumb'=>$breadcrumb));
-   
-    
+    } 
    
     public function ImportModules(AdminPermissionInterface $module)
     {

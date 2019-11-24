@@ -91,7 +91,6 @@
                       @else
                         @foreach ($tags as $values)
                          <option value="{{ $values->id }}">{{ $values->name }}</option>
-
                          @endforeach
                       @endif
                       
