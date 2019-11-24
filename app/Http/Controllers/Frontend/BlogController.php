@@ -157,19 +157,21 @@ class BlogController extends FrontendController
                             $dir=public_path().'/uploads/blog/'.$postId.'/';
                              if ($blogData->image != '' && File::exists($dir,$blogData->image))
                             {
-
-                            File::deleteDirectory($dir);
-                             }else{
+                                  echo $dir;exit;
+                                File::deleteDirectory($dir);
+                            }
+                            else
+                            {
+                              
                                 File::makeDirectory($dir, 0777, true, true);
                             }
-                            $tmpImg =request()->image->move($dir,$imageName);
-                            $img = Image::make($tmpImg);         
+                           $tmpImg =request()->image->move($dir,$imageName);
+                           $img = Image::make($tmpImg);         
                            $img->resize(100, null, function ($constraint) 
                            {
                              $constraint->aspectRatio();
                             }
                             )->save($dir.'/'.time().'-thumbnail.'.$extension);
-
                             $form['image'] = $imageName;
                         }
                         $form['short_description']=$request->short_description;

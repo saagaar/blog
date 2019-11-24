@@ -12269,7 +12269,7 @@ a:hover {
   padding: 0 40px;
   border: 0;
   background: #fff;
-  box-shadow: 0px 35px 46px 0px rgba(172, 189, 199, 0.28);
+  box-shadow:0px 14px 14px 14px rgba(172, 189, 199, 0.42);
   border-radius: 5px;
 }
 
@@ -12633,4 +12633,38 @@ font-weight: bold; color: #fff; text-shadow: 1px 1px #333; margin-top: 30px;}
 }
 .coming_soon time li em{font-style: normal; display: block; font-size: 1rem; 
   padding-top: 10px; color: #fff; text-shadow: 0 0px 0px #000; 
+}
+.contact-form-footer{
+  background: #d8e9f3;
+  padding: 50px 15px 15px 25px;
+  border-radius: 50px
+}
+
+.contact-form-footer input{
+height: 34px;
+margin-bottom: 10px;
+box-shadow:0px 2px 2px 2px rgba(172, 189, 199, 0.42);
+}
+.contact-form-footer textarea{
+  height: 66px;
+  margin-bottom: 10px;
+  box-shadow:0px 2px 2px 2px rgba(172, 189, 199, 0.42);
+}
+.contact-form-footer .btn{
+  padding: 5px 50px;
+}
+.pb-0{
+  padding-bottom: 0px !important;
+}
+
+.cat-word-title{
+  text-align: center;
+  width: 100%
+}
+.footer-copyright{
+  border-top: 1px solid rgba(0, 102, 153, 0.28);
+  background-color: rgba(0, 102, 153, 0.41);
+  padding: 10px 0px;
+  color: #fff;
+  font-size: 14px
 }

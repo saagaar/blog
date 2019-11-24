@@ -93,6 +93,7 @@ class UserController extends FrontendController
     {
         if(\Auth::check())
         {
+
             $routeName= ROUTE::currentRouteName();
             $followers = $this->followerList->getAllFollowers($this->authUser);
             $followings = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
@@ -139,7 +140,7 @@ class UserController extends FrontendController
           $offset=$request->get('page')*$limit;
           $allFollowings = $this->followerList->getAllFollowings($this->authUser,$limit,$offset);
           return array('status'=>true,'data'=>$allFollowings,'message'=>'');
-        
+          
       }
       catch(Exception $e)
       {
@@ -207,24 +208,36 @@ class UserController extends FrontendController
       return redirect()->route('home'); 
     }
   }
-  public function changeProfile(Request $request)
+ 
+ public function changeProfile(Request $request)
   {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     if(\Auth::check())
     {
       if(request()->hasFile('image'))
       {
-        $dir = 'uploads/user-images/';
+        $dir = '/uploads/user-images/';
+          if (!File::isDirectory(public_path().$dir)) {
+              File::makeDirectory(public_path().'/'.$dir,0777,true,true);
+          }
           if ($this->authUser->image != '' && File::exists($dir . $this->authUser->image)){
             File::delete($dir . $this->authUser->image);
           }
           $imageName = time().'.'.request()->image->getClientOriginalExtension();
-          request()->image->move(public_path('/uploads/user-images/'), $imageName);
+          request()->image->move('uploads/user-images/', $imageName);
           $form['image']=$imageName;
+           $this->user->update($this->authUser->id,$form);
+          return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
       }
-      $this->user->update($this->authUser->id,$form);
-      return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
-    }else{
-      return redirect()->route('home'); 
+      else
+      {
+          return  array('status'=>false,'message'=>'Profile Image unable to Update','data'=>array());
+      }
+    }
+    else
+    {
+          return redirect()->route('home'); 
     }
   }
   public function changeAddress(Request $request)

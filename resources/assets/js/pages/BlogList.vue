@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
         <div class="col-md-12 col-sm-12">
-          <div id="main" class="">
+          <div  class="">
             <div class="user_blog_list">
     <aside class="lg-side">
       <div class="inbox-head">

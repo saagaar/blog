@@ -26,6 +26,9 @@
                             </a>
                         </div>
                         <div class="short_details">
+                             <div class="meta-top d-flex">
+                                <a href="#">By Bikash Bhandari</a>
+                            </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $featuredBlog['0']->code)}}">
                                 <h4>{{ str_limit($featuredBlog['0']->title, $limit = 150, $end = '...') }}</h4>
                             </a>
@@ -230,7 +233,6 @@
 
                 ?>
                 @if(count($popular)>0)
-                {{count($popular)}}
                 <div class="col-lg-6 col-md-6">
                 	@foreach($popular as $eachPopular)
                     <div class="single-blog video-style small row m_b_30">
@@ -247,6 +249,9 @@
                             </figure>
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
+                            <div class="meta-top d-flex">
+                                <a href="#">By Sagar Chapagain</a>
+                            </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachPopular->code)}}">
                                 <h4>{{ str_limit($eachPopular->title, $limit = 150, $end = '...') }}</h4>
                             </a>
@@ -325,7 +330,9 @@
                 </div>
                 @endforeach
                 @endif
+                <div class="col-md-12">
                 <latest-blog-loading></latest-blog-loading>
+                </div>
             </div>
         </div>
     </div>

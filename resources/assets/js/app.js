@@ -5,11 +5,19 @@
  */
 import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
 fontawesome.config = { autoReplaceSvg: false }
+require('./bootstrap');
 
 window.Vue = require('vue');
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate);
 // Vue.use(window.Vuelidate.default)
+import helpers from './helpers/global';
+Vue.use({
+    install() {
+        Vue.helpers = helpers;
+        Vue.prototype.$helpers = helpers;
+    }
+});
 
 import store from './store/index'
 

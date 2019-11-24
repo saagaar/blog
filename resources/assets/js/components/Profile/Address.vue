@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div>
-    <h4 class="text-left"><i class="fa fa-map-marked">&nbsp;</i> Address</h4><a href='' v-if="!isClicked" class="text-right" v-on:click.prevent="clicked"><i class="fa fa-edit" aria-hidden="true"></i></a>  
+    <h4 class="text-left"><i class="fa fa-map-marked">&nbsp;</i> Address</h4><a href='' v-if="!isClicked" class="text-right" v-on:click.prevent="clicked"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>  
     </div>
 		<div v-if="isClicked">
 			<form method="post">

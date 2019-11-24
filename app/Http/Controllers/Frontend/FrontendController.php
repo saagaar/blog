@@ -40,8 +40,8 @@ class FrontendController extends BaseController
     Protected $permission;
     Protected $contactEmail;
 
-    Protected $perPage=10;
-    Protected $apiPerPage=8;
+    Protected $perPage=2;
+    Protected $apiPerPage=2;
     public function __construct()
     {
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');

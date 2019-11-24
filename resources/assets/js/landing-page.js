@@ -6,6 +6,7 @@
 // import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
 
 window.Vue = require('vue');
+require('./bootstrap');
 import VueWordCloud from 'vuewordcloud';
 Vue.component(VueWordCloud.name, VueWordCloud);
 import VProgressBar from './components/VProgressBar';

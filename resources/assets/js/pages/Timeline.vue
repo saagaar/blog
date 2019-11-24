@@ -1,30 +1,26 @@
 
 <template>
             <div>
-              <div id="main" class="">
+              <div  class="">
                 <div class="white-box create-post">
+                <form>
                   <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                      <form>
-                         <div class="col-md-8 col-sm-8">
-                           <input type="text"  class="form-control" v-model.trim="search" cols="45" placeholder="Search Post"><button class="btn btn-primary pull-right" @click.prevent="searchPost" type="submit">Search</button>
+                         <div class="col-md-11 col-sm-10 blog-src">
+                           <input type="text"  class="form-control" v-model.trim="search" cols="45" placeholder="Search Post">
+                           <button class="btn btn-primary pull-right" @click.prevent="searchPost" type="submit"><i class="fa fa-search"></i></button> 
                          </div>
-                         <div  class="col-md-4 col-sm-4">
+                         <div  class="col-md-1 col-sm-2 pad-left-0">
                            
                          </div>
-                       
-                      </form>
-                    </div>
+                         <div class="clearfix"></div>
                   </div>
-                </div>
-                <div class="row">
-
+                  </form>                
                 </div>
 
                   <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true && initialState.blogList>0">
                     
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList>0">
                     <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5">
                        <img v-if="eachBlog.image" class="img-fluid" :src="'/uploads/blog/'+eachBlog.code+'/'+eachBlog.image" :alt="eachBlog.title">
@@ -50,12 +46,13 @@
                  </pagination>
                     </div>
                   </div>
+                  <div v-else>
+                  </div>
 
               </div>
               <div class="clearfix"></div>
               </div>
-            </div>
-          </div>
+         
             
 </template>
 

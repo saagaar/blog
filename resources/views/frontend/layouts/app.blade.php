@@ -148,6 +148,59 @@
 <script src="{{ asset('frontend/js/app.js') }}"></script>
 <script src="{{ asset('frontend/js/common.js') }}"></script>
 
-    
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=671302589946860';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+function fb_share(dynamic_link,dynamic_title) {
+    var app_id = '671302589946860';
+    var pageURL="https://www.facebook.com/dialog/feed?app_id=" + app_id + "&link=" + dynamic_link;
+    var w = 600;
+    var h = 400;
+    var left = (screen.width / 2) - (w / 2);
+    var top = (screen.height / 2) - (h / 2);
+    window.open(pageURL, dynamic_title, 'toolbar=no, location=no, directories=no, status=no, menubar=yes, scrollbars=no, resizable=no, copyhistory=no, width=' + 800 + ', height=' + 650 + ', top=' + top + ', left=' + left)
+    return false;
+}
+</script>
+
+<script>
+    $(function(){
+  $('.fb-share').click(function(){
+    var url=$(this).data('url');
+      FB.ui({
+      method: 'share',
+      href: url,
+    }, function(response){
+        if(response!==undefined)
+        {
+             jQuery.ajax({
+                        type: "POST",
+                        url: '/blog/detail/share',
+                        data:{url:url,media:'facebook'},
+                        datatype: 'json',
+                        success: function(datajson) 
+                        {
+                            $('.img-loader').addClass('hidden');
+                             // data = jQuery.parseJSON(datajson);
+                            
+                        }
+                    });       
+        }
+    });
+  })
+})
+</script>
+<script type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip()
+    });
+</script>
 </body>
 </html>

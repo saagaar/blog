@@ -18,7 +18,7 @@
                           </div>
                         
 
-                       <div class="form-group">
+                       <div class="form-group pad-box">
                         <h4 class="grey"><i class="fa fa-edit">&nbsp;</i>Short Description </h4>
 
                         <textarea  class="form-control ckeditor" id="editor" rows="10" blur="$v.form.short_description.$touch()"  v-model="form.short_description"></textarea>

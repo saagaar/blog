@@ -170,6 +170,7 @@ class HomeController extends FrontendController
       $data=array();
       $tagsIds = $this->category->getTagsIdByCatSlug($slug);
       $blogByCategory = $this->blog->getBlogByCategory($tagsIds);
+      $websiteUrl=$this->websiteUrl;
       // $blogCount = $this->blog->getBlogCount($slug);
       $category =$this->category->getCatBySlug($slug);
       $navCategory=$this->category->getCategoryByShowInHome();
@@ -189,7 +190,7 @@ class HomeController extends FrontendController
               return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory));
           }
         }
-       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory));
+       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$websiteUrl));
     }
     public function getBlogByCategory($slug=false,Request $request){
       try{
@@ -211,6 +212,7 @@ class HomeController extends FrontendController
       try{
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
+          // sleep(60);
           $latest = $this->blog->getLatestAllBlog($limit,$offset);
           return array('status'=>true,'data'=>$latest,'message'=>'');
         
@@ -252,7 +254,7 @@ class HomeController extends FrontendController
           }
 
         }
-        return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory));
+        return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteUrl));
     }
     public function getBlogListBySlug($slug=false,Request $request){
       try
@@ -297,10 +299,8 @@ class HomeController extends FrontendController
         }
       }catch(Exception $e)
       {
-
           return array('status'=>false,'message'=>$e->getMessage());
       }
-      // print_r($blogCode);exit;
     }
 
     public function dashboard()

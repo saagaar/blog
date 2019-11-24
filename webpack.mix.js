@@ -22,7 +22,7 @@ const mix = require('laravel-mix');
 
     mix.scripts(
     [
-         'resources/assets/maintainence-mode/js/jquery-3.2.1.min.js',
+        'resources/assets/maintainence-mode/js/jquery-3.2.1.min.js',
         'resources/assets/maintainence-mode/js/vendor/countdowntime/moment.min.js',
         'resources/assets/maintainence-mode/js/vendor/countdowntime/moment-timezone.min.js',
         'resources/assets/maintainence-mode/js/vendor/countdowntime/moment-timezone-with-data.min.js',
@@ -56,7 +56,7 @@ const mix = require('laravel-mix');
     mix.styles([
     'resources/assets/landing-page/css/bootstrap.css',
     'resources/assets/vendors/fontawesome/css/all.min.css',
-
+    
     'resources/assets/landing-page/css/themify-icons.css',
     'resources/assets/landing-page/css/slick.css',
     'resources/assets/landing-page/animate.css',
