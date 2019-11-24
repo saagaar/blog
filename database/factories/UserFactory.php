@@ -176,6 +176,15 @@ $factory->define(Categories::class, function (Faker $faker) {
         'display'             =>$faker->randomElement(['Y' ,'N'])
     ];
 });
+
+$factory->define(Role::class, function (Faker $faker) {
+    return [
+        'name' => $faker->unique()->name,
+        'username' => $faker->unique()->username,
+        'created_at'           =>now()
+    ];
+});
+
 $factory->define(Blogs::class, function (Faker $faker) {
     $users = \DB::table('users')->select('id')->get();
     $userid = $faker->randomElement($users)->id;
