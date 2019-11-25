@@ -112,6 +112,7 @@ class BlogController extends AdminController
                 $validatedData = $requestObj->validated();          
              if ($request->hasFile('image')) 
               {     
+
                 $uniqId= uniqid();                        
                 $dir=public_path(). '/uploads/blog/'.$blog->code.'/';
                  if ($blog->image != '' && File::exists($dir,$blog->image))

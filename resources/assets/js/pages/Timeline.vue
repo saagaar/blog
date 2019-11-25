@@ -17,17 +17,16 @@
                   </form>                
                 </div>
 
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true && initialState.blogList>0">
-                    
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true">
+                           <PlaceHolderTimeline></PlaceHolderTimeline>
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList>0">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList.data && initialState.blogList.data.length>0">
                     <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5">
                        <img v-if="eachBlog.image" class="img-fluid" :src="'/uploads/blog/'+eachBlog.code+'/'+eachBlog.image" :alt="eachBlog.title">
                        <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="eachBlog.title">
-
-                        </div>
-                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="single-blog.html">
+                      </div>
+                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="#">
                         <h4>{{eachBlog.title}}</h4>
                         </a>
                         <p v-if="eachBlog.short_description.length<500" v-html="eachBlog.short_description"></p>
@@ -47,6 +46,11 @@
                     </div>
                   </div>
                   <div v-else>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="single-blog video-style small row m_b_30">
+                        <h4 class="text-center d-block">No Published  post !!</h4>
+                      </div>
+                    </div>
                   </div>
 
               </div>
@@ -59,6 +63,7 @@
 <script>
 
   import mixin  from './../mixins/LoadData.mixin.js';
+  import PlaceHolderTimeline  from './../components/ContentPlaceholder/PlaceHolderTimeline';
   import Form  from './../services/Form.js';
     export default {
       mixins: [ mixin ],
@@ -108,7 +113,7 @@
               }).catch(e => 
               {
                  this.$store.commit('TOGGLE_LOADING');
-                  console.log(e);
+                  // console.log(e);
               });
         },
         searchPost(){
@@ -116,7 +121,7 @@
         },
       },
         components:{
-          
+          PlaceHolderTimeline
         },
     }
 </script>

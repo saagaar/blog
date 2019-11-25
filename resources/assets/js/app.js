@@ -57,6 +57,8 @@ Vue.use(require('vue-moment'));
 // Vue.component('TheTopNav', require('./components/TopNav/TheTopNav.vue'));
 // import TheMainNav from './components/MainNav/TheMainNav';
 // Vue.component('TheMainNav', require('./components/MainNav/TheMainNav.vue'));
+import Favorite from './components/Favorites/Favorite';
+
 import TheFooter from './components/Footer/TheFooter';
 import SuccessErrorMessage from './components/SuccessErrorMessage.vue';
 import ListComment from './components/Comment/ListComment';
@@ -96,7 +98,8 @@ const app = new Vue({
             'signup-button':SignUpButton,
             'the-login-signup-modal':TheLoginSignupModal,
             'notification-loading':NotificationsLoading,
-            'success-error-message':SuccessErrorMessage
+            'success-error-message':SuccessErrorMessage,
+            'favorite':Favorite
           
         }
     

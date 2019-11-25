@@ -18,6 +18,8 @@ class CreateSiteOptionsTable extends Migration
             $table->string('site_name', 100);
             $table->string('url');
             $table->string('image');
+            $table->string('message');
+            $table->string('duration');
             $table->enum('log_admin_activity', ['Y', 'N']);
             $table->enum('log_admin_invalid_login', ['Y', 'N']);
             $table->string('contact_email', 100);

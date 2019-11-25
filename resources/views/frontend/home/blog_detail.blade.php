@@ -27,7 +27,7 @@
                         <div class="blog_details">
                             <h2>{{ $blogDetails->title }}</h2>
                             <ul class="blog-info-link mt-3 mb-4">
-                                <li><a href="#"><i class="far fa-user"></i> {{$blogDetails->user->name}}</a></li>
+                                <li><a href="#"><i class="far fa-user"></i> {{ (isset($blogDetails->user)) ? $blogDetails->user->name: 'Admin' }}</a></li>
                                 <li><icon-comments-count></icon-comments-count></li>
                             </ul>
                             <p class="excert">

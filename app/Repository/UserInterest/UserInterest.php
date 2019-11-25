@@ -2,8 +2,8 @@
 
 namespace App\Repository\UserInterest;
 
-use App\Models\Categories;
 use App\Repository\UserInterestInterface;
+use App\Models\Categories;
 
 Class  UserInterest implements UserInterestInterface
 {
@@ -29,7 +29,6 @@ Class  UserInterest implements UserInterestInterface
      * @return boolean
      */
     public function isAddedBySlug($user,$slug){
-
    
         return ($user->userInterests()->where('slug',$slug)->get());
     }

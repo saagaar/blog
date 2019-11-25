@@ -138,33 +138,20 @@ class BlogController extends FrontendController
                 ]);
                 if($this->blogRequiresActivation=='N'){
                     return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
-
                 }else{
                     if ($validator->fails()) {
                         return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
                     }else{
                         if(request()->image)
                         {
-                            // $dir = 'uploads/blog/'.$blogData->code.'/';
-                            // if ($blogData->image != '' && File::exists($dir . $blogData->image)){
-                            //     File::delete($dir . $blogData->image);
-                            // }
-                            // $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                            // request()->image->move(public_path('uploads/blog/'.$blogData->code.'/'), $imageName);
-                            // $form['image']=$imageName;
                             $extension = request()->image->getClientOriginalExtension();
                             $imageName = time().'.'.$extension;              
-                            $dir=public_path().'/uploads/blog/'.$postId.'/';
-                             if ($blogData->image != '' && File::exists($dir,$blogData->image))
+                             $dir=public_path().'/uploads/blog/'.$postId.'/';
+                            if ($blogData->image != '' && File::exists($dir,$blogData->image))
                             {
-                                  echo $dir;exit;
-                                File::deleteDirectory($dir);
+                                 File::deleteDirectory($dir);
                             }
-                            else
-                            {
-                              
-                                File::makeDirectory($dir, 0777, true, true);
-                            }
+                           File::makeDirectory($dir, 0777, true, true);
                            $tmpImg =request()->image->move($dir,$imageName);
                            $img = Image::make($tmpImg);         
                            $img->resize(100, null, function ($constraint) 

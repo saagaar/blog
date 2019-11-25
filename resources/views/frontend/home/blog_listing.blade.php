@@ -8,7 +8,6 @@
                     <div class="single-blog video-style">
                         <div class="thumb">
                             <a href="#">
-
                                 <img class="img-fluid" src="{{ asset('/uploads/categories-images/'.$category->banner_image) }}" alt="">
                             </a>
                         </div>
@@ -17,27 +16,27 @@
                 <div class="col-lg-4 col-md-5">
                     <div class="single-blog video-style small m_b_30 ">
                       <div class="short_details">
-                            <a class="d-block" href="single-blog.html">
+                            <a class="d-block" href="#">
                                 <h4 class="lt_ttl">{{$category->name }}</h4>
                             </a>
                             <p>
-                               The idea that the Big Bang happened everywhere
+                                {{ $category->description}}
                             </p>
                             <div class="meta-bottom d-flex meta-author mt-30">
 
                                 <div class="author">
                                     <div class="meta-author-content">
                                         <h6>
-                                            <a href="#">Admin</a>
+                                            <a href="#">Added By Admin</a>
                                         </h6>
-                                        <a href="#"><i class="ti-time"></i>mar 12</a>
-                                        <a href="#"><i class="ti-eye"></i> 1k view</a>
+                                        <a href="#"><i class="ti-time"></i> {{ $category->created_at }}</a>
+                                        <a href="#"><i class="ti-list"></i> {{ $totalBlogsCount}} blogs</a>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-                                <a href="#" class="btn btn-round btn-light">
+                               <!--  <a href="#" class="btn btn-round btn-light">
                                     <i class="ti-twitter-alt"></i> Follow
-                                </a>
+                                </a> -->
                             </div>
                         </div>
                     </div>

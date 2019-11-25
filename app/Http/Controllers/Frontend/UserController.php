@@ -211,8 +211,7 @@ class UserController extends FrontendController
  
  public function changeProfile(Request $request)
   {
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+   
     if(\Auth::check())
     {
       if(request()->hasFile('image'))

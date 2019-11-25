@@ -27,7 +27,7 @@
                         </div>
                         <div class="short_details">
                              <div class="meta-top d-flex">
-                                <a href="#">By Bikash Bhandari</a>
+                                <a href="#">By {{ ($featuredBlog['0']->anynomous=='2') ? (isset($featuredBlog['0']->user->name)  ? $featuredBlog['0']->user->name : 'Admin'):'Anynomous' }}</a>
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $featuredBlog['0']->code)}}">
                                 <h4>{{ str_limit($featuredBlog['0']->title, $limit = 150, $end = '...') }}</h4>
@@ -67,6 +67,9 @@
                             </figure>
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
+                             <div class="meta-top d-flex">
+                                <a href="#">By {{ ($eachFeaturedBlog->anynomous=='2') ? (isset($eachFeaturedBlog->user->name)  ? $eachFeaturedBlog->user->name : 'Admin'):'Anynomous' }}</a>
+                            </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachFeaturedBlog->code)}}">
                                 <h4>{{ str_limit($eachFeaturedBlog->title, $limit = 150, $end = '...') }}</h4>
                             </a>
@@ -116,12 +119,16 @@
                             <a href="#">
                                 @if($featuredForMember['0']->image)
                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember['0']->image) }}" alt="">
+                                @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
                             @endif
                             </a>
                         </div>
                         <div class="short_details">
+                             <div class="meta-top d-flex">
+                                <a href="#">By {{ ($featuredForMember['0']->anynomous=='2') ? (isset($featuredForMember['0']->user->name)  ? $featuredForMember['0']->user->name : 'Admin'):'Anynomous' }}</a>
+                            </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $featuredForMember['0']->code)}}">
                                 <h4>{{ str_limit($featuredForMember['0']->title, $limit = 150, $end = '...') }}</h4>
                             </a>
@@ -159,6 +166,9 @@
                             </figure>
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
+                            <div class="meta-top d-flex">
+                                <a href="#">By {{ ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? $eachFeaturedForMember->user->name : 'Admin'):'Anynomous' }}</a>
+                            </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachFeaturedForMember->code)}}">
                                 <h4>{{ str_limit($eachFeaturedForMember->title, $limit = 150, $end = '...') }}</h4>
                             </a>
@@ -211,6 +221,9 @@
                             </a>
                         </div>
                         <div class="short_details">
+                          <div class="meta-top d-flex">
+                                <a href="#">By {{ ($popular['0']->anynomous=='2') ? (isset($popular['0']->user->name)  ? $popular['0']->user->name : 'Admin'):'Anynomous' }}</a>
+                            </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $popular['0']->code)}}">
                                 <h4>{{ str_limit($popular['0']->title, $limit = 150, $end = '...') }}</h4>
                             </a>
@@ -249,8 +262,9 @@
                             </figure>
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
-                            <div class="meta-top d-flex">
-                                <a href="#">By Sagar Chapagain</a>
+
+                           <div class="meta-top d-flex">
+                                <a href="#">By {{ ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? $eachFeaturedForMember->user->name : 'Admin'):'Anynomous' }}</a>
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachPopular->code)}}">
                                 <h4>{{ str_limit($eachPopular->title, $limit = 150, $end = '...') }}</h4>
@@ -312,7 +326,10 @@
                             </figure>
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
-                            <a class="d-block"  href="">
+                          <div class="meta-top d-flex">
+                                <a href="#">By {{ ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? $eachFeaturedForMember->user->name : 'Admin'):'Anynomous' }}</a>
+                            </div>
+                            <a class="d-block"  href="{{ route('blog.detail' , $eachFeaturedForMember->code)}}">
                                 <h4>{{ str_limit($eachLatest->title, $limit = 150, $end = '...') }}</h4>
                             </a>
                             <p>{{ str_limit($eachLatest->short_description, $limit = 150, $end = '...') }}</p>

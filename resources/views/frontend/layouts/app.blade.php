@@ -47,19 +47,21 @@
                                <notification-loading :notificationlist="[]" :loadtype="'fullload'" :type="'nav'" ></notification-loading>
                                 
                         </li>
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <small>Welcome !</small>
-                            <figure>
-                              @if(auth()->user()->image)
-                                <img src="'uploads/user-images/'.auth()->user()->image">
-                              @else
-                                <img src="/frontend/images/elements/default-profile.png">
-                              @endif
-                            </figure><?php  
-                            $name=auth()->user()->name;
-                            $allNameArray=explode(' ',$name);
-                            ?> {{ $allNameArray['0'] }}
-                        </a>
+
+                        <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <small>Welcome !</small>
+                                <figure>
+                                  @if(auth()->user()->image)
+                                    <img src="{{ url('/uploads/user-images/'.auth()->user()->image)}}">
+                                  @else
+                                    <img src="{{ url('/frontend/images/elements/default-profile.png') }}">
+                                  @endif
+                                </figure><?php  
+                                $name=auth()->user()->name;
+                                $allNameArray=explode(' ',$name);
+                                ?> {{ $allNameArray['0'] }}
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a href="/dashboard"> My Dashboard</a></li>
                                 <li><a href="/profile"> Profile</a></li>

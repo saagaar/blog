@@ -88,8 +88,11 @@ import Form from './../services/Form.js';
         },
         watch: {
           initialState: function (value) {
+            if(value.blog)
+            {
               this.form.title=value.blog.title;        
               this.form.content=value.blog.content;   
+            }
           },
         },
         computed:{
