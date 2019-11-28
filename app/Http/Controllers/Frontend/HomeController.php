@@ -195,7 +195,7 @@ class HomeController extends FrontendController
               return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'totalBlogsCount'=>$blogCountinCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteLogo,'userCategory'=>$categories));
           }
         }
-       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$websiteUrl));
+       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'totalBlogsCount'=>$blogCountinCategory,'navCategory'=>$navCategory,'websiteLogo'=>$websiteUrl));
     }
     public function getBlogByCategory($slug=false,Request $request){
       try

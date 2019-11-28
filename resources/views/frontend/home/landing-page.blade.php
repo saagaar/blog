@@ -46,7 +46,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
 
-      <a class="navbar-brand" href="index.html"><img src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}" style="height:90px;width:150px;" alt="logo"></a>
+      <a class="navbar-brand" href="index.html"><img src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}"  alt="logo"></a>
       <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -341,7 +341,7 @@
        <div class="col-lg-2 text-center text-lg-left mb-4 mb-lg-0">
 
         <a href="index.html">
-          <img class="img-fluid" src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}" style="height:70px;width:150px;" alt="logo">
+          <img class="img-fluid" src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}"  alt="logo">
           </a>
         </div>
 

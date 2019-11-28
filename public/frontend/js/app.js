@@ -40168,91 +40168,6 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-9 col-md-8" }, [
-              _c("div", { staticClass: "single-footer-widget" }, [
-                _c("ul", [
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-angle-right" }, [
-                        _vm._v(" ")
-                      ]),
-                      _vm._v(" Home")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-angle-right" }, [
-                        _vm._v(" ")
-                      ]),
-                      _vm._v(" About Us")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-angle-right" }, [
-                        _vm._v(" ")
-                      ]),
-                      _vm._v(" Help")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-angle-right" }, [
-                        _vm._v(" ")
-                      ]),
-                      _vm._v(" Status")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-angle-right" }, [
-                        _vm._v(" ")
-                      ]),
-                      _vm._v(" Blog")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-angle-right" }, [
-                        _vm._v(" ")
-                      ]),
-                      _vm._v(" Writers")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-angle-right" }, [
-                        _vm._v(" ")
-                      ]),
-                      _vm._v(" Privacy & Policy")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-angle-right" }, [
-                        _vm._v(" ")
-                      ]),
-                      _vm._v(" Terms & Conditions")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fa fa-angle-right" }, [
-                        _vm._v(" ")
-                      ]),
-                      _vm._v(" Contact Us")
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
               _c(
                 "div",
                 {
@@ -62973,8 +62888,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONFIG = {
-  // ROOT_URL: 'http://localhost:8000/',
-  ROOT_URL: 'https://thebloggersclub.com/'
+  ROOT_URL: 'http://localhost:8000/' // ROOT_URL: 'https://thebloggersclub.com/',
+
 };
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 
