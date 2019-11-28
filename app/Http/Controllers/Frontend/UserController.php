@@ -170,12 +170,25 @@ class UserController extends FrontendController
     {
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
-    public function profile(BlogInterface $blog,Request $request)
+    public function profile(BlogInterface $blog,Request $request,$username=false)
     { 
-      if(\Auth::check())
-        {
+      // if(\Auth::check())
+      //   {
             $routeName= Route::currentRouteName();
-            $myBlogs=$blog->getActiveBlogByUserId($this->authUser->id);
+            
+             if($username)
+             {
+                $user=$this->user->getUserByUsername($username);
+             }
+             else{
+               if(!\Auth::check())
+               {
+                  return redirect()->route('home'); 
+               }
+                $user=$this->authUser;
+
+             }
+            $myBlogs=$blog->getActiveBlogByUserId($user->id);
 
            if($routeName=='api')
            {
@@ -202,11 +215,11 @@ class UserController extends FrontendController
               $user=$this->user_state_info();
               return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
            }
-    }
-    else
-    {
-      return redirect()->route('home'); 
-    }
+    // }
+    // else
+    // {
+    //   return redirect()->route('home'); 
+    // }
   }
  
  public function changeProfile(Request $request)

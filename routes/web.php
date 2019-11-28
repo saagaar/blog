@@ -32,6 +32,7 @@ Route::get('api/dashboard','Frontend\HomeController@dashboard')->name('api');
 
 Route::get('api/profile','Frontend\UserController@profile')->name('api');
 Route::get('/profile','Frontend\UserController@profile')->name('profile');
+Route::get('/profile/{username}','Frontend\UserController@profile')->name('profile');
 Route::post('/user/changeprofile', 'Frontend\UserController@changeProfile');
 Route::get('/settings','Frontend\UserController@settings')->name('settings');
 
