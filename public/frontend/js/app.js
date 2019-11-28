@@ -5524,6 +5524,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5617,75 +5618,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     submitLoginForm: function submitLoginForm() {
-      var curObject = this;
       this.$v.loginForm.$touch();
 
       if (!this.$v.loginForm.$invalid) {
         this.loginForm.post('blog/login').then(function (response) {
           if (response.data.status) {
-            curObject.$store.commit('SETFLASHMESSAGE', {
-              status: true,
-              message: response.data.message
-            });
-            curObject.$store.commit('TOGGLE_LOADING');
             window.location.href = "dashboard";
           } else {
-            curObject.$store.commit('SETFLASHMESSAGE', {
-              status: false,
-              message: response.data.message
-            });
-            curObject.$store.commit('TOGGLE_LOADING');
+            alert(response.data.message);
           }
         })["catch"](function (e) {
-          curObject.$store.commit('TOGGLE_LOADING');
-          if (e.status === false) curObject.$store.commit('SETFLASHMESSAGE', {
-            status: false,
-            message: e.message
-          });else curObject.$store.commit('SETFLASHMESSAGE', {
-            status: false,
-            message: e.message
-          });
+          console.log(e);
         });
       }
     },
     submitSignUpForm: function submitSignUpForm() {
-      var curObject = this;
+      var _this = this;
+
       this.$v.signUpForm.$touch();
 
       if (!this.$v.signUpForm.$invalid) {
         this.signUpForm.post('blog/register').then(function (response) {
           if (response.data.status) {
-            curObject.$store.commit('SETFLASHMESSAGE', {
+            _this.$store.commit('SETFLASHMESSAGE', {
               status: true,
               message: response.data.message
             });
-            curObject.$store.commit('TOGGLE_LOADING');
           } else {
-            curObject.$store.commit('SETFLASHMESSAGE', {
+            _this.$store.commit('SETFLASHMESSAGE', {
               status: false,
               message: response.data.message
             });
-            curObject.$store.commit('TOGGLE_LOADING');
           }
         })["catch"](function (e) {
-          curObject.$store.commit('TOGGLE_LOADING');
-          if (e.status === false) curObject.$store.commit('SETFLASHMESSAGE', {
+          _this.$store.commit('SETFLASHMESSAGE', {
             status: false,
-            message: e.message
-          });else curObject.$store.commit('SETFLASHMESSAGE', {
-            status: false,
-            message: e.message
+            message: response.data.message
           });
         });
       }
-    },
-    openSignUpModal: function openSignUpModal() {
-      $('.modal').modal('hide');
-      $('#SignUpModal').modal('show');
-    },
-    openSignInModal: function openSignInModal() {
-      $('.modal').modal('hide');
-      $('#loginModal').modal('show');
     }
   }
 });
@@ -9203,22 +9174,10 @@ var render = function() {
                     _vm._m(2)
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "signup-section text-center" }, [
-                    _vm._v("Already have an account? "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-info",
-                        attrs: { href: "#a" },
-                        on: { click: _vm.openSignInModal }
-                      },
-                      [_vm._v(" Sign In")]
-                    ),
-                    _vm._v(".")
-                  ])
+                  _vm._m(3)
                 ]),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(4)
               ])
             ])
           ]
@@ -9248,10 +9207,10 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-box" }, [
-                _vm._m(4),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
-                  _vm._m(5),
+                  _vm._m(6),
                   _vm._v(" "),
                   _c("div", { staticClass: "d-flex flex-column text-center" }, [
                     _c(
@@ -9408,28 +9367,16 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "text-center text-muted delimiter" },
-                      [_vm._v("or use a social network instead")]
+                      [_vm._v("or use a social network")]
                     ),
                     _vm._v(" "),
-                    _vm._m(6)
+                    _vm._m(7)
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "signup-section text-center" }, [
-                    _vm._v("Not a member yet? "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: " text-info",
-                        attrs: { href: "#" },
-                        on: { click: _vm.openSignUpModal }
-                      },
-                      [_vm._v(" Sign Up")]
-                    ),
-                    _vm._v(".")
-                  ])
+                  _vm._m(8)
                 ]),
                 _vm._v(" "),
-                _vm._m(7)
+                _vm._m(9)
               ])
             ])
           ]
@@ -9486,13 +9433,26 @@ var staticRenderFns = [
             staticClass: "btn btn-secondary btn-round",
             attrs: {
               type: "button",
-              href: "/social-login/google",
               "data-toggle": "tooltip",
               "data-placement": "top",
               title: "Google"
             }
           },
           [_c("i", { staticClass: "fab fa-google" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary btn-round",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Twitter"
+            }
+          },
+          [_c("i", { staticClass: "fab fa-twitter" })]
         ),
         _vm._v(" "),
         _c(
@@ -9524,6 +9484,18 @@ var staticRenderFns = [
         )
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "signup-section text-center" }, [
+      _vm._v("Already have an account? "),
+      _c("a", { staticClass: "text-info", attrs: { href: "#a" } }, [
+        _vm._v(" Sign Up")
+      ]),
+      _vm._v(".")
+    ])
   },
   function() {
     var _vm = this
@@ -9568,7 +9540,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "Sign in to read ,write and  follow the topics and people you would like to hear about."
+          "Sign in to get personalized view your choices,recommendations, follow the topics you love."
         )
       ])
     ])
@@ -9582,17 +9554,31 @@ var staticRenderFns = [
       { staticClass: "d-flex justify-content-center social-buttons" },
       [
         _c(
-          "a",
+          "button",
           {
             staticClass: "btn btn-secondary btn-round",
             attrs: {
-              href: "/social-login/google",
+              type: "button",
               "data-toggle": "tooltip",
               "data-placement": "top",
               title: "Google"
             }
           },
           [_c("i", { staticClass: "fab fa-google" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary btn-round",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Twitter"
+            }
+          },
+          [_c("i", { staticClass: "fab fa-twitter" })]
         ),
         _vm._v(" "),
         _c(
@@ -9629,10 +9615,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "signup-section text-center" }, [
+      _vm._v("Not a member yet? "),
+      _c("button", { staticClass: "submit text-info" }, [_vm._v(" Sign Up")]),
+      _vm._v(".")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-footer text-center" }, [
       _c("div", { staticClass: "popup_btm" }, [
         _vm._v(
-          "To make TheBloggersClub work  , Click “Sign In” above to accept "
+          "To make BlogSagar work, Click “Sign In” above to accept BlogSagar's "
         ),
         _c("a", { attrs: { href: "#" } }, [_vm._v(" Terms of Service")]),
         _vm._v(" & "),
@@ -29446,8 +29442,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_InfiniteLoading_BlogLoading__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/InfiniteLoading/BlogLoading */ "./resources/assets/js/components/InfiniteLoading/BlogLoading.vue");
 /* harmony import */ var _components_InfiniteLoading_BlogLoadingBySlug__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/InfiniteLoading/BlogLoadingBySlug */ "./resources/assets/js/components/InfiniteLoading/BlogLoadingBySlug.vue");
 /* harmony import */ var _components_InfiniteLoading_LatestBlogLoading__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/InfiniteLoading/LatestBlogLoading */ "./resources/assets/js/components/InfiniteLoading/LatestBlogLoading.vue");
-/* harmony import */ var _components_TopNav_LoginButton_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/TopNav/LoginButton.vue */ "./resources/assets/js/components/TopNav/LoginButton.vue");
-/* harmony import */ var _components_TopNav_SignUpButton_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/TopNav/SignUpButton.vue */ "./resources/assets/js/components/TopNav/SignUpButton.vue");
+/* harmony import */ var _components_TopNav_LoginButton__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/TopNav/LoginButton */ "./resources/assets/js/components/TopNav/LoginButton.vue");
+/* harmony import */ var _components_TopNav_SignUpButton__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/TopNav/SignUpButton */ "./resources/assets/js/components/TopNav/SignUpButton.vue");
 /* harmony import */ var _components_TopNav_TheLoginSignupModal__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/TopNav/TheLoginSignupModal */ "./resources/assets/js/components/TopNav/TheLoginSignupModal.vue");
 /* harmony import */ var _components_InfiniteLoading_NotificationsLoading__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/InfiniteLoading/NotificationsLoading */ "./resources/assets/js/components/InfiniteLoading/NotificationsLoading.vue");
 /**
@@ -29530,8 +29526,8 @@ var app = new Vue({
     'blog-loading': _components_InfiniteLoading_BlogLoading__WEBPACK_IMPORTED_MODULE_10__["default"],
     'blog-slug-loading': _components_InfiniteLoading_BlogLoadingBySlug__WEBPACK_IMPORTED_MODULE_11__["default"],
     'latest-blog-loading': _components_InfiniteLoading_LatestBlogLoading__WEBPACK_IMPORTED_MODULE_12__["default"],
-    'login-button': _components_TopNav_LoginButton_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
-    'signup-button': _components_TopNav_SignUpButton_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
+    'login-button': _components_TopNav_LoginButton__WEBPACK_IMPORTED_MODULE_13__["default"],
+    'signup-button': _components_TopNav_SignUpButton__WEBPACK_IMPORTED_MODULE_14__["default"],
     'the-login-signup-modal': _components_TopNav_TheLoginSignupModal__WEBPACK_IMPORTED_MODULE_15__["default"],
     'notification-loading': _components_InfiniteLoading_NotificationsLoading__WEBPACK_IMPORTED_MODULE_16__["default"],
     'success-error-message': _components_SuccessErrorMessage_vue__WEBPACK_IMPORTED_MODULE_4__["default"]

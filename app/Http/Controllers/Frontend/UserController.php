@@ -73,7 +73,7 @@ class UserController extends FrontendController
             $data['followings'] = $followings;
           if($routeName=='api')
           {
-            return ($data);
+              return ($data);
           }
           else
           {

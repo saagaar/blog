@@ -40,10 +40,10 @@ Class Blog implements BlogInterface
   }
 
   public function getAllFeaturedBlog($limit=10,$offset=0){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->take($limit)->skip($offset)->get();
+    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
   public function getAllFeaturedForMember($limit=10,$offset=0){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes')->take($limit)->skip($offset)->get();
+    return $this->blog->where(['featured'=> 1,'save_method'=>2])->with('tags')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
    /**
    * get blog for most view
@@ -92,7 +92,7 @@ Class Blog implements BlogInterface
    * @param int
    */
   public function getBlogByUserId($userid){
-    return  $this->blog::with('user:id,username')->where('user_id', $userid)->orderByDesc('id');
+    return  $this->blog::with('user:id,username')->withCount('likes','comments')->where('user_id', $userid)->orderByDesc('id');
   }
 
   public function countAllBlogUser(){
@@ -116,7 +116,7 @@ Class Blog implements BlogInterface
   }
   
   public function getActiveBlogByUserId($userid){
-    return  $this->blog::with('user:id,username')->where(['user_id'=>$userid,'save_method'=>'2'])->withCount('likes')->orderByDesc('id');
+    return  $this->blog::with('user:id,username')->where(['user_id'=>$userid,'save_method'=>'2'])->withCount('likes','comments')->orderByDesc('id');
   } 
      
   public function getAssociatedCategoryOfBlog($blogId){
@@ -164,6 +164,10 @@ Class Blog implements BlogInterface
   public function addTag($postId,$tags){
     $blogData = $this->blog->where('code',$postId)->first();
     return $blogData->tags()->sync($tags);
+  }
+
+  public function updateBlogViewCount($blog){
+    $blog->increment('views');
   }
 }
 ?>
