@@ -1,5 +1,5 @@
 <template>
-<div id="main" class="">      
+<div  class="">      
   <div  v-if="this.$store.getters.isLoading===true">
      <PlaceHolderFollowers></PlaceHolderFollowers>
     </div>         
@@ -25,10 +25,12 @@
             </div>
           </div>
       </div>
+      <div class="col-md-12 text-center">
        <InfiniteLoading @infinite="infiniteHandler" spinner="spiral">
           <div slot="no-more"></div>
           <div slot="no-results"><hr></div>
       </InfiniteLoading>
+      </div>
     </div> 
    
     </div>

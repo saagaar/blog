@@ -5,11 +5,19 @@
  */
 import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
 fontawesome.config = { autoReplaceSvg: false }
+require('./bootstrap');
 
 window.Vue = require('vue');
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate);
 // Vue.use(window.Vuelidate.default)
+import helpers from './helpers/global';
+Vue.use({
+    install() {
+        Vue.helpers = helpers;
+        Vue.prototype.$helpers = helpers;
+    }
+});
 
 import store from './store/index'
 
@@ -49,6 +57,8 @@ Vue.use(require('vue-moment'));
 // Vue.component('TheTopNav', require('./components/TopNav/TheTopNav.vue'));
 // import TheMainNav from './components/MainNav/TheMainNav';
 // Vue.component('TheMainNav', require('./components/MainNav/TheMainNav.vue'));
+import Favorite from './components/Favorites/Favorite';
+
 import TheFooter from './components/Footer/TheFooter';
 import SuccessErrorMessage from './components/SuccessErrorMessage.vue';
 import ListComment from './components/Comment/ListComment';
@@ -88,7 +98,8 @@ const app = new Vue({
             'signup-button':SignUpButton,
             'the-login-signup-modal':TheLoginSignupModal,
             'notification-loading':NotificationsLoading,
-            'success-error-message':SuccessErrorMessage
+            'success-error-message':SuccessErrorMessage,
+            'favorite':Favorite
           
         }
     

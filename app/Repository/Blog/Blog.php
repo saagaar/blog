@@ -26,12 +26,18 @@ Class Blog implements BlogInterface
     return $q->whereIn('tags_id', $tagsIds); 
     })
     ->withCount('likes','comments')->take($limit)->skip($offset)->get();
+   
     return $blogByCategoryTags;
   }
-  public function getBlogCount(){
-    $data=$this->category->blogs()->get()->toArray();
-    return $blogByCategoryTags;
+
+
+  public function getBlogCountByCategory($tagsIds,$limit=10,$offset=0){
+    $blogsCount =$this->blog->whereHas('tags', function ($q) use ($tagsIds) {
+    return $q->whereIn('tags_id', $tagsIds); 
+    })->count();
+    return $blogsCount;
   }
+
   /**
    * get blog for featured =1
    */
@@ -167,7 +173,7 @@ Class Blog implements BlogInterface
   }
 
   public function updateBlogViewCount($blog){
-    $blog->increment('views');
+    $blog->increment('views',1);
   }
 }
 ?>

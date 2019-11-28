@@ -94,8 +94,9 @@
                     </select>
                     <p class="help-block"></p>
                     @if($errors->has('tags'))
-                        <p class="help-block">
+                          <div class="alert alert-danger">
                             {{ $errors->first('tags') }}
+                          </div>
                         </p>
                     @endif
                 </div>
@@ -124,8 +125,8 @@
               </div>
                 <div class="custom-control custom-radio">
                  <input type="radio" class="custom-control-input flat-red" name="show_in_home"  value="2" @if($blog->show_in_home =='2') checked @endif>
-                <label class="custom-control-label" for="defaultChecked">Inactive</label>
-              </div>
+                 <label class="custom-control-label" for="defaultChecked">Inactive</label>
+                </div>
                   @if ($errors->has('show_in_home'))
                   <div class="alert alert-danger">{{ $errors->first('show_in_home') }}</div>
                   @endif

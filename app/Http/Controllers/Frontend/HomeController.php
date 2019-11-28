@@ -16,6 +16,7 @@ use App\Repository\BlogInterface;
 use App\Repository\ShareInterface;
 use App\Repository\CategoryInterface;
 use App\Repository\UserInteractionInterface; 
+use App\Repository\UserInterestInterface; 
 use App\Repository\TagInterface;
 use App\Repository\TestimonialInterface;  
 use App\Repository\ServiceInterface;
@@ -81,6 +82,7 @@ class HomeController extends FrontendController
     {
       
          $data=array();
+         $limit=$this->perPage;
         $featuredBlog = $this->blog->getAllFeaturedBlog(4);
         $websiteLogo=$this->websiteLogo;
         // $data['featuredBlog']=$featuredBlog;
@@ -90,7 +92,7 @@ class HomeController extends FrontendController
         // $data['popular'] = $popular;
         $featuredForMember = $this->blog->getAllFeaturedForMember(4);
         // $data['featuredForMember']=$featuredForMember;
-        $latest =$this->blog->getLatestAllBlog();
+        $latest =$this->blog->getLatestAllBlog($limit);
         // $data['latest'] = $latest;
         $navCategory=$this->category->getCategoryByShowInHome();
         $likes='';
@@ -122,21 +124,17 @@ class HomeController extends FrontendController
       $blogDetails = $this->blog->getBlogByCode($code);
       $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->orderBy('id','asc')->first();
       $next = $this->blog->getAll()->where('id', '<', $blogDetails['id'])->orderBy('id','desc')->first();
-      // print_r($next);exit;
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $relatedBlog = $this->blog->relatedBlogBycode($code);
       $navCategory=$this->category->getCategoryByShowInHome();
-      //What is the use of this line
       $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
       $data['blogDetails'] =$blogDetails;
       $data['blogComment']  =$blogComment;
       $user ='';
-      //Why do we need api for frontend route???
-         if(\Auth::check())
+        if(\Auth::check())
         {
           $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
-            $routeName= ROUTE::currentRouteName();
-            
+          $routeName= ROUTE::currentRouteName();
           if($routeName=='api')
           {
             return ($data);
@@ -148,7 +146,6 @@ class HomeController extends FrontendController
               $user=$this->user_state_info();
           }
         }
-
         $this->blog->updateBlogViewCount($blogDetails);
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory));
     }
@@ -167,12 +164,20 @@ class HomeController extends FrontendController
        abort(404);
     }
 
-    public function blogByCategory($slug){
+    public function blogByCategory($slug,UserInterestInterface $userInterest){
       $data=array();
       $tagsIds = $this->category->getTagsIdByCatSlug($slug);
       $blogByCategory = $this->blog->getBlogByCategory($tagsIds);
-      // $blogCount = $this->blog->getBlogCount($slug);
+      $blogCountinCategory = $this->blog->getBlogCountByCategory($tagsIds);
       $category =$this->category->getCatBySlug($slug);
+      $websiteUrl=$this->websiteUrl;
+      $categories=array();
+      if($this->authUser)
+      {
+         $cat= $userInterest->isInterest($this->authUser,$category->id) ;
+         if($cat)
+          $categories[]=$cat->slug;
+      }
       $navCategory=$this->category->getCategoryByShowInHome();
        $user ='';
          if(\Auth::check())
@@ -187,13 +192,14 @@ class HomeController extends FrontendController
               $data['path']='/home';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
-              return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory));
+              return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'totalBlogsCount'=>$blogCountinCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteLogo,'userCategory'=>$categories));
           }
         }
-       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory));
+       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$websiteUrl));
     }
     public function getBlogByCategory($slug=false,Request $request){
-      try{
+      try
+      {
         if(!$slug)
             throw new Exception("No Categories Selected", 1);
           $limit=$this->perPage;
@@ -204,21 +210,19 @@ class HomeController extends FrontendController
       }
       catch(Exception $e)
       {
-
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
     public function getLatestBlog(Request $request){
-      try{
+      try
+      {
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
           $latest = $this->blog->getLatestAllBlog($limit,$offset);
           return array('status'=>true,'data'=>$latest,'message'=>'');
-        
       }
       catch(Exception $e)
       {
-
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
@@ -253,7 +257,7 @@ class HomeController extends FrontendController
           }
 
         }
-        return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory));
+        return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteUrl));
     }
     public function getBlogListBySlug($slug=false,Request $request){
       try
@@ -291,17 +295,20 @@ class HomeController extends FrontendController
     public function share(Request $request,ShareInterface $share){
       try{
         $blogCode = $request->code;
+        print_r($blogCode);exit;
         $media=$request->media;
         if($media=='facebook'){
           $share->incrementFbShare($blogCode);
           return array('status'=>true,'data'=>'','message'=>'Shared successfully');
         }
+        if($media=='twitter'){
+          $share->incrementTwShare($blogCode);
+          return array('status'=>true,'data'=>'','message'=>'Shared successfully');
+        }
       }catch(Exception $e)
       {
-
           return array('status'=>false,'message'=>$e->getMessage());
       }
-      // print_r($blogCode);exit;
     }
 
     public function dashboard()

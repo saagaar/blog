@@ -30,7 +30,7 @@ class NotificationRequest extends FormRequest
             'view'=>'required',
             'email_body'=>'required',
             'database_body'=>'required',
-            'sms_body'=>'required',
+            'sms_body'=>'',
             'notification_type'=>'required',
             'active'=>'required'
         ];

@@ -9,28 +9,25 @@
                               <div class="error" v-if="!$v.form.oldpassword.required">This Field is required</div>
                               <div class="error" v-if="!$v.form.oldpassword.minLength">oldpassword must be at least {{ $v.form.oldpassword.$params.minLength.min }} letters.</div>
                             </div>
-				<br>
 				<label>New Password</label>
 				<input type="password" class="form-control" blur="$v.form.password.$touch()" v-model="form.password"></input>
 				<div v-if="$v.form.password.$anyDirty">
                               <div class="error" v-if="!$v.form.password.required">This Field is required</div>
                               <div class="error" v-if="!$v.form.password.minLength">New Password must be at least {{ $v.form.password.$params.minLength.min }} letters.</div>
                             </div>
-				<br>
 				<label>Confirm Password</label>
 				<input type="password" class="form-control" blur="$v.form.repassword.$touch()" v-model="form.repassword"></input>
 				<div v-if="$v.form.repassword.$anyDirty">
                               <div class="error" v-if="!$v.form.repassword.required">This Field is required</div>
                               <div class="error" v-if="!$v.form.repassword.minLength">Confirm Password must be at least {{ $v.form.repassword.$params.minLength.min }} letters.</div>
                             </div>
-				<br>
 				<button type="button" class="btn btn-primary ml-15" @click.prevent="updateDetails"><Loader></Loader>Update</button>
         <button type="button" class="btn btn-light ml-15" @click.prevent="cancel">Cancel</button>
 			</form>
 		</div>
 		<div v-else>
 			<div>
-		    <strong>Change Password</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='' v-if="!isClicked" v-on:click.prevent="clicked"><i class="fa fa-edit" aria-hidden="true"></i>Change</a>  
+		    <strong>Change Password</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='' v-if="!isClicked" v-on:click.prevent="clicked"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>  
 		    </div>
 		
         

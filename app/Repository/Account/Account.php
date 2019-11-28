@@ -46,7 +46,7 @@ Class Account implements AccountInterface
     }
 
     public function getActiveAccounts(){
-     return $this->account->where('status',1)->get();
+     return $this->account->where('status','1')->get();
     }
       /**
      * Get's all posts.

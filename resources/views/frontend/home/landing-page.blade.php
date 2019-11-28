@@ -140,7 +140,7 @@
 <section class="section-lg seo">
   <div class="container">
     <div class="row"> 
-        <div class="col-md-6 order-2 order-md-1">
+        <div class=" col-md-8 offset-md-2 offset-md-2 order-2 order-md-1">
         <h2 class="section-title">The community of common interests and Platforms for Story Telling   </h2>
         <p class="mb-4">The bloggersclub.com is a channel for your professional blogging. You can publish your blog in <b style="font-weight: 300px">(3f) way</b> .</p>
         <ul class="pl-0 service-list">
@@ -150,15 +150,7 @@
         </ul>
         <p> It is easy to use and manage your blog without any specific technical skills. You can reach an existing online community of people with similar interests and build a fan base.</p>
       </div>
-      <div class="col-md-5">
-        <h2 class="section-title"></h2>
-       <!--  <p>Far far away, behind the word mountains, far
-          from the countries Vokalia and Consonantia.<br>
-          There live the blind texts. Separated they
-          live in Bookmarksgrove right at the coast of
-          the Semantics, a large language ocean.
-        </p> -->
-      </div>
+     
     </div>
   </div>
   <!-- background image -->
@@ -169,11 +161,16 @@
   <img class="seo-bg-shape-3" src="landing-page/assets/images/background-shape/seo-ball-2.png" alt="bg-shape">
 </section>
 <!-- /marketing -->
-
+ <div class="container">
+  <div class="cat-word-title">
+  <h2>Subscribe to our Topics</h2>
+  <p>Receive updates from the topics you like</p>
+  </div>
+  </div>
 <!-- service -->
 <section class="section-lg service">
   <div class="container">
-    <div class="row">
+
 
    <div
               :style="(progressVisible && progress)
@@ -211,7 +208,7 @@
               >
                 
               </vue-word-cloud>
-              </div>
+          </div>
             <!-- <v-scale-transition> -->
               <v-progress-bar
                 v-if="progressVisible && progress "
@@ -247,7 +244,6 @@
       <div class="col-md-6 order-1 order-md-2">
         <img class="img-fluid" src="slanding-page/assets/images/service/service.png" alt="service">
       </div> -->
-    </div>
   </div>
   <!-- background image -->
   <img class="img-fluid service-bg" src="landing-page/assets/images/backgrounds/service-bg.png" alt="service-bg">
@@ -338,10 +334,11 @@
 
 <!-- footer -->
 
-<footer class="section-lg footer pb-100" style="background-image:url(landing-page/assets/images/backgrounds/footer-bg.png);">
+<footer class="section-lg footer pb-0" style="background-image:url(landing-page/assets/images/backgrounds/footer-bg.png);">
+
   <div class="container">
     <div class="row">
-       <div class="col-lg-3 text-center text-lg-left mb-4 mb-lg-0">
+       <div class="col-lg-2 text-center text-lg-left mb-4 mb-lg-0">
 
         <a href="index.html">
           <img class="img-fluid" src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}" style="height:70px;width:150px;" alt="logo">
@@ -349,13 +346,21 @@
         </div>
 
       <!-- footer menu -->
-      <nav class="col-lg-5 align-self-center mb-5">
+      <nav class="col-lg-3 align-self-center mb-2">
         <h4>Get In Touch</h4>
         <a href="{{$websiteUrl}}">{{$siteName}}</a><br>
         <p>{{$address}}<br>{{$contactNumber}}<br><a href="#">hi@blogsagar.com </a></p>
       </nav>  
+      <nav class="col-lg-4 align-self-center mb-2">
+        <form class="contact-form-footer">
+          <input class="form-control" type="" name="" placeholder="Name">
+          <input class="form-control" type="" name="" placeholder="email">
+          <textarea class="form-control" placeholder="message" ></textarea> 
+          <button type="submit" class="btn btn-primary  primary-shadow btn-sm">Send</button>
+        </form>
+      </nav>
       <!-- footer social icon -->
-      <nav class="col-lg-4">
+      <nav class="col-lg-3">
         <ul class="list-inline text-lg-right text-center social-icon">
           <li class="list-inline-item">
             <a class="facebook" href="{{$facebookId}}"><i class="ti-facebook"></i></a>
@@ -369,6 +374,15 @@
         </ul>
       </nav>
     </div>
+  </div>
+  <div class="footer-copyright">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 text-center">Copyright @TheBloggersClub.com</div>
+      <div class="col-md-6 text-right">Powered By: <a href="#">Idata solutions Pvt. Ltd.</a></div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
   </div>
 </footer>
 </div>

@@ -34,7 +34,7 @@ Class  VisitorLog implements VisitorLogInterface
     */
     public function getAll()
     {
-   	 return	$this->log->latest()->toArray();
+   	 return	$this->log->latest();
     }
  
      public function countTodayLoggedInVisitors()
