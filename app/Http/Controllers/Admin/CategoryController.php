@@ -164,7 +164,15 @@ class CategoryController extends AdminController
     {
         $category = $this->categories->getCatById($request->id);
         $status = $request->status;
-        $category->update(array('show_in_home'=>$status,'status'=>$status));  
+        $category->update(array('status'=>$status));  
+       return redirect()->route('adminblogcategory.list')
+                        ->with('success','Status change successfully.');
+    }
+    public function changeVisibility(Request $request)
+    {
+        $category = $this->categories->getCatById($request->id);
+        $showInHome = $request->show_in_home;
+        $category->update(array('show_in_home'=>$showInHome));  
        return redirect()->route('adminblogcategory.list')
                         ->with('success','Status change successfully.');
     }

@@ -145,7 +145,7 @@
 
 <script src="{{ asset('frontend/js/app.js') }}"></script>
 <script src="{{ asset('frontend/js/common.js') }}"></script>
-
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -195,7 +195,7 @@ function fb_share(dynamic_link,dynamic_title) {
 })
 </script>
 <script type="text/javascript"></script>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 <script type="text/javascript">
     $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip()

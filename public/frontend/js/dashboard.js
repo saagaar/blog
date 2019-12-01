@@ -6580,6 +6580,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6673,75 +6674,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     submitLoginForm: function submitLoginForm() {
-      var curObject = this;
       this.$v.loginForm.$touch();
 
       if (!this.$v.loginForm.$invalid) {
         this.loginForm.post('blog/login').then(function (response) {
           if (response.data.status) {
-            curObject.$store.commit('SETFLASHMESSAGE', {
-              status: true,
-              message: response.data.message
-            });
-            curObject.$store.commit('TOGGLE_LOADING');
             window.location.href = "dashboard";
           } else {
-            curObject.$store.commit('SETFLASHMESSAGE', {
-              status: false,
-              message: response.data.message
-            });
-            curObject.$store.commit('TOGGLE_LOADING');
+            alert(response.data.message);
           }
         })["catch"](function (e) {
-          curObject.$store.commit('TOGGLE_LOADING');
-          if (e.status === false) curObject.$store.commit('SETFLASHMESSAGE', {
-            status: false,
-            message: e.message
-          });else curObject.$store.commit('SETFLASHMESSAGE', {
-            status: false,
-            message: e.message
-          });
+          console.log(e);
         });
       }
     },
     submitSignUpForm: function submitSignUpForm() {
-      var curObject = this;
+      var _this = this;
+
       this.$v.signUpForm.$touch();
 
       if (!this.$v.signUpForm.$invalid) {
         this.signUpForm.post('blog/register').then(function (response) {
           if (response.data.status) {
-            curObject.$store.commit('SETFLASHMESSAGE', {
+            _this.$store.commit('SETFLASHMESSAGE', {
               status: true,
               message: response.data.message
             });
-            curObject.$store.commit('TOGGLE_LOADING');
           } else {
-            curObject.$store.commit('SETFLASHMESSAGE', {
+            _this.$store.commit('SETFLASHMESSAGE', {
               status: false,
               message: response.data.message
             });
-            curObject.$store.commit('TOGGLE_LOADING');
           }
         })["catch"](function (e) {
-          curObject.$store.commit('TOGGLE_LOADING');
-          if (e.status === false) curObject.$store.commit('SETFLASHMESSAGE', {
+          _this.$store.commit('SETFLASHMESSAGE', {
             status: false,
-            message: e.message
-          });else curObject.$store.commit('SETFLASHMESSAGE', {
-            status: false,
-            message: e.message
+            message: response.data.message
           });
         });
       }
-    },
-    openSignUpModal: function openSignUpModal() {
-      $('.modal').modal('hide');
-      $('#SignUpModal').modal('show');
-    },
-    openSignInModal: function openSignInModal() {
-      $('.modal').modal('hide');
-      $('#loginModal').modal('show');
     }
   }
 });
@@ -6762,8 +6733,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SignUpButton_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SignUpButton.vue */ "./resources/assets/js/components/TopNav/SignUpButton.vue");
 /* harmony import */ var _TheLoginSignupModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TheLoginSignupModal */ "./resources/assets/js/components/TopNav/TheLoginSignupModal.vue");
 /* harmony import */ var _components_InfiniteLoading_NotificationsLoading_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../components/InfiniteLoading/NotificationsLoading.vue */ "./resources/assets/js/components/InfiniteLoading/NotificationsLoading.vue");
-//
-//
 //
 //
 //
@@ -6890,12 +6859,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     getProfileUrl: function getProfileUrl() {
       var url = this.me.image;
-      return this.$helpers.getProfileUrl(url);
-    },
-    getFirstName: function getFirstName() {
-      var first = this.me.name.split(' ').slice(0, -1).join(' ');
-      ;
-      return first;
+
+      if (url === '') {
+        return 'frontend/images/elements/default-profile.png';
+      } else if (url.indexOf('://') > 0 || url.indexOf('//') === 0) {
+        return url;
+      } else {
+        return '/uploads/user-images/' + url;
+      }
     }
   },
   components: {
@@ -7659,6 +7630,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
 /* harmony import */ var _components_ContentPlaceholder_PlaceHolderBlogList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/ContentPlaceholder/PlaceHolderBlogList */ "./resources/assets/js/components/ContentPlaceholder/PlaceHolderBlogList.vue");
+//
+//
 //
 //
 //
@@ -9381,6 +9354,14 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_LoadData_mixin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../mixins/LoadData.mixin.js */ "./resources/assets/js/mixins/LoadData.mixin.js");
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../services/Form.js */ "./resources/assets/js/services/Form.js");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -34899,22 +34880,10 @@ var render = function() {
                     _vm._m(2)
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "signup-section text-center" }, [
-                    _vm._v("Already have an account? "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-info",
-                        attrs: { href: "#a" },
-                        on: { click: _vm.openSignInModal }
-                      },
-                      [_vm._v(" Sign In")]
-                    ),
-                    _vm._v(".")
-                  ])
+                  _vm._m(3)
                 ]),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(4)
               ])
             ])
           ]
@@ -34944,10 +34913,10 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-box" }, [
-                _vm._m(4),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
-                  _vm._m(5),
+                  _vm._m(6),
                   _vm._v(" "),
                   _c("div", { staticClass: "d-flex flex-column text-center" }, [
                     _c(
@@ -35104,28 +35073,16 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "text-center text-muted delimiter" },
-                      [_vm._v("or use a social network instead")]
+                      [_vm._v("or use a social network")]
                     ),
                     _vm._v(" "),
-                    _vm._m(6)
+                    _vm._m(7)
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "signup-section text-center" }, [
-                    _vm._v("Not a member yet? "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: " text-info",
-                        attrs: { href: "#" },
-                        on: { click: _vm.openSignUpModal }
-                      },
-                      [_vm._v(" Sign Up")]
-                    ),
-                    _vm._v(".")
-                  ])
+                  _vm._m(8)
                 ]),
                 _vm._v(" "),
-                _vm._m(7)
+                _vm._m(9)
               ])
             ])
           ]
@@ -35182,13 +35139,26 @@ var staticRenderFns = [
             staticClass: "btn btn-secondary btn-round",
             attrs: {
               type: "button",
-              href: "/social-login/google",
               "data-toggle": "tooltip",
               "data-placement": "top",
               title: "Google"
             }
           },
           [_c("i", { staticClass: "fab fa-google" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary btn-round",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Twitter"
+            }
+          },
+          [_c("i", { staticClass: "fab fa-twitter" })]
         ),
         _vm._v(" "),
         _c(
@@ -35220,6 +35190,18 @@ var staticRenderFns = [
         )
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "signup-section text-center" }, [
+      _vm._v("Already have an account? "),
+      _c("a", { staticClass: "text-info", attrs: { href: "#a" } }, [
+        _vm._v(" Sign Up")
+      ]),
+      _vm._v(".")
+    ])
   },
   function() {
     var _vm = this
@@ -35264,7 +35246,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "Sign in to read ,write and  follow the topics and people you would like to hear about."
+          "Sign in to get personalized view your choices,recommendations, follow the topics you love."
         )
       ])
     ])
@@ -35278,17 +35260,31 @@ var staticRenderFns = [
       { staticClass: "d-flex justify-content-center social-buttons" },
       [
         _c(
-          "a",
+          "button",
           {
             staticClass: "btn btn-secondary btn-round",
             attrs: {
-              href: "/social-login/google",
+              type: "button",
               "data-toggle": "tooltip",
               "data-placement": "top",
               title: "Google"
             }
           },
           [_c("i", { staticClass: "fab fa-google" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary btn-round",
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: "Twitter"
+            }
+          },
+          [_c("i", { staticClass: "fab fa-twitter" })]
         ),
         _vm._v(" "),
         _c(
@@ -35325,10 +35321,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "signup-section text-center" }, [
+      _vm._v("Not a member yet? "),
+      _c("button", { staticClass: "submit text-info" }, [_vm._v(" Sign Up")]),
+      _vm._v(".")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-footer text-center" }, [
       _c("div", { staticClass: "popup_btm" }, [
         _vm._v(
-          "To make TheBloggersClub work  , Click “Sign In” above to accept "
+          "To make BlogSagar work, Click “Sign In” above to accept BlogSagar's "
         ),
         _c("a", { attrs: { href: "#" } }, [_vm._v(" Terms of Service")]),
         _vm._v(" & "),
@@ -35383,22 +35389,19 @@ var render = function() {
                           _c("li", [_c("SignUpButton")], 1)
                         ])
                       : _c("ul", [
-                          _c(
-                            "li",
-                            [
-                              _c(
-                                "router-link",
-                                {
-                                  attrs: {
-                                    to: "/blog/add",
-                                    title: "Create Article"
-                                  }
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  id: "search",
+                                  href: "javascript:void(0)"
                                 },
-                                [_c("i", { staticClass: "fa fa-plus-square" })]
-                              )
-                            ],
-                            1
-                          ),
+                                on: { click: _vm.OpenSearchBox }
+                              },
+                              [_c("i", { staticClass: "fas fa-search" })]
+                            )
+                          ]),
                           _vm._v(" "),
                           _c(
                             "li",
@@ -35423,22 +35426,19 @@ var render = function() {
                                 [
                                   _c("i", { staticClass: "fas fa-bell" }),
                                   _vm._v(" "),
-                                  _vm.me.unReadNotificationsCount > 0
-                                    ? _c("em", [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.me.unReadNotificationsCount
-                                          )
-                                        )
-                                      ])
-                                    : _vm._e()
+                                  _c("span", [_vm._v("Notifications")]),
+                                  _vm._v(" "),
+                                  _c("em", [
+                                    _vm._v(
+                                      _vm._s(_vm.me.unReadNotificationsCount)
+                                    )
+                                  ])
                                 ]
                               ),
                               _vm._v(" "),
                               _c("NotificationsLoading", {
                                 attrs: {
-                                  notificationlist: _vm.topnotifications,
-                                  loadtype: "noload",
+                                  notificationList: _vm.topnotifications,
                                   type: "nav"
                                 }
                               })
@@ -35467,22 +35467,12 @@ var render = function() {
                                     attrs: { src: _vm.getProfileUrl() }
                                   })
                                 ]),
-                                _vm._v(" " + _vm._s(_vm.getFirstName()))
+                                _vm._v(" " + _vm._s(_vm.me.name))
                               ]
                             ),
                             _vm._v(" "),
                             _c("ul", { staticClass: "dropdown-menu" }, [
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    { attrs: { to: "/dashboard" } },
-                                    [_vm._v("My Dashboard")]
-                                  )
-                                ],
-                                1
-                              ),
+                              _vm._m(2),
                               _vm._v(" "),
                               _c(
                                 "li",
@@ -35501,26 +35491,14 @@ var render = function() {
                                 [
                                   _c(
                                     "router-link",
-                                    { attrs: { to: "/categories" } },
-                                    [_vm._v("Choose your interest")]
+                                    { attrs: { to: "/followers" } },
+                                    [_vm._v("Followers")]
                                   )
                                 ],
                                 1
                               ),
                               _vm._v(" "),
                               _c("hr"),
-                              _vm._v(" "),
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    { attrs: { to: "/blog/add" } },
-                                    [_vm._v("New Article")]
-                                  )
-                                ],
-                                1
-                              ),
                               _vm._v(" "),
                               _c(
                                 "li",
@@ -35528,7 +35506,23 @@ var render = function() {
                                   _c(
                                     "router-link",
                                     { attrs: { to: "/blog/list" } },
-                                    [_vm._v("My Articles")]
+                                    [_vm._v("My Blog")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _vm._m(3),
+                              _vm._v(" "),
+                              _vm._m(4),
+                              _vm._v(" "),
+                              _c(
+                                "li",
+                                [
+                                  _c(
+                                    "router-link",
+                                    { attrs: { to: "/categories" } },
+                                    [_vm._v("Customize your interest")]
                                   )
                                 ],
                                 1
@@ -35536,19 +35530,23 @@ var render = function() {
                               _vm._v(" "),
                               _c("hr"),
                               _vm._v(" "),
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    { attrs: { to: "/settings" } },
-                                    [_vm._v("Settings")]
-                                  )
-                                ],
-                                1
-                              ),
+                              _vm._m(5),
                               _vm._v(" "),
-                              _vm._m(2)
+                              _vm._m(6),
+                              _vm._v(" "),
+                              _vm._m(7),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href: _vm.config.ROOT_URL + "logout/user"
+                                    }
+                                  },
+                                  [_vm._v("Log Out")]
+                                )
+                              ])
                             ])
                           ])
                         ])
@@ -35566,7 +35564,7 @@ var render = function() {
             staticClass: "search_input",
             attrs: { id: "search_input_box" }
           },
-          [_vm._m(3)]
+          [_vm._m(8)]
         )
       ]),
       _vm._v(" "),
@@ -35586,7 +35584,7 @@ var staticRenderFns = [
       [
         _c("a", { staticClass: "logo", attrs: { href: "/blog" } }, [
           _c("img", {
-            attrs: { src: "/frontend/images/elements/logo-6.png", alt: "" }
+            attrs: { src: "images/system-images/logo.png", alt: "" }
           })
         ])
       ]
@@ -35607,7 +35605,41 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "/logout/user" } }, [_vm._v("Log Out")])
+      _c("a", { attrs: { href: "/dashboard" } }, [_vm._v("My Dashboard")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Bookmarks")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Publications")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Settings")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Help")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Change Password")])
     ])
   },
   function() {
@@ -37111,9 +37143,46 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _vm._m(3, true),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "inbox-small-cells",
+                                      attrs: { width: "62px" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        " " + _vm._s(eachblog.views) + " "
+                                      ),
+                                      _c("i", { staticClass: "fa fa-eye" })
+                                    ]
+                                  ),
                                   _vm._v(" "),
-                                  _vm._m(4, true),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "inbox-small-cells",
+                                      attrs: { width: "62px" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        " " + _vm._s(eachblog.likes_count) + " "
+                                      ),
+                                      _c("i", {
+                                        staticClass: "fa fa-thumbs-up"
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { staticClass: " inbox-small-cells" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(eachblog.comments_count) + " "
+                                      ),
+                                      _c("i", { staticClass: "fa fa-comments" })
+                                    ]
+                                  ),
                                   _vm._v(" "),
                                   _c(
                                     "td",
@@ -37135,7 +37204,7 @@ var render = function() {
                               0
                             )
                           : this.$store.getters.isLoading === false
-                          ? _c("tbody", [_vm._m(5)])
+                          ? _c("tbody", [_vm._m(3)])
                           : _vm._e()
                       ]
                     )
@@ -37210,25 +37279,6 @@ var staticRenderFns = [
         ),
         _c("i", { staticClass: "fa fa-angle-down " })
       ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "view-message inbox-small-cells" }, [
-      _vm._v("5 "),
-      _c("i", { staticClass: "fa fa-comments" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "td",
-      { staticClass: "inbox-small-cells", attrs: { width: "62px" } },
-      [_vm._v(" 14 "), _c("i", { staticClass: "fa fa-eye" })]
     )
   },
   function() {
@@ -39326,29 +39376,43 @@ var render = function() {
                               }
                             }),
                         _vm._v(" "),
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "ti-time" }),
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(
+                                _vm._f("moment")(eachBlog.created_at, "MMM DD")
+                              ) +
+                              "   "
+                          )
+                        ]),
+                        _vm._v(" "),
                         _c("div", { staticClass: "meta-bottom d-flex" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("i", { staticClass: "ti-time" }),
-                            _vm._v(
-                              " " +
-                                _vm._s(
-                                  _vm._f("moment")(
-                                    eachBlog.created_at,
-                                    "MMM DD"
-                                  )
-                                ) +
-                                " "
-                            )
-                          ]),
+                          _c(
+                            "a",
+                            { attrs: { href: "#", title: "Total Views" } },
+                            [
+                              _c("i", { staticClass: "fa fa-eye" }),
+                              _vm._v(" " + _vm._s(eachBlog.views) + " Views ")
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("i", { staticClass: "ti-heart" }),
-                            _vm._v(" " + _vm._s(eachBlog.likes_count) + " like")
-                          ]),
+                          _c(
+                            "a",
+                            { attrs: { href: "#", title: "Appreciates" } },
+                            [
+                              _c("i", { staticClass: "ti-heart" }),
+                              _vm._v(
+                                " " +
+                                  _vm._s(eachBlog.likes_count) +
+                                  " Appreciates "
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("i", { staticClass: "ti-eye" }),
-                            _vm._v(" " + _vm._s(eachBlog.views) + " view")
+                          _c("a", { attrs: { href: "#", title: "Comments" } }, [
+                            _c("i", { staticClass: "fa fa-comments" }),
+                            _vm._v(" " + _vm._s(eachBlog.views) + " comments")
                           ])
                         ])
                       ]

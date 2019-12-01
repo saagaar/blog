@@ -141,17 +141,14 @@
   <div class="container">
     <div class="row"> 
         <div class="col-md-6 order-2 order-md-1">
-        <h2 class="section-title">Powerful & Elegant Layout From Top To Bottom Of The Design</h2>
-        <p class="mb-4">Far far away, behind the word mountains,
-          far from the countries Vokalia and Consonantia,
-          there live the blind texts. Separated they
-          live in Bookmarksgrove right at the coast of the
-          Semantics, a large language ocean.</p>
+        <h2 class="section-title">The community of common interests and Platforms for Story Telling   </h2>
+        <p class="mb-4">The bloggersclub.com is a channel for your professional blogging. You can publish your blog in <b style="font-weight: 300px">(3f) way</b> .</p>
         <ul class="pl-0 service-list">
-          <li><i class="ti-layout-tab-window"></i>Responsive on any device</li>
-          <li><i class="ti-layout-placeholder"></i>Very easy to customize</li>
-          <li><i class="ti-support"></i>Effective support</li>
+          <li><i class="ti-layout-tab-window"></i>free</li>
+          <li><i class="ti-layout-placeholder"></i>fast</li>
+          <li><i class="ti-support"></i>flexible</li>
         </ul>
+        <p> It is easy to use and manage your blog without any specific technical skills. You can reach an existing online community of people with similar interests and build a fan base.</p>
       </div>
       <div class="col-md-5">
         <h2 class="section-title"></h2>

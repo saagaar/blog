@@ -37,7 +37,8 @@
                                     <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{ $featuredBlog['0']->comments_count }}</a>
                             </div>
                         </div>
                     </div> 
@@ -73,7 +74,8 @@
                                     <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{$eachFeaturedBlog->comments_count }}</a>
                             </div>
                         </div>
                     </div> 
@@ -132,7 +134,8 @@
 
                                 </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{$featuredForMember['0']->comments_count }}</a>
                             </div>
                         </div>
                     </div> 
@@ -167,7 +170,8 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachFeaturedForMember->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{$eachFeaturedForMember->comments_count }}</a>
                             </div>
                         </div>
                     </div> 
@@ -221,7 +225,8 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$popular['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{$popular['0']->comments_count }}</a>
                             </div>
                         </div>
                     </div> 
@@ -258,7 +263,8 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachPopular->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                  <a href="#" class="book_mark"><i class="fa fa-comments"></i> {{$eachPopular->comments_count }}</a>
                             </div>
                         </div>
                     </div> 
@@ -318,7 +324,7 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachLatest->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                                <a href="#"><i class="fa fa-comments"></i> {{$eachLatest->comments_count }}</a>
                             </div>
                         </div>
                     </div>

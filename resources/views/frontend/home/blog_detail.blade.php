@@ -1,12 +1,26 @@
 @extends('frontend.layouts.app')
 @section('content')
 	<div class="mid_part">
-    <meta property="og:url"           content="/share/{{ $blogDetails->code }}" />
+        @section('meta_url','https://thebloggersclub.com/blog/detail/{{ $blogDetails->code }}')
+        @section('meta_title',$blogDetails->title)
+        @section('meta_title',$blogDetails->title)
+        @section('meta_description',$blogDetails->short_description)
+        @section('meta_image',asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image))
+
+    <!-- <meta property="og:url"           content="https://thebloggersclub.com/blog/detail/{{ $blogDetails->code }}" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ $blogDetails->title }}" />
     <meta property="og:description"   content="{{ $blogDetails->short_description }}" />
-    <meta property="og:image"         content="{{ asset('images/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}" />
+    <meta property="og:image"         content="{{ asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}" />
 
+    <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@thebloggersclub" />
+        <meta name="twitter:creator" content="@thebloggersclub" />
+
+        <meta name="twitter:title" content="{{ $blogDetails->title }}" />
+        <meta name="twitter:description" content="{{ $blogDetails->short_description }}" />
+        <meta name="twitter:image:src" content="{{ asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}" />
+         -->
         <!--================Blog Area =================-->
     <section class="blog_area single-post-area">
         <div class="container">
@@ -49,9 +63,13 @@
                                 @php($url=url('https://thebloggersclub.com/blog/detail/'.$blogDetails->code))
                  
                                 <a class="fb-share" href="javascript:void(0);" data-code="{{$blogDetails->code}}" data-url="{{$url}}" onclick="fb_share('{{ $url }}', '{{ $blogDetails->title }}')"><i class="fab fa-facebook-f"></i></a>
-
+                                    
                                 <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a class="twitter-share-button"
+                                      href="https://twitter.com/intent/tweet"
+                                      data-text="{{$blogDetails->title}}"
+                                      data-url="{{$url}}"
+                                      data-hashtags="the_bloggers_club"><i class="fab fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
                                 <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                             </ul>
@@ -205,45 +223,6 @@
                                 @endforeach
                             </ul>
                         </aside>
-
-
-                        <aside class="single_sidebar_widget instagram_feeds">
-                            <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Instagram Feeds</h4>
-                            <ul class="instagram_row flex-wrap">
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i1.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i2.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i3.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i4.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i5.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="img/instagram/widget-i6.png" alt="">
-                                    </a>
-                                </li>
-                            </ul>
-                        </aside>
-
-
                         <aside class="single_sidebar_widget newsletter_widget">
                             <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Newsletter</h4>
 

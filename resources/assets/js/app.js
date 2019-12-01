@@ -60,8 +60,8 @@ import BlogLoading from './components/InfiniteLoading/BlogLoading';
 import BlogLoadingBySlug from './components/InfiniteLoading/BlogLoadingBySlug';
 import LatestBlogLoading from './components/InfiniteLoading/LatestBlogLoading';
 
-import LoginButton from './components/TopNav/LoginButton.vue';
-import SignUpButton from './components/TopNav/SignUpButton.vue';
+import LoginButton from './components/TopNav/LoginButton';
+import SignUpButton from './components/TopNav/SignUpButton';
 import TheLoginSignupModal from './components/TopNav/TheLoginSignupModal';
 import NotificationsLoading  from './components/InfiniteLoading/NotificationsLoading';
 // import UserDashboard from './pages/UserDashboard';

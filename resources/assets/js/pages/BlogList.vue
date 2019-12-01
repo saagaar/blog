@@ -111,8 +111,10 @@
                 </div>
               </td>
               <td class="view-message inbox-small-cells"><a href="#" class="draft_link">{{(eachblog.save_method==1) ?'Draft' : 'Published'}}</a> </td>
-              <td class="view-message inbox-small-cells">5 <i class="fa fa-comments"></i></td>
-              <td class="inbox-small-cells" width="62px"> 14 <i class="fa fa-eye"></i></td>
+               <td class="inbox-small-cells" width="62px"> {{eachblog.views}} <i class="fa fa-eye"></i></td>
+              <td class="inbox-small-cells" width="62px"> {{eachblog.likes_count}} <i class="fa fa-thumbs-up"></i></td>
+              <td class=" inbox-small-cells">{{eachblog.comments_count}} <i class="fa fa-comments"></i></td>
+
               <td class="view-message text-right">{{ eachblog.created_at | moment("from", "now")}}</td>
             </tr>
            
@@ -240,11 +242,11 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             this.allSelected=selected;
             this.postIds=postids;
         },
-        deleteBlog:function(code){
+           deleteBlog:function(code){
               var reconfirm = confirm("Are you sure you want to Delete this ");
               if (reconfirm) {
                   let curObject=this;
-          this.form.get('api/blog/deleteBlog/'+code).then(response => {
+                this.form.get('api/blog/deleteBlog/'+code).then(response => {
                this.$store.commit('TOGGLE_LOADING');
                if(response.data)
                {
@@ -267,7 +269,6 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
               } else {
                   return false;
               }
-          
         },
         select: function() {
             // this.allSelected = false;
