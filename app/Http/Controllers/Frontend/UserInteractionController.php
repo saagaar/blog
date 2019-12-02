@@ -69,7 +69,7 @@ class UserInteractionController extends FrontendController
             $date =date_create();
             $input['created_at'] = $date->format('Y-m-d H:i:s');
             $contact->create($input);
-             return array('status'=>true,'message'=>'success','data'=>'');
+             return array('status'=>true,'message'=>'Form submitted successfully','data'=>'');
     }
     public function testinglike(){
     	// $lik = $this->likeCount('5da9637080085a4c');

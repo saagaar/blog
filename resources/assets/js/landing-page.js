@@ -4,7 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 // import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
-
+import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
+fontawesome.config = { autoReplaceSvg: false }
 window.Vue = require('vue');
 require('./bootstrap');
 import VueWordCloud from 'vuewordcloud';
@@ -346,6 +347,7 @@ const app = new Vue({
         },
         components:{
             'contact':Contact,
+            
         },
         methods: {
             generateWordsText: function() {
