@@ -59,6 +59,10 @@ let routes=[
 						path:'/users/notifications',
 						components:require('./pages/AllNotifications')
 				},
+				{
+						path:'/blog/preview/:blogId/',
+						components:require('./pages/BlogPreview')
+				},
 
 		   ];
 

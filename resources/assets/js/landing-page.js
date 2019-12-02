@@ -6,6 +6,7 @@
 // import fontawesome from '@fortawesome/fontawesome-free/js/all.js';
 
 window.Vue = require('vue');
+require('./bootstrap');
 import VueWordCloud from 'vuewordcloud';
 Vue.component(VueWordCloud.name, VueWordCloud);
 import VProgressBar from './components/VProgressBar';
@@ -13,7 +14,8 @@ Vue.component('v-progress-bar', VProgressBar);
 // import Vuelidate from 'vuelidate'
 // Vue.use(Vuelidate);
 // Vue.use(window.Vuelidate.default)
-
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate);
 /**
 Custom Imports goes here
 */
@@ -39,6 +41,7 @@ Custom Imports goes here
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+ import Contact from './components/LandingPage/Contact';
 var svgNS = 'http://www.w3.org/2000/svg';
 
 
@@ -341,7 +344,9 @@ const app = new Vue({
             this.fontFamily = chance.pickone(this.fontFamilyValues);
             this.rotationItemIndex = chance.integer({min: 0, max: this.rotationItemsprogressVisible.length - 1});
         },
-
+        components:{
+            'contact':Contact,
+        },
         methods: {
             generateWordsText: function() {
                 this.wordsText = [

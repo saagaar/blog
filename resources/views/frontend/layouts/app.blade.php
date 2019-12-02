@@ -20,7 +20,8 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}" alt='logo' style="height:55px;width:150px;">
+
+                        <img src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}"alt='logo' >
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
@@ -30,6 +31,7 @@
                             <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
                             <li><login-button></login-button></li>
                             <li><signup-button></signup-button></li>
+                            
                         </ul>
                         @else
                          <ul>
@@ -45,19 +47,21 @@
                                <notification-loading :notificationlist="[]" :loadtype="'fullload'" :type="'nav'" ></notification-loading>
                                 
                         </li>
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <small>Welcome !</small>
-                            <figure>
-                              @if(auth()->user()->image)
-                                <img src="'uploads/user-images/'.auth()->user()->image">
-                              @else
-                                <img src="/frontend/images/elements/default-profile.png">
-                              @endif
-                            </figure><?php  
-                            $name=auth()->user()->name;
-                            $allNameArray=explode(' ',$name);
-                            ?> {{ $allNameArray['0'] }}
-                        </a>
+
+                        <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <small>Welcome !</small>
+                                <figure>
+                                  @if(auth()->user()->image)
+                                    <img src="{{ url('/uploads/user-images/'.auth()->user()->image)}}">
+                                  @else
+                                    <img src="{{ url('/frontend/images/elements/default-profile.png') }}">
+                                  @endif
+                                </figure><?php  
+                                $name=auth()->user()->name;
+                                $allNameArray=explode(' ',$name);
+                                ?> {{ $allNameArray['0'] }}
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a href="/dashboard"> My Dashboard</a></li>
                                 <li><a href="/profile"> Profile</a></li>
@@ -154,22 +158,11 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function fb_share(dynamic_link,dynamic_title) {
-    var app_id = '671302589946860';
-    var pageURL="https://www.facebook.com/dialog/feed?app_id=" + app_id + "&link=" + dynamic_link;
-    var w = 600;
-    var h = 400;
-    var left = (screen.width / 2) - (w / 2);
-    var top = (screen.height / 2) - (h / 2);
-    window.open(pageURL, dynamic_title, 'toolbar=no, location=no, directories=no, status=no, menubar=yes, scrollbars=no, resizable=no, copyhistory=no, width=' + 800 + ', height=' + 650 + ', top=' + top + ', left=' + left)
-    return false;
-}
 </script>
 
 <script>
     $(function(){
   $('.fb-share').click(function(){
-    var code=$(this).data('code');
     var url=$(this).data('url');
       FB.ui({
       method: 'share',
@@ -179,10 +172,11 @@ function fb_share(dynamic_link,dynamic_title) {
         {
              jQuery.ajax({
                         type: "POST",
-                        url: '/blog/detail/share',
-                        data:{code:code,media:'facebook'},
+                        url: sharecount,
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        data:{url:url,media:'facebook'},
                         datatype: 'json',
-                        success: function(datajson) 
+                        success: function(data) 
                         {
                             $('.img-loader').addClass('hidden');
                              // data = jQuery.parseJSON(datajson);
@@ -194,12 +188,53 @@ function fb_share(dynamic_link,dynamic_title) {
   })
 })
 </script>
-<script type="text/javascript"></script>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!-- <script type="text/javascript">
+    function loguser( event ) {
+    if ( event ) {
+        jQuery.ajax({
+                    type: "POST",
+                    url: sharecount,
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data:{url:event.target.baseURI,media:'twitter'},
+                    datatype: 'json',
+                    success: function(data) 
+                    {
+                        // $('.img-loader').addClass('hidden');
+                        //  data = jQuery.parseJSON(datajson);
+                        // console.log(data);
+                        // if(data.status=='success')
+                        // {
+                        //     preloadedimage--;
+                        // }
+                        // else{
+                        //     tempimage--;
+                        // }
+                    }
+                });  
+        // alert( 'Tweeted' );
+        console.log( event );
+    }
+}
+
+window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+    }(document, "script", "twitter-wjs"));
+ 
+twttr.ready(function (twttr) {
+    twttr.events.bind('tweet', loguser);
+});
+</script> -->
+<script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip()
     });
+</script>
+<script type="text/javascript">
+    var sharecount = "{{route('share')}}";
 </script>
 </body>
 </html>

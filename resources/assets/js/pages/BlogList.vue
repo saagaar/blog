@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
         <div class="col-md-12 col-sm-12">
-          <div id="main" class="">
+          <div  class="">
             <div class="user_blog_list">
     <aside class="lg-side">
       <div class="inbox-head">
@@ -104,7 +104,7 @@
                   <div class="hidden_td_link">
                     <router-link :to="'/blog/edit/'+eachblog.code" v-if="$gate.allow('update', 'blog', eachblog)">Edit</router-link>
                   &nbsp;|&nbsp;
-                  <a href="#">Preview</a>
+                  <router-link :to="'/blog/preview/'+eachblog.code">Preview</router-link>
                   &nbsp;|&nbsp;
                   <a href="" v-if="$gate.allow('delete', 'blog', eachblog)" @click.prevent="deleteBlog(eachblog.code)">Delete</a>
                   </div>

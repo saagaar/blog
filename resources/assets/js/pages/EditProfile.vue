@@ -1,20 +1,23 @@
 
 <template>
 <div class="col-md-9 col-sm-9">
-    <div id="main">
+    <div >
         <div class="white-box edit_profile">
           <div class="area-heading">
               <h3>Settings</h3>
           </div>
-          
-          <h4> <i class="fa fa-edit"></i> Edit basic information:</h4>
+
+          <div class="row">
+          <div class="col-md-6">
+          <div class="edit-box">
+            <h4> <i class="fa fa-edit"></i> Edit basic information:</h4>
 
           <div class="row">
 
           <div class="col-sm-12 form-group">
           <TextEdit :formName="'Name'" :inputName="'name'" :value="me.name"></TextEdit>
           </div>
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-12 form-group">
           <EmailEdit :formName="'My Email'" :inputName="'email'" :value="me.email"></EmailEdit>
           </div>
           <div class="col-sm-6">
@@ -74,28 +77,31 @@
           <div class="col-sm-6 form-group">
           <TextEdit :formName="'Country'" :inputName="'country'" :value="me.country"></TextEdit>
           </div>
-
-          <div class="col-sm-12 form-group upload_img">
-              <label><i class="fa fa-image"></i> Profile Photo <span class="file-input btn btn-success btn-file">
-                      <button class="btn btn-success">Chnage Profile Picture</button> 
-                      <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
-                  </span></label>
-              <figure> <img :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'" id="image-field"/> </figure>
-               
-                    
-                
-                </div>
-
-
-               
-
-          <div class="col-sm-12 form-group">
+          <div class="col-sm-6 form-group">
             <TextEdit :formName="'Bio'" :inputName="'bio'" :value="me.bio"></TextEdit>
           </div>
           <div class="col-sm-12 form-group">
             <ChangePassword></ChangePassword>
           </div>
           <div class="clearfix"></div>
+          </div>
+
+          </div>
+          </div>
+
+          <div class="col-md-6">
+             <div class="col-sm-12 form-group upload_img">
+              <label><i class="fa fa-image"></i> Profile Photo </label>
+              <figure> <img :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'" id="image-field"/> 
+                <span class="file-input btn btn-success btn-file">
+                      <button class="btn btn-success">Chnage Profile Picture</button> 
+                      <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
+                  </span>
+              </figure>   
+          </div>
+
+          </div>
+            <div class="clearfix"></div>
           </div>
 
           </div>

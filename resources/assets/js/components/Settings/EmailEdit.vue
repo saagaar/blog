@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div>
-    <strong>{{formName}}</strong>
+    <strong>{{formName}} <a href='#' v-if="!isClicked" v-on:click.prevent="clicked"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>  </strong>
     </div>
 		<div v-if="isClicked">
 			<form method="post">
@@ -12,13 +12,12 @@
                               <div class="error" v-if="!$v.form.inputParams.minLength">inputParams must be at least {{ $v.form.inputParams.$params.minLength.min }} letters.</div>
                               <div class="error" v-if="!$v.form.inputParams.isUnique">This Email Address is Already Used</div>
                             </div>
-				<br>
 				<button type="button" class="btn btn-primary ml-15" @click.prevent="updateDetails"><Loader></Loader>Update</button>
         <button type="button" class="btn btn-light ml-15" @click.prevent="cancel">Cancel</button>
 			</form>
 		</div>
 		<div v-else>
-		<span> {{value}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='' v-if="!isClicked" v-on:click.prevent="clicked"><i class="fa fa-edit" aria-hidden="true"></i>Change</a>  
+		<span> {{value}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         
 		</div>
         

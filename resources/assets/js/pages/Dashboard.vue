@@ -5,6 +5,9 @@
       <div class="row">
         <div class="col-md-9 col-sm-9">
 
+            <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true">
+                 <PlaceHolderDashboardFeed></PlaceHolderDashboardFeed>
+            </div>
             <div class="col-lg-12 col-md-12 col-sm-12" v-if="initialState.blogByFollowing &&initialState.blogByFollowing.length>0">
               <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogByFollowing">
                 <div class="thumb col-lg-3 col-md-4 col-sm-5">
@@ -79,6 +82,7 @@
 </div>
 </template>
 <script>
+import PlaceHolderDashboardFeed  from './../components/ContentPlaceholder/PlaceHolderDashboardFeed';
 import mixin  from './../mixins/LoadData.mixin.js';
 import FollowSuggestionsList from './../components/Follows/FollowSuggestionsList';
 import TheRightSideBar from './../components/TheRightSideBar';
@@ -101,7 +105,8 @@ import TheRightSideBar from './../components/TheRightSideBar';
     
       components:{
             TheRightSideBar,
-            FollowSuggestionsList
+            FollowSuggestionsList,
+            PlaceHolderDashboardFeed
         },
     }
 

@@ -1,6 +1,7 @@
 
 <template>
-<div class="col-md-9 col-sm-9" v-if="isLoading===true">
+<div class="col-md-9 col-sm-9" v-if="this.$store.getters.isLoading===true">
+    <PlaceHolderCustomizeInterest></PlaceHolderCustomizeInterest>
 </div>
 <div class="col-md-9 col-sm-9" v-else-if="initialState.allCategories">
     <div id="main" class="">
@@ -29,7 +30,7 @@
                             :src="'uploads/categories-images/icon-no-image.svg'" alt=""></a>
                         </div>
                         <div class="short_details">
-                            <a class="d-block" href="single-blog.html">
+                            <a class="d-block" href="#">
                                 <h4>{{subCategory.name}} </h4>
                             </a>
                             <Favorite
@@ -53,6 +54,7 @@
 </template>
 
 <script>
+import PlaceHolderCustomizeInterest  from './../components/ContentPlaceholder/PlaceHolderCustomizeInterest';
 import Favorite from './../components/Favorites/Favorite';
 import mixin  from './../mixins/LoadData.mixin.js';
     export default {
@@ -69,7 +71,8 @@ import mixin  from './../mixins/LoadData.mixin.js';
         },
         mixins:[mixin],
         components:{
-            Favorite
+            Favorite,
+            PlaceHolderCustomizeInterest
         },
         method:{
             isLoading:function()
@@ -80,6 +83,7 @@ import mixin  from './../mixins/LoadData.mixin.js';
 
             },
         },
+
  
     }
 </script>

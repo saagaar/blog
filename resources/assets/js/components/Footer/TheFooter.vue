@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="col-lg-9 col-md-8">
-        <div class="single-footer-widget">
+      <!--   <div class="single-footer-widget">
             <ul>
                 <li><a href="#"><i class="fa fa-angle-right">&nbsp;</i> Home</a></li>
                 <li><a href="#"><i class="fa fa-angle-right">&nbsp;</i> About Us</a></li>
@@ -22,7 +22,7 @@
                 <li><a href="#"><i class="fa fa-angle-right">&nbsp;</i> Terms &amp; Conditions</a></li>
                 <li><a href="#"><i class="fa fa-angle-right">&nbsp;</i> Contact Us</a></li>
             </ul>
-        </div>
+        </div> -->
         <div class="footer-bottom align-items-center text-center text-lg-left no-gutters">
             <div class="row">
             <p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

@@ -138,43 +138,32 @@ class BlogController extends FrontendController
                 ]);
                 if($this->blogRequiresActivation=='N'){
                     return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
-
                 }else{
                     if ($validator->fails()) {
                         return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
                     }else{
                         if(request()->image)
                         {
-                            // $dir = 'uploads/blog/'.$blogData->code.'/';
-                            // if ($blogData->image != '' && File::exists($dir . $blogData->image)){
-                            //     File::delete($dir . $blogData->image);
-                            // }
-                            // $imageName = time().'.'.request()->image->getClientOriginalExtension();
-                            // request()->image->move(public_path('uploads/blog/'.$blogData->code.'/'), $imageName);
-                            // $form['image']=$imageName;
                             $extension = request()->image->getClientOriginalExtension();
                             $imageName = time().'.'.$extension;              
-                            $dir=public_path().'/uploads/blog/'.$postId.'/';
-                             if ($blogData->image != '' && File::exists($dir,$blogData->image))
+                             $dir=public_path().'/uploads/blog/'.$postId.'/';
+                            if ($blogData->image != '' && File::exists($dir,$blogData->image))
                             {
-
-                            File::deleteDirectory($dir);
-                             }else{
-                                File::makeDirectory($dir, 0777, true, true);
+                                 File::deleteDirectory($dir);
                             }
-                            $tmpImg =request()->image->move($dir,$imageName);
-                            $img = Image::make($tmpImg);         
+                           File::makeDirectory($dir, 0777, true, true);
+                           $tmpImg =request()->image->move($dir,$imageName);
+                           $img = Image::make($tmpImg);         
                            $img->resize(100, null, function ($constraint) 
                            {
                              $constraint->aspectRatio();
                             }
                             )->save($dir.'/'.time().'-thumbnail.'.$extension);
-
                             $form['image'] = $imageName;
                         }
                         $form['short_description']=$request->short_description;
                         $form['save_method']=$request->save_method?$request->save_method:'1';
-                        $form['anynomous'] = $request->isAnynomous ? '1' : '2';
+                        $form['anynomous'] = ($request->isAnynomous=='true') ? '1' : '2';
                         $this->blog->updateByCode($postId,$form);
                         $tagid = $tag->getTagByName($request->tags);
                         $this->blog->addTag($postId,$tagid);  
@@ -185,6 +174,23 @@ class BlogController extends FrontendController
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
         }
     }   
+    public function preview($code,Request $request){
+        $blogDetails = $this->blog->getBlogByCode($code);
+        $data['blog'] =$blogDetails;
+        $routeName= ROUTE::currentRouteName();
+        if($routeName=='api')
+        {
+            return ($data);
+        }
+        else
+        {
+            $data['path']='/preview/'.$code;
+            $initialState=json_encode($data);
+            $user=$this->user_state_info();
+            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+        }        
+    }
+
     public function delete($blogCode){
         $blogData = $this->blog->getBlogByCode($blogCode);
         if( $blogData)

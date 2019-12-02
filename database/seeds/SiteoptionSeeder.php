@@ -31,7 +31,9 @@ class SiteoptionSeeder extends Seeder
         'city'              =>'lalitpur',
         'url'               =>'https://idata.com.np/',
         'image'             =>'',
-        'created_at' => date("Y-m-d H:i:s")
+        'created_at'        => date("Y-m-d H:i:s"),
+        'message'           =>'',
+        'duration'          =>''
         ]);
     }
 }

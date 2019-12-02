@@ -44,6 +44,7 @@ class NotificationSettingController extends AdminController
         {
             $requestObj=app(NotificationRequest::class);
             $validatedData = $requestObj->validated();
+            // print_r($validatedData);exit;
             $this->notification->create($validatedData);
             return redirect()->route('notification.list')    
                              ->with(array('success'=>'Notification created successfully.','breadcrumb'=>$breadcrumb));

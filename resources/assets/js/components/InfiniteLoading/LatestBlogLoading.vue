@@ -26,10 +26,12 @@
             </div>
         </div>
         </div>
+      <div class="col-md-12">
         <InfiniteLoading @infinite="infiniteHandler" spinner="spiral">
           <div slot="no-more"></div>
           <div slot="no-results"><hr></div>
         </InfiniteLoading>
+      </div>
 </div>
 </template>
 

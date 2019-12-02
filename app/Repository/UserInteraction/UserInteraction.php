@@ -26,8 +26,6 @@ Class  UserInteraction implements UserInteractionInterface
      * @return boolean
      */
     public function createCommment($data){
-        
-        
         return $this->comment->create($data);
     }
     public function getCommentByBlogId($id){
