@@ -171,6 +171,7 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::match(['get','post'],'/edit/blogcategory/{id}','Admin\CategoryController@edit')->name('adminblogcategory.edit');
 	Route::get('/delete/blogcategory/{id}','Admin\CategoryController@delete')->name('adminblogcategory.delete');
 	Route::get('changestatus/blogcategory', 'Admin\CategoryController@changeStatus')->name('adminblogcategory.changestatus');
+	Route::get('changevisibility/blogcategory', 'Admin\CategoryController@changeVisibility')->name('adminblogcategory.changevisibility');
 
 	//blog category
 

@@ -149,6 +149,7 @@ window.setTimeout(function() {
   $(function(){
     $('.toggle-class').change(function() {
         var status = $(this).prop('checked') == true ? 1 : 2;
+        var showInHome = $(this).prop('checked') == true ? 1 : 2;
         var paymentmode = $(this).prop('checked') == true ? 1 : 0;
         var savemethod = $(this).prop('checked') == true ? 2 : 1;
         var id = $(this).data('id');
@@ -157,7 +158,7 @@ window.setTimeout(function() {
             type: "GET",
             dataType: "json",
             url: url,
-            data: {'status': status,'mode': paymentmode,'save_method':savemethod,'display':status,'show_in_home':status,'id': id},
+            data: {'status': status,'mode': paymentmode,'save_method':savemethod,'display':status,'show_in_home':showInHome,'id': id},
              success: function(data){
               console.log(data.success)
             }           

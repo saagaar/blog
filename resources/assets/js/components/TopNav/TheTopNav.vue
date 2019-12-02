@@ -5,7 +5,7 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="/frontend/images/elements/logo-6.png" alt="">
+                        <img src="images/system-images/logo.png" alt="">
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
@@ -18,36 +18,34 @@
                             
                         </ul>
                          <ul v-else>
-                        <li><router-link to="/blog/add" title="Create Article"><i class="fa fa-plus-square" ></i></router-link></li>
+                        <li><a id="search" @click="OpenSearchBox" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
                       
                         <li class="nitify dropdown" @click="updateNotificationStatus">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
-                            aria-expanded="false" title="Notifications"><i  class="fas fa-bell"></i> <em v-if="me.unReadNotificationsCount>0">{{ me.unReadNotificationsCount }}</em></a>
+                            aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ me.unReadNotificationsCount }}</em></a>
 
-                               <NotificationsLoading :notificationlist="topnotifications" :loadtype="'noload'" :type="'nav'" ></NotificationsLoading>
+                               <NotificationsLoading :notificationList="topnotifications" :type="'nav'" ></NotificationsLoading>
                                 
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
-                            <figure><img :src="getProfileUrl()"></figure> {{getFirstName()}}</a>
+                            <figure><img :src="getProfileUrl()"></figure> {{ me.name}}</a>
                             <ul class="dropdown-menu">
-                                <li><router-link to="/dashboard">My Dashboard</router-link></li>
-
+                                <li><a href="/dashboard">My Dashboard</a></li>
                             
                                 <li><router-link to="/profile">Profile</router-link></li>
-                                <li><router-link to="/categories">Choose your interest</router-link></li>
-                                 <hr>
-                                <li><router-link to="/blog/add">New Article</router-link></li>
-                               
-                                <li><router-link to="/blog/list">My Articles</router-link></li>
-                                 <hr>
-                               
-
-                                <li><router-link to="/settings">Settings</router-link></li>
-                                <!-- <li><a href="#">Help</a></li> -->
-                                <!-- <li><a href="#">Change Password</a></li> -->
-                                <li><a href="/logout/user">Log Out</a></li>
+                                <li><router-link to="/followers">Followers</router-link></li>
+                                <hr>
+                                <li><router-link to="/blog/list">My Blog</router-link></li>
+                                <li><a href="#">Bookmarks</a></li>
+                                <li><a href="#">Publications</a></li>
+                                <li><router-link to="/categories">Customize your interest</router-link></li>
+                                <hr>
+                                <li><a href="#">Settings</a></li>
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Change Password</a></li>
+                                <li><a v-bind:href="config.ROOT_URL+'logout/user'">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -134,13 +132,16 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
                 }
             },
             getProfileUrl(){
-              
               let url=this.me.image;
-              return this.$helpers.getProfileUrl(url);
-           },
-           getFirstName(){
-             let first = this.me.name.split(' ').slice(0, -1).join(' ');; 
-             return first;
+              if(url===''){
+                return 'frontend/images/elements/default-profile.png';
+              }
+              else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
+                return url;
+              }
+              else{
+                return '/uploads/user-images/'+url;
+              }
            }
          },
         components:{

@@ -33,24 +33,21 @@
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="@BloggerClub" /> <!-- website name -->
   <meta property="og:site" content="https://thebloggersclub.com" /> <!-- website link -->
-  <meta property="og:title" content="The Bloggers Club-an online blogging platform for independent voices."/>
-  <meta property="og:description" content="Bloggers Club is an online blogging platform for posting your unique,creative articles in different categories and for those who loves to learn innovative things and express their words in order to link with the world." /> 
-  <meta property="og:image" content="" /> 
+  <meta property="og:title" content="@yield('meta_title','The Bloggers Club-an online blogging platform for independent voices.')"/>
+  <meta property="og:description" content="@yield('meta_description','Bloggers Club is an online blogging platform for posting your unique,creative articles in different categories and for those who loves to learn innovative things and express their words in order to link with the world.')" /> 
+  <meta property="og:image" content="@yield('meta_image')" /> 
   <meta property="og:url" content="https://thebloggersclub.com" /> 
   <meta property="og:type" content="article" />
   <meta property="fb:page_id" content="102453021098785" />
   <meta property="fb:app_id" content="456785908272461" />
   
-
-  <!-- twitter -->
-   <meta name="twitter:card" content="summary"/>  
-  <!-- which type of content we are sharing:summary, photo, video, product, app, gallery -->
-  <meta name="twitter:title" content="The Bloggers Club-an online blogging platform for independent voices."/>
-  <meta name="twitter:description" content="Bloggers Club is an online blogging platform for posting your unique,creative articles in different categories and for those who loves to learn innovative things and express their words in order to link to the world."/>
-  <meta name="twitter:url" content="https://thebloggersclub.com">
-  <meta name="twitter:site" content="@BloggerClub">
-  <!-- <meta name="twitter:image" content="https://thebloggersclub.com/image.jpg"> -->
-
+  <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@thebloggersclub" />
+        <meta name="twitter:creator" content="@thebloggersclub" />
+         <meta name="twitter:title" content="@yield('meta_title','The Bloggers Club-an online blogging platform for independent voices.')"/>
+  <meta name="twitter:description" content="@yield('meta_description','Bloggers Club is an online blogging platform for posting your unique,creative articles in different categories and for those who loves to learn innovative things and express their words in order to link with the world.')" /> 
+  <meta name="twitter:image:src" content="@yield('meta_image')" /> 
+        
 
    <script type="application/ld+json">
           {

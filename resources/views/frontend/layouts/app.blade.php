@@ -198,7 +198,7 @@ function fb_share(dynamic_link,dynamic_title) {
 })
 </script>
 <script type="text/javascript"></script>
-
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script type="text/javascript">
     $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip()
