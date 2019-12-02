@@ -158,16 +158,6 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function fb_share(dynamic_link,dynamic_title) {
-    var app_id = '671302589946860';
-    var pageURL="https://www.facebook.com/dialog/feed?app_id=" + app_id + "&link=" + dynamic_link;
-    var w = 600;
-    var h = 400;
-    var left = (screen.width / 2) - (w / 2);
-    var top = (screen.height / 2) - (h / 2);
-    window.open(pageURL, dynamic_title, 'toolbar=no, location=no, directories=no, status=no, menubar=yes, scrollbars=no, resizable=no, copyhistory=no, width=' + 800 + ', height=' + 650 + ', top=' + top + ', left=' + left)
-    return false;
-}
 </script>
 
 <script>
@@ -198,7 +188,7 @@ function fb_share(dynamic_link,dynamic_title) {
   })
 })
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function loguser( event ) {
     if ( event ) {
         jQuery.ajax({
@@ -236,7 +226,8 @@ window.twttr = (function (d,s,id) {
 twttr.ready(function (twttr) {
     twttr.events.bind('tweet', loguser);
 });
-</script>
+</script> -->
+<script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip()

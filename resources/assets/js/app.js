@@ -58,7 +58,8 @@ Vue.use(require('vue-moment'));
 // import TheMainNav from './components/MainNav/TheMainNav';
 // Vue.component('TheMainNav', require('./components/MainNav/TheMainNav.vue'));
 import Favorite from './components/Favorites/Favorite';
-
+import FbShare from './components/Share/FbShare';
+import TwShare from './components/Share/TwShare';
 import TheFooter from './components/Footer/TheFooter';
 import SuccessErrorMessage from './components/SuccessErrorMessage.vue';
 import ListComment from './components/Comment/ListComment';
@@ -84,7 +85,8 @@ const app = new Vue({
     store,
     components:{
             // 'the-top-nav':TheTopNav,
-            // 'the-main-nav':TheMainNav,
+            'fb-share':FbShare,
+            'tw-share':TwShare,
             'the-footer':TheFooter,
             'list-comment':ListComment,
             'add-comment':AddComment,
