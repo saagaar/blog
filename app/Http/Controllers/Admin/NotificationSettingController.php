@@ -30,7 +30,7 @@ class NotificationSettingController extends AdminController
         }else{
             $notification = $this->notification->getAll()->paginate($this->PerPage);
         }
-        return view('admin.notification.list')->with(array('notification'=>$notification,'breadcrumb'=>$breadcrumb,'menu'=>'notification List','primary_menu'=>'notification.list'));
+        return view('admin.notification.list')->with(array('notifications'=>$notification,'breadcrumb'=>$breadcrumb,'menu'=>'notification List','primary_menu'=>'notification.list'));
     }
     public function create(Request $request)
     {

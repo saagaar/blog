@@ -10,7 +10,10 @@ use App\Jobs\VisitorLog;
 use App\Repository\VisitorlogInterface;
 use App\Repository\PermissionInterface;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailable;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\Notifications;
 class FrontendController extends BaseController
 {
     Protected $siteSettings;
@@ -97,10 +100,11 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {   
-        $not = $this->authUser->Notifications()->take(10)->get();
-
-        print_r($not);exit;        
-        return view('frontend.home.index');
+       $code='user_registration';
+        $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
+        // print_r($data);exit;
+        $this->authUser->notify(new Notifications($code,$data));
+        echo "Success";
     }
     public function getAllPermissionsAttribute() {
       $permissions = [];

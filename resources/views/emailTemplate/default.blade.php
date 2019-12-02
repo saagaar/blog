@@ -14,7 +14,7 @@
     <div class="inbox-head">
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h3> <i class="fa fa-mail-bulk">&nbsp;</i> Idata Solutions Pvt.Ltd</h3>
+                <h3> <i class="fa fa-mail-bulk">&nbsp;</i> The Bloggers Club</h3>
             </div>
             
             <div class="clearfix"></div>

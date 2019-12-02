@@ -67,7 +67,7 @@ Route::get('/api/getfollowers','Frontend\UserController@getFollowers')->name('ge
 Route::get('/api/getfollowings','Frontend\UserController@getFollowings')->name('getfollowings');
 
 
-Route::get('/test', 'Frontend\HomeController@test')->name('test');
+Route::get('/test', 'Frontend\FrontendController@index')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 Route::post('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
 Route::post('/blog/detail/share','Frontend\HomeController@share')->name('share');
