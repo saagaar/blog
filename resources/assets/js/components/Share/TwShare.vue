@@ -34,20 +34,34 @@ import Form from './../../services/Form.js'
 	              });
             },
             tw_share:function(){
-            	window.twttr = (function (d,s,id) {
-			    var t, js, fjs = d.getElementsByTagName(s)[0];
-			    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
-			    js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-			    return window.twttr || (t = { _e: [], ready:function(f){ t._e.push(f) } });
-			    }(document, "script", "twitter-wjs"));
+                    $.getScript("http://platform.twitter.com/widgets.js", function(){
+                       function handleTweetEvent(event){
+                        console.log(event);
+                         if (event) {
+                           alert("This is a callback from a tweet")
+                         }
+                       }
+                       twttr.events.bind('tweet', handleTweetEvent);        
+                     });
+
+
+
+
+                // this.form.get()
+    //         	window.twttr = (function (d,s,id) {
+			 //    var t, js, fjs = d.getElementsByTagName(s)[0];
+			 //    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+			 //    js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+			 //    return window.twttr || (t = { _e: [], ready:function(f){ t._e.push(f) } });
+			 //    }(document, "script", "twitter-wjs"));
 			 
-				twttr.ready(function (twttr) {
-			    twttr.events.bind('tweet', function(event) {
-			    	if (event) {
-            	 	this.increment;
-            	 }
-			    });
-				});
+				// twttr.ready(function (twttr) {
+			 //    twttr.events.bind('tweet', function(event) {
+			 //    	if (event) {
+    //         	 	this.increment;
+    //         	 }
+			 //    });
+				// });
             },
             
             
