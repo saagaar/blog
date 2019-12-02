@@ -174,6 +174,23 @@ class BlogController extends FrontendController
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
         }
     }   
+    public function preview($code,Request $request){
+        $blogDetails = $this->blog->getBlogByCode($code);
+        $data['blog'] =$blogDetails;
+        $routeName= ROUTE::currentRouteName();
+        if($routeName=='api')
+        {
+            return ($data);
+        }
+        else
+        {
+            $data['path']='/preview/'.$code;
+            $initialState=json_encode($data);
+            $user=$this->user_state_info();
+            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+        }        
+    }
+
     public function delete($blogCode){
         $blogData = $this->blog->getBlogByCode($blogCode);
         if( $blogData)

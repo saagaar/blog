@@ -352,12 +352,13 @@
         <p>{{$address}}<br>{{$contactNumber}}<br><a href="#">hi@blogsagar.com </a></p>
       </nav>  
       <nav class="col-lg-4 align-self-center mb-2">
-        <form class="contact-form-footer">
+        <contact></contact>
+        <!-- <form class="contact-form-footer">
           <input class="form-control" type="" name="" placeholder="Name">
           <input class="form-control" type="" name="" placeholder="email">
           <textarea class="form-control" placeholder="message" ></textarea> 
           <button type="submit" class="btn btn-primary  primary-shadow btn-sm">Send</button>
-        </form>
+        </form> -->
       </nav>
       <!-- footer social icon -->
       <nav class="col-lg-3">

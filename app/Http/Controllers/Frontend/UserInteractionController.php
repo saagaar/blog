@@ -11,6 +11,7 @@ use Validator,Redirect,Response,File;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Repository\BlogInterface;
+use App\Repository\ContactInterface;
 use App\Repository\UserInteractionInterface;  
 class UserInteractionController extends FrontendController
 {
@@ -56,6 +57,19 @@ class UserInteractionController extends FrontendController
             $this->userInteraction->createCommment($input);
              return array('status'=>true,'message'=>'success','data'=>array('comment'=>$input['comment'],'created_at'=>$input['created_at']));
         }
+    }
+    public function contactForm(Request $request,ContactInterface $contact){
+            $request->validate([
+            'name' => 'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'message'=>'required'
+            ]);
+            $input = $request->all();
+            $date =date_create();
+            $input['created_at'] = $date->format('Y-m-d H:i:s');
+            $contact->create($input);
+             return array('status'=>true,'message'=>'success','data'=>'');
     }
     public function testinglike(){
     	// $lik = $this->likeCount('5da9637080085a4c');

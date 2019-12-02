@@ -20,6 +20,11 @@ Route::get('/logincheck', function () {
 
 Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
+
+Route::post('/contact/form', 'Frontend\UserInteractionController@contactForm')->name('contact.form');
+
+Route::get('/blog/preview/{code}', 'Frontend\BlogController@preview')->name('preview');
+Route::get('/api/blog/preview/{code}', 'Frontend\BlogController@preview')->name('api');
 Route::get('api/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('api');
 Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
 Route::post('/like/blog/{code}', 'Frontend\UserInteractionController@likeBlog')->name('like.blog');

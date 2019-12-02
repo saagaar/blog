@@ -6,21 +6,7 @@
         @section('meta_title',$blogDetails->title)
         @section('meta_description',$blogDetails->short_description)
         @section('meta_image',asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image))
-
-    <!-- <meta property="og:url"           content="https://thebloggersclub.com/blog/detail/{{ $blogDetails->code }}" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="{{ $blogDetails->title }}" />
-    <meta property="og:description"   content="{{ $blogDetails->short_description }}" />
-    <meta property="og:image"         content="{{ asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@thebloggersclub" />
-        <meta name="twitter:creator" content="@thebloggersclub" />
-
-        <meta name="twitter:title" content="{{ $blogDetails->title }}" />
-        <meta name="twitter:description" content="{{ $blogDetails->short_description }}" />
-        <meta name="twitter:image:src" content="{{ asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}" />
-         -->
+        <meta type="hidden" name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
         <!--================Blog Area =================-->
     <section class="blog_area single-post-area">
         <div class="container">
@@ -61,15 +47,11 @@
                             </div>
                             <ul class="social-icons">
                                 @php($url=url('https://thebloggersclub.com/blog/detail/'.$blogDetails->code))
-                 
-                                <a class="fb-share" href="javascript:void(0);" data-code="{{$blogDetails->code}}" data-url="{{$url}}" onclick="fb_share('{{ $url }}', '{{ $blogDetails->title }}')"><i class="fab fa-facebook-f"></i></a>
-                                    
+                    
+                                <fb-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></fb-share>
+                                <tw-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></tw-share>    
                                 <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
-                                <li><a class="twitter-share-button"
-                                      href="https://twitter.com/intent/tweet"
-                                      data-text="{{$blogDetails->title}}"
-                                      data-url="{{$url}}"
-                                      data-hashtags="the_bloggers_club"><i class="fab fa-twitter"></i></a></li>
+                                <!-- <li><a href="{{url('https://twitter.com/intent/tweet?url='.$url.'&text='.$blogDetails->title)}}"><i class="fab fa-twitter"></i></a></li> -->
                                 <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
                                 <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                             </ul>
