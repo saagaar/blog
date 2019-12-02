@@ -12900,10 +12900,31 @@ var app = new Vue({
       colorItemIndex: undefined,
       colorItems: [// ['#d99cd1', '#c99cd1', '#b99cd1', '#a99cd1'],
       // ['#403030', '#f97a7a'],
-      ['#31a50d', '#d1b022', '#74482a', '#779cc1']],
+      ['#31a50d', '#d1b022', '#74482a', '#779cc1'] // ['#ffd077', '#3bc4c7', '#3a9eea', '#ff4e69', '#461e47'],
+      ],
       drawer: true,
       fontFamily: undefined,
-      fontFamilyValues: ['Abril Fatface', 'Anton', 'Bahiana', 'Merienda', 'Quicksand'],
+      fontFamilyValues: ['Abril Fatface', 'Anton', 'Bahiana', 'Merienda', 'Quicksand' // 'Abril Fatface',
+      // 'Annie Use Your Telescope',
+      // 'Anton',
+      // 'Bahiana',
+      // 'Baloo Bhaijaan',
+      // 'Barrio',
+      // 'Finger Paint',
+      // 'Fredericka the Great',
+      // 'Gloria Hallelujah',
+      // 'Indie Flower',
+      // 'Life Savers',
+      // 'Londrina Sketch',
+      // 'Love Ya Like A Sister',
+      // 'Merienda',
+      // 'Nothing You Could Do',
+      // 'Pacifico',
+      // 'Quicksand',
+      // 'Righteous',
+      // 'Sacramento',
+      // 'Shadows Into Light',
+      ],
       fontSizeRatioValueIndex: 0,
       fontSizeRatioValues: [0, 1 / 20, 1 / 5, 1 / 2, 1],
       progress: undefined,
@@ -13146,7 +13167,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\blog\resources\assets\js\landing-page.js */"./resources/assets/js/landing-page.js");
+module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/js/landing-page.js */"./resources/assets/js/landing-page.js");
 
 
 /***/ })
