@@ -49,7 +49,7 @@ const app = new Vue({
            this.$store.commit('ADD_ME', userState)
             Vue.prototype.$gate = new Gate(userState);
         }
-            // this.$store.dispatch('checkLoginUser');
+            this.$store.dispatch('checkLoginUser');
     },
     render: function (createElement) 
     {
