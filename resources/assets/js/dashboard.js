@@ -29,9 +29,10 @@ import store from './store/index'
 import config from './config/config.js';
 import UserDashboard from './layouts/UserDashboard';
 import Profile from './layouts/Profile';
+import UserProfile from './layouts/UserProfile';
 Vue.component('default-layout',UserDashboard);
 Vue.component('timeline-layout', Profile);
-
+Vue.component('userprofile-layout', UserProfile);
 import Gate from './services/Gate.js';
 
 const default_layout="default";

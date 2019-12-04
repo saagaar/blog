@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Validator,Redirect,Response,File;
 use Socialite;
 use App\Repository\AccountInterface;
-
+use App\Notifications\Notifications;
 class LoginController extends FrontendController
 {
     protected $account;
@@ -101,9 +101,9 @@ class LoginController extends FrontendController
         $input = $request->all(); 
         $input['password'] = bcrypt($input['password']); 
         if($this->userRequiresActivation=='Y'){
-            $input['status']    ='1';
+            $input['status']    ='2';
         }else{
-            $input['status']    ='0';
+            $input['status']    ='1';
         }
         $emailParts = explode('@', $input['email']);
 
@@ -116,8 +116,39 @@ class LoginController extends FrontendController
             $randUsername = $username.$random;
             $input['username'] = $randUsername;
         }
+        $input['activation_code']= mt_rand(100000,999999);
+        $input['activation_date'] = date('Y-m-d H:i:s', strtotime('+1 days'));
         $user = $this->account->create($input);
+         $code='user_registration';
+        $data=['NAME'=>$input['name'],'URL'=>url('/blog/useractivation/'.$input['username'].'/'.$input['activation_code']),'SITENAME'=>$this->siteName];
+        $user->notify(new Notifications($code,$data));
     return response()->json(['status'=>true,'data'=>$user,'message'=>'Registration completed Successfully']); 
+    }
+    public function userActivation($username,$code){
+        $user = $this->account->getUserByUsername($username);
+
+        if(!empty($user)){
+            if($user->status==='2'){
+                if ($user->activation_code==$code) {
+                    if(strtotime(date('Y-m-d H:i:s')) < strtotime($user->activation_date)){
+                        $data['status']='1';
+                        $this->account->update($user->id,$data);
+                         return redirect()->route('home')
+                        ->with('success','Your account have been activated!!');
+                    }else{
+                         return redirect()->route('home')
+                        ->with('error','Activation Code already expired!');
+                    }
+                }else{
+                     return redirect()->route('home')
+                        ->with('error','Wrong activation code');
+                }
+            }else{
+                 return redirect()->route('home')
+                        ->with('error','This account has been already activated!');
+            }
+        }
+         
     }
     public function isEmailAlreadyRegistered($email){
         $user = $this->account->getAll()->where('email',$email)->first();

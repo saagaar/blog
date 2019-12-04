@@ -19,7 +19,7 @@ export const createComments = ({ commit,getters },data) => {
           res.user={'name':getters.me.name,'image':getters.me.image};
 
           commit('LIST_COMMENTS',res);
-          data.form.reset();
+          // data.form.reset();
       }
     
       }).catch(e => 

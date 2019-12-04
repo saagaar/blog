@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @section('content')
-
+ 
 <section class="fullwidth-block area-padding-bottom">
 
 

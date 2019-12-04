@@ -63,6 +63,24 @@ let routes=[
 						path:'/blog/preview/:blogId/',
 						components:require('./pages/BlogPreview')
 				},
+				{
+						path:'/profile/:username',
+						components:require('./pages/Timeline'),
+						meta:{layout:"userprofile"}
+						
+				},
+				{
+						path:'/followers/:username',
+						components:require('./pages/FollowersList'),
+						meta:{layout:"userprofile"}
+						
+				},
+				{
+						path:'/followings/:username',
+						components:require('./pages/FollowingsList'),
+						meta:{layout:"userprofile"}
+						
+				},
 
 		   ];
 

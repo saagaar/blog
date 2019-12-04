@@ -42,7 +42,7 @@ Class Account implements AccountInterface
      }
     
     public function getUserByUsername($username){
-      return $this->account->where('username', $username)->first();
+      return $this->account->where('username', $username)->withCount('followers','followings')->first();
     }
 
     public function getActiveAccounts(){

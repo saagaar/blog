@@ -6421,9 +6421,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -44660,7 +44657,8 @@ var render = function() {
                         ? _c("img", {
                             attrs: {
                               src:
-                                "/images/user-images/" + eachComment.user.image,
+                                "/uploads/user-images/" +
+                                eachComment.user.image,
                               alt: ""
                             }
                           })
@@ -44706,9 +44704,7 @@ var render = function() {
                                 )
                               ])
                             ]
-                          ),
-                          _vm._v(" "),
-                          _vm._m(0, true)
+                          )
                         ]
                       )
                     ])
@@ -44719,22 +44715,10 @@ var render = function() {
           }),
           0
         )
-      : _c("div", { staticClass: "comment-list" }, [_vm._m(1)])
+      : _c("div", { staticClass: "comment-list" }, [_vm._m(0)])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "reply-btn" }, [
-      _c(
-        "a",
-        { staticClass: "btn-reply text-uppercase", attrs: { href: "#" } },
-        [_vm._v("reply")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -68191,8 +68175,7 @@ var createComments = function createComments(_ref2, data) {
         'name': getters.me.name,
         'image': getters.me.image
       };
-      commit('LIST_COMMENTS', res);
-      data.form.reset();
+      commit('LIST_COMMENTS', res); // data.form.reset();
     }
   })["catch"](function (e) {
     console.log(e);

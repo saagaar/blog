@@ -12,6 +12,16 @@
 @include('frontend.common.header')
 <!--================ End of Meta Elements and includes=================-->
 <body>
+  @if ($message = Session::get('success'))
+  @component('layouts.components.home_response' ,['type'=>'success'])
+               {{ $message }}
+  @endcomponent      
+@endif  
+@if ($message = Session::get('error'))
+  @component('layouts.components.home_response',['type'=>'error'])
+               {{ $message }}
+  @endcomponent       
+@endif
 <!-- <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -167,91 +177,21 @@
 <script src="{{ asset('frontend/js/app.js') }}"></script>
 <script src="{{ asset('frontend/js/common.js') }}"></script>
 
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=671302589946860';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-</script>
-
 <script>
-    $(function(){
-  $('.fb-share').click(function(){
-    var url=$(this).data('url');
-      FB.ui({
-      method: 'share',
-      href: url,
-    }, function(response){
-        if(response!==undefined)
-        {
-             jQuery.ajax({
-                        type: "POST",
-                        url: sharecount,
-                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        data:{url:url,media:'facebook'},
-                        datatype: 'json',
-                        success: function(data) 
-                        {
-                            $('.img-loader').addClass('hidden');
-                             // data = jQuery.parseJSON(datajson);
-                            
-                        }
-                    });       
-        }
-    });
-  })
-})
-</script>
-<!-- <script type="text/javascript">
-    function loguser( event ) {
-    if ( event ) {
-        jQuery.ajax({
-                    type: "POST",
-                    url: sharecount,
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    data:{url:event.target.baseURI,media:'twitter'},
-                    datatype: 'json',
-                    success: function(data) 
-                    {
-                        // $('.img-loader').addClass('hidden');
-                        //  data = jQuery.parseJSON(datajson);
-                        // console.log(data);
-                        // if(data.status=='success')
-                        // {
-                        //     preloadedimage--;
-                        // }
-                        // else{
-                        //     tempimage--;
-                        // }
-                    }
-                });  
-        // alert( 'Tweeted' );
-        console.log( event );
-    }
-}
-
-window.twttr = (function (d,s,id) {
-    var t, js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
-    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
-    }(document, "script", "twitter-wjs"));
+$(document).ready(function () {
  
-twttr.ready(function (twttr) {
-    twttr.events.bind('tweet', loguser);
+window.setTimeout(function() {
+    $("#display-message").fadeTo(1000, 0).slideUp(1000, function(){
+        $(this).remove(); 
+    });
+}, 2000);
+ 
 });
-</script> -->
-<script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+</script>
 <script type="text/javascript">
     $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip()
     });
-</script>
-<script type="text/javascript">
-    var sharecount = "{{route('share')}}";
 </script>
 </body>
 </html>

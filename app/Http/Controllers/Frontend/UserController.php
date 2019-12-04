@@ -62,13 +62,22 @@ class UserController extends FrontendController
            return redirect()->route('home'); 
         } 
     }
-    public function followings()
+    public function followings($username=false)
     {
         if(\Auth::check())
         {
+          if($username)
+             {
+                $userdata=$this->user->getUserByUsername($username);
+             }
+             else{
+                $userdata=$this->authUser;
+
+             }
+            $data['userdata'] = $userdata;
             $routeName= ROUTE::currentRouteName();
             $suggestion=$this->getFollowSuggestions(3);
-            $followings = $this->followerList->getAllFollowings($this->authUser);
+            $followings = $this->followerList->getAllFollowings($userdata);
             $data['followSuggestion']=$suggestion;
             $data['followings'] = $followings;
           if($routeName=='api')
@@ -89,14 +98,22 @@ class UserController extends FrontendController
              return redirect()->route('home'); 
         }
     }
-    public function followers()
+    public function followers($username=false)
     {
         if(\Auth::check())
         {
+          if($username)
+             {
+                $userdata=$this->user->getUserByUsername($username);
+             }
+             else{
+                $userdata=$this->authUser;
 
+             }
+             $data['userdata'] = $userdata;
             $routeName= ROUTE::currentRouteName();
-            $followers = $this->followerList->getAllFollowers($this->authUser);
-            $followings = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
+            $followers = $this->followerList->getAllFollowers($userdata);
+            $followings = $this->followerList->getAllFollowings($userdata)->pluck('username');
             $data['followers'] = $followers;
             $data['followings'] = $followings;
             // echo "<pre>";
@@ -188,6 +205,9 @@ class UserController extends FrontendController
                 $user=$this->authUser;
 
              }
+             $data['userdata'] = $user;
+             // echo "<pre>";
+             // print_r($user);exit;
             $myBlogs=$blog->getActiveBlogByUserId($user->id);
 
            if($routeName=='api')
@@ -209,7 +229,7 @@ class UserController extends FrontendController
            {
               
               $data['blogList']=$myBlogs->paginate($this->perPage);
-
+              
               $data['path']='/profile';
               $initialState=json_encode($data);
               $user=$this->user_state_info();

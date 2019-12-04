@@ -100,11 +100,13 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {   
-       $code='user_registration';
-        $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
-        // print_r($data);exit;
-        $this->authUser->notify(new Notifications($code,$data));
-        echo "Success";
+        $body = 'Hello';
+        return view('emailTemplate.default',compact('body'));
+       // $code='user_registration';
+       //  $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
+       //  // print_r($data);exit;
+       //  $this->authUser->notify(new Notifications($code,$data));
+       //  echo "Success";
     }
     public function getAllPermissionsAttribute() {
       $permissions = [];
