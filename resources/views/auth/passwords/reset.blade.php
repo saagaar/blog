@@ -7,7 +7,7 @@
             <div class="columns align-item-center">
                 <div class="column is-7">
                     <h1 class="title">
-                        Reset Password
+                        Resets Password
                     </h1>
                     <h2 class="subtitle">
                         Create a new password.

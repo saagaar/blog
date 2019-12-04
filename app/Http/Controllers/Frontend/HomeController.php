@@ -287,9 +287,15 @@ class HomeController extends FrontendController
     }
     public function test(ShareInterface $share)
     {
-       $blogCode='5da95a60500cc2da';
-       $data = $share->incrementFbShare($blogCode);
-        print_r($data);
+       // $blogCode='5da95a60500cc2da';
+       // $data = $share->incrementFbShare($blogCode);
+       //  print_r($data);
+
+       $code='user_registration';
+        $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
+        // print_r($data);exit;
+        $this->authUser->notify(new Notifications($code,$data));
+        echo "Success";
         // return view('frontend.layouts.app');
     }
     public function share(Request $request,ShareInterface $share){

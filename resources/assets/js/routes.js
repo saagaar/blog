@@ -32,6 +32,12 @@ let routes=[
 						
 				},
 				{
+						path:'/profile/:username',
+						components:require('./pages/Timeline'),
+						meta:{layout:"timeline"}
+						
+				},
+				{
 						path:'/followers',
 						components:require('./pages/FollowersList'),
 						meta:{layout:"timeline"}
