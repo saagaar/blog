@@ -70,7 +70,7 @@ import Likes from './components/Likes/Likes';
 import BlogLoading from './components/InfiniteLoading/BlogLoading';
 import BlogLoadingBySlug from './components/InfiniteLoading/BlogLoadingBySlug';
 import LatestBlogLoading from './components/InfiniteLoading/LatestBlogLoading';
-
+import Gate from './services/Gate.js';
 import LoginButton from './components/TopNav/LoginButton';
 import SignUpButton from './components/TopNav/SignUpButton';
 import TheLoginSignupModal from './components/TopNav/TheLoginSignupModal';
@@ -83,6 +83,14 @@ const app = new Vue({
         // config:config
     },
     store,
+    beforeCreate() 
+    {
+        let userState = JSON.parse(window.__USER_STATE__) || {};
+        if (userState) {
+           this.$store.commit('ADD_ME', userState)
+            Vue.prototype.$gate = new Gate(userState);
+        }
+    },
     components:{
             // 'the-top-nav':TheTopNav,
             'fb-share':FbShare,

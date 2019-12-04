@@ -57846,8 +57846,9 @@ function () {
 
   }, {
     key: "onSuccess",
-    value: function onSuccess(data) {} // this.reset();
-
+    value: function onSuccess(data) {
+      this.reset();
+    }
     /**
      * Handle a failed form submission.
      *
