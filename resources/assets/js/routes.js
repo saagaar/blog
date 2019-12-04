@@ -66,19 +66,19 @@ let routes=[
 				{
 						path:'/profile/:username',
 						components:require('./pages/Timeline'),
-						meta:{layout:"userprofile"}
+						meta:{layout:"publicprofile"}
 						
 				},
 				{
 						path:'/followers/:username',
 						components:require('./pages/FollowersList'),
-						meta:{layout:"userprofile"}
+						meta:{layout:"publicprofile"}
 						
 				},
 				{
 						path:'/followings/:username',
 						components:require('./pages/FollowingsList'),
-						meta:{layout:"userprofile"}
+						meta:{layout:"publicprofile"}
 						
 				},
 
