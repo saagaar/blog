@@ -17,9 +17,7 @@ Class Share implements ShareInterface
 
     public function getShareByCode($blogCode){
       $this->blog =app()->make('App\Repository\BlogInterface');
-      print_r($blogCode); exit;
     	$blog=$this->blog->getBlogByCode($blogCode);
-        print_r($blog);exit;
         $share =$this->share->where('blog_id',$blog->id)->latest();
         if(!$share){
             $this->share->create(array('blog_id'=>$blog->id));

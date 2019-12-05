@@ -1,6 +1,5 @@
 <?php 
 namespace App\Repository;
-use App\Repository\NotificationSettingInterface;
 interface NotificationSettingInterface
 {
 	 /**

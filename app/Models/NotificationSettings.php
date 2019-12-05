@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NotificationSettings extends Model
 {
-    protected $guarded='notification_settings';
+    protected $table='notification_settings';
 
     /**
      * The attributes that have specific data types are declared

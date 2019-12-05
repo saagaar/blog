@@ -34,8 +34,8 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if (!$notification->isEmpty())
-                @foreach ($notification as $eachNotification)
+                @if (!$notifications->isEmpty())
+                @foreach ($notifications as $eachNotification)
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachNotification->title }}</td>
@@ -45,15 +45,16 @@
                   </td>
                   <td>{{ $eachNotification->subject }}</td>
                   <td>{{ $eachNotification->view }}</td>
-                  <td>@foreach($eachNotification->notification_type as $each)
-                        @if($each=='sms')
-                       <span class="label label-warning label-large">{{$each}}</span>
-                       @elseif($each=='database')
-                        <span class="label label-primary label-large">{{$each}}</span>
-                        @elseif($each=='mail')
-                         <span class="label label-info label-large">{{$each}}</span>
+                  <td>
+                        @if(in_array('mail',$eachNotification->notification_type))
+                       <span class="label label-warning label-large">Mail</span>
+                       @endif
+                       @if(in_array('database',$eachNotification->notification_type))
+                        <span class="label label-primary label-large">Database</span>
                         @endif
-                      @endforeach
+                        @if(in_array('sms',$eachNotification->notification_type))
+                         <span class="label label-info label-large">Sms</span>
+                        @endif
                   </td>
                   <td>{{$eachNotification->created_at}}</td>
                   <td><a href="{{route('notification.edit', $eachNotification->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
@@ -70,7 +71,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $notification->links() !!}
+              {!! $notifications->links() !!}
               </ul>
             </div>
             <!-- /.box-body -->

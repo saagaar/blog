@@ -9,7 +9,7 @@ export const checkLoginUser = ({ commit }) => {
           console.log(e);
       });
 }
-export const createComments = ({ commit,getters },data) => {
+export const createComments = ({ commit,getters},data) => {
     // show loading
     // let form=new Form();
     data.form.post('/create/comment/'+data.code).then(response => {
@@ -19,7 +19,6 @@ export const createComments = ({ commit,getters },data) => {
           res.user={'name':getters.me.name,'image':getters.me.image};
 
           commit('LIST_COMMENTS',res);
-          data.form.reset();
       }
     
       }).catch(e => 

@@ -6437,9 +6437,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7116,12 +7113,41 @@ var action = '';
     return {
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
         code: this.blog.code,
-        media: 'twitter'
+        media: 'facebook'
       })
     };
   },
+  created: function created() {
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '671302589946860',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v5.0'
+      });
+      console.log(FB); //This function should be here, inside window.fbAsyncInit
+      //  FB.getLoginStatus(function(response) {
+      //    console.log(response);
+      // });
+    };
+
+    (function (d, s, id) {
+      var js,
+          fjs = d.getElementsByTagName(s)[0];
+
+      if (d.getElementById(id)) {
+        return;
+      }
+
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, 'script', 'facebook-jssdk');
+  },
   methods: {
     fb_share: function fb_share(url, title) {
+      var current = this;
       var app_id = '671302589946860';
       var pageURL = "https://www.facebook.com/dialog/feed?app_id=" + app_id + "&link=" + url;
       var w = 600;
@@ -7129,14 +7155,15 @@ var action = '';
       var left = screen.width / 2 - w / 2;
       var top = screen.height / 2 - h / 2;
       window.open(pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=yes, scrollbars=no, resizable=no, copyhistory=no, width=' + 800 + ', height=' + 650 + ', top=' + top + ', left=' + left);
+      console.log(FB);
       FB.ui({
         method: 'share',
-        href: url
+        href: this.url
       }, function (response) {
         console.log(response);
 
         if (response !== undefined) {
-          this.increment();
+          current.increment();
         }
       });
     },
@@ -7182,39 +7209,21 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    increment: function increment() {
-      this.form.post('/blog/detail/share').then(function (response) {
-        if (response.data.status) {// console.log(response);
-        } else {}
-      })["catch"](function (e) {
-        console.log(e);
-      });
-    },
     tw_share: function tw_share() {
+      var current = this;
       $.getScript("http://platform.twitter.com/widgets.js", function () {
         function handleTweetEvent(event) {
-          console.log(event);
-
           if (event) {
-            alert("This is a callback from a tweet");
+            current.form.post('/blog/detail/share').then(function (response) {
+              if (response.data.status) {} else {}
+            })["catch"](function (e) {
+              console.log(e);
+            });
           }
         }
 
         twttr.events.bind('tweet', handleTweetEvent);
-      }); // this.form.get()
-      //         	window.twttr = (function (d,s,id) {
-      //    var t, js, fjs = d.getElementsByTagName(s)[0];
-      //    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
-      //    js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-      //    return window.twttr || (t = { _e: [], ready:function(f){ t._e.push(f) } });
-      //    }(document, "script", "twitter-wjs"));
-      // twttr.ready(function (twttr) {
-      //    twttr.events.bind('tweet', function(event) {
-      //    	if (event) {
-      //         	 	this.increment;
-      //         	 }
-      //    });
-      // });
+      });
     }
   }
 });
@@ -44588,7 +44597,8 @@ var render = function() {
                         ? _c("img", {
                             attrs: {
                               src:
-                                "/images/user-images/" + eachComment.user.image,
+                                "/uploads/user-images/" +
+                                eachComment.user.image,
                               alt: ""
                             }
                           })
@@ -44634,9 +44644,7 @@ var render = function() {
                                 )
                               ])
                             ]
-                          ),
-                          _vm._v(" "),
-                          _vm._m(0, true)
+                          )
                         ]
                       )
                     ])
@@ -44647,22 +44655,10 @@ var render = function() {
           }),
           0
         )
-      : _c("div", { staticClass: "comment-list" }, [_vm._m(1)])
+      : _c("div", { staticClass: "comment-list" }, [_vm._m(0)])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "reply-btn" }, [
-      _c(
-        "a",
-        { staticClass: "btn-reply text-uppercase", attrs: { href: "#" } },
-        [_vm._v("reply")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -45445,7 +45441,7 @@ var render = function() {
           ? _c("img", {
               staticClass: "img-fluid",
               attrs: {
-                src: "/images/appreciate-active.gif",
+                src: "/frontend/images/elements/appreciate-active.gif",
                 width: "25",
                 height: "25"
               }
@@ -45453,7 +45449,7 @@ var render = function() {
           : _c("img", {
               staticClass: "img-fluid",
               attrs: {
-                src: "/images/appreciate.png",
+                src: "/frontend/images/elements/appreciate-active.gif",
                 width: "25",
                 height: "25"
               }
@@ -66362,10 +66358,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_InfiniteLoading_BlogLoading__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/InfiniteLoading/BlogLoading */ "./resources/assets/js/components/InfiniteLoading/BlogLoading.vue");
 /* harmony import */ var _components_InfiniteLoading_BlogLoadingBySlug__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/InfiniteLoading/BlogLoadingBySlug */ "./resources/assets/js/components/InfiniteLoading/BlogLoadingBySlug.vue");
 /* harmony import */ var _components_InfiniteLoading_LatestBlogLoading__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/InfiniteLoading/LatestBlogLoading */ "./resources/assets/js/components/InfiniteLoading/LatestBlogLoading.vue");
-/* harmony import */ var _components_TopNav_LoginButton__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/TopNav/LoginButton */ "./resources/assets/js/components/TopNav/LoginButton.vue");
-/* harmony import */ var _components_TopNav_SignUpButton__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/TopNav/SignUpButton */ "./resources/assets/js/components/TopNav/SignUpButton.vue");
-/* harmony import */ var _components_TopNav_TheLoginSignupModal__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/TopNav/TheLoginSignupModal */ "./resources/assets/js/components/TopNav/TheLoginSignupModal.vue");
-/* harmony import */ var _components_InfiniteLoading_NotificationsLoading__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/InfiniteLoading/NotificationsLoading */ "./resources/assets/js/components/InfiniteLoading/NotificationsLoading.vue");
+/* harmony import */ var _services_Gate_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/Gate.js */ "./resources/assets/js/services/Gate.js");
+/* harmony import */ var _components_TopNav_LoginButton__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/TopNav/LoginButton */ "./resources/assets/js/components/TopNav/LoginButton.vue");
+/* harmony import */ var _components_TopNav_SignUpButton__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/TopNav/SignUpButton */ "./resources/assets/js/components/TopNav/SignUpButton.vue");
+/* harmony import */ var _components_TopNav_TheLoginSignupModal__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/TopNav/TheLoginSignupModal */ "./resources/assets/js/components/TopNav/TheLoginSignupModal.vue");
+/* harmony import */ var _components_InfiniteLoading_NotificationsLoading__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/InfiniteLoading/NotificationsLoading */ "./resources/assets/js/components/InfiniteLoading/NotificationsLoading.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -66439,6 +66436,7 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
 
 
 
+
  // import UserDashboard from './pages/UserDashboard';
 
 var default_layout = "default";
@@ -66447,6 +66445,14 @@ var app = new Vue({
   data: function data() {// config:config
   },
   store: _store_index__WEBPACK_IMPORTED_MODULE_3__["default"],
+  beforeCreate: function beforeCreate() {
+    var userState = JSON.parse(window.__USER_STATE__) || {};
+
+    if (userState) {
+      this.$store.commit('ADD_ME', userState);
+      Vue.prototype.$gate = new _services_Gate_js__WEBPACK_IMPORTED_MODULE_17__["default"](userState);
+    }
+  },
   components: {
     // 'the-top-nav':TheTopNav,
     'fb-share': _components_Share_FbShare__WEBPACK_IMPORTED_MODULE_5__["default"],
@@ -66460,10 +66466,10 @@ var app = new Vue({
     'blog-loading': _components_InfiniteLoading_BlogLoading__WEBPACK_IMPORTED_MODULE_14__["default"],
     'blog-slug-loading': _components_InfiniteLoading_BlogLoadingBySlug__WEBPACK_IMPORTED_MODULE_15__["default"],
     'latest-blog-loading': _components_InfiniteLoading_LatestBlogLoading__WEBPACK_IMPORTED_MODULE_16__["default"],
-    'login-button': _components_TopNav_LoginButton__WEBPACK_IMPORTED_MODULE_17__["default"],
-    'signup-button': _components_TopNav_SignUpButton__WEBPACK_IMPORTED_MODULE_18__["default"],
-    'the-login-signup-modal': _components_TopNav_TheLoginSignupModal__WEBPACK_IMPORTED_MODULE_19__["default"],
-    'notification-loading': _components_InfiniteLoading_NotificationsLoading__WEBPACK_IMPORTED_MODULE_20__["default"],
+    'login-button': _components_TopNav_LoginButton__WEBPACK_IMPORTED_MODULE_18__["default"],
+    'signup-button': _components_TopNav_SignUpButton__WEBPACK_IMPORTED_MODULE_19__["default"],
+    'the-login-signup-modal': _components_TopNav_TheLoginSignupModal__WEBPACK_IMPORTED_MODULE_20__["default"],
+    'notification-loading': _components_InfiniteLoading_NotificationsLoading__WEBPACK_IMPORTED_MODULE_21__["default"],
     'success-error-message': _components_SuccessErrorMessage_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     'favorite': _components_Favorites_Favorite__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
@@ -67855,6 +67861,99 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/mixins/PermissionCheck.mixin.js":
+/*!*************************************************************!*\
+  !*** ./resources/assets/js/mixins/PermissionCheck.mixin.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    $can: function $can(permissionName) {
+      return Permissions.indexOf(permissionName) !== -1;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/policies/BlogPolicy.js":
+/*!****************************************************!*\
+  !*** ./resources/assets/js/policies/BlogPolicy.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BlogPolicy; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var BlogPolicy =
+/*#__PURE__*/
+function () {
+  function BlogPolicy() {
+    _classCallCheck(this, BlogPolicy);
+  }
+
+  _createClass(BlogPolicy, null, [{
+    key: "update",
+    // static create(user)
+    // {
+    //     return user.role === 'editor';
+    // }
+    // static view(user, post)
+    // {
+    //     return true;
+    // }
+    // static delete(user, post)
+    // {
+    //     return user.id === post.user_id;
+    // }
+    value: function update(user, blog) {
+      if (user.permissions.indexOf('edit all posts') !== -1) {
+        return user.username === blog.user.username;
+      }
+
+      if (user.permissions.indexOf('edit own posts') !== -1) {
+        return true;
+      }
+
+      if (user.permissions == 'edit posts more then his point') {
+        return false;
+      }
+    }
+  }, {
+    key: "delete",
+    value: function _delete(user, blog) {
+      if (user.permissions.indexOf('delete all posts') !== -1) {
+        return user.username === blog.user.username;
+      }
+
+      if (user.permissions.indexOf('delete own post') !== -1) {
+        return true;
+      }
+
+      if (user.permissions == 'delete posts more then his point') {
+        return false;
+      }
+    }
+  }]);
+
+  return BlogPolicy;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/services/Form.js":
 /*!**********************************************!*\
   !*** ./resources/assets/js/services/Form.js ***!
@@ -68101,8 +68200,9 @@ function () {
 
   }, {
     key: "onSuccess",
-    value: function onSuccess(data) {} // this.reset();
-
+    value: function onSuccess(data) {
+      this.reset();
+    }
     /**
      * Handle a failed form submission.
      *
@@ -68117,6 +68217,78 @@ function () {
   }]);
 
   return Form;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/services/Gate.js":
+/*!**********************************************!*\
+  !*** ./resources/assets/js/services/Gate.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Gate; });
+/* harmony import */ var _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../policies/BlogPolicy */ "./resources/assets/js/policies/BlogPolicy.js");
+/* harmony import */ var _mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../mixins/PermissionCheck.mixin */ "./resources/assets/js/mixins/PermissionCheck.mixin.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+/**
+* This class is used to implement permission check same as laravel gate /policies
+* construct expects @object User
+**/
+
+var Gate =
+/*#__PURE__*/
+function () {
+  function Gate(user) {
+    _classCallCheck(this, Gate);
+
+    this.user = user;
+    this.policies = {
+      blog: _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__["default"]
+    };
+  }
+
+  _createClass(Gate, [{
+    key: "before",
+    value: function before() {
+      return this.user.roles === 'admin';
+    }
+  }, {
+    key: "allow",
+    value: function allow(action, type) {
+      var model = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+      if (this.before()) {
+        return true;
+      }
+
+      if (type == '' || type === undefined || model == '' || model === undefined) {
+        return this.user.permissions.indexOf(action) !== -1;
+      }
+
+      return this.policies[type][action](this.user, model);
+    }
+  }, {
+    key: "deny",
+    value: function deny(action, type) {
+      var model = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      return !this.allow(action, type, model);
+    }
+  }]);
+
+  return Gate;
 }();
 
 
@@ -68159,7 +68331,6 @@ var createComments = function createComments(_ref2, data) {
         'image': getters.me.image
       };
       commit('LIST_COMMENTS', res);
-      data.form.reset();
     }
   })["catch"](function (e) {
     console.log(e);

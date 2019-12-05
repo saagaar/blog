@@ -5,7 +5,7 @@
 		    <div class="user justify-content-between d-flex">
 		        <div class="thumb">
 		       
-		            <img v-if="eachComment.user.image" :src="'/images/user-images/'+eachComment.user.image" alt="">
+		            <img v-if="eachComment.user.image" :src="'/uploads/user-images/'+eachComment.user.image" alt="">
 		            <img v-else :src="'/images/user-images/default.png'" alt="">
 		        </div>
 		        <div class="desc">
@@ -21,9 +21,6 @@
 		                    <p class="date">{{ eachComment.created_at | moment("dddd, MMMM YYYY, h:mm:ss a") }} </p>
 		                </div>
 
-		                <div class="reply-btn">
-		                    <a href="#" class="btn-reply text-uppercase">reply</a>
-		                </div>
 		            </div>
 
 		        </div>

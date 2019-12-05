@@ -18,6 +18,7 @@
     <link rel="icon" href="images/favicon.png" type="image/png">
   
     <link rel="stylesheet" href="{{ asset('frontend/css/app.css') }}">    
+    <link rel="stylesheet" href="{{ asset('landing-page/assets/css/fontawesome-all.css') }}">    
     <title>The Bloggers Club-an online blogging platform for independent voices.</title>
     <meta name="keywords" content="Blogs,bloggers blog,Bloggers Club,Online Blogging Platform,Categories for blog posts,Categories for blog,Blog with categories">
     <meta name="title" content="The Bloggers Club-an online blogging platform for independent voices.">

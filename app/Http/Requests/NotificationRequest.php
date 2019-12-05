@@ -28,8 +28,8 @@ class NotificationRequest extends FormRequest
             'code'=>'required|unique:notification_settings,code,'. $this->id,
             'subject'=>'required',
             'view'=>'required',
-            'email_body'=>'required',
-            'database_body'=>'required',
+            'email_body'=>'',
+            'database_body'=>'',
             'sms_body'=>'',
             'notification_type'=>'required',
             'active'=>'required'

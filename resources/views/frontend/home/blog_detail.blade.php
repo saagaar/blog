@@ -196,7 +196,7 @@
                             @endforeach
                         </aside>
                         <aside class="single_sidebar_widget tag_cloud_widget">
-                            <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Tag Clouds</h4>
+                            <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Tags</h4>
                             <ul class="list">
                             	@foreach($blogDetails->tags as $eachTags)
                                 <li>

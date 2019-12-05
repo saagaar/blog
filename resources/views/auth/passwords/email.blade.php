@@ -1,5 +1,4 @@
 @extends('frontend.layouts.app')
-
 @section('content')
 <section class="hero is-light is-fullheight">
     <div class="hero-body">

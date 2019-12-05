@@ -301,7 +301,6 @@ class HomeController extends FrontendController
     public function share(Request $request,ShareInterface $share){
       try{
         $blogCode = $request->code;
-        print_r($blogCode);exit;
         $media=$request->media;
         if($media=='facebook'){
           $share->incrementFbShare($blogCode);

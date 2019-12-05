@@ -38,6 +38,7 @@ Route::get('api/dashboard','Frontend\HomeController@dashboard')->name('api');
 Route::get('api/profile','Frontend\UserController@profile')->name('api');
 Route::get('/profile','Frontend\UserController@profile')->name('profile');
 Route::get('/profile/{username}','Frontend\UserController@profile')->name('profile');
+Route::get('api/profile/{username}','Frontend\UserController@profile')->name('api');
 Route::post('/user/changeprofile', 'Frontend\UserController@changeProfile');
 Route::get('/settings','Frontend\UserController@settings')->name('settings');
 
@@ -67,7 +68,7 @@ Route::get('/api/getfollowers','Frontend\UserController@getFollowers')->name('ge
 Route::get('/api/getfollowings','Frontend\UserController@getFollowings')->name('getfollowings');
 
 
-Route::get('/test', 'Frontend\HomeController@test')->name('test');
+Route::get('/test', 'Frontend\FrontendController@index')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 Route::post('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
 Route::post('/blog/detail/share','Frontend\HomeController@share')->name('share');
@@ -82,7 +83,7 @@ Route::get('/social-login/{provider}','Frontend\LoginController@socialLogin')->n
 // Route::match(['get','post'],'/admin/login','AdminController@login');
 Route::post('/blog/login', 'Frontend\LoginController@login')->name('login');
 Route::post('/blog/register', 'Frontend\LoginController@register')->name('register');
-
+Route::get('/blog/useractivation/{username}/{code}', 'Frontend\LoginController@userActivation')->name('user.activation');
 Route::get('/blog/isemailregistered/{email}', 'Frontend\LoginController@isEmailAlreadyRegistered')->name('useremail');
 Route::get('/user/emailupdatecheck/{email}', 'Frontend\UserController@emailAvailabilityForUpdate')->name('useremailupdate');
 
@@ -106,6 +107,12 @@ Route::get('/followings','Frontend\UserController@followings')->name('followings
 	
 Route::get('api/followers','Frontend\UserController@followers')->name('api');
 Route::get('/followers','Frontend\UserController@followers')->name('followers');
+
+Route::get('/api/followings/{username}','Frontend\UserController@followings')->name('api');
+Route::get('/followings/{username}','Frontend\UserController@followings')->name('followings');
+	
+Route::get('/api/followers/{username}','Frontend\UserController@followers')->name('api');
+Route::get('/followers/{username}','Frontend\UserController@followers')->name('followers');
 
 Route::get('users/notifications','Frontend\UserController@notifications')->name('user.notification');
 Route::get('api/users/notifications','Frontend\UserController@notifications')->name('api');
