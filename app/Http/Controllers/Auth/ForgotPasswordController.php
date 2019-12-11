@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use App\Repository\CategoryInterface;
 
 class ForgotPasswordController extends Controller
 {
@@ -27,6 +28,12 @@ class ForgotPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('web');
+    }
+
+    public function showLinkRequestForm(CategoryInterface $category)
+    {
+          $navCategory=$category->getCategoryByShowInHome();
+          return view('auth.passwords.email')->with('navCategory',$navCategory);
     }
 }

@@ -118,7 +118,9 @@ class HomeController extends FrontendController
         
         return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo));
     }
-
+    public function test(Request $request){
+      $this->category->subs(5);
+    }
     public function blogDetail($code,Request $request){
 
       $blogDetails = $this->blog->getBlogByCode($code);
@@ -285,13 +287,19 @@ class HomeController extends FrontendController
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
-    public function test(ShareInterface $share)
-    {
-       $blogCode='5da95a60500cc2da';
-       $data = $share->incrementFbShare($blogCode);
-        print_r($data);
-        // return view('frontend.layouts.app');
-    }
+    // public function test(ShareInterface $share)
+    // {
+    //    // $blogCode='5da95a60500cc2da';
+    //    // $data = $share->incrementFbShare($blogCode);
+    //    //  print_r($data);
+
+    //    $code='user_registration';
+    //     $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
+    //     // print_r($data);exit;
+    //     $this->authUser->notify(new Notifications($code,$data));
+    //     echo "Success";
+    //     // return view('frontend.layouts.app');
+    // }
     public function share(Request $request,ShareInterface $share){
       try{
         $blogCode = $request->code;

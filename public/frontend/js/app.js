@@ -7480,6 +7480,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -46273,10 +46274,12 @@ var render = function() {
                     _vm._m(7)
                   ]),
                   _vm._v(" "),
-                  _vm._m(8)
+                  _vm._m(8),
+                  _vm._v(" "),
+                  _vm._m(9)
                 ]),
                 _vm._v(" "),
-                _vm._m(9)
+                _vm._m(10)
               ])
             ])
           ]
@@ -46518,6 +46521,20 @@ var staticRenderFns = [
     return _c("div", { staticClass: "signup-section text-center" }, [
       _vm._v("Not a member yet? "),
       _c("button", { staticClass: "submit text-info" }, [_vm._v(" Sign Up")]),
+      _vm._v(".")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "signup-section text-center" }, [
+      _vm._v("Forgot Password? "),
+      _c(
+        "a",
+        { staticClass: "submit text-info", attrs: { href: "/password/reset" } },
+        [_vm._v(" Forgot Password")]
+      ),
       _vm._v(".")
     ])
   },

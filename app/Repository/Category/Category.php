@@ -43,8 +43,14 @@ Class Category implements CategoryInterface
      *
      * @return mixed
      */
+    public function subs($id){
+      $dd =$this->cat->find($id);
+      $dd->subscribes()->associate($dd);
+      echo "<pre>";
+      print_r($dd);exit;
+    }
     public function getAll(){
-   	 return	$this->cat;
+   	 return	$this->cat->latest();
     }
 
     public function getCategoryByWeight(){

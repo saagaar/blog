@@ -58,7 +58,7 @@ class Notifications extends Notification
         {
             throw new \Exception('Notification Couldn\'t be set. No channel provided.');
         }
-        return is_array($this->_channel) ? $this->_channel : [$this->_channel];
+        return  $this->_channel ;
     }
 
     /**
