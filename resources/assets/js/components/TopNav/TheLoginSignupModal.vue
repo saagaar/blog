@@ -143,9 +143,10 @@
 </template>
 <script>
 import { required, minLength , sameAs, between ,email} from 'vuelidate/lib/validators'
+import LoginMixin from './../../mixins/Login.mixins';
 import Form from './../../services/Form.js'
     export default {
-
+          mixins:[LoginMixin],
         data() {
         	 return {
             loginForm:new Form({
@@ -210,21 +211,19 @@ import Form from './../../services/Form.js'
         methods:{
 
           submitLoginForm:function(){
-
-          
             this.$v.loginForm.$touch();
             if(!this.$v.loginForm.$invalid)
             {
               this.loginForm.post('blog/login').then(response => {
                if(response.data.status){
 
-                  window.location.href="dashboard"
+                  window.location.href="/home"
                }
                else{
-                  alert(response.data.message)
+                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message})
                }
               }).catch(e => {
-                  console.log(e);
+                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message})
               });
             }
           },
@@ -233,8 +232,9 @@ import Form from './../../services/Form.js'
             if(!this.$v.signUpForm.$invalid)
             {
               this.signUpForm.post('blog/register').then(response => {
-               if(response.data.status){
-                  this.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
+               if(response.data.data.status){
+                 this.closeAllPopups();
+                 this.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                }
                else{
                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});

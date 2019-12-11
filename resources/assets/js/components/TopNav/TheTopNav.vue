@@ -5,7 +5,7 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="images/system-images/logo.png" alt="">
+                        <img :src="'/uploads/sitesettings-images/'+me.websiteLogo" alt="">
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
@@ -35,16 +35,18 @@
                                 <li><a href="/dashboard">My Dashboard</a></li>
                             
                                 <li><router-link to="/profile">Profile</router-link></li>
-                                <li><router-link to="/followers">Followers</router-link></li>
+                                <li><router-link to="/categories">Choose your interest</router-link></li>
                                 <hr>
-                                <li><router-link to="/blog/list">My Blog</router-link></li>
-                                <li><a href="#">Bookmarks</a></li>
-                                <li><a href="#">Publications</a></li>
-                                <li><router-link to="/categories">Customize your interest</router-link></li>
+                                <li><router-link to="/add/blog">New Articles</router-link></li>
+                                
+                                <li><router-link to="/blog/list">My Articles</router-link></li>
+                                <!-- <li><a href="#">Bookmarks</a></li> -->
+                                <!-- <li><a href="#">Publications</a></li> -->
+                             
                                 <hr>
                                 <li><a href="#">Settings</a></li>
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Change Password</a></li>
+                                <!-- <li><a href="#">Help</a></li> -->
+                                <!-- <li><a href="#">Change Password</a></li> -->
                                 <li><a v-bind:href="config.ROOT_URL+'logout/user'">Log Out</a></li>
                             </ul>
                         </li>

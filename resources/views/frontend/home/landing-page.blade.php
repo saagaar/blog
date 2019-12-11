@@ -55,7 +55,10 @@
       <div class="collapse navbar-collapse text-center" id="navbar">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/home"><b>Home</b></a>
+            <a class="nav-link" href="/"><b>Home</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/blog"><b>Blog</b></a>
           </li>
           <li class="nav-item">
             <a class="nav-link page-scroll" href="#feature  "><b>Feature  </b></a>
@@ -67,7 +70,7 @@
             <a class="nav-link" href="login.html"><b>Login</b></a>
           </li> -->
         </ul>
-        <a href="/home" class="btn btn-primary ml-lg-3 primary-shadow">Join Now</a>
+        <a href="/home" class="btn btn-primary ml-lg-3 primary-shadow">Explore Us</a>
       </div>
     </nav>
   </div>
@@ -85,7 +88,7 @@
       <div class="col-lg-12 text-center">        
         <h1 class="mb-3">{{$eachBanner->title}}</h1>
         <p class="mb-4">{{$eachBanner->description}}</p>
-        <a href="" class="btn btn-secondary btn-lg mb-5">explore us</a>
+        <a href="" class="btn btn-secondary btn-lg mb-5">About us</a>
         <!-- banner image -->
         <img class="img-fluid" src="landing-page/assets/images/hero-area/banner.png" alt="banner-img">        
       </div>
@@ -94,7 +97,7 @@
          <div class="col-lg-12 text-center">        
         <h1 class="mb-3">Update Title From Backend</h1>
         <p class="mb-4"> </p>
-        <a href="#" class="btn btn-secondary btn-lg mb-5">explore us</a>
+        <a href="#" class="btn btn-secondary btn-lg mb-5">About us</a>
         <!-- banner image -->
       </div>
       @endif

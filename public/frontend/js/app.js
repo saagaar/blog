@@ -7373,7 +7373,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
+/* harmony import */ var _mixins_Login_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../mixins/Login.mixins */ "./resources/assets/js/mixins/Login.mixins.js");
+/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
 
 //
 //
@@ -7518,16 +7519,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_Login_mixins__WEBPACK_IMPORTED_MODULE_2__["default"]],
   data: function data() {
     return {
-      loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
+      loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
         email: '',
         password: ''
       }),
-      signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
+      signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
         email: '',
         password: '',
         repassword: '',
@@ -7601,32 +7604,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submitLoginForm: function submitLoginForm() {
+      var _this = this;
+
       this.$v.loginForm.$touch();
 
       if (!this.$v.loginForm.$invalid) {
         this.loginForm.post('blog/login').then(function (response) {
           if (response.data.status) {
-            window.location.href = "dashboard";
-          } else {
-            alert(response.data.message);
-          }
-        })["catch"](function (e) {
-          console.log(e);
-        });
-      }
-    },
-    submitSignUpForm: function submitSignUpForm() {
-      var _this = this;
-
-      this.$v.signUpForm.$touch();
-
-      if (!this.$v.signUpForm.$invalid) {
-        this.signUpForm.post('blog/register').then(function (response) {
-          if (response.data.status) {
-            _this.$store.commit('SETFLASHMESSAGE', {
-              status: true,
-              message: response.data.message
-            });
+            window.location.href = "/home";
           } else {
             _this.$store.commit('SETFLASHMESSAGE', {
               status: false,
@@ -7635,6 +7620,34 @@ __webpack_require__.r(__webpack_exports__);
           }
         })["catch"](function (e) {
           _this.$store.commit('SETFLASHMESSAGE', {
+            status: false,
+            message: response.data.message
+          });
+        });
+      }
+    },
+    submitSignUpForm: function submitSignUpForm() {
+      var _this2 = this;
+
+      this.$v.signUpForm.$touch();
+
+      if (!this.$v.signUpForm.$invalid) {
+        this.signUpForm.post('blog/register').then(function (response) {
+          if (response.data.data.status) {
+            _this2.closeAllPopups();
+
+            _this2.$store.commit('SETFLASHMESSAGE', {
+              status: true,
+              message: response.data.message
+            });
+          } else {
+            _this2.$store.commit('SETFLASHMESSAGE', {
+              status: false,
+              message: response.data.message
+            });
+          }
+        })["catch"](function (e) {
+          _this2.$store.commit('SETFLASHMESSAGE', {
             status: false,
             message: response.data.message
           });
@@ -67876,6 +67889,9 @@ __webpack_require__.r(__webpack_exports__);
     openSignUpModal: function openSignUpModal() {
       $('.modal').modal('hide');
       $('#SignUpModal').modal();
+    },
+    closeAllPopups: function closeAllPopups() {
+      $('.modal').modal('hide'); // $('#loginModal').modal('hide');
     }
   }
 });

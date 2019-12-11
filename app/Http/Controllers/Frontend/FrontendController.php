@@ -131,6 +131,7 @@ class FrontendController extends BaseController
             $user->notifications=$account->getUsersNotification($accUser,$this->apiPerPage);
             $user->blogCount=$accUser->blogs()->count();
             $user->root_url=url('/');
+            $user->websiteLogo=$this->websiteLogo;
             $userid=$user->id;
             $user=$user->toArray();
             $user['userid']=$userid;
@@ -148,6 +149,7 @@ class FrontendController extends BaseController
             $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
             $user->notifications=$account->getUsersNotification($this->authUser,$this->apiPerPage);
             $user->blogCount=$this->authUser->blogs()->count();
+            $user->websiteLogo=$this->websiteLogo;
             $user->root_url=url('/');
             
             $user=$user->toArray();
