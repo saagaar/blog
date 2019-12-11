@@ -41,9 +41,8 @@ Class  UserInteraction implements UserInteractionInterface
       return $user->likes()->where('code',$code)->get();
     }
      public function getLikeByBlog($code){
-        return $this->blog->where('code',$code)->withCount('likes')->get();
+        return $this->blog->where('code',$code)->with('user')->withCount('likes')->first();
      }
-
 
     
     public function likeBlog($user,$code){

@@ -9,6 +9,7 @@ use App\Repository\BlogInterface;
 use Illuminate\Support\Facades\File;
 use App\Repository\FollowerInterface; 
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\Notifications;
 use Validator;
 class UserController extends FrontendController
 {
@@ -189,6 +190,10 @@ class UserController extends FrontendController
          {
             $this->followerList->followUser($this->authUser,$username);
          }  
+         $code='follow_notification';
+         $userdata=$this->user->getUserByUsername($username);
+        $data=['NAME'=>$this->authUser->name,'URL'=>url('/followers')];
+        $userdata->notify(new Notifications($code,$data));
          return array('status'=>true,'message'=>$this->getFollowSuggestions($this->authUser,1,$offset));
     }
     public function unFollowUser($username,$offset=false)

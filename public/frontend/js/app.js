@@ -6822,6 +6822,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7018,6 +7019,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7026,6 +7031,7 @@ var action = '';
   data: function data() {
     return {
       isChecked: '',
+      isLoading: false,
       count: ''
     };
   },
@@ -7044,16 +7050,19 @@ var action = '';
     toggleLike: function toggleLike() {
       var _this = this;
 
-      if (this.isChecked) {
-        this.isChecked = false;
-      } else {
-        this.isChecked = true;
-      }
-
+      this.isLoading = true;
       action = '/like/blog/' + this.blogcode;
       var form = new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
       form.post(action).then(function (response) {
         if (response.data.status) {
+          _this.isLoading = false;
+
+          if (_this.isChecked) {
+            _this.isChecked = false;
+          } else {
+            _this.isChecked = true;
+          }
+
           return _this.count = response.data.likes['0'].likes_count;
         } else {
           if (_this.isChecked) {
@@ -45283,7 +45292,15 @@ var render = function() {
                           ? _c("a", { attrs: { href: "#" } }, [
                               _vm._v("By Admin")
                             ])
-                          : _vm._e()
+                          : _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: "/profile/" + items.user.username
+                                }
+                              },
+                              [_vm._v("By " + _vm._s(items.user.name))]
+                            )
                       ]),
                       _vm._v(" "),
                       _c(
@@ -45301,9 +45318,14 @@ var render = function() {
                         _c("a", { attrs: { href: "#" } }, [
                           _c("i", { staticClass: "ti-time" }),
                           _vm._v(
-                            _vm._s(
-                              _vm._f("moment")(items.created_at, "from", "now")
-                            )
+                            " " +
+                              _vm._s(
+                                _vm._f("moment")(
+                                  items.created_at,
+                                  "from",
+                                  "now"
+                                )
+                              )
                           )
                         ]),
                         _vm._v(" "),
@@ -45539,7 +45561,7 @@ var render = function() {
           ? _c("img", {
               staticClass: "img-fluid",
               attrs: {
-                src: "/frontend/images/elements/appreciate-active.gif",
+                src: "/frontend/images/elements/appreciate.png",
                 width: "25",
                 height: "25"
               }
