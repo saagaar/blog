@@ -48,6 +48,7 @@ export default {
     return {
       offset: 1,
       lists: [],
+      
       form:new Form()
     };
   },

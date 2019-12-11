@@ -25,26 +25,25 @@ let routes=[
 						path:'/blog/list',
 						components:require('./pages/BlogList')
 				},
+			
 				{
-						path:'/profile',
+						name:'profile',
+						path:'/profile/:username?',
 						components:require('./pages/Timeline'),
 						meta:{layout:"timeline"}
 						
 				},
+			
 				{
-						path:'/profile/:username',
-						components:require('./pages/Timeline'),
-						meta:{layout:"timeline"}
-						
-				},
-				{
-						path:'/followers',
+						name:'followers',
+						path:'/followers/:username?',
 						components:require('./pages/FollowersList'),
 						meta:{layout:"timeline"}
 						
 				},
 				{
-						path:'/followings',
+						name:'followings',
+						path:'/followings/:username?',
 						components:require('./pages/FollowingsList'),
 						meta:{layout:"timeline"}
 						
@@ -69,24 +68,8 @@ let routes=[
 						path:'/blog/preview/:blogId/',
 						components:require('./pages/BlogPreview')
 				},
-				{
-						path:'/profile/:username',
-						components:require('./pages/Timeline'),
-						meta:{layout:"publicprofile"}
-						
-				},
-				{
-						path:'/followers/:username',
-						components:require('./pages/FollowersList'),
-						meta:{layout:"publicprofile"}
-						
-				},
-				{
-						path:'/followings/:username',
-						components:require('./pages/FollowingsList'),
-						meta:{layout:"publicprofile"}
-						
-				},
+				
+				
 
 		   ];
 

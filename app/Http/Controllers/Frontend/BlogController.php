@@ -68,15 +68,15 @@ class BlogController extends FrontendController
         $imagePath=public_path(). '/uploads/blog/'.$code.'/'.$name;
         if(File::exists($imagePath))
         {
-           $img = Image::make($imagePath);
-          $img->resize($width, null, function ($constraint) {
+          $img = Image::make($imagePath);
+          $img->resize($width, null, function ($constraint) 
+          {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            });
+          });
           return $img->response('jpg'); 
         }
        abort(404);
-      
     }
     public function update(Request $request,$blogCode,TagInterface $tag)
     {
@@ -154,7 +154,7 @@ class BlogController extends FrontendController
                            File::makeDirectory($dir, 0777, true, true);
                            $tmpImg =request()->image->move($dir,$imageName);
                            $img = Image::make($tmpImg);         
-                           $img->resize(100, null, function ($constraint) 
+                           $img->resize(180, 180, function ($constraint) 
                            {
                              $constraint->aspectRatio();
                             }

@@ -15,19 +15,21 @@
             	@if($featuredBlog['0'])
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
-                        <div class="thumb">
+                        <div class="thumb bg-color">
                             <a href="#">
-                                @if($featuredBlog['0']->image)
-                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$featuredBlog['0']->image) }}" alt="">
+                            @if($featuredBlog['0']->image)
+                                 <img class="img-fluid plain-bg" data-src="{{ '/image/'.$featuredBlog[0]->code.'/555/'.$featuredBlog[0]->image }}" alt="">
                             @else
-                                 <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
+                                 <img class="img-fluid" src="{{ asset('/frontend/images/elements/default-post.jpg') }}" alt="">
 
                             @endif
                             </a>
                         </div>
                         <div class="short_details">
                              <div class="meta-top d-flex">
-                                <a href="#">By {{ ($featuredBlog['0']->anynomous=='2') ? (isset($featuredBlog['0']->user->name)  ? $featuredBlog['0']->user->name : 'Admin'):'Anynomous' }}</a>
+                            @php
+                          echo   ($featuredBlog['0']->anynomous=='2') ? (isset($featuredBlog['0']->user->name)  ? '<a href="/profile/'.$featuredBlog['0']->user->username.'">By'. $featuredBlog['0']->user->name.'</a>' : '<a href="#">Admin</a>'):'<a href="#"> Anynomous </a>'
+                            @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $featuredBlog['0']->code)}}">
                                 <h4>{{ str_limit($featuredBlog['0']->title, $limit = 150, $end = '...') }}</h4>
@@ -41,7 +43,7 @@
                                     <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                             <!--    <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -54,11 +56,16 @@
                 <div class="col-lg-6 col-md-6">
                 	@foreach($featuredBlog as $eachFeaturedBlog)
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
+                        <div class="thumb col-md-4 col-sm-5 col-12 bg-color">
                             <figure>
                                 <a href="#">
-                                    @if($eachFeaturedBlog->image)
-                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachFeaturedBlog->code.'/'.$eachFeaturedBlog->image) }}" alt="">
+
+                            @if($eachFeaturedBlog->image)
+                                    @php
+
+                                        $img=explode('.',$eachFeaturedBlog->image);
+                                    @endphp
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$eachFeaturedBlog->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -68,7 +75,9 @@
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
                              <div class="meta-top d-flex">
-                                <a href="#">By {{ ($eachFeaturedBlog->anynomous=='2') ? (isset($eachFeaturedBlog->user->name)  ? $eachFeaturedBlog->user->name : 'Admin'):'Anynomous' }}</a>
+                           @php
+                                echo   ($eachFeaturedBlog->anynomous=='2') ? (isset($eachFeaturedBlog->user->name)  ? '<a href="/profile/'.$eachFeaturedBlog->user->username.'"> By '.$eachFeaturedBlog->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                            @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachFeaturedBlog->code)}}">
                                 <h4>{{ str_limit($eachFeaturedBlog->title, $limit = 150, $end = '...') }}</h4>
@@ -80,7 +89,7 @@
                                     <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                               <!--  <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -115,10 +124,10 @@
             	@if($featuredForMember['0'])
                <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
-                        <div class="thumb">
+                        <div class="thumb bg-color">
                             <a href="#">
                                 @if($featuredForMember['0']->image)
-                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember['0']->image) }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ '/image/'.$featuredForMember[0]->code.'/555/'.$featuredForMember[0]->image }}" alt="">
                                 @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -127,7 +136,9 @@
                         </div>
                         <div class="short_details">
                              <div class="meta-top d-flex">
-                                <a href="#">By {{ ($featuredForMember['0']->anynomous=='2') ? (isset($featuredForMember['0']->user->name)  ? $featuredForMember['0']->user->name : 'Admin'):'Anynomous' }}</a>
+                            @php
+                                echo   ($featuredForMember['0']->anynomous=='2') ? (isset($featuredForMember['0']->user->name)  ? '<a href="/profile/'.$featuredForMember[0]->user->username.'"> By '.$featuredForMember['0']->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                            @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $featuredForMember['0']->code)}}">
                                 <h4>{{ str_limit($featuredForMember['0']->title, $limit = 150, $end = '...') }}</h4>
@@ -141,7 +152,7 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                               <!--  <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -153,11 +164,16 @@
                 <div class="col-lg-6 col-md-6">
                     @foreach($featuredForMember as $eachFeaturedForMember)
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
+                        <div class="thumb col-md-4 col-sm-5 col-12 bg-color">
                             <figure>
                                 <a href="#">
+                                 
                             @if($eachFeaturedForMember->image)
-                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachFeaturedForMember->code.'/'.$eachFeaturedForMember->image) }}" alt="">
+                                @php
+                                    $img=array();
+                                    $img=explode('.',$eachFeaturedForMember->image);
+                                @endphp
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$eachFeaturedForMember->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -167,7 +183,9 @@
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
                             <div class="meta-top d-flex">
-                                <a href="#">By {{ ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? $eachFeaturedForMember->user->name : 'Admin'):'Anynomous' }}</a>
+                                @php
+                                    echo   ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? '<a href="/profile/'.$eachFeaturedForMember->user->username.'"> By '.$eachFeaturedForMember->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                            @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachFeaturedForMember->code)}}">
                                 <h4>{{ str_limit($eachFeaturedForMember->title, $limit = 150, $end = '...') }}</h4>
@@ -179,7 +197,7 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachFeaturedForMember->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                             <!--    <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -210,10 +228,10 @@
             	
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
-                        <div class="thumb">
+                        <div class="thumb bg-color">
                             <a href="#">
-                                @if($popular['0']->image)
-                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$popular['0']->code.'/'.$popular['0']->image) }}" alt="">
+                            @if($popular['0']->image)
+                                 <img class="img-fluid plain-bg"  data-src="{{ '/image/'.$popular[0]->code.'/555/'.$popular[0]->image }}"  alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -222,8 +240,10 @@
                         </div>
                         <div class="short_details">
                           <div class="meta-top d-flex">
-                                <a href="#">By {{ ($popular['0']->anynomous=='2') ? (isset($popular['0']->user->name)  ? $popular['0']->user->name : 'Admin'):'Anynomous' }}</a>
-                            </div>
+                            @php
+                                echo   ($popular['0']->anynomous=='2') ? (isset($popular['0']->user->name)  ? '<a href="/profile/'.$popular[0]->user->username.'"> By '.$popular['0']->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                            @endphp
+                           </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $popular['0']->code)}}">
                                 <h4>{{ str_limit($popular['0']->title, $limit = 150, $end = '...') }}</h4>
                             </a>
@@ -236,7 +256,7 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$popular['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                               <!--  <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -249,11 +269,15 @@
                 <div class="col-lg-6 col-md-6">
                 	@foreach($popular as $eachPopular)
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
+                        <div class="thumb col-md-4 col-sm-5 col-12 bg-color bg-color">
                             <figure>
+                                    
                                 <a href="#">
-                                    @if($eachPopular->image)
-                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachPopular->code.'/'.$eachPopular->image) }}" alt="">
+                            @if($eachPopular->image)
+                                     @php
+                                        $img=explode('.',$eachPopular->image);
+                                    @endphp
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$eachPopular->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -264,7 +288,9 @@
                         <div class="short_details col-md-8 col-sm-7 col-12">
 
                            <div class="meta-top d-flex">
-                                <a href="#">By {{ ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? $eachFeaturedForMember->user->name : 'Admin'):'Anynomous' }}</a>
+                            @php
+                                    echo   ($eachPopular->anynomous=='2') ? (isset($eachPopular->user->name)  ? '<a href="/profile/'.$eachPopular->user->username.'"> By '.$eachPopular->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                            @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachPopular->code)}}">
                                 <h4>{{ str_limit($eachPopular->title, $limit = 150, $end = '...') }}</h4>
@@ -277,7 +303,7 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachPopular->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -313,11 +339,15 @@
             	@foreach($latest as $eachLatest)
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12">
+                        <div class="thumb col-md-4 col-sm-5 col-12 bg-color">
                             <figure>
                                 <a href="#">
+
                                 @if($eachLatest->image)
-	                                <img class="img-fluid" src="{{ asset('uploads/blog/'.$eachLatest->code.'/'.$eachLatest->image) }}" alt="">
+                                     @php
+                                        $img=explode('.',$eachLatest->image);
+                                    @endphp
+	                                <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$eachLatest->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
 	                            @else
 	                                <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -327,9 +357,11 @@
                         </div>
                         <div class="short_details col-md-8 col-sm-7 col-12">
                           <div class="meta-top d-flex">
-                                <a href="#">By {{ ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? $eachFeaturedForMember->user->name : 'Admin'):'Anynomous' }}</a>
+                            @php
+                                echo   ($eachLatest->anynomous=='2') ? (isset($eachLatest->user->name)  ? '<a href="/profile/'.$eachLatest->user->username.'"> By '.$eachLatest->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                            @endphp
                             </div>
-                            <a class="d-block"  href="{{ route('blog.detail' , $eachFeaturedForMember->code)}}">
+                            <a class="d-block"  href="{{ route('blog.detail' , $eachLatest->code)}}">
                                 <h4>{{ str_limit($eachLatest->title, $limit = 150, $end = '...') }}</h4>
                             </a>
                             <p>{{ str_limit($eachLatest->short_description, $limit = 150, $end = '...') }}</p>
@@ -340,7 +372,7 @@
                                     <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachLatest->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
-                                <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                               <!--  <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div>

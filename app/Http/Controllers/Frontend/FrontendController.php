@@ -43,7 +43,7 @@ class FrontendController extends BaseController
     Protected $permission;
     Protected $contactEmail;
 
-    Protected $perPage=10;
+    Protected $perPage=4;
     Protected $apiPerPage=8;
     public function __construct()
     {
@@ -108,21 +108,41 @@ class FrontendController extends BaseController
        //  $this->authUser->notify(new Notifications($code,$data));
        //  echo "Success";
     }
-    public function getAllPermissionsAttribute() {
+    public function getAllPermissionsAttribute($user=false) {
       $permissions = [];
         foreach ($this->permission->getAll()->get() as $permission) {
-          if (Auth::user()->can($permission->name)) {
+          if ($user->can($permission->name)) {
             $permissions[] = $permission->name;
           }
         }
         return $permissions;
     }
-    public function user_state_info(){
+    public function user_state_info($username=false){
        $followerList = app()->make('App\Repository\FollowerInterface');
        $account = app()->make('App\Repository\AccountInterface');
-        if(\Auth::check())
+        if($username)
         {
+            $accUser=$account->getUserByUsername($username);
+
+            $user=$accUser;
+            $user->followersCount=$followerList->getFollowersCount($accUser);
+            $user->followingCount=$followerList->getFollowingsCount($accUser);
+            $user->unReadNotificationsCount=$accUser->unreadNotifications()->count() ;
+            $user->notifications=$account->getUsersNotification($accUser,$this->apiPerPage);
+            $user->blogCount=$accUser->blogs()->count();
+            $user->root_url=url('/');
+            $userid=$user->id;
+            $user=$user->toArray();
+            $user['userid']=$userid;
+            $user['permissions']= $this->getAllPermissionsAttribute($accUser);    
+            return $user;
+        }
+        else if(\Auth::check())
+        {
+           
             $user =$this->authUser;
+            $userid=$user->id;
+            $user['userid']=$userid;
             $user->followersCount=$followerList->getFollowersCount($this->authUser);
             $user->followingCount=$followerList->getFollowingsCount($this->authUser);
             $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
@@ -131,7 +151,8 @@ class FrontendController extends BaseController
             $user->root_url=url('/');
             
             $user=$user->toArray();
-            $user['permissions']= $this->getAllPermissionsAttribute();    
+
+            $user['permissions']= $this->getAllPermissionsAttribute($this->authUser);    
             // $user['roles']=$this->authUser->roles->first()->name;
             return $user;
         }
@@ -145,7 +166,6 @@ class FrontendController extends BaseController
     public function save_visitor_info()
     {
         $serverData = $this->visitorInfo->getServerInfo();
-
         $ipAddress=$serverData['ip_address'];  
         $dblogdata=$this->VisitorLogInterface->getLogbyIpAddressAndURL($serverData['ip_address'],$serverData['path']);
        if($dblogdata && (trim($dblogdata['details'])!='')){
@@ -187,6 +207,5 @@ class FrontendController extends BaseController
             $logcreate->visitordetails()->create($logdata);
         }
         VisitorLog::dispatch($this->VisitorlogInterface,$ipAddress);
-
     }
 }

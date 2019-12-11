@@ -33,10 +33,9 @@
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li><router-link to="/dashboard">Dashboard</router-link></li>
-                  <li><router-link to="/profile">Timeline</router-link></li>
-                  
-                  <li><router-link to="/followings">Followings({{ me.followingCount}} )</router-link></a></li>
-                  <li><router-link to="/followers">Followers({{ me.followersCount}} )</router-link></a></li>
+                  <li><router-link :to="{name:'profile',params:{username:username}}">Timeline</router-link></li>
+                  <li><router-link :to="{name:'followings',params:{username:username}}">Followings({{ me.followingCount}} )</router-link></a></li>
+                  <li><router-link :to="{name:'followers',params:{username:username}}">Followers({{ me.followersCount}} )</router-link></a></li>
                 </ul>
                 <ul class="follow-me list-inline">
                   <li>
@@ -105,17 +104,24 @@ import Form from './../services/Form.js';
             isLoading:false,
             form:new Form({
               image:'',
-              file:true
+              file:true,
+              username:'',
+              bio:'-',
+              name:'',
+
             })
            }
         },
         mixin,
+        
         computed:{
+
             me:function(){
               return this.$store.getters.me
             },
-            
-           
+        },
+        created(){
+          this.username=this.$route.params.username;
         },
         methods:{
             changeImage:function() 
@@ -129,7 +135,7 @@ import Form from './../services/Form.js';
                  }
                  else{
                    curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
-                    curObject.$store.commit('TOGGLE_LOADING');
+                   curObject.$store.commit('TOGGLE_LOADING');
                  }
                 }).catch(e => {
                      curObject.$store.commit('TOGGLE_LOADING');
@@ -138,20 +144,11 @@ import Form from './../services/Form.js';
                       else
                      curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
                 });
-
             },
             getProfileUrl(){
-                let url=this.me.image;
-                if(url==='' || url==null){
-                  return 'frontend/images/elements/default-profile.png';
-                }
-                else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
-                  return url;
-                }
-                else{
-                  return '/uploads/user-images/'+url;
-                }
-             }
+                  let url=this.me.image;
+                  return this.$helpers.getProfileUrl(url);
+            }
         },
         components:{
             TheTopNav,
@@ -163,10 +160,5 @@ import Form from './../services/Form.js';
         },
 
     }
-
-
-     
-
-
 
 </script>

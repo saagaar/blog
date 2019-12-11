@@ -3,7 +3,6 @@
 <div>
 <TheTopNav></TheTopNav>
 <div class="mid_part" >
-
   <section class="dashboard_sec">
     <div class="container">
          <div class="timeline">
@@ -11,7 +10,7 @@
           
         <div class="timeline-quote">
           <div class="collen">
-            <p>{{user.bio}}</p>
+            <p>  {{ bio }}</p>
           </div>
         </div>
           <div class="timeline-nav-bar hidden-sm hidden-xs">
@@ -25,17 +24,17 @@
                       </span> </div> -->
                   </figure>
                   </form>
-                  <h3>{{ user.name}}</h3>
+                  <h3>{{ name }}</h3>
                 </div>
             
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li><router-link to="/dashboard">Dashboard</router-link></li>
-                  <li><router-link :to="'/profile/'+user.username">Timeline</router-link></li>
+                  <li><router-link :to="'/profile/'+username">Timeline</router-link></li>
                   
-                  <li><router-link :to="'/followings/'+user.username">Followings({{ user.followings_count}} )</router-link></a></li>
-                  <li><router-link :to="'/followers/'+user.username">Followers({{ user.followers_count}} )</router-link></a></li>
+                  <li><router-link :to="'/followings/'+username">Followings({{ followings_count }} )</router-link></a></li>
+                  <li><router-link :to="'/followers/'+username">Followers({{ followers_count }} )</router-link></a></li>
                 </ul>
                 <ul class="follow-me list-inline">
                   <li>
@@ -51,14 +50,14 @@
         <div id="page-contents">
           <div class="row">
             <div class="col-md-3 col-sm-3">
-              <!-- <div id="sideba3">
-              <TheDashboardSideMenu></TheDashboardSideMenu>
-              </div> -->
-                <!-- <div class="bio">
+             <!--  <div id="sideba3">
+                <TheDashboardSideMenu></TheDashboardSideMenu>
+              </div>  -->
+               <div class="bio">
                 <Bio></Bio>
                 <hr/>
                 <Address></Address>
-                 </div> -->
+                 </div> 
               <!-- <div id="chat-block" class="" style="">
                 <div class="title">Chat online</div>
                 <ul class="online-users list-inline">
@@ -100,41 +99,33 @@ import Loader from './../components/Loader';
 import Form from './../services/Form.js';
     export default {
     	 mixins:[mixin],
-        data() {
+        data(){
           return {
-          	user:{},
             isLoading:false,
+            initialState:{},
+            image:'',
+            username:'',
+            followers_count:0,
+            followings_count:0,
+            bio:'-',
+            name:'-'
            }
         },
-        computed:{
-            me:function(){
-              return this.$store.getters.me
-            },
-            
-           
-        },
-        created(){
-		    if(window.__INITIAL_STATE__ !==undefined){
-		      let initialState=JSON.parse(window.__INITIAL_STATE__) || {};
-		      this.user=initialState.userdata;
-		    }
-		  },
-        mounted(){
-        	console.log(this.user);
+        watch: {
+          initialState: function () {
+            this.bio=this.initialState.userdata.bio;
+            this.image=this.initialState.userdata.image;
+            this.username=this.initialState.userdata.username;
+            this.name=this.initialState.userdata.name;
+            this.followers_count=this.initialState.userdata.followers_count;
+            this.followings_count=this.initialState.userdata.followings_count;
+            this.name=this.initialState.userdata.name;
+          },
         },
         methods:{
             getProfileUrl(){
-                let url=this.user.image;
-                if(url==='' || url==null){
-                  return 'frontend/images/elements/default-profile.png';
-                }
-                else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
-                  return url;
-                }
-                else{
-                  return '/uploads/user-images/'+url;
-                }
-             }
+              return this.$helpers.getProfileUrl(this.image);
+            }
         },
         components:{
             TheTopNav,
@@ -146,10 +137,5 @@ import Form from './../services/Form.js';
         },
 
     }
-
-
-     
-
-
 
 </script>
