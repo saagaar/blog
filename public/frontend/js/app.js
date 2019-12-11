@@ -6545,22 +6545,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       message: 'Sagar'
     };
+  },
+  methods: {
+    openNav: function openNav() {
+      document.getElementById("mySidenav").style.width = "100%";
+    },
+    closeNav: function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
   }
 });
 
@@ -6821,6 +6818,10 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6833,6 +6834,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       lists: [],
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]()
     };
+  },
+  watch: {
+    users: function users(newval) {
+      alert(newval);
+    }
   },
   methods: {
     infiniteHandler: function infiniteHandler($state) {
@@ -7316,6 +7322,12 @@ __webpack_require__.r(__webpack_exports__);
   // components:{
   //    LoginSignupModal 
   // },
+  props: {
+    text: {
+      type: String,
+      "default": 'Get Started'
+    }
+  },
   data: function data() {
     return {};
   },
@@ -7335,9 +7347,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
+/* harmony import */ var _LoginButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginButton.vue */ "./resources/assets/js/components/TopNav/LoginButton.vue");
+/* harmony import */ var _SignUpButton_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SignUpButton.vue */ "./resources/assets/js/components/TopNav/SignUpButton.vue");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -7489,14 +7503,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
+      loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
         email: '',
         password: ''
       }),
-      signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
+      signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
         email: '',
         password: '',
         repassword: '',
@@ -7507,17 +7523,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   validations: {
     loginForm: {
       email: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
-        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["email"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["email"]
       },
       password: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"]
       }
     },
     signUpForm: {
       email: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
-        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["email"],
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["email"],
         isUnique: function () {
           var _isUnique = _asyncToGenerator(
           /*#__PURE__*/
@@ -7564,19 +7580,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }()
       },
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
-        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["minLength"])(2)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["minLength"])(2)
       },
       password: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
-        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["minLength"])(6)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["minLength"])(6)
       },
       repassword: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
-        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["minLength"])(6),
-        sameAsPassword: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["sameAs"])("password")
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["minLength"])(6),
+        sameAsPassword: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["sameAs"])("password")
       }
     }
+  },
+  components: {
+    SignUpButton: _SignUpButton_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    LoginButton: _LoginButton_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
     submitLoginForm: function submitLoginForm() {
@@ -44812,85 +44832,94 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "sidenav", attrs: { id: "mySidenav" } }, [
+      _c(
+        "a",
+        {
+          staticClass: "closebtn",
+          attrs: { href: "javascript:void(0)" },
+          on: { click: _vm.closeNav }
+        },
+        [_vm._v("×")]
+      ),
+      _vm._v(" "),
+      _vm._m(0)
+    ]),
+    _vm._v(" "),
+    _c("span", { staticClass: "open_btn", on: { click: _vm.openNav } }, [
+      _vm._m(1)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("footer", { staticClass: "footer-area", attrs: { id: "footer" } }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-3 col-md-4" }, [
-              _c("div", { staticClass: "footer-logo" }, [
-                _c("img", {
-                  attrs: { src: "/images/system-images/logo.png", alt: "" }
-                })
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-7 col-md-6" }, [
+          _c("div", { staticClass: "single-footer-widget" }, [
+            _c("ul", [
+              _c("li", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("i", { staticClass: "fa fa-angle-right" }, [_vm._v(" ")]),
+                  _vm._v(" About Us")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("i", { staticClass: "fa fa-angle-right" }, [_vm._v(" ")]),
+                  _vm._v(" Privacy & Policy")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("i", { staticClass: "fa fa-angle-right" }, [_vm._v(" ")]),
+                  _vm._v(" Terms & Conditions")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("i", { staticClass: "fa fa-angle-right" }, [_vm._v(" ")]),
+                  _vm._v(" Contact Us")
+                ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-9 col-md-8" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "footer-bottom align-items-center text-center text-lg-left no-gutters"
-                },
-                [
-                  _c("div", { staticClass: "row" }, [
-                    _c(
-                      "p",
-                      { staticClass: "footer-text m-0 col-lg-8 col-md-12" },
-                      [
-                        _vm._v(
-                          "\nCopyright ©2019 All rights reserved | Powered By --- "
-                        ),
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: "https://idata.com.np",
-                              target: "_blank"
-                            }
-                          },
-                          [_vm._v("iData Solutions")]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "col-lg-4 col-md-12 text-center text-lg-right footer-social"
-                      },
-                      [
-                        _c("a", { attrs: { href: "#" } }, [
-                          _c("i", { staticClass: "ti-facebook" })
-                        ]),
-                        _vm._v(" "),
-                        _c("a", { attrs: { href: "#" } }, [
-                          _c("i", { staticClass: "ti-twitter-alt" })
-                        ]),
-                        _vm._v(" "),
-                        _c("a", { attrs: { href: "#" } }, [
-                          _c("i", { staticClass: "ti-linkedin" })
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "clearfix" })
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" })
+            ])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-5 col-md-6" }, [
+          _c("p", { staticClass: "footer-text m-0" }, [
+            _vm._v(
+              "\r\n                Copyright ©All rights reserved | Powered By: "
+            ),
+            _c(
+              "a",
+              { attrs: { href: "https://idata.com.np", target: "_blank" } },
+              [_vm._v("iData Solutions")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "clearfix" })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "javascript:void(0)" } }, [
+      _c("i", { staticClass: "fa fa-angle-left faa-passing-reverse animated" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fa fa-angle-left" }),
+      _vm._v(" "),
+      _c("em", [_vm._v("Slide here")])
     ])
   }
 ]
@@ -45232,7 +45261,8 @@ var render = function() {
                           : _c("img", {
                               staticClass: "img-fluid",
                               attrs: {
-                                src: "/images/system-images/default-post.jpg",
+                                src:
+                                  "/frontend/images/elements/default-post.jpg",
                                 alt: items.title
                               }
                             })
@@ -45244,6 +45274,18 @@ var render = function() {
                     "div",
                     { staticClass: "short_details col-md-8 col-sm-7 col-12" },
                     [
+                      _c("div", { staticClass: "meta-top d-flex" }, [
+                        items.anynomous == 1
+                          ? _c("a", { attrs: { href: "#" } }, [
+                              _vm._v("By Anynomyous")
+                            ])
+                          : items.user == null
+                          ? _c("a", { attrs: { href: "#" } }, [
+                              _vm._v("By Admin")
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
                       _c(
                         "a",
                         {
@@ -45277,9 +45319,7 @@ var render = function() {
                         _c("a", { attrs: { href: "#" } }, [
                           _c("i", { staticClass: "ti-eye" }),
                           _vm._v(" " + _vm._s(items.views) + " view")
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(1, true)
+                        ])
                       ])
                     ]
                   )
@@ -45328,15 +45368,6 @@ var staticRenderFns = [
           height: "25"
         }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "book_mark", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fa fa-bookmark" }),
-      _vm._v(" Bookmark")
     ])
   }
 ]
@@ -45702,7 +45733,7 @@ var render = function() {
   return _c("div", [
     _c("a", { attrs: { href: "#" }, on: { click: _vm.openSignUpModal } }, [
       _c("i", { staticClass: "fas fa-sign-in-alt" }, [_vm._v(" ")]),
-      _vm._v(" Get Started")
+      _vm._v(" " + _vm._s(_vm.text))
     ])
   ])
 }
@@ -46081,10 +46112,19 @@ var render = function() {
                     _vm._m(2)
                   ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _c(
+                    "div",
+                    { staticClass: "signup-section text-center" },
+                    [
+                      _vm._v("Already have an account? "),
+                      _c("LoginButton"),
+                      _vm._v(".")
+                    ],
+                    1
+                  )
                 ]),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ])
             ])
           ]
@@ -46114,10 +46154,10 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-box" }, [
-                _vm._m(5),
+                _vm._m(4),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
-                  _vm._m(6),
+                  _vm._m(5),
                   _vm._v(" "),
                   _c("div", { staticClass: "d-flex flex-column text-center" }, [
                     _c(
@@ -46277,15 +46317,24 @@ var render = function() {
                       [_vm._v("or use a social network")]
                     ),
                     _vm._v(" "),
-                    _vm._m(7)
+                    _vm._m(6)
                   ]),
                   _vm._v(" "),
-                  _vm._m(8),
+                  _c(
+                    "div",
+                    { staticClass: "signup-section text-center" },
+                    [
+                      _vm._v("Not a member yet?"),
+                      _c("SignUpButton", { attrs: { text: "Sign Up" } }),
+                      _vm._v(".")
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _vm._m(9)
+                  _vm._m(7)
                 ]),
                 _vm._v(" "),
-                _vm._m(10)
+                _vm._m(8)
               ])
             ])
           ]
@@ -46351,20 +46400,6 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c(
-          "button",
-          {
-            staticClass: "btn btn-secondary btn-round",
-            attrs: {
-              type: "button",
-              "data-toggle": "tooltip",
-              "data-placement": "top",
-              title: "Twitter"
-            }
-          },
-          [_c("i", { staticClass: "fab fa-twitter" })]
-        ),
-        _vm._v(" "),
-        _c(
           "a",
           {
             staticClass: "btn btn-secondary btn-round",
@@ -46393,18 +46428,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "signup-section text-center" }, [
-      _vm._v("Already have an account? "),
-      _c("a", { staticClass: "text-info", attrs: { href: "#a" } }, [
-        _vm._v(" Sign Up")
-      ]),
-      _vm._v(".")
-    ])
   },
   function() {
     var _vm = this
@@ -46477,20 +46500,6 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c(
-          "button",
-          {
-            staticClass: "btn btn-secondary btn-round",
-            attrs: {
-              type: "button",
-              "data-toggle": "tooltip",
-              "data-placement": "top",
-              title: "Twitter"
-            }
-          },
-          [_c("i", { staticClass: "fab fa-twitter" })]
-        ),
-        _vm._v(" "),
-        _c(
           "a",
           {
             staticClass: "btn btn-secondary btn-round",
@@ -46519,16 +46528,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "signup-section text-center" }, [
-      _vm._v("Not a member yet? "),
-      _c("button", { staticClass: "submit text-info" }, [_vm._v(" Sign Up")]),
-      _vm._v(".")
-    ])
   },
   function() {
     var _vm = this
@@ -67817,7 +67816,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   getProfileUrl: function getProfileUrl(url) {
     if (url == '' || url == null) {
-      return 'frontend/images/elements/default-profile.png';
+      return '/frontend/images/elements/default-profile.png';
     } else if (url.match('(http(s)?://)') != null) {
       return url;
     } else if (url.match('www.') != null) {

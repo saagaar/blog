@@ -62,100 +62,117 @@ class UserController extends FrontendController
            return redirect()->route('home'); 
         } 
     }
+
+    public function profile(BlogInterface $blog,Request $request,$username=false)
+    { 
+             $routeName= Route::currentRouteName();
+             $user=$this->user_state_info($username);
+
+             $myBlogs=$blog->getActiveBlogByUserId($user['userid']);
+             unset($user['userid']);
+             if($routeName=='api')
+             {
+                $search=$request->get('search');
+                $sortBy=$request->get('sort_by');
+                if($sortBy)
+                  $myBlogs=$myBlogs->orderBy('created_at',strtoupper($sortBy));
+                $data['blogList']=$myBlogs->paginate($this->perPage);
+                return ($data);
+             }
+             else
+             {
+                $data['blogList']=$myBlogs->paginate($this->perPage);
+                $data['path']='/profile/'.$username;
+                $initialState=json_encode($data);
+                return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+             }
+    }
+
     public function followings($username=false)
     {
-        if(\Auth::check())
-        {
-          if($username)
+             if($username)
              {
                 $userdata=$this->user->getUserByUsername($username);
              }
-             else{
+             else
+             {
                 $userdata=$this->authUser;
-
              }
-            $data['userdata'] = $userdata;
             $routeName= ROUTE::currentRouteName();
-            $suggestion=$this->getFollowSuggestions(3);
+            $suggestion=$this->getFollowSuggestions($userdata,3);
             $followings = $this->followerList->getAllFollowings($userdata);
             $data['followSuggestion']=$suggestion;
             $data['followings'] = $followings;
-          if($routeName=='api')
-          {
-              return ($data);
-          }
-          else
-          {
-              $data['path']='/followings';
-              $initialState=json_encode($data);
-              $user=$this->user_state_info();
-              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-          }
-
-        }
-        else
-        {
-             return redirect()->route('home'); 
-        }
+            if($routeName=='api')
+            {
+                return ($data);
+            }
+            else
+            {
+                $data['path']='/followings';
+                $initialState=json_encode($data);
+                $user=$this->user_state_info($username);
+                return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+            }
     }
     public function followers($username=false)
     {
-        if(\Auth::check())
-        {
-          if($username)
-             {
+            if($username){
                 $userdata=$this->user->getUserByUsername($username);
-             }
-             else{
+            }
+            else{
                 $userdata=$this->authUser;
-
-             }
-             $data['userdata'] = $userdata;
+            }
+            $data['userdata'] = $userdata;
             $routeName= ROUTE::currentRouteName();
             $followers = $this->followerList->getAllFollowers($userdata);
             $followings = $this->followerList->getAllFollowings($userdata)->pluck('username');
             $data['followers'] = $followers;
             $data['followings'] = $followings;
-            // echo "<pre>";
-            // print_r($data);exit;
-          if($routeName=='api')
+            if($routeName=='api')
+            {
+              return ($data);
+            }
+            else
+            {
+                $data['path']='/followers';
+                $initialState=json_encode($data);
+                $user=$this->user_state_info($username);
+                return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+            }
+    }
+    public function getFollowers($user=false,Request $request){
+      try{
+          if($user)
           {
-            return ($data);
+            $userdata=$this->user->getUserByUsername($user);
           }
-          else
-          {
-        
-              $data['path']='/followers';
-              $initialState=json_encode($data);
-              $user=$this->user_state_info();
-              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+          else{
+            $userdata=$this->authUser;
           }
 
-        }
-        else
-        {
-             return redirect()->route('home'); 
-        }
-    }
-    public function getFollowers(Request $request){
-      try{
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
-          $allFollowers = $this->followerList->getAllFollowers($this->authUser,$limit,$offset);
+          $allFollowers = $this->followerList->getAllFollowers($userdata,$limit,$offset);
           return array('status'=>true,'data'=>$allFollowers,'message'=>'');
-        
       }
-      catch(Exception $e)
-      {
-
+      catch(Exception $e){
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
-    public function getFollowings(Request $request){
+    public function getFollowings($user=false,Request $request){
       try{
+           if($user)
+            {
+              $userdata=$this->user->getUserByUsername($user);
+            }
+            else{
+              $userdata=$this->authUser;
+            }
+
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
-          $allFollowings = $this->followerList->getAllFollowings($this->authUser,$limit,$offset);
+          $allFollowings = $this->followerList->getAllFollowings($userdata,$limit,$offset);
           return array('status'=>true,'data'=>$allFollowings,'message'=>'');
           
       }
@@ -172,7 +189,7 @@ class UserController extends FrontendController
          {
             $this->followerList->followUser($this->authUser,$username);
          }  
-         return array('status'=>true,'message'=>$this->getFollowSuggestions(1,$offset));
+         return array('status'=>true,'message'=>$this->getFollowSuggestions($this->authUser,1,$offset));
     }
     public function unFollowUser($username,$offset=false)
     {
@@ -183,64 +200,11 @@ class UserController extends FrontendController
          }  
         return array('status'=>true,'message'=>'');
     }
-    public function getFollowSuggestions($limit=1,$offset=0)
+    public function getFollowSuggestions($user,$limit=1,$offset=0)
     {
-       return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
+       return $this->followerList->getFollowUserSuggestions($user,$limit,$offset);
     }
-    public function profile(BlogInterface $blog,Request $request,$username=false)
-    { 
-      // if(\Auth::check())
-      //   {
-            $routeName= Route::currentRouteName();
-            
-             if($username)
-             {
-                $user=$this->user->getUserByUsername($username);
-             }
-             else{
-               if(!\Auth::check())
-               {
-                  return redirect()->route('home'); 
-               }
-                $user=$this->authUser;
-
-             }
-             $data['userdata'] = $user;
-             // echo "<pre>";
-             // print_r($user);exit;
-            $myBlogs=$blog->getActiveBlogByUserId($user->id);
-
-           if($routeName=='api')
-           {
-              $search=$request->get('search');
-              // $filterBy=$request->get('filter_by');
-              $sortBy=$request->get('sort_by');
-              // if($filterBy)
-              //    $myBlogs=$myBlogs->where('save_method',$filterBy);
-              if($search)
-                $myBlogs=$myBlogs->where('title' ,'like','%'.$search.'%');
-              if($sortBy)
-                $myBlogs=$myBlogs->orderBy('created_at',strtoupper($sortBy));
-            
-                $data['blogList']=$myBlogs->paginate($this->perPage);
-              return ($data);
-           }
-           else
-           {
-              
-              $data['blogList']=$myBlogs->paginate($this->perPage);
-              
-              $data['path']='/profile';
-              $initialState=json_encode($data);
-              $user=$this->user_state_info();
-              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-           }
-    // }
-    // else
-    // {
-    //   return redirect()->route('home'); 
-    // }
-  }
+    
  
  public function changeProfile(Request $request)
   {

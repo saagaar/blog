@@ -6,11 +6,15 @@
                 <figure>
                     <a href="#">
                          <img v-if="items.image" class="img-fluid" :src="'/uploads/blog/'+items.code+'/'+items.image" :alt="items.title">
-                       <img v-else class="img-fluid" :src="'/images/system-images/default-post.jpg'" :alt="items.title">
+                       <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="items.title">
                     </a>
                 </figure>
             </div>
             <div class="short_details col-md-8 col-sm-7 col-12">
+            <div class="meta-top d-flex">
+            <a v-if="items.anynomous==1" href="#">By Anynomyous</a>
+            <a v-else-if="items.user==null" href="#">By Admin</a>
+            </div>
                 <a class="d-block" :href="'/blog/detail/'+items.code">
                     <h4>{{items.title}}</h4>
                 </a>
@@ -21,7 +25,7 @@
                         <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                     </i>&nbsp; {{items.likes_count}} like</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
-                    <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                    <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                 </div>
             </div>
         </div>
@@ -47,8 +51,16 @@ export default {
     return {
       offset: 1,
       lists: [],
+     
       form:new Form()
     };
+  },
+  watch:
+  {
+    users:function(newval){
+
+     alert(newval);
+    }
   },
   methods: {
     infiniteHandler($state) {

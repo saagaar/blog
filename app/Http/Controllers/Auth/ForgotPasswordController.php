@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use App\Repository\CategoryInterface;
+use Session;
 
 class ForgotPasswordController extends Controller
 {
@@ -33,6 +34,11 @@ class ForgotPasswordController extends Controller
 
     public function showLinkRequestForm(CategoryInterface $category)
     {
+          if(auth()->user())
+          {
+            Session::flash('error', 'You are already logged in !! Please change password from settings!!'); 
+            return redirect('/home');
+          }
           $navCategory=$category->getCategoryByShowInHome();
           return view('auth.passwords.email')->with('navCategory',$navCategory);
     }

@@ -48,9 +48,9 @@ const app = new Vue({
         let userState = JSON.parse(window.__USER_STATE__) || {};
         if (userState) {
            this.$store.commit('ADD_ME', userState)
-            Vue.prototype.$gate = new Gate(userState);
+           Vue.prototype.$gate = new Gate(userState);
         }
-            this.$store.dispatch('checkLoginUser');
+        this.$store.dispatch('checkLoginUser');
     },
     render: function (createElement) 
     {

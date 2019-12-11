@@ -57,9 +57,9 @@
             <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google">
               <i class="fab fa-google"></i>
             </button>
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
+           <!--  <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
               <i class="fab fa-twitter"></i>
-            </button>
+            </button> -->
             <a href="/social-login/facebook" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
               <i class="fab fa-facebook"></i>
             </a>
@@ -68,7 +68,7 @@
             </a>
           </div>
         </div>
-        <div class="signup-section text-center">Already have an account? <a href="#a" class="text-info"> Sign Up</a>.</div>
+        <div class="signup-section text-center">Already have an account? <LoginButton></LoginButton>.</div>
       </div>
       <div class="modal-footer text-center">
         <div class="popup_btm">To make BlogSagar work, Click “Sign In” above to accept BlogSagar's <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy.</a></div>
@@ -117,9 +117,9 @@
             <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google">
               <i class="fab fa-google"></i>
             </button>
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
+           <!--  <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
               <i class="fab fa-twitter"></i>
-            </button>
+            </button> -->
             <a href="/social-login/facebook" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
               <i class="fab fa-facebook"></i>
             </a>
@@ -128,7 +128,7 @@
             </a>
           </div>
         </div>
-        <div class="signup-section text-center">Not a member yet? <button  class="submit text-info"> Sign Up</button>.</div>
+        <div class="signup-section text-center">Not a member yet?<SignUpButton :text="'Sign Up'"></SignUpButton>.</div>
         <div class="signup-section text-center">Forgot Password? <a href="/password/reset" class="submit text-info"> Forgot Password</a>.</div>
       </div>
       <div class="modal-footer text-center">
@@ -142,6 +142,8 @@
 
 </template>
 <script>
+  import LoginButton from './LoginButton.vue';
+import SignUpButton from './SignUpButton.vue';
 import { required, minLength , sameAs, between ,email} from 'vuelidate/lib/validators'
 import Form from './../../services/Form.js'
     export default {
@@ -206,7 +208,10 @@ import Form from './../../services/Form.js'
           }
           
         },
-
+        components:{
+                SignUpButton,
+                LoginButton,
+            },
         methods:{
 
           submitLoginForm:function(){

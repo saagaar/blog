@@ -4,7 +4,6 @@
 <script type="text/javascript">
 	 window.__USER_STATE__ = '{!! addslashes(json_encode($user)) !!}'
 	 window.__NOTIFICATION__ = '{!! addslashes(json_encode($user["notifications"])) !!}'
-	 
 </script>
 @endif
 <!--================ Start Meta Elements an
@@ -52,7 +51,6 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-
                         <img src="{{asset('uploads/sitesettings-images/'. config('settings.image') )}}"alt='logo' >
                     </a>
                 </div>
@@ -68,7 +66,6 @@
                         @else
                          <ul>
                         <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
-                      
                         <li class="nitify dropdown">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
@@ -114,7 +111,7 @@
                 </div>
             </div>
         </div>
-<success-error-message></success-error-message>
+    <success-error-message></success-error-message>
         
     <!--     <div class="search_input" id="search_input_box" ref="search_input_box" >
             <div class="container ">

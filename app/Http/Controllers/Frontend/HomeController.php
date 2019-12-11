@@ -93,7 +93,6 @@ class HomeController extends FrontendController
         $featuredForMember = $this->blog->getAllFeaturedForMember(4);
         // $data['featuredForMember']=$featuredForMember;
         $latest =$this->blog->getLatestAllBlog($limit);
-        // $data['latest'] = $latest;
         $navCategory=$this->category->getCategoryByShowInHome();
         $likes='';
         $user ='';

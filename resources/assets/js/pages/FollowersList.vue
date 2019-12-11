@@ -49,12 +49,12 @@
     export default {
       mixins: [ mixin ],
          data:function(){
-    return {
+           return {
             initialState:{},
             isFollowing:false,
             offset: 1,
             form:new Form()
-        }
+          }
       },
       
        methods:{
@@ -63,7 +63,10 @@
                // remove after 1 second
           },
           infiniteHandler($state) {
-              this.form.get('/api/getfollowers?page='+this.offset).then(response => 
+              let username=this.$route.params.username;
+              if(username===undefined)
+              username='';
+              this.form.get('/api/getfollowers/'+username+'?page='+this.offset).then(response => 
               {
                      if(response.data.data.length)
                      {

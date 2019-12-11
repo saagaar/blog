@@ -120,7 +120,11 @@
             
           },
           infiniteHandler($state) {
-            this.form.get('/api/getfollowings?page='+this.offset).then(response => 
+            let username=this.$route.params.username;
+            if(username===undefined)
+              username='';
+
+            this.form.get('/api/getfollowings/'+username+'?page='+this.offset).then(response => 
             {
                    if(response.data.data.length)
                    {

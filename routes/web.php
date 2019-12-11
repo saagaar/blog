@@ -66,6 +66,8 @@ Route::get('api/getbloglistbyslug/{slug}','Frontend\HomeController@getBlogListBy
 
 Route::get('/api/getfollowers','Frontend\UserController@getFollowers')->name('getfollowers');
 Route::get('/api/getfollowings','Frontend\UserController@getFollowings')->name('getfollowings');
+Route::get('/api/getfollowers/{user}','Frontend\UserController@getFollowers')->name('getfollowers');
+Route::get('/api/getfollowings/{user}','Frontend\UserController@getFollowings')->name('getfollowings');
 
 
 Route::get('/test', 'Frontend\HomeController@test')->name('test');
