@@ -47,5 +47,9 @@ class Categories extends Model implements Auditable
     {
         return $this->belongsToMany(User::class,'user_interests','category_id','user_id');
     }
+    public function subscribes()
+    {
+        return $this->morphMany(SubscriptionManagers::class, 'subscribable');
+    }
  
 }

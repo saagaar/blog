@@ -39,7 +39,9 @@
                         <div class="d-sm-flex justify-content-between text-center">
                             <p class="like-info"><span class="align-middle">
                                 @if($likes)
-                                <likes v-bind:currentBlog="{{$blogDetails}}" :blogCode="'{{$blogDetails->code}}'" :likes="{{$likes}}"></likes>
+                                <likes v-bind:likescount="{{$blogDetails->likes_count}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :likes="{{$likes}}"></likes>
+                                @else
+                                    <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid"><span>{{ $blogDetails->likes_count }} people Appreciate this</span>
                                 @endif
                             <!-- </span>{{$blogDetails->likes_count}} people like this</p> -->
                             <div class="col-sm-4 text-center my-2 my-sm-0">
@@ -52,8 +54,8 @@
                                 <tw-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></tw-share>    
                                 <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
                                 <!-- <li><a href="{{url('https://twitter.com/intent/tweet?url='.$url.'&text='.$blogDetails->title)}}"><i class="fab fa-twitter"></i></a></li> -->
-                                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <!-- <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li> -->
                             </ul>
                         </div>
 
@@ -65,7 +67,6 @@
                                     <div class="thumb">
                                         <a href="#">
                                             @if($prev->image)
-
                                                  <img class="img-fluid" src="{{ asset('uploads/blog/'.$prev->code.'/'.$prev->image) }}" width="60" height="60" alt="">
                                             @else
                                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}"  width="60" height="60" alt="">
@@ -124,7 +125,15 @@
                             </div>
                         </div>
                     </div> -->
+                    @if(auth()->user())
                     <comment v-bind:blog="{{ $blogDetails }}" :allComment="{{ $blogComment }}"></comment>
+                    @else
+                    <div class="area-padding">
+                    <div class="d-flex justify-content-center text-center">
+                                <p class="comment-count"><span class="align-middle"></span>Please <login-button></login-button> to comment</p>
+                            </div>
+                    </div>
+                    @endif
                     <!-- <div class="comments-area white-box">
                         <h4>{{ $blogDetails->comments_count}} Comments</h4>
                         <list-comment  v-bind:allComment="{{ $blogComment }}"></list-comment>

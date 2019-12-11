@@ -15,6 +15,12 @@ class CreateSubscriptionManagersTable extends Migration
     {
         Schema::create('subscription_managers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')
+                    ->references('id')->on('users')
+                    ->onDelete('cascade');
+         $table->integer('subscribable_id')->unsigned()->nullable();
+         $table->string('subscribable_type')->nullable();
             $table->String('email');
             $table->String('comment');
             $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');

@@ -42,7 +42,7 @@ Class Blog implements BlogInterface
    * get blog for featured =1
    */
   public function getLikesOfBlogByUser($user){
-    return $this->blog->likes('id:user_id')->get();
+    return $user->likes()->pluck('blog_id');
   }
 
   public function getAllFeaturedBlog($limit=10,$offset=0){

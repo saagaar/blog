@@ -80,5 +80,9 @@ class Users extends Authenticatable implements Auditable
     {
         return $this->belongsToMany(Blogs::class,'likes','user_id','blog_id');
     }
+    public function subscribes()
+    {
+        return $this->morphMany(SubscriptionManagers::class, 'subscribable');
+    }
 }
     

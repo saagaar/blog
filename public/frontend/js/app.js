@@ -7045,7 +7045,7 @@ __webpack_require__.r(__webpack_exports__);
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'likes',
-  props: ['currentblog', 'likes', 'blogcode'],
+  props: ['likescount', 'blogid', 'likes', 'blogcode'],
   data: function data() {
     return {
       isChecked: '',
@@ -7053,7 +7053,7 @@ var action = '';
     };
   },
   mounted: function mounted() {
-    var indexval = this.likes.indexOf(this.currentblog.id);
+    var indexval = this.likes.indexOf(this.blogid);
 
     if (indexval == -1) {
       this.isChecked = false;
@@ -7061,7 +7061,7 @@ var action = '';
       this.isChecked = true;
     }
 
-    this.count = this.currentblog.likes_count;
+    this.count = this.likescount;
   },
   methods: {
     toggleLike: function toggleLike() {
@@ -7078,6 +7078,12 @@ var action = '';
       form.post(action).then(function (response) {
         if (response.data.status) {
           return _this.count = response.data.likes['0'].likes_count;
+        } else {
+          if (_this.isChecked) {
+            _this.isChecked = false;
+          } else {
+            _this.isChecked = true;
+          }
         }
       })["catch"](function (e) {
         console.log(e);
@@ -7362,6 +7368,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
 
+//
 //
 //
 //
@@ -44957,7 +44964,7 @@ var staticRenderFns = [
     return _c("i", [
       _c("img", {
         staticClass: "img-fluid",
-        attrs: { src: "/images/appreciate-active.gif" }
+        attrs: { src: "frontend/images/elements/inactive-appreciate.png" }
       })
     ])
   },
@@ -45101,7 +45108,7 @@ var staticRenderFns = [
     return _c("i", [
       _c("img", {
         staticClass: "img-fluid",
-        attrs: { src: "/images/appreciate-active.gif" }
+        attrs: { src: "frontend/images/elements/inactive-appreciate.png" }
       })
     ])
   },
@@ -45256,7 +45263,7 @@ var staticRenderFns = [
       _c("img", {
         staticClass: "img-fluid",
         attrs: {
-          src: "images/appreciate-active.gif",
+          src: "frontend/images/elements/inactive-appreciate.png",
           width: "25",
           height: "25"
         }
@@ -45449,7 +45456,7 @@ var render = function() {
           : _c("img", {
               staticClass: "img-fluid",
               attrs: {
-                src: "/frontend/images/elements/appreciate-active.gif",
+                src: "/frontend/images/elements/inactive-appreciate.png",
                 width: "25",
                 height: "25"
               }
@@ -46213,10 +46220,12 @@ var render = function() {
                     _vm._m(7)
                   ]),
                   _vm._v(" "),
-                  _vm._m(8)
+                  _vm._m(8),
+                  _vm._v(" "),
+                  _vm._m(9)
                 ]),
                 _vm._v(" "),
-                _vm._m(9)
+                _vm._m(10)
               ])
             ])
           ]
@@ -46458,6 +46467,20 @@ var staticRenderFns = [
     return _c("div", { staticClass: "signup-section text-center" }, [
       _vm._v("Not a member yet? "),
       _c("button", { staticClass: "submit text-info" }, [_vm._v(" Sign Up")]),
+      _vm._v(".")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "signup-section text-center" }, [
+      _vm._v("Forgot Password? "),
+      _c(
+        "a",
+        { staticClass: "submit text-info", attrs: { href: "/password/reset" } },
+        [_vm._v(" Forgot Password")]
+      ),
       _vm._v(".")
     ])
   },
