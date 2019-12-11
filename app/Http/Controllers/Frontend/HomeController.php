@@ -117,7 +117,9 @@ class HomeController extends FrontendController
         
         return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo));
     }
-
+    public function test(Request $request){
+      $this->category->subs(5);
+    }
     public function blogDetail($code,Request $request){
 
       $blogDetails = $this->blog->getBlogByCode($code);
@@ -126,13 +128,16 @@ class HomeController extends FrontendController
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $relatedBlog = $this->blog->relatedBlogBycode($code);
       $navCategory=$this->category->getCategoryByShowInHome();
-      $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+      // $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
       $data['blogDetails'] =$blogDetails;
       $data['blogComment']  =$blogComment;
       $user ='';
+      $likes='';
         if(\Auth::check())
         {
           $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+          // echo "<pre>";
+          // print_r($likes);exit;
           $routeName= ROUTE::currentRouteName();
           if($routeName=='api')
           {
@@ -284,19 +289,19 @@ class HomeController extends FrontendController
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
-    public function test(ShareInterface $share)
-    {
-       // $blogCode='5da95a60500cc2da';
-       // $data = $share->incrementFbShare($blogCode);
-       //  print_r($data);
+    // public function test(ShareInterface $share)
+    // {
+    //    // $blogCode='5da95a60500cc2da';
+    //    // $data = $share->incrementFbShare($blogCode);
+    //    //  print_r($data);
 
-       $code='user_registration';
-        $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
-        // print_r($data);exit;
-        $this->authUser->notify(new Notifications($code,$data));
-        echo "Success";
-        // return view('frontend.layouts.app');
-    }
+    //    $code='user_registration';
+    //     $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
+    //     // print_r($data);exit;
+    //     $this->authUser->notify(new Notifications($code,$data));
+    //     echo "Success";
+    //     // return view('frontend.layouts.app');
+    // }
     public function share(Request $request,ShareInterface $share){
       try{
         $blogCode = $request->code;

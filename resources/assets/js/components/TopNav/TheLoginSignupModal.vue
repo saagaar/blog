@@ -129,6 +129,7 @@
           </div>
         </div>
         <div class="signup-section text-center">Not a member yet? <button  class="submit text-info"> Sign Up</button>.</div>
+        <div class="signup-section text-center">Forgot Password? <a href="/password/reset" class="submit text-info"> Forgot Password</a>.</div>
       </div>
       <div class="modal-footer text-center">
         <div class="popup_btm">To make BlogSagar work, Click “Sign In” above to accept BlogSagar's <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy.</a></div>

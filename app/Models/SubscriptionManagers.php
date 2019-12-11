@@ -17,6 +17,10 @@ class SubscriptionManagers extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'email','comment','status',
+        'email','comment','status','user_id','subscribable_id','subscribable_type'
     ];
+    public function subscribable()
+    {
+        return $this->morphTo('subscription_managers');
+    }
 }

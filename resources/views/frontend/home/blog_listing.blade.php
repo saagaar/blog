@@ -71,7 +71,7 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>{{ $eachBlog->created_at->diffForHumans() }}</a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="/images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 </i>&nbsp;&nbsp;{{$eachBlog->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i> {{ $eachBlog->views }} view</a>
                             </div>

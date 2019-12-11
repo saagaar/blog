@@ -21,6 +21,11 @@
                {{ $message }}
   @endcomponent       
 @endif
+@if ($message = Session::get('status'))
+  @component('layouts.components.home_response' ,['type'=>'success'])
+               {{ $message }}
+  @endcomponent      
+@endif  
 <!-- <script>
   window.fbAsyncInit = function() {
     FB.init({
