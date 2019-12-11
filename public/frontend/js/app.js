@@ -45474,7 +45474,7 @@ var render = function() {
           ? _c("img", {
               staticClass: "img-fluid",
               attrs: {
-                src: "/frontend/images/elements/appreciate-active.gif",
+                src: "/frontend/images/elements/appreciate.gif",
                 width: "25",
                 height: "25"
               }

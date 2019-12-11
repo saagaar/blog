@@ -1,7 +1,7 @@
 <template>
 	<div>
          <a href="" @click.prevent="toggleLike" class="appreciate">
-         	<img v-if="isChecked" src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
+         	<img v-if="isChecked" src="/frontend/images/elements/appreciate.gif" width="25" height="25" class="img-fluid">
         	<img v-else src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
    		</a>
    		<span>{{ count }} people Appreciate this</span>
@@ -35,7 +35,7 @@ let action='';
        
         methods: {
             toggleLike:function(){
-                if(this.isChecked)
+                             if(this.isChecked)
                             {
                                 this.isChecked=false;
                             }
