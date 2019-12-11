@@ -14,7 +14,7 @@
             <div class="meta-top d-flex">
             <a v-if="items.anynomous==1" href="#">By Anynomyous</a>
             <a v-else-if="items.user==null" href="#">By Admin</a>
-             <a v-else href="/profile/{{items.user.username}}">By {{ items.user.name }}</a>
+             <a v-else :href="/profile/"+{{items.user.username}}>By {{ items.user.name }}</a>
             </div>
                 <a class="d-block" :href="'/blog/detail/'+items.code">
                     <h4>{{items.title}}</h4>

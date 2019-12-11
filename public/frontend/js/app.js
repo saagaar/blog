@@ -45148,8 +45148,158 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
-var staticRenderFns = []
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      _vm._l(_vm.lists, function(items) {
+        return _vm.lists.length > 0
+          ? _c("div", { staticClass: "col-lg-6 col-md-6" }, [
+              _c(
+                "div",
+                { staticClass: "single-blog video-style small row m_b_30 " },
+                [
+                  _c("div", { staticClass: "thumb col-md-4 col-sm-5 col-12" }, [
+                    _c("figure", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        items.image
+                          ? _c("img", {
+                              staticClass: "img-fluid",
+                              attrs: {
+                                src:
+                                  "/uploads/blog/" +
+                                  items.code +
+                                  "/" +
+                                  items.image,
+                                alt: items.title
+                              }
+                            })
+                          : _c("img", {
+                              staticClass: "img-fluid",
+                              attrs: {
+                                src: "/images/system-images/default-post.jpg",
+                                alt: items.title
+                              }
+                            })
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "short_details col-md-8 col-sm-7 col-12" },
+                    [
+                      _c("div", { staticClass: "meta-top d-flex" }, [
+                        items.anynomous == 1
+                          ? _c("a", { attrs: { href: "#" } }, [
+                              _vm._v("By Anynomyous")
+                            ])
+                          : items.user == null
+                          ? _c("a", { attrs: { href: "#" } }, [
+                              _vm._v("By Admin")
+                            ])
+                          : _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: /profile/,
+                                  "+{{items.user.username}}": ""
+                                }
+                              },
+                              [_vm._v("By " + _vm._s(items.user.name))]
+                            )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block",
+                          attrs: { href: "/blog/detail/" + items.code }
+                        },
+                        [_c("h4", [_vm._v(_vm._s(items.title))])]
+                      ),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(items.short_description))]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "meta-bottom d-flex" }, [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "ti-time" }),
+                          _vm._v(
+                            _vm._s(
+                              _vm._f("moment")(items.created_at, "from", "now")
+                            )
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          { staticClass: "appreciate", attrs: { href: "#" } },
+                          [
+                            _vm._m(0, true),
+                            _vm._v("  " + _vm._s(items.likes_count) + " like")
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("i", { staticClass: "ti-eye" }),
+                          _vm._v(" " + _vm._s(items.views) + " view")
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ])
+          : _vm._e()
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-12" },
+        [
+          _c(
+            "InfiniteLoading",
+            {
+              attrs: { spinner: "spiral" },
+              on: { infinite: _vm.infiniteHandler }
+            },
+            [
+              _c("div", { attrs: { slot: "no-more" }, slot: "no-more" }),
+              _vm._v(" "),
+              _c("div", { attrs: { slot: "no-results" }, slot: "no-results" }, [
+                _c("hr")
+              ])
+            ]
+          )
+        ],
+        1
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("i", [
+      _c("img", {
+        staticClass: "img-fluid",
+        attrs: {
+          src: "images/appreciate-active.gif",
+          width: "25",
+          height: "25"
+        }
+      })
+    ])
+  }
+]
+render._withStripped = true
 
 
 
