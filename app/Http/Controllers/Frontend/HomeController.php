@@ -129,13 +129,16 @@ class HomeController extends FrontendController
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $relatedBlog = $this->blog->relatedBlogBycode($code);
       $navCategory=$this->category->getCategoryByShowInHome();
-      $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+      // $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
       $data['blogDetails'] =$blogDetails;
       $data['blogComment']  =$blogComment;
       $user ='';
+      $likes='';
         if(\Auth::check())
         {
           $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+          // echo "<pre>";
+          // print_r($likes);exit;
           $routeName= ROUTE::currentRouteName();
           if($routeName=='api')
           {

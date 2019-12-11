@@ -38,7 +38,7 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredBlog['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -77,7 +77,7 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $eachFeaturedBlog->created_at->diffForHumans() }}</a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -138,7 +138,7 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredForMember['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -176,7 +176,7 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $eachFeaturedForMember->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachFeaturedForMember->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -233,7 +233,7 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>&nbsp;{{ $popular['0']->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$popular['0']->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -274,7 +274,7 @@
                                 <a href="#"><i class="ti-time"></i>&nbsp;
                                 {{ $eachPopular->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachPopular->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
@@ -337,7 +337,7 @@
                                 <a href="#"><i class="ti-time"></i>&nbsp;
                                 {{ $eachLatest->created_at->diffForHumans() }} </a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachLatest->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
                                 <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>

@@ -18,7 +18,7 @@
                 <div class="meta-bottom d-flex">
                     <a href="#"><i class="ti-time"></i>{{ items.created_at | moment("from", "now")}}</a>
                     <a href="#" class="appreciate"><i>
-                        <img src="images/appreciate-active.gif" width="25" height="25" class="img-fluid">
+                        <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                     </i>&nbsp; {{items.likes_count}} like</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
