@@ -76,6 +76,8 @@ class UserController extends FrontendController
        if($routeName=='api')
        {
           $search=$request->get('search');
+          if($search)
+                $myBlogs=$myBlogs->where('title' ,'like','%'.$search.'%');
           $sortBy=$request->get('sort_by');
           if($sortBy)
             $myBlogs=$myBlogs->orderBy('created_at',strtoupper($sortBy));
