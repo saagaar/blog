@@ -26,7 +26,7 @@
                        <img v-if="eachBlog.image" class="img-fluid" :src="'/uploads/blog/'+eachBlog.code+'/'+eachBlog.image" :alt="eachBlog.title">
                        <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="eachBlog.title">
                       </div>
-                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" href="#">
+                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" :href="'/blog/detail/'+eachBlog.code">
                         <h4>{{eachBlog.title}}</h4>
                         </a>
                         <p v-if="eachBlog.short_description.length<500" v-html="eachBlog.short_description"></p>

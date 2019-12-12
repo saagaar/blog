@@ -28,6 +28,8 @@ Route::get('/api/blog/preview/{code}', 'Frontend\BlogController@preview')->name(
 Route::get('api/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('api');
 Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
 Route::post('/like/blog/{code}', 'Frontend\UserInteractionController@likeBlog')->name('like.blog');
+Route::post('/newsletter/subscribe', 'Frontend\UserInteractionController@newsletter')->name('create.newsletter');
+
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');
 

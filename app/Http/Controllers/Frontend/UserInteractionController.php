@@ -14,6 +14,7 @@ use App\Repository\BlogInterface;
 use App\Repository\ContactInterface;
 use App\Repository\AccountInterface;
 use App\Repository\UserInteractionInterface;  
+use App\Repository\SubscriptionManagerInterface;
 class UserInteractionController extends FrontendController
 {
     protected $data;
@@ -77,6 +78,23 @@ class UserInteractionController extends FrontendController
             $input['created_at'] = $date->format('Y-m-d H:i:s');
             $contact->create($input);
              return array('status'=>true,'message'=>'Form submitted successfully','data'=>'');
+    }
+    public function newsletter(Request $request,SubscriptionManagerInterface $subscribe){
+            $request->validate([
+            'email' => 'required',
+            ]);
+            $input = $request->all();
+            $date =date_create();
+            if(auth()->user()){
+                $input['user_id']  =Auth()->user()->id;
+            }
+            else{
+                $input['user_id']  =Null;
+            }
+            $input['comment']='News Letter Subscription';
+            $input['created_at'] = $date->format('Y-m-d H:i:s');
+            $subscribe->create($input);
+             return array('status'=>true,'message'=>'Subscribed successfully','data'=>'');
     }
     public function testinglike($code){
         $user = app()->make('App\Repository\AccountInterface');

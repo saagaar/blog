@@ -32,6 +32,9 @@ Class SubscriptionManager implements SubscriptionManagerInterface
      * @param int
      * @param array
      */
+    public function create(array $data){
+      return $this->Subscription->create($data);
+    }
 
     public function update( $id,array $data){
          return $this->Subscription->find($id)->update($data);

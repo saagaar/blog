@@ -26,24 +26,7 @@
                {{ $message }}
   @endcomponent      
 @endif  
-<!-- <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : '671302589946860',
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v5.0'
-    });
-  };
-  (function(d, s, id){
-           var js, fjs = d.getElementsByTagName(s)[0];
-           if (d.getElementById(id)) {return;}
-           js = d.createElement(s); js.id = id;
-           js.src = "https://connect.facebook.net/en_US/sdk.js";
-           fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));
-</script>
- --><!-- <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script> -->
+
 <div class="wrapper" >
 <div id="app">
 	<section class="header-top">

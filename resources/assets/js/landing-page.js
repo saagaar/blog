@@ -42,7 +42,8 @@ Custom Imports goes here
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
- import Contact from './components/LandingPage/Contact';
+import Contact from './components/LandingPage/Contact';
+import Newsletter from './components/LandingPage/Newsletter';
 var svgNS = 'http://www.w3.org/2000/svg';
 
 
@@ -347,6 +348,7 @@ const app = new Vue({
         },
         components:{
             'contact':Contact,
+            'newsletter':Newsletter,
             
         },
         methods: {

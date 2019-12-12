@@ -100,6 +100,7 @@ class HomeController extends FrontendController
          if(\Auth::check())
         {
            $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+           // print_r($likes);exit;
            $routeName= ROUTE::currentRouteName();
           if($routeName=='api')
           {
