@@ -125,9 +125,8 @@
                             </div>
                         </div>
                     </div> -->
-                    @if(auth()->user())
                     <comment v-bind:blog="{{ $blogDetails }}" :allComment="{{ $blogComment }}"></comment>
-                    @else
+                    @if(!auth()->user())
                     <div class="area-padding">
                     <div class="d-flex justify-content-center text-center">
                                 <p class="comment-count"><span class="align-middle"></span>Please <login-button></login-button> to comment</p>
