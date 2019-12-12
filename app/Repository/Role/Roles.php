@@ -29,7 +29,12 @@ Class Roles implements RoleInterface
     public function getAll(){
    	 return	$this->userrole->latest();
     }
- 	
+ 	  /**
+     * get default role id 
+     */
+    public function getDefaultRoleId(){
+     return $this->userrole->where('default','1')->pluck('id');
+    }
  	  /**
      * create a 
      *

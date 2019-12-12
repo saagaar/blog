@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Role;
+use App\Models\Permissions;
 class AssignPermissionSeeder extends Seeder
 {
     /**
@@ -11,8 +12,11 @@ class AssignPermissionSeeder extends Seeder
      */
     public function run()
     {
-        $SingleRole = Role::find(1);
-        $authorPermission = array(['1','2','5','8']);
-        $SingleRole->givePermissionTo($authorPermission);
+        $roles = Role::where('default','1')->get();
+        foreach ($roles as  $SingleRole) {
+           $authorPermission = Permissions::where('default','1')->pluck('id');
+            $SingleRole->givePermissionTo($authorPermission);
+        }
+        
     }
 }

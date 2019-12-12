@@ -8,15 +8,18 @@ use Illuminate\Support\Facades\Auth;
 use Validator,Redirect,Response,File;
 use Socialite;
 use App\Repository\AccountInterface;
+use App\Repository\RoleInterface;
 use App\Notifications\Notifications;
 class LoginController extends FrontendController
 {
     protected $account;
+    protected $role;
     public $successStatus = 200;
-    public function __construct(AccountInterface $account)
+    public function __construct(AccountInterface $account,RoleInterface $role)
     {
         parent::__construct();
         $this->account=$account;
+        $this->role=$role;
     }   
 
     /**
@@ -67,7 +70,7 @@ class LoginController extends FrontendController
              'provider_id'  => $getInfo->id,
              'token'        =>$getInfo->token,
          ]);
-          $roles=['author'];
+          $roles=$this->role->getDefaultRoleId();
           $userData->assignRole($roles);  
           return array('status'=>true,'userData'=>$userData,'message'=>'Registered successfully!'); 
         }else{
@@ -120,7 +123,7 @@ class LoginController extends FrontendController
         $input['activation_code']= mt_rand(100000,999999);
         $input['activation_date'] = date('Y-m-d H:i:s', strtotime('+1 days'));
         $user = $this->account->create($input);
-        $roles=['author'];
+        $roles=$this->role->getDefaultRoleId();
         $user->assignRole($roles);  
          $code='user_registration';
         $data=['NAME'=>$input['name'],'URL'=>url('/blog/useractivation/'.$input['username'].'/'.$input['activation_code']),'SITENAME'=>$this->siteName];

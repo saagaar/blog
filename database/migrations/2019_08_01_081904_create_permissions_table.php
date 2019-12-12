@@ -20,6 +20,7 @@ class CreatePermissionsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('guard_name');
+            $table->enum('default', ['1', '2'])->default(2)->comment('1->yes,2->no');
             $table->timestamps();
         });
 
@@ -27,6 +28,7 @@ class CreatePermissionsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('guard_name');
+            $table->enum('default', ['1', '2'])->default(2)->comment('1->yes,2->no');
             $table->timestamps();
         });
 

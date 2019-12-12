@@ -71,8 +71,9 @@ class AdminController extends BaseController
         return view('admin.dashboard',compact('breadcrumb','dashboard'))->with(array('primary_menu'=>'dashboard.list'));
     } 
    
-    public function ImportModules(AdminPermissionInterface $module)
+    public function ImportModules()
     {
+        $module = app()->make('App\Repository\AdminPermissionInterface');
         $controllers = [];
         $i=1;
         foreach (Route::getRoutes()->getRoutes() as $route)
