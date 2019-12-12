@@ -20,10 +20,11 @@
                 <div class="profile-info profile_pic_upload">
                   <form>
                   <figure><img :src="getProfileUrl()" alt="Profile Image" class="img-responsive profile-photo" id="profileimage" /><Loader></Loader>
-                    <div class="profile_img_change"> <span class="file-input btn btn-success btn-file"> <i class="fa fa-camera"></i>
-                      <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
+                    <div class="profile_img_change" v-if="$gate.allow('updateProfile', 'profile', loggedIn)"> <span class="file-input btn btn-success btn-file"> <i class="fa fa-camera"></i>
+                      <input  type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
                       <!-- <input type="file"  name="image" id="file1" class="upload" @change="changeImage()" > -->
-                      </span> </div>
+                      </span> 
+                    </div>
                   </figure>
                   </form>
                   <h3>{{me.name}}</h3>
@@ -119,6 +120,10 @@ import Form from './../services/Form.js';
             me:function(){
               return this.$store.getters.me
             },
+            loggedIn(){
+              return this.$store.getters.user.loggedInUser;
+            }  
+            
         },
         created(){
           this.username=this.$route.params.username;
@@ -148,7 +153,8 @@ import Form from './../services/Form.js';
             getProfileUrl(){
                   let url=this.me.image;
                   return this.$helpers.getProfileUrl(url);
-            }
+            },
+             
         },
         components:{
             TheTopNav,

@@ -9,6 +9,7 @@ use App\Repository\BlogInterface;
 use Illuminate\Support\Facades\File;
 use App\Repository\FollowerInterface; 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Notifications\Notifications;
 use Validator;
 class UserController extends FrontendController
@@ -18,6 +19,8 @@ class UserController extends FrontendController
      *
      * @return void
      */
+
+    use AuthorizesRequests;
     protected $user;
     protected $followerList;
     function __construct(AccountInterface $user,FollowerInterface $followInterface)
@@ -28,7 +31,6 @@ class UserController extends FrontendController
     }
     public function myBlogs(BlogInterface $blog,Request $request)
     { 
-      // sleep(10);
       if(\Auth::check())
         {
             $routeName= Route::currentRouteName();
@@ -66,81 +68,81 @@ class UserController extends FrontendController
 
     public function profile(BlogInterface $blog,Request $request,$username=false)
     { 
-             $routeName= Route::currentRouteName();
-             $user=$this->user_state_info($username);
+       $routeName= Route::currentRouteName();
+       $user=$this->user_state_info($username);
 
-             $myBlogs=$blog->getActiveBlogByUserId($user['userid']);
-             unset($user['userid']);
-             if($routeName=='api')
-             {
-                $search=$request->get('search');
-                $sortBy=$request->get('sort_by');
-                if($sortBy)
-                  $myBlogs=$myBlogs->orderBy('created_at',strtoupper($sortBy));
-                $data['blogList']=$myBlogs->paginate($this->perPage);
-                return ($data);
-             }
-             else
-             {
-                $data['blogList']=$myBlogs->paginate($this->perPage);
-                $data['path']='/profile/'.$username;
-                $initialState=json_encode($data);
-                return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-             }
+       $myBlogs=$blog->getActiveBlogByUserId($user['userid']);
+       unset($user['userid']);
+       if($routeName=='api')
+       {
+          $search=$request->get('search');
+          $sortBy=$request->get('sort_by');
+          if($sortBy)
+            $myBlogs=$myBlogs->orderBy('created_at',strtoupper($sortBy));
+          $data['blogList']=$myBlogs->paginate($this->perPage);
+          return ($data);
+       }
+       else
+       {
+          $data['blogList']=$myBlogs->paginate($this->perPage);
+          $data['path']='/profile/'.$username;
+          $initialState=json_encode($data);
+          return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+       }
     }
 
     public function followings($username=false)
     {
-             if($username)
-             {
-                $userdata=$this->user->getUserByUsername($username);
-             }
-             else
-             {
-                $userdata=$this->authUser;
-             }
-            $routeName= ROUTE::currentRouteName();
-            $suggestion=$this->getFollowSuggestions($userdata,3);
-            $followings = $this->followerList->getAllFollowings($userdata);
-            $data['followSuggestion']=$suggestion;
-            $data['followings'] = $followings;
-            if($routeName=='api')
-            {
-                return ($data);
-            }
-            else
-            {
-                $data['path']='/followings';
-                $initialState=json_encode($data);
-                $user=$this->user_state_info($username);
-                return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-            }
+         if($username)
+         {
+            $userdata=$this->user->getUserByUsername($username);
+         }
+         else
+         {
+            $userdata=$this->authUser;
+         }
+        $routeName= ROUTE::currentRouteName();
+        $suggestion=$this->getFollowSuggestions($userdata,3);
+        $followings = $this->followerList->getAllFollowings($userdata);
+        $data['followSuggestion']=$suggestion;
+        $data['followings'] = $followings;
+        if($routeName=='api')
+        {
+            return ($data);
+        }
+        else
+        {
+            $data['path']='/followings';
+            $initialState=json_encode($data);
+            $user=$this->user_state_info($username);
+            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+        }
     }
     public function followers($username=false)
     {
-            if($username){
-                $userdata=$this->user->getUserByUsername($username);
-            }
-            else{
-                $userdata=$this->authUser;
-            }
-            $data['userdata'] = $userdata;
-            $routeName= ROUTE::currentRouteName();
-            $followers = $this->followerList->getAllFollowers($userdata);
-            $followings = $this->followerList->getAllFollowings($userdata)->pluck('username');
-            $data['followers'] = $followers;
-            $data['followings'] = $followings;
-            if($routeName=='api')
-            {
-              return ($data);
-            }
-            else
-            {
-                $data['path']='/followers';
-                $initialState=json_encode($data);
-                $user=$this->user_state_info($username);
-                return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-            }
+        if($username){
+            $userdata=$this->user->getUserByUsername($username);
+        }
+        else{
+            $userdata=$this->authUser;
+        }
+        $data['userdata'] = $userdata;
+        $routeName= ROUTE::currentRouteName();
+        $followers = $this->followerList->getAllFollowers($userdata);
+        $followings = $this->followerList->getAllFollowings($userdata)->pluck('username');
+        $data['followers'] = $followers;
+        $data['followings'] = $followings;
+        if($routeName=='api')
+        {
+          return ($data);
+        }
+        else
+        {
+            $data['path']='/followers';
+            $initialState=json_encode($data);
+            $user=$this->user_state_info($username);
+            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+        }
     }
     public function getFollowers($user=false,Request $request){
       try{
@@ -162,7 +164,8 @@ class UserController extends FrontendController
       }
     }
     public function getFollowings($user=false,Request $request){
-      try{
+      try
+      {
            if($user)
             {
               $userdata=$this->user->getUserByUsername($user);
@@ -211,14 +214,14 @@ class UserController extends FrontendController
     }
     
  
- public function changeProfile(Request $request)
+  public function changeProfile(Request $request)
   {
-   
-    if(\Auth::check())
-    {
-      if(request()->hasFile('image'))
+      if(\Auth::check())
       {
-        $dir = '/uploads/user-images/';
+        $this->authorize('updateProfile', $this->authUser);
+        if(request()->hasFile('image'))
+        {
+          $dir = '/uploads/user-images/';
           if (!File::isDirectory(public_path().$dir)) {
               File::makeDirectory(public_path().'/'.$dir,0777,true,true);
           }
@@ -230,35 +233,38 @@ class UserController extends FrontendController
           $form['image']=$imageName;
            $this->user->update($this->authUser->id,$form);
           return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
+        }
+        else
+        {
+            return  array('status'=>false,'message'=>'Profile Image unable to Update','data'=>array());
+        }
       }
       else
       {
-          return  array('status'=>false,'message'=>'Profile Image unable to Update','data'=>array());
+            return redirect()->route('home'); 
       }
-    }
-    else
-    {
-          return redirect()->route('home'); 
-    }
   }
   public function changeAddress(Request $request)
   {
+    $this->authorize('updateProfile', $this->authUser);
     if(\Auth::check())
     {
-      // $form='';
       $form['address'] = $request->address;
       $form['country'] = $request->country;
       $this->user->update($this->authUser->id,$form);
       return array('status'=>true,'message'=>'Address Changed Successfully','data'=>array('addressName'=>$form['address'],'countryName'=>$form['country']));
-    }else{
+    }
+    else
+    {
       return redirect()->route('home'); 
     }
   }
   public function changeBio(Request $request)
   {
+    
     if(\Auth::check())
     {
-      // $form='';
+      $this->authorize('updateProfile', $this->authUser);
       $form['bio'] = $request->bio;
       $this->user->update($this->authUser->id,$form);
       return array('status'=>true,'message'=>'Bio Updated Successfully','data'=>array('bioName'=>$form['bio']));
@@ -300,22 +306,24 @@ class UserController extends FrontendController
   }
   public function updateNotificationStatus(){
    if(\Auth::check())
-      {
+    {
         $data=array();
         $notifications=$this->user->getUsersNotification($this->authUser,$this->apiPerPage);
         $this->user->markNotificationsToRead($notifications);
 
         $data['unReadNotificationsCount']=$this->user->countUnreadNotifications($this->authUser) ;
         return  array('status'=>true,'data'=>$data,'message'=>'Success');
-      }
-     else
-      {
-         return  array('status'=>false,'message'=>'User not logged in!!');
-      }
+    }
+   else
+    {
+       return  array('status'=>false,'message'=>'User not logged in!!');
+    }
   }
-  public function settings(Request $request){
+  public function settings(Request $request)
+  {
+    $this->authorize('updateProfile', $this->authUser);
     if(\Auth::check())
-        {
+    {
             $routeName= Route::currentRouteName();
             $data['path']='/profile';
            if($routeName=='api')
@@ -339,54 +347,58 @@ class UserController extends FrontendController
   {
     if(\Auth::check())
     {
-      // $form='';
-      
       if($request->inputName=='dob'){
         $form['dob']=date('Y-m-d',strtotime($request->inputParams));
-      }else{
+      }
+      else{
         $form[$request->inputName]=$request->inputParams;
       }
       $this->user->update($this->authUser->id,$form);
       $user =$this->user->getUserByUsername($this->authUser->username);
       return array('status'=>true,'message'=>'Changed','data'=>array('me'=>$user));
-    }else{
+    }
+    else{
       return redirect()->route('home'); 
     }
   }
   public function emailAvailabilityForUpdate($email){
-        $user = $this->user->getAll()->where('email',$email)->first();
-        if($user) {
-            if($this->authUser->email==$email){
-                return response()->json(true); 
-            }else
-                 return response()->json(false); 
-        }
-        else{
-           return response()->json(true); 
-        }
-           
+      $user = $this->user->getAll()->where('email',$email)->first();
+      if($user) {
+          if($this->authUser->email==$email){
+              return response()->json(true); 
+          }else
+               return response()->json(false); 
+      }
+      else{
+         return response()->json(true); 
+      }
   } 
   public function changePassword(Request $request)
   {
     if(\Auth::check())
     {
-      if(Hash::check($request->oldpassword,$this->authUser->password)){
+      if(Hash::check($request->oldpassword,$this->authUser->password))
+      {
         $validator = Validator::make($request->all(), [ 
             'password' => 'required|min:6', 
             'repassword' => 'required|min:6|same:password', 
         ]);
-        if ($validator->fails()) { 
+        if ($validator->fails()) 
+        { 
             return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
         }
         $form['password']=Hash::make($request->password);
         $this->user->update($this->authUser->id,$form);
         $user =$this->user->getUserByUsername($this->authUser->username);
         return array('status'=>true,'message'=>'Password Changed','data'=>array('me'=>$user));
-      }else{
+      }
+      else
+      {
         return array('status'=>false,'message'=>'old Password incorrect','data'=>'');
       }
       
-    }else{
+    }
+    else{
       return redirect()->route('home'); 
     }
   }

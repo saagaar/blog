@@ -12,6 +12,12 @@ export default {
 	          {
 			    $('.modal').modal('hide');
 	            $('#SignUpModal').modal()
-	          }
+	          },
+	           closeAllPopups:function()
+			  {
+			    $('.modal').modal('hide');
+	            // $('#loginModal').modal('hide');
+	          },
+	        
 		}
 }

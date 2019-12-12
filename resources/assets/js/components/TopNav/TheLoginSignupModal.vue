@@ -71,7 +71,7 @@
         <div class="signup-section text-center">Already have an account? <LoginButton></LoginButton>.</div>
       </div>
       <div class="modal-footer text-center">
-        <div class="popup_btm">To make BlogSagar work, Click “Sign In” above to accept BlogSagar's <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy.</a></div>
+        <div class="popup_btm"> Read our <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy</a> to understand how TheBloggersClub works.</a></div>
       </div>
   </div>
 </div>
@@ -132,7 +132,7 @@
         <div class="signup-section text-center">Forgot Password? <a href="/password/reset" class="submit text-info"> Forgot Password</a>.</div>
       </div>
       <div class="modal-footer text-center">
-        <div class="popup_btm">To make BlogSagar work, Click “Sign In” above to accept BlogSagar's <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy.</a></div>
+        <div class="popup_btm"> Read our <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy</a> to understand how TheBloggersClub works.</a></div>
       </div>
   </div>
 </div>
@@ -145,9 +145,10 @@
   import LoginButton from './LoginButton.vue';
 import SignUpButton from './SignUpButton.vue';
 import { required, minLength , sameAs, between ,email} from 'vuelidate/lib/validators'
+import LoginMixin from './../../mixins/Login.mixins';
 import Form from './../../services/Form.js'
     export default {
-
+          mixins:[LoginMixin],
         data() {
         	 return {
             loginForm:new Form({
@@ -215,21 +216,19 @@ import Form from './../../services/Form.js'
         methods:{
 
           submitLoginForm:function(){
-
-          
             this.$v.loginForm.$touch();
             if(!this.$v.loginForm.$invalid)
             {
               this.loginForm.post('blog/login').then(response => {
                if(response.data.status){
 
-                  window.location.href="dashboard"
+                  window.location.href="/home"
                }
                else{
-                  alert(response.data.message)
+                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message})
                }
               }).catch(e => {
-                  console.log(e);
+                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message})
               });
             }
           },
@@ -238,8 +237,9 @@ import Form from './../../services/Form.js'
             if(!this.$v.signUpForm.$invalid)
             {
               this.signUpForm.post('blog/register').then(response => {
-               if(response.data.status){
-                  this.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
+               if(response.data.data.status){
+                 this.closeAllPopups();
+                 this.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                }
                else{
                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});

@@ -29,23 +29,25 @@ class UserInteractionController extends FrontendController
     }
     public function likeBlog($code)
     {
-        $this->user = app()->make('App\Repository\AccountInterface');
-        $blog = $this->userInteraction->getLikeByBlog($code);
+        // $this->user = app()->make('App\Repository\AccountInterface');
+        // $blog = $this->userInteraction->getAuthorByBlog($code);
         $isLiked=$this->userInteraction->isLiked($this->authUser,$code)->toArray();
          if(empty($isLiked))
          {
             $this->userInteraction->likeBlog($this->authUser,$code);
-            if($blog->user_id){
-                $code='like_notification';
-                $userdata=$this->user->getUserByUsername($blog->user->username);
-                $data=['NAME'=>$this->authUser->name,'URL'=>route('blog.detail' , $blog->code)];
-                $userdata->notify(new Notifications($code,$data));
-            }
+            // if($blog->user_id){
+            //     $code='like_notification';
+            //     $userdata=$this->user->getUserByUsername($blog->user->username);
+            //     $data=['NAME'=>$this->authUser->name,'URL'=>route('blog.detail' , $blog->code)];
+            //     $userdata->notify(new Notifications($code,$data));
+            // }
          }else{
          	$this->userInteraction->unlikeBlog($this->authUser,$code);
          }
-         
-         return array('status'=>true,'message'=>'success','likes'=>$blog);
+         $data = $this->userInteraction->getLikeByBlog($code);
+         // echo "<pre>";
+         // print_r($data);exit;
+         return array('status'=>true,'message'=>'success','likes'=>$data);
     }
     
     public function likeCount($code){

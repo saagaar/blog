@@ -29,14 +29,11 @@
     <meta property="og:type" content="article" />
 
     <!-- Website Title -->
-    <title>Blog Sagar - Social Media</title>    
+    <title>For all Blog writers|Share your knowledge and Story|theBloggersClub.com</title>    
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
     <link href="{{asset('frontend/css/landing-page.css')}}" rel="stylesheet">
-
-    <!-- Favicon  -->
-
     <link rel="icon" href="{{asset('landing-page/assets/images/favicon.png')}}">
 </head>
 <body>
@@ -46,7 +43,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
 
-      <a class="navbar-brand" href="index.html"><img src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}"  alt="logo"></a>
+      <a class="navbar-brand" href="/"><img src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}"  alt="logo"></a>
       <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -54,11 +51,15 @@
       <!-- navbar -->
       <div class="collapse navbar-collapse text-center" id="navbar">
         <ul class="navbar-nav ml-auto">
+         
           <li class="nav-item">
-            <a class="nav-link" href="/home"><b>Home</b></a>
+            <a class="nav-link" href="#home"><b>Home</b></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link page-scroll" href="#feature  "><b>Feature  </b></a>
+            <a class="nav-link page-scroll" href="#about-us"><b>Feature  </b></a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link page-scroll" href="#topics"><b>Topics  </b></a>
           </li>
           <li class="nav-item">
             <a class="nav-link page-scroll" href="#team"><b>Testimonials</b></a>
@@ -67,7 +68,7 @@
             <a class="nav-link" href="login.html"><b>Login</b></a>
           </li> -->
         </ul>
-        <a href="/home" class="btn btn-primary ml-lg-3 primary-shadow">Join Now</a>
+        <a href="/home" class="btn btn-primary ml-lg-3 primary-shadow">Get Started</a>
       </div>
     </nav>
   </div>
@@ -77,7 +78,7 @@
 <!-- hero area -->
 
 
-<section class="hero-section" data-background="" id="home" style="background-image: url(landing-page/assets/images/hero-area/banner-bg.png);">
+<section class="hero-section" id="home" style="background-image: url(landing-page/assets/images/hero-area/banner-bg.png);">
   <div class="container">
     <div class="row">
     @if(count($banner)>0 && is_object($banner))
@@ -85,7 +86,7 @@
       <div class="col-lg-12 text-center">        
         <h1 class="mb-3">{{$eachBanner->title}}</h1>
         <p class="mb-4">{{$eachBanner->description}}</p>
-        <a href="" class="btn btn-secondary btn-lg mb-5">explore us</a>
+        <a href="#about-us" class="btn btn-secondary btn-lg mb-5">About us</a>
         <!-- banner image -->
         <img class="img-fluid" src="landing-page/assets/images/hero-area/banner.png" alt="banner-img">        
       </div>
@@ -94,7 +95,7 @@
          <div class="col-lg-12 text-center">        
         <h1 class="mb-3">Update Title From Backend</h1>
         <p class="mb-4"> </p>
-        <a href="#" class="btn btn-secondary btn-lg mb-5">explore us</a>
+        <a href="#" class="btn btn-secondary btn-lg mb-5">About us</a>
         <!-- banner image -->
       </div>
       @endif
@@ -137,7 +138,7 @@
 <!-- /feature -->
 
 <!-- marketing -->
-<section class="section-lg seo">
+<section class="section-lg seo" id="about-us">
   <div class="container">
     <div class="row"> 
         <div class=" col-md-8 offset-md-2 offset-md-2 order-2 order-md-1">
@@ -161,7 +162,7 @@
   <img class="seo-bg-shape-3" src="landing-page/assets/images/background-shape/seo-ball-2.png" alt="bg-shape">
 </section>
 <!-- /marketing -->
- <div class="container">
+ <div class="container" id="topics">
   <div class="cat-word-title">
   <h2>Subscribe to our Topics</h2>
   <p>Receive updates from the topics you like</p>
@@ -341,8 +342,9 @@
       <!-- footer menu -->
       <nav class="col-lg-3 align-self-center mb-2">
         <h4>Get In Touch</h4>
-        <a href="{{$websiteUrl}}">{{$siteName}}</a><br>
-        <p>{{$address}}<br>{{$contactNumber}}<br><a href="#">hi@blogsagar.com </a></p>
+        <p> For any suggestions or feedbacks</p> 
+        <p><a href="mailto:{{ config('settings.contact_email')}}">{{ config('settings.contact_email')}} </a></p>
+        <a href="{{$websiteUrl}}">{{$siteName}}</a>
       </nav>  
       <nav class="col-lg-4 align-self-center mb-2">
         <contact></contact>
@@ -357,13 +359,13 @@
       <nav class="col-lg-3">
         <ul class="list-inline text-lg-right text-center social-icon">
           <li class="list-inline-item">
-            <a class="facebook" href="{{$facebookId}}"><i class="ti-facebook"></i></a>
+            <a class="facebook" href="{{config('settings.facebook_id')}}"><i class="ti-facebook"></i></a>
           </li>
           <li class="list-inline-item">
-            <a class="twitter" href="{{$twitterId}}"><i class="ti-twitter-alt"></i></a>
+            <a class="twitter" href="{{config('settings.twitter_id')}}"><i class="ti-twitter-alt"></i></a>
           </li>
           <li class="list-inline-item">
-            <a class="linkedin" href="{{$linkedinId}}"><i class="ti-linkedin"></i></a>
+            <a class="linkedin" href="{{config('settings.linkedin_id')}}"><i class="ti-linkedin"></i></a>
           </li>
         </ul>
       </nav>

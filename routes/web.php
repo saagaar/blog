@@ -14,7 +14,8 @@ Route::get('/','Frontend\HomeController@landingPage')->name('landing.page');
 
 Route::get('/logincheck', function () {
     return response()->json([
-   'status'=> \Auth::check()
+   'status'=> \Auth::check(),
+   'data'=>Auth::user()
 ]);
 });    
 

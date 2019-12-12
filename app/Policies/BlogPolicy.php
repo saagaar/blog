@@ -22,8 +22,12 @@ class BlogPolicy
      * @param  \App\Models Blogs $blog
      * @return mixed
      */
-    public function update(Users $user, Blogs $blog)
+    public function updateBlog(Users $user, Blogs $blog)
     {
+        if($user->id == $blog->user_id)
+        {
+            return true;
+        }
         if ($user->can('edit own posts')) {
             return $user->id == $blog->user_id;
         }
@@ -34,7 +38,7 @@ class BlogPolicy
             return false;
         }
     }
-    public function delete(Users $user, Blogs $blog)
+    public function deleteBlog(Users $user, Blogs $blog)
     {
         if ($user->can('delete own posts')) {
             return $user->id == $blog->user_id;

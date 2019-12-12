@@ -7027,7 +7027,7 @@ __webpack_require__.r(__webpack_exports__);
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'likes',
-  props: ['likescount', 'blogid', 'likes', 'blogcode'],
+  props: ['currentblog', 'blogid', 'likes', 'blogcode'],
   data: function data() {
     return {
       isChecked: '',
@@ -7044,7 +7044,7 @@ var action = '';
       this.isChecked = true;
     }
 
-    this.count = this.likescount;
+    this.count = this.currentblog.likes_count;
   },
   methods: {
     toggleLike: function toggleLike() {
@@ -7323,8 +7323,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
  // import LoginSignupModal from './LoginSignupModal';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7360,7 +7358,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SignUpButton_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SignUpButton.vue */ "./resources/assets/js/components/TopNav/SignUpButton.vue");
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
+/* harmony import */ var _mixins_Login_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../mixins/Login.mixins */ "./resources/assets/js/mixins/Login.mixins.js");
+/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -7514,14 +7513,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_Login_mixins__WEBPACK_IMPORTED_MODULE_4__["default"]],
   data: function data() {
     return {
-      loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
+      loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_5__["default"]({
         email: '',
         password: ''
       }),
-      signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
+      signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_5__["default"]({
         email: '',
         password: '',
         repassword: '',
@@ -7609,32 +7610,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     submitLoginForm: function submitLoginForm() {
+      var _this = this;
+
       this.$v.loginForm.$touch();
 
       if (!this.$v.loginForm.$invalid) {
         this.loginForm.post('blog/login').then(function (response) {
           if (response.data.status) {
-            window.location.href = "dashboard";
-          } else {
-            alert(response.data.message);
-          }
-        })["catch"](function (e) {
-          console.log(e);
-        });
-      }
-    },
-    submitSignUpForm: function submitSignUpForm() {
-      var _this = this;
-
-      this.$v.signUpForm.$touch();
-
-      if (!this.$v.signUpForm.$invalid) {
-        this.signUpForm.post('blog/register').then(function (response) {
-          if (response.data.status) {
-            _this.$store.commit('SETFLASHMESSAGE', {
-              status: true,
-              message: response.data.message
-            });
+            window.location.href = "/home";
           } else {
             _this.$store.commit('SETFLASHMESSAGE', {
               status: false,
@@ -7643,6 +7626,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         })["catch"](function (e) {
           _this.$store.commit('SETFLASHMESSAGE', {
+            status: false,
+            message: response.data.message
+          });
+        });
+      }
+    },
+    submitSignUpForm: function submitSignUpForm() {
+      var _this2 = this;
+
+      this.$v.signUpForm.$touch();
+
+      if (!this.$v.signUpForm.$invalid) {
+        this.signUpForm.post('blog/register').then(function (response) {
+          if (response.data.data.status) {
+            _this2.closeAllPopups();
+
+            _this2.$store.commit('SETFLASHMESSAGE', {
+              status: true,
+              message: response.data.message
+            });
+          } else {
+            _this2.$store.commit('SETFLASHMESSAGE', {
+              status: false,
+              message: response.data.message
+            });
+          }
+        })["catch"](function (e) {
+          _this2.$store.commit('SETFLASHMESSAGE', {
             status: false,
             message: response.data.message
           });
@@ -45752,11 +45763,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("a", { attrs: { href: "#" }, on: { click: _vm.openSignUpModal } }, [
-      _c("i", { staticClass: "fas fa-sign-in-alt" }, [_vm._v(" ")]),
-      _vm._v(" " + _vm._s(_vm.text))
-    ])
+  return _c("a", { attrs: { href: "#" }, on: { click: _vm.openSignUpModal } }, [
+    _vm._v("  "),
+    _c("i", { staticClass: "fas fa-sign-in-alt" }, [_vm._v(" ")]),
+    _vm._v(" " + _vm._s(_vm.text))
   ])
 }
 var staticRenderFns = []
@@ -46457,12 +46467,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-footer text-center" }, [
       _c("div", { staticClass: "popup_btm" }, [
-        _vm._v(
-          "To make BlogSagar work, Click “Sign In” above to accept BlogSagar's "
-        ),
+        _vm._v(" Read our "),
         _c("a", { attrs: { href: "#" } }, [_vm._v(" Terms of Service")]),
         _vm._v(" & "),
-        _c("a", { attrs: { href: "#" } }, [_vm._v(" Privacy Policy.")])
+        _c("a", { attrs: { href: "#" } }, [_vm._v(" Privacy Policy")]),
+        _vm._v(" to understand how TheBloggersClub works.")
       ])
     ])
   },
@@ -46571,12 +46580,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-footer text-center" }, [
       _c("div", { staticClass: "popup_btm" }, [
-        _vm._v(
-          "To make BlogSagar work, Click “Sign In” above to accept BlogSagar's "
-        ),
+        _vm._v(" Read our "),
         _c("a", { attrs: { href: "#" } }, [_vm._v(" Terms of Service")]),
         _vm._v(" & "),
-        _c("a", { attrs: { href: "#" } }, [_vm._v(" Privacy Policy.")])
+        _c("a", { attrs: { href: "#" } }, [_vm._v(" Privacy Policy")]),
+        _vm._v(" to understand how TheBloggersClub works.")
       ])
     ])
   }
@@ -67920,6 +67928,9 @@ __webpack_require__.r(__webpack_exports__);
     openSignUpModal: function openSignUpModal() {
       $('.modal').modal('hide');
       $('#SignUpModal').modal();
+    },
+    closeAllPopups: function closeAllPopups() {
+      $('.modal').modal('hide'); // $('#loginModal').modal('hide');
     }
   }
 });
@@ -68013,6 +68024,47 @@ function () {
   }]);
 
   return BlogPolicy;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/policies/UserProfilePolicy.js":
+/*!***********************************************************!*\
+  !*** ./resources/assets/js/policies/UserProfilePolicy.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserProfilePolicy; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var UserProfilePolicy =
+/*#__PURE__*/
+function () {
+  function UserProfilePolicy() {
+    _classCallCheck(this, UserProfilePolicy);
+  }
+
+  _createClass(UserProfilePolicy, null, [{
+    key: "updateProfile",
+    value: function updateProfile(currentUser, loginUser) {
+      if (loginUser.hasOwnProperty('username')) {
+        if (loginUser.username == currentUser.username) {
+          return true;
+        }
+      }
+    }
+  }]);
+
+  return UserProfilePolicy;
 }();
 
 
@@ -68299,12 +68351,14 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Gate; });
 /* harmony import */ var _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../policies/BlogPolicy */ "./resources/assets/js/policies/BlogPolicy.js");
-/* harmony import */ var _mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../mixins/PermissionCheck.mixin */ "./resources/assets/js/mixins/PermissionCheck.mixin.js");
+/* harmony import */ var _policies_UserProfilePolicy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../policies/UserProfilePolicy */ "./resources/assets/js/policies/UserProfilePolicy.js");
+/* harmony import */ var _mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../mixins/PermissionCheck.mixin */ "./resources/assets/js/mixins/PermissionCheck.mixin.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -68321,7 +68375,8 @@ function () {
 
     this.user = user;
     this.policies = {
-      blog: _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__["default"]
+      blog: _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__["default"],
+      profile: _policies_UserProfilePolicy__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
   }
 
@@ -68379,6 +68434,7 @@ var checkLoginUser = function checkLoginUser(_ref) {
   var form = new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
   form.get('logincheck').then(function (response) {
     commit('UserLoggedIn', response.data.status);
+    commit('LoggedInUser', response.data.data);
   })["catch"](function (e) {
     console.log(e);
   });
@@ -68507,12 +68563,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*!************************************************!*\
   !*** ./resources/assets/js/store/mutations.js ***!
   \************************************************/
-/*! exports provided: UserLoggedIn, ADD_ME, UPDATE_UNREAD_NOTIFICATION_COUNT, UPDATE_PROFILE, UPDATE_ADDRESS, UPDATE_COUNTRY, UPDATE_BIO, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT, TOGGLE_LOADING, SETFLASHMESSAGE, LIST_COMMENTS */
+/*! exports provided: UserLoggedIn, LoggedInUser, ADD_ME, UPDATE_UNREAD_NOTIFICATION_COUNT, UPDATE_PROFILE, UPDATE_ADDRESS, UPDATE_COUNTRY, UPDATE_BIO, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT, TOGGLE_LOADING, SETFLASHMESSAGE, LIST_COMMENTS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserLoggedIn", function() { return UserLoggedIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoggedInUser", function() { return LoggedInUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_ME", function() { return ADD_ME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_UNREAD_NOTIFICATION_COUNT", function() { return UPDATE_UNREAD_NOTIFICATION_COUNT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PROFILE", function() { return UPDATE_PROFILE; });
@@ -68528,6 +68585,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LIST_COMMENTS", function() { return LIST_COMMENTS; });
 var UserLoggedIn = function UserLoggedIn(state, user) {
   state.user.isLoggedIn = user;
+};
+var LoggedInUser = function LoggedInUser(state, user) {
+  state.user.loggedInUser = user;
 };
 var ADD_ME = function ADD_ME(state, user) {
   state.me = user;
@@ -68588,7 +68648,8 @@ var state = {
   user: {
     isLoggedIn: false,
     followersCount: 0,
-    followingsCount: 0
+    followingsCount: 0,
+    loggedInUser: {}
   },
   feed: [],
   listComments: [],

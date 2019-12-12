@@ -127,7 +127,7 @@
             </a>
           </div>
         </div>
-        <div class="signup-section text-center">Not a member yet? <a href="#" class=" text-info"   @click="openSignUpModal" > Sign Up</a>.</div>
+        <div class="signup-section text-center">Not a member yet?  Sign Up.</div>
       </div>
       <div class="modal-footer text-center">
         <div class="popup_btm">To make TheBloggersClub work  , Click “Sign In” above to accept <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy.</a></div>
