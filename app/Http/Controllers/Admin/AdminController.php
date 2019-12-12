@@ -106,5 +106,9 @@ class AdminController extends BaseController
         echo 'Import Successfull';
 
     }
+    public function test()
+    {
+        echo 'here';
+    }
   
 }
