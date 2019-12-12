@@ -12,7 +12,7 @@
                     <div class="right-button">
 
                         <ul v-if="!isUserloggedIn" >
-                            <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                            <li><!-- <a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a> --></li>
                             <li><LoginButton></LoginButton></li>
                             <li><SignUpButton></SignUpButton></li>
                             
@@ -24,7 +24,6 @@
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
                             aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ me.unReadNotificationsCount }}</em></a>
-
                                <NotificationsLoading :notificationList="topnotifications" :type="'nav'" ></NotificationsLoading>
                                 
                         </li>
@@ -44,7 +43,7 @@
                                 <!-- <li><a href="#">Publications</a></li> -->
                              
                                 <hr>
-                                <li><a href="#">Settings</a></li>
+                                <li><router-link to="/settings">Settings</router-link></li>
                                 <!-- <li><a href="#">Help</a></li> -->
                                 <!-- <li><a href="#">Change Password</a></li> -->
                                 <li><a v-bind:href="config.ROOT_URL+'logout/user'">Log Out</a></li>
@@ -137,7 +136,7 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
                 }
             },
             getProfileUrl(){
-              let url=this.me.image;
+              let url=this.loggedInUser.image;
               if(url==='' || url==null){
                 return 'frontend/images/elements/default-profile.png';
               }
