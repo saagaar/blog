@@ -127,7 +127,9 @@ class FrontendController extends BaseController
             $user=$accUser;
             $user->followersCount=$followerList->getFollowersCount($accUser);
             $user->followingCount=$followerList->getFollowingsCount($accUser);
-            $user->unReadNotificationsCount=$accUser->unreadNotifications()->count() ;
+            if(\Auth::check())
+            $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
+            $user->unReadNotificationsCount=0;
             $user->notifications=$account->getUsersNotification($accUser,$this->apiPerPage);
             $user->blogCount=$accUser->blogs()->count();
             $user->root_url=url('/');

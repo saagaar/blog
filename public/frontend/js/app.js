@@ -67806,8 +67806,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONFIG = {
-  ROOT_URL: 'http://localhost:8000/' // ROOT_URL: 'https://thebloggersclub.com/',
-
+  // ROOT_URL: 'http://localhost:8000/',
+  ROOT_URL: 'https://thebloggersclub.com/'
 };
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 
@@ -68035,10 +68035,26 @@ function () {
   _createClass(UserProfilePolicy, null, [{
     key: "updateProfile",
     value: function updateProfile(currentUser, loginUser) {
-      if (loginUser.hasOwnProperty('username')) {
+      if (loginUser != null && loginUser.hasOwnProperty('username')) {
         if (loginUser.username == currentUser.username) {
           return true;
         }
+      }
+    }
+  }, {
+    key: "viewUserDashboard",
+    value: function viewUserDashboard(currentUser, loginUser) {
+      if (loginUser != null && loginUser.hasOwnProperty('username')) {
+        if (loginUser.username == currentUser.username) {
+          return true;
+        }
+      }
+    }
+  }, {
+    key: "viewFollowButton",
+    value: function viewFollowButton(currentUser, loginUser) {
+      if (loginUser != null && loginUser.hasOwnProperty('username')) {
+        return true;
       }
     }
   }]);
