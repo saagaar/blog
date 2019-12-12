@@ -17,7 +17,7 @@ import Form from './../../services/Form.js'
 let action='';
     export default {
         name: 'likes',
-        props: ['likescount','blogid', 'likes','blogcode'],
+        props: ['currentblog','blogid', 'likes','blogcode'],
 
         data: function() {
             return {
@@ -35,7 +35,7 @@ let action='';
             }else{
                 this.isChecked=true;
             }
-            this.count=this.likescount;
+            this.count=this.currentblog.likes_count;
         },
        
         methods: {

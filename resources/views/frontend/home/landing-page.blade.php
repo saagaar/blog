@@ -318,14 +318,7 @@
         <h2>Subscribe to our newsletter</h2>
         <p class="mb-5">Receive updates, news and deals</p>
       </div>
-      <div class="col-lg-8 col-sm-10 col-12 mx-auto">
-        <form action="#">
-          <div class="input-wrapper position-relative">
-            <input type="email" class="newsletter-form" id="newsletter" placeholder="Enter your email">
-            <button type="submit" value="send" class="btn newsletter-btn">subscribe</button>
-          </div>
-        </form>
-      </div>
+      <newsletter></newsletter>
     </div>
   </div>
   <!-- background shapes -->

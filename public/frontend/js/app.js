@@ -7056,7 +7056,7 @@ __webpack_require__.r(__webpack_exports__);
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'likes',
-  props: ['likescount', 'blogid', 'likes', 'blogcode'],
+  props: ['currentblog', 'blogid', 'likes', 'blogcode'],
   data: function data() {
     return {
       isChecked: '',
@@ -7073,7 +7073,7 @@ var action = '';
       this.isChecked = true;
     }
 
-    this.count = this.likescount;
+    this.count = this.currentblog.likes_count;
   },
   methods: {
     toggleLike: function toggleLike() {

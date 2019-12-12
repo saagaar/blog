@@ -14,6 +14,7 @@ use App\Repository\BlogInterface;
 use App\Repository\ContactInterface;
 use App\Repository\AccountInterface;
 use App\Repository\UserInteractionInterface;  
+use App\Repository\SubscriptionManagerInterface;
 class UserInteractionController extends FrontendController
 {
     protected $data;
@@ -28,23 +29,25 @@ class UserInteractionController extends FrontendController
     }
     public function likeBlog($code)
     {
-        $this->user = app()->make('App\Repository\AccountInterface');
-        $blog = $this->userInteraction->getLikeByBlog($code);
+        // $this->user = app()->make('App\Repository\AccountInterface');
+        // $blog = $this->userInteraction->getAuthorByBlog($code);
         $isLiked=$this->userInteraction->isLiked($this->authUser,$code)->toArray();
          if(empty($isLiked))
          {
             $this->userInteraction->likeBlog($this->authUser,$code);
-            if($blog->user_id){
-                $code='like_notification';
-                $userdata=$this->user->getUserByUsername($blog->user->username);
-                $data=['NAME'=>$this->authUser->name,'URL'=>route('blog.detail' , $blog->code)];
-                $userdata->notify(new Notifications($code,$data));
-            }
+            // if($blog->user_id){
+            //     $code='like_notification';
+            //     $userdata=$this->user->getUserByUsername($blog->user->username);
+            //     $data=['NAME'=>$this->authUser->name,'URL'=>route('blog.detail' , $blog->code)];
+            //     $userdata->notify(new Notifications($code,$data));
+            // }
          }else{
          	$this->userInteraction->unlikeBlog($this->authUser,$code);
          }
-         
-         return array('status'=>true,'message'=>'success','likes'=>$blog);
+         $data = $this->userInteraction->getLikeByBlog($code);
+         // echo "<pre>";
+         // print_r($data);exit;
+         return array('status'=>true,'message'=>'success','likes'=>$data);
     }
     
     public function likeCount($code){
@@ -77,6 +80,23 @@ class UserInteractionController extends FrontendController
             $input['created_at'] = $date->format('Y-m-d H:i:s');
             $contact->create($input);
              return array('status'=>true,'message'=>'Form submitted successfully','data'=>'');
+    }
+    public function newsletter(Request $request,SubscriptionManagerInterface $subscribe){
+            $request->validate([
+            'email' => 'required',
+            ]);
+            $input = $request->all();
+            $date =date_create();
+            if(auth()->user()){
+                $input['user_id']  =Auth()->user()->id;
+            }
+            else{
+                $input['user_id']  =Null;
+            }
+            $input['comment']='News Letter Subscription';
+            $input['created_at'] = $date->format('Y-m-d H:i:s');
+            $subscribe->create($input);
+             return array('status'=>true,'message'=>'Subscribed successfully','data'=>'');
     }
     public function testinglike($code){
         $user = app()->make('App\Repository\AccountInterface');

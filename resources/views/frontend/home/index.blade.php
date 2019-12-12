@@ -40,7 +40,16 @@
                             <div class="meta-bottom d-flex">
                                 <a ><i class="ti-time"></i>&nbsp;{{ $featuredBlog['0']->created_at->diffForHumans() }} </a>
                                 <a  class="appreciate"><i>
+                                @if(auth()->user())
+                                    @if(in_array($featuredBlog['0']->id,$likes->toArray()))
+                                        <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
+                                    @else
+                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @endif
+                                @else
+                                
                                     <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                @endif
                                 </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
                              <!--    <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
@@ -86,7 +95,16 @@
                             <div class="meta-bottom d-flex">
                                 <a ><i class="ti-time"></i>&nbsp;{{ $eachFeaturedBlog->created_at->diffForHumans() }}</a>
                                 <a  class="appreciate"><i>
-                                    <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @if(auth()->user())
+                                        @if(in_array($eachFeaturedBlog->id,$likes->toArray()))
+                                            <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
+                                        @else
+                                            <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                        @endif
+                                    @else
+                                    
+                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @endif
                                 </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
                                <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
@@ -149,7 +167,16 @@
                             <div class="meta-bottom d-flex">
                                 <a ><i class="ti-time"></i>&nbsp;{{ $featuredForMember['0']->created_at->diffForHumans() }} </a>
                                 <a  class="appreciate"><i>
-                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @if(auth()->user())
+                                        @if(in_array($featuredForMember['0']->id,$likes->toArray()))
+                                            <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
+                                        @else
+                                            <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                        @endif
+                                    @else
+                                    
+                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @endif
                                 </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
                                <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
@@ -194,7 +221,16 @@
                             <div class="meta-bottom d-flex">
                                 <a ><i class="ti-time"></i>&nbsp;{{ $eachFeaturedForMember->created_at->diffForHumans() }} </a>
                                 <a  class="appreciate"><i>
-                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @if(auth()->user())
+                                        @if(in_array($eachFeaturedForMember->id,$likes->toArray()))
+                                            <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
+                                        @else
+                                            <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                        @endif
+                                    @else
+                                    
+                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @endif
                                 &nbsp;</i>{{$eachFeaturedForMember->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
                              <!--    <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
@@ -253,7 +289,16 @@
                             <div class="meta-bottom d-flex">
                                 <a ><i class="ti-time"></i>&nbsp;{{ $popular['0']->created_at->diffForHumans() }} </a>
                                 <a  class="appreciate"><i>
-                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @if(auth()->user())
+                                        @if(in_array($popular['0']->id,$likes->toArray()))
+                                            <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
+                                        @else
+                                            <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                        @endif
+                                    @else
+                                    
+                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @endif
                                 &nbsp;</i>{{$popular['0']->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
                                <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
@@ -300,7 +345,16 @@
                                 <a ><i class="ti-time"></i>&nbsp;
                                 {{ $eachPopular->created_at->diffForHumans() }} </a>
                                 <a  class="appreciate"><i>
-                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @if(auth()->user())
+                                        @if(in_array($eachPopular->id,$likes->toArray()))
+                                            <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
+                                        @else
+                                            <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                        @endif
+                                    @else
+                                    
+                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @endif
                                 &nbsp;</i>{{$eachPopular->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
                                 <!-- <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
@@ -369,7 +423,16 @@
                                 <a ><i class="ti-time"></i>&nbsp;
                                 {{ $eachLatest->created_at->diffForHumans() }} </a>
                                 <a  class="appreciate"><i>
-                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @if(auth()->user())
+                                        @if(in_array($eachLatest->id,$likes->toArray()))
+                                            <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
+                                        @else
+                                            <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                        @endif
+                                    @else
+                                    
+                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @endif
                                 &nbsp;</i>{{$eachLatest->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
                                <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->

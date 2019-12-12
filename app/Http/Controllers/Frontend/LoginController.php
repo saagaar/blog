@@ -67,7 +67,8 @@ class LoginController extends FrontendController
              'provider_id'  => $getInfo->id,
              'token'        =>$getInfo->token,
          ]);
-
+          $roles=['author'];
+          $userData->assignRole($roles);  
           return array('status'=>true,'userData'=>$userData,'message'=>'Registered successfully!'); 
         }else{
             return array('status'=>false,'userData'=>'','message'=>'Email Already Exist!'); 
@@ -119,6 +120,8 @@ class LoginController extends FrontendController
         $input['activation_code']= mt_rand(100000,999999);
         $input['activation_date'] = date('Y-m-d H:i:s', strtotime('+1 days'));
         $user = $this->account->create($input);
+        $roles=['author'];
+        $user->assignRole($roles);  
          $code='user_registration';
         $data=['NAME'=>$input['name'],'URL'=>url('/blog/useractivation/'.$input['username'].'/'.$input['activation_code']),'SITENAME'=>$this->siteName];
         $user->notify(new Notifications($code,$data));

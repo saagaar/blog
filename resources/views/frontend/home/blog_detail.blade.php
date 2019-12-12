@@ -39,7 +39,7 @@
                         <div class="d-sm-flex justify-content-between text-center">
                             <p class="like-info"><span class="align-middle">
                                 @if($likes)
-                                <likes v-bind:likescount="{{$blogDetails->likes_count}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :likes="{{$likes}}"></likes>
+                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :likes="{{$likes}}"></likes>
                                 @else
                                     <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid"><span>{{ $blogDetails->likes_count }} people Appreciate this</span>
                                 @endif
