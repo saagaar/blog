@@ -6,7 +6,7 @@
                 <figure>
                     <a href="#">
                          <img v-if="items.image" class="img-fluid" :src="'/uploads/blog/'+items.code+'/'+items.image" :alt="items.title">
-                       <img v-else class="img-fluid" :src="'/images/system-images/default-post.jpg'" :alt="items.title">
+                       <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="items.title">
                     </a>
                 </figure>
             </div>
@@ -14,14 +14,14 @@
             <div class="meta-top d-flex">
             <a v-if="items.anynomous==1" href="#">By Anynomyous</a>
             <a v-else-if="items.user==null" href="#">By Admin</a>
-             <a v-else :href="/profile/"+{{items.user.username}}>By {{ items.user.name }}</a>
+             <a v-else :href="'/profile/'+items.user.username">By {{ items.user.name }}</a>
             </div>
                 <a class="d-block" :href="'/blog/detail/'+items.code">
                     <h4>{{items.title}}</h4>
                 </a>
                 <p>{{items.short_description}}</p>
                 <div class="meta-bottom d-flex">
-                    <a href="#"><i class="ti-time"></i>{{ items.created_at | moment("from", "now")}}</a>
+                    <a href="#"><i class="ti-time"></i>&nbsp;{{ items.created_at | moment("from", "now")}}</a>
                     <a href="#" class="appreciate"><i>
                         <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                     </i>&nbsp; {{items.likes_count}} like</a>

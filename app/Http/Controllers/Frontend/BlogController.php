@@ -42,7 +42,8 @@ class BlogController extends FrontendController
             }else{
                 if ($validator->fails()) {
                     return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
-                }else{
+                }
+                else{
                     $input = $request->all();
                     $input['locale_id']='1';
                     $input['user_id']=Auth()->user()->id;
@@ -80,40 +81,38 @@ class BlogController extends FrontendController
     }
     public function update(Request $request,$blogCode,TagInterface $tag)
     {
-            $routeName= Route::currentRouteName();
-            $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
-            $data['blog']   = $this->blog->getBlogByCode($blogCode);
-                 $this->authorize('update', $data['blog']);
-                if($routeName=='api')
-                   {
-                      return ($data);
-                   }
-                   else
-                   {
-                    if($request->method()=='POST')
-                    {
-                        $validator = Validator::make($request->all(), [ 
-                        'title' => 'required', 
-                        'content' => 'required', 
-                        ]);
-                        if($this->blogRequiresActivation=='N'){
-                            return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
-                        }else{
-                            if ($validator->fails()) {
-                                return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
-                            }else{
-                                    $input = $request->all();
-                                    $this->blog->updateByCode($blogCode,$input);
-                                    return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'Blog Saved!']);
-                            }
-                            } 
+        $routeName= Route::currentRouteName();
+        $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
+        $data['blog']   = $this->blog->getBlogByCode($blogCode);
+        $this->authorize('updateBlog', $data['blog']);
+        if($routeName=='api')
+           {
+              return ($data);
+           }
+           else
+           {
+            if($request->method()=='POST')
+            {
+                $validator = Validator::make($request->all(), [ 
+                'title' => 'required', 
+                'content' => 'required', 
+                ]);
+                if($this->blogRequiresActivation=='N'){
+                    return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
+                }else{
+                    if ($validator->fails()) {
+                        return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+                    }else{
+                            $input = $request->all();
+                            $this->blog->updateByCode($blogCode,$input);
+                            return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'Blog Saved!']);
                     }
-                    $initialState=json_encode($data);
-                    $user=$this->user_state_info();
-                    return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-                }
-         
-            
+                    } 
+            }
+            $initialState=json_encode($data);
+            $user=$this->user_state_info();
+            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+        }
     }
     public function updateBlogDetail(Request $request,$postId,TagInterface $tag)
     {
@@ -138,7 +137,8 @@ class BlogController extends FrontendController
                 ]);
                 if($this->blogRequiresActivation=='N'){
                     return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
-                }else{
+                }
+                else{
                     if ($validator->fails()) {
                         return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
                     }else{
@@ -192,6 +192,7 @@ class BlogController extends FrontendController
     }
 
     public function delete($blogCode){
+        $this->authorize('deleteBlog', $data['blog']);
         $blogData = $this->blog->getBlogByCode($blogCode);
         if( $blogData)
         {

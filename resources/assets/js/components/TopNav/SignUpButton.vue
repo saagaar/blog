@@ -1,7 +1,5 @@
 <template>
-<div>
-<a href="#" @click="openSignUpModal"> <i class="fas fa-sign-in-alt">&nbsp;</i> Get Started</a>
-</div>
+<a href="#" @click="openSignUpModal"> &nbsp;<i class="fas fa-sign-in-alt">&nbsp;</i> {{text}}</a>
 </template>
 <script>
 import LoginMixin from './../../mixins/Login.mixins';
@@ -11,6 +9,9 @@ import LoginMixin from './../../mixins/Login.mixins';
         // components:{
         //    LoginSignupModal 
         // },
+        props: {
+            text:{type:String,default:'Get Started'},
+          },
         data() {
         	return {
            }

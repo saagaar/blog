@@ -14,7 +14,8 @@ Route::get('/','Frontend\HomeController@landingPage')->name('landing.page');
 
 Route::get('/logincheck', function () {
     return response()->json([
-   'status'=> \Auth::check()
+   'status'=> \Auth::check(),
+   'data'=>Auth::user()
 ]);
 });    
 
@@ -70,7 +71,7 @@ Route::get('/api/getfollowers/{user}','Frontend\UserController@getFollowers')->n
 Route::get('/api/getfollowings/{user}','Frontend\UserController@getFollowings')->name('getfollowings');
 
 
-Route::get('/test', 'Frontend\HomeController@test')->name('test');
+Route::get('/test/{code}', 'Frontend\UserInteractionController@testinglike')->name('test');
 Route::get('/blog','Frontend\HomeController@index')->name('home');
 Route::post('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
 Route::post('/blog/detail/share','Frontend\HomeController@share')->name('share');

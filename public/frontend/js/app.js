@@ -7048,6 +7048,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7056,6 +7060,7 @@ var action = '';
   data: function data() {
     return {
       isChecked: '',
+      isLoading: false,
       count: ''
     };
   },
@@ -7074,16 +7079,19 @@ var action = '';
     toggleLike: function toggleLike() {
       var _this = this;
 
-      if (this.isChecked) {
-        this.isChecked = false;
-      } else {
-        this.isChecked = true;
-      }
-
+      this.isLoading = true;
       action = '/like/blog/' + this.blogcode;
       var form = new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
       form.post(action).then(function (response) {
         if (response.data.status) {
+          _this.isLoading = false;
+
+          if (_this.isChecked) {
+            _this.isChecked = false;
+          } else {
+            _this.isChecked = true;
+          }
+
           return _this.count = response.data.likes['0'].likes_count;
         } else {
           if (_this.isChecked) {
@@ -7344,14 +7352,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
  // import LoginSignupModal from './LoginSignupModal';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   // components:{
   //    LoginSignupModal 
   // },
+  props: {
+    text: {
+      type: String,
+      "default": 'Get Started'
+    }
+  },
   data: function data() {
     return {};
   },
@@ -7371,10 +7383,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mixins_Login_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../mixins/Login.mixins */ "./resources/assets/js/mixins/Login.mixins.js");
-/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
+/* harmony import */ var _LoginButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginButton.vue */ "./resources/assets/js/components/TopNav/LoginButton.vue");
+/* harmony import */ var _SignUpButton_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SignUpButton.vue */ "./resources/assets/js/components/TopNav/SignUpButton.vue");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _mixins_Login_mixins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../mixins/Login.mixins */ "./resources/assets/js/mixins/Login.mixins.js");
+/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
 
 //
 //
@@ -7519,18 +7533,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [_mixins_Login_mixins__WEBPACK_IMPORTED_MODULE_2__["default"]],
+  mixins: [_mixins_Login_mixins__WEBPACK_IMPORTED_MODULE_4__["default"]],
   data: function data() {
     return {
-      loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
+      loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_5__["default"]({
         email: '',
         password: ''
       }),
-      signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
+      signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_5__["default"]({
         email: '',
         password: '',
         repassword: '',
@@ -7541,17 +7557,17 @@ __webpack_require__.r(__webpack_exports__);
   validations: {
     loginForm: {
       email: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
-        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["email"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["email"]
       },
       password: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"]
       }
     },
     signUpForm: {
       email: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
-        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["email"],
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["email"],
         isUnique: function isUnique(value) {
           var response;
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function isUnique$(_context) {
@@ -7588,19 +7604,23 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
-        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["minLength"])(2)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["minLength"])(2)
       },
       password: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
-        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["minLength"])(6)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["minLength"])(6)
       },
       repassword: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"],
-        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["minLength"])(6),
-        sameAsPassword: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["sameAs"])("password")
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["minLength"])(6),
+        sameAsPassword: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["sameAs"])("password")
       }
     }
+  },
+  components: {
+    SignUpButton: _SignUpButton_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    LoginButton: _LoginButton_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
     submitLoginForm: function submitLoginForm() {
@@ -45201,7 +45221,8 @@ var render = function() {
                           : _c("img", {
                               staticClass: "img-fluid",
                               attrs: {
-                                src: "/images/system-images/default-post.jpg",
+                                src:
+                                  "/frontend/images/elements/default-post.jpg",
                                 alt: items.title
                               }
                             })
@@ -45226,8 +45247,7 @@ var render = function() {
                               "a",
                               {
                                 attrs: {
-                                  href: /profile/,
-                                  "+{{items.user.username}}": ""
+                                  href: "/profile/" + items.user.username
                                 }
                               },
                               [_vm._v("By " + _vm._s(items.user.name))]
@@ -45249,9 +45269,14 @@ var render = function() {
                         _c("a", { attrs: { href: "#" } }, [
                           _c("i", { staticClass: "ti-time" }),
                           _vm._v(
-                            _vm._s(
-                              _vm._f("moment")(items.created_at, "from", "now")
-                            )
+                            " " +
+                              _vm._s(
+                                _vm._f("moment")(
+                                  items.created_at,
+                                  "from",
+                                  "now"
+                                )
+                              )
                           )
                         ]),
                         _vm._v(" "),
@@ -45487,7 +45512,7 @@ var render = function() {
           ? _c("img", {
               staticClass: "img-fluid",
               attrs: {
-                src: "/frontend/images/elements/appreciate.gif",
+                src: "/frontend/images/elements/appreciate.png",
                 width: "25",
                 height: "25"
               }
@@ -45678,11 +45703,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("a", { attrs: { href: "#" }, on: { click: _vm.openSignUpModal } }, [
-      _c("i", { staticClass: "fas fa-sign-in-alt" }, [_vm._v(" ")]),
-      _vm._v(" Get Started")
-    ])
+  return _c("a", { attrs: { href: "#" }, on: { click: _vm.openSignUpModal } }, [
+    _vm._v("  "),
+    _c("i", { staticClass: "fas fa-sign-in-alt" }, [_vm._v(" ")]),
+    _vm._v(" " + _vm._s(_vm.text))
   ])
 }
 var staticRenderFns = []
@@ -46060,10 +46084,19 @@ var render = function() {
                     _vm._m(2)
                   ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _c(
+                    "div",
+                    { staticClass: "signup-section text-center" },
+                    [
+                      _vm._v("Already have an account? "),
+                      _c("LoginButton"),
+                      _vm._v(".")
+                    ],
+                    1
+                  )
                 ]),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ])
             ])
           ]
@@ -46093,10 +46126,10 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-box" }, [
-                _vm._m(5),
+                _vm._m(4),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
-                  _vm._m(6),
+                  _vm._m(5),
                   _vm._v(" "),
                   _c("div", { staticClass: "d-flex flex-column text-center" }, [
                     _c(
@@ -46256,15 +46289,24 @@ var render = function() {
                       [_vm._v("or use a social network")]
                     ),
                     _vm._v(" "),
-                    _vm._m(7)
+                    _vm._m(6)
                   ]),
                   _vm._v(" "),
-                  _vm._m(8),
+                  _c(
+                    "div",
+                    { staticClass: "signup-section text-center" },
+                    [
+                      _vm._v("Not a member yet?"),
+                      _c("SignUpButton", { attrs: { text: "Sign Up" } }),
+                      _vm._v(".")
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _vm._m(9)
+                  _vm._m(7)
                 ]),
                 _vm._v(" "),
-                _vm._m(10)
+                _vm._m(8)
               ])
             ])
           ]
@@ -46363,26 +46405,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "signup-section text-center" }, [
-      _vm._v("Already have an account? "),
-      _c("a", { staticClass: "text-info", attrs: { href: "#a" } }, [
-        _vm._v(" Sign Up")
-      ]),
-      _vm._v(".")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-footer text-center" }, [
       _c("div", { staticClass: "popup_btm" }, [
-        _vm._v(
-          "To make BlogSagar work, Click “Sign In” above to accept BlogSagar's "
-        ),
+        _vm._v(" Read our "),
         _c("a", { attrs: { href: "#" } }, [_vm._v(" Terms of Service")]),
         _vm._v(" & "),
-        _c("a", { attrs: { href: "#" } }, [_vm._v(" Privacy Policy.")])
+        _c("a", { attrs: { href: "#" } }, [_vm._v(" Privacy Policy")]),
+        _vm._v(" to understand how TheBloggersClub works.")
       ])
     ])
   },
@@ -46476,16 +46505,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "signup-section text-center" }, [
-      _vm._v("Not a member yet? "),
-      _c("button", { staticClass: "submit text-info" }, [_vm._v(" Sign Up")]),
-      _vm._v(".")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "signup-section text-center" }, [
       _vm._v("Forgot Password? "),
       _c(
         "a",
@@ -46501,12 +46520,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-footer text-center" }, [
       _c("div", { staticClass: "popup_btm" }, [
-        _vm._v(
-          "To make BlogSagar work, Click “Sign In” above to accept BlogSagar's "
-        ),
+        _vm._v(" Read our "),
         _c("a", { attrs: { href: "#" } }, [_vm._v(" Terms of Service")]),
         _vm._v(" & "),
-        _c("a", { attrs: { href: "#" } }, [_vm._v(" Privacy Policy.")])
+        _c("a", { attrs: { href: "#" } }, [_vm._v(" Privacy Policy")]),
+        _vm._v(" to understand how TheBloggersClub works.")
       ])
     ])
   }
@@ -67991,6 +68009,47 @@ function () {
 
 /***/ }),
 
+/***/ "./resources/assets/js/policies/UserProfilePolicy.js":
+/*!***********************************************************!*\
+  !*** ./resources/assets/js/policies/UserProfilePolicy.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserProfilePolicy; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var UserProfilePolicy =
+/*#__PURE__*/
+function () {
+  function UserProfilePolicy() {
+    _classCallCheck(this, UserProfilePolicy);
+  }
+
+  _createClass(UserProfilePolicy, null, [{
+    key: "updateProfile",
+    value: function updateProfile(currentUser, loginUser) {
+      if (loginUser.hasOwnProperty('username')) {
+        if (loginUser.username == currentUser.username) {
+          return true;
+        }
+      }
+    }
+  }]);
+
+  return UserProfilePolicy;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/services/Form.js":
 /*!**********************************************!*\
   !*** ./resources/assets/js/services/Form.js ***!
@@ -68271,12 +68330,14 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Gate; });
 /* harmony import */ var _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../policies/BlogPolicy */ "./resources/assets/js/policies/BlogPolicy.js");
-/* harmony import */ var _mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../mixins/PermissionCheck.mixin */ "./resources/assets/js/mixins/PermissionCheck.mixin.js");
+/* harmony import */ var _policies_UserProfilePolicy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../policies/UserProfilePolicy */ "./resources/assets/js/policies/UserProfilePolicy.js");
+/* harmony import */ var _mixins_PermissionCheck_mixin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../mixins/PermissionCheck.mixin */ "./resources/assets/js/mixins/PermissionCheck.mixin.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -68293,7 +68354,8 @@ function () {
 
     this.user = user;
     this.policies = {
-      blog: _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__["default"]
+      blog: _policies_BlogPolicy__WEBPACK_IMPORTED_MODULE_0__["default"],
+      profile: _policies_UserProfilePolicy__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
   }
 
@@ -68351,6 +68413,7 @@ var checkLoginUser = function checkLoginUser(_ref) {
   var form = new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
   form.get('logincheck').then(function (response) {
     commit('UserLoggedIn', response.data.status);
+    commit('LoggedInUser', response.data.data);
   })["catch"](function (e) {
     console.log(e);
   });
@@ -68479,12 +68542,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*!************************************************!*\
   !*** ./resources/assets/js/store/mutations.js ***!
   \************************************************/
-/*! exports provided: UserLoggedIn, ADD_ME, UPDATE_UNREAD_NOTIFICATION_COUNT, UPDATE_PROFILE, UPDATE_ADDRESS, UPDATE_COUNTRY, UPDATE_BIO, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT, TOGGLE_LOADING, SETFLASHMESSAGE, LIST_COMMENTS */
+/*! exports provided: UserLoggedIn, LoggedInUser, ADD_ME, UPDATE_UNREAD_NOTIFICATION_COUNT, UPDATE_PROFILE, UPDATE_ADDRESS, UPDATE_COUNTRY, UPDATE_BIO, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT, TOGGLE_LOADING, SETFLASHMESSAGE, LIST_COMMENTS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserLoggedIn", function() { return UserLoggedIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoggedInUser", function() { return LoggedInUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_ME", function() { return ADD_ME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_UNREAD_NOTIFICATION_COUNT", function() { return UPDATE_UNREAD_NOTIFICATION_COUNT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PROFILE", function() { return UPDATE_PROFILE; });
@@ -68500,6 +68564,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LIST_COMMENTS", function() { return LIST_COMMENTS; });
 var UserLoggedIn = function UserLoggedIn(state, user) {
   state.user.isLoggedIn = user;
+};
+var LoggedInUser = function LoggedInUser(state, user) {
+  state.user.loggedInUser = user;
 };
 var ADD_ME = function ADD_ME(state, user) {
   state.me = user;
@@ -68560,7 +68627,8 @@ var state = {
   user: {
     isLoggedIn: false,
     followersCount: 0,
-    followingsCount: 0
+    followingsCount: 0,
+    loggedInUser: {}
   },
   feed: [],
   listComments: [],

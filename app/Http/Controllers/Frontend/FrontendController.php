@@ -91,7 +91,7 @@ class FrontendController extends BaseController
         $this->authUser= \Auth::user();
             return $next($request);
         });
-
+    
     }
     /**
      * Show the application dashboard.

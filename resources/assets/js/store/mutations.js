@@ -1,12 +1,16 @@
 export const UserLoggedIn = (state, user) => {
     state.user.isLoggedIn = user
 }
+export const LoggedInUser = (state, user) => {
+    state.user.loggedInUser = user
+}
 
 export const ADD_ME = (state, user) => {
     state.me = user
 }
 export const UPDATE_UNREAD_NOTIFICATION_COUNT = (state, count) => {
     state.me.unReadNotificationsCount = count
+    
 }
 export const UPDATE_PROFILE = (state, imageName) => {
     state.me.image = imageName

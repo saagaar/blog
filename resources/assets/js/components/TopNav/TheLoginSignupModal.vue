@@ -68,10 +68,10 @@
             </a>
           </div>
         </div>
-        <div class="signup-section text-center">Already have an account? <a href="#a" class="text-info"> Sign Up</a>.</div>
+        <div class="signup-section text-center">Already have an account? <LoginButton></LoginButton>.</div>
       </div>
       <div class="modal-footer text-center">
-        <div class="popup_btm">To make BlogSagar work, Click “Sign In” above to accept BlogSagar's <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy.</a></div>
+        <div class="popup_btm"> Read our <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy</a> to understand how TheBloggersClub works.</a></div>
       </div>
   </div>
 </div>
@@ -128,11 +128,11 @@
             </a>
           </div>
         </div>
-        <div class="signup-section text-center">Not a member yet? <button  class="submit text-info"> Sign Up</button>.</div>
+        <div class="signup-section text-center">Not a member yet?<SignUpButton :text="'Sign Up'"></SignUpButton>.</div>
         <div class="signup-section text-center">Forgot Password? <a href="/password/reset" class="submit text-info"> Forgot Password</a>.</div>
       </div>
       <div class="modal-footer text-center">
-        <div class="popup_btm">To make BlogSagar work, Click “Sign In” above to accept BlogSagar's <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy.</a></div>
+        <div class="popup_btm"> Read our <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy</a> to understand how TheBloggersClub works.</a></div>
       </div>
   </div>
 </div>
@@ -142,6 +142,8 @@
 
 </template>
 <script>
+  import LoginButton from './LoginButton.vue';
+import SignUpButton from './SignUpButton.vue';
 import { required, minLength , sameAs, between ,email} from 'vuelidate/lib/validators'
 import LoginMixin from './../../mixins/Login.mixins';
 import Form from './../../services/Form.js'
@@ -207,7 +209,10 @@ import Form from './../../services/Form.js'
           }
           
         },
-
+        components:{
+                SignUpButton,
+                LoginButton,
+            },
         methods:{
 
           submitLoginForm:function(){

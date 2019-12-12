@@ -5,7 +5,8 @@ const state = {
     user:{
         isLoggedIn:false,
         followersCount:0,
-        followingsCount:0
+        followingsCount:0,
+        loggedInUser:{}
     },
     feed: [],
     listComments:[],

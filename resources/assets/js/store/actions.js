@@ -4,6 +4,7 @@ export const checkLoginUser = ({ commit }) => {
     let form=new Form();
     form.get('logincheck').then(response => {
           commit('UserLoggedIn', response.data.status );
+          commit('LoggedInUser', response.data.data );
       }).catch(e => 
       {
           console.log(e);

@@ -1,4 +1,5 @@
 import BlogPolicy from './../policies/BlogPolicy';
+import UserProfilePolicy from './../policies/UserProfilePolicy';
 import PermissionCheck from './../mixins/PermissionCheck.mixin';
 
 /**
@@ -9,10 +10,10 @@ export default class Gate
 {
     constructor(user)
     {
-     
         this.user=user;
         this.policies = {
             blog: BlogPolicy,
+            profile: UserProfilePolicy,
         };
     }
 
@@ -30,6 +31,7 @@ export default class Gate
        {
           return this.user.permissions.indexOf(action) !== -1;
        }
+      
         return this.policies[type][action](this.user, model);
     }
 

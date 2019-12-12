@@ -16,7 +16,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
                         <div class="thumb bg-color">
-                            <a href="#">
+                            <a >
                             @if($featuredBlog['0']->image)
                                  <img class="img-fluid plain-bg" data-src="{{ '/image/'.$featuredBlog[0]->code.'/555/'.$featuredBlog[0]->image }}" alt="">
                             @else
@@ -28,7 +28,7 @@
                         <div class="short_details">
                              <div class="meta-top d-flex">
                             @php
-                          echo   ($featuredBlog['0']->anynomous=='2') ? (isset($featuredBlog['0']->user->name)  ? '<a href="/profile/'.$featuredBlog['0']->user->username.'">By'. $featuredBlog['0']->user->name.'</a>' : '<a href="#">Admin</a>'):'<a href="#"> Anynomous </a>'
+                          echo   ($featuredBlog['0']->anynomous=='2') ? (isset($featuredBlog['0']->user->name)  ? '<a href="/profile/'.$featuredBlog['0']->user->username.'">By'. $featuredBlog['0']->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $featuredBlog['0']->code)}}">
@@ -38,12 +38,12 @@
                                {{ str_limit($featuredBlog['0']->short_description, $limit = 150, $end = '...') }}
                             </p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredBlog['0']->created_at->diffForHumans() }} </a>
-                                <a href="#" class="appreciate"><i>
+                                <a ><i class="ti-time"></i>&nbsp;{{ $featuredBlog['0']->created_at->diffForHumans() }} </a>
+                                <a  class="appreciate"><i>
                                     <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
-                             <!--    <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                <a ><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
+                             <!--    <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -58,7 +58,7 @@
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-md-4 col-sm-5 col-12 bg-color">
                             <figure>
-                                <a href="#">
+                                <a >
 
                             @if($eachFeaturedBlog->image)
                                     @php
@@ -76,7 +76,7 @@
                         <div class="short_details col-md-8 col-sm-7 col-12">
                              <div class="meta-top d-flex">
                            @php
-                                echo   ($eachFeaturedBlog->anynomous=='2') ? (isset($eachFeaturedBlog->user->name)  ? '<a href="/profile/'.$eachFeaturedBlog->user->username.'"> By '.$eachFeaturedBlog->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                                echo   ($eachFeaturedBlog->anynomous=='2') ? (isset($eachFeaturedBlog->user->name)  ? '<a href="/profile/'.$eachFeaturedBlog->user->username.'"> By '.$eachFeaturedBlog->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachFeaturedBlog->code)}}">
@@ -84,12 +84,12 @@
                             </a>
                             <p>{{ str_limit($eachFeaturedBlog->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>&nbsp;{{ $eachFeaturedBlog->created_at->diffForHumans() }}</a>
-                                <a href="#" class="appreciate"><i>
+                                <a ><i class="ti-time"></i>&nbsp;{{ $eachFeaturedBlog->created_at->diffForHumans() }}</a>
+                                <a  class="appreciate"><i>
                                     <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
-                               <!--  <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                <a ><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
+                               <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -125,7 +125,7 @@
                <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
                         <div class="thumb bg-color">
-                            <a href="#">
+                            <a >
                                 @if($featuredForMember['0']->image)
                                  <img class="img-fluid plain-bg" data-src="{{ '/image/'.$featuredForMember[0]->code.'/555/'.$featuredForMember[0]->image }}" alt="">
                                 @else
@@ -137,7 +137,7 @@
                         <div class="short_details">
                              <div class="meta-top d-flex">
                             @php
-                                echo   ($featuredForMember['0']->anynomous=='2') ? (isset($featuredForMember['0']->user->name)  ? '<a href="/profile/'.$featuredForMember[0]->user->username.'"> By '.$featuredForMember['0']->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                                echo   ($featuredForMember['0']->anynomous=='2') ? (isset($featuredForMember['0']->user->name)  ? '<a href="/profile/'.$featuredForMember[0]->user->username.'"> By '.$featuredForMember['0']->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $featuredForMember['0']->code)}}">
@@ -147,12 +147,12 @@
                                {{str_limit($featuredForMember['0']->short_description, $limit = 150, $end = '...') }}
                             </p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>&nbsp;{{ $featuredForMember['0']->created_at->diffForHumans() }} </a>
-                                <a href="#" class="appreciate"><i>
+                                <a ><i class="ti-time"></i>&nbsp;{{ $featuredForMember['0']->created_at->diffForHumans() }} </a>
+                                <a  class="appreciate"><i>
                                     <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
-                               <!--  <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                <a ><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
+                               <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -166,7 +166,7 @@
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-md-4 col-sm-5 col-12 bg-color">
                             <figure>
-                                <a href="#">
+                                <a >
                                  
                             @if($eachFeaturedForMember->image)
                                 @php
@@ -184,7 +184,7 @@
                         <div class="short_details col-md-8 col-sm-7 col-12">
                             <div class="meta-top d-flex">
                                 @php
-                                    echo   ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? '<a href="/profile/'.$eachFeaturedForMember->user->username.'"> By '.$eachFeaturedForMember->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                                    echo   ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? '<a href="/profile/'.$eachFeaturedForMember->user->username.'"> By '.$eachFeaturedForMember->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachFeaturedForMember->code)}}">
@@ -192,12 +192,12 @@
                             </a>
                             <p>{{ str_limit($eachFeaturedForMember->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>&nbsp;{{ $eachFeaturedForMember->created_at->diffForHumans() }} </a>
-                                <a href="#" class="appreciate"><i>
+                                <a ><i class="ti-time"></i>&nbsp;{{ $eachFeaturedForMember->created_at->diffForHumans() }} </a>
+                                <a  class="appreciate"><i>
                                     <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachFeaturedForMember->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
-                             <!--    <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                <a ><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
+                             <!--    <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -229,7 +229,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
                         <div class="thumb bg-color">
-                            <a href="#">
+                            <a >
                             @if($popular['0']->image)
                                  <img class="img-fluid plain-bg"  data-src="{{ '/image/'.$popular[0]->code.'/555/'.$popular[0]->image }}"  alt="">
                             @else
@@ -241,7 +241,7 @@
                         <div class="short_details">
                           <div class="meta-top d-flex">
                             @php
-                                echo   ($popular['0']->anynomous=='2') ? (isset($popular['0']->user->name)  ? '<a href="/profile/'.$popular[0]->user->username.'"> By '.$popular['0']->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                                echo   ($popular['0']->anynomous=='2') ? (isset($popular['0']->user->name)  ? '<a href="/profile/'.$popular[0]->user->username.'"> By '.$popular['0']->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                            </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $popular['0']->code)}}">
@@ -251,12 +251,12 @@
                                {{ str_limit($popular['0']->short_description, $limit = 150, $end = '...') }}
                             </p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>&nbsp;{{ $popular['0']->created_at->diffForHumans() }} </a>
-                                <a href="#" class="appreciate"><i>
+                                <a ><i class="ti-time"></i>&nbsp;{{ $popular['0']->created_at->diffForHumans() }} </a>
+                                <a  class="appreciate"><i>
                                     <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$popular['0']->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
-                               <!--  <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                <a ><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
+                               <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -272,7 +272,7 @@
                         <div class="thumb col-md-4 col-sm-5 col-12 bg-color bg-color">
                             <figure>
                                     
-                                <a href="#">
+                                <a >
                             @if($eachPopular->image)
                                      @php
                                         $img=explode('.',$eachPopular->image);
@@ -289,7 +289,7 @@
 
                            <div class="meta-top d-flex">
                             @php
-                                    echo   ($eachPopular->anynomous=='2') ? (isset($eachPopular->user->name)  ? '<a href="/profile/'.$eachPopular->user->username.'"> By '.$eachPopular->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                                    echo   ($eachPopular->anynomous=='2') ? (isset($eachPopular->user->name)  ? '<a href="/profile/'.$eachPopular->user->username.'"> By '.$eachPopular->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachPopular->code)}}">
@@ -297,13 +297,13 @@
                             </a>
                             <p>{{ str_limit($eachPopular->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>&nbsp;
+                                <a ><i class="ti-time"></i>&nbsp;
                                 {{ $eachPopular->created_at->diffForHumans() }} </a>
-                                <a href="#" class="appreciate"><i>
+                                <a  class="appreciate"><i>
                                     <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachPopular->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
-                                <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                <a ><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
+                                <!-- <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div> 
@@ -341,7 +341,7 @@
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-md-4 col-sm-5 col-12 bg-color">
                             <figure>
-                                <a href="#">
+                                <a >
 
                                 @if($eachLatest->image)
                                      @php
@@ -358,7 +358,7 @@
                         <div class="short_details col-md-8 col-sm-7 col-12">
                           <div class="meta-top d-flex">
                             @php
-                                echo   ($eachLatest->anynomous=='2') ? (isset($eachLatest->user->name)  ? '<a href="/profile/'.$eachLatest->user->username.'"> By '.$eachLatest->user->name.'</a>' : '<a href="#">By Admin</a>'):'<a href="#">By  Anynomous </a>'
+                                echo   ($eachLatest->anynomous=='2') ? (isset($eachLatest->user->name)  ? '<a href="/profile/'.$eachLatest->user->username.'"> By '.$eachLatest->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $eachLatest->code)}}">
@@ -366,13 +366,13 @@
                             </a>
                             <p>{{ str_limit($eachLatest->short_description, $limit = 150, $end = '...') }}</p>
                             <div class="meta-bottom d-flex">
-                                <a href="#"><i class="ti-time"></i>&nbsp;
+                                <a ><i class="ti-time"></i>&nbsp;
                                 {{ $eachLatest->created_at->diffForHumans() }} </a>
-                                <a href="#" class="appreciate"><i>
+                                <a  class="appreciate"><i>
                                     <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 &nbsp;</i>{{$eachLatest->likes_count }} like</a>
-                                <a href="#"><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
-                               <!--  <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
+                                <a ><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
+                               <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
                     </div>
