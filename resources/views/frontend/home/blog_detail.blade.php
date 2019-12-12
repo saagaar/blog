@@ -125,7 +125,6 @@
                             </div>
                         </div>
                     </div> -->
-                    <!-- @if(auth()->user()) -->
                     <comment v-bind:blog="{{ $blogDetails }}" :allComment="{{ $blogComment }}"></comment>
                     @if(!auth()->user())
                     <div class="area-padding">
