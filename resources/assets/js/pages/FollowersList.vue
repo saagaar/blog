@@ -17,7 +17,7 @@
               </div>
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">
-                  <h5><a href="timeline.html" class="profile-link">{{eachFollowers.name}} </a></h5>
+                  <h5><a :href="'/profile/'+eachFollowers.username"  class="profile-link">{{eachFollowers.name}} </a></h5>
                   <FollowButton  @clicked="userFollowed" :followings="initialState.followings" :Buttonclass="'float-right'" :username="eachFollowers.username" :followSuggestionHead="3"></FollowButton>
                   <p>{{eachFollowers.followers_count}} Followers</p>
                 </div>

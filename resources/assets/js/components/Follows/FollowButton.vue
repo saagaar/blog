@@ -1,5 +1,5 @@
 <template>
-  <a href='' class="btn btn-sm  btn-round" :class="[Buttonclass,buttonDesign]"  @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
+  <a v-if="$gate.allow('viewFollowButton', 'profile', loggedInUser)" class="btn btn-sm  btn-round" :class="[Buttonclass,buttonDesign]"  @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
   {{ isFollowing ? 'Unfollow' : 'Follow'}}
   </a>
 </template>
@@ -23,6 +23,11 @@ let action='';
                 buttonDesign:" text-green"
            }
         },
+        computed:{
+            loggedInUser:function(){
+              return this.$store.getters.user.loggedInUser
+            },
+          },
         watch:{
             isFollowing: function (val) {
               if(val==true)

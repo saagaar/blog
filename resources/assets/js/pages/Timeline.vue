@@ -2,7 +2,7 @@
 <template>
             <div>
               <div  class="">
-                <div class="white-box create-post">
+                <div class="white-box create-post"  v-if="$gate.allow('viewUserDashboard', 'profile', loggedIn)">
                 <form>
                   <div class="row">
                          <div class="col-md-11 col-sm-10 blog-src">
@@ -75,6 +75,11 @@
             filter_by:2,
             search:'',
         }
+      },
+      computed:{
+         loggedIn(){
+              return this.$store.getters.user.loggedInUser;
+            }  
       },
       watch: {
           filter_by: function () {

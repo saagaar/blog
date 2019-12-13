@@ -17,7 +17,7 @@ class ProfileSettingPolicy
     
     public function updateProfile(Users $user)
     {
-        if(Auth()->check())
+        if(\Auth()->check())
         {
             return true;
         }

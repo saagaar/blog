@@ -31,7 +31,6 @@ export default class Gate
        {
           return this.user.permissions.indexOf(action) !== -1;
        }
-      
         return this.policies[type][action](this.user, model);
     }
 

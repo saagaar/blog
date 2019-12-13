@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div>
-    <h4 class="text-left"><i class="fa fa-info-circle">&nbsp;</i>Bio</h4><a  href='#' v-if="!isClicked && $gate.allow('updateProfile', 'profile', loggedIn)" class="text-right" v-on:click.prevent="clicked"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>  
+    <h4 class="text-left"><i class="fa fa-info-circle">&nbsp;</i>&nbsp;Bio</h4><a  href='#' v-if="!isClicked && $gate.allow('updateProfile', 'profile', loggedIn)" class="text-right" v-on:click.prevent="clicked"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>  
     </div>
 		<div v-if="isClicked">
 			<form method="post">
