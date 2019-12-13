@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ImportModuleSeeder::class);
         $this->call(PermissionSeeder::class);
         $this->call(AssignPermissionSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(UserRoleSeeder::class);
     }
 }

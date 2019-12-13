@@ -62,6 +62,7 @@ class HomeController extends FrontendController
         $address= $this->address;
         $websiteLogo= $this->websiteLogo;
         $siteName=$this->siteName;
+        $city=$this->city;
         $address=$this->address;
         $contactNumber=$this->contactNumber;
         $facebookId=$this->facebookId;
@@ -75,7 +76,7 @@ class HomeController extends FrontendController
         $client=$this->client();
         $banner=$this->bannerTagLine(); 
 
-        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'siteName'=>$siteName,'contactNumber'=>$contactNumber,'address'=>$address,'CategoryByWeight'=>$CategoryByWeight,'client'=>$client,'banner'=>$banner,'websiteLogo'=>$websiteLogo,'facebookId'=>$facebookId,'twitterId'=>$twitterId,'linkedinId'=>$linkedinId,'websiteUrl'=>$websiteUrl));
+        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'siteName'=>$siteName,'contactNumber'=>$contactNumber,'address'=>$address,'CategoryByWeight'=>$CategoryByWeight,'client'=>$client,'banner'=>$banner,'websiteLogo'=>$websiteLogo,'facebookId'=>$facebookId,'twitterId'=>$twitterId,'linkedinId'=>$linkedinId,'websiteUrl'=>$websiteUrl,'city'=>$city));
     }
 
     public function index(Request $request)

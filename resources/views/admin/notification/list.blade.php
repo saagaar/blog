@@ -34,8 +34,8 @@
                 </thead>
                 <tbody>
                 <?php  $i = 0; ?>
-                @if (!$notifications->isEmpty())
-                @foreach ($notifications as $eachNotification)
+                @if (!$notification->isEmpty())
+                @foreach ($notification as $eachNotification)
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachNotification->title }}</td>
@@ -71,7 +71,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $notifications->links() !!}
+              {!! $notification->links() !!}
               </ul>
             </div>
             <!-- /.box-body -->

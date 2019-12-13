@@ -96,12 +96,12 @@
         .button-link {
             text-decoration: none !important;
         }
-    webversion a:hover{color:#ffffff !important;}
+        webversion a:hover{color:#ffffff !important;}
 
         /*Social Media Added*/ /*Design and Develop by: Bikash Bhandari (bikash.433@gmail.com)*/
-    a.facebook, a.twitter, a.linkedin, a.google, a.youtube{display:inline-block !important; position:relative !important; min-height:28px !important; min-width:28px !important; 
-    overflow:hidden !important; -webkit-transition: 0.5s linear !important; -moz-transition: 0.5s linear !important; -ms-transition: 0.5s linear; transition: 0.5s linear !important; margin:0px 5px !important;}
-    
+        a.facebook, a.twitter, a.linkedin, a.google, a.youtube{display:inline-block !important; position:relative !important; min-height:28px !important; min-width:28px !important; 
+        overflow:hidden !important; -webkit-transition: 0.5s linear !important; -moz-transition: 0.5s linear !important; -ms-transition: 0.5s linear; transition: 0.5s linear !important; margin:0px 5px !important;}
+        
         /* iPhone 4, 4S, 5, 5S, 5C, and 5SE */
         @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
             .email-container {
@@ -187,7 +187,7 @@
             border="0" align="center" width="100%" style="max-width: 600px; background:url(https://thebloggersclub.com/frontend/images/elements/white-pattern.png); border-bottom: 1px solid #dbdbdb;">
                 <tr>
                     <td style="padding: 2px 0; text-align: center">
-                       <a href="https://thebloggersclub.com/home" target="_blank" title="thebloggersclub.com"> <img src="https://thebloggersclub.com/uploads/sitesettings-images/1574762126.png" width="205" height="72" alt="thebloggersclub.com" border="0" style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 100%; color: #4cb748;"></a>
+                       <a href="{{config('settings.url')}}" target="_blank" title="{{config('settings.site_name')}}"> <img src="{{config('settings.url')}}/uploads/sitesettings-images/{{config('settings.image')}}" width="205" height="72" alt="thebloggersclub.com" border="0" style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 100%; color: #4cb748;"></a>
                     </td>
                 </tr>
             </table>
@@ -198,14 +198,20 @@
             <!-- Email Body : END -->
 
             <!-- Email Footer : BEGIN -->
-            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px; font-family: sans-serif; color: #999999; font-size: 12px; line-height: 100%; background:#1b2a3c;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px; font-family: sans-serif; color: #999999; font-size: 12px; line-height: 100%; background:#1b2a3c;">
                 
                 <tr>
                     <td style="padding: 20px 10px; width: 100%; font-family: sans-serif; font-size: 12px; line-height: 100%; text-align: center; color: #999999;" class="x-gmail-data-detectors">
-                        <webversion style="color: #999999; text-decoration: underline; font-weight: bold;">
-                          <a href="https://thebloggersclub.com/home" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Change notification settings</a> |
-                            <a href="https://thebloggersclub.com/home" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Privacy Policy </a> |
-                            <a href="https://thebloggersclub.com/home" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Contact Support</a>
+                        <webversion style="color: #999999; text-decoration: underline; font-weight: bold; display: block; width: 100%; padding-bottom: 10px;">
+                            <a href="{{config('settings.url')}}/blog" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Home</a> |
+                            <a href="{{config('settings.url')}}/privacy-policy" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Privacy Policy </a> |
+                            <a href="{{config('settings.url')}}/contact" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Contact Us</a>
+                        </webversion>
+
+                        <webversion style="color: #999999; text-decoration: underline;  display: block; width: 100% font-size:11px; padding: 0px 60px; line-height: 18px; color: #bbb;">
+
+                            Sent by {{config('settings.site_name')}} · 44600 Kumaripati Kathmandu, Nepal
+                            <a href="https://thebloggersclub.com/newsletter/unsubscribe" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;  font-weight: bold;">Unsubscribe</a> from this type of email ·
                         </webversion>
                     </td>
                 </tr>

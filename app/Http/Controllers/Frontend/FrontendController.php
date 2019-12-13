@@ -70,7 +70,7 @@ class FrontendController extends BaseController
         $this->state = config('settings.state'); 
         $this->country = config('settings.country');
         $this->websiteMode=config('settings.mode');
-        $this->websiteLogo=config('settings.image');
+        $this->websiteLogo=config('settings.image'); 
         $this->websiteUrl=config('settings.url');
         $this->message=config('settings.message');
         $this->duration=config('settings.duration');

@@ -2,8 +2,8 @@
 <html lang="en">
 @if(auth()->user())
 <script type="text/javascript">
-	 window.__USER_STATE__ = '{!! addslashes(json_encode($user)) !!}'
-	 window.__NOTIFICATION__ = '{!! addslashes(json_encode($user["notifications"])) !!}'
+     window.__USER_STATE__ = '{!! addslashes(json_encode($user)) !!}'
+     window.__NOTIFICATION__ = '{!! addslashes(json_encode($user["notifications"])) !!}'
 </script>
 @endif
 <!--================ Start Meta Elements an
@@ -26,10 +26,9 @@
                {{ $message }}
   @endcomponent      
 @endif  
-
 <div class="wrapper" >
 <div id="app">
-	<section class="header-top">
+    <section class="header-top">
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
@@ -59,13 +58,17 @@
                                <notification-loading :notificationlist="[]" :loadtype="'fullload'" :type="'nav'" ></notification-loading>
                                 
                         </li>
-
+                   
                         <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <small>Welcome !</small>
                                 <figure>
                                   @if(auth()->user()->image)
-                                    <img src="{{ url('/uploads/user-images/'.auth()->user()->image)}}">
+                                      @if(strval(strpos(auth()->user()->image,'https://'))==false || strval(strpos(auth()->user()->image,'http://')==false))
+                                        <img src="{{ auth()->user()->image}}">
+                                      @else
+                                       <img src="{{ url('/uploads/user-images/'.auth()->user()->image)}}">
+                                      @endif
                                   @else
                                     <img src="{{ url('/frontend/images/elements/default-profile.png') }}">
                                   @endif
@@ -111,7 +114,7 @@
       <the-login-signup-modal></the-login-signup-modal>
     
 
-	<header id="header" class="header_area">
+    <header id="header" class="header_area"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <div class="main_menu">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
@@ -123,10 +126,10 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav mr-auto">
-                        	<li class="nav-item"><a class="nav-link" href="{{route('home')}}">Home</a></li>  
-                        	@foreach($navCategory as $eachCategory)
+                            <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Home</a></li>  
+                            @foreach($navCategory as $eachCategory)
                             <li class="nav-item">
-                            	<a class="nav-link {{ request()->is('/blogbycategory/'.$eachCategory->slug) ? 'active' : '' }}" href="{{route('blogbycategory',$eachCategory->slug)}}">{{$eachCategory->name }}</a></li> 
+                                <a class="nav-link {{ request()->is('/blogbycategory/'.$eachCategory->slug) ? 'active' : '' }}" href="{{route('blogbycategory',$eachCategory->slug)}}">{{$eachCategory->name }}</a></li> 
                             @endforeach
                             <!-- <li class="nav-item"><a class="nav-link" href="category.html">Categories</a></li> 
                             <li class="nav-item"><a class="nav-link" href="archive.html">Archive</a></li>     -->
@@ -150,10 +153,10 @@
             </nav>
         </div>
     </header>
-	<the-footer></the-footer>
-	 @yield('content')
-	 
-	
+    <the-footer></the-footer>
+     @yield('content')
+     
+    
 </div>
   
 </div>

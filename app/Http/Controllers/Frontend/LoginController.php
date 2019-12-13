@@ -66,10 +66,11 @@ class LoginController extends FrontendController
              'email'    => $getInfo->email,
              'username'     =>$infoUsername,
              'activation_code'=>mt_rand(100000,999999),
-            'activation_date'=>date('Y-m-d H:i:s', strtotime('+1 days')),
+             'activation_date'=>date('Y-m-d H:i:s', strtotime('+1 days')),
              'status'        =>'1',
              'provider'     =>$provider,
              'provider_id'  => $getInfo->id,
+             'image'=> $getInfo->avatar,
              'token'        =>$getInfo->token,
          ]);
           $roles=$this->role->getDefaultRoleId();
