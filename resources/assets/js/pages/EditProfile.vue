@@ -94,7 +94,7 @@
               <label><i class="fa fa-image"></i> Profile Photo </label>
               <figure> <img :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'" id="image-field"/> 
                 <span class="file-input btn btn-success btn-file">
-                      <button class="btn btn-success">Chnage Profile Picture</button> 
+                      <button class="btn btn-success">Change Profile Picture</button> 
                       <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
                   </span>
               </figure>   

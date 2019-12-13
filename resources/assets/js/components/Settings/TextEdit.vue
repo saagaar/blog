@@ -53,7 +53,7 @@ import { required, minLength,maxLength } from 'vuelidate/lib/validators';
         },
       computed:{
             me(){
-              return this.$store.getters.me
+              return this.$store.getters.user.loggedInUser
             },            
         },
         

@@ -33,7 +33,7 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><router-link to="/dashboard">Dashboard</router-link></li>
+                  <li v-if="$gate.allow('viewUserDashboard', 'profile', loggedIn)"><router-link to="/dashboard">Dashboard</router-link></li>
                   <li><router-link :to="{name:'profile',params:{username:username}}">Timeline</router-link></li>
                   <li><router-link :to="{name:'followings',params:{username:username}}">Followings({{ me.followingCount}} )</router-link></a></li>
                   <li><router-link :to="{name:'followers',params:{username:username}}">Followers({{ me.followersCount}} )</router-link></a></li>

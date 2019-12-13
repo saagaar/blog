@@ -16,9 +16,9 @@
               </div>
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">
-                  <h5> <router-link :to="'/profile/'+eachFollowings.username" class="profile-link">{{eachFollowings.name}}</router-link></h5>
+                  <h5> <a :href="'/profile/'+eachFollowings.username" class="profile-link">{{eachFollowings.name}}</a></h5>
                  <!--  <a href="#" class="float-right text-green btn">Unfollow</a> -->
-                 <FollowButton  @clicked="userFollowed" :following="true" :Buttonclass="'float-right'" :username="eachFollowings.username" :followSuggestionHead="followSuggestion.length" ></FollowButton>
+                 <FollowButton  @clicked="userFollowed"  :followings="initialState.authFollowing" :Buttonclass="'float-right'" :username="eachFollowings.username" :followSuggestionHead="followSuggestion.length" ></FollowButton>
                   <p>{{eachFollowings.followers_count}}  Followers</p>
                 </div>
               </div>
@@ -106,6 +106,9 @@
             offset: 1,
             form:new Form()
         }
+      },
+      created(){
+        console.log(this.initialState.authFollowing);
       },
         watch:{
         initialState: function (val) {

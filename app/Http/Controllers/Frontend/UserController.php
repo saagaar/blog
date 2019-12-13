@@ -103,11 +103,18 @@ class UserController extends FrontendController
          {
             $userdata=$this->authUser;
          }
+         if(!$userdata){
+          return redirect()->route('home'); 
+         }
         $routeName= ROUTE::currentRouteName();
         $suggestion=$this->getFollowSuggestions($userdata,3);
         $followings = $this->followerList->getAllFollowings($userdata);
+        $authFollowing = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
+        // echo "<pre>";
+        // print_r($authFollowing);exit;
         $data['followSuggestion']=$suggestion;
         $data['followings'] = $followings;
+        $data['authFollowing'] = $authFollowing;
         if($routeName=='api')
         {
             return ($data);

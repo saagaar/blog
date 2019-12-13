@@ -12,8 +12,8 @@
             <SuccessErrorMessage></SuccessErrorMessage>
             <div id="sidebar">      
             <div class="profile-card">
-                <img :src="getProfileUrl()" :alt="me.name" class="profile-photo">
-                <h5><router-link to="/profile"  class="text-white">{{ me.name}}</router-link></h5>
+                <img :src="getProfileUrl()" :alt="loggedInUser.name" class="profile-photo">
+                <h5><router-link to="/profile"  class="text-white">{{ loggedInUser.name}}</router-link></h5>
                   <router-link to="/followers" class="text-white">{{ me.followersCount}} followers</router-link>
                   <router-link to="/followings" class="text-white">{{ me.followingCount}} following</router-link>
                 <!-- <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> {{ me.followersCount}} followers &nbsp;{{ me.followingCount}} following</a> -->
@@ -54,7 +54,12 @@ import TheFooter from './../components/Footer/TheFooter';
             me:function(){
               return this.$store.getters.me
             },
+             loggedInUser:function(){
+              return this.$store.getters.user.loggedInUser
+            },
         },
+        
+
         components:{
             TheTopNav,
             TheFooter,

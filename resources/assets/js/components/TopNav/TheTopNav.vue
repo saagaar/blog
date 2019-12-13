@@ -12,7 +12,7 @@
                     <div class="right-button">
 
                         <ul v-if="!isUserloggedIn" >
-                            <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                            <li><!-- <a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a> --></li>
                             <li><LoginButton></LoginButton></li>
                             <li><SignUpButton></SignUpButton></li>
                             
@@ -24,27 +24,26 @@
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
                             aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ me.unReadNotificationsCount }}</em></a>
-
                                <NotificationsLoading :notificationList="topnotifications" :type="'nav'" ></NotificationsLoading>
                                 
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
-                            <figure><img :src="getProfileUrl()"></figure> {{ me.name}}</a>
+                            <figure><img :src="getProfileUrl()"></figure> {{ loggedInUser.name}}</a>
                             <ul class="dropdown-menu">
                                 <li><a href="/dashboard">My Dashboard</a></li>
                             
-                                <li><router-link to="/profile">Profile</router-link></li>
+                                <li><a href="/profile/">Profile</a></li>
                                 <li><router-link to="/categories">Choose your interest</router-link></li>
                                 <hr>
-                                <li><router-link to="/add/blog">New Articles</router-link></li>
+                                <li><router-link to="/blog/add">New Articles</router-link></li>
                                 
                                 <li><router-link to="/blog/list">My Articles</router-link></li>
                                 <!-- <li><a href="#">Bookmarks</a></li> -->
                                 <!-- <li><a href="#">Publications</a></li> -->
                              
                                 <hr>
-                                <li><a href="#">Settings</a></li>
+                                <li><router-link to="/settings">Settings</router-link></li>
                                 <!-- <li><a href="#">Help</a></li> -->
                                 <!-- <li><a href="#">Change Password</a></li> -->
                                 <li><a v-bind:href="config.ROOT_URL+'logout/user'">Log Out</a></li>
@@ -94,6 +93,9 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
             isUserloggedIn:function(){
               return this.$store.getters.user.isLoggedIn
             },
+            loggedInUser:function(){
+              return this.$store.getters.user.loggedInUser
+            },
             config:function(){
                return this.$store.getters.config;
             },
@@ -134,8 +136,8 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
                 }
             },
             getProfileUrl(){
-              let url=this.me.image;
-              if(url===''){
+              let url=this.loggedInUser.image;
+              if(url==='' || url==null){
                 return 'frontend/images/elements/default-profile.png';
               }
               else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){

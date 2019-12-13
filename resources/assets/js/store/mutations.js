@@ -25,16 +25,16 @@ export const UPDATE_BIO = (state, bioName) => {
     state.me.bio = bioName
 }
 export const INCREMENT_FOLLOWERS_COUNT = (state, count) => {
-   	state.me.followerCount += count;
+   	state.user.followerCount += count;
 }
 export const INCREMENT_FOLLOWING_COUNT = (state, count) => {
-    state.me.followingCount += count;
+    state.user.followingCount += count;
 }
 export const DECREMENT_FOLLOWERS_COUNT = (state, count) => {
-   	state.me.followerCount -= count;
+   	state.user.followerCount -= count;
 }
 export const DECREMENT_FOLLOWING_COUNT = (state, count) => {
-    state.me.followingCount -= count;
+    state.user.followingCount -= count;
 }
 export const TOGGLE_LOADING = state => 
 {

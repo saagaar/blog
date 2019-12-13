@@ -49,7 +49,7 @@
                  <!-- <div class="error" v-if="!$v.repassword.sameAsPassword">Passwords must be identical.</div> -->
               </div>
             </div> 
-            <button type="submit" id="signupbtn" @click.prevent="submitSignUpForm" class="btn btn-primary btn-round">Sign Up</button>
+            <button type="submit" id="signupbtn" @click.prevent="submitSignUpForm" class="btn btn-primary btn-round"><Loader></Loader> Sign Up</button>
           </form>
           
           <div class="text-center text-muted delimiter">or use a social network</div>
@@ -109,7 +109,7 @@
                 <div class="error" v-if="!$v.loginForm.password.required">This Field is required</div>
               </div>
             </div> 
-            <button type="submit" @click.prevent="submitLoginForm"  class="btn btn-primary btn-round">Login</button>
+            <button type="submit" @click.prevent="submitLoginForm"  class="btn btn-primary btn-round"><Loader></Loader> Login</button>
           </form>
           
           <div class="text-center text-muted delimiter">or use a social network</div>
@@ -146,7 +146,8 @@
 import SignUpButton from './SignUpButton.vue';
 import { required, minLength , sameAs, between ,email} from 'vuelidate/lib/validators'
 import LoginMixin from './../../mixins/Login.mixins';
-import Form from './../../services/Form.js'
+import Form from './../../services/Form.js';
+import Loader from './../../components/Loader';
     export default {
           mixins:[LoginMixin],
         data() {
@@ -212,39 +213,50 @@ import Form from './../../services/Form.js'
         components:{
                 SignUpButton,
                 LoginButton,
+                Loader,
             },
         methods:{
 
           submitLoginForm:function(){
             this.$v.loginForm.$touch();
+            let curObject=this;
             if(!this.$v.loginForm.$invalid)
             {
+              curObject.$store.commit('TOGGLE_LOADING');
               this.loginForm.post('blog/login').then(response => {
                if(response.data.status){
-
+                curObject.$store.commit('TOGGLE_LOADING');
                   window.location.href="/home"
                }
                else{
+                curObject.$store.commit('TOGGLE_LOADING');
+                this.closeAllPopups();
                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message})
                }
               }).catch(e => {
+                curObject.$store.commit('TOGGLE_LOADING');
                    this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message})
               });
             }
           },
           submitSignUpForm:function(){
             this.$v.signUpForm.$touch();
+            let curObject=this;
             if(!this.$v.signUpForm.$invalid)
             {
+              curObject.$store.commit('TOGGLE_LOADING');
               this.signUpForm.post('blog/register').then(response => {
                if(response.data.data.status){
+                curObject.$store.commit('TOGGLE_LOADING');
                  this.closeAllPopups();
                  this.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                }
                else{
+                curObject.$store.commit('TOGGLE_LOADING');
                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
                }
               }).catch(e => {
+                curObject.$store.commit('TOGGLE_LOADING');
                     this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
               });
             }
