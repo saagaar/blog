@@ -55,11 +55,11 @@ class LoginController extends FrontendController
         $username = $emailParts[0];
         $check = $this->account->getAll()->where('username',$username)->first();
         if (!$check) {
-            $infoUsername = $username;
+            $infoUsername = str_replace(".", "", $username);
         }else{
             $random = rand(0, 9999);
             $randUsername = $username.$random;
-            $infoUsername = $randUsername;
+            $infoUsername = str_replace(".", "", $randUsername);
         }
           $userData = $this->account->create([
              'name'     => $getInfo->name,
@@ -106,30 +106,31 @@ class LoginController extends FrontendController
         }
         $input = $request->all(); 
         $input['password'] = bcrypt($input['password']); 
-        if($this->userRequiresActivation=='Y'){
-            $input['status']    ='2';
-        }else{
-            $input['status']    ='1';
-        }
         $emailParts = explode('@', $input['email']);
 
         $username = $emailParts[0];
         $check = $this->account->getAll()->where('username',$username)->first();
         if (!$check) {
-            $input['username'] = $username;
+            $input['username'] = str_replace(".", "", $username);
         }else{
             $random = rand(0, 9999);
             $randUsername = $username.$random;
-            $input['username'] = $randUsername;
+            $input['username'] = str_replace(".", "", $randUsername);
         }
         $input['activation_code']= mt_rand(100000,999999);
         $input['activation_date'] = date('Y-m-d H:i:s', strtotime('+1 days'));
+        if($this->userRequiresActivation=='Y'){
+            $input['status']    ='2';
+            $code='user_registration';
+            $data=['NAME'=>$input['name'],'URL'=>url('/blog/useractivation/'.$input['username'].'/'.$input['activation_code']),'SITENAME'=>$this->siteName];
+        $user->notify(new Notifications($code,$data));
+        }else{
+            $input['status']    ='1';
+        }
         $user = $this->account->create($input);
         $roles=$this->role->getDefaultRoleId();
         $user->assignRole($roles);  
-         $code='user_registration';
-        $data=['NAME'=>$input['name'],'URL'=>url('/blog/useractivation/'.$input['username'].'/'.$input['activation_code']),'SITENAME'=>$this->siteName];
-        $user->notify(new Notifications($code,$data));
+         
     return response()->json(['status'=>true,'data'=>$user,'message'=>'Registration completed Successfully']); 
     }
     public function userActivation($username,$code){

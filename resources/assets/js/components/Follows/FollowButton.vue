@@ -1,5 +1,5 @@
 <template>
-  <a v-if="$gate.allow('viewFollowButton', 'profile', loggedInUser)" class="btn btn-sm  btn-round" :class="[Buttonclass,buttonDesign]"  @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
+  <a v-if="$gate.allow('viewFollowButton', 'profile', loggedInUser)" href="" class="btn btn-sm  btn-round" :class="[Buttonclass,buttonDesign]"  @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
   {{ isFollowing ? 'Unfollow' : 'Follow'}}
   </a>
 </template>

@@ -103,6 +103,9 @@ class UserController extends FrontendController
          {
             $userdata=$this->authUser;
          }
+         if(!$userdata){
+          return redirect()->route('home'); 
+         }
         $routeName= ROUTE::currentRouteName();
         $suggestion=$this->getFollowSuggestions($userdata,3);
         $followings = $this->followerList->getAllFollowings($userdata);

@@ -8,7 +8,7 @@
 
                     <img :src="eachsuggestion.image? '/uploads/user-images/'+eachsuggestion.image:'/frontend/images/elements/default-profile.png'" alt="user" class="profile-photo-sm pull-left" />
                     <div>
-                      <h5><router-link :to="'/profile/'+eachsuggestion.username" class="profile-link">{{eachsuggestion.name}}</router-link></h5>
+                      <h5><a :href="'/profile/'+eachsuggestion.username" class="profile-link">{{eachsuggestion.name}}</a></h5>
                       <FollowButton  @clicked="userFollowed" :following="following" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
                     </div>
                    </div>
