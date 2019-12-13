@@ -1,11 +1,13 @@
 <template>
-  <a v-if="$gate.allow('viewFollowButton', 'profile', loggedInUser)" href="" class="btn btn-sm  btn-round" :class="[Buttonclass,buttonDesign]"  @click.prevent="toggleFollow" ><i class="fa fa-user-plus">&nbsp;</i> 
-  {{ isFollowing ? 'Unfollow' : 'Follow'}}
+  <a v-if="$gate.allow('viewFollowButton', 'profile', loggedInUser)" href="" class="btn btn-sm  btn-round" :class="[Buttonclass,buttonDesign]"  @click.prevent="toggleFollow" ><i
+  v-if="isLoad" class='fa fa-circle-notch fa-spin'></i> <i v-else class="fa fa-user-plus">&nbsp;</i> 
+  {{ isFollowing ? 'Unfollow' : 'Follow'}} 
   </a>
 </template>
 
 <script>
-import Form from './../../services/Form.js'
+import Form from './../../services/Form.js';
+import Loader from './../../components/Loader';
 let action='';
     export default {
     	name: 'followButton',
@@ -18,6 +20,7 @@ let action='';
         },
         data() {
         	return {
+                isLoad:false,
         		    isFollowing: this.following,
                 form:new Form(),
                 buttonDesign:" text-green"
@@ -27,6 +30,7 @@ let action='';
             loggedInUser:function(){
               return this.$store.getters.user.loggedInUser
             },
+            
           },
         watch:{
             isFollowing: function (val) {
@@ -58,17 +62,25 @@ let action='';
           }
             
         },
+        components:{
+                Loader,
+            },
         methods:
         {
+          
         	toggleFollow:function(){
+              this.isLoad=true;
+
         		if(!this.isFollowing)
         			action='api/followuser/'+this.username+'/'+this.followSuggestionHead;
         		else 
         			action='api/unfollowuser/'+this.username+'/'+this.followSuggestionHead;
-	        		
+
+	        		let curObject=this;
 	        		this.form.get(action).then(response => {
 		               if(response.data.status)
 		               {
+                    curObject.isLoad=false;
                           if(!this.isFollowing){
                             this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
                             this.isFollowing=true;
@@ -81,8 +93,10 @@ let action='';
 		               }
 		               else
 		               {
+                    curObject.isLoad=false;
 		               }
 	              }).catch(e => {
+                  curObject.isLoad=false;
 	              });
 
         	},

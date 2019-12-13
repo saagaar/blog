@@ -209,8 +209,9 @@ export default class Form {
              * @param {object} data
              */
             onSuccess(data) {
-
-                this.reset();
+                if(data.status){
+                    this.reset();
+                }
             }
 
 

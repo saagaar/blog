@@ -52,7 +52,7 @@ import moment from 'moment';
         },
       computed:{
             me(){
-              return this.$store.getters.me
+              return this.$store.getters.user.loggedInUser
             },            
         },
         

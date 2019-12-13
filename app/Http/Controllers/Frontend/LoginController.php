@@ -81,16 +81,14 @@ class LoginController extends FrontendController
         
     }
     public function login(){
-        if(auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'),'status'=>1 ]))
+        if(auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'),'status'=>1]))
         { 
             $user = Auth()->user()->toArray();
-
-         
             return response()->json(['status'=>true,'data'=>$user,'message'=>'Logged in Successfully']); 
         } 
         else
-        { 
-            return response()->json(['status'=>false,'message'=>'Not able to Login']); 
+        {
+            return response()->json(['status'=>false,'message'=>'Your Email or Password is incorrect']); 
         } 
     }
     public function register(Request $request) 
