@@ -135,6 +135,42 @@
                 <div class="alert alert-danger">{{$errors->first('banner_image') }}</div>
                 @endif
                 </div>
+                <div class="form-group">
+                  <label for="meta_keyword">Meta Keyword</label>
+                  <input type="text" class="form-control" name="meta_keyword" id="meta_keyword" value="{{ $category->meta_keyword }}" placeholder="Enter Meta Key">
+                  @if ($errors->has('meta_keyword'))
+                  <div class="alert alert-danger">{{ $errors->first('meta_keyword') }}</div>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="meta_title">Meta title</label>
+                  <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ $category->meta_title }}" placeholder="Enter Meta Key">
+                  @if ($errors->has('meta_title'))
+                  <div class="alert alert-danger">{{ $errors->first('meta_title') }}</div>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="meta_description">Meta Description: </label>
+                    <textarea name="meta_description" class="form-control" rows="5" placeholder="Meta Description here..">{{ $category->meta_description }}</textarea>
+                  @if ($errors->has('meta_description'))
+                  <div class="alert alert-danger">{{ $errors->first('meta_description') }}</div>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="schema1">schema1</label>
+                  <textarea name="schema1" class="form-control" rows="8" placeholder="Schema1 here..">{{$category->schema1}}</textarea>
+                                      
+                  @if ($errors->has('schema1'))
+                  <div class="alert alert-danger">{{ $errors->first('schema1') }}</div>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="schema2">schema2</label>
+                  <textarea name="schema2" class="form-control" rows="8" placeholder="Schema2 here..">{{$category->schema2}}</textarea>                 
+                  @if ($errors->has('schema2'))
+                  <div class="alert alert-danger">{{ $errors->first('schema2') }}</div>
+                  @endif
+                </div>
               </div>
               <!-- /.box-body -->
 
