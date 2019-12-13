@@ -58172,7 +58172,9 @@ function () {
   }, {
     key: "onSuccess",
     value: function onSuccess(data) {
-      this.reset();
+      if (data.status) {
+        this.reset();
+      }
     }
     /**
      * Handle a failed form submission.

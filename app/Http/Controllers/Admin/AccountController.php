@@ -68,11 +68,11 @@ class AccountController extends AdminController{
             $username = $emailParts[0];
             $check = $this->account->getAll()->where('username',$username)->first();
             if (!$check) {
-                $validatedData['username'] = $username;
+                $validatedData['username'] = str_replace(".", "", $username);
             }else{
                 $random = rand(0, 9999);
                 $randUsername = $username.$random;
-                $validatedData['username'] = $randUsername;
+                $validatedData['username'] = str_replace(".", "", $randUsername);
             }
             $activeUser = $this->account->create($validatedData);            
             $roles = $request->input('roles') ? $request->input('roles') : [];

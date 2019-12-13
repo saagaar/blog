@@ -6,6 +6,7 @@
 <script>
     export default 
     {
+        
          data:function(){
            return {
                 loader:false,
@@ -17,6 +18,7 @@
               },
             },
         watch: {
+         
           isLoading(newValue) {
            this.loader=newValue;
            

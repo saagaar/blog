@@ -11,6 +11,6 @@ class ImportModuleSeeder extends Seeder
     public function run()
     {
         $ctrl = new \App\Http\Controllers\Admin\AdminController();
-		$ctrl->ImportModules();
+		$ctrl->importmodules();
     }
 }
