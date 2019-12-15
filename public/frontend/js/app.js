@@ -44986,7 +44986,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "single-footer-widget" }, [
             _c("ul", [
               _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
+                _c("a", { attrs: { href: "/page/about" } }, [
                   _c("i", { staticClass: "fa fa-angle-right" }, [_vm._v(" ")]),
                   _vm._v(" About Us")
                 ])
