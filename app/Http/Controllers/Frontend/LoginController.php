@@ -75,7 +75,7 @@ class LoginController extends FrontendController
          ]);
           $roles=$this->role->getDefaultRoleId();
           $userData->assignRole($roles);  
-          return array('status'=>true,'userData'=>$userData,'message'=>'Registered successfully!'); 
+          return array('status'=>true,'userData'=>$userData,'message'=>'Resgistered Successfully! An Email has been sent to your Email Account.'); 
         }else{
             return array('status'=>false,'userData'=>'','message'=>'Email Already Exist!'); 
         }

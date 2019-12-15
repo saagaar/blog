@@ -123,7 +123,6 @@ class FrontendController extends BaseController
         if($username)
         {
             $accUser=$account->getUserByUsername($username);
-
             $user=$accUser;
             $user->followersCount=$followerList->getFollowersCount($accUser);
             $user->followingCount=$followerList->getFollowingsCount($accUser);
@@ -156,7 +155,8 @@ class FrontendController extends BaseController
             
             $user=$user->toArray();
 
-            $user['permissions']= $this->getAllPermissionsAttribute($this->authUser);    
+            $user['permissions']= $this->getAllPermissionsAttribute($this->authUser);  
+
             // $user['roles']=$this->authUser->roles->first()->name;
             return $user;
         }

@@ -2,7 +2,7 @@
     <ul class="nav-news-feed">
               <li>
                   <i class="fa fa-newspaper"></i>
-                  <div><router-link to="/dashboard">Reports</router-link></div>
+                  <div><router-link to="/dashboard">Followers Posts</router-link></div>
               </li>
               <li>
                   <i class="fa fa-list-ol"></i>
@@ -30,10 +30,10 @@
                   </div>
               </li>
              
-              <li>
+              <!-- <li>
                   <i class="fa fa-user-plus"></i>
                   <div><a href="#">Who's viewed your profile <span>14</span></a></div>
-              </li>
+              </li> -->
               <li>
                   <i class="fa fa-cog" aria-hidden="true"></i>
                   <div>

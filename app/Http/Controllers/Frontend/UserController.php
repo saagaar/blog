@@ -202,8 +202,8 @@ class UserController extends FrontendController
          {
             $this->followerList->followUser($this->authUser,$username);
          }  
-         $code='follow_notification';
-         $userdata=$this->user->getUserByUsername($username);
+        $code='follow_notification';
+        $userdata=$this->user->getUserByUsername($username);
         $data=['NAME'=>$this->authUser->name,'URL'=>url('/followers')];
         $userdata->notify(new Notifications($code,$data));
          return array('status'=>true,'message'=>$this->getFollowSuggestions($this->authUser,1,$offset));
@@ -221,38 +221,36 @@ class UserController extends FrontendController
     {
        return $this->followerList->getFollowUserSuggestions($user,$limit,$offset);
     }
-    
- 
-  public function changeProfile(Request $request)
-  {
-      if(\Auth::check())
-      {
-        $this->authorize('updateProfile', $this->authUser);
-        if(request()->hasFile('image'))
+    public function changeProfile(Request $request)
+    {
+        if(\Auth::check())
         {
-          $dir = '/uploads/user-images/';
-          if (!File::isDirectory(public_path().$dir)) {
-              File::makeDirectory(public_path().'/'.$dir,0777,true,true);
+          $this->authorize('updateProfile', $this->authUser);
+          if(request()->hasFile('image'))
+          {
+            $dir = '/uploads/user-images/';
+            if (!File::isDirectory(public_path().$dir)) {
+                File::makeDirectory(public_path().'/'.$dir,0777,true,true);
+            }
+            if ($this->authUser->image != '' && File::exists($dir . $this->authUser->image)){
+              File::delete($dir . $this->authUser->image);
+            }
+            $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            request()->image->move('uploads/user-images/', $imageName);
+            $form['image']=$imageName;
+             $this->user->update($this->authUser->id,$form);
+            return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
           }
-          if ($this->authUser->image != '' && File::exists($dir . $this->authUser->image)){
-            File::delete($dir . $this->authUser->image);
+          else
+          {
+              return  array('status'=>false,'message'=>'Profile Image unable to Update','data'=>array());
           }
-          $imageName = time().'.'.request()->image->getClientOriginalExtension();
-          request()->image->move('uploads/user-images/', $imageName);
-          $form['image']=$imageName;
-           $this->user->update($this->authUser->id,$form);
-          return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
         }
         else
         {
-            return  array('status'=>false,'message'=>'Profile Image unable to Update','data'=>array());
+              return redirect()->route('home'); 
         }
-      }
-      else
-      {
-            return redirect()->route('home'); 
-      }
-  }
+    }
   public function changeAddress(Request $request)
   {
     $this->authorize('updateProfile', $this->authUser);
@@ -292,7 +290,7 @@ class UserController extends FrontendController
             $limit=$this->apiPerPage;;
             $offset=$limit*$request->post('page');
             $data['notifications']=$this->user->getUsersNotification($this->authUser,$limit,$offset);
-            // print_r($data['notifications']);exit;
+           
             $this->user->markNotificationsToRead($data['notifications']);
             $data['unReadNotificationsCount']=$this->user->countUnreadNotifications($this->authUser) ;
             return array('status'=>true,'data'=>$data,'message'=>'Success');

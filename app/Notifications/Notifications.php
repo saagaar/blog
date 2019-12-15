@@ -76,7 +76,6 @@ class Notifications extends Notification implements ShouldQueue
         ->from($this->contactEmail);
                            
     }
-
     /**
      * Get the array representation of the notification.
      *
@@ -92,8 +91,17 @@ class Notifications extends Notification implements ShouldQueue
         ];
     }
 
+    public function toSms($notifiable)
+    {
+        $body=$this->parseNotificationBody($this->notification->database_body);
+        return 
+        [
+             'message'=>$body
+        ];
+    }
+
      //to parse the the email which is available in the
-   private function parseNotificationBody($text_string)
+    private function parseNotificationBody($text_string)
     {
         $patterns_string = array();
         $replacement_string = array();

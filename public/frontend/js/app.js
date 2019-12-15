@@ -6951,7 +6951,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    notificationlist: {
+    notificationList: {
       type: Array,
       "default": function _default() {
         return [];
@@ -6972,15 +6972,15 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   data: function data() {
     return {
       offset: 1,
-      allNotifications: this.notificationlist,
+      allNotifications: this.notificationList,
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]()
     };
   },
-  created: function created() {
-    if (window.__NOTIFICATION__ !== undefined) {
-      var notifications = JSON.parse(window.__NOTIFICATION__) || {};
-      this.allNotifications = notifications;
-    }
+  created: function created() {// if(window.__INITIAL_STATE__!==undefined){
+    //   let notifications=JSON.parse(window.__INITIAL_STATE__) || {};
+    //   alert(notifications.notifications);
+    //   this.allNotifications=notifications.notifications;
+    // }
   },
   watch: {
     notificationList: function notificationList(newValue) {
@@ -45483,7 +45483,7 @@ var render = function() {
           { staticClass: "allnotificationlist" },
           [
             _vm._l(_vm.allNotifications, function(eachNotifications) {
-              return _vm.allNotifications.length > 0
+              return _vm.allNotifications
                 ? _c(
                     "li",
                     {
@@ -46471,7 +46471,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-title text-center" }, [
-      _c("h3", [_vm._v("Join BlogSagar")]),
+      _c("h3", [_vm._v("Join TheBloggersClub.com")]),
       _vm._v(" "),
       _c("p", [
         _vm._v(
@@ -46489,11 +46489,11 @@ var staticRenderFns = [
       { staticClass: "d-flex justify-content-center social-buttons" },
       [
         _c(
-          "button",
+          "a",
           {
             staticClass: "btn btn-secondary btn-round",
             attrs: {
-              type: "button",
+              href: "/social-login/google",
               "data-toggle": "tooltip",
               "data-placement": "top",
               title: "Google"
@@ -46514,20 +46514,6 @@ var staticRenderFns = [
             }
           },
           [_c("i", { staticClass: "fab fa-facebook" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-secondary btn-round",
-            attrs: {
-              href: "/social-login/linkedin",
-              "data-toggle": "tooltip",
-              "data-placement": "top",
-              title: "Linkedin"
-            }
-          },
-          [_c("i", { staticClass: "fab fa-linkedin" })]
         )
       ]
     )
@@ -46588,11 +46574,11 @@ var staticRenderFns = [
       { staticClass: "d-flex justify-content-center social-buttons" },
       [
         _c(
-          "button",
+          "a",
           {
             staticClass: "btn btn-secondary btn-round",
             attrs: {
-              type: "button",
+              href: "/social-login/google",
               "data-toggle": "tooltip",
               "data-placement": "top",
               title: "Google"
@@ -46613,20 +46599,6 @@ var staticRenderFns = [
             }
           },
           [_c("i", { staticClass: "fab fa-facebook" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-secondary btn-round",
-            attrs: {
-              href: "/social-login/linkedin",
-              "data-toggle": "tooltip",
-              "data-placement": "top",
-              title: "Linkedin"
-            }
-          },
-          [_c("i", { staticClass: "fab fa-linkedin" })]
         )
       ]
     )
