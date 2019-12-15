@@ -126,7 +126,7 @@
                         	<li class="nav-item"><a class="nav-link" href="{{route('home')}}">Home</a></li>  
                         	@foreach($navCategory as $eachCategory)
                             <li class="nav-item">
-                            	<a class="nav-link {{ request()->is('/blogbycategory/'.$eachCategory->slug) ? 'active' : '' }}" href="{{route('blogbycategory',$eachCategory->slug)}}">{{$eachCategory->name }}</a></li> 
+                            	<a class="nav-link {{ request()->is('/category/'.$eachCategory->slug) ? 'active' : '' }}" href="{{route('blogbycategory',$eachCategory->slug)}}">{{$eachCategory->name }}</a></li> 
                             @endforeach
                             <!-- <li class="nav-item"><a class="nav-link" href="category.html">Categories</a></li> 
                             <li class="nav-item"><a class="nav-link" href="archive.html">Archive</a></li>     -->

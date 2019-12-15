@@ -3,7 +3,6 @@
 	<div class="mid_part">
         @section('meta_url','https://thebloggersclub.com/blog/detail/{{ $blogDetails->code }}')
         @section('meta_title',$blogDetails->title)
-        @section('meta_title',$blogDetails->title)
         @section('meta_description',$blogDetails->short_description)
         @section('meta_image',asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image))
         <meta type="hidden" name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">

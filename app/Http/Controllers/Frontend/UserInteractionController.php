@@ -93,6 +93,7 @@ class UserInteractionController extends FrontendController
             else{
                 $input['user_id']  =Null;
             }
+            $input['type']      ='1';
             $input['comment']='News Letter Subscription';
             $input['created_at'] = $date->format('Y-m-d H:i:s');
             $subscribe->create($input);

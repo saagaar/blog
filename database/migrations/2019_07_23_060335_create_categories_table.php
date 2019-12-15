@@ -29,8 +29,8 @@ class CreateCategoriesTable extends Migration
             $table->string('meta_title');
             $table->string('meta_keyword');
             $table->string('meta_description');
-            $table->string('schema1');
-            $table->string('schema2');
+            $table->json('schema1');
+            $table->json('schema2');
             $table->timestamps();
         });
     }
