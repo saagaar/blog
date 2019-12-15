@@ -79,11 +79,12 @@ import { required, minLength,maxLength,email } from 'vuelidate/lib/validators';
             this.$v.form.$touch();
             if(!this.$v.form.$invalid)
             {
+              curObject.$store.commit('TOGGLE_LOADING');
               this.form.post('/user/change/details').then(response => {
                if(response.data.status){
                  curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                  this.isClicked=false;
-                 // curObject.$store.commit('TOGGLE_LOADING');
+                 curObject.$store.commit('TOGGLE_LOADING');
                  curObject.$store.commit('ADD_ME',response.data.data.me);
                }
                else{

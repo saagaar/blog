@@ -61,7 +61,12 @@ class CategoryRequest extends FormRequest
                 'banner_image' => $banner,
                 'show_in_home'  =>'required',
                 'priority'  =>'required',
-                'description'  =>'required'
+                'description'  =>'required',
+                'meta_title'                    =>'required|min:5',
+                'meta_keyword'                      =>'required|min:5',
+                'meta_description'              =>'required|min:5',
+                'schema1'                       =>'required|min:5',
+                'schema2'                       =>'required|min:5'
               
         ];
     }

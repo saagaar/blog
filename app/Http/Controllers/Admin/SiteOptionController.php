@@ -6,6 +6,7 @@ use App\Repository\SiteoptionInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\SiteoptionsRequest;
 use Illuminate\Support\Facades\File;
+use Image;
 use App;
 
 class SiteOptionController extends AdminController
@@ -24,7 +25,6 @@ class SiteOptionController extends AdminController
     }
     public function edit(Request $request)
     {   
-
         $site =$this->siteOptions->getSiteInfo();
         $breadcrumb=array('breadcrumbs'=>array('Dashboard' => route('admin.dashboard'),
                           'current_menu' => 'Site Settings',
@@ -34,20 +34,56 @@ class SiteOptionController extends AdminController
             $requestObj=app(SiteoptionsRequest::class);
             $validatedData = $requestObj->validated();
             request()->validate([
-            'image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:4048',
              ]);
                if ($request->hasFile('image')) 
-               {
-                 $extension = request()->image->getClientOriginalExtension();
-                 $imageName = time().'.'.$extension;
-                 request()->image->move(public_path('uploads/sitesettings-images'), $imageName);
-                 $dir = 'uploads/sitesettings-images/';
-                 if($site->image != '' && File::exists($dir . $site->image))
+              {     
+
+                $uniqId= uniqid();                        
+                $dir=public_path(). '/uploads/sitesettings-images';
+                 if ($site->image != '' && File::exists($dir,$site->image))
+                {
+                  // echo "string";exit;
+                File::delete($dir.$site->image);
+                }
+                // echo "string";exit;
+                $extension = request()->image->getClientOriginalExtension();
+                $imageName = $uniqId.'.'.$extension;
+                $originalImg =request()->image->move($dir,$imageName);
+                $img = Image::make($originalImg);
+                echo "string";exit;
+                list($width, $height) = getimagesize($originalImg);  
+
+                if ($width > 200 && $height < 200)
+                {                          
+                    $img->resize(200,200, function ($constraint) 
                     {
-                    File::delete($dir . $site->image);
-                    }
-                   $validatedData['image'] = $imageName;        
-                }  
+                    $constraint->aspectRatio();
+                     })->save($dir.'/'.$uniqId.'.'.$extension);            
+                }
+                 else if($width < 200 && $height > 200)
+                {
+                     $img->resize(200,200, function ($constraint) 
+                    {
+                    $constraint->aspectRatio();
+                     })->save($dir.'/'.$uniqId.'.'.$extension);
+                }
+                else if($width > 200 && $height > 200)
+                {
+                     $img->resize(200,200, function ($constraint) 
+                    {
+                    $constraint->aspectRatio();
+                     })->save($dir.'/'.$uniqId.'.'.$extension);
+                }
+                else if($width < 200 && $height < 200)
+                {
+                     return redirect()->route('sitesetting')
+                            ->with('error','image must be atleast 200x200');
+                } 
+                //**************resizing the image of thumbnail******************//
+                
+                  $validatedData['image'] = $imageName;
+              }
                else
                {
                  $validatedData['image'] = $site->image;

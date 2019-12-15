@@ -25,7 +25,12 @@ class CreateCategoriesTable extends Migration
             $table->string('banner_image')->nullable();
             $table->enum('show_in_home',['1', '2'])->comment('1->Active,2->Inactive');
             $table->integer('priority')->default(0);
-           $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');
+            $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');
+            $table->string('meta_title');
+            $table->string('meta_keyword');
+            $table->string('meta_description');
+            $table->json('schema1');
+            $table->json('schema2');
             $table->timestamps();
         });
     }

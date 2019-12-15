@@ -175,6 +175,8 @@ class HomeController extends FrontendController
       $blogByCategory = $this->blog->getBlogByCategory($tagsIds);
       $blogCountinCategory = $this->blog->getBlogCountByCategory($tagsIds);
       $category =$this->category->getCatBySlug($slug);
+      // echo "<pre>";
+      // print_r($category);exit;
       $websiteUrl=$this->websiteUrl;
       $categories=array();
       if($this->authUser)
