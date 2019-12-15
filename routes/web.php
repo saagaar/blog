@@ -22,6 +22,7 @@ Route::get('/logincheck', function () {
 Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
 
+Route::get('/page/{slug}', 'Frontend\CmsController@cmsPage')->name('cms.page');
 Route::post('/contact/form', 'Frontend\UserInteractionController@contactForm')->name('contact.form');
 
 Route::get('/blog/preview/{code}', 'Frontend\BlogController@preview')->name('preview');

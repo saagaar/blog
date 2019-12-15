@@ -17,7 +17,7 @@ class SubscriptionManagers extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'email','comment','status','user_id','subscribable_id','subscribable_type'
+        'email','comment','status','user_id','subscribable_id','subscribable_type','type'
     ];
     public function subscribable()
     {

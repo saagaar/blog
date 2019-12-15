@@ -18,6 +18,9 @@ Class Cmss implements CmsInterface
       return $this->cms->where('id', $cms_id)->first();
     }
 
+    public function getCmsBySlug($slug){
+      return $this->cms->where('cms_slug', $slug)->first();
+    }
       /**
      * Get's all posts.
      *

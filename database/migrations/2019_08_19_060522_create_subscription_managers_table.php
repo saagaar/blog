@@ -21,6 +21,7 @@ class CreateSubscriptionManagersTable extends Migration
                     ->onDelete('cascade');
          $table->integer('subscribable_id')->unsigned()->nullable();
          $table->string('subscribable_type')->nullable();
+         $table->enum('type', ['1', '2','3'])->comment('1->newsletter,2->category3->user');
             $table->String('email');
             $table->String('comment');
             $table->enum('status', ['1', '2'])->comment('1->Active,2->Inactive');
