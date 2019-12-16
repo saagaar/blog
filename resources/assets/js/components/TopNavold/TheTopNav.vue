@@ -70,9 +70,6 @@
     
       <TheLoginSignupModal></TheLoginSignupModal>
       </div>
-    
-
-
 </template>
 
 <script>

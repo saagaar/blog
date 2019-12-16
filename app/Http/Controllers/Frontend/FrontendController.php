@@ -154,10 +154,7 @@ class FrontendController extends BaseController
             $user->blogCount=$this->authUser->blogs()->count();
             $user->websiteLogo=$this->websiteLogo;
             $user->root_url=url('/');
-             if(!$accUser)
-                     return false;      
             $user=$user->toArray();
-
             $user['permissions']= $this->getAllPermissionsAttribute($this->authUser);  
 
             // $user['roles']=$this->authUser->roles->first()->name;

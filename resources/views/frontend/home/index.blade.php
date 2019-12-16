@@ -29,7 +29,7 @@
                         <div class="short_details">
                              <div class="meta-top d-flex">
                             @php
-                          echo   ($featuredBlog['0']->anynomous=='2') ? (isset($featuredBlog['0']->user->name)  ? '<a href="/profile/'.$featuredBlog['0']->user->username.'">By'. $featuredBlog['0']->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
+                          echo   ($featuredBlog['0']->anynomous=='2') ? (isset($featuredBlog['0']->user->name)  ? '<a href="/profile/'.$featuredBlog['0']->user->username.'">By '. $featuredBlog['0']->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , $featuredBlog['0']->code)}}">

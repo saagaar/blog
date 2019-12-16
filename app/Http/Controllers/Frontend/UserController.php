@@ -70,6 +70,9 @@ class UserController extends FrontendController
     { 
        $routeName= Route::currentRouteName();
        $user=$this->user_state_info($username);
+       if(!$user)
+          return redirect()->route('home')
+                        ->with('error','No user found!!'); 
        $myBlogs=$blog->getActiveBlogByUserId($user['userid']);
        unset($user['userid']);
        if($routeName=='api')
@@ -102,15 +105,17 @@ class UserController extends FrontendController
          {
             $userdata=$this->authUser;
          }
-         if(!$userdata)
+        if(!$userdata){
+          if($routeName=='api')
+            return array('status'=>false,'message'=>'No user found!!');
+          else
           return redirect()->route('home')
-                        ->with('error','No user found!!');       
+                        ->with('error','No user found!!');     
+        }
         $routeName= ROUTE::currentRouteName();
         $suggestion=$this->getFollowSuggestions($userdata,3);
         $followings = $this->followerList->getAllFollowings($userdata);
         $authFollowing = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
-        // echo "<pre>";
-        // print_r($authFollowing);exit;
         $data['followSuggestion']=$suggestion;
         $data['followings'] = $followings;
         $data['authFollowing'] = $authFollowing;
@@ -135,9 +140,14 @@ class UserController extends FrontendController
             $userdata=$this->authUser;
         }
         $data['userdata'] = $userdata;
-        if(!$userdata)
+        if(!$userdata )
+        {
+          if($routeName=='api')
+            return array('status'=>false,'message'=>'No user found!!');
+          else
           return redirect()->route('home')
                         ->with('error','No user found!!');        
+        }
         $routeName= ROUTE::currentRouteName();
         $followers = $this->followerList->getAllFollowers($userdata);
         $followings = $this->followerList->getAllFollowings($userdata)->pluck('username');
