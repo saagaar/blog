@@ -24,7 +24,7 @@
 @if ($message = Session::get('status'))
   @component('layouts.components.home_response' ,['type'=>'success'])
                {{ $message }}
-  @endcomponent      
+  @endcomponent 
 @endif  
 <div class="wrapper" >
 <div id="app">
