@@ -70,7 +70,6 @@ class UserController extends FrontendController
     { 
        $routeName= Route::currentRouteName();
        $user=$this->user_state_info($username);
-
        $myBlogs=$blog->getActiveBlogByUserId($user['userid']);
        unset($user['userid']);
        if($routeName=='api')
@@ -103,9 +102,9 @@ class UserController extends FrontendController
          {
             $userdata=$this->authUser;
          }
-         if(!$userdata){
-          return redirect()->route('home'); 
-         }
+         if(!$userdata)
+          return redirect()->route('home')
+                        ->with('error','No user found!!');       
         $routeName= ROUTE::currentRouteName();
         $suggestion=$this->getFollowSuggestions($userdata,3);
         $followings = $this->followerList->getAllFollowings($userdata);
@@ -136,6 +135,9 @@ class UserController extends FrontendController
             $userdata=$this->authUser;
         }
         $data['userdata'] = $userdata;
+        if(!$userdata)
+          return redirect()->route('home')
+                        ->with('error','No user found!!');        
         $routeName= ROUTE::currentRouteName();
         $followers = $this->followerList->getAllFollowers($userdata);
         $followings = $this->followerList->getAllFollowings($userdata)->pluck('username');
@@ -162,7 +164,8 @@ class UserController extends FrontendController
           else{
             $userdata=$this->authUser;
           }
-
+          if(!$userdata)
+           throw new Exception("No User Found!!", 1);
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
           $allFollowers = $this->followerList->getAllFollowers($userdata,$limit,$offset);
@@ -182,7 +185,8 @@ class UserController extends FrontendController
             else{
               $userdata=$this->authUser;
             }
-
+          if(!$userdata)
+           throw new Exception("No User Found!!", 1);
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
           $allFollowings = $this->followerList->getAllFollowings($userdata,$limit,$offset);

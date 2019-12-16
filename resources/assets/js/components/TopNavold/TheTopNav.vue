@@ -134,7 +134,6 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
                 }
             },
             getProfileUrl(){
-              
               let url=this.me.image;
               return this.$helpers.getProfileUrl(url);
            },

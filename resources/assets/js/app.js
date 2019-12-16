@@ -75,6 +75,7 @@ import LoginButton from './components/TopNav/LoginButton';
 import SignUpButton from './components/TopNav/SignUpButton';
 import TheLoginSignupModal from './components/TopNav/TheLoginSignupModal';
 import NotificationsLoading  from './components/InfiniteLoading/NotificationsLoading';
+import Newsletter from './components/LandingPage/Newsletter';
 // import UserDashboard from './pages/UserDashboard';
 const default_layout="default";
 const app = new Vue({
@@ -109,7 +110,8 @@ const app = new Vue({
             'the-login-signup-modal':TheLoginSignupModal,
             'notification-loading':NotificationsLoading,
             'success-error-message':SuccessErrorMessage,
-            'favorite':Favorite
+            'favorite':Favorite,
+            'newsletter':Newsletter,
           
         }
     

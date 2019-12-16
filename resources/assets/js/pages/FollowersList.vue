@@ -9,12 +9,10 @@
       <div class="col-md-6 col-sm-12"  v-for="eachFollowers in initialState.followers">
         <div class="friend-card">
             <div class="row card-info">
-              <div class="col-lg-3 col-md-4" v-if="eachFollowers.image">
-                <img :src="'/uploads/user-images/'+eachFollowers.image" alt="user" class="profile-photo-lg" />
+              <div class="col-lg-3 col-md-4">
+                <img :src="getProfileUrl(eachFollowers.image)" alt="user" class="profile-photo-lg" />
               </div>
-              <div class="col-lg-3 col-md-4"v-else>
-                <img src="/frontend/images/elements/default-profile.png" alt="user" class="profile-photo-lg" />
-              </div>
+              
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">
                   <h5><a :href="'/profile/'+eachFollowers.username"  class="profile-link">{{eachFollowers.name}} </a></h5>
@@ -83,8 +81,11 @@
                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
               },
+           getProfileUrl(url){
+              return this.$helpers.getProfileUrl(url);
+           },
          },
-         components:{
+        components:{
           FollowButton,
           PlaceHolderFollowers,
           InfiniteLoading

@@ -53,6 +53,7 @@
           </form>
           
           <div class="text-center text-muted delimiter">or use a social network</div>
+          
           <div class="d-flex justify-content-center social-buttons">
             <a href="/social-login/google" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google">
               <i class="fab fa-google"></i>
@@ -63,7 +64,11 @@
             <a href="/social-login/facebook" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
               <i class="fab fa-facebook"></i>
             </a>
+
           <!--   <a href="/social-login/linkedin" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
+=======
+           <!--  <a href="/social-login/linkedin" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
+>>>>>>> avi
               <i class="fab fa-linkedin"></i>
             </a> -->
           </div>
@@ -114,7 +119,8 @@
           
           <div class="text-center text-muted delimiter">or use a social network</div>
           <div class="d-flex justify-content-center social-buttons">
-           <a href="/social-login/google" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google">
+
+            <a href="/social-login/google" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Google">
               <i class="fab fa-google"></i>
             </a>
            <!--  <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
@@ -124,6 +130,9 @@
               <i class="fab fa-facebook"></i>
             </a>
            <!--  <a href="/social-login/linkedin" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
+
+          <!--   <a href="/social-login/linkedin" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
+
               <i class="fab fa-linkedin"></i>
             </a> -->
           </div>

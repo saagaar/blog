@@ -61,9 +61,9 @@ $('.play-video').magnificPopup({
 // Search Toggle
 
 $("#search").on("click", function () {
-    alert('here');
-    $("#search_input_box").slideToggle();
-    $("#search_input").focus();
+  
+    // $("#search_input_box").slideToggle();
+    // $("#search_input").focus();
 });
 $("#close_search").on("click", function () {
     $('#search_input_box').slideUp(500);
