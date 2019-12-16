@@ -358,15 +358,21 @@
       <!-- footer social icon -->
       <nav class="col-lg-3">
         <ul class="list-inline text-lg-right text-center social-icon">
+        @if(config('settings.facebook_id'))
           <li class="list-inline-item">
-            <a class="facebook" href="{{config('settings.facebook_id')}}"><i class="ti-facebook"></i></a>
+            <a target="_blank" class="facebook" href="{{config('settings.facebook_id')}}"><i class="ti-facebook"></i></a>
           </li>
+        @endif
+        @if(config('settings.twitter_id'))
           <li class="list-inline-item">
-            <a class="twitter" href="{{config('settings.twitter_id')}}"><i class="ti-twitter-alt"></i></a>
+            <a target="_blank" class="twitter" href="{{config('settings.twitter_id')}}"><i class="ti-twitter-alt"></i></a>
           </li>
+        @endif
+        @if(config('settings.linkedin_id'))
           <li class="list-inline-item">
-            <a class="linkedin" href="{{config('settings.linkedin_id')}}"><i class="ti-linkedin"></i></a>
+            <a target="_blank" class="linkedin" href="{{config('settings.linkedin_id')}}"><i class="ti-linkedin"></i></a>
           </li>
+         @endif
         </ul>
       </nav>
     </div>

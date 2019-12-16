@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-@if(auth()->user())
+@if(auth()->user() && isset($user))
 <script type="text/javascript">
      window.__USER_STATE__ = '{!! addslashes(json_encode($user)) !!}'
      window.__NOTIFICATION__ = '{!! addslashes(json_encode($user["notifications"])) !!}'
@@ -55,7 +55,7 @@
                             <em >{{ auth()->user()->unreadNotifications()->count() }}</em>
                             @endif
                             </a>
-                               <notification-loading :notificationlist="[]" :loadtype="'fullload'" :type="'nav'" ></notification-loading>
+                               <notification-loading :notificationList="[]" :loadtype="'fullload'" :type="'nav'" ></notification-loading>
                                 
                         </li>
                    
@@ -64,7 +64,7 @@
                                 <small>Welcome!</small>
                                 <figure>
                                   @if(auth()->user()->image)
-                                      @if(strval(strpos(auth()->user()->image,'https://'))==false || strval(strpos(auth()->user()->image,'http://')==false))
+                                      @if(preg_match('/http(s)?:\/\//',auth()->user()->image))
                                         <img src="{{ auth()->user()->image}}">
                                       @else
                                        <img src="{{ url('/uploads/user-images/'.auth()->user()->image)}}">

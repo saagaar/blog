@@ -6,7 +6,7 @@
                 </li>
                 <li>
                   <ul class="allnotificationlist">
-                      <li v-if="allNotifications" v-for="eachNotifications in allNotifications" class="media" :class="[eachNotifications.read_at ? '':'unreadnotification']" ><a href="#"><img class="mr-3" :src="getProfileUrl()" alt="Generic placeholder image"><p class="media-body"> {{eachNotifications.data.message}}<b class="mt-0 mb-1">2 days ago</b></p></a>
+                      <li v-if="allNotifications.length>0" v-for="eachNotifications in allNotifications" class="media" :class="[eachNotifications.read_at ? '':'unreadnotification']" ><a href="#"><img class="mr-3" :src="getProfileUrl()" alt="Generic placeholder image"><p class="media-body"> {{eachNotifications.data.message}}<b class="mt-0 mb-1">2 days ago</b></p></a>
                        </li>
                        <li v-else>
                        <a href="#"><p class="media-body">No Notifications</p></a>
@@ -49,15 +49,13 @@ export default {
     };
   },
   created(){
-    // if(window.__INITIAL_STATE__!==undefined){
-    //   let notifications=JSON.parse(window.__INITIAL_STATE__) || {};
-    //   alert(notifications.notifications);
-    //   this.allNotifications=notifications.notifications;
-    // }
+    if(window.__NOTIFICATION__!==undefined){
+      let notifications=JSON.parse(window.__NOTIFICATION__) || {};
+      this.allNotifications=notifications;
+    }
   },
   watch:{
     notificationList:function(newValue){
-      // alert('here');
        this.allNotifications=newValue
     }
   },

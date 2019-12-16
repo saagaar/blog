@@ -6342,7 +6342,7 @@ __webpack_require__.r(__webpack_exports__);
     blog: Object,
     allcomment: Array
   },
-  mounted: function mounted() {
+  created: function created() {
     this.$store.commit('LIST_COMMENTS', this.allcomment);
   },
   data: function data() {
@@ -6976,15 +6976,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]()
     };
   },
-  created: function created() {// if(window.__INITIAL_STATE__!==undefined){
-    //   let notifications=JSON.parse(window.__INITIAL_STATE__) || {};
-    //   alert(notifications.notifications);
-    //   this.allNotifications=notifications.notifications;
-    // }
+  created: function created() {
+    if (window.__NOTIFICATION__ !== undefined) {
+      var notifications = JSON.parse(window.__NOTIFICATION__) || {};
+      this.allNotifications = notifications;
+    }
   },
   watch: {
     notificationList: function notificationList(newValue) {
-      // alert('here');
       this.allNotifications = newValue;
     }
   },
@@ -45635,7 +45634,7 @@ var render = function() {
           { staticClass: "allnotificationlist" },
           [
             _vm._l(_vm.allNotifications, function(eachNotifications) {
-              return _vm.allNotifications
+              return _vm.allNotifications.length > 0
                 ? _c(
                     "li",
                     {
