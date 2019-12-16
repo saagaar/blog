@@ -39,7 +39,8 @@ class LoginController extends FrontendController
             if($user['status']==true){
                 auth()->login($user['userData']); 
             }else{
-                return response()->json(['status'=>false,'data'=>'','message'=>$user['message']], 401);
+                return redirect()->route('home')
+                        ->with('error',$user['message']);
             }
         }else{
             auth()->login($userData); 
@@ -85,11 +86,11 @@ class LoginController extends FrontendController
         if(auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'),'status'=>1]))
         { 
             $user = Auth()->user()->toArray();
-            return response()->json(['status'=>true,'data'=>$user,'message'=>'Logged in Successfully']); 
+             return array('status'=>true,'data'=>$user,'message'=>'Logged in Successfully'); 
         } 
         else
         {
-            return response()->json(['status'=>false,'message'=>'Your Email or Password is incorrect']); 
+             return array('status'=>false,'message'=>'Your Email or Password is incorrect'); 
         } 
     }
     public function register(Request $request) 
@@ -101,7 +102,7 @@ class LoginController extends FrontendController
             'repassword' => 'required|min:6|same:password', 
         ]);
         if ($validator->fails()) { 
-            return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+            return array('status'=>false,'data'=>'','message'=>$validator->errors(), 401);            
         }
         $input = $request->all(); 
         $input['password'] = bcrypt($input['password']); 
@@ -130,7 +131,7 @@ class LoginController extends FrontendController
         $roles=$this->role->getDefaultRoleId();
         $user->assignRole($roles);  
          
-    return response()->json(['status'=>true,'data'=>$user,'message'=>'Registration completed Successfully']); 
+     return array('status'=>true,'data'=>$user,'message'=>'Registration completed Successfully'); 
     }
     public function userActivation($username,$code){
         $user = $this->account->getUserByUsername($username);

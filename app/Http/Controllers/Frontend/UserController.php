@@ -204,7 +204,7 @@ class UserController extends FrontendController
          }  
         $code='follow_notification';
         $userdata=$this->user->getUserByUsername($username);
-        $data=['NAME'=>$this->authUser->name,'URL'=>url('/followers')];
+        $data=['NAME'=>$this->authUser->name,'URL'=>url('/followers/'.$this->authUser->username)];
         $userdata->notify(new Notifications($code,$data));
          return array('status'=>true,'message'=>$this->getFollowSuggestions($this->authUser,1,$offset));
     }

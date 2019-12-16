@@ -253,6 +253,7 @@ import Loader from './../../components/Loader';
                }
                else{
                 curObject.$store.commit('TOGGLE_LOADING');
+                this.closeAllPopups();
                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
                }
               }).catch(e => {
