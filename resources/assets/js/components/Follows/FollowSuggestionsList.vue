@@ -6,7 +6,7 @@
                   <div v-if="followSuggestion.length>0">
                    <div class="follow-user" v-for="eachsuggestion in followSuggestion" >
 
-                    <img :src="eachsuggestion.image? '/uploads/user-images/'+eachsuggestion.image:'/frontend/images/elements/default-profile.png'" alt="user" class="profile-photo-sm pull-left" />
+                    <img :src="getProfileUrl(eachsuggestion.image)" alt="Profile Picture" class="profile-photo-sm pull-left" />
                     <div>
                       <h5><a :href="'/profile/'+eachsuggestion.username" class="profile-link">{{eachsuggestion.name}}</a></h5>
                       <FollowButton  @clicked="userFollowed" :following="following" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
@@ -56,7 +56,11 @@ import PlaceHolderDashboardFeed  from './../ContentPlaceholder/PlaceHolderDashbo
             {
               this.newUser=toAddUser[0];
             } 
-          }
+          },
+         getProfileUrl(url){
+              return this.$helpers.getProfileUrl(url);
+           },
+          
         },
         components:{
             FollowButton,

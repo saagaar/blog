@@ -115,7 +115,7 @@ class UserController extends FrontendController
         $routeName= ROUTE::currentRouteName();
         $suggestion=$this->getFollowSuggestions($userdata,3);
         $followings = $this->followerList->getAllFollowings($userdata);
-        $authFollowing = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
+        $authFollowing = $this->followerList->getAllFollowings($userdata)->pluck('username');
         $data['followSuggestion']=$suggestion;
         $data['followings'] = $followings;
         $data['authFollowing'] = $authFollowing;

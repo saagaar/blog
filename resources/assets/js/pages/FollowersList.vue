@@ -84,6 +84,7 @@
            getProfileUrl(url){
               return this.$helpers.getProfileUrl(url);
            },
+           
          },
         components:{
           FollowButton,
