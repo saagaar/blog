@@ -26,7 +26,11 @@ class CmsController extends FrontendController
     public function cmsPage($slug)
     {
     	$cms_data = $this->cms->getCmsBySlug($slug);
-    	$navCategory=$this->category->getCategoryByShowInHome();
-    	return view('frontend.home.cms')->with(array('cms'=>$cms_data,'navCategory'=>$navCategory));
+        if($cms_data){
+        	$navCategory=$this->category->getCategoryByShowInHome();
+        	return view('frontend.home.cms')->with(array('cms'=>$cms_data,'navCategory'=>$navCategory));
+        }else {
+            abort(404);
+        }
     }
 }
