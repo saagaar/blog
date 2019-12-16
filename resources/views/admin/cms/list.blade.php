@@ -25,7 +25,7 @@
                   <th>Is Display</th>
                   <th>CMS type</th>
                   <th>Created at</th>
-                  <th>Updated at</th>
+                  <!-- <th>Updated at</th> -->
                   <th colspan="2">Action</th>
                 </tr>
                 </thead>
@@ -36,7 +36,7 @@
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachCms->heading }}</td>
-                  <td>{{strip_tags($eachCms->content)}}</td>
+                  <td> {{ str_limit(strip_tags($eachCms->content), $limit = 150, $end = '...') }} </td>
                   <td>
                       <input data-id="{{$eachCms->id}}" data-url="{{route('cms.changestatus')}}" style="font-size:5px;padding:0px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive"{{$eachCms->status==1 ? 'checked' : ''}}>
                   </td>
@@ -48,7 +48,7 @@
                   @endif
                   </td>
                   <td>{{$eachCms->created_at}}</td>
-                  <td>{{$eachCms->updated_at}}</td>
+                  <!-- <td>{{$eachCms->updated_at}}</td> -->
                   
                       <td><a href="{{route('cms.edit',$eachCms->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                       <td>
