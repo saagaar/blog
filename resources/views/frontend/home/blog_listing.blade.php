@@ -22,10 +22,10 @@
                     <div class="single-blog video-style small m_b_30 ">
                       <div class="short_details">
                             <a class="d-block" href="#">
-                                <h4 class="lt_ttl">{{$category->name }}</h4>
+                                <h4 class="lt_ttl">{{ $category->name }}</h4>
                             </a>
                             <p>
-                                {{ $category->description}}
+                                {{ $category->description }}
                             </p>
                             <div class="meta-bottom d-flex meta-author mt-30">
 

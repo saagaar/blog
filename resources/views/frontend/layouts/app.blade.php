@@ -62,10 +62,12 @@
 
                         <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <small>Welcome !</small>
+                                <small>Welcome!</small>
                                 <figure>
-                                  @if(auth()->user()->image)
-                                    <img src="{{ url('/uploads/user-images/'.auth()->user()->image)}}">
+                                  @if(preg_match('/http(s)?:/',auth()->user()->image))
+                                    <img src="{{ auth()->user()->image }}">
+                                  @elseif(auth()->user()->image)
+                                     <img src="{{ url('/uploads/user-images/'.auth()->user()->image)}}">
                                   @else
                                     <img src="{{ url('/frontend/images/elements/default-profile.png') }}">
                                   @endif
