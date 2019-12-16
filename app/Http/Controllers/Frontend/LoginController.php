@@ -28,24 +28,31 @@ class LoginController extends FrontendController
      */
    
     public function socialLogin($provider)
-    {
+    {   
         return Socialite::driver($provider)->redirect();
     }
     public function dashboard($provider){
-    $getInfo = Socialite::driver($provider)->user(); 
-    $userData = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
-        if (!$userData) {
-            $user = $this->registerUser($getInfo,$provider); 
-            if($user['status']==true){
-                auth()->login($user['userData']); 
+ 
+        try
+        {
+            $getInfo = Socialite::driver($provider)->user(); 
+            $userData = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
+            if (!$userData) {
+                $user = $this->registerUser($getInfo,$provider); 
+                if($user['status']==true){
+                    auth()->login($user['userData']); 
+                }else{
+                    return redirect()->route('home')
+                            ->with('error',$user['message']);
+                }
             }else{
-                return redirect()->route('home')
-                        ->with('error',$user['message']);
+                auth()->login($userData); 
             }
-        }else{
-            auth()->login($userData); 
-        }
-        return redirect()->to('/home');
+            return redirect()->to('/home');
+        }catch (\GuzzleHttp\Exception\ClientException $e) {
+        return redirect()->route('home')
+                            ->with('error',"Authentication Error");
+    }
     }
     
     public function registerUser($getInfo,$provider)

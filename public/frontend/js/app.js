@@ -6275,13 +6275,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submitForm: function submitForm() {
-      this.$v.form.$touch();
+      this.$v.form.$touch(); // let curObject=this;
 
       if (!this.$v.form.$invalid) {
         this.$store.dispatch('createComments', {
           'code': this.blogCode,
           'form': this.form
-        }); // this.form.post('/create/comment/'+this.blogCode).then(response => {
+        }); // curObject.$store.commit('TOGGLE_LOADING');
+        // this.form.post('/create/comment/'+this.blogCode).then(response => {
         //  if(response.data.status){
         //  	// console.log(response);
         // this.$emit('commented', {comment:this.form.comment,created_at:moment()});
@@ -6423,12 +6424,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      initialState: {}
+      initialState: {},
+      comments: []
     };
   },
   computed: {
-    comments: function comments() {
+    allComments: function allComments() {
       return this.$store.getters.listComments;
+    }
+  },
+  watch: {
+    allComments: function allComments(newValue) {
+      this.comments = newValue;
     }
   },
   methods: {
@@ -6950,11 +6957,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]()
     };
   },
-  created: function created() {// if(window.__INITIAL_STATE__!==undefined){
-    //   let notifications=JSON.parse(window.__INITIAL_STATE__) || {};
-    //   alert(notifications.notifications);
-    //   this.allNotifications=notifications.notifications;
-    // }
+  created: function created() {
+    this.allNotifications = this.notifications();
   },
   watch: {
     notificationList: function notificationList(newValue) {
@@ -44960,7 +44964,11 @@ var render = function() {
                   { staticClass: "user justify-content-between d-flex" },
                   [
                     _c("div", { staticClass: "thumb" }, [
-                      _vm._v('">\r\n\t\t        ')
+                      _c("img", {
+                        attrs: {
+                          src: _vm.getProfileUrl(eachComment.user.image)
+                        }
+                      })
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "desc" }, [
@@ -68572,7 +68580,7 @@ function () {
         return user.username === blog.user.username;
       }
 
-      if (user.permissions.indexOf('delete own post') !== -1) {
+      if (user.permissions.indexOf('delete own posts') !== -1) {
         return true;
       }
 
@@ -69174,27 +69182,31 @@ var UPDATE_UNREAD_NOTIFICATION_COUNT = function UPDATE_UNREAD_NOTIFICATION_COUNT
 };
 var UPDATE_PROFILE = function UPDATE_PROFILE(state, imageName) {
   state.me.image = imageName;
+  state.user.loggedInUser.image = imageName;
 };
 var UPDATE_ADDRESS = function UPDATE_ADDRESS(state, addressName) {
   state.me.address = addressName;
+  state.user.loggedInUser.address = addressName;
 };
 var UPDATE_COUNTRY = function UPDATE_COUNTRY(state, countryName) {
   state.me.country = countryName;
+  state.user.loggedInUser.country = countryName;
 };
 var UPDATE_BIO = function UPDATE_BIO(state, bioName) {
   state.me.bio = bioName;
+  state.user.loggedInUser.bio = bioName;
 };
 var INCREMENT_FOLLOWERS_COUNT = function INCREMENT_FOLLOWERS_COUNT(state, count) {
-  state.user.followerCount += count;
+  state.me.followerCount += count;
 };
 var INCREMENT_FOLLOWING_COUNT = function INCREMENT_FOLLOWING_COUNT(state, count) {
-  state.user.followingCount += count;
+  state.me.followingCount += count;
 };
 var DECREMENT_FOLLOWERS_COUNT = function DECREMENT_FOLLOWERS_COUNT(state, count) {
-  state.user.followerCount -= count;
+  state.me.followerCount -= count;
 };
 var DECREMENT_FOLLOWING_COUNT = function DECREMENT_FOLLOWING_COUNT(state, count) {
-  state.user.followingCount -= count;
+  state.me.followingCount -= count;
 };
 var TOGGLE_LOADING = function TOGGLE_LOADING(state) {
   state.isLoading = !state.isLoading;

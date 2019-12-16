@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Route;
 
 class PermissionsRequest extends FormRequest
 {
@@ -23,8 +24,18 @@ class PermissionsRequest extends FormRequest
      */
     public function rules()
     {
+        $routeName= ROUTE::currentRouteName();
+        if ($routeName == 'permission.edit')
+          {
+           $name = 'required|unique:permissions,name,' . $this->id;
+          }
+          else
+          {
+              $name = 'required|unique:permissions,name';
+          }
         return [
-            'name'              =>'required|unique:permissions,name',
+            'name'              =>$name,
+            'default'           =>'required'
         ];
     }
 }

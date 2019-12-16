@@ -4,7 +4,7 @@
 		<div class="single-comment justify-content-between d-flex" v-for="eachComment in comments">
 		    <div class="user justify-content-between d-flex">
 		        <div class="thumb">
-		       		<img :src=getProfileUrl(eachComment.user.image)">
+		       		<img :src="getProfileUrl(eachComment.user.image)">
 		        </div>
 		        <div class="desc">
 		            <p class="comment">
@@ -40,15 +40,22 @@ import mixin  from './../../mixins/LoadData.mixin.js';
         
         data:function(){
           return {
-            initialState:{}
-            
+            initialState:{},
+            comments:[]
           }
         },
+        
         computed: {
-        	  comments:function(){
+        	  allComments:function(){
                 return this.$store.getters.listComments;
             }
-        },methods:{
+        },
+        watch: {
+          allComments: function (newValue) {
+            this.comments=newValue;          
+          },
+      },
+        methods:{
         	getProfileUrl(url){
               return this.$helpers.getProfileUrl(url);
            },

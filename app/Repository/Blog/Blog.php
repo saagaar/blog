@@ -72,7 +72,7 @@ Class Blog implements BlogInterface
    */
   public function getBlogOfFollowingUser($user){
     $listofFollowings=$user->followings()->select('follow_id')->get()->pluck('follow_id')->toArray();
-    return $this->blog->whereIn('user_id', $listofFollowings)->latest()->get()->toArray();
+    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->whereIn('user_id', $listofFollowings)->latest()->get()->toArray();
   }
   /**
    * get retaled blog

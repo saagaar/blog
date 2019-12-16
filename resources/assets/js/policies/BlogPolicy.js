@@ -38,7 +38,7 @@ export default class BlogPolicy
         {
             return user.username === blog.user.username;
         }
-         if(user.permissions.indexOf('delete own post')!==-1)
+         if(user.permissions.indexOf('delete own posts')!==-1)
         {
            return true;
         }

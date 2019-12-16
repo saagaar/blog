@@ -128,10 +128,13 @@ class FrontendController extends BaseController
             $user=$accUser;
             $user->followersCount=$followerList->getFollowersCount($accUser);
             $user->followingCount=$followerList->getFollowingsCount($accUser);
-            if(\Auth::check())
-            $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
             $user->unReadNotificationsCount=0;
-            $user->notifications=$account->getUsersNotification($accUser,$this->apiPerPage);
+            if(\Auth::check()){
+            $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
+            // $user->unReadNotificationsCount=0;
+            $user->notifications=$account->getUsersNotification($this->authUser,$this->apiPerPage);
+            }
+
             $user->blogCount=$accUser->blogs()->count();
             $user->root_url=url('/');
             $user->websiteLogo=$this->websiteLogo;
@@ -154,10 +157,7 @@ class FrontendController extends BaseController
             $user->blogCount=$this->authUser->blogs()->count();
             $user->websiteLogo=$this->websiteLogo;
             $user->root_url=url('/');
-             if(!$accUser)
-                     return false;      
             $user=$user->toArray();
-
             $user['permissions']= $this->getAllPermissionsAttribute($this->authUser);  
 
             // $user['roles']=$this->authUser->roles->first()->name;

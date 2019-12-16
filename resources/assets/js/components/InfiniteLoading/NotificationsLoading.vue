@@ -49,11 +49,7 @@ export default {
     };
   },
   created(){
-    // if(window.__INITIAL_STATE__!==undefined){
-    //   let notifications=JSON.parse(window.__INITIAL_STATE__) || {};
-    //   alert(notifications.notifications);
-    //   this.allNotifications=notifications.notifications;
-    // }
+    this.allNotifications=this.notifications();
   },
   watch:{
     notificationList:function(newValue){

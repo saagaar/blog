@@ -28,7 +28,7 @@ class Role extends Model implements Auditable,RoleContract
      * @var array
      */
     protected $fillable = [
-        'name','guard_name'
+        'name','guard_name','default'
     ];
     protected $guard_name = 'web';
     // protected $guarded = ['id'];
