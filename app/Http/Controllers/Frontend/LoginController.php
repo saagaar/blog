@@ -121,13 +121,14 @@ class LoginController extends FrontendController
             $input['status']    ='2';
             $code='user_registration';
             $data=['NAME'=>$input['name'],'URL'=>url('/blog/useractivation/'.$input['username'].'/'.$input['activation_code']),'SITENAME'=>$this->siteName];
-        $user->notify(new Notifications($code,$data));
+       
         }else{
             $input['status']    ='1';
         }
         $user = $this->account->create($input);
         $roles=$this->role->getDefaultRoleId();
         $user->assignRole($roles);  
+        $user->notify(new Notifications($code,$data));
          
     return response()->json(['status'=>true,'data'=>$user,'message'=>'Registration completed Successfully']); 
     }

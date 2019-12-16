@@ -18,18 +18,19 @@
                             
                         </ul>
                          <ul v-else>
-                        <li><a id="search" @click="OpenSearchBox" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                        <!-- <li><a id="search"  href="javascript:void(0)"><i class="fas fa-search"></i></a></li> -->
+                        <li><router-link to="/blog/add" v-if="$gate.allow('create')"><i class="fa fa-plus-circle"></i></router-link></li>
                       
                         <li class="nitify dropdown" @click="updateNotificationStatus">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
-                            aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span>Notifications</span> <em>{{ me.unReadNotificationsCount }}</em></a>
+                            aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span></span> <em>{{ me.unReadNotificationsCount }}</em></a>
                                <NotificationsLoading :notificationList="topnotifications" :type="'nav'" ></NotificationsLoading>
                                 
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
-                            <figure><img :src="getProfileUrl()"></figure> {{ loggedInUser.name}}</a>
+                            <figure><img :src="getProfileUrl()"></figure> {{ getFirstName() }}</a>
                             <ul class="dropdown-menu">
                                 <li><a href="/dashboard">My Dashboard</a></li>
                             
@@ -55,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="search_input" id="search_input_box" ref="search_input_box" >
+        <!-- <div class="search_input" id="search_input_box" ref="search_input_box" >
             <div class="container ">
                 <form class="d-flex justify-content-between search-inner">
                     <input type="text" class="form-control" id="search_input" placeholder="Search Here">
@@ -63,7 +64,7 @@
                     <span class="ti-close" id="close_search" title="Close Search"></span>
                 </form>
             </div>
-        </div>
+        </div> -->
 
     </section>
     
@@ -137,15 +138,12 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
             },
             getProfileUrl(){
               let url=this.loggedInUser.image;
-              if(url==='' || url==null){
-                return 'frontend/images/elements/default-profile.png';
-              }
-              else if(url.indexOf('://') > 0 || url.indexOf('//') === 0){
-                return url;
-              }
-              else{
-                return '/uploads/user-images/'+url;
-              }
+              return this.$helpers.getProfileUrl(url);
+           },
+           getFirstName(){
+              let name=(this.loggedInUser.name);
+              var fullname=name.split(' ');
+              return (fullname[0]);
            }
          },
         components:{

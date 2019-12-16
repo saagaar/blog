@@ -1,11 +1,11 @@
 @extends('frontend.layouts.app')
 @section('content')
-    @section('meta_url','https://thebloggersclub.com/category/{{ $category->slug }}')
+{{--     @section('meta_url','https://thebloggersclub.com/category/{{ $category->slug }}')
     @section('meta_title',$category->meta_title)
     @section('schema1',$category->schema1)
     @section('meta_keyword',$category->meta_keyword)
     @section('meta_description',$category->meta_description)
-    @section('meta_image',asset('/uploads/categories-images/'.$category->banner_image))
+    @section('meta_image',asset('/uploads/categories-images/'.$category->banner_image)) --}}
 <section class="fullwidth-block area-padding-bottom area-padding-top">
         <div class="container">
             <div class="row">

@@ -7,10 +7,11 @@
  <div class="spinner-border text-primary" role="status">
   <span class="sr-only">Loading...</span>
 </div>
+ @if(count($featuredBlog) >=4)
  <!--================Fullwidth block Area =================-->
     <section class="fullwidth-block area-padding-bottom area-padding-top">
-        <div class="container">
-             @if(count($featuredBlog) >0)
+        <div class="container"> 
+            
             <div class="row">
             	@if($featuredBlog['0'])
                 <div class="col-lg-6 col-md-6">
@@ -120,14 +121,63 @@
 
                 </div>
             </div>
-             @endif
+           
         </div>
     </section>
+    {{--
+    Section when blog count is less then 4
+    --}}
+ @else
+ <section class="hero-section" id="home" style="background-image: url(landing-page/assets/images/hero-area/banner-bg.png);">
+  <div class="container">
+    <div class="row">
+    
+         <div class="col-lg-12 text-center">        
+        <h1 class="mb-3">It's So easy to get started</h1>
+        <p class="mb-4"> </p>
+        @if(\Auth::check()):
+        <a href="/blog/add" class="btn btn-secondary btn-lg mb-5">Create a post</a>
+        @else
+        <login-button class="btn btn-secondary btn-lg mb-5"></login-button>
+        <!-- <a href="/blog/add" class="btn btn-secondary btn-lg mb-5">Login</a> -->
+        @endif
+
+         <h2 class="section-title">Share your story to the world.</h2>
+        <p class="mb-4"> <b style="font-weight: 300px">One</b> small story has potential to change  <b style="font-weight: 300px">Millions </b> of people.</p>
+        <!-- banner image -->
+        <h4> Select one of 100s topics you are enthusiast about!!</h4>
+         <newsletter></newsletter>
+         <div class="clearfix"></div>
+      </div>
+      <!-- <img class="img-fluid" src="landing-page/assets/images/hero-area/banner.png" alt="banner-img">    -->
+    </div>
+  </div>
+</section>
+<section class="section-lg seo" id="about-us">
+  <div class="container">
+    <div class="row"> 
+        <div class=" col-md-8 offset-md-2 offset-md-2 order-2 order-md-1">
+       
+     
+        <!-- <p> It is easy to use and manage your blog without any specific technical skills. You can reach an existing online community of people with similar interests and build a fan base.</p> -->
+      </div>
+     
+    </div>
+  </div>
+  <!-- background image -->
+  
+  <!-- background-shape -->
+  <img class="seo-bg-shape-1" src="landing-page/assets/images/background-shape/seo-ball-1.png" alt="bg-shape">
+  <img class="seo-bg-shape-2" src="landing-page/assets/images/background-shape/seo-half-cycle.png" alt="bg-shape">
+  <img class="seo-bg-shape-3" src="landing-page/assets/images/background-shape/seo-ball-2.png" alt="bg-shape">
+</section>
+ @endif
+
 
     <!--================Fullwidth block Area end =================-->
 
     <!--================ Latest Featured section start =================-->  
-
+ @if(count($featuredForMember) > 4)
     <div class="latest-news  area-padding-bottom area-padding-top">
         <div class="container">
             <div class="row">
@@ -137,7 +187,7 @@
                     </div>
                 </div>
             </div>
-            @if(count($featuredForMember) > 0)
+           
             <div class="row">
             	@if($featuredForMember['0'])
                <div class="col-lg-6 col-md-6">
@@ -245,14 +295,15 @@
 
                 </div>
             </div>
-            @endif
+
         </div>
     </div>
+             @endif
 
 
     <!--================ Latest Featured section end =================--> 
 
-
+ @if(count($popular)>4)
     <!--================ First block section start =================-->      
     <section class="first_block area-padding-top area-padding-bottom">
         <div class="container">
@@ -260,7 +311,7 @@
                 <h3>Popular</h3>
             </div>
             <div class="row">
-                @if(count($popular)>0)
+               
             	
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
@@ -370,13 +421,14 @@
 
                 </div>
                 @endif
-                @endif
             </div>
         </div>
     </section>
+                @endif
+
     <!--================ First block section end =================-->       
 
-    
+    @if(count($latest)>2)
     <!--================ three-block section start =================-->  
     <div class="three-block  area-padding">
         <div class="container">
@@ -389,7 +441,7 @@
             </div>
 
             <div class="row">
-                @if(count($latest)>0)
+                
             	@foreach($latest as $eachLatest)
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style small row m_b_30">
@@ -441,12 +493,13 @@
                     </div>
                 </div>
                 @endforeach
-                @endif
+             
                 <div class="col-md-12">
                 <latest-blog-loading></latest-blog-loading>
                 </div>
             </div>
         </div>
     </div>
+       @endif
     <!--================ three-block section end =================-->  
 @endsection

@@ -33,7 +33,7 @@ import Form from './../../services/Form.js';
 
 export default {
   props: {
-    notificationlist:{type:Array,default: function () { return [] }},
+    notificationList:{type:Array,default: function () { return [] }},
     type:{type:String,default:'fullPage'},
     loadtype:{type:String,default:'noload'},
 
@@ -44,7 +44,7 @@ export default {
  data:function(){
     return {
       offset: 1,
-      allNotifications:this.notificationlist,
+      allNotifications:this.notificationList,
       form:new Form()
     };
   },
