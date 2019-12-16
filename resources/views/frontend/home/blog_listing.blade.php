@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 @section('content')
 {{--   @section('meta_url','https://thebloggersclub.com/category/{{ $category->slug }}')
+
     @section('meta_title',$category->meta_title)
     @section('schema1',$category->schema1)
     @section('meta_keyword',$category->meta_keyword)
@@ -22,10 +23,10 @@
                     <div class="single-blog video-style small m_b_30 ">
                       <div class="short_details">
                             <a class="d-block" href="#">
-                                <h4 class="lt_ttl">{{$category->name }}</h4>
+                                <h4 class="lt_ttl">{{ $category->name }}</h4>
                             </a>
                             <p>
-                                {{ $category->description}}
+                                {{ $category->description }}
                             </p>
                             <div class="meta-bottom d-flex meta-author mt-30">
 

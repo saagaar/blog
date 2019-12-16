@@ -85,7 +85,6 @@ export default {
         },
         notifications(){
           let notifications=JSON.parse(window.__NOTIFICATION__) || {};
-          console.log(notifications);
           return notifications;
         },
         getProfileUrl(){

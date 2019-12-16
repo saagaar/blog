@@ -40,14 +40,14 @@
                     <div class="right-button">
                         @if(!auth()->user())
                         <ul>
-                            <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                           <!--  <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li> -->
                             <li><login-button></login-button></li>
                             <li><signup-button></signup-button></li>
                             
                         </ul>
                         @else
                          <ul>
-                        <li><a id="search" href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                        <li><a id="create Post" href="/blog/add"><i class="fa fa-plus-circle"></i></a></li>
                         <li class="nitify dropdown">
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
@@ -61,7 +61,7 @@
                    
                         <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <small>Welcome !</small>
+                                <small>Welcome!</small>
                                 <figure>
                                   @if(auth()->user()->image)
                                       @if(strval(strpos(auth()->user()->image,'https://'))==false || strval(strpos(auth()->user()->image,'http://')==false))
@@ -69,6 +69,7 @@
                                       @else
                                        <img src="{{ url('/uploads/user-images/'.auth()->user()->image)}}">
                                       @endif
+
                                   @else
                                     <img src="{{ url('/frontend/images/elements/default-profile.png') }}">
                                   @endif
