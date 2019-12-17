@@ -1,8 +1,11 @@
 @extends('frontend.layouts.app')
 @section('content')
+@php
+      $author=   ($blogDetails->anynomous=='2') ? (isset($blogDetails->user->name)  ?  $blogDetails->user->name :'Admin'):' Anynomous ';
+@endphp
 	<div class="mid_part">
-        @section('meta_url','https://thebloggersclub.com/blog/detail/{{ $blogDetails->code }}')
-        @section('meta_title',$blogDetails->title)
+        @section('meta_url',config('settings.url').'/blog/detail/'. $blogDetails->code)
+        @section('meta_title',$blogDetails->title.' | By '.$author  )
         @section('meta_description',$blogDetails->short_description)
         @section('meta_image',asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image))
         <meta type="hidden" name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
@@ -26,7 +29,10 @@
                         <div class="blog_details">
                             <h2>{{ $blogDetails->title }}</h2>
                             <ul class="blog-info-link mt-3 mb-4">
-                                <li><a href="#"><i class="far fa-user"></i> {{ (isset($blogDetails->user)) ? $blogDetails->user->name: 'Admin' }}</a></li>
+                                <li><a href="#"><i class="far fa-user"></i> 
+                                @php
+                               echo  ($blogDetails->anynomous=='2') ? (isset($blogDetails->user->name)  ? '<a href="/profile/'.$blogDetails->user->username.'"> '. $blogDetails->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
+                                @endphp  </a></li>
                                 <li><icon-comments-count></icon-comments-count></li>
                             </ul>
                             <p class="excert">

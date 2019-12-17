@@ -46004,6 +46004,7 @@ var render = function() {
       "a",
       {
         attrs: {
+          target: "_blank",
           href:
             "https://twitter.com/intent/tweet?url=" +
             _vm.url +
@@ -68551,7 +68552,7 @@ function () {
         return user.username === blog.user.username;
       }
 
-      if (user.permissions.indexOf('delete own post') !== -1) {
+      if (user.permissions.indexOf('delete own posts') !== -1) {
         return true;
       }
 
