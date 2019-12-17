@@ -100,6 +100,7 @@ import Bio from './../components/Profile/Bio';
 import Loader from './../components/Loader';
 import Form from './../services/Form.js';
     export default {
+
         data() {
           return {
             isLoading:false,
@@ -122,7 +123,7 @@ import Form from './../services/Form.js';
             },
             loggedIn(){
               return this.$store.getters.user.loggedInUser;
-            }  
+            },  
             
         },
         created(){
@@ -131,8 +132,14 @@ import Form from './../services/Form.js';
         methods:{
             changeImage:function() 
             {
-              this.form.image = this.$refs.file.files[0];
               let curObject=this;
+              const file = this.$refs.file.files[0];
+              if (file.size > 5 * 1024 * 1024) {
+                curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:'File size is more then 5 MB'});
+                return;
+              }
+              this.form.image = file;
+              
               this.form.post('/user/changeprofile').then(response => {
                  if(response.data.status){
                    curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
@@ -140,7 +147,7 @@ import Form from './../services/Form.js';
                  }
                  else{
                    curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
-                   curObject.$store.commit('TOGGLE_LOADING');
+                   // curObject.$store.commit('TOGGLE_LOADING');
                  }
                 }).catch(e => {
                      curObject.$store.commit('TOGGLE_LOADING');

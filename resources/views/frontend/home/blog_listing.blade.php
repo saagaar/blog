@@ -70,7 +70,7 @@
                                 <a href="#">{{ $eachTags->name }}</a>
                                 @endforeach
                             </div>
-                            <a class="d-block" href="{{ route('blog.detail' , $eachBlog->code)}}">
+                            <a class="d-block" href="{{ route('blog.detail' , [$eachBlog->code,str_slug($eachBlog->title)])}}">
                                 <h4> {{ $eachBlog->title }}</h4>
                             </a>
                             <p>{!! str_limit($eachBlog->short_description, $limit = 50, $end = '...') !!}</p>

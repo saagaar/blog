@@ -180,8 +180,10 @@ class UserController extends FrontendController
           }
           if(!$userdata)
            throw new Exception("No User Found!!", 1);
-          $limit=$this->perPage;
+          $limit=10;
+
           $offset=$request->get('page')*$limit;
+          // print_r($offset);exit;
           $allFollowers = $this->followerList->getAllFollowers($userdata,$limit,$offset);
           return array('status'=>true,'data'=>$allFollowers,'message'=>'');
       }
@@ -201,7 +203,7 @@ class UserController extends FrontendController
             }
           if(!$userdata)
            throw new Exception("No User Found!!", 1);
-          $limit=$this->perPage;
+          $limit=10;
           $offset=$request->get('page')*$limit;
           $allFollowings = $this->followerList->getAllFollowings($userdata,$limit,$offset);
           return array('status'=>true,'data'=>$allFollowings,'message'=>'');
@@ -244,6 +246,7 @@ class UserController extends FrontendController
         if(\Auth::check())
         {
           $this->authorize('updateProfile', $this->authUser);
+          $allowedFileExtension=['jpg','png','jpeg','gif','svg'];
           if(request()->hasFile('image'))
           {
             $dir = '/uploads/user-images/';
@@ -253,11 +256,19 @@ class UserController extends FrontendController
             if ($this->authUser->image != '' && File::exists($dir . $this->authUser->image)){
               File::delete($dir . $this->authUser->image);
             }
-            $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move('uploads/user-images/', $imageName);
-            $form['image']=$imageName;
-             $this->user->update($this->authUser->id,$form);
-            return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
+             $extension = request()->image->getClientOriginalExtension();
+              $check=in_array($extension,$allowedFileExtension);
+              if($check)
+                {
+                  $imageName = time().'.'.request()->image->getClientOriginalExtension();
+                  request()->image->move('uploads/user-images/', $imageName);
+                  $form['image']=$imageName;
+                   $this->user->update($this->authUser->id,$form);
+                  return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
+                }else 
+                  {
+                    return  array('status'=>false,'message'=>'File must be jpg, png, jpeg, gif, svg ','data'=>array());
+                  }
           }
           else
           {

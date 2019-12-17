@@ -6666,7 +6666,50 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           message: e.message
         });
       });
-    }
+    },
+    url: function url(items) {
+      var blogslug = this.blogslug(items.title);
+      var url = '/blog/detail/' + items.code + '/' + blogslug;
+      return url;
+    },
+    blogslug: function blogslug(title) {
+      var blogslug = this.sanitizeTitle(title);
+      return blogslug;
+    },
+    sanitizeTitle: function sanitizeTitle(title) {
+      var slug = ""; // alert(sl);
+      // Change to lower case
+
+      var titleLower = title.toLowerCase(); // Letter "e"
+
+      slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e'); // Letter "a"
+
+      slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a'); // Letter "o"
+
+      slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o'); // Letter "u"
+
+      slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u'); // Letter "d"
+
+      slug = slug.replace(/đ/gi, 'd'); // Trim the last whitespace
+
+      slug = slug.replace(/\s*$/g, ''); // Change whitespace to "-"
+
+      slug = slug.replace(/\s+/g, '-');
+      return slug;
+    } // axios.get(api, {
+    //   params: {
+    //     page: this.page,
+    //   },
+    // }).then(({ data }) => {
+    //   if (data.hits.length) {
+    //     this.page += 1;
+    //     this.list.push(...data.hits);
+    //     $state.loaded();
+    //   } else {
+    //     $state.complete();
+    //   }
+    // });
+
   }
 });
 
@@ -6765,6 +6808,36 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           message: e.message
         });
       });
+    },
+    url: function url(items) {
+      var blogslug = this.blogslug(items.title);
+      var url = '/blog/detail/' + items.code + '/' + blogslug;
+      return url;
+    },
+    blogslug: function blogslug(title) {
+      var blogslug = this.sanitizeTitle(title);
+      return blogslug;
+    },
+    sanitizeTitle: function sanitizeTitle(title) {
+      var slug = ""; // alert(sl);
+      // Change to lower case
+
+      var titleLower = title.toLowerCase(); // Letter "e"
+
+      slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e'); // Letter "a"
+
+      slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a'); // Letter "o"
+
+      slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o'); // Letter "u"
+
+      slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u'); // Letter "d"
+
+      slug = slug.replace(/đ/gi, 'd'); // Trim the last whitespace
+
+      slug = slug.replace(/\s*$/g, ''); // Change whitespace to "-"
+
+      slug = slug.replace(/\s+/g, '-');
+      return slug;
     }
   }
 });
@@ -6846,12 +6919,22 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]()
     };
   },
+  computed: {},
   watch: {
     users: function users(newval) {
       alert(newval);
     }
   },
   methods: {
+    url: function url(items) {
+      var blogslug = this.slug(items.title);
+      var url = '/blog/detail/' + items.code + '/' + blogslug;
+      return url;
+    },
+    slug: function slug(title) {
+      var slug = this.sanitizeTitle(title);
+      return slug;
+    },
     infiniteHandler: function infiniteHandler($state) {
       var _this = this;
 
@@ -6873,6 +6956,27 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           message: e.message
         });
       });
+    },
+    sanitizeTitle: function sanitizeTitle(title) {
+      var slug = ""; // alert(sl);
+      // Change to lower case
+
+      var titleLower = title.toLowerCase(); // Letter "e"
+
+      slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e'); // Letter "a"
+
+      slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a'); // Letter "o"
+
+      slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o'); // Letter "u"
+
+      slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u'); // Letter "d"
+
+      slug = slug.replace(/đ/gi, 'd'); // Trim the last whitespace
+
+      slug = slug.replace(/\s*$/g, ''); // Change whitespace to "-"
+
+      slug = slug.replace(/\s+/g, '-');
+      return slug;
     }
   }
 });
@@ -6958,7 +7062,9 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     };
   },
   created: function created() {
-    this.allNotifications = this.notifications();
+    if (window.__NOTIFICATION__) {
+      this.allNotifications = this.notifications();
+    }
   },
   watch: {
     notificationList: function notificationList(newValue) {
@@ -45263,7 +45369,7 @@ var render = function() {
                         "a",
                         {
                           staticClass: "d-block",
-                          attrs: { href: "/blog/detail/" + items.code }
+                          attrs: { href: _vm.url(items) }
                         },
                         [_c("h4", [_vm._v(_vm._s(items.title))])]
                       ),
@@ -45407,7 +45513,7 @@ var render = function() {
                         "a",
                         {
                           staticClass: "d-block",
-                          attrs: { href: "/blog/detail/" + items.code }
+                          attrs: { href: _vm.url(items) }
                         },
                         [_c("h4", [_vm._v(_vm._s(items.title))])]
                       ),
@@ -45572,7 +45678,7 @@ var render = function() {
                         "a",
                         {
                           staticClass: "d-block",
-                          attrs: { href: "/blog/detail/" + items.code }
+                          attrs: { href: _vm.url(items) }
                         },
                         [_c("h4", [_vm._v(_vm._s(items.title))])]
                       ),

@@ -43,7 +43,7 @@ class FrontendController extends BaseController
     Protected $permission;
     Protected $contactEmail;
 
-    Protected $perPage=4;
+    Protected $perPage=10;
     Protected $apiPerPage=8;
     public function __construct()
     {

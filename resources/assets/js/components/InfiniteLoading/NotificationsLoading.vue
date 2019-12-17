@@ -49,7 +49,9 @@ export default {
     };
   },
   created(){
+    if (window.__NOTIFICATION__) {
     this.allNotifications=this.notifications();
+    }
   },
   watch:{
     notificationList:function(newValue){

@@ -26,7 +26,7 @@
                        <img v-if="eachBlog.image" class="img-fluid" :src="'/uploads/blog/'+eachBlog.code+'/'+eachBlog.image" :alt="eachBlog.title">
                        <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="eachBlog.title">
                       </div>
-                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" :href="'/blog/detail/'+eachBlog.code">
+                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" :href="url(eachBlog)">
                         <h4>{{eachBlog.title}}</h4>
                         </a>
                         <p v-if="eachBlog.short_description.length<500" v-html="eachBlog.short_description"></p>
@@ -124,6 +124,37 @@
         searchPost(){
          this.getResults();
         },
+        url(items){
+          var blogslug= this.blogslug(items.title);
+          var url = '/blog/detail/'+items.code+'/'+blogslug;
+          return url;
+        },
+        blogslug: function(title) {
+          var blogslug = this.sanitizeTitle(title);
+          return blogslug;
+        },
+        sanitizeTitle: function(title) {
+              var slug = "";
+              // alert(sl);
+              // Change to lower case
+              var titleLower = title.toLowerCase();
+              // Letter "e"
+              slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+              // Letter "a"
+              slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+              // Letter "o"
+              slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+              // Letter "u"
+              slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+              // Letter "d"
+              slug = slug.replace(/đ/gi, 'd');
+              // Trim the last whitespace
+              slug = slug.replace(/\s*$/g, '');
+              // Change whitespace to "-"
+              slug = slug.replace(/\s+/g, '-');
+              
+              return slug;
+            }
       },
         components:{
           PlaceHolderTimeline

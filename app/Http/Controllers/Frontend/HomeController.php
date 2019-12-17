@@ -122,7 +122,7 @@ class HomeController extends FrontendController
     public function test(Request $request){
       $this->category->subs(5);
     }
-    public function blogDetail($code,Request $request){
+    public function blogDetail($code,$slug,Request $request){
 
       $blogDetails = $this->blog->getBlogByCode($code);
       $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->orderBy('id','asc')->first();

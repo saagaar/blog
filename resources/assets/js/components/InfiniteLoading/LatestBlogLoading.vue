@@ -16,7 +16,7 @@
             <a v-else-if="items.user==null" href="#">By Admin</a>
              <a v-else :href="'/profile/'+items.user.username">By {{ items.user.name }}</a>
             </div>
-                <a class="d-block" :href="'/blog/detail/'+items.code">
+                <a class="d-block" :href="url(items)">
                     <h4>{{items.title}}</h4>
                 </a>
                 <p>{{items.short_description}}</p>
@@ -56,6 +56,9 @@ export default {
       form:new Form()
     };
   },
+   computed: {
+    
+  },
   watch:
   {
     users:function(newval){
@@ -64,6 +67,15 @@ export default {
     }
   },
   methods: {
+  url(items){
+      var blogslug= this.slug(items.title);
+      var url = '/blog/detail/'+items.code+'/'+blogslug;
+      return url;
+    },
+    slug: function(title) {
+      var slug = this.sanitizeTitle(title);
+      return slug;
+    },
     infiniteHandler($state) {
        
         this.form.get('/api/getlatestblog?page='+this.offset).then(response => 
@@ -83,6 +95,28 @@ export default {
                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
         },
+        sanitizeTitle: function(title) {
+          var slug = "";
+          // alert(sl);
+          // Change to lower case
+          var titleLower = title.toLowerCase();
+          // Letter "e"
+          slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+          // Letter "a"
+          slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+          // Letter "o"
+          slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+          // Letter "u"
+          slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+          // Letter "d"
+          slug = slug.replace(/đ/gi, 'd');
+          // Trim the last whitespace
+          slug = slug.replace(/\s*$/g, '');
+          // Change whitespace to "-"
+          slug = slug.replace(/\s+/g, '-');
+          
+          return slug;
+        }
     },
  
 };
