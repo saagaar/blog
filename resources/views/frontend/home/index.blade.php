@@ -495,7 +495,11 @@
                 @endforeach
              
                 <div class="col-md-12">
-                <latest-blog-loading></latest-blog-loading>
+                 @if(auth()->user())
+                <latest-blog-loading :user="{{ auth()->user()->id }}"></latest-blog-loading>
+                @else
+                    <latest-blog-loading></latest-blog-loading>
+                @endif
                 </div>
             </div>
         </div>

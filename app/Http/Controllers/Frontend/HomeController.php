@@ -97,6 +97,8 @@ class HomeController extends FrontendController
         $navCategory=$this->category->getCategoryByShowInHome();
         $likes='';
         $user ='';
+        // echo "<pre>";
+        // print_r($latest[0]['likes']); exit;
         $data['path']='/home';
          if(\Auth::check())
         {
@@ -130,7 +132,6 @@ class HomeController extends FrontendController
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $relatedBlog = $this->blog->relatedBlogBycode($code);
       $navCategory=$this->category->getCategoryByShowInHome();
-      // $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
       $data['blogDetails'] =$blogDetails;
       $data['blogComment']  =$blogComment;
       $user ='';
@@ -188,8 +189,10 @@ class HomeController extends FrontendController
       }
       $navCategory=$this->category->getCategoryByShowInHome();
        $user ='';
+       $likes='';
          if(\Auth::check())
         {
+          $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
           $routeName= ROUTE::currentRouteName();
           if($routeName=='api')
           {
@@ -200,10 +203,10 @@ class HomeController extends FrontendController
               $data['path']='/home';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
-              return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'totalBlogsCount'=>$blogCountinCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteLogo,'userCategory'=>$categories));
+              // return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'totalBlogsCount'=>$blogCountinCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteLogo,'userCategory'=>$categories,,'likes'=>$likes));
           }
         }
-       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'category'=>$category,'totalBlogsCount'=>$blogCountinCategory,'navCategory'=>$navCategory,'websiteLogo'=>$websiteUrl));
+       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'totalBlogsCount'=>$blogCountinCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteLogo,'userCategory'=>$categories,'likes'=>$likes));
     }
     public function getBlogByCategory($slug=false,Request $request){
       try
@@ -227,6 +230,7 @@ class HomeController extends FrontendController
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
           $latest = $this->blog->getLatestAllBlog($limit,$offset);
+          
           return array('status'=>true,'data'=>$latest,'message'=>'');
       }
       catch(Exception $e)
@@ -247,6 +251,7 @@ class HomeController extends FrontendController
         $navCategory=$this->category->getCategoryByShowInHome();
         $likes='';
         $user ='';
+
         $data['path']='/home';
          if(\Auth::check())
         {

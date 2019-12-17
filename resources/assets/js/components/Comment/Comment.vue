@@ -15,7 +15,7 @@ import AddComment from './AddComment';
     		blog:Object,
     		allcomment:Array
     	},
-        mounted() {
+        created() {
 
             this.$store.commit('LIST_COMMENTS',this.allcomment);
         },

@@ -23,7 +23,8 @@
                 <div class="meta-bottom d-flex">
                     <a href="#"><i class="ti-time"></i>&nbsp;{{ items.created_at | moment("from", "now")}}</a>
                     <a href="#" class="appreciate"><i>
-                        <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                      <LikeCheck v-if="user" :likes="items.likes['0']" :user="user"></LikeCheck>
+                      <img v-else src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                     </i>&nbsp; {{items.likes_count}} like</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
@@ -43,10 +44,15 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading';
 import Form from './../../services/Form.js';
-
+import LikeCheck from './../../components/Likes/LikeCheck';
 export default {
   components: {
     InfiniteLoading,
+    LikeCheck
+  },
+  props: {
+    user:{type:Number,default:''},
+
   },
   data(){
     return {

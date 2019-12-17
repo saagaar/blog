@@ -9,7 +9,7 @@
           <div class="friend-card">
             <div class="row card-info">
               <div class="col-lg-3 col-md-4" v-if="eachFollowings.image">
-                <img :src="'/uploads/user-images/'+eachFollowings.image" alt="user" class="profile-photo-lg" />
+                <img :src="getProfileUrl(eachFollowings.image)" alt="user" class="profile-photo-lg" />
               </div>
               <div class="col-lg-3 col-md-4"v-else>
                 <img src="/frontend/images/elements/default-profile.png" alt="user" class="profile-photo-lg" />
@@ -34,7 +34,7 @@
       <div class="friend-list">
           <div class="friend-card">
             <div class="row card-info">
-              You haven't followed anyone!!
+             No Followings yet!!
             </div>
           </div>
         </div>
@@ -144,7 +144,9 @@
                      this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
                   });
             },
-       
+          getProfileUrl(url){
+              return this.$helpers.getProfileUrl(url);
+           },
           
         },
         components:{

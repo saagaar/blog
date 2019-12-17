@@ -6,7 +6,7 @@
                 <figure>
                     <a href="#">
                          <img v-if="items.image" class="img-fluid" :src="'/uploads/blog/'+items.code+'/'+items.image" :alt="items.title">
-                       <img v-else class="img-fluid" :src="'/images/system-images/default-post.jpg'" :alt="items.title">
+                       <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="items.title">
                     </a>
                 </figure>
             </div>
@@ -18,7 +18,7 @@
                 <div class="meta-bottom d-flex">
                     <a href="#"><i class="ti-time"></i>{{ items.created_at | moment("from", "now")}}</a>
                     <a href="#" class="appreciate"><i>
-                        <img src="frontend/images/elements/inactive-appreciate.png" class="img-fluid">
+                        <img src="/frontend/images/elements/inactive-appreciate.png" class="img-fluid">
                     </i> {{items.likes_count}} like</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>

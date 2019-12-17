@@ -61,7 +61,7 @@
                         	@if($eachBlog->image)
                             	<img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachBlog->code.'/'.$eachBlog->image) }}" alt="{{ $eachBlog->title }}">
                             @else
-                            	<img class="img-fluid" src="/images/system-images/default-post.jpg" alt="{{ $eachBlog->title }}">
+                            	<img class="img-fluid" src="/frontend/images/elements/default-post.jpg" alt="{{ $eachBlog->title }}">
                             @endif
                         </div>
                         <div class="short_details col-lg-8 col-md-7 col-sm-12">
@@ -77,7 +77,16 @@
                             <div class="meta-bottom d-flex">
                                 <a href="#"><i class="ti-time"></i>{{ $eachBlog->created_at->diffForHumans() }}</a>
                                 <a href="#" class="appreciate"><i>
-                                    <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @if(auth()->user())
+                                    @if(in_array($eachBlog->id,$likes->toArray()))
+                                        <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
+                                    @else
+                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                    @endif
+                                @else
+                                
+                                    <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                                @endif
                                 </i>&nbsp;&nbsp;{{$eachBlog->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i> {{ $eachBlog->views }} view</a>
                             </div>

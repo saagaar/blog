@@ -49,13 +49,13 @@ export default {
     };
   },
   created(){
-    if (window.__NOTIFICATION__) {
-    this.allNotifications=this.notifications();
+    if(window.__NOTIFICATION__!==undefined){
+      let notifications=JSON.parse(window.__NOTIFICATION__) || {};
+      this.allNotifications=notifications;
     }
   },
   watch:{
     notificationList:function(newValue){
-      // alert('here');
        this.allNotifications=newValue
     }
   },
