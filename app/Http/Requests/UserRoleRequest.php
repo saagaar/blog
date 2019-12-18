@@ -25,6 +25,7 @@ class UserRoleRequest extends FormRequest
     {
         return [
             'name'              =>'required',
+            'default'           =>'required'
         ];
     }
 }

@@ -29,6 +29,8 @@ $factory->define(Users::class, function (Faker $faker) {
         'username' => $faker->unique()->username,
         'email' => $faker->unique()->safeEmail,
         'phone' => random_int(9800000000, 9899999999),
+        'activation_code' => random_int(100000, 999999),
+        'activation_date'   =>now(),
         'status' =>'1',
         'email_verified_at' => now(),
         'password' => Hash::make('123456'), // password

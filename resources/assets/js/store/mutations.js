@@ -14,27 +14,31 @@ export const UPDATE_UNREAD_NOTIFICATION_COUNT = (state, count) => {
 }
 export const UPDATE_PROFILE = (state, imageName) => {
     state.me.image = imageName
+    state.user.loggedInUser.image=imageName
 }
 export const UPDATE_ADDRESS = (state, addressName) => {
     state.me.address = addressName
+    state.user.loggedInUser.address = addressName
 }
 export const UPDATE_COUNTRY = (state, countryName) => {
     state.me.country = countryName
+    state.user.loggedInUser.country = countryName
 }
 export const UPDATE_BIO = (state, bioName) => {
     state.me.bio = bioName
+    state.user.loggedInUser.bio = bioName
 }
 export const INCREMENT_FOLLOWERS_COUNT = (state, count) => {
-   	state.user.followerCount += count;
+   	state.me.followerCount += count;
 }
 export const INCREMENT_FOLLOWING_COUNT = (state, count) => {
-    state.user.followingCount += count;
+    state.me.followingCount += count;
 }
 export const DECREMENT_FOLLOWERS_COUNT = (state, count) => {
-   	state.user.followerCount -= count;
+   	state.me.followerCount -= count;
 }
 export const DECREMENT_FOLLOWING_COUNT = (state, count) => {
-    state.user.followingCount -= count;
+    state.me.followingCount -= count;
 }
 export const TOGGLE_LOADING = state => 
 {

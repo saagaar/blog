@@ -1,5 +1,9 @@
 @extends('frontend.layouts.app')
 @section('content')
+		@section('meta_url',config('settings.url'))
+        @section('meta_title',$cms->page_title)
+        @section('meta_description',$cms->meta_description)
+        @section('meta_keyword',$cms->meta_key)
 <div class="mid_part">
 
 <!--================Dashboard Area Bikash Bhandari (bhandaribikash.com.np) =================-->

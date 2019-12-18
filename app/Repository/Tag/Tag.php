@@ -37,7 +37,10 @@ Class Tag implements TagInterface
      * @return id
      */
     public function getTagByName($tags){
-      return $this->tag->whereIn('name',$tags)->get();
+        foreach ($tags as $value) {
+            $tagNames[]=$value['name'];
+        }
+      return $this->tag->whereIn('name',$tagNames)->get()->pluck('id');
     }   
 
     public function getTagsList(){

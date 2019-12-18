@@ -47,13 +47,20 @@
                 <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                 @endif
                 </div>
-               <!--  <div class="form-group">
-                  <label for="guard_name">Guard Name:</label>
-                  <input type="text" class="form-control" name="guard_name" id="guard_name" value="{{ $permissions->guard_name }}" placeholder="Enter guard name">
-                @if ($errors->has('guard_name'))
-                <div class="alert alert-danger">{{ $errors->first('guard_name') }}</div>
-                @endif
-                </div> -->
+                <div class="form-group">
+                  <label for="default">default</label>
+                    <div class="custom-control custom-radio radio-inline">
+                        <input type="radio" class="custom-control-input flat-red" name="default" value="1" @if($permissions->default=='1')checked @endif>
+                        <label class="custom-control-label" for="defaultChecked">Yes</label>
+                    </div>
+                    <div class="custom-control custom-radio radio-inline">
+                        <input type="radio" class="custom-control-input flat-red" name="default" value="2" @if($permissions->default=='2')checked @endif >
+                        <label class="custom-control-label" for="defaultChecked">No</label>
+                    </div>
+                         @if ($errors->has('default'))
+                         <div class="alert alert-danger">{{ $errors->first('default') }}</div>
+                         @endif
+                  </div>
                
               </div>
               <!-- /.box-body -->

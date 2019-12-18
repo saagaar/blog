@@ -97,6 +97,7 @@ class UserController extends FrontendController
 
     public function followings($username=false)
     {
+        $authFollowing=[];
          if($username)
          {
             $userdata=$this->user->getUserByUsername($username);
@@ -104,6 +105,7 @@ class UserController extends FrontendController
          else
          {
             $userdata=$this->authUser;
+            $authFollowing = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
          }
         if(!$userdata){
           if($routeName=='api')
@@ -115,7 +117,6 @@ class UserController extends FrontendController
         $routeName= ROUTE::currentRouteName();
         $suggestion=$this->getFollowSuggestions($userdata,3);
         $followings = $this->followerList->getAllFollowings($userdata);
-        $authFollowing = $this->followerList->getAllFollowings($userdata)->pluck('username');
         $data['followSuggestion']=$suggestion;
         $data['followings'] = $followings;
         $data['authFollowing'] = $authFollowing;
@@ -133,11 +134,13 @@ class UserController extends FrontendController
     }
     public function followers($username=false)
     {
+        $followings = [];
         if($username){
             $userdata=$this->user->getUserByUsername($username);
         }
         else{
             $userdata=$this->authUser;
+            $followings = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
         }
         $data['userdata'] = $userdata;
         if(!$userdata )
@@ -150,7 +153,7 @@ class UserController extends FrontendController
         }
         $routeName= ROUTE::currentRouteName();
         $followers = $this->followerList->getAllFollowers($userdata);
-        $followings = $this->followerList->getAllFollowings($userdata)->pluck('username');
+        
         $data['followers'] = $followers;
         $data['followings'] = $followings;
         if($routeName=='api')
@@ -176,8 +179,10 @@ class UserController extends FrontendController
           }
           if(!$userdata)
            throw new Exception("No User Found!!", 1);
-          $limit=$this->perPage;
+          $limit=10;
+
           $offset=$request->get('page')*$limit;
+          // print_r($offset);exit;
           $allFollowers = $this->followerList->getAllFollowers($userdata,$limit,$offset);
           return array('status'=>true,'data'=>$allFollowers,'message'=>'');
       }
@@ -197,7 +202,7 @@ class UserController extends FrontendController
             }
           if(!$userdata)
            throw new Exception("No User Found!!", 1);
-          $limit=$this->perPage;
+          $limit=10;
           $offset=$request->get('page')*$limit;
           $allFollowings = $this->followerList->getAllFollowings($userdata,$limit,$offset);
           return array('status'=>true,'data'=>$allFollowings,'message'=>'');
@@ -218,7 +223,7 @@ class UserController extends FrontendController
          }  
         $code='follow_notification';
         $userdata=$this->user->getUserByUsername($username);
-        $data=['NAME'=>$this->authUser->name,'URL'=>url('/followers')];
+        $data=['NAME'=>$this->authUser->name,'URL'=>url('/followers/'.$this->authUser->username)];
         $userdata->notify(new Notifications($code,$data));
          return array('status'=>true,'message'=>$this->getFollowSuggestions($this->authUser,1,$offset));
     }
@@ -240,6 +245,7 @@ class UserController extends FrontendController
         if(\Auth::check())
         {
           $this->authorize('updateProfile', $this->authUser);
+          $allowedFileExtension=['jpg','png','jpeg','gif','svg'];
           if(request()->hasFile('image'))
           {
             $dir = '/uploads/user-images/';
@@ -249,11 +255,19 @@ class UserController extends FrontendController
             if ($this->authUser->image != '' && File::exists($dir . $this->authUser->image)){
               File::delete($dir . $this->authUser->image);
             }
-            $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move('uploads/user-images/', $imageName);
-            $form['image']=$imageName;
-             $this->user->update($this->authUser->id,$form);
-            return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
+             $extension = request()->image->getClientOriginalExtension();
+              $check=in_array($extension,$allowedFileExtension);
+              if($check)
+                {
+                  $imageName = time().'.'.request()->image->getClientOriginalExtension();
+                  request()->image->move('uploads/user-images/', $imageName);
+                  $form['image']=$imageName;
+                   $this->user->update($this->authUser->id,$form);
+                  return array('status'=>true,'message'=>'Profile Changed Successfully','data'=>array('imageName'=>$form['image']));
+                }else 
+                  {
+                    return  array('status'=>false,'message'=>'File must be jpg, png, jpeg, gif, svg ','data'=>array());
+                  }
           }
           else
           {

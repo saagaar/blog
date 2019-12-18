@@ -57,6 +57,20 @@
                         </p>
                     @endif
                 </div>
+                <div class="form-group">
+                  <label for="default">Default</label>
+                    <div class="custom-control custom-radio radio-inline">
+                        <input type="radio" class="custom-control-input flat-red" name="default" value="1">
+                        <label class="custom-control-label" for="defaultChecked">Yes</label>
+                    </div>
+                    <div class="custom-control custom-radio radio-inline">
+                        <input type="radio" class="custom-control-input flat-red" name="default" value="2" checked>
+                        <label class="custom-control-label" for="defaultChecked">No</label>
+                    </div>
+                         @if ($errors->has('default'))
+                         <div class="alert alert-danger">{{ $errors->first('default') }}</div>
+                         @endif
+                  </div>
               </div>
               <!-- /.box-body -->
 

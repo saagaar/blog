@@ -43,7 +43,7 @@ class FrontendController extends BaseController
     Protected $permission;
     Protected $contactEmail;
 
-    Protected $perPage=4;
+    Protected $perPage=10;
     Protected $apiPerPage=8;
     public function __construct()
     {
@@ -128,10 +128,13 @@ class FrontendController extends BaseController
             $user=$accUser;
             $user->followersCount=$followerList->getFollowersCount($accUser);
             $user->followingCount=$followerList->getFollowingsCount($accUser);
-            if(\Auth::check())
-            $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
             $user->unReadNotificationsCount=0;
-            $user->notifications=$account->getUsersNotification($accUser,$this->apiPerPage);
+            if(\Auth::check()){
+            $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
+            // $user->unReadNotificationsCount=0;
+            $user->notifications=$account->getUsersNotification($this->authUser,$this->apiPerPage);
+            }
+
             $user->blogCount=$accUser->blogs()->count();
             $user->root_url=url('/');
             $user->websiteLogo=$this->websiteLogo;

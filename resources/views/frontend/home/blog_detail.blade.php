@@ -4,8 +4,9 @@
       $author=   ($blogDetails->anynomous=='2') ? (isset($blogDetails->user->name)  ?  $blogDetails->user->name :'Admin'):' Anynomous ';
 @endphp
 	<div class="mid_part">
-        @section('meta_url',config('settings.url').'/blog/detail/'. $blogDetails->code)
+        @section('meta_url',config('settings.url').'/blog/detail/'. $blogDetails->code.'/'.str_slug($blogDetails->title))
         @section('meta_title',$blogDetails->title.' | By '.$author  )
+
         @section('meta_description',$blogDetails->short_description)
         @section('meta_image',asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image))
         <meta type="hidden" name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
@@ -53,7 +54,7 @@
                                 <p class="comment-count"><span class="align-middle"></span> <icon-comments-count></icon-comments-count></p>
                             </div>
                             <ul class="social-icons">
-                                @php($url=url('https://thebloggersclub.com/blog/detail/'.$blogDetails->code))
+                                @php($url=url('https://thebloggersclub.com/blog/detail/'.$blogDetails->code.'/'.str_slug($blogDetails->title)))
                     
                                 <fb-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></fb-share>
                                 <tw-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></tw-share>    
@@ -85,7 +86,7 @@
                                     </div>
                                     <div class="details">
                                         <p>Prev Post</p>
-                                        <a href="#">
+                                        <a href="{{ route('blog.detail' , [$prev->code,str_slug($prev->title)])}}">
                                             <h4>{{ $prev->title }}</h4>
                                         </a>
                                     </div>
@@ -97,17 +98,17 @@
                                     @if($next)
                                     <div class="details">
                                         <p>Next Post</p>
-                                        <a href="{{ route('blog.detail' , $next->code)}}">
+                                        <a href="{{ route('blog.detail' , [$next->code,str_slug($next->title)])}}">
                                             <h4>{{ $next->title }}</h4>
                                         </a>
                                     </div>
                                     <div class="arrow">
-                                        <a href="{{ route('blog.detail' , $next->code)}}">
+                                        <a href="{{ route('blog.detail' , [$next->code,str_slug($next->title)])}}">
                                             <span class="lnr text-white lnr-arrow-right"></span>
                                         </a>
                                     </div>
                                     <div class="thumb">
-                                        <a href="{{ route('blog.detail' , $next->code)}}">
+                                        <a href="{{ route('blog.detail' , [$next->code,str_slug($next->title)])}}">
                                             <i class="fas fa-arrow-right"></i>
                                         </a>
                                     </div>
@@ -200,7 +201,7 @@
 
                                 @endif
                                 <div class="media-body">
-                                    <a href="{{ route('blog.detail' , $eachRelatedBlog->code)}}">
+                                    <a href="{{ route('blog.detail' , [$eachRelatedBlog->code,str_slug($eachRelatedBlog->title)])}}">
                                         <h3>{{ str_limit($eachRelatedBlog->title, $limit = 25, $end = '...') }}</h3>
                                     </a>
                                     <p>January 12, 2019</p>

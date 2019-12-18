@@ -27,7 +27,7 @@ class CategoryRequest extends FormRequest
         $routeName= ROUTE::currentRouteName();
         if ($routeName == 'adminblogcategory.edit')
           {
-            $banner = 'image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+            $banner = 'image|mimes:jpeg,png,jpg,gif,svg|max:5200';
            
             $slug = 'required|min:2|max:255|unique:categories,slug,'. $this->id;
             if($request->parent_id==''){
@@ -44,11 +44,11 @@ class CategoryRequest extends FormRequest
             $slug = 'required|min:2|max:255|unique:categories,slug';
             if($request->parent_id==''){
                 $tags='';
-                $banner = 'image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+                $banner = 'image|mimes:jpeg,png,jpg,gif,svg|max:5200';
             }
             else{
                 $tags='required';
-                $banner = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+                $banner = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5200';
             }
           }
         

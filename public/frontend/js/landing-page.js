@@ -11035,7 +11035,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#display-message[data-v-40be661b]{\n    border: 1px solid;\n    min-width: 200px;\n    max-width: 500px;\n    height: auto;\n    position: relative;\n    z-index: 1000;\n    float: right;\n    left: 1px;\n    background:#3c2a2a;\n    opacity: 0.7;\n    border-top-left-radius: 18px;\n    border-bottom-left-radius: 20px;\n    color: white;\n    top:-26px;\n    font-size: 16px;\n    padding: 16px;\n    position: fixed;\n    top: 80px;\n    left: auto;\n    right: 0;\n    background: #170a0b;\n    border: solid 1px #black;\n    color: #fff;\n    padding: 10px 22px;\n}\n#message-status[data-v-40be661b]{\n   float: left;padding-left: 5px;padding-right: 10px\n}\n#message-data[data-v-40be661b]{\n   float: left\n}\n   ", ""]);
+exports.push([module.i, "\n#display-message[data-v-40be661b]{\n    border: 1px solid;\n    min-width: 200px;\n    max-width: 500px;\n    height: auto;\n    position: relative;\n    z-index: 1000;\n    float: right;\n    left: 1px;\n    background:#3c2a2a;\n    opacity: 0.7;\n    border-top-left-radius: 18px;\n    border-bottom-left-radius: 20px;\n    color: white;\n    top:-26px;\n    font-size: 16px;\n    padding: 16px;\n    position: fixed;\n    top: 80px;\n    left: auto;\n    right: 0;\n    background: #170a0b;\n    border: solid 1px #black;\n    color: #fff;\n    padding: 10px 22px;\n}\n#message-status[data-v-40be661b]{\n   float: left;padding-left: 5px;padding-right: 10px\n}\n.msg-icon[data-v-40be661b]{\n  float: left;\n}\n.msg-icon svg[data-v-40be661b]{\n  margin-right: 8px;\n}\n#message-data[data-v-40be661b]{\n   float: left;\n   text-align: left;\n   line-height: 20px\n}\n   ", ""]);
 
 // exports
 
@@ -43013,8 +43013,10 @@ var render = function() {
         _vm.status == "success"
           ? _c("div", {}, [
               _c("div", { attrs: { id: "message-data" } }, [
-                _c("i", { staticClass: "fa fa-check-circle text-success" }),
-                _vm._v(" " + _vm._s(_vm.message) + ".")
+                _vm._m(0),
+                _c("div", { staticClass: "msg-icon" }, [
+                  _c("span", { domProps: { innerHTML: _vm._s(_vm.message) } })
+                ])
               ])
             ])
           : _vm._e(),
@@ -43032,7 +43034,16 @@ var render = function() {
       ])
     : _vm._e()
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "msg-icon" }, [
+      _c("i", { staticClass: "fa fa-check-circle text-success" })
+    ])
+  }
+]
 render._withStripped = true
 
 

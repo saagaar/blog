@@ -19466,7 +19466,7 @@ ul.album-photos li img{
 }
 .header-top .right-button ul.dropdown-menu.notifications_list li a,
 .notifications_list li a
-{border-bottom: 1px solid #ddd; display: block; width: 100%; color: #000000;}
+{border-bottom: 1px solid #ddd; width: 100%; color: #000000;}
 .header-top .right-button ul.dropdown-menu.notifications_list li:last-child a
 {border-bottom: none;}
 .notifications_list a img, .notifications_list a p,

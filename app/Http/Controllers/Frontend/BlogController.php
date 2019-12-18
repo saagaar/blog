@@ -121,6 +121,7 @@ class BlogController extends FrontendController
         $user=$this->user_state_info();
         $blogData   = $this->blog->getBlogByCode($postId);
         $data['blog'] = $blogData;
+         $allowedFileExtension=['jpg','png','jpeg','gif','svg'];
         if($routeName=='api')
         {
             return ($data);
@@ -145,21 +146,27 @@ class BlogController extends FrontendController
                         if(request()->image)
                         {
                             $extension = request()->image->getClientOriginalExtension();
-                            $imageName = time().'.'.$extension;              
-                             $dir=public_path().'/uploads/blog/'.$postId.'/';
-                            if ($blogData->image != '' && File::exists($dir,$blogData->image))
+                            $imageName = time().'.'.$extension; 
+                            $check=in_array($extension,$allowedFileExtension);
+                            if($check)
                             {
-                                 File::deleteDirectory($dir);
+                                $dir=public_path().'/uploads/blog/'.$postId.'/';
+                                if ($blogData->image != '' && File::exists($dir,$blogData->image))
+                                {
+                                     File::deleteDirectory($dir);
+                                }
+                                File::makeDirectory($dir, 0777, true, true);
+                                $tmpImg =request()->image->move($dir,$imageName);
+                                $img = Image::make($tmpImg);         
+                                $img->resize(180, 180, function ($constraint) 
+                                {
+                                 $constraint->aspectRatio();
+                                }
+                                )->save($dir.'/'.time().'-thumbnail.'.$extension);
+                                $form['image'] = $imageName;
+                            }else{
+                                return response()->json(['status'=>false,'data'=>'','message'=>'The image file type must be:jpeg,png,jpg,gif,svg'], 401);
                             }
-                           File::makeDirectory($dir, 0777, true, true);
-                           $tmpImg =request()->image->move($dir,$imageName);
-                           $img = Image::make($tmpImg);         
-                           $img->resize(180, 180, function ($constraint) 
-                           {
-                             $constraint->aspectRatio();
-                            }
-                            )->save($dir.'/'.time().'-thumbnail.'.$extension);
-                            $form['image'] = $imageName;
                         }
                         $form['short_description']=$request->short_description;
                         $form['save_method']=$request->save_method?$request->save_method:'1';

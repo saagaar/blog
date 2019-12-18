@@ -4,7 +4,7 @@
 <div class="" v-if="status=='success'" >
 
 
-  <div id="message-data" ><i class="fa fa-check-circle text-success"></i> {{ message}}.</div>
+  <div id="message-data"> <div class="msg-icon"><i class="fa fa-check-circle text-success" ></i></div><div class="msg-icon"> <span v-html="message"></span></div></div>
 </div>
 
 <div class="" v-if="status=='error'">
@@ -79,7 +79,16 @@
 #message-status{
    float: left;padding-left: 5px;padding-right: 10px
 }
+.msg-icon{
+  float: left;
+
+}
+.msg-icon svg{
+  margin-right: 8px;
+}
 #message-data{
-   float: left
+   float: left;
+   text-align: left;
+   line-height: 20px
 }
    </style>

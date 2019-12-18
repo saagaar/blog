@@ -17,8 +17,7 @@
     <meta name="csrf-token" content="{{ csrf_token()}}">
 
 
-      <link rel="shortcut icon" href="/favicon.ico">
-      <link rel="icon" sizes="16x16 32x32 64x64" href="/favicon.ico">
+      <link rel="shortcut icon"  href="{{ url('frontend/images/fav-ico//favicon.ico')}}">
       <link rel="icon" type="image/png" sizes="192x192" href="{{url('frontend/images/fav-ico/android-icon-192x192.png')}}">
        <link rel="icon" type="image/png" sizes="196x196" href="{{url('frontend/images/fav-ico/android-icon-36x36.png')}}">
       <link rel="icon" type="image/png" sizes="160x160" href="{{url('frontend/images/fav-ico/favicon-16x16.png')}}">

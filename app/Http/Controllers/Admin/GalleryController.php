@@ -63,7 +63,7 @@ class GalleryController extends AdminController
                         else 
                         {
                         return redirect()->route('gallery.list')
-                        ->with(array('error'=>'Sorry Only Upload png , jpg , doc','breadcrumb'=>$breadcrumb));
+                        ->with(array('error'=>'Sorry Only Upload png , jpg , gif','breadcrumb'=>$breadcrumb));
                     }
 
            		}
@@ -106,7 +106,7 @@ class GalleryController extends AdminController
 
                     else{
                         return redirect()->route('gallery.list')
-                            ->with(array('error'=>'Sorry Only Upload png , jpg , doc','breadcrumb'=>$breadcrumb));
+                            ->with(array('error'=>'Sorry Only Upload png , jpg , gif','breadcrumb'=>$breadcrumb));
                         }
                 }
                 else {

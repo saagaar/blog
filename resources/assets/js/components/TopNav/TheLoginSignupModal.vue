@@ -66,9 +66,6 @@
             </a>
 
           <!--   <a href="/social-login/linkedin" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
-=======
-           <!--  <a href="/social-login/linkedin" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
->>>>>>> avi
               <i class="fab fa-linkedin"></i>
             </a> -->
           </div>
@@ -76,7 +73,7 @@
         <div class="signup-section text-center">Already have an account? <LoginButton></LoginButton>.</div>
       </div>
       <div class="modal-footer text-center">
-        <div class="popup_btm"> Read our <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy</a> to understand how TheBloggersClub works.</a></div>
+        <div class="popup_btm"> Read our <a href="/page/terms-service"> Terms of Service</a> & <a href="/page/privacy-policy"> Privacy Policy</a> to understand how TheBloggersClub works.</a></div>
       </div>
   </div>
 </div>
@@ -141,7 +138,7 @@
         <div class="signup-section text-center">Forgot Password? <a href="/password/reset" class="submit text-info"> Forgot Password</a>.</div>
       </div>
       <div class="modal-footer text-center">
-        <div class="popup_btm"> Read our <a href="#"> Terms of Service</a> & <a href="#"> Privacy Policy</a> to understand how TheBloggersClub works.</a></div>
+        <div class="popup_btm"> Read our <a href="/page/terms-service"> Terms of Service</a> & <a href="/page/privacy-policy"> Privacy Policy</a> to understand how TheBloggersClub works.</a></div>
       </div>
   </div>
 </div>
@@ -262,6 +259,7 @@ import Loader from './../../components/Loader';
                }
                else{
                 curObject.$store.commit('TOGGLE_LOADING');
+                this.closeAllPopups();
                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
                }
               }).catch(e => {

@@ -22,6 +22,9 @@ class Permissions extends Model implements PermissionContract,Auditable
     use RefreshesPermissionCache;
     use Auditables;
     protected $guarded = ['id'];
+    protected $fillable = [
+        'name','guard_name','default'
+    ];
     protected $guard_name = 'web';
     public function __construct(array $attributes = [])
     {

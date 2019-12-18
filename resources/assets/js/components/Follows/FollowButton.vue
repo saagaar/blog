@@ -34,6 +34,9 @@ let action='';
             loggedInUser:function(){
               return this.$store.getters.user.loggedInUser
             },
+            me:function(){
+              return this.$store.getters.me
+            },
             
           },
         watch:{
@@ -94,11 +97,15 @@ let action='';
 		               {
                           this.isLoading=false;
                           if(!this.isFollowing){
-                            this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
+                            if(this.me.username===this.loggedInUser.username){
+                              this.$store.commit('INCREMENT_FOLLOWING_COUNT', 1);
+                            }
                             this.isFollowing=true;
 
                           }else{
-                             this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
+                            if(this.me.username===this.loggedInUser.username){
+                              this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
+                            }
                               this.isFollowing=false;
                           }
 		               	        this.$emit('clicked',this.username,response.data.message);

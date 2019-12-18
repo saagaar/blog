@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailer;
 
-class EmailClass extends Mailer
+class EmailClass extends ShouldQueue
 {
 
     protected $email;

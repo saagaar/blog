@@ -26,7 +26,29 @@ class CmsController extends FrontendController
     public function cmsPage($slug)
     {
     	$cms_data = $this->cms->getCmsBySlug($slug);
-    	$navCategory=$this->category->getCategoryByShowInHome();
-    	return view('frontend.home.cms')->with(array('cms'=>$cms_data,'navCategory'=>$navCategory));
+        $user ='';
+        $data['path']='/page/';
+        // echo "<pre>";
+        //  print_r($cms_data);exit;
+        if($cms_data){
+            if(\Auth::check())
+            {
+               $routeName= ROUTE::currentRouteName();
+              if($routeName=='api')
+              {
+                return ($data);
+              }
+              else
+              {
+                  $data['path']='/page';
+                  $initialState=json_encode($data);
+                  $user=$this->user_state_info();
+              }
+            }
+        	$navCategory=$this->category->getCategoryByShowInHome();
+        	return view('frontend.home.cms',['initialState'=>$data,'user'=>$user])->with(array('cms'=>$cms_data,'navCategory'=>$navCategory));
+        }else {
+            abort(404);
+        }
     }
 }

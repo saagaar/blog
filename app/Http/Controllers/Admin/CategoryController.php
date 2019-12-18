@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\CategoryRequest;
 use App;
-
+use Image;
 class CategoryController extends AdminController
 {
     protected $categories;
@@ -48,13 +48,47 @@ class CategoryController extends AdminController
             $requestobj=app(CategoryRequest::class);
             $validatedData = $requestobj->validated(); 
 
-            if($request->hasFile('banner_image'))
-            {              
-            $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-            request()->banner_image->move(public_path('uploads/categories-images/'), $imageName);
-            $validatedData['banner_image'] = $imageName;
-            
-            }
+            if ($request->hasFile('banner_image')) 
+              {     
+
+                $uniqId= uniqid();                        
+                $dir=public_path(). '/uploads/categories-images';
+                $extension = request()->banner_image->getClientOriginalExtension();
+                $imageName = $uniqId.'.'.$extension;
+                $originalImg =request()->banner_image->move($dir,$imageName);
+                $img = Image::make($originalImg);
+                list($width, $height) = getimagesize($originalImg);  
+
+                if ($width > 350 && $height < 350)
+                {                          
+                    $img->resize(null,350, function ($constraint) 
+                    {
+                    $constraint->aspectRatio();
+                     })->save($dir.'/'.$uniqId.'.'.$extension);            
+                }
+                 else if($width < 350 && $height > 350)
+                {
+                     $img->resize(null,350, function ($constraint) 
+                    {
+                    $constraint->aspectRatio();
+                     })->save($dir.'/'.$uniqId.'.'.$extension);   
+                }
+                else if($width > 350 && $height > 350)
+                {
+                     $img->resize(null,350, function ($constraint) 
+                    {
+                    $constraint->aspectRatio();
+                     })->save($dir.'/'.$uniqId.'.'.$extension);   
+                }
+                else if($width < 200 && $height < 200)
+                {
+                     return redirect()->route('adminblogcategory.list')
+                            ->with('error','image must be atleast 200x200');
+                } 
+                //**************resizing the image of thumbnail******************//
+                
+                  $validatedData['banner_image'] = $imageName;
+              }
             else{
                 $validatedData['banner_image'] = '';
             }
@@ -117,15 +151,54 @@ class CategoryController extends AdminController
                 $validatedData = $requestobj->validated();
 
 
-                if ($request->hasFile('banner_image')) {
-                    $dir = 'uploads/categories-images/';
-                    if ($category->banner_image != '' && File::exists($dir . $category->banner_image))
-                    File::delete($dir . $category->banner_image);
+               if ($request->hasFile('banner_image')) 
+              {     
 
-                    $imageName = time().'.'.request()->banner_image->getClientOriginalExtension();
-                    request()->banner_image->move(public_path('uploads/categories-images/'), $imageName);
+                $uniqId= uniqid();                        
+                $dir=public_path(). '/uploads/categories-images';
+                 if ($category->banner_image != '' && File::exists($dir,$category->banner_image))
+                {
+                  // echo "string";exit;
+                    File::delete($dir.$category->banner_image);
+                    }
+                    // echo "string";exit;
+                    $extension = request()->banner_image->getClientOriginalExtension();
+                    $imageName = $uniqId.'.'.$extension;
+                    $originalImg =request()->banner_image->move($dir,$imageName);
+                    $img = Image::make($originalImg);
+                    list($width, $height) = getimagesize($originalImg);  
+                         if($width < 500 && $height < 350)
+                        {
+                             return redirect()->route('adminblogcategory.list')
+                                    ->with('error','image must be atleast 200x200');
+                        } 
+                    // if ($width > 350 && $height < 350)
+                    // {                          
+                        $img->resize(750,350, function ($constraint) 
+                        {
+                        $constraint->aspectRatio();
+                         })->save($dir.'/'.$uniqId.'.'.$extension);            
+                    // }
+                    //  else if($width < 350 && $height > 350)
+                    // {
+                    //      $img->resize(null,350, function ($constraint) 
+                    //     {
+                    //     $constraint->aspectRatio();
+                    //      })->save($dir.'/'.$uniqId.'.'.$extension);   
+                    // }
+                    // else if($width > 350 && $height > 350)
+                    // {
+                    //      $img->resize(null,350, function ($constraint) 
+                    //     {
+                    //     $constraint->aspectRatio();
+                    //      })->save($dir.'/'.$uniqId.'.'.$extension);   
+                    // }
+                   
+                    //**************resizing the image of thumbnail******************//
+                    
                     $validatedData['banner_image'] = $imageName;
-                }else
+                }
+                else
 
                  {
                     $validatedData['banner_image'] = $category->banner_image;

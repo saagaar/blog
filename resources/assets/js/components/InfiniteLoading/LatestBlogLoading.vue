@@ -16,14 +16,15 @@
             <a v-else-if="items.user==null" href="#">By Admin</a>
              <a v-else :href="'/profile/'+items.user.username">By {{ items.user.name }}</a>
             </div>
-                <a class="d-block" :href="'/blog/detail/'+items.code">
+                <a class="d-block" :href="url(items)">
                     <h4>{{items.title}}</h4>
                 </a>
                 <p>{{items.short_description}}</p>
                 <div class="meta-bottom d-flex">
                     <a href="#"><i class="ti-time"></i>&nbsp;{{ items.created_at | moment("from", "now")}}</a>
                     <a href="#" class="appreciate"><i>
-                        <img src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                      <LikeCheck v-if="user" :likes="items.likes['0']" :user="user"></LikeCheck>
+                      <img v-else src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                     </i>&nbsp; {{items.likes_count}} like</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
@@ -43,10 +44,15 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading';
 import Form from './../../services/Form.js';
-
+import LikeCheck from './../../components/Likes/LikeCheck';
 export default {
   components: {
     InfiniteLoading,
+    LikeCheck
+  },
+  props: {
+    user:{type:Number,default:''},
+
   },
   data(){
     return {
@@ -56,6 +62,9 @@ export default {
       form:new Form()
     };
   },
+   computed: {
+    
+  },
   watch:
   {
     users:function(newval){
@@ -64,6 +73,15 @@ export default {
     }
   },
   methods: {
+  url(items){
+      var blogslug= this.slug(items.title);
+      var url = '/blog/detail/'+items.code+'/'+blogslug;
+      return url;
+    },
+    slug: function(title) {
+      var slug = this.sanitizeTitle(title);
+      return slug;
+    },
     infiniteHandler($state) {
        
         this.form.get('/api/getlatestblog?page='+this.offset).then(response => 
@@ -83,6 +101,28 @@ export default {
                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
         },
+        sanitizeTitle: function(title) {
+          var slug = "";
+          // alert(sl);
+          // Change to lower case
+          var titleLower = title.toLowerCase();
+          // Letter "e"
+          slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+          // Letter "a"
+          slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+          // Letter "o"
+          slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+          // Letter "u"
+          slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+          // Letter "d"
+          slug = slug.replace(/đ/gi, 'd');
+          // Trim the last whitespace
+          slug = slug.replace(/\s*$/g, '');
+          // Change whitespace to "-"
+          slug = slug.replace(/\s+/g, '-');
+          
+          return slug;
+        }
     },
  
 };

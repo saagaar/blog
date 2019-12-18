@@ -48,11 +48,12 @@ export default {
         methods:{
         	submitForm:function(){
                 this.$v.form.$touch();
+                // let curObject=this;
             if(!this.$v.form.$invalid)
             {
 
               (this.$store.dispatch('createComments',{'code':this.blogCode,'form':this.form}));
-
+              // curObject.$store.commit('TOGGLE_LOADING');
               // this.form.post('/create/comment/'+this.blogCode).then(response => {
               //  if(response.data.status){
               //  	// console.log(response);

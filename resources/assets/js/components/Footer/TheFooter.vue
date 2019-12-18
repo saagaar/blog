@@ -8,8 +8,8 @@
                 <div class="single-footer-widget">
                     <ul>
                         <li><a href="/page/about"><i class="fa fa-angle-right">&nbsp;</i> About Us</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right">&nbsp;</i> Privacy &amp; Policy</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right">&nbsp;</i> Terms &amp; Conditions</a></li>
+                        <li><a href="/page/privacy-policy"><i class="fa fa-angle-right">&nbsp;</i> Privacy &amp; Policy</a></li>
+                        <li><a href="/page/terms-service"><i class="fa fa-angle-right">&nbsp;</i> Terms &amp; Conditions</a></li>
                         <li><a href="#"><i class="fa fa-angle-right">&nbsp;</i> Contact Us</a></li>
                     </ul>
                 </div>

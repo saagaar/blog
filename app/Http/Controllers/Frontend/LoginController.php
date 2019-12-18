@@ -28,23 +28,31 @@ class LoginController extends FrontendController
      */
    
     public function socialLogin($provider)
-    {
+    {   
         return Socialite::driver($provider)->redirect();
     }
     public function dashboard($provider){
-    $getInfo = Socialite::driver($provider)->user(); 
-    $userData = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
-        if (!$userData) {
-            $user = $this->registerUser($getInfo,$provider); 
-            if($user['status']==true){
-                auth()->login($user['userData']); 
+ 
+        try
+        {
+            $getInfo = Socialite::driver($provider)->user(); 
+            $userData = $this->account->getAll()->where('provider_id', $getInfo->id)->first();
+            if (!$userData) {
+                $user = $this->registerUser($getInfo,$provider); 
+                if($user['status']==true){
+                    auth()->login($user['userData']); 
+                }else{
+                    return redirect()->route('home')
+                            ->with('error',$user['message']);
+                }
             }else{
-                return response()->json(['status'=>false,'data'=>'','message'=>$user['message']], 401);
+                auth()->login($userData); 
             }
-        }else{
-            auth()->login($userData); 
-        }
-        return redirect()->to('/home');
+            return redirect()->to('/home');
+        }catch (\GuzzleHttp\Exception\ClientException $e) {
+        return redirect()->route('home')
+                            ->with('error',"Authentication Error");
+    }
     }
     
     public function registerUser($getInfo,$provider)
@@ -75,7 +83,7 @@ class LoginController extends FrontendController
          ]);
           $roles=$this->role->getDefaultRoleId();
           $userData->assignRole($roles);  
-          return array('status'=>true,'userData'=>$userData,'message'=>'Resgistered Successfully! An Email has been sent to your Email Account'); 
+          return array('status'=>true,'userData'=>$userData,'message'=>'Registration Successfully!! We have sent activation link to your email.'); 
         }else{
             return array('status'=>false,'userData'=>'','message'=>'Email Already Exist!'); 
         }
@@ -85,11 +93,11 @@ class LoginController extends FrontendController
         if(auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'),'status'=>1]))
         { 
             $user = Auth()->user()->toArray();
-            return response()->json(['status'=>true,'data'=>$user,'message'=>'Logged in Successfully']); 
+             return array('status'=>true,'data'=>$user,'message'=>'Logged in Successfully'); 
         } 
         else
         {
-            return response()->json(['status'=>false,'message'=>'Your Email or Password is incorrect']); 
+             return array('status'=>false,'message'=>'Your Email or Password is incorrect'); 
         } 
     }
     public function register(Request $request) 
@@ -101,7 +109,7 @@ class LoginController extends FrontendController
             'repassword' => 'required|min:6|same:password', 
         ]);
         if ($validator->fails()) { 
-            return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+            return array('status'=>false,'data'=>'','message'=>$validator->errors(), 401);            
         }
         $input = $request->all(); 
         $input['password'] = bcrypt($input['password']); 
@@ -131,7 +139,7 @@ class LoginController extends FrontendController
         $user->assignRole($roles);  
         $user->notify(new Notifications($code,$data));
          
-    return response()->json(['status'=>true,'data'=>$user,'message'=>'Registration completed Successfully']); 
+     return array('status'=>true,'data'=>$user,'message'=>'Registration Successfully!! We have sent activation link to your email.'); 
     }
     public function userActivation($username,$code){
         $user = $this->account->getUserByUsername($username);
@@ -154,7 +162,7 @@ class LoginController extends FrontendController
                 }
             }else{
                  return redirect()->route('home')
-                        ->with('error','This account has been already activated!');
+                        ->with('error','This account has been activated!');
             }
         }
          
