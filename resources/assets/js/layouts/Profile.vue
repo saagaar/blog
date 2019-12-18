@@ -18,7 +18,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info profile_pic_upload">
-                  <form>
+                  <!-- <form> -->
                   <figure><img :src="getProfileUrl()" alt="Profile Image" class="img-responsive profile-photo" id="profileimage" /><Loader></Loader>
                     <div class="profile_img_change" v-if="$gate.allow('updateProfile', 'profile', loggedIn)"> <span class="file-input btn btn-success btn-file"> <i class="fa fa-camera"></i>
                       <input  type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
@@ -26,7 +26,7 @@
                       </span> 
                     </div>
                   </figure>
-                  </form>
+                  <!-- </form> -->
                   <h3>{{me.name}}</h3>
                 </div>
             

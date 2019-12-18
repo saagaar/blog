@@ -355,7 +355,20 @@ class HomeController extends FrontendController
              return redirect()->route('home'); 
         }
     }
-
+    public function getBlogOfFollowing(Request $request){
+      try
+      {
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $latest = $this->blog->getBlogOfFollowingUser($this->authUser,$limit,$offset);
+          
+          return array('status'=>true,'data'=>$latest,'message'=>'');
+      }
+      catch(Exception $e)
+      {
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
     public function getFollowSuggestions($limit=1,$offset=0)
     {
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);

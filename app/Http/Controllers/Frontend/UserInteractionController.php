@@ -35,12 +35,12 @@ class UserInteractionController extends FrontendController
          if(empty($isLiked))
          {
             $this->userInteraction->likeBlog($this->authUser,$code);
-            // if($blog->user_id){
-            //     $code='like_notification';
-            //     $userdata=$this->user->getUserByUsername($blog->user->username);
-            //     $data=['NAME'=>$this->authUser->name,'URL'=>route('blog.detail' , [$blog->code,str_slug($blog->title)])];
-            //     $userdata->notify(new Notifications($code,$data));
-            // }
+            if($blog->user_id){
+                $code='like_notification';
+                $userdata=$this->user->getUserByUsername($blog->user->username);
+                $data=['NAME'=>$this->authUser->name,'URL'=>route('blog.detail' , [$blog->code,str_slug($blog->title)])];
+                $userdata->notify(new Notifications($code,$data));
+            }
          }else{
          	$this->userInteraction->unlikeBlog($this->authUser,$code);
          }
@@ -54,6 +54,7 @@ class UserInteractionController extends FrontendController
     	return $this->userInteraction->getLikeByBlog($code);
     }
     public function createComment(Request $request,$code,BlogInterface $blog){
+        $this->user = app()->make('App\Repository\AccountInterface');
         if($code){
             $request->validate([
             'comment' => 'required',
@@ -65,6 +66,12 @@ class UserInteractionController extends FrontendController
             $input['blog_id'] = $blogData->id;
             $input['created_at'] = $date->format('Y-m-d H:i:s');
             $this->userInteraction->createCommment($input);
+            if($blogData->user_id){
+                $code='comment_notification';
+                $userdata=$this->user->getUserByUsername($blogData->user->username);
+                $data=['NAME'=>$this->authUser->name,'PROFILEURL'=>'/profile/'.$this->authUser->username,'URL'=>route('blog.detail' , [$blogData->code,str_slug($blogData->title)]),'TITLE'=>$blogData->title];
+                $userdata->notify(new Notifications($code,$data));
+            }
              return array('status'=>true,'message'=>'success','data'=>array('comment'=>$input['comment'],'created_at'=>$input['created_at']));
         }
     }

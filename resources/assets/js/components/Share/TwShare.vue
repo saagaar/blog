@@ -1,6 +1,6 @@
 <template>
 	<li>
-		<a @click="tw_share" :href="'https://twitter.com/intent/tweet?url='+url+'&text='+blog.title"><i class="fab fa-twitter"></i></a>
+		<a target="_blank" @click="tw_share" :href="'https://twitter.com/intent/tweet?url='+url+'&text='+blog.title"><i class="fab fa-twitter"></i></a>
    	</li>
 </template>
 

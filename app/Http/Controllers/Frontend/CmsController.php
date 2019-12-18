@@ -51,4 +51,29 @@ class CmsController extends FrontendController
             abort(404);
         }
     }
+    public function contactUs(Request $request)
+    {
+      
+         $data=array();
+        $navCategory=$this->category->getCategoryByShowInHome();
+        $user ='';
+        $data['path']='/contact-us';
+         if(\Auth::check())
+        {
+           $routeName= ROUTE::currentRouteName();
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/contact-us';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+          }
+        }
+
+        
+        return view('frontend.home.contact',['initialState'=>$data,'user'=>$user])->with(array('navCategory'=>$navCategory));
+    }
 }

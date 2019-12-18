@@ -24,6 +24,7 @@ Route::get('/blog/detail/{code}/{slug}', 'Frontend\HomeController@blogDetail')->
 
 Route::get('/page/{slug}', 'Frontend\CmsController@cmsPage')->name('cms.page');
 Route::post('/contact/form', 'Frontend\UserInteractionController@contactForm')->name('contact.form');
+Route::get('/contact-us', 'Frontend\CmsController@contactUs')->name('contact.us');
 
 Route::get('/blog/preview/{code}', 'Frontend\BlogController@preview')->name('preview');
 Route::get('/api/blog/preview/{code}', 'Frontend\BlogController@preview')->name('api');
@@ -52,6 +53,7 @@ Route::post('/user/change/password', 'Frontend\UserController@changePassword');
 
 
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
+Route::get('/getblogoffollowing','Frontend\HomeController@getBlogOfFollowing')->name('getblogoffollowing');
 
 Route::get('/blog/list','Frontend\UserController@myBlogs')->name('my.blog');
 

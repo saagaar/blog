@@ -4,7 +4,7 @@
     <h4 class="text-left"><i class="fa fa-map-marked">&nbsp;</i> Address</h4><a  v-if="!isClicked && $gate.allow('updateProfile', 'profile', loggedIn)" class="text-right" v-on:click.prevent="clicked"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>  
     </div>
 		<div v-if="isClicked">
-			<form method="post">
+			<!-- <form method="post"> -->
 				<input type="text" name="address" class="form-control" id="editor" blur="$v.form.address.$touch()" v-model="form.address"></input>
 			         	<div v-if="$v.form.address.$anyDirty">
                     <div class="error" v-if="!$v.form.address.required">This Field is required</div>
@@ -21,7 +21,7 @@
                             <br>
 				<button type="button" class="btn btn-primary ml-15" @click.prevent="updateAddress"><Loader></Loader>Update</button>
         <button type="button" class="btn btn-light ml-15" @click.prevent="cancel">Cancel</button>
-			</form>
+			<!-- </form> -->
 		</div>
 		<div v-else>
 		<p class="text-center"> {{me.address}}/{{me.country}}</p>

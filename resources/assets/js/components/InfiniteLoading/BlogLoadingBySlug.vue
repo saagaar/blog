@@ -11,17 +11,22 @@
                 </figure>
             </div>
             <div class="short_details col-md-8 col-sm-7 col-12">
+              <div class="meta-top d-flex">
+            <a v-if="items.anynomous==1" href="#">By Anynomyous</a>
+            <a v-else-if="items.user==null" href="#">By Admin</a>
+             <a v-else :href="'/profile/'+items.user.username">By {{ items.user.name }}</a>
+            </div>
                 <a class="d-block" :href="url(items)">
                     <h4>{{items.title}}</h4>
                 </a>
                 <p>{{items.short_description}}</p>
                 <div class="meta-bottom d-flex">
                     <a href="#"><i class="ti-time"></i>{{ items.created_at | moment("from", "now")}}</a>
-                    <a href="#" class="appreciate"><i>
+                    <a href="" class="appreciate"><i>
                         <img src="/frontend/images/elements/inactive-appreciate.png" class="img-fluid">
                     </i> {{items.likes_count}} like</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
-                    <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+                    <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                 </div>
             </div>
         </div>

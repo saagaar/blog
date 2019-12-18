@@ -4,7 +4,7 @@
     <h4 class="text-left"><i class="fa fa-info-circle">&nbsp;</i>&nbsp;Bio</h4><a  href='#' v-if="!isClicked && $gate.allow('updateProfile', 'profile', loggedIn)" class="text-right" v-on:click.prevent="clicked"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>  
     </div>
 		<div v-if="isClicked">
-			<form method="post">
+			<!-- <form method="post"> -->
 				<input type="text" name="bio" class="form-control" id="editor" blur="$v.form.bio.$touch()" v-model="form.bio"></input>
 				<div v-if="$v.form.bio.$anyDirty">
                               <div class="error" v-if="!$v.form.bio.required">This Field is required</div>
@@ -14,7 +14,7 @@
 				<br>
 				<button type="button" class="btn btn-primary ml-15" @click.prevent="updateBio"><Loader></Loader>Update</button>
 				<button type="button" class="btn btn-light ml-15" @click.prevent="cancel">Cancel</button>
-			</form>
+			<!-- </form> -->
 		</div>
 		<div v-else>
 		<p class="text-center"> {{me.bio}}</p>
