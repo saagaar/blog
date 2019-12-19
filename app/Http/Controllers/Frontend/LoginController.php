@@ -83,7 +83,7 @@ class LoginController extends FrontendController
          ]);
           $roles=$this->role->getDefaultRoleId();
           $userData->assignRole($roles);  
-          return array('status'=>true,'userData'=>$userData,'message'=>'Resgistered Successfully! An Email has been sent to your Email Account'); 
+          return array('status'=>true,'userData'=>$userData,'message'=>'Registration Successfully!! We have sent activation link to your email.'); 
         }else{
             return array('status'=>false,'userData'=>'','message'=>'Email Already Exist!'); 
         }
@@ -139,7 +139,7 @@ class LoginController extends FrontendController
         $user->assignRole($roles);  
         $user->notify(new Notifications($code,$data));
          
-     return array('status'=>true,'data'=>$user,'message'=>'Registration completed Successfully'); 
+     return array('status'=>true,'data'=>$user,'message'=>'Registration Successfully!! We have sent activation link to your email.'); 
     }
     public function userActivation($username,$code){
         $user = $this->account->getUserByUsername($username);
@@ -162,7 +162,7 @@ class LoginController extends FrontendController
                 }
             }else{
                  return redirect()->route('home')
-                        ->with('error','This account has been already activated!');
+                        ->with('error','This account has been activated!');
             }
         }
          

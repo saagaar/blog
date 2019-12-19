@@ -76,7 +76,7 @@ class FrontendController extends BaseController
         $this->duration=config('settings.duration');
 
 
-        // $this->save_visitor_info();
+        $this->save_visitor_info();
        
         date_default_timezone_set('Asia/Kathmandu');
         

@@ -25,7 +25,7 @@ Class Blog implements BlogInterface
     $blogByCategoryTags =$this->blog->whereHas('tags', function ($q) use ($tagsIds) {
     return $q->whereIn('tags_id', $tagsIds); 
     })
-    ->where(['save_method'=>2,'show_in_home'=>1])->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    ->where(['save_method'=>2,'show_in_home'=>1])->with('user')->withCount('likes','comments')->orderBy('created_at','DESC')->take($limit)->skip($offset)->get();
    
     return $blogByCategoryTags;
   }
@@ -46,10 +46,10 @@ Class Blog implements BlogInterface
   }
 
   public function getAllFeaturedBlog($limit=10,$offset=0){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2,'show_in_home'=>1])->with('tags')->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    return $this->blog->where(['featured'=> 1,'save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('tags')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
   public function getAllFeaturedForMember($limit=10,$offset=0){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2,'show_in_home'=>1])->with('tags')->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    return $this->blog->where(['featured'=> 1,'save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('tags')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
    /**
    * get blog for most view
@@ -61,7 +61,7 @@ Class Blog implements BlogInterface
    * get latest blog 
    */
   public function getLatestAllBlog($limit=10,$offset=0){
-    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->orderBy('created_at','ASC')->with('user','likes')->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('user','likes')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
 
   public function getPopularBlog($limit=10,$offset=0){
@@ -72,7 +72,7 @@ Class Blog implements BlogInterface
    */
   public function getBlogOfFollowingUser($user,$limit=10,$offset=0){
     $listofFollowings=$user->followings()->select('follow_id')->get()->pluck('follow_id')->toArray();
-    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->whereIn('user_id', $listofFollowings)->withCount('likes')->latest()->take($limit)->skip($offset)->get()->toArray();
+    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->whereIn('user_id', $listofFollowings)->with('user')->orderBy('created_at','DESC')->withCount('likes')->latest()->take($limit)->skip($offset)->get()->toArray();
   }
   /**
    * get retaled blog
@@ -82,7 +82,8 @@ Class Blog implements BlogInterface
     $related =$this->blog->whereHas('tags', function ($q) use ($blogData) {
     return $q->whereIn('name', $blogData->tags()->pluck('name')); 
     })
-    ->where('id', '!=', $blogData->id) // So you won't fetch same post
+    ->where('id', '!=', $blogData->id)
+    ->orderBy('created_at','DESC') // So you won't fetch same post
     ->get();
     return $related;
   }

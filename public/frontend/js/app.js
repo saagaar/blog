@@ -12759,7 +12759,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#display-message[data-v-40be661b]{\r\n    border: 1px solid;\r\n    min-width: 200px;\r\n    max-width: 500px;\r\n    height: auto;\r\n    position: relative;\r\n    z-index: 1000;\r\n    float: right;\r\n    left: 1px;\r\n    background:#3c2a2a;\r\n    opacity: 0.7;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 20px;\r\n    color: white;\r\n    top:-26px;\r\n    font-size: 16px;\r\n    padding: 16px;\r\n    position: fixed;\r\n    top: 80px;\r\n    left: auto;\r\n    right: 0;\r\n    background: #170a0b;\r\n    border: solid 1px #black;\r\n    color: #fff;\r\n    padding: 10px 22px;\n}\n#message-status[data-v-40be661b]{\r\n   float: left;padding-left: 5px;padding-right: 10px\n}\n#message-data[data-v-40be661b]{\r\n   float: left\n}\r\n   ", ""]);
+exports.push([module.i, "\n#display-message[data-v-40be661b]{\r\n    border: 1px solid;\r\n    min-width: 200px;\r\n    max-width: 500px;\r\n    height: auto;\r\n    position: relative;\r\n    z-index: 1000;\r\n    float: right;\r\n    left: 1px;\r\n    background:#3c2a2a;\r\n    opacity: 0.7;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 20px;\r\n    color: white;\r\n    top:-26px;\r\n    font-size: 16px;\r\n    padding: 16px;\r\n    position: fixed;\r\n    top: 80px;\r\n    left: auto;\r\n    right: 0;\r\n    background: #170a0b;\r\n    border: solid 1px #black;\r\n    color: #fff;\r\n    padding: 10px 22px;\n}\n#message-status[data-v-40be661b]{\r\n   float: left;padding-left: 5px;padding-right: 10px\n}\n.msg-icon[data-v-40be661b]{\r\n  float: left;\n}\n.msg-icon svg[data-v-40be661b]{\r\n  margin-right: 8px;\n}\n#message-data[data-v-40be661b]{\r\n   float: left;\r\n   text-align: left;\r\n   line-height: 20px\n}\r\n   ", ""]);
 
 // exports
 
@@ -46863,8 +46863,10 @@ var render = function() {
         _vm.status == "success"
           ? _c("div", {}, [
               _c("div", { attrs: { id: "message-data" } }, [
-                _c("i", { staticClass: "fa fa-check-circle text-success" }),
-                _vm._v(" " + _vm._s(_vm.message) + ".")
+                _vm._m(0),
+                _c("div", { staticClass: "msg-icon" }, [
+                  _c("span", { domProps: { innerHTML: _vm._s(_vm.message) } })
+                ])
               ])
             ])
           : _vm._e(),
@@ -46882,7 +46884,16 @@ var render = function() {
       ])
     : _vm._e()
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "msg-icon" }, [
+      _c("i", { staticClass: "fa fa-check-circle text-success" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -69316,8 +69327,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONFIG = {
-  ROOT_URL: 'http://localhost:8000/' // ROOT_URL: 'https://thebloggersclub.com/',
-
+  // ROOT_URL: 'http://localhost:8000/',
+  ROOT_URL: 'https://thebloggersclub.com/'
 };
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 

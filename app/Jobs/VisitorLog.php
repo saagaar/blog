@@ -21,7 +21,7 @@ class VisitorLog implements ShouldQueue
      *
      * @return void
      */
-    public function __construct( VisitorLogInterface $VisitorLogInterface,$ipAddress)
+    public function __construct($ipAddress)
     {
         $this->ipAddress=$ipAddress;
         $this->visitorInfo =  new visitorInfo();

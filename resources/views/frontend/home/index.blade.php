@@ -177,7 +177,7 @@
     <!--================Fullwidth block Area end =================-->
 
     <!--================ Latest Featured section start =================-->  
- @if(count($featuredForMember) > 4)
+ @if(count($featuredForMember) == 4)
     <div class="latest-news  area-padding-bottom area-padding-top">
         <div class="container">
             <div class="row">
@@ -303,7 +303,7 @@
 
     <!--================ Latest Featured section end =================--> 
 
- @if(count($popular)>4)
+ @if(count($popular) == 4)
     <!--================ First block section start =================-->      
     <section class="first_block area-padding-top area-padding-bottom">
         <div class="container">
@@ -428,7 +428,7 @@
 
     <!--================ First block section end =================-->       
 
-    @if(count($latest)>2)
+    @if(count($latest) >= 2)
     <!--================ three-block section start =================-->  
     <div class="three-block  area-padding">
         <div class="container">

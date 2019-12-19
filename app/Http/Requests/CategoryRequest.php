@@ -48,7 +48,7 @@ class CategoryRequest extends FormRequest
             }
             else{
                 $tags='required';
-                $banner = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000';
+                $banner = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5200';
             }
           }
         

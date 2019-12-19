@@ -203,7 +203,7 @@
                                     <a href="{{ route('blog.detail' , [$eachRelatedBlog->code,str_slug($eachRelatedBlog->title)])}}">
                                         <h3>{{ str_limit($eachRelatedBlog->title, $limit = 25, $end = '...') }}</h3>
                                     </a>
-                                    <p>January 12, 2019</p>
+                                    <p>{{ $eachRelatedBlog->created_at->diffForHumans() }}</p>
                                 </div>
                             </div>
                             @endforeach
