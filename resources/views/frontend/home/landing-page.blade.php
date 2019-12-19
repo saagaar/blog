@@ -34,7 +34,22 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
     <link href="{{asset('frontend/css/landing-page.css')}}" rel="stylesheet">
-    <link rel="icon" href="{{asset('landing-page/assets/images/favicon.png')}}">
+     <link rel="shortcut icon"  href="{{url('frontend/images/fav-ico/favicon.ico')}}">
+      <link rel="icon" type="image/png" sizes="192x192" href="{{url('frontend/images/fav-ico/android-icon-192x192.png')}}">
+       <link rel="icon" type="image/png" sizes="196x196" href="{{url('frontend/images/fav-ico/android-icon-36x36.png')}}">
+      <link rel="icon" type="image/png" sizes="160x160" href="{{url('frontend/images/fav-ico/favicon-16x16.png')}}">
+      <link rel="icon" type="image/png" sizes="96x96" href="{{url('frontend/images/fav-ico/android-icon-96x96.png')}}">
+      <link rel="icon" type="image/png" sizes="32x32" href="{{url('frontend/images/fav-ico/favicon-32x32.png')}}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{{url('frontend/images/fav-ico/favicon-16x16.png')}}">
+      <link rel="icon" href="{{url('frontend/images/fav-ico')}}/favicon.ico">
+      <link rel="apple-touch-icon" sizes="114x114" href="{{url('frontend/images/fav-ico/apple-icon-114x114.png')}}">
+      <link rel="apple-touch-icon" sizes="72x72" href="{{url('frontend/images/fav-ico/apple-icon-72x72.png')}}">
+      <link rel="apple-touch-icon" sizes="144x144" href="{{url('frontend/images/fav-ico')}}/apple-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="{{url('frontend/images/fav-ico')}}/apple-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="{{url('frontend/images/fav-ico')}}/apple-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="{{url('frontend/images/fav-ico')}}/apple-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="{{url('frontend/images/fav-ico')}}/apple-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="{{url('frontend/images/fav-ico')}}/apple-icon-180x180.png">
 </head>
 <body>
 <div id="landing-page">

@@ -33,7 +33,7 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                     <a href="/blog" class="logo">
-                        <img src="{{asset('uploads/sitesettings-images/'. config('settings.image') )}}"alt='logo' >
+                        <img src="{{asset('uploads/sitesettings-images/'. config('settings.image') )}}" alt='logo' >
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
