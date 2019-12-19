@@ -57,6 +57,7 @@ Vue.use(require('vue-moment'));
 // Vue.component('TheTopNav', require('./components/TopNav/TheTopNav.vue'));
 // import TheMainNav from './components/MainNav/TheMainNav';
 // Vue.component('TheMainNav', require('./components/MainNav/TheMainNav.vue'));
+import Contact from './components/LandingPage/Contact';
 import Favorite from './components/Favorites/Favorite';
 import FbShare from './components/Share/FbShare';
 import TwShare from './components/Share/TwShare';
@@ -95,6 +96,7 @@ const app = new Vue({
     },
     components:{
             // 'the-top-nav':TheTopNav,
+            'contact':Contact,
             'fb-share':FbShare,
             'tw-share':TwShare,
             'the-footer':TheFooter,

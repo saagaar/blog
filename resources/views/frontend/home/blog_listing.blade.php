@@ -65,11 +65,16 @@
                             @endif
                         </div>
                         <div class="short_details col-lg-8 col-md-7 col-sm-12">
+                            @php
+                          echo   ($eachBlog->anynomous=='2') ? (isset($eachBlog->user->name)  ? '<a href="/profile/'.$eachBlog->user->username.'">By '. $eachBlog->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
+                            @endphp
                             <div class="meta-top d-flex">
                             	@foreach($eachBlog->tags as $eachTags)
                                 <a href="#">{{ $eachTags->name }}</a>
                                 @endforeach
+
                             </div>
+
                             <a class="d-block" href="{{ route('blog.detail' , [$eachBlog->code,str_slug($eachBlog->title)])}}">
                                 <h4> {{ $eachBlog->title }}</h4>
                             </a>

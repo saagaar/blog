@@ -70,9 +70,9 @@ Class Blog implements BlogInterface
   /**
    * get blog bye following
    */
-  public function getBlogOfFollowingUser($user){
+  public function getBlogOfFollowingUser($user,$limit=10,$offset=0){
     $listofFollowings=$user->followings()->select('follow_id')->get()->pluck('follow_id')->toArray();
-    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->whereIn('user_id', $listofFollowings)->latest()->get()->toArray();
+    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->whereIn('user_id', $listofFollowings)->withCount('likes')->latest()->take($limit)->skip($offset)->get()->toArray();
   }
   /**
    * get retaled blog

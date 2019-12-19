@@ -86,7 +86,7 @@ Class Account implements AccountInterface
 
     public function getUsersNotification($user,$limit=10,$offset=0){
      
-        return $user->unreadNotifications()->union($user->readNotifications())->limit($limit)->offset($offset)->get();
+        return $user->unreadNotifications()->union($user->readNotifications())->orderBy('id','DESC')->limit($limit)->offset($offset)->get();
     }
 
 

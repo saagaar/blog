@@ -6,7 +6,6 @@
 	<div class="mid_part">
         @section('meta_url',config('settings.url').'/blog/detail/'. $blogDetails->code.'/'.str_slug($blogDetails->title))
         @section('meta_title',$blogDetails->title.' | By '.$author  )
-
         @section('meta_description',$blogDetails->short_description)
         @section('meta_image',asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image))
         <meta type="hidden" name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
@@ -204,7 +203,7 @@
                                     <a href="{{ route('blog.detail' , [$eachRelatedBlog->code,str_slug($eachRelatedBlog->title)])}}">
                                         <h3>{{ str_limit($eachRelatedBlog->title, $limit = 25, $end = '...') }}</h3>
                                     </a>
-                                    <p>January 12, 2019</p>
+                           
                                 </div>
                             </div>
                             @endforeach

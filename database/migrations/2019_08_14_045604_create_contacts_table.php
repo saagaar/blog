@@ -18,10 +18,10 @@ class CreateContactsTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email');
-            $table->string('subject');
+            $table->string('subject')->nullable();
             $table->text('message');
-            $table->string('comment');
-            $table->enum('status', ['pending', 'followup','contacted','closed']);
+            $table->string('comment')->nullable();
+            $table->enum('status', ['pending', 'followup','contacted','closed'])->default('pending');
             $table->date('follow_date')->nullable();
             $table->timestamps();
         });

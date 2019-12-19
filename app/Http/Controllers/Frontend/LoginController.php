@@ -83,7 +83,7 @@ class LoginController extends FrontendController
          ]);
           $roles=$this->role->getDefaultRoleId();
           $userData->assignRole($roles);  
-          return array('status'=>true,'userData'=>$userData,'message'=>'Registration Successfully!! We have sent activation link to your email.'); 
+          return array('status'=>true,'userData'=>$userData,'message'=>'Registration Successfully!! <br/>  We have send an activation link to your email.'); 
         }else{
             return array('status'=>false,'userData'=>'','message'=>'Email Already Exist!'); 
         }
@@ -139,7 +139,7 @@ class LoginController extends FrontendController
         $user->assignRole($roles);  
         $user->notify(new Notifications($code,$data));
          
-     return array('status'=>true,'data'=>$user,'message'=>'Registration Successfully!! We have sent activation link to your email.'); 
+     return array('status'=>true,'data'=>$user,'message'=>'Registration Successfully!! <br/> We have send an activation link to your email.'); 
     }
     public function userActivation($username,$code){
         $user = $this->account->getUserByUsername($username);
@@ -170,7 +170,7 @@ class LoginController extends FrontendController
     public function isEmailAlreadyRegistered($email){
         $user = $this->account->getAll()->where('email',$email)->first();
         if($user) {
-            if($this->authUser->email==$email){
+            if($this->authUser && $this->authUser->email==$email){
                 return response()->json(true); 
             }else
                  return response()->json(false); 

@@ -6276,10 +6276,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    colclass: {
+      type: String,
+      "default": 'col-12'
+    },
+    colsno: {
+      type: Number,
+      "default": 1
+    },
+    rowsno: {
+      type: Number,
+      "default": 1
+    }
+  },
   data: function data() {
     return {
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -42615,246 +42649,271 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _c("form", { staticClass: "contact-form-footer" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.form.name,
-            expression: "form.name"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", name: "name", placeholder: "Name" },
-        domProps: { value: _vm.form.name },
-        on: {
-          blur: function($event) {
-            return _vm.$v.form.name.$touch()
-          },
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("div", { class: _vm.colclass }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.name,
+                expression: "form.name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "name", placeholder: "Name" },
+            domProps: { value: _vm.form.name },
+            on: {
+              blur: function($event) {
+                return _vm.$v.form.name.$touch()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "name", $event.target.value)
+              }
             }
-            _vm.$set(_vm.form, "name", $event.target.value)
-          }
-        }
-      }),
+          }),
+          _vm._v(" "),
+          _vm.$v.form.name.$anyDirty
+            ? _c("div", [
+                !_vm.$v.form.name.required
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v("This Field is required")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.form.name.maxLength
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "name must be less " +
+                          _vm._s(_vm.$v.form.name.$params.maxLength.max) +
+                          " letters."
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.form.name.minLength
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "name must be at least " +
+                          _vm._s(_vm.$v.form.name.$params.minLength.min) +
+                          " letters."
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            : _vm._e()
+        ])
+      ]),
       _vm._v(" "),
-      _vm.$v.form.name.$anyDirty
-        ? _c("div", [
-            !_vm.$v.form.name.required
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v("This Field is required")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.$v.form.name.maxLength
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v(
-                    "name must be less " +
-                      _vm._s(_vm.$v.form.name.$params.maxLength.max) +
-                      " letters."
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.$v.form.name.minLength
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v(
-                    "name must be at least " +
-                      _vm._s(_vm.$v.form.name.$params.minLength.min) +
-                      " letters."
-                  )
-                ])
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.form.email,
-            expression: "form.email"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", name: "email", placeholder: "email" },
-        domProps: { value: _vm.form.email },
-        on: {
-          blur: function($event) {
-            return _vm.$v.form.email.$touch()
-          },
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("div", { class: _vm.colclass }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.email,
+                expression: "form.email"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "email", placeholder: "email" },
+            domProps: { value: _vm.form.email },
+            on: {
+              blur: function($event) {
+                return _vm.$v.form.email.$touch()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "email", $event.target.value)
+              }
             }
-            _vm.$set(_vm.form, "email", $event.target.value)
-          }
-        }
-      }),
+          }),
+          _vm._v(" "),
+          _vm.$v.form.email.$anyDirty
+            ? _c("div", [
+                !_vm.$v.form.email.required
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v("This Field is required")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.form.email.maxLength
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "email must be less " +
+                          _vm._s(_vm.$v.form.email.$params.maxLength.max) +
+                          " letters."
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.form.email.minLength
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "email must be at least " +
+                          _vm._s(_vm.$v.form.email.$params.minLength.min) +
+                          " letters."
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            : _vm._e()
+        ])
+      ]),
       _vm._v(" "),
-      _vm.$v.form.email.$anyDirty
-        ? _c("div", [
-            !_vm.$v.form.email.required
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v("This Field is required")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.$v.form.email.maxLength
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v(
-                    "email must be less " +
-                      _vm._s(_vm.$v.form.email.$params.maxLength.max) +
-                      " letters."
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.$v.form.email.minLength
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v(
-                    "email must be at least " +
-                      _vm._s(_vm.$v.form.email.$params.minLength.min) +
-                      " letters."
-                  )
-                ])
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.form.phone,
-            expression: "form.phone"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", name: "phone", placeholder: "phone" },
-        domProps: { value: _vm.form.phone },
-        on: {
-          blur: function($event) {
-            return _vm.$v.form.phone.$touch()
-          },
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("div", { class: _vm.colclass }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.phone,
+                expression: "form.phone"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "phone", placeholder: "phone" },
+            domProps: { value: _vm.form.phone },
+            on: {
+              blur: function($event) {
+                return _vm.$v.form.phone.$touch()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "phone", $event.target.value)
+              }
             }
-            _vm.$set(_vm.form, "phone", $event.target.value)
-          }
-        }
-      }),
+          }),
+          _vm._v(" "),
+          _vm.$v.form.phone.$anyDirty
+            ? _c("div", [
+                !_vm.$v.form.phone.required
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v("This Field is required")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.form.phone.maxLength
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "phone must be less " +
+                          _vm._s(_vm.$v.form.phone.$params.maxLength.max) +
+                          " letters."
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.form.phone.minLength
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "phone must be at least " +
+                          _vm._s(_vm.$v.form.phone.$params.minLength.min) +
+                          " letters."
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.form.phone.numeric
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v("phone must be Numbers.")
+                    ])
+                  : _vm._e()
+              ])
+            : _vm._e()
+        ])
+      ]),
       _vm._v(" "),
-      _vm.$v.form.phone.$anyDirty
-        ? _c("div", [
-            !_vm.$v.form.phone.required
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v("This Field is required")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.$v.form.phone.maxLength
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v(
-                    "phone must be less " +
-                      _vm._s(_vm.$v.form.phone.$params.maxLength.max) +
-                      " letters."
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.$v.form.phone.minLength
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v(
-                    "phone must be at least " +
-                      _vm._s(_vm.$v.form.phone.$params.minLength.min) +
-                      " letters."
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.$v.form.phone.numeric
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v("phone must be Numbers.")
-                ])
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.form.message,
-            expression: "form.message"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { name: "message", placeholder: "message" },
-        domProps: { value: _vm.form.message },
-        on: {
-          blur: function($event) {
-            return _vm.$v.form.message.$touch()
-          },
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("div", { class: _vm.colclass }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.message,
+                expression: "form.message"
+              }
+            ],
+            staticClass: "form-control w-100",
+            attrs: {
+              cols: _vm.colsno,
+              rows: _vm.rowsno,
+              name: "message",
+              placeholder: "message"
+            },
+            domProps: { value: _vm.form.message },
+            on: {
+              blur: function($event) {
+                return _vm.$v.form.message.$touch()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "message", $event.target.value)
+              }
             }
-            _vm.$set(_vm.form, "message", $event.target.value)
-          }
-        }
-      }),
+          }),
+          _vm._v(" "),
+          _vm.$v.form.message.$anyDirty
+            ? _c("div", [
+                !_vm.$v.form.message.required
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v("This Field is required")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.form.message.maxLength
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "message must be less " +
+                          _vm._s(_vm.$v.form.message.$params.maxLength.max) +
+                          " letters."
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.$v.form.message.minLength
+                  ? _c("div", { staticClass: "error" }, [
+                      _vm._v(
+                        "message must be at least " +
+                          _vm._s(_vm.$v.form.message.$params.minLength.min) +
+                          " letters."
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            : _vm._e()
+        ])
+      ]),
       _vm._v(" "),
-      _vm.$v.form.message.$anyDirty
-        ? _c("div", [
-            !_vm.$v.form.message.required
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v("This Field is required")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.$v.form.message.maxLength
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v(
-                    "message must be less " +
-                      _vm._s(_vm.$v.form.message.$params.maxLength.max) +
-                      " letters."
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.$v.form.message.minLength
-              ? _c("div", { staticClass: "error" }, [
-                  _vm._v(
-                    "message must be at least " +
-                      _vm._s(_vm.$v.form.message.$params.minLength.min) +
-                      " letters."
-                  )
-                ])
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary  primary-shadow btn-sm",
-          attrs: { type: "submit" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.submitForm()
-            }
-          }
-        },
-        [_vm._v("Send")]
-      )
+      _c("div", { class: _vm.colclass }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary  primary-shadow btn-sm",
+              attrs: { type: "submit" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.submitForm()
+                }
+              }
+            },
+            [_vm._v("Send")]
+          )
+        ])
+      ])
     ])
   ])
 }
@@ -57564,8 +57623,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONFIG = {
-  // ROOT_URL: 'http://localhost:8000/',
-  ROOT_URL: 'https://thebloggersclub.com/'
+  ROOT_URL: 'http://localhost:8000/' // ROOT_URL: 'https://thebloggersclub.com/',
+
 };
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 
