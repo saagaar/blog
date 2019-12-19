@@ -199,8 +199,10 @@ class BlogController extends FrontendController
     }
 
     public function delete($blogCode){
-        $this->authorize('deleteBlog', $data['blog']);
+       
         $blogData = $this->blog->getBlogByCode($blogCode);
+        $data['blog'] = $blogData;
+         $this->authorize('deleteBlog', $data['blog']);
         if( $blogData)
         {
             $dir = public_path(). '/uploads/blog/'.$blogData->code.'/';

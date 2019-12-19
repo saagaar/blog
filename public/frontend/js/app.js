@@ -6424,19 +6424,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      initialState: {},
-      comments: []
+      initialState: {} // comments:[]
+
     };
   },
   computed: {
-    allComments: function allComments() {
+    comments: function comments() {
       return this.$store.getters.listComments;
     }
   },
-  watch: {
-    allComments: function allComments(newValue) {
-      this.comments = newValue;
-    }
+  watch: {// allComments: function (newValue) {
+    //   this.comments=newValue;          
+    // },
   },
   methods: {
     getProfileUrl: function getProfileUrl(url) {
