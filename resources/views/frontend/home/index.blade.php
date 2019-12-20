@@ -17,9 +17,12 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
                         <div class="thumb bg-color">
-                            <a >
+                            <a>
+                            @php
+                                $img=explode('.',$featuredBlog['0']->image);
+                            @endphp
                             @if($featuredBlog['0']->image)
-                                 <img class="img-fluid plain-bg" data-src="{{ '/image/'.$featuredBlog[0]->code.'/555/'.$featuredBlog[0]->image }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('/frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -177,7 +180,7 @@
     <!--================Fullwidth block Area end =================-->
 
     <!--================ Latest Featured section start =================-->  
- @if(count($featuredForMember) > 4)
+ @if(count($featuredForMember) == 4)
     <div class="latest-news  area-padding-bottom area-padding-top">
         <div class="container">
             <div class="row">
@@ -303,7 +306,7 @@
 
     <!--================ Latest Featured section end =================--> 
 
- @if(count($popular)>4)
+ @if(count($popular) == 4)
     <!--================ First block section start =================-->      
     <section class="first_block area-padding-top area-padding-bottom">
         <div class="container">
@@ -428,7 +431,7 @@
 
     <!--================ First block section end =================-->       
 
-    @if(count($latest)>2)
+    @if(count($latest) >= 2)
     <!--================ three-block section start =================-->  
     <div class="three-block  area-padding">
         <div class="container">

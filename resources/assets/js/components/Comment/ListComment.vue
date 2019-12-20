@@ -41,19 +41,19 @@ import mixin  from './../../mixins/LoadData.mixin.js';
         data:function(){
           return {
             initialState:{},
-            comments:[]
+            // comments:[]
           }
         },
         
         computed: {
-        	  allComments:function(){
+        	  comments:function(){
                 return this.$store.getters.listComments;
             }
         },
         watch: {
-          allComments: function (newValue) {
-            this.comments=newValue;          
-          },
+          // allComments: function (newValue) {
+          //   this.comments=newValue;          
+          // },
       },
         methods:{
         	getProfileUrl(url){

@@ -51,7 +51,7 @@ class SiteOptionController extends AdminController
                 $imageName = $uniqId.'.'.$extension;
                 $originalImg =request()->image->move($dir,$imageName);
                 $img = Image::make($originalImg);
-                echo "string";exit;
+                // echo "string";exit;
                 list($width, $height) = getimagesize($originalImg);  
 
                 if ($width > 200 && $height < 200)

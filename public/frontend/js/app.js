@@ -6440,19 +6440,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      initialState: {},
-      comments: []
+      initialState: {} // comments:[]
+
     };
   },
   computed: {
-    allComments: function allComments() {
+    comments: function comments() {
       return this.$store.getters.listComments;
     }
   },
-  watch: {
-    allComments: function allComments(newValue) {
-      this.comments = newValue;
-    }
+  watch: {// allComments: function (newValue) {
+    //   this.comments=newValue;          
+    // },
   },
   methods: {
     getProfileUrl: function getProfileUrl(url) {
@@ -69294,8 +69293,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONFIG = {
-  ROOT_URL: 'http://localhost:8000/' // ROOT_URL: 'https://thebloggersclub.com/',
-
+  // ROOT_URL: 'http://localhost:8000/',
+  ROOT_URL: 'https://thebloggersclub.com/'
 };
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 

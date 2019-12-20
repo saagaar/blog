@@ -11,9 +11,10 @@ class UserRoleSeeder extends Seeder
      */
     public function run()
     {
-          DB::table('roles')->insert([
+        DB::table('roles')->insert([
             'name' => 'writer',
             'guard_name' => 'web',
+            'default'      =>'1',
             'created_at' => date("Y-m-d H:i:s")
         ]);
     }

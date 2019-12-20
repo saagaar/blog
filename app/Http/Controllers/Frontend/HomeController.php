@@ -84,14 +84,15 @@ class HomeController extends FrontendController
       
          $data=array();
          $limit=$this->perPage;
-        $featuredBlog = $this->blog->getAllFeaturedBlog(4);
+         $homeLimit = 4;
+        $featuredBlog = $this->blog->getAllFeaturedBlog($homeLimit);
         $websiteLogo=$this->websiteLogo;
         // $data['featuredBlog']=$featuredBlog;
         // $mostViewed =$this->blog->getAllBlogByViews();
         // $data['mostViewed'] = $mostViewed;
-        $popular =$this->blog->getPopularBlog(4);
+        $popular =$this->blog->getPopularBlog($homeLimit);
         // $data['popular'] = $popular;
-        $featuredForMember = $this->blog->getAllFeaturedForMember(4);
+        $featuredForMember = $this->blog->getAllFeaturedForMember($homeLimit);
         // $data['featuredForMember']=$featuredForMember;
         $latest =$this->blog->getLatestAllBlog($limit);
         $navCategory=$this->category->getCategoryByShowInHome();
@@ -127,8 +128,8 @@ class HomeController extends FrontendController
     public function blogDetail($code,$slug,Request $request){
 
       $blogDetails = $this->blog->getBlogByCode($code);
-      $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->orderBy('id','asc')->first();
-      $next = $this->blog->getAll()->where('id', '<', $blogDetails['id'])->orderBy('id','desc')->first();
+      $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->where(['save_method'=>2,'show_in_home'=>1])->orderBy('id','asc')->first();
+      $next = $this->blog->getAll()->where('id', '<', $blogDetails['id'])->where(['save_method'=>2,'show_in_home'=>1])->orderBy('id','desc')->first();
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $relatedBlog = $this->blog->relatedBlogBycode($code);
       $navCategory=$this->category->getCategoryByShowInHome();

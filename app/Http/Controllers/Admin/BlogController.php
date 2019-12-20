@@ -114,12 +114,12 @@ class BlogController extends AdminController
               {     
 
                 $uniqId= uniqid();                        
-                $dir=public_path(). '/uploads/blog/'.$blog->code.'/';
+                $dir=public_path(). '/uploads/blog/'.$blog->code;
                  if ($blog->image != '' && File::exists($dir,$blog->image))
                 {
-                File::deleteDirectory($dir);
+                File::delete($dir.'/'.$blog->image);
                 }
-                File::makeDirectory($dir);
+                
                 $extension = request()->image->getClientOriginalExtension();
                 $imageName = $uniqId.'.'.$extension;
                 $originalImg =request()->image->move($dir,$imageName);

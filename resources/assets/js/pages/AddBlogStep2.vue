@@ -68,8 +68,8 @@
                         <div class="col-lg-8 col-md-8 col-sm-8">
                           <div class="tools add_btn">
                               <button class="btn btn-light" @click.prevent="submitForm('1')">Save</button>
-                              <button class="btn btn-light">Preview</button>
-                              <button class="btn btn-light">Close</button>
+                              <button class="btn btn-light" @click.prevent="preview()">Preview</button>
+                              <button class="btn btn-light" @click.prevent="close()">Close</button>
                           </div>
                         </div>
                         <div class="clearfix"></div>
@@ -196,8 +196,12 @@ import Form from './../services/Form.js';
               reader.readAsDataURL(event.target.files[0]);
               
             },
-
-
+            preview:function(){
+              this.$router.push('/blog/preview/'+this.$route.params.blogId)
+            },
+            close:function(){
+              this.$router.push('/blog/list')
+            },
           submitForm:function(save_method='1'){
             this.form.save_method=save_method;
             let curObject=this;

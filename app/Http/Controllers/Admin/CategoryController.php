@@ -46,7 +46,8 @@ class CategoryController extends AdminController
         if ($request->method()=='POST') {
 
             $requestobj=app(CategoryRequest::class);
-            $validatedData = $requestobj->validated(); 
+            $validatedData = $requestobj->validated();
+            $validatedData['slug'] =str_slug($validatedData['slug']);
 
             if ($request->hasFile('banner_image')) 
               {     
@@ -149,7 +150,7 @@ class CategoryController extends AdminController
         {           
                 $requestobj=app(CategoryRequest::class);
                 $validatedData = $requestobj->validated();
-
+                $validatedData['slug'] =str_slug($validatedData['slug']);
 
                if ($request->hasFile('banner_image')) 
               {     
