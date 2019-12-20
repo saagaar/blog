@@ -145,8 +145,9 @@ class BlogController extends FrontendController
                     }else{
                         if(request()->image)
                         {
+                            $uniq = time();
                             $extension = request()->image->getClientOriginalExtension();
-                            $imageName = time().'.'.$extension; 
+                            $imageName = $uniq.'.'.$extension; 
                             $check=in_array($extension,$allowedFileExtension);
                             if($check)
                             {
@@ -157,12 +158,17 @@ class BlogController extends FrontendController
                                 }
                                 File::makeDirectory($dir, 0777, true, true);
                                 $tmpImg =request()->image->move($dir,$imageName);
-                                $img = Image::make($tmpImg);         
-                                $img->resize(180, 180, function ($constraint) 
+                                $img = Image::make($tmpImg);
+                                list($width,$height) = getimagesize($tmpImg);       
+                                    $img->resize(1000,null, function ($constraint) 
+                                    {
+                                    $constraint->aspectRatio();
+                                     })->save($dir.'/'.$uniq.'.'.$extension);            
+                                $img->resize(250, 250, function ($constraint) 
                                 {
                                  $constraint->aspectRatio();
                                 }
-                                )->save($dir.'/'.time().'-thumbnail.'.$extension);
+                                )->save($dir.'/'.$uniq.'-thumbnail.'.$extension);
                                 $form['image'] = $imageName;
                             }else{
                                 return response()->json(['status'=>false,'data'=>'','message'=>'The image file type must be:jpeg,png,jpg,gif,svg'], 401);
@@ -171,6 +177,7 @@ class BlogController extends FrontendController
                         $form['short_description']=$request->short_description;
                         $form['save_method']=$request->save_method?$request->save_method:'1';
                         $form['anynomous'] = ($request->isAnynomous=='true') ? '1' : '2';
+                        $form['featured'] = '2';
                         $this->blog->updateByCode($postId,$form);
                         $tagid = $tag->getTagByName($request->tags);
                         $this->blog->addTag($postId,$tagid);  
