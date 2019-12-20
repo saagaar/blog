@@ -46102,7 +46102,7 @@ var render = function() {
       _c("li", [
         _c(
           "ul",
-          { staticClass: "allnotificationlist" },
+          { staticClass: "allnotificationlist " },
           [
             _vm._l(_vm.allNotifications, function(eachNotifications) {
               return _vm.allNotifications
@@ -46122,22 +46122,22 @@ var render = function() {
                             src: _vm.getProfileUrl(),
                             alt: "Generic placeholder image"
                           }
-                        }),
-                        _c(
-                          "p",
-                          {
-                            staticClass: "media-body",
-                            domProps: {
-                              innerHTML: _vm._s(eachNotifications.data.message)
-                            }
-                          },
-                          [
-                            _c("b", { staticClass: "mt-0 mb-1" }, [
-                              _vm._v("2 days ago")
-                            ])
-                          ]
-                        )
-                      ])
+                        })
+                      ]),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "media-body",
+                          domProps: {
+                            innerHTML: _vm._s(eachNotifications.data.message)
+                          }
+                        },
+                        [
+                          _c("b", { staticClass: "mt-0 mb-1" }, [
+                            _vm._v("2 days ago")
+                          ])
+                        ]
+                      )
                     ]
                   )
                 : _c("li", [_vm._m(1)])

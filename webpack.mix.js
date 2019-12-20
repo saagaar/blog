@@ -43,7 +43,7 @@ const mix = require('laravel-mix');
     mix.styles([
     // 'resources/assets/vendors/fontawesome/css/all.min.css',
 	'resources/assets/css/bootstrap.css',  
-    'resources/assets/css/about.css',
+    
     'resources/assets/css/themify-icons.css',
     'resources/assets/css/flaticon.css',
     'resources/assets/vendors/animate-css/animate.css',

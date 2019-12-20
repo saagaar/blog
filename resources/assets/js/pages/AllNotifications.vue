@@ -1,6 +1,6 @@
 <template>
       <div class="col-md-9 col-sm-9">
-            <div class="white-box" style="padding-bottom: 0px;">
+            <div class="white-box notify-full" style="padding-bottom: 0px;">
                 <NotificationsLoading :notificationList="totalNotifications" :type="'fullPage'"></NotificationsLoading>
             </div>
              <div class="clearfix"></div>

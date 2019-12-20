@@ -349,7 +349,7 @@
     <div class="row">
        <div class="col-lg-2 text-center text-lg-left mb-4 mb-lg-0">
 
-        <a href="index.html">
+        <a href="/" class="footer-logo">
           <img class="img-fluid" src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}"  alt="logo">
           </a>
         </div>
