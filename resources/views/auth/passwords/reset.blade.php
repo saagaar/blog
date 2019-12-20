@@ -1,92 +1,72 @@
 @extends('frontend.layouts.app')
 @section('content')
-<section  class="d-flex justify-content-center">
-    <div class="columns align-item-center">
-        <div class="area-padding-top">
-            <h1>
-                Resets Password
-            </h1>
-            <h2>
-                Create a new password.
-            </h2>
-        </div>
-    </div>
-</section>
-<section class="d-flex justify-content-center">
-    <div class="area-padding">
-        <div class="container">
-            <div class="row">
-                   <form method="POST" action="{{ route('password.request') }}">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="token" value="{{ $token }}">
-
-                                <div class="field flex-column text-center">
-                                    <label class="label" for="email">Email</label>
-                                    <div class="control has-icons-left">
-                                        <input class="form-control form__input {{ $errors->has('email') ? ' is-danger' : '' }}"
-                                               name="email"
-                                               id="email"
-                                               type="text"
-                                               placeholder="hello@email.com"
-                                               value="{{ old('email') }}" required autofocus>
-                                               <br>
-                                        <!-- <span class="icon is-small is-left">
-                                            <i class="fa fa-envelope"></i>
-                                        </span> -->
-                                    </div>
-                                    @if ($errors->has('email'))
+<!-- Landing Page Contents
+    ================================================= -->
+    <div id="lp-register">
+        <div class="container wrapper">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-right-1">
+            <div class="intro-texts">
+                <h1 class="text-white">Make Cool Friends !!!</h1>
+                <p>Blog Sagar is a social network Site that can be used to connect people. The website offers Landing pages, News Feed, Image/Video Feed, Chat Box, Timeline and lot more. <br /> <br />Why are you waiting for? Join it now.</p>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+          </div>
+            <div class="col-sm-5">
+            <div class="reg-form-container forgot_pw"> 
+            
+              <!-- Register/Login Tabs-->
+              <!-- <div class="reg-options">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#register" class="active" data-toggle="tab">Register</a></li>
+                  <li><a href="#login" data-toggle="tab">Login</a></li>
+                </ul>
+              </div> -->
+              
+              <!--Registration Form Contents-->
+              <div class="tab-content">
+                
+                <!--Login-->
+                <div class="tab-pane active" id="login">
+                  <h3>Reset Pasword</h3>
+                  <p class="text-muted">Give your registered email id and enter new password.</p>
+                  
+                  <!--Login Form-->
+                  <form method="POST" action="{{ route('password.request') }}" name="Login_form" id='Login_form'>
+                    {{ csrf_field() }}
+                     <div class="row">
+                      <div class="form-group col-sm-12">
+                        <label for="my-email" class="sr-only">Email</label>
+                        <input id="my-email" class="form-control input-group-lg" type="text" name="email" title="Enter Email" placeholder="Your Email"/>
+                        @if ($errors->has('email'))
                                         <p class="help is-danger">{{ $errors->first('email') }}</p>
                                     @endif
-                                </div>
-
-                                <div class="field flex-column text-center">
-                                    <label class="label" for="password">Password</label>
-                                    <div class="control has-icons-left">
-                                        <input class="form-control form__input {{ $errors->has('password') ? ' is-danger' : '' }}"
-                                               name="password"
-                                               id="password"
-                                               type="password"
-                                               placeholder="Password"
-                                               value="{{ old('password') }}">
-                                        <br>
-                                        <!-- <span class="icon is-small is-left">
-                                            <i class="fa fa-lock"></i>
-                                        </span> -->
-                                    </div>
-                                    @if ($errors->has('password'))
+                      </div>
+                      <div class="form-group col-sm-12">
+                        <label for="my-email" class="sr-only">New Password</label>
+                        <input id="my-email" class="form-control input-group-lg" type="password" name="password" title="Enter password"  placeholder="New Password"/>
+                        @if ($errors->has('password'))
                                         <p class="help is-danger">{{ $errors->first('password') }}</p>
                                     @endif
-                                </div>
-
-                                <div class="field flex-column text-center">
-                                    <label class="label" for="password_confirmation">Confirm Password </label>
-                                    <div class="control has-icons-left">
-                                        <input class="form-control form__input {{ $errors->has('password_confirmation') ? ' is-danger' : '' }}"
-                                               name="password_confirmation"
-                                               id="password_confirmation"
-                                               type="password"
-                                               placeholder="Password Confirmation"
-                                               value="{{ old('password_confirmation') }}">
-                                        <br>
-                                        <!-- <span class="icon is-small is-left">
-                                            <i class="fa fa-lock"></i>
-                                        </span> -->
-                                    </div>
-                                    @if ($errors->has('password_confirmation'))
-                                        <p class="help is-danger">{{ $errors->first('password_confirmation') }}</p>
-                                    @endif
-                                </div>
-
-                                <div class="field is-grouped">
-                                    <div class="control">
-                                        <button type="submit" class="btn btn-primary btn-round">
-                                            Reset Password
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                      </div>
+                      <div class="form-group col-sm-12">
+                        <label for="my-email" class="sr-only">Confirm password</label>
+                        <input id="my-email" class="form-control input-group-lg" type="password" name="password_confirmation" title="Enter Password Confirmation" placeholder="Your Password Confirmation"/>
+                        @if ($errors->has('password_confirmation'))
+                            <p class="help is-danger">{{ $errors->first('password_confirmation') }}</p>
+                        @endif
+                      </div>
+                    </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Reset</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+        
+      </div>
     </div>
-</section>
 @endsection
