@@ -14339,6 +14339,7 @@ ul {
 
 .logo-wrapper {
   text-align: left; }
+.logo-wrapper .logo{display: block; padding: 4px 10px 4px 0px;}
 
   .logo-wrapper img{max-height: 60px; max-width: 100%;}
 
@@ -15239,8 +15240,12 @@ body.mobile-nav-active #mobile-nav-toggle {
     .single-blog.video-style .short_details a:hover {
       color: #008dec; }
 
-.single-blog.video-style .short_details p{line-height: 20px; font-size: 14px;
-    text-align: justify; margin-bottom: 10px;}
+.single-blog.video-style .short_details p{
+  line-height: 20px; font-size: 14px;
+    text-align: justify; margin-bottom: 10px;
+    max-height: 45px;
+    overflow: hidden;
+  }
 
 .single-blog.video-style .thumb.bg-color{
   overflow: hidden;
@@ -15258,9 +15263,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     max-height: 375px;
     max-width: 100%;
     transition: all 300ms linear 0s; }
-.single-blog.video-style.small .thumb{
-  min-height: inherit;
-}
+
 .single-blog.video-style.small .thumb img{max-height: 170px;}
 .single-blog.video-style .meta-bottom {
   margin-bottom: 15px; }
@@ -15283,8 +15286,8 @@ body.mobile-nav-active #mobile-nav-toggle {
   .single-blog.video-style .meta-top a {
     display: inline-block;
     font-size: 11px;
+    text-transform: inherit;
     color: #008dec;
-    text-transform: uppercase;
     position: relative;
     font-weight: 600;
     font-family: "Open Sans", sans-serif;
@@ -15324,8 +15327,9 @@ body.mobile-nav-active #mobile-nav-toggle {
   .single-blog.video-style.small .meta-top a {
     display: inline-block;
     font-size: 11px;
-    color: #008dec;
-    text-transform: uppercase;
+    color: #797979 ;
+    cursor: pointer;
+    text-transform: inherit;
     position: relative;
     font-weight: 600;
     font-family: "Open Sans", sans-serif;
@@ -16249,10 +16253,14 @@ body.mobile-nav-active #mobile-nav-toggle {
       font-size: 20px; }
   .single-category .thumb {
     overflow: hidden;
-    position: relative; }
+    position: relative; 
+    min-height: 262px
+  }
     .single-category .thumb img {
       width: 100%;
-      transition: all 300ms linear 0s; }
+      transition: all 300ms linear 0s; 
+    width: 262px;
+  height: 210px;}
   .single-category .meta-bottom {
     margin-bottom: 15px; }
     .single-category .meta-bottom a {
@@ -19800,6 +19808,56 @@ animation:passing-reverse 1s linear infinite}
 animation:passing-reverse 3s linear infinite}
   
 
+
+/*Start New CSS 2019-12-18*/
+.single-blog.video-style.small .thumb figure{background: none !important;}
+.single-blog.video-style.small .thumb img{min-height: 170px;}
+  /*************New changes 2019-12-20***************/
+
+.header-top .right-button ul.dropdown-menu.notifications_list li a, .notifications_list li a, .notifications_list li p
+{
+  display: inline-block !important;
+  width: auto !important;
+  border: 0;
+  padding: 2px 0px !important
+}
+.notifications_list a img{
+  margin-left: 15px;
+
+}
+
+.notifications_list li{
+  display: block !important;
+  width: 100% !important;
+  padding: 10px 0px;
+  border-bottom: 1px solid #ddd;
+
+}
+.notifications_list li p{
+  width: 80% !important;
+    line-height: 25px;
+    vertical-align: middle;
+}
+.header-top .right-button ul.notifications_list li a:hover, 
+.unreadnotification, ul.notifications_list li a:hover{
+  background: none !important;
+}
+.header-top .right-button ul.notifications_list li ul.allnotificationlist li:hover{ background: #eee; color:#000;}
+.header-top .right-button ul.notifications_list li ul.allnotificationlist li:hover a{color:#4cb748;}
+.notify-full ul.allnotificationlist{
+  max-height: inherit !important;
+}
+
+#lp-register{
+  background: linear-gradient(to right, rgba(4, 99, 0, 0.62) , rgba(5, 150, 0, 0.50)), url(../img/bg-3.jpg) fixed no-repeat !important;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  width: 100%;
+  min-height: 81vh !important;
+}
+#lp-register .wrapper{padding-top: 30px; padding-bottom: 30px;}
+.reg-form-container{min-height: 420px;}
 @media (max-width:1619px){
 	/* Main Menu Area css
 	============================================================================================ */

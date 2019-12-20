@@ -120,7 +120,10 @@
                 min-width: 414px !important;
             }
         }
-
+        .button-td{
+            border-radius: 5px;
+            background: #01b875; border: 1px solid #00a63f; font-family: sans-serif; font-size: 14px; text-align: center; text-decoration: none; display: block; border-radius: 1px; font-weight: bold; padding:5px 15px;color: #ffffff
+        }
     </style>
     <!-- CSS Reset : END -->
 
@@ -195,22 +198,32 @@
 
             <!-- Email Body : BEGIN -->
             {!! $body !!}
+            <br/>
+            <br/>
             <!-- Email Body : END -->
 
             <!-- Email Footer : BEGIN -->
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px; font-family: sans-serif; color: #999999; font-size: 12px; line-height: 100%; background:#1b2a3c;">
                 
                 <tr>
-                    <td style="padding: 20px 10px; width: 100%; font-family: sans-serif; font-size: 12px; line-height: 100%; text-align: center; color: #999999;" class="x-gmail-data-detectors">
+                    <td style="padding: 5px 10px; width: 100%; font-family: sans-serif; font-size: 12px; line-height: 100%; text-align: center; color: #999999;" class="x-gmail-data-detectors">
                         <webversion style="color: #999999; text-decoration: underline; font-weight: bold; display: block; width: 100%; padding-bottom: 10px;">
                             <a href="{{config('settings.url')}}/blog" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Home</a> |
                             <a href="{{config('settings.url')}}/privacy-policy" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Privacy Policy </a> |
                             <a href="{{config('settings.url')}}/contact" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Contact Us</a>
                         </webversion>
-
+                    </td>
+                    </tr>
+                     <tr>
+                    <td style="padding: 5px 10px; width: 100%; font-family: sans-serif; font-size: 12px; line-height: 100%; text-align: center; color: #999999;" class="x-gmail-data-detectors">
                         <webversion style="color: #999999; text-decoration: underline;  display: block; width: 100% font-size:11px; padding: 0px 60px; line-height: 18px; color: #bbb;">
-
                             Sent by {{config('settings.site_name')}} · 44600 Kumaripati Kathmandu, Nepal
+                        </webversion>
+                    </td>
+                    </tr>
+                     <tr>
+                    <td style="padding: 5px 10px; width: 100%; font-family: sans-serif; font-size: 12px; line-height: 100%; text-align: center; color: #999999;" class="x-gmail-data-detectors">
+                        <webversion style="color: #999999; text-decoration: underline;  display: block; width: 100% font-size:11px; padding: 0px 60px; line-height: 18px; color: #bbb;">
                             <a href="https://thebloggersclub.com/newsletter/unsubscribe" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;  font-weight: bold;">Unsubscribe</a> from this type of email ·
                         </webversion>
                     </td>

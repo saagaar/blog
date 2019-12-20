@@ -479,7 +479,7 @@ a:hover {
 }
 
 .service-list li i {
-  margin-right: 20px;
+  margin-right: 10px;
   color: #4d546f;
 }
 
@@ -1076,4 +1076,29 @@ box-shadow:0px 2px 2px 2px rgba(172, 189, 199, 0.42);
   padding: 10px 0px;
   color: #fff;
   font-size: 14px
+}
+
+
+/****************new Css 2019-12-20****************/
+.logo-wrapper .logo {
+    display: block;
+    padding:2px 2px 2px 0px;
+}
+.hero-section h1, .hero-section p{
+  width: 60%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.service-list li {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 15px;
+  padding-right: 30px;
+
+}
+.footer-logo
+{
+  padding-top: 30px;
+  display: block;
 }

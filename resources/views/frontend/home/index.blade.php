@@ -22,7 +22,7 @@
                                 $img=explode('.',$featuredBlog['0']->image);
                             @endphp
                             @if($featuredBlog['0']->image)
-                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$featuredBlog['0']->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('/frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -197,8 +197,11 @@
                     <div class="single-blog video-style">
                         <div class="thumb bg-color">
                             <a >
+                                @php
+                                    $img=explode('.',$featuredForMember['0']->image);
+                                @endphp
                                 @if($featuredForMember['0']->image)
-                                 <img class="img-fluid plain-bg" data-src="{{ '/image/'.$featuredForMember[0]->code.'/555/'.$featuredForMember[0]->image }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember['0']->image) }}" alt="">
                                 @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -319,9 +322,12 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
                         <div class="thumb bg-color">
-                            <a >
+                            <a>
+                            @php
+                                    $img=explode('.',$popular['0']->image);
+                            @endphp
                             @if($popular['0']->image)
-                                 <img class="img-fluid plain-bg"  data-src="{{ '/image/'.$popular[0]->code.'/555/'.$popular[0]->image }}"  alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$popular['0']->code.'/'.$popular['0']->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
