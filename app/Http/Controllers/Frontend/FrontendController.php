@@ -174,6 +174,7 @@ class FrontendController extends BaseController
     {
         $serverData = $this->visitorInfo->getServerInfo();
         $ipAddress=$serverData['ip_address'];  
+        // print_r($ipAddress);exit;
         $dblogdata=$this->VisitorLogInterface->getLogbyIpAddressAndURL($serverData['ip_address'],$serverData['path']);
        if($dblogdata && (trim($dblogdata['details'])!='')){
             $start = date_create($dblogdata['details']->visit_date);
@@ -213,6 +214,6 @@ class FrontendController extends BaseController
                 );
             $logcreate->visitordetails()->create($logdata);
         }
-        VisitorLog::dispatch($this->VisitorlogInterface,$ipAddress);
+        VisitorLog::dispatch($ipAddress);
     }
 }

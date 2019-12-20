@@ -17,9 +17,12 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style">
                         <div class="thumb bg-color">
-                            <a >
+                            <a>
+                            @php
+                                $img=explode('.',$featuredBlog['0']->image);
+                            @endphp
                             @if($featuredBlog['0']->image)
-                                 <img class="img-fluid plain-bg" data-src="{{ '/image/'.$featuredBlog[0]->code.'/555/'.$featuredBlog[0]->image }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('/frontend/images/elements/default-post.jpg') }}" alt="">
 
