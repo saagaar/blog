@@ -1127,12 +1127,17 @@ body.mobile-nav-active #mobile-nav-toggle {
 .single-blog.video-style .thumb.bg-color{
   overflow: hidden;
   position: relative;
-  min-height: 375px;
+  height: 375px;
   background: #c3c3c3;
-
-
  }
- .plain-bg{
+ .single-blog.small.video-style .thumb.bg-color{
+  overflow: hidden;
+  position: relative;
+  height: 175px;
+  background: #c3c3c3;
+ }
+ .single-blog.video-style.big .thumb {
+  min-height: 375px;
  }
 
 .single-blog.video-style .thumb img {
@@ -5735,3 +5740,7 @@ animation:passing-reverse 3s linear infinite}
 }
 #lp-register .wrapper{padding-top: 30px; padding-bottom: 30px;}
 .reg-form-container{min-height: 420px;}
+
+.reg-form-container{min-height: 420px;}
+.reg-form-container label{font-weight: 600; margin-top: 9px;}
+.forgot_pw{min-height: 220px !important; margin-top: 60px;}
