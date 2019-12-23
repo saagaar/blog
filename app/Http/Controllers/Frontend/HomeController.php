@@ -157,6 +157,7 @@ class HomeController extends FrontendController
         $ip = $_SERVER['REMOTE_ADDR'];
         $ipCheckForDailyViewCount = $this->blogVisit->getIpByBlog($blogDetails,$ip);
         if($ipCheckForDailyViewCount){
+
           $this->blog->updateBlogViewCount($blogDetails);
         }
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory));

@@ -47,6 +47,7 @@ Class BlogVisit implements BlogVisitInterface
                 }
             }
             else{
+
                 $this->create(
                     array(
                     'blog_id'               =>$blog->id,
