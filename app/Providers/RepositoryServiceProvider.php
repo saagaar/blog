@@ -70,6 +70,8 @@ use App\Repository\UserInteractionInterface;
 use App\Repository\UserInteraction\UserInteraction;
 use App\Repository\ShareInterface;
 use App\Repository\Share\Share;
+use App\Repository\BlogVisitInterface;
+use App\Repository\BlogVisit\BlogVisit;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -123,5 +125,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(NotificationSettingInterface::class, NotificationSetting::class);
         $this->app->singleton(UserInteractionInterface::class, UserInteraction::class);
         $this->app->singleton(ShareInterface::class, Share::class);
+        $this->app->singleton(BlogVisitInterface::class, BlogVisit::class);
     }
 }

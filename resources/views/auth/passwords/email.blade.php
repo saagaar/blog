@@ -1,53 +1,61 @@
 @extends('frontend.layouts.app')
 @section('content')
-<section  class="d-flex justify-content-center">
-    <div class="columns align-item-center">
-        <div class="area-padding-top">
-            <h1>
-                Forgot Password?
-            </h1>
-            <h2>
-                Give your registered email id and we will <br>
-                send you password reset email.
-            </h2>
-        </div>
-    </div>
-</section>
-<section class="d-flex justify-content-center">
-    <div class="area-padding">
-        <div class="container">
-            <div class="row">
-                            
-
-                            <form method="POST" action="{{ route('password.email') }}">
-                                {{ csrf_field() }}
-
-                                <div class="field  flex-column text-center">
-                                    <label class="label" for="email">Email</label>
-                                    <div class="form-group control has-icons-left">
-                                        <input class="form-control form__input {{ $errors->has('email') ? ' is-danger' : '' }}"
-                                               name="email"
-                                               id="email"
-                                               type="text"
-                                               placeholder="example@email.com"
-                                               value="{{ old('email') }}" autofocus>
-
-                                    </div>
-                                    @if ($errors->has('email'))
+<!-- Landing Page Contents
+    ================================================= -->
+    <div id="lp-register">
+        <div class="container wrapper">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-right-1">
+            <div class="intro-texts">
+                <h1 class="text-white">Make Cool Friends !!!</h1>
+                <p>Blog Sagar is a social network Site that can be used to connect people. The website offers Landing pages, News Feed, Image/Video Feed, Chat Box, Timeline and lot more. <br /> <br />Why are you waiting for? Join it now.</p>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+          </div>
+            <div class="col-sm-5">
+            <div class="reg-form-container forgot_pw"> 
+            
+              <!-- Register/Login Tabs-->
+              <!-- <div class="reg-options">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#register" class="active" data-toggle="tab">Register</a></li>
+                  <li><a href="#login" data-toggle="tab">Login</a></li>
+                </ul>
+              </div> -->
+              
+              <!--Registration Form Contents-->
+              <div class="tab-content">
+                
+                <!--Login-->
+                <div class="tab-pane active" id="login">
+                  <h3>Forgot Pasword</h3>
+                  <p class="text-muted">Give your registered email id and we will
+send you password reset email.</p>
+                  
+                  <!--Login Form-->
+                  <form  method="POST" action="{{ route('password.email') }}" name="Login_form" id='Login_form'>
+                    {{ csrf_field() }}
+                     <div class="row">
+                      <div class="form-group col-sm-12">
+                        <label for="my-email" class="sr-only">Email</label>
+                        <input id="my-email" class="form-control input-group-lg" type="text" name="email" title="Enter Email" placeholder="Your Email" value="{{ old('email') }}"/>
+                        @if ($errors->has('email'))
                                         <p class="help is-danger">{{ $errors->first('email') }}</p>
                                     @endif
-                                </div>
-
-                                <div class="field is-grouped">
-                                    <div class="control">
-                                        <button type="submit"   class="btn btn-primary btn-round">
-                                            Send Password Reset Link
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                      </div>
+                    </div>
+                  
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Send Password Reset Link</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+        
+      </div>
     </div>
-</section>
+
 @endsection

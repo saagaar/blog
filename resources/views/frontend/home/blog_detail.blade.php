@@ -43,10 +43,10 @@
                     <div class="white-box  navigation-top">
                         <div class="d-sm-flex justify-content-between text-center">
                             <p class="like-info"><span class="align-middle">
-                                @if($likes)
-                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :likes="{{$likes}}"></likes>
+                                @if(!auth()->user())
+                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'"></likes>
                                 @else
-                                    <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid"><span>{{ $blogDetails->likes_count }} people Appreciate this</span>
+                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :likes="{{$likes}}"></likes>
                                 @endif
                             <!-- </span>{{$blogDetails->likes_count}} people like this</p> -->
                             <div class="col-sm-4 text-center my-2 my-sm-0">
@@ -70,17 +70,8 @@
                                 <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                                     @if($prev)
                                     <div class="thumb">
-                                        <a href="#">
-                                            @if($prev->image)
-                                                 <img class="img-fluid" src="{{ asset('uploads/blog/'.$prev->code.'/'.$prev->image) }}" width="60" height="60" alt="">
-                                            @else
-                                                 <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}"  width="60" height="60" alt="">
-                                            @endif
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white lnr-arrow-left"></span>
+                                        <a href="{{ route('blog.detail' , [$prev->code,str_slug($prev->title)])}}">
+                                            <i class="fas fa-arrow-left"></i>
                                         </a>
                                     </div>
                                     <div class="details">
@@ -89,6 +80,13 @@
                                             <h4>{{ $prev->title }}</h4>
                                         </a>
                                     </div>
+                                    
+                                    <div class="arrow">
+                                        <a href="{{ route('blog.detail' , [$prev->code,str_slug($prev->title)])}}">
+                                            <span class="lnr text-white lnr-arrow-left"></span>
+                                        </a>
+                                    </div>
+                                    
                                     @endif
                                 </div>
                                 

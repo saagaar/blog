@@ -110,7 +110,7 @@ import Form from './../services/Form.js';
                     short_description:'',
                     image:'',
                     tags:[],
-                    isAnynomous:'',
+                    isAnynomous:'2',
                     file:true,
                     save_method:'1'
                 }),

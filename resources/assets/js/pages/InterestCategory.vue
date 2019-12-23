@@ -30,7 +30,7 @@
                             :src="'uploads/categories-images/icon-no-image.svg'" alt=""></a>
                         </div>
                         <div class="short_details">
-                            <a class="d-block" href="#">
+                            <a class="d-block" :href="'/getblogbycategory/'+subCategory.slug">
                                 <h4>{{subCategory.name}} </h4>
                             </a>
                             <Favorite
