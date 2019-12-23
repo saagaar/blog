@@ -204,6 +204,34 @@
                     <td bgcolor="#ffffff">
                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                         {!! $body !!}
+                        @if($data)
+                            <tr>
+                                <td style="padding: 0px 40px 15px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555;">
+                                    <!-- Button : BEGIN -->
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="1" align="center" style="margin: auto; width:100%;">
+                                        @foreach($data as $items)
+                                        <tr>
+                                            <th style="padding:10px;" width="25%">
+                                                <a href="{{url('/blog/detail/'.$items['code'].'/'.str_slug($items['title'])) }}" target="_blank" title="{{ $items['title'] }}">
+                                                    @if($items['image'])
+                                                        <img src="{{config('settings.url')}}/uploads/blog/{{$items['code']}}/{{$items['image']}}" width="205" height="72" alt="thebloggersclub.com" border="0" style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 100%; color: #4cb748; max-width: 100px !important;">
+                                                    @else
+                                                    <img src="{{config('settings.url')}}/frontend/images/elements/default-post.jpg" width="205" height="72" alt="thebloggersclub.com" border="0" style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 100%; color: #4cb748; max-width: 100px !important;">
+                                                    @endif
+                                                 </a>
+                                            </th>
+                                            <td style="padding:10px;">
+                                                <h4 style="margin-bottom: 5px; margin-top: 0px;"><a style="font-family: sans-serif; color:#000; font-size: 14px; text-align: left; text-decoration: none; display: inline-block; position:relative;" href="{{url('/blog/detail/'.$items['code'].'/'.str_slug($items['title'])) }}" target="_blank" title="{{ $items['title'] }}">{{ $items['title'] }}</a></h4>
+                                <p style="margin-bottom: 0px; font-size: 13px;">{{ $items['short_description']}}</p>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                    <!-- Button : END -->
+                                </td>
+                            </tr>
+                        
+            @endif
                         </table>
                     </td>
                 </tr>

@@ -1,4 +1,4 @@
-`<?php
+<?php
 
 namespace App\Notifications;
 
@@ -17,7 +17,7 @@ class Notifications extends Notification implements ShouldQueue
     protected $contactEmail;
 
     protected $systemEmail;
-
+    protected$additionalData;
     /**
      * All notification Channels to list
      * 
@@ -36,13 +36,15 @@ class Notifications extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($code='',$rawData=array())
+    public function __construct($code='',$rawData=array(),$additionalData=array())
     {
       $repoNotify = app()->make('App\Repository\NotificationSettingInterface');
      
       $this->notification=$repoNotify->getNotificationByCode($code);
+      
       $this->_channel=$this->notification->notification_type;
       $this->rawData=$rawData;
+      $this->additionalData=$additionalData;
       $this->contactEmail=config('settings.contact_email');
     }
 
@@ -71,10 +73,9 @@ class Notifications extends Notification implements ShouldQueue
     {
         $body=$this->parseNotificationBody($this->notification->email_body);
         return (new MailMessage)
-        ->view('emailTemplate.default', ['body' => $body])
+        ->view('emailTemplate.'.$this->notification->view, ['body' => $body,'data'=>$this->additionalData])
         ->subject($this->notification->subject)
         ->from($this->contactEmail);
-                           
     }
     /**
      * Get the array representation of the notification.
