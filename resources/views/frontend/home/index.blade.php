@@ -15,7 +15,7 @@
             <div class="row">
             	@if($featuredBlog['0'])
                 <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style">
+                    <div class="single-blog video-style big">
                         <div class="thumb bg-color">
                             <a>
                             @php
@@ -180,7 +180,7 @@
     <!--================Fullwidth block Area end =================-->
 
     <!--================ Latest Featured section start =================-->  
- @if(count($featuredForMember) == 4)
+ @if(count($featuredForMember) >4)
     <div class="latest-news  area-padding-bottom area-padding-top">
         <div class="container">
             <div class="row">
@@ -194,7 +194,7 @@
             <div class="row">
             	@if($featuredForMember['0'])
                <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style">
+                    <div class="single-blog video-style big">
                         <div class="thumb bg-color">
                             <a >
                                 @php
@@ -320,7 +320,7 @@
                
             	
                 <div class="col-lg-6 col-md-6">
-                    <div class="single-blog video-style">
+                    <div class="single-blog video-style big">
                         <div class="thumb bg-color">
                             <a>
                             @php

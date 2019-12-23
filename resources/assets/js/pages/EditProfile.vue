@@ -22,54 +22,8 @@
           </div>
           <div class="col-sm-6">
             <DobEdit :formName="'Date of birth'" :inputName="'dob'" :value="me.dob"></DobEdit>
-          <!-- <label>Date Of Birth</label>
-           -->
-          <!-- <div class="row">  
-            <div class="form-group col-sm-3 col-xs-6">
-              <label for="month" class="sr-only"></label>
-              <select class="form-control" id="day">
-                <option value="Day">Day</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-             
-              </select>
-            </div>
-            <div class="form-group col-sm-4 col-xs-6">
-              <label for="month" class="sr-only"></label>
-              <select class="form-control" id="month">
-                <option value="month">Month</option>
-                <option>Jan</option>
-               
-                <option selected="">Dec</option>
-              </select>
-            </div>
-            <div class="form-group col-sm-5 col-xs-12">
-              <label for="year" class="sr-only"></label>
-              <select class="form-control" id="year">
-                <option value="year">Year</option>
-                <option selected="">2000</option>
-                <option>2001</option>
-              
-              </select>
-            </div>
-            <div class="clearfix"></div>
-          </div> -->
-          </div>
 
-          <!-- <div class="col-sm-12">
-              <div class="form-group gender">
-                <span class="custom-label"><strong>I am a: </strong></span>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" checked="">Male
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio">Female
-                </label>
-              </div>
-          </div> -->
+          </div>
 
           <div class="col-sm-6 form-group">
           <TextEdit :formName="'Address'" :inputName="'address'" :value="me.address"></TextEdit>
@@ -92,9 +46,34 @@
           <div class="col-md-6">
              <div class="col-sm-12 form-group upload_img">
               <label><i class="fa fa-image"></i> Profile Photo </label>
-              <figure> <img :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'" id="image-field"/> 
+              <cropper
+                        classname="cropper"
+                        :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'"
+                        :stencilProps="{
+                          aspectRatio: 10/12
+                        }"
+                        :minWidth="48"
+                        :minHeight="72"
+                        :maxWidth="640"
+                        :maxHeight="760"
+                        
+                        @change="change"
+                        :previewClassname="image"
+
+                      ></cropper>
+              <figure>
+              
+                       <!-- <img :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'" id="image-field"/>  -->
                 <span class="file-input btn btn-success btn-file">
                       <button class="btn btn-success">Change Profile Picture</button> 
+                      <!-- <cropper
+                        classname="cropper"
+                        :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'"
+                        :stencilProps="{
+                          aspectRatio: 10/12
+                        }"
+                        @change="change"
+                      ></cropper> -->
                       <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
                   </span>
               </figure>   
@@ -119,7 +98,7 @@ import ChangePassword from './../components/Settings/ChangePassword';
 import EmailEdit from './../components/Settings/EmailEdit';
 import DobEdit from './../components/Settings/DobEdit';
 import Form from './../services/Form.js';
-
+import { Cropper } from 'vue-advanced-cropper'
     export default {
          data() {
           return {
@@ -138,6 +117,9 @@ import Form from './../services/Form.js';
             },
         },
         methods:{
+          change({coordinates, canvas}) {
+            console.log(coordinates, canvas)
+          },
           changeImage:function() 
           {
             let curObject=this;
@@ -172,7 +154,8 @@ import Form from './../services/Form.js';
             TextEdit,
             EmailEdit,
             ChangePassword,
-            DobEdit
+            DobEdit,
+            Cropper,
         },
     }
 </script>

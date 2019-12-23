@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class NotificationSettings extends Model
+class Notifications extends Model
 {
     protected $guarded='notifications';
 

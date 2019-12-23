@@ -250,7 +250,7 @@ class UserController extends FrontendController
           {
             $dir = '/uploads/user-images/';
             if (!File::isDirectory(public_path().$dir)) {
-                File::makeDirectory(public_path().'/'.$dir,0777,true,true);
+                File::makeDirectory(public_path().$dir,0777,true,true);
             }
             if ($this->authUser->image != '' && File::exists($dir . $this->authUser->image)){
               File::delete($dir . $this->authUser->image);
