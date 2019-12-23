@@ -23,6 +23,7 @@ use App\Repository\ServiceInterface;
 use App\Repository\SiteoptionInterface;
 use App\Repository\ClientInterface;
 use App\Repository\BannerInterface;
+use App\Repository\BlogVisitInterface;
 use Session;
 
 class HomeController extends FrontendController
@@ -96,7 +97,7 @@ class HomeController extends FrontendController
         // $data['featuredForMember']=$featuredForMember;
         $latest =$this->blog->getLatestAllBlog($limit);
         $navCategory=$this->category->getCategoryByShowInHome();
-        $likes='';
+        $likes=array();
         $user ='';
         // echo "<pre>";
         // print_r($latest[0]['likes']); exit;
@@ -127,6 +128,7 @@ class HomeController extends FrontendController
     }
     public function blogDetail($code,$slug,Request $request){
 
+      $this->blogVisit = app()->make('App\Repository\BlogVisitInterface');
       $blogDetails = $this->blog->getBlogByCode($code);
       $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->where(['save_method'=>2,'show_in_home'=>1])->orderBy('id','asc')->first();
       $next = $this->blog->getAll()->where('id', '<', $blogDetails['id'])->where(['save_method'=>2,'show_in_home'=>1])->orderBy('id','desc')->first();
@@ -140,8 +142,6 @@ class HomeController extends FrontendController
         if(\Auth::check())
         {
           $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
-          // echo "<pre>";
-          // print_r($likes);exit;
           $routeName= ROUTE::currentRouteName();
           if($routeName=='api')
           {
@@ -154,7 +154,11 @@ class HomeController extends FrontendController
               $user=$this->user_state_info();
           }
         }
-        $this->blog->updateBlogViewCount($blogDetails);
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $ipCheckForDailyViewCount = $this->blogVisit->getIpByBlog($blogDetails,$ip);
+        if($ipCheckForDailyViewCount){
+          $this->blog->updateBlogViewCount($blogDetails);
+        }
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory));
     }
 

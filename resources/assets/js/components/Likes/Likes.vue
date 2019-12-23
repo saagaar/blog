@@ -1,9 +1,6 @@
 <template>
 	<div>
          <a href="" @click.prevent="toggleLike" class="appreciate">
-            <!-- <figure  v-if="isLoading">
-                <img src="/frontend/images/elements/appreciate-active.gif" width="25" height="25" class="img-fluid">
-            </figure> -->
                 <img v-if="isChecked" src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
                 <img v-else src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
          	
@@ -28,19 +25,35 @@ let action='';
         },
 
         mounted() {
-            var indexval=(this.likes.indexOf(this.blogid));
-            if(indexval==-1)
-            {
-                this.isChecked=false;
-            }else{
-                this.isChecked=true;
+            if(this.likes){
+                var indexval=(this.likes.indexOf(this.blogid));
+                if(indexval==-1)
+                {
+                    this.isChecked=false;
+                }else{
+                    this.isChecked=true;
+                }
             }
             this.count=this.currentblog.likes_count;
         },
-       
+       computed:{
+            me(){
+              return this.$store.getters.me
+            },
+            loggedIn(){
+              return this.$store.getters.user.loggedInUser;
+            }              
+        },
         methods: {
             toggleLike:function(){
-                    this.isLoading=true;
+                let curObject=this;
+                if(!this.likes){
+                    curObject.$store.commit('TOGGLE_LOADING');
+                    curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:'You must login first'});
+                    return;
+
+                }
+                this.isLoading=true;
                 action='/like/blog/'+this.blogcode;
                     var form=new Form();
                     form.post(action).then(response => {

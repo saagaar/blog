@@ -7468,9 +7468,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7484,19 +7481,40 @@ var action = '';
     };
   },
   mounted: function mounted() {
-    var indexval = this.likes.indexOf(this.blogid);
+    if (this.likes) {
+      var indexval = this.likes.indexOf(this.blogid);
 
-    if (indexval == -1) {
-      this.isChecked = false;
-    } else {
-      this.isChecked = true;
+      if (indexval == -1) {
+        this.isChecked = false;
+      } else {
+        this.isChecked = true;
+      }
     }
 
     this.count = this.currentblog.likes_count;
   },
+  computed: {
+    me: function me() {
+      return this.$store.getters.me;
+    },
+    loggedIn: function loggedIn() {
+      return this.$store.getters.user.loggedInUser;
+    }
+  },
   methods: {
     toggleLike: function toggleLike() {
       var _this = this;
+
+      var curObject = this;
+
+      if (!this.likes) {
+        curObject.$store.commit('TOGGLE_LOADING');
+        curObject.$store.commit('SETFLASHMESSAGE', {
+          status: false,
+          message: 'You must login first'
+        });
+        return;
+      }
 
       this.isLoading = true;
       action = '/like/blog/' + this.blogcode;

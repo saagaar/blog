@@ -84,7 +84,7 @@ Class VisitorInfo
             $path = '';
         }
         $server = array(
-                    'ip_address'          => '27.34.25.94',//$_SERVER['REMOTE_ADDR'],
+                    'ip_address'        =>$_SERVER['REMOTE_ADDR'],
                     'servername'        =>$_SERVER['SERVER_NAME'],
                     'method'            =>$_SERVER['REQUEST_METHOD'],
                     'path'              =>$path,
