@@ -19,6 +19,13 @@ Route::get('/logincheck', function () {
 ]);
 });    
 
+Route::domain('{slug}.localhost:8000')->group(function () {
+	
+	Route::get('/category/{slug}','Frontend\HomeController@blogByCategory')->name('blogbycategory');
+        //
+
+});
+
 Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}/{slug}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
 
