@@ -5,7 +5,7 @@
             <div class="thumb col-md-4 col-sm-5 col-12">
                 <figure>
                     <a href="#">
-                         <img v-if="items.image" class="img-fluid" :src="'/uploads/blog/'+items.code+'/'+items.image" :alt="items.title">
+                         <img v-if="items.image" class="img-fluid" :src="getImageurl(items.code,items.image)" :alt="items.title">
                        <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="items.title">
                     </a>
                 </figure>
@@ -75,6 +75,11 @@ export default {
               {
                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
+        },
+        getImageurl:function(code,image){
+          var img = image.split('.');
+          var url = '/uploads/blog/'+code+'/'+img[0]+'-thumbnail.'+img[1];
+          return url;
         },
         url(items){
           var blogslug= this.blogslug(items.title);

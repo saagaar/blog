@@ -59,7 +59,11 @@
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-lg-4 col-md-5 col-sm-12">
                         	@if($eachBlog->image)
-                            	<img class="img-fluid" src="{{ asset('/uploads/blog/'.$eachBlog->code.'/'.$eachBlog->image) }}" alt="{{ $eachBlog->title }}">
+                                @php
+                                    $img=array();
+                                    $img=explode('.',$eachBlog->image);
+                                @endphp
+                            	<img class="img-fluid" src="{{ asset('uploads/blog/'.$eachBlog->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="{{ $eachBlog->title }}">
                             @else
                             	<img class="img-fluid" src="/frontend/images/elements/default-post.jpg" alt="{{ $eachBlog->title }}">
                             @endif

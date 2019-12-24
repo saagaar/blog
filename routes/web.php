@@ -21,6 +21,7 @@ Route::get('/logincheck', function () {
 Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
 Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}/{slug}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
+Route::get('/all/category', 'Frontend\HomeController@categoryListing')->name('category.listing');
 
 Route::get('/page/{slug}', 'Frontend\CmsController@cmsPage')->name('cms.page');
 Route::post('/contact/form', 'Frontend\UserInteractionController@contactForm')->name('contact.form');

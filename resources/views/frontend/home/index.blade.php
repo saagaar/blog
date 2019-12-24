@@ -201,7 +201,7 @@
                                     $img=explode('.',$featuredForMember['0']->image);
                                 @endphp
                                 @if($featuredForMember['0']->image)
-                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember['0']->image) }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredForMember['0']->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
                                 @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -327,7 +327,7 @@
                                     $img=explode('.',$popular['0']->image);
                             @endphp
                             @if($popular['0']->image)
-                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$popular['0']->code.'/'.$popular['0']->image) }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$popular['0']->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 

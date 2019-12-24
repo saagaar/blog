@@ -6691,6 +6691,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         });
       });
     },
+    getImageurl: function getImageurl(code, image) {
+      var img = image.split('.');
+      var url = '/uploads/blog/' + code + '/' + img[0] + '-thumbnail.' + img[1];
+      return url;
+    },
     url: function url(items) {
       var blogslug = this.blogslug(items.title);
       var url = '/blog/detail/' + items.code + '/' + blogslug;
@@ -6838,6 +6843,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         });
       });
     },
+    getImageurl: function getImageurl(code, image) {
+      var img = image.split('.');
+      var url = '/uploads/blog/' + code + '/' + img[0] + '-thumbnail.' + img[1];
+      return url;
+    },
     url: function url(items) {
       var blogslug = this.blogslug(items.title);
       var url = '/blog/detail/' + items.code + '/' + blogslug;
@@ -6965,6 +6975,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     }
   },
   methods: {
+    getImageurl: function getImageurl(code, image) {
+      var img = image.split('.');
+      var url = '/uploads/blog/' + code + '/' + img[0] + '-thumbnail.' + img[1];
+      return url;
+    },
     url: function url(items) {
       var blogslug = this.slug(items.title);
       var url = '/blog/detail/' + items.code + '/' + blogslug;
@@ -45672,11 +45687,7 @@ var render = function() {
                           ? _c("img", {
                               staticClass: "img-fluid",
                               attrs: {
-                                src:
-                                  "/uploads/blog/" +
-                                  items.code +
-                                  "/" +
-                                  items.image,
+                                src: _vm.getImageurl(items.code, items.image),
                                 alt: items.title
                               }
                             })
@@ -45817,11 +45828,7 @@ var render = function() {
                           ? _c("img", {
                               staticClass: "img-fluid",
                               attrs: {
-                                src:
-                                  "/uploads/blog/" +
-                                  items.code +
-                                  "/" +
-                                  items.image,
+                                src: _vm.getImageurl(items.code, items.image),
                                 alt: items.title
                               }
                             })
@@ -45971,11 +45978,7 @@ var render = function() {
                           ? _c("img", {
                               staticClass: "img-fluid",
                               attrs: {
-                                src:
-                                  "/uploads/blog/" +
-                                  items.code +
-                                  "/" +
-                                  items.image,
+                                src: _vm.getImageurl(items.code, items.image),
                                 alt: items.title
                               }
                             })
