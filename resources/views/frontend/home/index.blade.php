@@ -22,7 +22,7 @@
                                 $img=explode('.',$featuredBlog['0']->image);
                             @endphp
                             @if($featuredBlog['0']->image)
-                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$featuredBlog['0']->image) }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('/frontend/images/elements/default-post.jpg') }}" alt="">
 

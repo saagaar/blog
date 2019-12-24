@@ -90,9 +90,9 @@ class LoginController extends FrontendController
         
     }
     public function login(){
-        if(auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'),'status'=>1]))
+        if(auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'),'status'=>1],request('remember')))
         { 
-            $user = Auth()->user()->toArray();
+            $user = auth()->user()->toArray();
              return array('status'=>true,'data'=>$user,'message'=>'Logged in Successfully'); 
         } 
         else

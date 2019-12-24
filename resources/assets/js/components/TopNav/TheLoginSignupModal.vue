@@ -111,6 +111,9 @@
                 <div class="error" v-if="!$v.loginForm.password.required">This Field is required</div>
               </div>
             </div> 
+            <div class="form-group">
+              <input type="checkbox" name="remember" id="password1" v-model.trim="loginForm.remember">  Remember Me
+            </div>
             <button type="submit" @click.prevent="submitLoginForm"  class="btn btn-primary btn-round"><Loader></Loader> Login</button>
           </form>
           
@@ -161,6 +164,7 @@ import Loader from './../../components/Loader';
             loginForm:new Form({
                 email: '',
                 password: '',
+                remember:''
               }),
             signUpForm:new Form({
                 email: '',

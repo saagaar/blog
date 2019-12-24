@@ -197,7 +197,18 @@
             <!-- Email Header : END -->
 
             <!-- Email Body : BEGIN -->
-            {!! $body !!}
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px;">
+
+                <!-- 1 Column Text + Button : BEGIN -->
+                <tr>
+                    <td bgcolor="#ffffff">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        {!! $body !!}
+                        </table>
+                    </td>
+                </tr>
+                <!-- 1 Column Text + Button : END -->
+            </table>
             <br/>
             <br/>
             <!-- Email Body : END -->
