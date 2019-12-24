@@ -16,10 +16,10 @@
 
 	            <div class="row">
 	            	@foreach($eachCategories->categories as $subCategories)
-	                <div class="col-lg-4 col-md-3 col-sm-6">
+	                <div class="col-lg-3 col-md-3 col-sm-6">
 	                    <div class="single-category">
 	                        <div class="thumb">
-	                           <a href="#"> 
+	                           <a href="{{asset('blogbycategory',$subCategories->slug)}}"> 
 	                           	@if($subCategories->banner_image)
                             	<img class="img-fluid" src="{{ asset('/uploads/categories-images/'.$subCategories->banner_image) }}" alt="">
                             @else
@@ -28,7 +28,7 @@
 	                           </a>
 	                        </div>
 	                        <div class="short_details">
-	                            <a class="d-block" href="{{asset('getblogbycategory',$subCategories->slug)}}">
+	                            <a class="d-block" href="{{asset('blogbycategory',$subCategories->slug)}}">
 	                                <h4>{{$subCategories->name}}</h4>
 	                            </a>
 	                        </div>

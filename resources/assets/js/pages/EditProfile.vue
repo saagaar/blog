@@ -46,7 +46,7 @@
           <div class="col-md-6">
              <div class="col-sm-12 form-group upload_img">
               <label><i class="fa fa-image"></i> Profile Photo </label>
-              <cropper
+           <!--    <cropper
                         classname="cropper"
                         :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'"
                         :stencilProps="{
@@ -56,13 +56,26 @@
                         :minHeight="72"
                         :maxWidth="640"
                         :maxHeight="760"
-                        
                         @change="change"
                         :previewClassname="image"
-
-                      ></cropper>
+                      >
+                      
+                </cropper> -->
+                <myUpload 
+                    @crop-success="cropSuccess"
+                    @crop-upload-success="cropUploadSuccess"
+                    @crop-upload-fail="cropUploadFail"
+                    v-model="show"
+                     lang-type="en"
+                :width="300"
+                :height="300"
+                field="image"
+                :header="headers"
+                :params="params"
+                url="/user/changeprofile"
+                ></myUpload>
+              <img :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'" @click="toggleShow()">
               <figure>
-              
                        <!-- <img :src="me.image? '/uploads/user-images/'+me.image:'/images/system-images/default-profile.png'" id="image-field"/>  -->
                 <span class="file-input btn btn-success btn-file">
                       <button class="btn btn-success">Change Profile Picture</button> 
@@ -74,7 +87,8 @@
                         }"
                         @change="change"
                       ></cropper> -->
-                      <input type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
+                      <!-- <input type="file" ref="file" name="image" id="file1" class="upload" @change="toggleShow();"> -->
+                      <!-- <a ="#" @change="toggleShow()">Change Profile</a -->
                   </span>
               </figure>   
           </div>
@@ -98,7 +112,8 @@ import ChangePassword from './../components/Settings/ChangePassword';
 import EmailEdit from './../components/Settings/EmailEdit';
 import DobEdit from './../components/Settings/DobEdit';
 import Form from './../services/Form.js';
-import { Cropper } from 'vue-advanced-cropper'
+// import { Cropper } from 'vue-advanced-cropper'
+import myUpload from 'vue-image-crop-upload';
     export default {
          data() {
           return {
@@ -106,19 +121,56 @@ import { Cropper } from 'vue-advanced-cropper'
             form:new Form({
               image:'',
               file:true
-            })
-           }
-        },
-        mounted() {
-        },
+            }),
+            headers: {
+
+                        'Content-Type': 'multipart/form-data',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+            show:false,
+            params: {
+            name: 'image',
+          },
+          
+           
+        }
+      },
+       
         computed:{
             me:function(){
               return this.$store.getters.me
             },
         },
         methods:{
-          change({coordinates, canvas}) {
-            console.log(coordinates, canvas)
+        
+          toggleShow() 
+          {
+            this.show = !this.show;
+          },
+          cropSuccess(image, field){
+            this.form.image = image;
+          },
+          /**
+           * upload success
+           *
+           * [param] jsonData  server api return data, already json encode
+           * [param] field
+           */
+          cropUploadSuccess(jsonData, field){
+
+             this.$store.commit('SETFLASHMESSAGE',{status:true,message:jsonData.message});
+             this.$store.commit('TOGGLE_LOADING');
+             this.$store.commit('UPDATE_PROFILE',jsonData.data.imageName);
+          },
+          /**
+           * upload fail
+           *
+           * [param] status    server api return error status, like 500
+           * [param] field
+           */
+          cropUploadFail(status, field){
+            console.log('-------- upload fail --------');
+            this.$store.commit('SETFLASHMESSAGE',{status:false,message:'We couldn\'t upload the image now.<br/> Please try again later.'});
           },
           changeImage:function() 
           {
@@ -155,7 +207,7 @@ import { Cropper } from 'vue-advanced-cropper'
             EmailEdit,
             ChangePassword,
             DobEdit,
-            Cropper,
+            myUpload
         },
     }
 </script>

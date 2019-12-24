@@ -30,32 +30,24 @@ Class BlogVisit implements BlogVisitInterface
     public function getIpByBlog($blog,$ip){
         try
         {
-            $blogIp = $this->blogvisit->where(['blog_id'=>$blog->id])->first();
+            $blogIp = $this->blogvisit->where(['blog_id'=>$blog->id,'ip_address'=>$ip])->first();
             if($blogIp){
-                $start = date("d",strtotime($blogIp->visit_date));
-                $end = date("d",strtotime("Y-m-d H:i:s"));
-                if($blogIp->ip_address==$ip){
-                    if($start != $end){
-                        $this->update($blogIp->id,
-                            array(
-                            'visit_date'            =>date("Y-m-d H:i:s"),
-                        ));
-                        return true;
-                    }
-                    else{
-                        return false;
-                    }
-                }
-                else{
-                    $this->create(
+                $start = strtotime(date('Y-m-d',strtotime($blogIp->visit_date)));
+                $end =   strtotime(date("Y-m-d"));
+                if($start != $end)
+                {
+                    $this->update($blogIp->id,
                         array(
-                        'blog_id'               =>$blog->id,
-                        'ip_address'            =>$ip,
                         'visit_date'            =>date("Y-m-d H:i:s"),
-                    ));
+                        ));
                     return true;
                 }
-            }else{
+                else{
+                    return false;
+                }
+            }
+            else{
+
                 $this->create(
                     array(
                     'blog_id'               =>$blog->id,

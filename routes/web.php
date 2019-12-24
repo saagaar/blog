@@ -11,7 +11,7 @@
 |
 */
 Route::get('/','Frontend\HomeController@landingPage')->name('landing.page');
-
+Route::post('/check','Frontend\FrontendController@index')->name('check.maintainence');
 Route::get('/logincheck', function () {
     return response()->json([
    'status'=> \Auth::check(),
@@ -19,6 +19,8 @@ Route::get('/logincheck', function () {
 ]);
 });    
 Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
+
+
 Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}/{slug}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
 Route::get('/all/category', 'Frontend\HomeController@categoryListing')->name('category.listing');
@@ -31,7 +33,7 @@ Route::get('/blog/preview/{code}', 'Frontend\BlogController@preview')->name('pre
 Route::get('/api/blog/preview/{code}', 'Frontend\BlogController@preview')->name('api');
 Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
 Route::post('/like/blog/{code}', 'Frontend\UserInteractionController@likeBlog')->name('like.blog');
-Route::post('/newsletter/subscribe', 'Frontend\UserInteractionController@newsletter')->name('create.newsletter');
+Route::post('/newsletter/subscribe', 'Frontend\UserInteractionController@newsletter')->name('newsletter');
 
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');
