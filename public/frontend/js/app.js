@@ -8020,6 +8020,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -8032,7 +8035,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_5__["default"]({
         email: '',
-        password: ''
+        password: '',
+        remember: ''
       }),
       signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_5__["default"]({
         email: '',
@@ -47545,6 +47549,61 @@ var render = function() {
                               : _vm._e()
                           ]
                         ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.trim",
+                                value: _vm.loginForm.remember,
+                                expression: "loginForm.remember",
+                                modifiers: { trim: true }
+                              }
+                            ],
+                            attrs: {
+                              type: "checkbox",
+                              name: "remember",
+                              id: "password1"
+                            },
+                            domProps: {
+                              checked: Array.isArray(_vm.loginForm.remember)
+                                ? _vm._i(_vm.loginForm.remember, null) > -1
+                                : _vm.loginForm.remember
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.loginForm.remember,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.loginForm,
+                                        "remember",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.loginForm,
+                                        "remember",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(_vm.loginForm, "remember", $$c)
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v("  Remember Me\n            ")
+                        ]),
                         _vm._v(" "),
                         _c(
                           "button",
