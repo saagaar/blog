@@ -68,7 +68,7 @@
         <ul class="navbar-nav ml-auto">
          
           <li class="nav-item">
-            <a class="nav-link" href="#home"><b>Home</b></a>
+            <a class="nav-link" href="/home"><b>Home</b></a>
           </li>
           <li class="nav-item">
             <a class="nav-link page-scroll" href="#about-us"><b>Feature  </b></a>

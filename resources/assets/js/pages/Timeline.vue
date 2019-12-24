@@ -23,7 +23,7 @@
                   <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList.data && initialState.blogList.data.length>0">
                     <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5">
-                       <img v-if="eachBlog.image" class="img-fluid" :src="'/uploads/blog/'+eachBlog.code+'/'+eachBlog.image" :alt="eachBlog.title">
+                       <img v-if="eachBlog.image" class="img-fluid" :src="getImageurl(eachBlog.code,eachBlog.image)" :alt="eachBlog.title">
                        <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="eachBlog.title">
                       </div>
                       <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" :href="url(eachBlog)">
@@ -123,6 +123,11 @@
         },
         searchPost(){
          this.getResults();
+        },
+        getImageurl:function(code,image){
+          var img = image.split('.');
+          var url = '/uploads/blog/'+code+'/'+img[0]+'-thumbnail.'+img[1];
+          return url;
         },
         url(items){
           var blogslug= this.blogslug(items.title);

@@ -154,9 +154,10 @@ class HomeController extends FrontendController
               $user=$this->user_state_info();
           }
         }
-        $ip = '27.34.25.109';//$_SERVER['REMOTE_ADDR'];
-        $check = $this->blogVisit->getIpByBlog($blogDetails,$ip);
-        if($check){
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $ipCheckForDailyViewCount = $this->blogVisit->getIpByBlog($blogDetails,$ip);
+        if($ipCheckForDailyViewCount){
+
           $this->blog->updateBlogViewCount($blogDetails);
         }
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory));
@@ -175,7 +176,31 @@ class HomeController extends FrontendController
         }
        abort(404);
     }
-
+    public function categoryListing(UserInterestInterface $userInterest)
+    {
+      $data=array();
+      $user=array();
+      $categories=array();
+      $allCategories= $this->category->getAllCategories();
+      // echo "<pre>";
+      // print_r($allCategories);exit;
+      $navCategory=$this->category->getCategoryByShowInHome();
+      if(\Auth::check())
+        {
+          $routeName= ROUTE::currentRouteName();
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+              $data['path']='/all/category';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+          }
+        }
+        return view('frontend.home.category',['initialState'=>$data,'user'=>$user])->with(array('allCategory'=>$allCategories,'navCategory'=>$navCategory));
+    }
     public function blogByCategory($slug,UserInterestInterface $userInterest){
       $data=array();
       $tagsIds = $this->category->getTagsIdByCatSlug($slug);

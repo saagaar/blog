@@ -37,7 +37,10 @@ Class Category implements CategoryInterface
     $data=$this->cat->where(['show_in_home'=>'1','status'=>'1'])->orderByRaw('FIELD(priority,NULL) ASC')->limit($limit)->get();
     return $data;
   }
- 
+    public function getAllCategories()
+    {
+      return $this->cat->where('parent_id', NULL)->with('categories')->get();
+    }
       /**
      * Get's all posts.
      *
