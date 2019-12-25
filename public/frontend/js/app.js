@@ -7156,8 +7156,9 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var notifications = JSON.parse(window.__NOTIFICATION__) || {};
       return notifications;
     },
-    getProfileUrl: function getProfileUrl() {
-      var url = this.$store.getters.me.image;
+    getProfileUrl: function getProfileUrl(user) {
+      // console.log(user);
+      var url = user.image;
       return this.$helpers.getProfileUrl(url);
     }
   }
@@ -46148,7 +46149,7 @@ var render = function() {
                         _c("img", {
                           staticClass: "mr-3",
                           attrs: {
-                            src: _vm.getProfileUrl(),
+                            src: _vm.getProfileUrl(eachNotifications.data.user),
                             alt: "Generic placeholder image"
                           }
                         })

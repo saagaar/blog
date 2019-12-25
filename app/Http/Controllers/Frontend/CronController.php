@@ -34,9 +34,13 @@ class CronController extends FrontendController
     		if($blog){
 	    		$code='blog_registration';
 		        $data=['NAME'=>$eachUser->name,'SITENAME'=>config('settings.site_name')];
-		        $eachUser->notify(new Notifications($code,$data,$blog));
-	    	}
+                $receiverInfo = ['email'=>$eachUser->email];
+		        $eachUser->notify(new Notifications($code,$data,$blog,$receiverInfo));
+                echo "success";
+	    	}else{
+                echo "no blog";
+            }
 	    }
-	    echo "success";
+	    
     }	
 }

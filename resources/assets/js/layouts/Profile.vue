@@ -20,8 +20,11 @@
                 <div class="profile-info profile_pic_upload">
                   <!-- <form> -->
                   <figure><img :src="getProfileUrl()" alt="Profile Image" class="img-responsive profile-photo" id="profileimage" /><Loader></Loader>
-                    <div class="profile_img_change" v-if="$gate.allow('updateProfile', 'profile', loggedIn)"> <span class="file-input btn btn-success btn-file"> <i class="fa fa-camera"></i>
-                      <input  type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();">
+                    <div @click="clickImageChange" class="profile_img_change" v-if="$gate.allow('updateProfile', 'profile', loggedIn)"> <span class="file-input btn btn-success btn-file"> <i class="fa fa-camera"></i>
+                      <!-- <input  type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();"> -->
+
+                     <ProfileImage :profileChangeEnable="enableProfileChangePopup" @clicked="updatePopupClosed" >
+                   </ProfileImage>
                       <!-- <input type="file"  name="image" id="file1" class="upload" @change="changeImage()" > -->
                       </span> 
                     </div>
@@ -99,11 +102,14 @@ import Address from './../components/Profile/Address';
 import Bio from './../components/Profile/Bio';
 import Loader from './../components/Loader';
 import Form from './../services/Form.js';
+import ProfileImage from './../components/Profile/ProfileImage';
+
     export default {
 
         data() {
           return {
             isLoading:false,
+            enableProfileChangePopup:false,
             form:new Form({
               image:'',
               file:true,
@@ -130,6 +136,12 @@ import Form from './../services/Form.js';
           this.username=this.$route.params.username;
         },
         methods:{
+           clickImageChange(){
+            this.enableProfileChangePopup=true
+            },
+            updatePopupClosed(newval){
+              this.enableProfileChangePopup=newval
+            },
             changeImage:function() 
             {
               let curObject=this;
@@ -169,7 +181,8 @@ import Form from './../services/Form.js';
             TheDashboardSideMenu,
             Loader,
             Address,
-            Bio
+            Bio,
+            ProfileImage
         },
 
     }

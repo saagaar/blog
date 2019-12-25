@@ -5744,3 +5744,15 @@ animation:passing-reverse 3s linear infinite}
 .reg-form-container{min-height: 420px;}
 .reg-form-container label{font-weight: 600; margin-top: 9px;}
 .forgot_pw{min-height: 220px !important; margin-top: 60px;}
+
+
+#lp-register{
+  background: linear-gradient(to right, rgba(4, 99, 0, 0.62) , rgba(5, 150, 0, 0.50)), url(../images/background/bg-3.jpg) fixed no-repeat !important;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  width: 100%;
+  min-height: 81vh !important;
+}
+#lp-register .wrapper{padding-top: 30px; padding-bottom: 30px;}
+.reg-form-container{min-height: 420px;}

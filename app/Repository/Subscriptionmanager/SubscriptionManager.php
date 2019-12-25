@@ -25,6 +25,9 @@ Class SubscriptionManager implements SubscriptionManagerInterface
     public function getAll(){
      return $this->Subscription->latest();
     }
+    public function checkNewsletterSubscriptionInTable($email){
+     return $this->Subscription->where(['email'=>$email,'type'=>1])->first();
+    }
   
      /**
      * Update a post.

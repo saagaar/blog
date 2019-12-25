@@ -21,6 +21,7 @@ Route::get('/logincheck', function () {
 Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
 
 
+
 Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}/{slug}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
 Route::get('/all/category', 'Frontend\HomeController@categoryListing')->name('category.listing');
@@ -34,6 +35,7 @@ Route::get('/api/blog/preview/{code}', 'Frontend\BlogController@preview')->name(
 Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
 Route::post('/like/blog/{code}', 'Frontend\UserInteractionController@likeBlog')->name('like.blog');
 Route::post('/newsletter/subscribe', 'Frontend\UserInteractionController@newsletter')->name('newsletter');
+Route::get('/newsletter/unsubscribe/{email}', 'Frontend\UserInteractionController@newsletterUnsuscribe')->name('newsletter.unsubscribe');
 
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');

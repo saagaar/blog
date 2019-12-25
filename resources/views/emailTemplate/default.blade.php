@@ -235,7 +235,7 @@
                      <tr>
                     <td style="padding: 5px 10px; width: 100%; font-family: sans-serif; font-size: 12px; line-height: 100%; text-align: center; color: #999999;" class="x-gmail-data-detectors">
                         <webversion style="color: #999999; text-decoration: underline;  display: block; width: 100% font-size:11px; padding: 0px 60px; line-height: 18px; color: #bbb;">
-                            <a href="https://thebloggersclub.com/newsletter/unsubscribe" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;  font-weight: bold;">Unsubscribe</a> from this type of email ·
+                            <a href="https://thebloggersclub.com/newsletter/unsubscribe/{{$receiverInfo['email']}}" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;  font-weight: bold;">Unsubscribe</a> from this type of email ·
                         </webversion>
                     </td>
                 </tr>
