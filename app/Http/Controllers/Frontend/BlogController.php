@@ -164,7 +164,7 @@ class BlogController extends FrontendController
                                     {
                                     $constraint->aspectRatio();
                                      })->save($dir.'/'.$uniq.'.'.$extension);            
-                                $img->resize(250, 250, function ($constraint) 
+                                $img->resize(200, 200, function ($constraint) 
                                 {
                                  $constraint->aspectRatio();
                                 }

@@ -55,7 +55,8 @@ class FrontendController extends BaseController
         $this->systemEmail =  config('settings.system_email');
         $this->contactName = config('settings.contact_name');
         $this->contactNumber = config('settings.contact_number'); 
-        $this->maintainence = config('settings.maintainence');
+        $this->maintainence_code = config('settings.maintainence_code');
+        $this->maintainence_start_date = config('settings.maintainence_start_date');
         $this->userRequiresActivation  =  config('settings.user_requires_activation');
         $this->blogRequiresActivation = config('settings.blog_requires_activation');
         $this->facebookId =config('settings.facebook_id');  
@@ -72,8 +73,8 @@ class FrontendController extends BaseController
         $this->websiteMode=config('settings.mode');
         $this->websiteLogo=config('settings.image'); 
         $this->websiteUrl=config('settings.url');
-        $this->message=config('settings.message');
-        $this->duration=config('settings.duration');
+        $this->maintainence_message=config('settings.maintainence_message');
+        $this->maintainence_duration=config('settings.maintainence_duration');
 
 
         // $this->save_visitor_info();
@@ -100,13 +101,7 @@ class FrontendController extends BaseController
      */
     public function index(Request $request)
     {   
-        $body = 'Hello';
-        return view('emailTemplate.default',compact('body'));
-       // $code='user_registration';
-       //  $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
-       //  // print_r($data);exit;
-       //  $this->authUser->notify(new Notifications($code,$data));
-       //  echo "Success";
+         return redirect()->route('home'); 
     }
     public function getAllPermissionsAttribute($user=false) {
       $permissions = [];
