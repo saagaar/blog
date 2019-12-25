@@ -7156,8 +7156,9 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var notifications = JSON.parse(window.__NOTIFICATION__) || {};
       return notifications;
     },
-    getProfileUrl: function getProfileUrl() {
-      var url = this.$store.getters.me.image;
+    getProfileUrl: function getProfileUrl(user) {
+      // console.log(user);
+      var url = user.image;
       return this.$helpers.getProfileUrl(url);
     }
   }
@@ -7886,6 +7887,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
 /* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../components/Loader */ "./resources/assets/js/components/Loader.vue");
 
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -8075,40 +8081,50 @@ __webpack_require__.r(__webpack_exports__);
       email: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
         email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["email"],
-        isUnique: function isUnique(value) {
-          var response;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function isUnique$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  if (!(value === '')) {
-                    _context.next = 2;
-                    break;
-                  }
+        isUnique: function () {
+          var _isUnique = _asyncToGenerator(
+          /*#__PURE__*/
+          _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(value) {
+            var response;
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    if (!(value === '')) {
+                      _context.next = 2;
+                      break;
+                    }
 
-                  return _context.abrupt("return", true);
+                    return _context.abrupt("return", true);
 
-                case 2:
-                  _context.next = 4;
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch('/blog/isemailregistered/' + value));
+                  case 2:
+                    _context.next = 4;
+                    return fetch('/blog/isemailregistered/' + value);
 
-                case 4:
-                  response = _context.sent;
-                  _context.t0 = Boolean;
-                  _context.next = 8;
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(response.json());
+                  case 4:
+                    response = _context.sent;
+                    _context.t0 = Boolean;
+                    _context.next = 8;
+                    return response.json();
 
-                case 8:
-                  _context.t1 = _context.sent;
-                  return _context.abrupt("return", (0, _context.t0)(_context.t1));
+                  case 8:
+                    _context.t1 = _context.sent;
+                    return _context.abrupt("return", (0, _context.t0)(_context.t1));
 
-                case 10:
-                case "end":
-                  return _context.stop();
+                  case 10:
+                  case "end":
+                    return _context.stop();
+                }
               }
-            }
-          });
-        }
+            }, _callee);
+          }));
+
+          function isUnique(_x) {
+            return _isUnique.apply(this, arguments);
+          }
+
+          return isUnique;
+        }()
       },
       name: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__["required"],
@@ -12749,7 +12765,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#display-message[data-v-aff12160]{\n    border: 1px solid;\n    min-width: 200px;\n    max-width: 500px;\n    height: auto;\n    position: relative;\n    z-index: 1000;\n    float: right;\n    left: 1px;\n    background:#3c2a2a;\n    opacity: 0.7;\n    border-top-left-radius: 18px;\n    border-bottom-left-radius: 20px;\n    color: white;\n    top:-26px;\n    font-size: 16px;\n    padding: 16px;\n    position: fixed;\n    top: 80px;\n    left: auto;\n    right: 0;\n    background: #170a0b;\n    border: solid 1px #black;\n    color: #fff;\n    padding: 10px 22px;\n}\n#message-status[data-v-aff12160]{\n   float: left;padding-left: 5px;padding-right: 10px\n}\n#message-data[data-v-aff12160]{\n   float: left\n}\n   ", ""]);
+exports.push([module.i, "\n#display-message[data-v-aff12160]{\r\n    border: 1px solid;\r\n    min-width: 200px;\r\n    max-width: 500px;\r\n    height: auto;\r\n    position: relative;\r\n    z-index: 1000;\r\n    float: right;\r\n    left: 1px;\r\n    background:#3c2a2a;\r\n    opacity: 0.7;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 20px;\r\n    color: white;\r\n    top:-26px;\r\n    font-size: 16px;\r\n    padding: 16px;\r\n    position: fixed;\r\n    top: 80px;\r\n    left: auto;\r\n    right: 0;\r\n    background: #170a0b;\r\n    border: solid 1px #black;\r\n    color: #fff;\r\n    padding: 10px 22px;\n}\n#message-status[data-v-aff12160]{\r\n   float: left;padding-left: 5px;padding-right: 10px\n}\n#message-data[data-v-aff12160]{\r\n   float: left\n}\r\n   ", ""]);
 
 // exports
 
@@ -12768,7 +12784,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#display-message[data-v-6351b98e]{\n    border: 1px solid;\n    min-width: 200px;\n    max-width: 500px;\n    height: auto;\n    position: relative;\n    z-index: 1000;\n    float: right;\n    left: 1px;\n    background:#3c2a2a;\n    opacity: 0.7;\n    border-top-left-radius: 18px;\n    border-bottom-left-radius: 20px;\n    color: white;\n    top:-26px;\n    font-size: 16px;\n    padding: 16px;\n    position: fixed;\n    top: 80px;\n    left: auto;\n    right: 0;\n    background: #170a0b;\n    border: solid 1px #black;\n    color: #fff;\n    padding: 10px 22px;\n}\n#message-status[data-v-6351b98e]{\n   float: left;padding-left: 5px;padding-right: 10px\n}\n#message-data[data-v-6351b98e]{\n   float: left\n}\n", ""]);
+exports.push([module.i, "\n#display-message[data-v-6351b98e]{\r\n    border: 1px solid;\r\n    min-width: 200px;\r\n    max-width: 500px;\r\n    height: auto;\r\n    position: relative;\r\n    z-index: 1000;\r\n    float: right;\r\n    left: 1px;\r\n    background:#3c2a2a;\r\n    opacity: 0.7;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 20px;\r\n    color: white;\r\n    top:-26px;\r\n    font-size: 16px;\r\n    padding: 16px;\r\n    position: fixed;\r\n    top: 80px;\r\n    left: auto;\r\n    right: 0;\r\n    background: #170a0b;\r\n    border: solid 1px #black;\r\n    color: #fff;\r\n    padding: 10px 22px;\n}\n#message-status[data-v-6351b98e]{\r\n   float: left;padding-left: 5px;padding-right: 10px\n}\n#message-data[data-v-6351b98e]{\r\n   float: left\n}\r\n", ""]);
 
 // exports
 
@@ -12787,7 +12803,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.fa-spin{\n\tsize: 20px\n}\n", ""]);
+exports.push([module.i, "\n.fa-spin{\r\n\tsize: 20px\n}\r\n", ""]);
 
 // exports
 
@@ -12806,7 +12822,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#display-message[data-v-40be661b]{\n    border: 1px solid;\n    min-width: 200px;\n    max-width: 500px;\n    height: auto;\n    position: relative;\n    z-index: 1000;\n    float: right;\n    left: 1px;\n    background:#3c2a2a;\n    opacity: 0.7;\n    border-top-left-radius: 18px;\n    border-bottom-left-radius: 20px;\n    color: white;\n    top:-26px;\n    font-size: 16px;\n    padding: 16px;\n    position: fixed;\n    top: 80px;\n    left: auto;\n    right: 0;\n    background: #170a0b;\n    border: solid 1px #black;\n    color: #fff;\n    padding: 10px 22px;\n}\n#message-status[data-v-40be661b]{\n   float: left;padding-left: 5px;padding-right: 10px\n}\n.msg-icon[data-v-40be661b]{\n  float: left;\n}\n.msg-icon svg[data-v-40be661b]{\n  margin-right: 8px;\n}\n#message-data[data-v-40be661b]{\n   float: left;\n   text-align: left;\n   line-height: 20px\n}\n   ", ""]);
+exports.push([module.i, "\n#display-message[data-v-40be661b]{\r\n    border: 1px solid;\r\n    min-width: 200px;\r\n    max-width: 500px;\r\n    height: auto;\r\n    position: relative;\r\n    z-index: 1000;\r\n    float: right;\r\n    left: 1px;\r\n    background:#3c2a2a;\r\n    opacity: 0.7;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 20px;\r\n    color: white;\r\n    top:-26px;\r\n    font-size: 16px;\r\n    padding: 16px;\r\n    position: fixed;\r\n    top: 80px;\r\n    left: auto;\r\n    right: 0;\r\n    background: #170a0b;\r\n    border: solid 1px #black;\r\n    color: #fff;\r\n    padding: 10px 22px;\n}\n#message-status[data-v-40be661b]{\r\n   float: left;padding-left: 5px;padding-right: 10px\n}\n.msg-icon[data-v-40be661b]{\r\n  float: left;\n}\n.msg-icon svg[data-v-40be661b]{\r\n  margin-right: 8px;\n}\n#message-data[data-v-40be661b]{\r\n   float: left;\r\n   text-align: left;\r\n   line-height: 20px\n}\r\n   ", ""]);
 
 // exports
 
@@ -45410,9 +45426,9 @@ var render = function() {
                     _c("div", { staticClass: "desc" }, [
                       _c("p", { staticClass: "comment" }, [
                         _vm._v(
-                          "\n\t\t                " +
+                          "\r\n\t\t                " +
                             _vm._s(eachComment.comment) +
-                            " \n\t\t            "
+                            " \r\n\t\t            "
                         )
                       ]),
                       _vm._v(" "),
@@ -45465,7 +45481,7 @@ var staticRenderFns = [
       { staticClass: "single-comment justify-content-between d-flex" },
       [
         _c("div", { staticClass: "user justify-content-between d-flex" }, [
-          _vm._v("\n\t\t        No Comments Found\n\t\t    ")
+          _vm._v("\r\n\t\t        No Comments Found\r\n\t\t    ")
         ])
       ]
     )
@@ -45606,7 +45622,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-lg-5 col-md-6" }, [
           _c("p", { staticClass: "footer-text m-0" }, [
             _vm._v(
-              "\n                Copyright ©All rights reserved | Powered By: "
+              "\r\n                Copyright ©All rights reserved | Powered By: "
             ),
             _c(
               "a",
@@ -46148,7 +46164,7 @@ var render = function() {
                         _c("img", {
                           staticClass: "mr-3",
                           attrs: {
-                            src: _vm.getProfileUrl(),
+                            src: _vm.getProfileUrl(eachNotifications.data.user),
                             alt: "Generic placeholder image"
                           }
                         })
@@ -70469,8 +70485,8 @@ var state = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/blog/resources/assets/js/app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/sass/style.scss */"./resources/assets/sass/style.scss");
+__webpack_require__(/*! C:\blog\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! C:\blog\resources\assets\sass\style.scss */"./resources/assets/sass/style.scss");
 
 
 /***/ })

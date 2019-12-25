@@ -7,9 +7,9 @@
         <div class="row">
             <div class="col-sm-6 col-sm-offset-right-1">
             <div class="intro-texts">
-                <h1 class="text-white">Make Cool Friends !!!</h1>
-                <p>Blog Sagar is a social network Site that can be used to connect people. The website offers Landing pages, News Feed, Image/Video Feed, Chat Box, Timeline and lot more. <br /> <br />Why are you waiting for? Join it now.</p>
-              <button class="btn btn-primary">Learn More</button>
+                <h1 class="text-white">Enjoy Learning !!!</h1>
+                  <p>Thebloggersclub.com is an online blogging platform for all as simple as it is. It is a community of writers and readers who can connect and share their stories to develop a learning environment among the users..</p>
+              <a href="/home" class="btn btn-primary" >Explore Us</a>
             </div>
           </div>
             <div class="col-sm-5">
@@ -29,8 +29,7 @@
                 <!--Login-->
                 <div class="tab-pane active" id="login">
                   <h3>Forgot Pasword</h3>
-                  <p class="text-muted">Give your registered email id and we will
-send you password reset email.</p>
+                  <p class="text-muted">Use Your email to reset password.You will receive an email with  reset link.</p>
                   
                   <!--Login Form-->
                   <form  method="POST" action="{{ route('password.email') }}" name="Login_form" id='Login_form'>

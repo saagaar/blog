@@ -6,7 +6,7 @@
                 </li>
                 <li>
                   <ul class="allnotificationlist ">
-                      <li v-if="allNotifications" v-for="eachNotifications in allNotifications" class="media" :class="[eachNotifications.read_at ? '':'unreadnotification']" ><a href="#"><img class="mr-3" :src="getProfileUrl()" alt="Generic placeholder image"> </a><p class="media-body" v-html="eachNotifications.data.message"><b class="mt-0 mb-1">2 days ago</b></p>
+                      <li v-if="allNotifications" v-for="eachNotifications in allNotifications" class="media" :class="[eachNotifications.read_at ? '':'unreadnotification']" ><a href="#"><img class="mr-3" :src="getProfileUrl(eachNotifications.data.user)" alt="Generic placeholder image"> </a><p class="media-body" v-html="eachNotifications.data.message"><b class="mt-0 mb-1">2 days ago</b></p>
                        </li>
                        <li v-else>
                        <a href="#"><p class="media-body">No Notifications</p></a>
@@ -85,8 +85,9 @@ export default {
           let notifications=JSON.parse(window.__NOTIFICATION__) || {};
           return notifications;
         },
-        getProfileUrl(){
-          let url=this.$store.getters.me.image;
+        getProfileUrl(user){
+          // console.log(user);
+          let url=user.image;
           return this.$helpers.getProfileUrl(url);
        },
 

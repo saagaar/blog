@@ -24,12 +24,14 @@ class VisitorLogController extends AdminController
         $search = $request->get('search');
         if($search)
         {
-            $logs = $this->visitorLog->getAll()->where('ip_address', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $logs = $this->visitorLog->getAll()->where('ip_address', 'like', '%' . $search . '%')->withCount('visitordetails')->paginate($this->PerPage)->withPath('?search=' . $search);
         }
         else{
 
-            $logs = $this->visitorLog->getAll()->paginate($this->PerPage);
+            $logs = $this->visitorLog->getAll()->withCount('visitordetails')->paginate($this->PerPage);
         }
+        // echo "<pre>";
+        // print_r($logs);exit;
         return view('admin.websitelog.list')->with(array('websiteLog'=>$logs,'breadcrumb'=>$breadcrumb,'menu'=>'logs List','primary_menu'=>'websitelog.list'));
     }
     public function View(Request $request,$id)
