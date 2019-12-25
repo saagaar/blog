@@ -75,10 +75,14 @@ $(document).on('click', '.logdetail', function (e) {
                  $('#listOfIpAddressDetail').html('');
                  // console.log(data);
                  data.visitordetails.forEach(function(i,v){
+                    var text = i.referer_url;
+                    if(text.length > 15) text = text.substring(0,15);
+                    var redirectedtext = i.redirected_to;
+                    if(redirectedtext.length > 15) redirectedtext = redirectedtext.substring(0,15);
                         var nhtml='<tr>'+
                                   '<td >'+i.id+'</td>'+
-                                  '<td >'+i.referer_url+'</td>'+
-                                  '<td >'+i.redirected_to+'</td>'+
+                                  '<td title="'+i.referer_url+'"><a href="'+i.referer_url+'">'+text+'</a></td>'+
+                                  '<td title="'+i.redirected_to+'" >'+ redirectedtext +'</td>'+
                                   '<td>'+i.user_agent+'</td>'+
                                   '<td>'+i.visit_date+'</td>'+
                                   '</tr>';
