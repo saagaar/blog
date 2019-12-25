@@ -19,16 +19,16 @@
 	                <div class="col-lg-3 col-md-3 col-sm-6">
 	                    <div class="single-category">
 	                        <div class="thumb">
-	                           <a href="{{asset('blogbycategory',$subCategories->slug)}}"> 
+	                           <a href="{{url('category',$subCategories->slug)}}"> 
 	                           	@if($subCategories->banner_image)
                             	<img class="img-fluid" src="{{ asset('/uploads/categories-images/'.$subCategories->banner_image) }}" alt="">
                             @else
-                            	<img class="img-fluid" src="/frontend/images/elements/default-post.jpg" alt="{{ $eachBlog->title }}">
+                            	<img class="img-fluid" src="/frontend/images/elements/default-post.jpg" alt="{{ $subCategories->title }}">
                             @endif
 	                           </a>
 	                        </div>
 	                        <div class="short_details">
-	                            <a class="d-block" href="{{asset('blogbycategory',$subCategories->slug)}}">
+	                            <a class="d-block" href="{{ url('category',$subCategories->slug) }}">
 	                                <h4>{{$subCategories->name}}</h4>
 	                            </a>
 	                        </div>
