@@ -18,14 +18,10 @@
                     <div class="single-blog video-style big">
                         <div class="thumb bg-color">
                             <a>
-                            @php
-                                $img=explode('.',$featuredBlog['0']->image);
-                            @endphp
                             @if($featuredBlog['0']->image)
-                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredBlog['0']->code.'/'.$featuredBlog[0]->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('/frontend/images/elements/default-post.jpg') }}" alt="">
-
                             @endif
                             </a>
                         </div>
@@ -57,9 +53,9 @@
                                 </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
                              <!--    <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
-                            </div>
                         </div>
-                    </div> 
+                    </div>
+                </div> 
 
                 </div> 
                 @endif
@@ -180,7 +176,7 @@
     <!--================Fullwidth block Area end =================-->
 
     <!--================ Latest Featured section start =================-->  
- @if(count($featuredForMember) >4)
+ @if(count($featuredForMember)>4)
     <div class="latest-news  area-padding-bottom area-padding-top">
         <div class="container">
             <div class="row">
@@ -201,7 +197,7 @@
                                     $img=explode('.',$featuredForMember['0']->image);
                                 @endphp
                                 @if($featuredForMember['0']->image)
-                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredForMember['0']->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$featuredForMember['0']->code.'/'.$featuredForMember[0]->image) }}" alt="">
                                 @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
@@ -317,17 +313,13 @@
                 <h3>Popular</h3>
             </div>
             <div class="row">
-               
-            	
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style big">
                         <div class="thumb bg-color">
                             <a>
-                            @php
-                                    $img=explode('.',$popular['0']->image);
-                            @endphp
+                           
                             @if($popular['0']->image)
-                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$popular['0']->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
+                                 <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$popular['0']->code.'/'.$popular['0']->image) }}" alt="">
                             @else
                                  <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 

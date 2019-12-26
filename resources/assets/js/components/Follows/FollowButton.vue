@@ -57,7 +57,6 @@ let action='';
               this.faClass="fa fa-circle-notch fa-spin";
             else
               this.faClass="fa fa-user-plus";
-            console.log(this.faClass);
           }
         },
         mounted() {
@@ -77,6 +76,11 @@ let action='';
           }
             
         },
+         beforeUpdate() {
+          if(this.following)
+           this.isFollowing= this.following;
+         
+         },
         components:{
                 Loader,
             },
@@ -85,7 +89,7 @@ let action='';
           
         	toggleFollow:function(){
               this.isLoading=true;
-
+              console.log(this.isFollowing);
         		if(!this.isFollowing)
         			action='api/followuser/'+this.username+'/'+this.followSuggestionHead;
         		else 
@@ -102,11 +106,14 @@ let action='';
                             }
                             this.isFollowing=true;
 
+
                           }else{
                             if(this.me.username===this.loggedInUser.username){
                               this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
                             }
                               this.isFollowing=false;
+                              console.log(this.isFollowing);
+
                           }
 		               	        this.$emit('clicked',this.username,response.data.message);
 		               }

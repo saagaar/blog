@@ -80,7 +80,7 @@ class BlogController extends AdminController
              })->save($dir.'/'.$uniqId.'.'.$extension);
         }        
                  
-           $img->resize(100,null, function ($constraint) 
+           $img->resize(200,200, function ($constraint) 
             {
             $constraint->aspectRatio();
             })->save($dir.'/'.$uniqId.'-thumbnail.'.$extension);

@@ -31,6 +31,7 @@
                   </figure>
                   <!-- </form> -->
                   <h3>{{me.name}}</h3>
+                  
                 </div>
             
               </div>
@@ -40,6 +41,7 @@
                   <li><router-link :to="{name:'profile',params:{username:username}}">Timeline</router-link></li>
                   <li><router-link :to="{name:'followings',params:{username:username}}">Followings({{ me.followingCount}} )</router-link></a></li>
                   <li><router-link :to="{name:'followers',params:{username:username}}">Followers({{ me.followersCount}} )</router-link></a></li>
+                  <li class="lifollow"><FollowButton v-if="this.$route.params.username && loggedIn" :following="checkFollow()" :followings="authFollowing" :Buttonclass="'float-right'" :username="this.$route.params.username" :followSuggestionHead="3"></FollowButton></li>
                 </ul>
                 <ul class="follow-me list-inline">
                   <li>
@@ -102,6 +104,7 @@ import Address from './../components/Profile/Address';
 import Bio from './../components/Profile/Bio';
 import Loader from './../components/Loader';
 import Form from './../services/Form.js';
+import FollowButton from './../components/Follows/FollowButton';
 import ProfileImage from './../components/Profile/ProfileImage';
 
     export default {
@@ -109,6 +112,7 @@ import ProfileImage from './../components/Profile/ProfileImage';
         data() {
           return {
             isLoading:false,
+            initialState:{},
             enableProfileChangePopup:false,
             form:new Form({
               image:'',
@@ -129,13 +133,38 @@ import ProfileImage from './../components/Profile/ProfileImage';
             },
             loggedIn(){
               return this.$store.getters.user.loggedInUser;
-            },  
+            }, 
+            authFollowing(){
+              return this.$store.getters.authFollowing;
+            } 
             
+        },
+        mounted(){
+          // console.log(this.authFollowing);
         },
         created(){
           this.username=this.$route.params.username;
         },
         methods:{
+          checkFollow:function(){
+            
+            if (this.authFollowing) {
+            var indexval=(this.authFollowing.indexOf(this.$route.params.username));
+            // console.log(indexval);
+            if(indexval==-1)
+            {
+                return false;
+                
+                
+            }else
+            {
+               return true;
+            }
+          }
+          },
+          addUserFollowed(username){
+            this.authFollowing.push(username);
+          },
            clickImageChange(){
             this.enableProfileChangePopup=true
             },
@@ -182,7 +211,8 @@ import ProfileImage from './../components/Profile/ProfileImage';
             Loader,
             Address,
             Bio,
-            ProfileImage
+            ProfileImage,
+            FollowButton
         },
 
     }

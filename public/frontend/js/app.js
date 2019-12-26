@@ -70252,12 +70252,13 @@ var createComments = function createComments(_ref2, data) {
 /*!**********************************************!*\
   !*** ./resources/assets/js/store/getters.js ***!
   \**********************************************/
-/*! exports provided: me, user, feed, categoryPage, tweetDetail, followerSuggestions, openTweetDetails, isLoading, appName, config, listComments */
+/*! exports provided: me, authFollowing, user, feed, categoryPage, tweetDetail, followerSuggestions, openTweetDetails, isLoading, appName, config, listComments */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "me", function() { return me; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authFollowing", function() { return authFollowing; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "feed", function() { return feed; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "categoryPage", function() { return categoryPage; });
@@ -70271,6 +70272,9 @@ __webpack_require__.r(__webpack_exports__);
 // Get authenticated user
 var me = function me(state) {
   return state.me;
+};
+var authFollowing = function authFollowing(state) {
+  return state.authFollowing;
 }; //Get Loggedin info
 
 var user = function user(state) {
@@ -70351,7 +70355,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*!************************************************!*\
   !*** ./resources/assets/js/store/mutations.js ***!
   \************************************************/
-/*! exports provided: UserLoggedIn, LoggedInUser, ADD_ME, UPDATE_UNREAD_NOTIFICATION_COUNT, UPDATE_PROFILE, UPDATE_ADDRESS, UPDATE_COUNTRY, UPDATE_BIO, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT, TOGGLE_LOADING, SETFLASHMESSAGE, LIST_COMMENTS */
+/*! exports provided: UserLoggedIn, LoggedInUser, ADD_ME, AUTH_FOLLOWING, UPDATE_UNREAD_NOTIFICATION_COUNT, UPDATE_PROFILE, UPDATE_ADDRESS, UPDATE_COUNTRY, UPDATE_BIO, INCREMENT_FOLLOWERS_COUNT, INCREMENT_FOLLOWING_COUNT, DECREMENT_FOLLOWERS_COUNT, DECREMENT_FOLLOWING_COUNT, TOGGLE_LOADING, SETFLASHMESSAGE, LIST_COMMENTS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70359,6 +70363,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserLoggedIn", function() { return UserLoggedIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoggedInUser", function() { return LoggedInUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_ME", function() { return ADD_ME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AUTH_FOLLOWING", function() { return AUTH_FOLLOWING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_UNREAD_NOTIFICATION_COUNT", function() { return UPDATE_UNREAD_NOTIFICATION_COUNT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PROFILE", function() { return UPDATE_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_ADDRESS", function() { return UPDATE_ADDRESS; });
@@ -70379,6 +70384,9 @@ var LoggedInUser = function LoggedInUser(state, user) {
 };
 var ADD_ME = function ADD_ME(state, user) {
   state.me = user;
+};
+var AUTH_FOLLOWING = function AUTH_FOLLOWING(state, data) {
+  state.authFollowing = data;
 };
 var UPDATE_UNREAD_NOTIFICATION_COUNT = function UPDATE_UNREAD_NOTIFICATION_COUNT(state, count) {
   state.me.unReadNotificationsCount = count;
@@ -70437,6 +70445,7 @@ __webpack_require__.r(__webpack_exports__);
 var state = {
   settings: _config_config_js__WEBPACK_IMPORTED_MODULE_0__["default"],
   me: {},
+  authFollowing: [],
   user: {
     isLoggedIn: false,
     followersCount: 0,
