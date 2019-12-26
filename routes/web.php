@@ -34,6 +34,7 @@ Route::get('/blog/preview/{code}', 'Frontend\BlogController@preview')->name('pre
 Route::get('/api/blog/preview/{code}', 'Frontend\BlogController@preview')->name('api');
 Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
 Route::post('/like/blog/{code}', 'Frontend\UserInteractionController@likeBlog')->name('like.blog');
+Route::post('/save/blog/{code}', 'Frontend\UserInteractionController@saveBlog')->name('save.blog');
 Route::post('/newsletter/subscribe', 'Frontend\UserInteractionController@newsletter')->name('newsletter');
 Route::get('/newsletter/unsubscribe/{email}', 'Frontend\UserInteractionController@newsletterUnsuscribe')->name('newsletter.unsubscribe');
 

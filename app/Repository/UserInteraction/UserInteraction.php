@@ -60,5 +60,19 @@ Class  UserInteraction implements UserInteractionInterface
     public function unlikeBlog($user,$code){
      return  $user->likes()->detach($this->blog->where('code',$code)->get());
     }
+    public function getSaveByBlog($code){
+        return $this->blog->where('code',$code)->withCount('save_blogs')->get();
+     }
+    public function saveBlog($user,$code)
+    {
+        return  $user->save_blogs()->attach($this->blog->where('code',$code)->first());
+    }
+    public function unsaveBlog($user,$code)
+    {
+        return  $user->save_blogs()->detach($this->blog->where('code',$code)->first());
+    }
+    public function isSaved($user,$code){
+      return $user->save_blogs()->where('code',$code)->get();
+    }
 }
 ?>
