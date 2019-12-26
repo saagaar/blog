@@ -14,7 +14,16 @@
           </div>
             <div class="col-sm-5">
             <div class="reg-form-container forgot_pw"> 
-            
+            @if (isset($errors) && count($errors))
+     
+            There were {{count($errors->all())}} Error(s)
+                        <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }} </li>
+                    @endforeach
+                </ul>
+                
+        @endif
               <!-- Register/Login Tabs-->
               <!-- <div class="reg-options">
                 <ul class="nav nav-tabs">
@@ -42,6 +51,7 @@
                             <p class="help is-danger">{{ $errors->first('email') }}</p>
                         @endif
                       </div> -->
+                      <input type="hidden" name="email" value="{{$email}}">
                       <div class="form-group col-sm-12">
                         <label for="my-email" class="sr-only">New Password</label>
                         <input id="my-email" class="form-control input-group-lg" type="password" name="password" title="Enter password"  placeholder="New Password"/>

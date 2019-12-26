@@ -73,8 +73,8 @@ $(document).on('click', '.logdetail', function (e) {
                 {
                  $('#ajaxModel').modal('show');
                  $('#listOfIpAddressDetail').html('');
-
-                 data.logdetails.forEach(function(i,v){
+                 // console.log(data);
+                 data.visitordetails.forEach(function(i,v){
                         var nhtml='<tr>'+
                                   '<td >'+i.id+'</td>'+
                                   '<td >'+i.referer_url+'</td>'+

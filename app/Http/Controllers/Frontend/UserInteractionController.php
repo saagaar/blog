@@ -15,6 +15,7 @@ use App\Repository\ContactInterface;
 use App\Repository\AccountInterface;
 use App\Repository\UserInteractionInterface;  
 use App\Repository\SubscriptionManagerInterface;
+use App\Repository\CategoryInterface;
 class UserInteractionController extends FrontendController
 {
     protected $data;
@@ -29,25 +30,26 @@ class UserInteractionController extends FrontendController
     }
     public function likeBlog($code)
     {
+        $return=array();
         $this->user = app()->make('App\Repository\AccountInterface');
         $blog = $this->userInteraction->getAuthorByBlog($code);
         $isLiked=$this->userInteraction->isLiked($this->authUser,$code)->toArray();
          if(empty($isLiked))
          {
             $this->userInteraction->likeBlog($this->authUser,$code);
+            $return = $this->userInteraction->getLikeByBlog($code);
             if($blog->user_id){
                 $code='like_notification';
                 $userdata=$this->user->getUserByUsername($blog->user->username);
-                $data=['NAME'=>$this->authUser->name,'URL'=>route('blog.detail' , [$blog->code,str_slug($blog->title)])];
-                $userdata->notify(new Notifications($code,$data));
+                $data=['NAME'=>'<a href="'.route('profile',$this->authUser->username).'">'.$this->authUser->name.'</a>','POST'=>'<a href="'. route('blog.detail' , [$blog->code,str_slug($blog->title)]).'"> POST </a>'];
+                $userdata->notify(new Notifications($code,$data,array(),$this->authUser));
             }
+
          }else{
          	$this->userInteraction->unlikeBlog($this->authUser,$code);
+            $return = $this->userInteraction->getLikeByBlog($code);
          }
-         $data = $this->userInteraction->getLikeByBlog($code);
-         // echo "<pre>";
-         // print_r($data);exit;
-         return array('status'=>true,'message'=>'success','likes'=>$data);
+         return array('status'=>true,'message'=>'success','likes'=>$return);
     }
     
     public function likeCount($code){
@@ -69,8 +71,8 @@ class UserInteractionController extends FrontendController
             if($blogData->user_id){
                 $code='comment_notification';
                 $userdata=$this->user->getUserByUsername($blogData->user->username);
-                $data=['NAME'=>$this->authUser->name,'PROFILEURL'=>'/profile/'.$this->authUser->username,'URL'=>route('blog.detail' , [$blogData->code,str_slug($blogData->title)]),'TITLE'=>$blogData->title];
-                $userdata->notify(new Notifications($code,$data));
+                $data=['NAME'=>'<a href="'.route('profile',$this->authUser->username).'">'.$this->authUser->name.'</a>','POST'=>'<a href="'. route('blog.detail' , [$code,str_slug($blogData->title)]).'"> POST </a>'];
+                $userdata->notify(new Notifications($code,$data,array(),$this->authUser));
             }
              return array('status'=>true,'message'=>'success','data'=>array('comment'=>$input['comment'],'created_at'=>$input['created_at']));
         }
@@ -105,6 +107,19 @@ class UserInteractionController extends FrontendController
             $input['created_at'] = $date->format('Y-m-d H:i:s');
             $subscribe->create($input);
              return array('status'=>true,'message'=>'Subscribed successfully','data'=>'');
+    }
+    public function newsletterUnsuscribe($email,SubscriptionManagerInterface $subscribe,CategoryInterface $category)
+    {
+        $navCategory=$category->getCategoryByShowInHome();
+        $checkEmail = $subscribe->checkNewsletterSubscriptionInTable($email);
+        if($checkEmail){
+            $data = array('status'=>2);
+            $subscribe->update($checkEmail->id,$data);
+            return view('frontend.home.unsubscribe')->with(array('navCategory'=>$navCategory));
+        }
+        else{
+            return redirect()->route('home'); 
+         }
     }
     public function testinglike($code){
         $user = app()->make('App\Repository\AccountInterface');
