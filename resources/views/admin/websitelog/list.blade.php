@@ -168,7 +168,7 @@
 	  </div>
 </div>
 <div class="modal fade" id="ajaxModel" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel">
-  <div role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

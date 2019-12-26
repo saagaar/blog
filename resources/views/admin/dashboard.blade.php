@@ -32,21 +32,21 @@
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">{{  $dashboard['allVisitors']}}</span><br>
-                          TOTAL VISITORS
+                          <a class="dash" href="{{route('websitelog.list')}}"> TOTAL VISITORS</a>
                       </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #3C8DBC;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['allLoggedInVisitors']}}</span>
-                          <br>VISITORS LOGGED IN TODAY
+                          <br><a class="dash" href="{{route('websitelog.list')}}">VISITORS LOGGED IN TODAY</a>
                       </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #F26161;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['allRegisteredVisitors']}}</span> 
-                          <br>PAGES VISITED TODAY
+                          <br><a class="dash" href="{{route('websitelog.list')}}">PAGES VISITED TODAY</a>
                       </div>
                     </div>
                 </div>
@@ -60,20 +60,20 @@
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color:#00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">{{  $dashboard['allUsers']}}</span> 
-                          <br>TOTAL USERS
+                          <br><a class="dash" href="{{route('account.list')}}">TOTAL USERS</a>
                       </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #374850;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['loggedinUsers']}}</span> 
-                          <br>USERS LOGGED IN TODAY</div>
+                          <br><a class="dash" href="{{route('account.list')}}">USERS LOGGED IN TODAY</a></div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['allRegisteredUsers']}}</span> 
-                          <br>REGISTERED TODAY
+                          <br><a class="dash" href="{{route('account.list')}}">REGISTERED TODAY</a>
                        </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">{{ $dashboard['activeUsers']}}</span> 
-                          <br> ACTIVE USERS
+                          <br><a class="dash" href="{{route('account.list')}}"> ACTIVE USERS</a>
                        </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                  <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #F26161;color:white;"><span style="font-size:35px;font-weight:bold;">{{ $dashboard['inActiveUsers']}}</span> 
-                          <br> IN ACTIVE USERS
+                          <br> <a class="dash" href="{{route('account.list')}}">IN ACTIVE USERS</a>
                        </div>
                     </div>
                 </div>
@@ -109,21 +109,21 @@
                 <div class="col-xs-4">  
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #374850;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['allBlogUsers']}}</span>
-                        <br>TOTAL BLOGS
+                        <br><a class="dash" href="{{route('blog.list')}}">TOTAL BLOGS</a>
                       </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['publishedBlogs']}}</span>
-                          <br>PUBLISHED BLOGS
+                          <br><a class="dash" href="{{route('blog.list')}}">PUBLISHED BLOGS</a>
                       </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color:#00A65A;color:white;"><span style="font-size:35px;font-weight:bold;">{{ $dashboard['savedBlogs']}}</span>
-                          <br>SAVED BLOGS
+                          <br><a class="dash" href="{{route('blog.list')}}">SAVED BLOGS</a>
                       </div>
                     </div>
                 </div>
@@ -135,14 +135,14 @@
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #3C8DBC;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['todayPublishedBlogs']}}</span>
-                        <br>PUBLISHED TODAY   
+                        <br><a class="dash" href="{{route('blog.list')}}">PUBLISHED TODAY</a>
                       </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
                    <div class="panel panel-default">
                       <div class="panel-body text-center" style="height:100px;background-color: #b67782;color:white;"><span style="font-size:35px;font-weight:bold;">{{$dashboard['publishedBlogsThisMonth']}}</span><br>                       
-                            PUBLISHED THIS MONTH
+                            <a class="dash" href="{{route('blog.list')}}">PUBLISHED THIS MONTH</a>
                       </div>
                     </div>
                 </div>

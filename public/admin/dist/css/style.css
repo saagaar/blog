@@ -75,6 +75,20 @@
   transition: transform .15s ease;
   position: relative;
 }
+.dash {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.dash:link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.dash:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
 /* line 46, ../sass/demo.scss */
 .container .gallery a:hover img {
   -webkit-transform: scale(1.05);
