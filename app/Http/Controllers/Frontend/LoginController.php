@@ -46,7 +46,9 @@ class LoginController extends FrontendController
                             ->with('error',$user['message']);
                 }
             }else{
-                auth()->login($userData); 
+                auth()->login($userData);
+                $ip = $_SERVER['REMOTE_ADDR']; 
+                $ipinsert = $this->account->insertIp($userData->username,$ip);
             }
             return redirect()->to('/home');
         }catch (\GuzzleHttp\Exception\ClientException $e) {
@@ -83,6 +85,8 @@ class LoginController extends FrontendController
          ]);
           $roles=$this->role->getDefaultRoleId();
           $userData->assignRole($roles);  
+          $ip = $_SERVER['REMOTE_ADDR']; 
+            $ipinsert = $this->account->insertIp($infoUsername,$ip);
           return array('status'=>true,'userData'=>$userData,'message'=>'Registration Successfully!! <br/>  We have send an activation link to your email.'); 
         }else{
             return array('status'=>false,'userData'=>'','message'=>'Email Already Exist!'); 
@@ -93,6 +97,8 @@ class LoginController extends FrontendController
         if(auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'),'status'=>1],request('remember')))
         { 
             $user = auth()->user()->toArray();
+            $ip = $_SERVER['REMOTE_ADDR']; 
+            $ipinsert = $this->account->insertIp($user['username'],$ip);
              return array('status'=>true,'data'=>$user,'message'=>'Logged in Successfully'); 
         } 
         else
@@ -130,6 +136,7 @@ class LoginController extends FrontendController
             $input['status']    ='2';
             $code='user_registration';
             $data=['NAME'=>$input['name'],'URL'=>url('/blog/useractivation/'.$input['username'].'/'.$input['activation_code']),'SITENAME'=>$this->siteName];
+            
        
         }else{
             $input['status']    ='1';
@@ -137,8 +144,11 @@ class LoginController extends FrontendController
         $user = $this->account->create($input);
         $roles=$this->role->getDefaultRoleId();
         $user->assignRole($roles);  
-        $user->notify(new Notifications($code,$data));
-         
+        if($this->userRequiresActivation=='Y'){
+            $user->notify(new Notifications($code,$data));
+        }
+        $ip = $_SERVER['REMOTE_ADDR']; 
+        $ipinsert = $this->account->insertIp($user->username,$ip);
      return array('status'=>true,'data'=>$user,'message'=>'Registration Successfully!! <br/> We have send an activation link to your email.'); 
     }
     public function userActivation($username,$code){

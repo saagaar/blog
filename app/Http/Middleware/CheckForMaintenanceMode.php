@@ -29,6 +29,7 @@ class CheckForMaintenanceMode extends Middleware
     }
     public function handle($request, Closure $next)
     {
+
     	     $data['time']=10;
 	         $data['retry']=10;
 	         $data['message']='Sorry we are down';
@@ -42,6 +43,7 @@ class CheckForMaintenanceMode extends Middleware
               $session->set('maintainence_code', $request->post('maintainence_code'));
 	         }
          $maintainence_code= $session->get('maintainence_code');
+     
 
        	if($this->settings->first()->mode=='1' || $maintainence_code==$this->settings->first()->maintainence_code || $currentroute=='newsletter')
        	{

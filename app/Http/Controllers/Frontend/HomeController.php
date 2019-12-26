@@ -82,7 +82,9 @@ class HomeController extends FrontendController
 
     public function index(Request $request)
     {
-      
+        // $savedBlog = $this->authUser->with('save_blogs');
+        // echo "<pre>";
+        // print_r($savedBlog);exit;
          $data=array();
          $limit=$this->perPage;
          $homeLimit = 4;

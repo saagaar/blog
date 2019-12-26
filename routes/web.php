@@ -17,10 +17,10 @@ Route::get('/logincheck', function () {
    'status'=> \Auth::check(),
    'data'=>Auth::user()
 ]);
-});    
+});
+
 Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
-
-
+Route::get('/updatelog/cron','Frontend\CronController@updateLogCron')->name('updatelog.cron');
 
 Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}/{slug}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
@@ -34,6 +34,7 @@ Route::get('/blog/preview/{code}', 'Frontend\BlogController@preview')->name('pre
 Route::get('/api/blog/preview/{code}', 'Frontend\BlogController@preview')->name('api');
 Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
 Route::post('/like/blog/{code}', 'Frontend\UserInteractionController@likeBlog')->name('like.blog');
+Route::post('/save/blog/{code}', 'Frontend\UserInteractionController@saveBlog')->name('save.blog');
 Route::post('/newsletter/subscribe', 'Frontend\UserInteractionController@newsletter')->name('newsletter');
 Route::get('/newsletter/unsubscribe/{email}', 'Frontend\UserInteractionController@newsletterUnsuscribe')->name('newsletter.unsubscribe');
 

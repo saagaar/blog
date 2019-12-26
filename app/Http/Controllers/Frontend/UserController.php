@@ -68,8 +68,19 @@ class UserController extends FrontendController
 
     public function profile(BlogInterface $blog,Request $request,$username=false)
     { 
+      $authFollowing=[];
        $routeName= Route::currentRouteName();
-       $user=$this->user_state_info($username);
+       if($username)
+         {
+            $user=$this->user_state_info($username);
+         }
+         else
+         {
+            $user=$this->user_state_info();
+         }      
+        $authFollowing = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
+        $data['authFollowing'] = $authFollowing; 
+          
        if(!$user)
           return redirect()->route('home')
                         ->with('error','No user found!!'); 
@@ -101,6 +112,7 @@ class UserController extends FrontendController
          if($username)
          {
             $userdata=$this->user->getUserByUsername($username);
+            $authFollowing = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
          }
          else
          {
@@ -137,6 +149,7 @@ class UserController extends FrontendController
         $followings = [];
         if($username){
             $userdata=$this->user->getUserByUsername($username);
+            $followings = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
         }
         else{
             $userdata=$this->authUser;

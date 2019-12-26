@@ -26,7 +26,9 @@ Class  VisitorLog implements VisitorLogInterface
     {
       return $this->log->where('id', $log_id)->first();
     }
-
+    public function getUnupdateLog(){
+        return  $this->log->where('country',Null)->get();
+    }
     /**
      * Get's all log.
      *

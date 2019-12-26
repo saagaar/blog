@@ -62,5 +62,9 @@ class Blogs extends Model implements Auditable
     {
         return $this->hasManyThrough(Categories::class,BlogTags::class,'categories_id','blogs_id');
     }
+    public function save_blogs()
+    {
+        return $this->hasMany(SaveBlogs::class,'blog_id');
+    }
  
 }

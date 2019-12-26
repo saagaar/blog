@@ -1,6 +1,6 @@
 // Get authenticated user
 export const me = state => state.me
-
+export const authFollowing = state => state.authFollowing
 //Get Loggedin info
 export const user = state => state.user
 //Get initial data from html

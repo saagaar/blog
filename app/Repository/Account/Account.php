@@ -48,6 +48,16 @@ Class Account implements AccountInterface
     public function getActiveAccounts(){
      return $this->account->where('status','1')->get();
     }
+    public function insertIp($username,$ip){
+      $user = $this->account->where('username', $username)->first();
+      $ipcheck = $user->usersIpaddress()->where('ip_address',$ip)->get()->toArray();
+      if($ipcheck){
+        return false;
+      }else{
+        $ipad=  array('ip_address'=>$ip);
+        return $user->usersIpaddress()->create($ipad);
+      }
+    }
       /**
      * Get's all posts.
      *

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Notifications\Notifications;
 use Validator;
+use App\Jobs\VisitorLog;
+use App\Repository\VisitorLogInterface;
 class CronController extends FrontendController
 {
     use AuthorizesRequests;
@@ -43,4 +45,13 @@ class CronController extends FrontendController
 	    }
 	    
     }	
+    public function updateLogCron(){
+        $this->VisitorLogInterface = app()->make('App\Repository\VisitorLogInterface');
+        $emptyLog = $this->VisitorLogInterface->getUnupdateLog();
+        foreach ($emptyLog as $key => $value) {
+            VisitorLog::dispatch($value->ip_address)
+                ->delay(now()->addMinutes(1));
+        }
+        
+    }
 }
