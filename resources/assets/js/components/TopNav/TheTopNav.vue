@@ -36,9 +36,10 @@
                             
                                 <li><a href="/profile/">Profile</a></li>
                                 <li><router-link to="/categories">Choose your interest</router-link></li>
+                                <li><router-link to="/saved/blog">Saved</router-link></li>
                                 <hr>
                                 <li><router-link to="/blog/add">New Articles</router-link></li>
-                                
+
                                 <li><router-link to="/blog/list">My Articles</router-link></li>
                                 <!-- <li><a href="#">Bookmarks</a></li> -->
                                 <!-- <li><a href="#">Publications</a></li> -->

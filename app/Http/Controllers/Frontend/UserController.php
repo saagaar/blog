@@ -253,6 +253,47 @@ class UserController extends FrontendController
     {
        return $this->followerList->getFollowUserSuggestions($user,$limit,$offset);
     }
+    public function savedBlogList(BlogInterface $blog,Request $request)
+    { $data= array();
+      if(\Auth::check())
+        {
+          $savedBlog = array();
+          $routeName= Route::currentRouteName();
+          $savedBlogId = $blog->getSaveBlogByUser($this->authUser);
+          $savedBlogData = $blog->getSavedBlog($savedBlogId);
+          $savedBlogCode = $blog->getBlogCodeBySave($savedBlogId);
+          
+          $data['saved'] = $savedBlogData;
+          $data['savedBlogCode'] = $savedBlogCode;
+          if($routeName=='api')
+          {
+            return ($data);
+          }
+          else
+          {
+            $data['path']='/saved/blog';
+            $initialState=json_encode($data);
+            $user=$this->user_state_info();
+            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+          }
+        }else{
+          return redirect()->route('home'); 
+        } 
+    }
+    public function getSavedBlogLoader(BlogInterface $blog,Request $request){
+      try
+      {
+          $limit=$this->perPage;
+          $offset=$request->get('page')*$limit;
+          $savedBlogId = $blog->getSaveBlogByUser($this->authUser);
+          $savedBlogData = $blog->getSavedBlog($savedBlogId,$limit,$offset);
+          return array('status'=>true,'data'=>$savedBlogData,'message'=>'');
+      }
+      catch(Exception $e)
+      {
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
     public function changeProfile(Request $request)
     {
         if(\Auth::check())

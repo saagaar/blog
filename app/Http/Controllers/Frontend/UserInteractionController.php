@@ -93,8 +93,8 @@ class UserInteractionController extends FrontendController
     public function saveBlog($code)
     {
         $return=array();
-        $isSaved=$this->userInteraction->isSaved($this->authUser,$code)->toArray();
-         if(empty($isSaved))
+        $isSaved=$this->userInteraction->isSaved($this->authUser,$code);
+         if(!($isSaved))
          {
             $this->userInteraction->saveBlog($this->authUser,$code);
             $return = $this->userInteraction->getSaveByBlog($code);

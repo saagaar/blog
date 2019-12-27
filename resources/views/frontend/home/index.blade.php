@@ -52,6 +52,10 @@
                                 @endif
                                 </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
+                                
+                                @if(auth()->user())
+                                <save-blog :blogcode="'{{$featuredBlog['0']->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
+                                @endif
                              <!--    <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                         </div>
                     </div>
@@ -107,6 +111,9 @@
                                     @endif
                                 </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
+                                @if(auth()->user())
+                                <save-blog :blogcode="'{{$eachFeaturedBlog->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
+                                @endif
                                <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
@@ -231,6 +238,9 @@
                                     @endif
                                 </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
+                                @if(auth()->user())
+                                <save-blog :blogcode="'{{$featuredForMember['0']->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
+                                @endif
                                <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
@@ -285,6 +295,9 @@
                                     @endif
                                 &nbsp;</i>{{$eachFeaturedForMember->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
+                                @if(auth()->user())
+                                <save-blog :blogcode="'{{$eachFeaturedForMember->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
+                                @endif
                              <!--    <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
@@ -353,6 +366,9 @@
                                     @endif
                                 &nbsp;</i>{{$popular['0']->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
+                                @if(auth()->user())
+                                <save-blog :blogcode="'{{$popular['0']->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
+                                @endif
                                <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
@@ -409,6 +425,9 @@
                                     @endif
                                 &nbsp;</i>{{$eachPopular->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
+                                @if(auth()->user())
+                                <save-blog :blogcode="'{{$eachPopular->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
+                                @endif
                                 <!-- <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
@@ -488,6 +507,9 @@
                                     @endif
                                 &nbsp;</i>{{$eachLatest->likes_count }} like</a>
                                 <a ><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
+                                @if(auth()->user())
+                                <save-blog :blogcode="'{{$eachLatest->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
+                                @endif
                                <!--  <a  class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                             </div>
                         </div>
@@ -497,7 +519,7 @@
              
                 <div class="col-md-12">
                  @if(auth()->user())
-                <latest-blog-loading :user="{{ auth()->user()->id }}"></latest-blog-loading>
+                <latest-blog-loading v-bind:saves="{{$savedBlog}}" v-bind:userliked="{{$userLiked}}"></latest-blog-loading>
                 @else
                     <latest-blog-loading></latest-blog-loading>
                 @endif
