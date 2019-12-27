@@ -72,7 +72,13 @@ Class  UserInteraction implements UserInteractionInterface
         return  $user->save_blogs()->detach($this->blog->where('code',$code)->first());
     }
     public function isSaved($user,$code){
-      return $user->save_blogs()->where('code',$code)->get();
+      $blogIds =  $user->saved_blogs()->pluck('blog_id');
+      $saved = $this->blog->whereIn('id', $blogIds)->get()->pluck('code')->toArray();
+      if(in_array($code, $saved)){
+        return true;
+      }else{
+        return false;
+      }
     }
 }
 ?>

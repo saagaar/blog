@@ -38,6 +38,10 @@ Route::post('/save/blog/{code}', 'Frontend\UserInteractionController@saveBlog')-
 Route::post('/newsletter/subscribe', 'Frontend\UserInteractionController@newsletter')->name('newsletter');
 Route::get('/newsletter/unsubscribe/{email}', 'Frontend\UserInteractionController@newsletterUnsuscribe')->name('newsletter.unsubscribe');
 
+Route::get('/saved/blog','Frontend\UserController@savedBlogList')->name('saved.blog');
+Route::get('api/saved/blog','Frontend\UserController@savedBlogList')->name('api');
+Route::get('/getsavedblog','Frontend\UserController@getSavedBlogLoader')->name('infinity');
+
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');
 

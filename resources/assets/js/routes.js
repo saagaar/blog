@@ -22,6 +22,10 @@ let routes=[
 						components:require('./pages/Dashboard')
 				},
 				{
+						path:'/saved/blog',
+						components:require('./pages/SavedBlog')
+				},
+				{
 						path:'/blog/list',
 						components:require('./pages/BlogList')
 				},

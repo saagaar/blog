@@ -14,15 +14,15 @@ class CreateSaveBlogsTable extends Migration
     public function up()
     {
         Schema::create('save_blogs', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('blog_id');
-             $table->foreign('blog_id')
-                    ->references('id')->on('blogs')
-                    ->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                     ->references('id')->on('users')
                     ->onDelete('cascade');
+            $table->unsignedBigInteger('blog_id');
+             $table->foreign('blog_id')
+                    ->references('id')->on('blogs')
+                    ->onDelete('cascade');
+            $table->primary(['user_id', 'blog_id']);
         });
     }
 

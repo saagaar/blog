@@ -38,14 +38,27 @@ Class Blog implements BlogInterface
     })->count();
     return $blogsCount;
   }
-
+  public function getSaveBlogByUser($user){
+    return $user->saved_blogs()->pluck('blog_id');
+  }
+  public function getBlogCodeBySave($blogIds)
+  {
+    return $this->blog->whereIn('id', $blogIds)->get()->pluck('code');
+  }
+  public function getSavedBlog($blogIds,$limit=10,$offset=0)
+  {
+    return $this->blog->whereIn('id', $blogIds)->withCount('likes','comments')->take($limit)->skip($offset)->get();
+  }
   /**
    * get blog for featured =1
    */
   public function getLikesOfBlogByUser($user){
     return $user->likes()->pluck('blog_id');
   }
-
+  public function getBlogCodeByLike($blogIds)
+  {
+    return $this->blog->whereIn('id', $blogIds)->get()->pluck('code');
+  }
   public function getAllFeaturedBlog($limit=10,$offset=0){
     return $this->blog->where(['featured'=> 1,'save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('tags')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }

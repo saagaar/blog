@@ -48,10 +48,10 @@ class CronController extends FrontendController
     public function updateLogCron(){
         $this->VisitorLogInterface = app()->make('App\Repository\VisitorLogInterface');
         $emptyLog = $this->VisitorLogInterface->getUnupdateLog();
+        $count = 1;
         foreach ($emptyLog as $key => $value) {
             VisitorLog::dispatch($value->ip_address)
-                ->delay(now()->addMinutes(1));
+                ->delay(now()->addSeconds($count));
         }
-        
     }
 }

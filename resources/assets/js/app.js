@@ -68,6 +68,7 @@ import AddComment from './components/Comment/AddComment';
 import Comment from './components/Comment/Comment';
 import IconCommentsCount from './components/Comment/IconCommentsCount';
 import Likes from './components/Likes/Likes';
+import SaveBlog from './components/Likes/SaveBlog';
 import LikeCheck from './components/Likes/LikeCheck';
 import BlogLoading from './components/InfiniteLoading/BlogLoading';
 import BlogLoadingBySlug from './components/InfiniteLoading/BlogLoadingBySlug';
@@ -116,6 +117,7 @@ const app = new Vue({
             'success-error-message':SuccessErrorMessage,
             'favorite':Favorite,
             'newsletter':Newsletter,
+            'save-blog':SaveBlog
           
         }
     
