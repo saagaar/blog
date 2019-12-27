@@ -6972,7 +6972,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
-//
 
 
 
@@ -6984,11 +6983,13 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     SaveBlog: _components_Likes_SaveBlog__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
-    user: {
-      type: Number,
-      "default": ''
-    },
     saves: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    userliked: {
       type: Array,
       "default": function _default() {
         return [];
@@ -7488,7 +7489,7 @@ __webpack_require__.r(__webpack_exports__);
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'likes',
-  props: ['user', 'likes'],
+  props: ['code', 'likes'],
   data: function data() {
     return {
       isChecked: '',
@@ -7497,7 +7498,7 @@ var action = '';
     };
   },
   mounted: function mounted() {
-    var indexval = Object.values(this.likes).indexOf(this.user);
+    var indexval = this.likes.indexOf(this.code);
     console.log(this.likes);
 
     if (indexval == -1) {
@@ -46208,11 +46209,11 @@ var render = function() {
                               _c(
                                 "i",
                                 [
-                                  _vm.user
+                                  _vm.userliked
                                     ? _c("LikeCheck", {
                                         attrs: {
-                                          likes: items.likes["0"],
-                                          user: _vm.user
+                                          likes: _vm.userliked,
+                                          code: items.code
                                         }
                                       })
                                     : _c("img", {
@@ -46236,7 +46237,7 @@ var render = function() {
                             _vm._v(" " + _vm._s(items.views) + " view")
                           ]),
                           _vm._v(" "),
-                          _vm.loggedIn
+                          _vm.userliked
                             ? _c("SaveBlog", {
                                 attrs: {
                                   saves: _vm.saves,
@@ -46883,7 +46884,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a", [
+  return _c("i", [
     _vm.isChecked
       ? _c("img", {
           staticClass: "img-fluid",

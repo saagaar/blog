@@ -89,15 +89,20 @@ class HomeController extends FrontendController
         $featuredBlog = $this->blog->getAllFeaturedBlog($homeLimit);
         $websiteLogo=$this->websiteLogo;
         $popular =$this->blog->getPopularBlog($homeLimit);
+        // echo "<pre>";
+        // print_r($popular);exit;
         $featuredForMember = $this->blog->getAllFeaturedForMember($homeLimit);
         $latest =$this->blog->getLatestAllBlog($limit);
         $navCategory=$this->category->getCategoryByShowInHome();
+        $liked=array();
         $likes=array();
         $user ='';
         $data['path']='/home';
          if(\Auth::check())
         {
            $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+            $liked = $this->blog->getBlogCodeByLike($likes);
+           // print_r($liked);exit;
             $savedBlogId = $this->blog->getSaveBlogByUser($this->authUser);
             $savedBlog = $this->blog->getBlogCodeBySave($savedBlogId);
            $routeName= ROUTE::currentRouteName();
@@ -114,7 +119,7 @@ class HomeController extends FrontendController
         }
 
         
-        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo,'savedBlog'=>$savedBlog));
+        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo,'savedBlog'=>$savedBlog,'userLiked'=>$liked));
     }
     public function test(Request $request){
       $this->category->subs(5);

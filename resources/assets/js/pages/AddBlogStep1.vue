@@ -43,6 +43,7 @@
                                 <div class="error" v-if="!$v.form.content.minLength">Content must be at least {{ $v.form.content.$params.minLength.min }} letters.</div>
                               </div>
                        </div>
+                       
 
                       <button @click.prevent="next()" class="btn btn-primary ml-30">Continue</button>
                     </div>

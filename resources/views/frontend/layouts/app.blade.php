@@ -82,6 +82,7 @@
                                 <li><a href="/dashboard"> My Dashboard</a></li>
                                 <li><a href="/profile"> Profile</a></li>
                                 <li><a href="/categories">Choose your interest</a></li>
+                                <li><a href="/saved/blog">Saved</a></li>
                                   <hr/>
                                 <li><a href="/blog/add">New Article</a></li>
                                 <li><a href="/blog/list">My Articles</a></li>

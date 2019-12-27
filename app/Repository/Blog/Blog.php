@@ -55,7 +55,10 @@ Class Blog implements BlogInterface
   public function getLikesOfBlogByUser($user){
     return $user->likes()->pluck('blog_id');
   }
-
+  public function getBlogCodeByLike($blogIds)
+  {
+    return $this->blog->whereIn('id', $blogIds)->get()->pluck('code');
+  }
   public function getAllFeaturedBlog($limit=10,$offset=0){
     return $this->blog->where(['featured'=> 1,'save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('tags')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }

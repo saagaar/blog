@@ -519,7 +519,7 @@
              
                 <div class="col-md-12">
                  @if(auth()->user())
-                <latest-blog-loading v-bind:saves="{{$savedBlog}}"></latest-blog-loading>
+                <latest-blog-loading v-bind:saves="{{$savedBlog}}" v-bind:userliked="{{$userLiked}}"></latest-blog-loading>
                 @else
                     <latest-blog-loading></latest-blog-loading>
                 @endif

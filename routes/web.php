@@ -40,7 +40,7 @@ Route::get('/newsletter/unsubscribe/{email}', 'Frontend\UserInteractionControlle
 
 Route::get('/saved/blog','Frontend\UserController@savedBlogList')->name('saved.blog');
 Route::get('api/saved/blog','Frontend\UserController@savedBlogList')->name('api');
-Route::get('api/getsavedblog','Frontend\UserController@getSavedBlogLoader')->name('infinity');
+Route::get('/getsavedblog','Frontend\UserController@getSavedBlogLoader')->name('infinity');
 
 Route::get('/api/unfollowuser/{username}/{offset}','Frontend\UserController@unfollowuser');
 Route::get('/api/followuser/{username}/{offset}','Frontend\UserController@followuser');

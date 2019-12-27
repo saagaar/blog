@@ -20,7 +20,7 @@
                         <img src="/frontend/images/elements/inactive-appreciate.png" class="img-fluid">
                     </i> {{eachBlog.likes_count}} like</a>
                    	<a href=""><i class="ti-eye"></i> {{eachBlog.views}} view</a>
-                   	<SaveBlog  :saves="saves" :blogcode="items.code" ></SaveBlog>
+                   	<SaveBlog  :saves="saves" :blogcode="eachBlog.code" ></SaveBlog>
                     </div>
                 </div>
               </div>
@@ -54,7 +54,7 @@ export default {
   methods: {
     infiniteHandler($state) {
        
-        this.form.get('api/getsavedblog?page='+this.offset).then(response => 
+        this.form.get('/getsavedblog?page='+this.offset).then(response => 
         {
                if(response.data.data.length)
                {
