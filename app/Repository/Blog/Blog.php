@@ -38,7 +38,17 @@ Class Blog implements BlogInterface
     })->count();
     return $blogsCount;
   }
-
+  public function getSaveBlogByUser($user){
+    return $user->saved_blogs()->pluck('blog_id');
+  }
+  public function getBlogCodeBySave($blogIds)
+  {
+    return $this->blog->whereIn('id', $blogIds)->get()->pluck('code');
+  }
+  public function getSavedBlog($blogIds,$limit=10,$offset=0)
+  {
+    return $this->blog->whereIn('id', $blogIds)->withCount('likes','comments')->take($limit)->skip($offset)->get();
+  }
   /**
    * get blog for featured =1
    */

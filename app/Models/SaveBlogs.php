@@ -14,13 +14,6 @@ class SaveBlogs extends Pivot implements Auditable
 
 
     protected $hidden  = ['user_id','blog_id'];
-    public function user()
-    {
-        return $this->belongsToMany(Users::class,'user_id');
-    }
-    public function blogs()
-    {
-        return $this->belongsToMany(Blogs::class,'blog_id');
-    }
+    
 }
 

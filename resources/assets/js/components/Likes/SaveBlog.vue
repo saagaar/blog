@@ -1,6 +1,9 @@
 <template>
 	<div>
-		<a @click.prevent="toggleSave" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a>
+		<a href="" @click.prevent="toggleSave" class="book_mark">
+			<i v-if="isChecked" class="fa fa-clipboard-check"></i>
+			<i v-else class="fa fa-bookmark"></i> 
+		{{ isChecked ? 'Saved' : 'Save'}} </a>
    	</div>
 </template>
 
@@ -9,7 +12,10 @@ import Form from './../../services/Form.js'
 let action='';
     export default {
         name: 'saves',
-        props: ['currentblog','blogid', 'saves','blogcode'],
+        props: {
+	      saves:{type:Array},
+	      blogcode:{type:String},
+	    },
 
         data: function() {
             return {
@@ -21,7 +27,7 @@ let action='';
 
         mounted() {
             if(this.saves){
-                var indexval=(this.saves.indexOf(this.blogid));
+                var indexval=(this.saves.indexOf(this.blogcode));
                 if(indexval==-1)
                 {
                     this.isChecked=false;

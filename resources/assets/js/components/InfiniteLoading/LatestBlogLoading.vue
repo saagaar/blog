@@ -27,6 +27,7 @@
                       <img v-else src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                     </i>&nbsp; {{items.likes_count}} like</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
+                    <SaveBlog v-if="loggedIn" :saves="saves" :blogcode="items.code" ></SaveBlog>
                     <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->
                 </div>
             </div>
@@ -44,14 +45,17 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading';
 import Form from './../../services/Form.js';
+import SaveBlog from './../../components/Likes/SaveBlog';
 import LikeCheck from './../../components/Likes/LikeCheck';
 export default {
   components: {
     InfiniteLoading,
-    LikeCheck
+    LikeCheck,
+    SaveBlog
   },
   props: {
     user:{type:Number,default:''},
+    saves:{type:Array,default: function () { return [] }}
 
   },
   data(){
@@ -63,7 +67,9 @@ export default {
     };
   },
    computed: {
-    
+    loggedIn(){
+              return this.$store.getters.user.isLoggedIn;
+            }, 
   },
   watch:
   {

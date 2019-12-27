@@ -57,12 +57,19 @@
                                 @endif
                                 </i>&nbsp;&nbsp;{{$eachBlog->likes_count }} like</a>
                                 <a href="#"><i class="ti-eye"></i> {{ $eachBlog->views }} view</a>
+                                @if(auth()->user())
+                                <save-blog :blogcode="'{{$eachBlog->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
-                <blog-slug-loading :slug="'{{ $slug }}'"></blog-slug-loading>
+                @if(auth()->user())
+                    <blog-slug-loading v-bind:saves="{{ $savedBlog }}" :slug="'{{ $slug }}'"></blog-slug-loading>
+                @else
+                    <blog-slug-loading :slug="'{{ $slug }}'"></blog-slug-loading>
+                @endif
             </div>
         </div>
     </div>
