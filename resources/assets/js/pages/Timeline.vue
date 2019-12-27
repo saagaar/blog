@@ -1,6 +1,7 @@
 
 <template>
             <div>
+
               <div  class="">
                 <div class="white-box create-post"  v-if="$gate.allow('viewUserDashboard', 'profile', loggedIn)">
                 <form>
@@ -20,7 +21,7 @@
                   <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true">
                            <PlaceHolderTimeline></PlaceHolderTimeline>
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList.data && initialState.blogList.data.length>0">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList.data && initialState.blogList.data.length > 0">
                     <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5">
                        <img v-if="eachBlog.image" class="img-fluid" :src="getImageurl(eachBlog.code,eachBlog.image)" :alt="eachBlog.title">
@@ -81,7 +82,11 @@
               return this.$store.getters.user.loggedInUser;
             }  
       },
+       
       watch: {
+          initialState: function(){
+            this.$store.commit('AUTH_FOLLOWING',this.initialState.authFollowing);
+          },
           filter_by: function () {
             this.getResults();          
           },

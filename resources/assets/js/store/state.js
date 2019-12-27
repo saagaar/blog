@@ -2,6 +2,7 @@ import config from './../config/config.js';
 const state = {
     settings:config,
     me: {},
+    authFollowing:[],
     user:{
         isLoggedIn:false,
         followersCount:0,

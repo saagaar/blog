@@ -90,6 +90,20 @@ class UserInteractionController extends FrontendController
             $contact->create($input);
              return array('status'=>true,'message'=>'Form submitted successfully','data'=>'');
     }
+    public function saveBlog($code)
+    {
+        $return=array();
+        $isSaved=$this->userInteraction->isSaved($this->authUser,$code)->toArray();
+         if(empty($isSaved))
+         {
+            $this->userInteraction->saveBlog($this->authUser,$code);
+            $return = $this->userInteraction->getSaveByBlog($code);
+         }else{
+            $this->userInteraction->unsaveBlog($this->authUser,$code);
+            $return = $this->userInteraction->getSaveByBlog($code);
+         }
+         return array('status'=>true,'message'=>'success','save'=>$return);
+    }
     public function newsletter(Request $request,SubscriptionManagerInterface $subscribe){
             $request->validate([
             'email' => 'required',

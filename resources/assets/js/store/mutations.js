@@ -8,6 +8,9 @@ export const LoggedInUser = (state, user) => {
 export const ADD_ME = (state, user) => {
     state.me = user
 }
+export const AUTH_FOLLOWING = (state, data) => {
+    state.authFollowing = data
+}
 export const UPDATE_UNREAD_NOTIFICATION_COUNT = (state, count) => {
     state.me.unReadNotificationsCount = count
     
