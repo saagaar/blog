@@ -21,7 +21,7 @@
                   <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true">
                            <PlaceHolderTimeline></PlaceHolderTimeline>
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList.data && initialState.blogList.data.length > 0">
+                  <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList.data">
                     <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
                       <div class="thumb col-lg-3 col-md-4 col-sm-5">
                        <img v-if="eachBlog.image" class="img-fluid" :src="getImageurl(eachBlog.code,eachBlog.image)" :alt="eachBlog.title">
@@ -30,9 +30,10 @@
                       <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" :href="url(eachBlog)">
                         <h4>{{eachBlog.title}}</h4>
                         </a>
-                        <p v-if="eachBlog.short_description.length<500" v-html="eachBlog.short_description"></p>
+                        <p v-if="eachBlog.short_description==NULL"> ---- </p>
+                        <p v-else-if="eachBlog.short_description.length<500" v-html="eachBlog.short_description"></p>
                         <p v-else v-html="eachBlog.short_description.substring(0,500)+' ......' "></p>
-                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a> <a href="#"><i class="ti-heart"></i> {{eachBlog.likes_count}} like</a> <a href="#"><i class="ti-eye"></i> {{ eachBlog.views }} view</a> </div>
+                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a> <a href="#"><img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid"> {{eachBlog.likes_count}} like</a> <a href="#"><i class="ti-eye"></i> {{ eachBlog.views }} view</a> </div>
                       </div>
                     </div>
                     <div class="align-right">
@@ -82,7 +83,9 @@
               return this.$store.getters.user.loggedInUser;
             }  
       },
-       
+       created(){
+        console.log(this.initialState.blogList.data);
+       },
       watch: {
           initialState: function(){
             this.$store.commit('AUTH_FOLLOWING',this.initialState.authFollowing);

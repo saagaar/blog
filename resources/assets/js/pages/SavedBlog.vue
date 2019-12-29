@@ -38,7 +38,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12" v-else>
               <div class="single-blog video-style small row m_b_30">
                 <div class="short_details col-lg-12 col-md-12 col-sm-12">
-                  <h4 class="text-center d-block">No post From your followings !!</h4>
+                  <h4 class="text-center d-block">No saved post !!</h4>
                 </div>
               </div>
             </div>

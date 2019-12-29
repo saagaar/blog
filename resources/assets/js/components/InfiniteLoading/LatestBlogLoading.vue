@@ -23,11 +23,11 @@
                 <div class="meta-bottom d-flex">
                     <a href="#"><i class="ti-time"></i>&nbsp;{{ items.created_at | moment("from", "now")}}</a>
                     <a href="#" class="appreciate"><i>
-                      <LikeCheck v-if="userliked" :likes="userliked" :code="items.code"></LikeCheck>
+                      <LikeCheck v-if="isLoggedIn" :likes="userliked" :code="items.code"></LikeCheck>
                       <img v-else src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                     </i>&nbsp; {{items.likes_count}} like</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
-                    <SaveBlog v-if="userliked" :saves="saves" :blogcode="items.code" ></SaveBlog>
+                    <SaveBlog v-if="isLoggedIn" :saves="saves" :blogcode="items.code" ></SaveBlog>
                 </div>
             </div>
         </div>
@@ -53,6 +53,7 @@ export default {
     SaveBlog
   },
   props: {
+    isLoggedIn:{type: Boolean, default: false},
     saves:{type:Array,default: function () { return [] }},
     userliked:{type:Array,default: function () { return [] }}
 
@@ -64,11 +65,6 @@ export default {
      
       form:new Form()
     };
-  },
-   computed: {
-    loggedIn(){
-              return this.$store.getters.user.isLoggedIn;
-            }, 
   },
   watch:
   {
