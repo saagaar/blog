@@ -20,6 +20,7 @@
         $end = date('Y-m-d H:i:s', strtotime($start. ' + '.config('settings.maintainence_duration').' days')); 
         $diff=strtotime($end)-strtotime($today);
         $remain_date=date_diff(date_create($end),date_create($today));
+        print_r($remain_date);
 		@endphp
 
 		<div class="flex-c-m bg-img1 size2 where1 overlay1 where2 respon2" style="background-image: url('/frontend/images/background/bg-maintainence2.png');">
@@ -30,17 +31,17 @@
 					<span class="s2-txt4">Days</span>
 				</div>
 
-				<div class="flex-col-c-m cd100 size6 bor2 m-l-10 m-r-10 m-t-15">
+				<div class="flex-col-c-m size6 bor2 m-l-10 m-r-10 m-t-15">
 					<span class="l2-txt1 p-b-9 hours">{{ $remain_date->h }}</span>
 					<span class="s2-txt4">Hours</span>
 				</div>
 
-				<div class="flex-col-c-m cd100 size6 bor2 m-l-10 m-r-10 m-t-15">
+				<div class="flex-col-c-m size6 bor2 m-l-10 m-r-10 m-t-15">
 					<span class="l2-txt1 p-b-9 minutes">{{ $remain_date->i}}</span>
 					<span class="s2-txt4">Minutes</span>
 				</div>
 
-				<div class="flex-col-c-m cd100 size6 bor2 m-l-10 m-r-10 m-t-15">
+				<div class="flex-col-c-m size6 bor2 m-l-10 m-r-10 m-t-15">
 					<span class="l2-txt1 p-b-9 seconds">{{$remain_date->s}}</span>
 					<span class="s2-txt4">Seconds</span>
 				</div>
@@ -109,18 +110,20 @@
 		var hour="<?php echo $remain_date->h; ?>";
 		var min="<?php echo $remain_date->i; ?>";
 		var sec="<?php echo $remain_date->s; ?>";
+		// alert(sec);
 	$(document).ready(function(){
 
 			$('.cd100').countdown100({
 				/*Set Endtime here*/
 				/*Endtime must be > current time*/
+				timeZone: "",
 				endtimeYear: 0,
 				endtimeMonth: 0,
 				endtimeDate: date,
 				endtimeHours: hour,
 				endtimeMinutes: min,
 				endtimeSeconds: sec,
-				timeZone: "" 
+				
 				// ex:  timeZone: "America/New_York"
 				//go to " http://momentjs.com/timezone/ " to get timezone
 			});

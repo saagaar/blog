@@ -105,7 +105,7 @@
                 </div>
                 @endforeach
                 @if(auth()->user())
-                    <blog-loading v-bind:saves="{{ $savedBlog }}" :category="'{{ $category->slug }}'"></blog-loading>
+                    <blog-loading v-bind:is-logged-in="true" v-bind:saves="{{ $savedBlog }}"  v-bind:userliked="{{$userLiked}}" :category="'{{ $category->slug }}'"></blog-loading>
                 @else
                     <blog-loading :category="'{{ $category->slug }}'"></blog-loading>
                 @endif

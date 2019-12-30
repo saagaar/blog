@@ -26,13 +26,14 @@
                   <p>{{eachBlog.short_description}}</p>
                   <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a>
                    <a href="" class="appreciate"><i>
-                        <img src="/frontend/images/elements/inactive-appreciate.png" class="img-fluid">
+                        <LikeCheck :likes="initialState.userliked" :code="eachBlog.code"></LikeCheck>
+                      
                     </i> {{eachBlog.likes_count}} like</a>
                    <a href=""><i class="ti-eye"></i> {{eachBlog.views}} view</a>
                     </div>
                 </div>
               </div>
-              <DashboardLoading></DashboardLoading>
+              <DashboardLoading :userliked="initialState.userliked"></DashboardLoading>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12" v-else>
               <div class="single-blog video-style small row m_b_30">
@@ -56,6 +57,7 @@ import PlaceHolderDashboardFeed  from './../components/ContentPlaceholder/PlaceH
 import mixin  from './../mixins/LoadData.mixin.js';
 import FollowSuggestionsList from './../components/Follows/FollowSuggestionsList';
 import DashboardLoading from './../components/InfiniteLoading/DashboardLoading';
+import LikeCheck from './../components/Likes/LikeCheck';
     export default {
         mixins: [ mixin ],  
         data:function(){
@@ -108,7 +110,8 @@ import DashboardLoading from './../components/InfiniteLoading/DashboardLoading';
       components:{
             DashboardLoading,
             FollowSuggestionsList,
-            PlaceHolderDashboardFeed
+            PlaceHolderDashboardFeed,
+            LikeCheck
         },
     }
 

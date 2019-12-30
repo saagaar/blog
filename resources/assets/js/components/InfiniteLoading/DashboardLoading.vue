@@ -17,7 +17,7 @@
                   <p>{{eachBlog.short_description}}</p>
                   <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a>
                    <a href="" class="appreciate"><i>
-                        <img src="/frontend/images/elements/inactive-appreciate.png" class="img-fluid">
+                        <LikeCheck :likes="userliked" :code="eachBlog.code"></LikeCheck>
                     </i> {{eachBlog.likes_count}} like</a>
                    <a href=""><i class="ti-eye"></i> {{eachBlog.views}} view</a>
                     </div>
@@ -33,10 +33,15 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading';
 import Form from './../../services/Form.js';
-
+import LikeCheck from './../../components/Likes/LikeCheck';
 export default {
   components: {
     InfiniteLoading,
+    LikeCheck
+  },
+  props: {
+    userliked:{type:Array,default: function () { return [] }}
+
   },
   data(){
     return {
