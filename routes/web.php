@@ -28,7 +28,6 @@ Route::get('/logincheck', function () {
 Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
 
 
->>>>>>> avi
 Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
 Route::get('/updatelog/cron','Frontend\CronController@updateLogCron')->name('updatelog.cron');
 
