@@ -9,6 +9,7 @@ const state = {
         followingsCount:0,
         loggedInUser:{}
     },
+    likes:0,
     feed: [],
     listComments:[],
     profilePage: {
@@ -26,6 +27,7 @@ const state = {
     },
     openTweetDetails: null,
     isLoading: false,
+    isLikedCurrentBlog:'',
     flashMessage:{},
     appName: 'TheBloggersClub.com'
 }

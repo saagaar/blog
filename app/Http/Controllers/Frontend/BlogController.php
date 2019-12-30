@@ -47,6 +47,7 @@ class BlogController extends FrontendController
                     $input = $request->all();
                     $input['locale_id']='1';
                     $input['user_id']=Auth()->user()->id;
+                    $input['anynomous'] = '2';
                     $created = $this->blog->create($input);
                     $code= uniqid();
                     $part1=substr($code,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);

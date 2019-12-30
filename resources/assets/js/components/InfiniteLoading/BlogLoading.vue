@@ -20,7 +20,7 @@
                     <a href="#" class="appreciate"><i>
                         <LikeCheck v-if="isLoggedIn" :likes="userliked" :code="items.code"></LikeCheck>
                       <img v-else src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
-                    </i> {{items.likes_count}} like</a>
+                    </i> {{items.likes_count}} appreciate</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <SaveBlog v-if="isLoggedIn" :saves="saves" :blogcode="items.code" ></SaveBlog>
                 </div>

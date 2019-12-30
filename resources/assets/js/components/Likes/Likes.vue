@@ -1,11 +1,11 @@
 <template>
 	<div>
          <a href="" @click.prevent="toggleLike" class="appreciate">
-                <img v-if="isChecked" src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
+                <img v-if="this.$store.getters.isLikedCurrentBlog" src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
                 <img v-else src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
          	
    		</a>
-   		<span>{{ count }} people Appreciate this</span>
+   		<span>{{ this.$store.getters.likes }} {{text}}</span>
    	</div>
 </template>
 
@@ -14,13 +14,12 @@ import Form from './../../services/Form.js'
 let action='';
     export default {
         name: 'likes',
-        props: ['currentblog','blogid', 'likes','blogcode'],
+        props: ['currentblog','blogid', 'likes','blogcode','text'],
 
         data: function() {
             return {
                 isChecked:'',
                 isLoading:false,
-                count:''
             }
         },
 
@@ -29,12 +28,12 @@ let action='';
                 var indexval=(this.likes.indexOf(this.blogid));
                 if(indexval==-1)
                 {
-                    this.isChecked=false;
+                    this.$store.commit('TOGGLE_LIKED_CURRENT_BLOG',false);
                 }else{
-                    this.isChecked=true;
+                    this.$store.commit('TOGGLE_LIKED_CURRENT_BLOG',true);
                 }
             }
-            this.count=this.currentblog.likes_count;
+            this.$store.commit('LIKES_COUNT',this.currentblog.likes_count);
         },
        computed:{
             me(){
@@ -42,7 +41,7 @@ let action='';
             },
             loggedIn(){
               return this.$store.getters.user.loggedInUser;
-            }              
+            }   
         },
         methods: {
             toggleLike:function(){
@@ -59,23 +58,23 @@ let action='';
                     form.post(action).then(response => {
                         if (response.data.status) {
                             this.isLoading=false;
-                            if(this.isChecked)
+                            if(this.$store.getters.isLikedCurrentBlog)
                             {
-                                this.isChecked=false;
+                                curObject.$store.commit('TOGGLE_LIKED_CURRENT_BLOG',false);
                             }
                             else
                             {
-                                  this.isChecked=true;
+                                  curObject.$store.commit('TOGGLE_LIKED_CURRENT_BLOG',true);
                             } 
-                        	return this.count = response.data.likes['0'].likes_count; 
+                        	this.$store.commit('LIKES_COUNT',response.data.likes['0'].likes_count); 
                         }else{
-                            if(this.isChecked)
+                            if(this.$store.getters.isLikedCurrentBlog)
                             {
-                                this.isChecked=false;
+                                curObject.$store.commit('TOGGLE_LIKED_CURRENT_BLOG',false);
                             }
                             else
                             {
-                                  this.isChecked=true;
+                                  curObject.$store.commit('TOGGLE_LIKED_CURRENT_BLOG',true);
                             } 
                         }
 

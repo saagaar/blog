@@ -89,7 +89,9 @@ button:focus {
 
 .area-padding-top {
   padding-top: 60px; }
-
+li.top-social {
+    float: right;
+}
 .area-padding-bottom {
   padding-bottom: 60px; }
 

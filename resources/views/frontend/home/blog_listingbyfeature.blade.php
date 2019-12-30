@@ -55,7 +55,7 @@
                                 
                                     <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 @endif
-                                </i>&nbsp;&nbsp;{{$eachBlog->likes_count }} like</a>
+                                </i>&nbsp;&nbsp;{{$eachBlog->likes_count }} appreciate</a>
                                 <a href="#"><i class="ti-eye"></i> {{ $eachBlog->views }} view</a>
                                 @if(auth()->user())
                                 <save-blog :blogcode="'{{$eachBlog->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>

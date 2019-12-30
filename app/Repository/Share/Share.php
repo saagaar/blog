@@ -20,7 +20,7 @@ Class Share implements ShareInterface
     	$blog=$this->blog->getBlogByCode($blogCode);
         $share =$this->share->where('blog_id',$blog->id)->latest();
         if(!$share){
-            $this->share->create(array('blog_id'=>$blog->id));
+            $this->share->create(array('blog_id'=>$blog->id,'fb_share_count'=>0,'tw_share_count'=>0,'ln_share_count'=>0));
         }
     	$shareByBlog=$this->share->where('blog_id',$blog->id)->first();
         // print_r($shareByBlog);exit;
@@ -36,8 +36,11 @@ Class Share implements ShareInterface
     	$data=[];
     	$this->blog =app()->make('App\Repository\BlogInterface');
     	$blog=$this->blog->getBlogByCode($blogCode);
-    	$shareByBlog=$this->share->where('blog_id',$blog->id)->first()->toArray();
-		$total = $shareByBlog['fb_share_count'] + $shareByBlog['tw_share_count'] + $shareByBlog['ln_share_count']; 
+    	$shareByBlog=$this->share->where('blog_id',$blog->id)->first();
+      if(!$shareByBlog){
+            $this->share->create(array('blog_id'=>$blog->id,'fb_share_count'=>0,'tw_share_count'=>0,'ln_share_count'=>0));
+        }
+		$total = $shareByBlog->fb_share_count + $shareByBlog->tw_share_count + $shareByBlog->ln_share_count; 
 		$data['total_share']=$total;
    	 return	$data;
     }
