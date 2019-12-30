@@ -342,26 +342,24 @@
 <!-- /newsletter -->
 
 <!-- footer -->
-
 <footer class="section-lg footer pb-0" style="background-image:url(landing-page/assets/images/backgrounds/footer-bg.png);">
 
   <div class="container">
     <div class="row">
-       <div class="col-lg-2 text-center text-lg-left mb-4 mb-lg-0">
-
+       <div class="col-lg-2 col-md-4 col-sm-4 text-center text-lg-left mb-4 mb-lg-0">
         <a href="/" class="footer-logo">
           <img class="img-fluid" src="{{asset('uploads/sitesettings-images/'.$websiteLogo)}}"  alt="logo">
           </a>
         </div>
 
       <!-- footer menu -->
-      <nav class="col-lg-3 align-self-center mb-2">
+      <nav class="col-lg-3 col-md-8 col-sm-8 align-self-center mb-2">
         <h4>Get In Touch</h4>
         <p> For any suggestions or feedbacks</p> 
         <p><a href="mailto:{{ config('settings.contact_email')}}">{{ config('settings.contact_email')}} </a></p>
         <a href="{{$websiteUrl}}">{{$siteName}}</a>
       </nav>  
-      <nav class="col-lg-4 align-self-center mb-2">
+      <nav class="col-lg-4 col-md-12 align-self-center mb-2">
         <contact></contact>
         <!-- <form class="contact-form-footer">
           <input class="form-control" type="" name="" placeholder="Name">
@@ -371,7 +369,7 @@
         </form> -->
       </nav>
       <!-- footer social icon -->
-      <nav class="col-lg-3">
+      <nav class="col-lg-3 col-md-12">
         <ul class="list-inline text-lg-right text-center social-icon">
         @if(config('settings.facebook_id'))
           <li class="list-inline-item">
@@ -402,6 +400,7 @@
   </div>
   </div>
 </footer>
+
 </div>
 <!-- /footer -->
 
