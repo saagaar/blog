@@ -36,8 +36,6 @@ class CheckForMaintenanceMode extends Middleware
            $session = new Session();
            $route = Route::getRoutes()->match($request);
             $currentroute = $route->getName();
-           //  echo "<pre>";
-           // print_r($this->settings->first());exit;
 	         if($request->post('maintainence_code'))
 	         {
               $session->set('maintainence_code', $request->post('maintainence_code'));

@@ -19,8 +19,19 @@ Route::get('/logincheck', function () {
 ]);
 });
 
+
+// Route::domain('{slug}.localhost:8000')->group(function () {
+	
+// 	Route::get('/category/{slug}','Frontend\HomeController@blogByCategory')->name('blogbycategory');
+
+// });
+Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
+
+
+>>>>>>> avi
 Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
 Route::get('/updatelog/cron','Frontend\CronController@updateLogCron')->name('updatelog.cron');
+
 
 Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');
 Route::get('/blog/detail/{code}/{slug}', 'Frontend\HomeController@blogDetail')->name('blog.detail');
