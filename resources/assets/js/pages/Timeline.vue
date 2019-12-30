@@ -33,7 +33,7 @@
                         <p v-if="eachBlog.short_description==NULL"> ---- </p>
                         <p v-else-if="eachBlog.short_description.length<500" v-html="eachBlog.short_description"></p>
                         <p v-else v-html="eachBlog.short_description.substring(0,500)+' ......' "></p>
-                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a> <a href="#"><img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid"> {{eachBlog.likes_count}} like</a> <a href="#"><i class="ti-eye"></i> {{ eachBlog.views }} view</a> </div>
+                        <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a> <a href="#"><img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid"> {{eachBlog.likes_count}} appreciate</a> <a href="#"><i class="ti-eye"></i> {{ eachBlog.views }} view</a> </div>
                       </div>
                     </div>
                     <div class="align-right">

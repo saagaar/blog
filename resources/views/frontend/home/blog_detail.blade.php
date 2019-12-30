@@ -26,14 +26,28 @@
 
                             @endif
                         </div>
-                        <div class="blog_details">
+                        <div class="blog_details" >
                             <h2>{{ $blogDetails->title }}</h2>
                             <ul class="blog-info-link mt-3 mb-4">
                                 <li><a href="#"><i class="far fa-user"></i> 
                                 @php
                                echo  ($blogDetails->anynomous=='2') ? (isset($blogDetails->user->name)  ? '<a href="/profile/'.$blogDetails->user->username.'"> '. $blogDetails->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
                                 @endphp  </a></li>
+                                <li><p class="like-info"><span class="align-middle">
+                                @if(!auth()->user())
+                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :text="' appreciate'"></likes>
+                                @else
+                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :text="' appreciate'" :likes="{{$likes}}"></likes>
+                                @endif
+                            </span></p></li>
                                 <li><icon-comments-count></icon-comments-count></li>
+                                <li>{{$totalShare['total_share']}} Share</li>
+                                <li class="top-social">
+                                    @php($url=url('https://thebloggersclub.com/blog/detail/'.$blogDetails->code.'/'.str_slug($blogDetails->title)))
+                        
+                                    <fb-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></fb-share>
+                                    <tw-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></tw-share>    
+                                </li>
                             </ul>
                             <p class="excert">
                             	{!! $blogDetails->content !!}
@@ -44,11 +58,11 @@
                         <div class="d-sm-flex justify-content-between text-center">
                             <p class="like-info"><span class="align-middle">
                                 @if(!auth()->user())
-                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'"></likes>
+                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :text="'people appreciate this'"></likes>
                                 @else
-                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :likes="{{$likes}}"></likes>
+                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :text="'people appreciate this'" :likes="{{$likes}}"></likes>
                                 @endif
-                            <!-- </span>{{$blogDetails->likes_count}} people like this</p> -->
+                            </span></p>
                             <div class="col-sm-4 text-center my-2 my-sm-0">
                                 <p class="comment-count"><span class="align-middle"></span> <icon-comments-count></icon-comments-count></p>
                             </div>

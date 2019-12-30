@@ -5,8 +5,11 @@ namespace App\Services;
 Class VisitorInfo
 {
 	public function visitorsIp($ipAddress){
+     try{
 		if($ipAddress){
+            delay(1);
 			$ip_api = json_decode(file_get_contents("http://ip-api.io/json/{$ipAddress}"));
+
 
 			if($ip_api && !array_key_exists('status_message', $ip_api)){
 				$data = array(
@@ -45,7 +48,28 @@ Class VisitorInfo
 					);
 			}
 			return $data;
-		}
+		  }
+        }
+        catch(Exception $e)
+        {
+            $plugin = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip={$ipAddress}"));
+                $data = array(
+                        'country_code'          =>$plugin->geoplugin_countryCode,
+                        'country'               =>$plugin->geoplugin_countryName,
+                        'region'                =>$plugin->geoplugin_regionName,
+                        'region_code'           =>$plugin->geoplugin_regionCode,
+                        'city'                  =>$plugin->geoplugin_city,
+                        'time_zone'             =>$plugin->geoplugin_timezone,
+                        'latitude'              =>$plugin->geoplugin_latitude,
+                        'longitude'             =>$plugin->geoplugin_longitude,
+                        'organisation'          =>'',
+                        'flagurl'               =>'',
+                        'currencysymbol'        =>$plugin->geoplugin_currencySymbol,
+                        'currency'              =>$plugin->geoplugin_currencyCode,
+                        'callingcode'           =>$plugin->geoplugin_areaCode,
+                        'countrycapital'        =>'',
+                    );
+        }
 	}
 	public function getServerInfo(){
         $device = '';

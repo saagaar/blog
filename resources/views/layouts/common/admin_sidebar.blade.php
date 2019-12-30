@@ -101,7 +101,8 @@
     </li>
      <li @if($primary_menu=="seo.list") class="active" @endif><a href="{{route('seo.list')}}"><i class="fa fa-search"></i> <span>Seo Management</span></a>   
     </li>
-
+    <li @if($primary_menu=="audit.list") class="active" @endif><a href="{{route('audit.list')}}"><i class="fa fa-search"></i> <span>Audit Management</span></a>   
+    </li>
   </ul>
   <!-- /.sidebar-menu -->
 </section>

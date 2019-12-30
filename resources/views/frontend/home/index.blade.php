@@ -50,7 +50,7 @@
                                 
                                     <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                 @endif
-                                </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} like</a>
+                                </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
                                 
                                 @if(auth()->user())

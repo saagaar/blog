@@ -89,7 +89,9 @@ button:focus {
 
 .area-padding-top {
   padding-top: 60px; }
-
+li.top-social {
+    float: right;
+}
 .area-padding-bottom {
   padding-bottom: 60px; }
 
@@ -5362,7 +5364,7 @@ ul.album-photos li img{
 .notifications_list a img, .notifications_list a p,
 .notifications_list a b, .notifications_list a span{display: inline-block;
  position: relative;}
-.notifications_list a img{max-height: 30px ; max-width: 30px; border-radius: 100px;vertical-align: top}
+.notifications_list a img{max-height: 50px ; max-width: 50px; border-radius: 100px;vertical-align: top}
 .notifications_list a p{
   margin-bottom: 0px
 }
@@ -5705,6 +5707,7 @@ animation:passing-reverse 3s linear infinite}
 }
 .notifications_list a img{
   margin-left: 15px;
+  margin-top: -20px;
 
 }
 
