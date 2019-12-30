@@ -85,6 +85,7 @@ class UserController extends FrontendController
           return redirect()->route('home')
                         ->with('error','No user found!!'); 
        $myBlogs=$blog->getActiveBlogByUserId($user['userid']);
+       
        unset($user['userid']);
        if($routeName=='api')
        {

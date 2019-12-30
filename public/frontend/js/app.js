@@ -6610,6 +6610,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
 /* harmony import */ var _components_Likes_SaveBlog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../components/Likes/SaveBlog */ "./resources/assets/js/components/Likes/SaveBlog.vue");
+/* harmony import */ var _components_Likes_LikeCheck__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../components/Likes/LikeCheck */ "./resources/assets/js/components/Likes/LikeCheck.vue");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -6653,12 +6654,24 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     category: String,
+    isLoggedIn: {
+      type: Boolean,
+      "default": false
+    },
+    userliked: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
     saves: {
       type: Array,
       "default": function _default() {
@@ -6668,7 +6681,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   },
   components: {
     InfiniteLoading: vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0___default.a,
-    SaveBlog: _components_Likes_SaveBlog__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SaveBlog: _components_Likes_SaveBlog__WEBPACK_IMPORTED_MODULE_2__["default"],
+    LikeCheck: _components_Likes_LikeCheck__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
@@ -6766,6 +6780,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
 /* harmony import */ var _components_Likes_SaveBlog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../components/Likes/SaveBlog */ "./resources/assets/js/components/Likes/SaveBlog.vue");
+/* harmony import */ var _components_Likes_LikeCheck__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../components/Likes/LikeCheck */ "./resources/assets/js/components/Likes/LikeCheck.vue");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -6815,13 +6830,25 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     slug: String,
+    isLoggedIn: {
+      type: Boolean,
+      "default": false
+    },
     saves: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    userliked: {
       type: Array,
       "default": function _default() {
         return [];
@@ -6830,7 +6857,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   },
   components: {
     InfiniteLoading: vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0___default.a,
-    SaveBlog: _components_Likes_SaveBlog__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SaveBlog: _components_Likes_SaveBlog__WEBPACK_IMPORTED_MODULE_2__["default"],
+    LikeCheck: _components_Likes_LikeCheck__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
@@ -6983,6 +7011,10 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     SaveBlog: _components_Likes_SaveBlog__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
+    isLoggedIn: {
+      type: Boolean,
+      "default": false
+    },
     saves: {
       type: Array,
       "default": function _default() {
@@ -7002,11 +7034,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       lists: [],
       form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]()
     };
-  },
-  computed: {
-    loggedIn: function loggedIn() {
-      return this.$store.getters.user.isLoggedIn;
-    }
   },
   watch: {
     users: function users(newval) {
@@ -45864,7 +45891,28 @@ var render = function() {
                             "a",
                             { staticClass: "appreciate", attrs: { href: "#" } },
                             [
-                              _vm._m(0, true),
+                              _c(
+                                "i",
+                                [
+                                  _vm.isLoggedIn
+                                    ? _c("LikeCheck", {
+                                        attrs: {
+                                          likes: _vm.userliked,
+                                          code: items.code
+                                        }
+                                      })
+                                    : _c("img", {
+                                        staticClass: "img-fluid",
+                                        attrs: {
+                                          src:
+                                            "frontend/images/elements/inactive-appreciate.png",
+                                          width: "25",
+                                          height: "25"
+                                        }
+                                      })
+                                ],
+                                1
+                              ),
                               _vm._v(" " + _vm._s(items.likes_count) + " like")
                             ]
                           ),
@@ -45874,9 +45922,14 @@ var render = function() {
                             _vm._v(" " + _vm._s(items.views) + " view")
                           ]),
                           _vm._v(" "),
-                          _c("SaveBlog", {
-                            attrs: { saves: _vm.saves, blogcode: items.code }
-                          })
+                          _vm.isLoggedIn
+                            ? _c("SaveBlog", {
+                                attrs: {
+                                  saves: _vm.saves,
+                                  blogcode: items.code
+                                }
+                              })
+                            : _vm._e()
                         ],
                         1
                       )
@@ -45903,19 +45956,7 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("i", [
-      _c("img", {
-        staticClass: "img-fluid",
-        attrs: { src: "/frontend/images/elements/inactive-appreciate.png" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -46027,7 +46068,28 @@ var render = function() {
                             "a",
                             { staticClass: "appreciate", attrs: { href: "" } },
                             [
-                              _vm._m(0, true),
+                              _c(
+                                "i",
+                                [
+                                  _vm.isLoggedIn
+                                    ? _c("LikeCheck", {
+                                        attrs: {
+                                          likes: _vm.userliked,
+                                          code: items.code
+                                        }
+                                      })
+                                    : _c("img", {
+                                        staticClass: "img-fluid",
+                                        attrs: {
+                                          src:
+                                            "frontend/images/elements/inactive-appreciate.png",
+                                          width: "25",
+                                          height: "25"
+                                        }
+                                      })
+                                ],
+                                1
+                              ),
                               _vm._v(" " + _vm._s(items.likes_count) + " like")
                             ]
                           ),
@@ -46037,9 +46099,14 @@ var render = function() {
                             _vm._v(" " + _vm._s(items.views) + " view")
                           ]),
                           _vm._v(" "),
-                          _c("SaveBlog", {
-                            attrs: { saves: _vm.saves, blogcode: items.code }
-                          })
+                          _vm.isLoggedIn
+                            ? _c("SaveBlog", {
+                                attrs: {
+                                  saves: _vm.saves,
+                                  blogcode: items.code
+                                }
+                              })
+                            : _vm._e()
                         ],
                         1
                       )
@@ -46066,19 +46133,7 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("i", [
-      _c("img", {
-        staticClass: "img-fluid",
-        attrs: { src: "/frontend/images/elements/inactive-appreciate.png" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -46194,7 +46249,7 @@ var render = function() {
                               _c(
                                 "i",
                                 [
-                                  _vm.userliked
+                                  _vm.isLoggedIn
                                     ? _c("LikeCheck", {
                                         attrs: {
                                           likes: _vm.userliked,
@@ -46222,7 +46277,7 @@ var render = function() {
                             _vm._v(" " + _vm._s(items.views) + " view")
                           ]),
                           _vm._v(" "),
-                          _vm.userliked
+                          _vm.isLoggedIn
                             ? _c("SaveBlog", {
                                 attrs: {
                                   saves: _vm.saves,
