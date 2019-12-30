@@ -11126,7 +11126,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#display-message[data-v-aff12160]{\n    border: 1px solid;\n    min-width: 200px;\n    max-width: 500px;\n    height: auto;\n    position: relative;\n    z-index: 1000;\n    float: right;\n    left: 1px;\n    background:#3c2a2a;\n    opacity: 0.7;\n    border-top-left-radius: 18px;\n    border-bottom-left-radius: 20px;\n    color: white;\n    top:-26px;\n    font-size: 16px;\n    padding: 16px;\n    position: fixed;\n    top: 80px;\n    left: auto;\n    right: 0;\n    background: #170a0b;\n    border: solid 1px #black;\n    color: #fff;\n    padding: 10px 22px;\n}\n#message-status[data-v-aff12160]{\n   float: left;padding-left: 5px;padding-right: 10px\n}\n#message-data[data-v-aff12160]{\n   float: left\n}\n   ", ""]);
+exports.push([module.i, "\n#display-message[data-v-aff12160]{\r\n    border: 1px solid;\r\n    min-width: 200px;\r\n    max-width: 500px;\r\n    height: auto;\r\n    position: relative;\r\n    z-index: 1000;\r\n    float: right;\r\n    left: 1px;\r\n    background:#3c2a2a;\r\n    opacity: 0.7;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 20px;\r\n    color: white;\r\n    top:-26px;\r\n    font-size: 16px;\r\n    padding: 16px;\r\n    position: fixed;\r\n    top: 80px;\r\n    left: auto;\r\n    right: 0;\r\n    background: #170a0b;\r\n    border: solid 1px #black;\r\n    color: #fff;\r\n    padding: 10px 22px;\n}\n#message-status[data-v-aff12160]{\r\n   float: left;padding-left: 5px;padding-right: 10px\n}\n#message-data[data-v-aff12160]{\r\n   float: left\n}\r\n   ", ""]);
 
 // exports
 
@@ -11145,7 +11145,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#display-message[data-v-6351b98e]{\n    border: 1px solid;\n    min-width: 200px;\n    max-width: 500px;\n    height: auto;\n    position: relative;\n    z-index: 1000;\n    float: right;\n    left: 1px;\n    background:#3c2a2a;\n    opacity: 0.7;\n    border-top-left-radius: 18px;\n    border-bottom-left-radius: 20px;\n    color: white;\n    top:-26px;\n    font-size: 16px;\n    padding: 16px;\n    position: fixed;\n    top: 80px;\n    left: auto;\n    right: 0;\n    background: #170a0b;\n    border: solid 1px #black;\n    color: #fff;\n    padding: 10px 22px;\n}\n#message-status[data-v-6351b98e]{\n   float: left;padding-left: 5px;padding-right: 10px\n}\n#message-data[data-v-6351b98e]{\n   float: left\n}\n", ""]);
+exports.push([module.i, "\n#display-message[data-v-6351b98e]{\r\n    border: 1px solid;\r\n    min-width: 200px;\r\n    max-width: 500px;\r\n    height: auto;\r\n    position: relative;\r\n    z-index: 1000;\r\n    float: right;\r\n    left: 1px;\r\n    background:#3c2a2a;\r\n    opacity: 0.7;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 20px;\r\n    color: white;\r\n    top:-26px;\r\n    font-size: 16px;\r\n    padding: 16px;\r\n    position: fixed;\r\n    top: 80px;\r\n    left: auto;\r\n    right: 0;\r\n    background: #170a0b;\r\n    border: solid 1px #black;\r\n    color: #fff;\r\n    padding: 10px 22px;\n}\n#message-status[data-v-6351b98e]{\r\n   float: left;padding-left: 5px;padding-right: 10px\n}\n#message-data[data-v-6351b98e]{\r\n   float: left\n}\r\n", ""]);
 
 // exports
 
@@ -11164,7 +11164,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#display-message[data-v-40be661b]{\n    border: 1px solid;\n    min-width: 200px;\n    max-width: 500px;\n    height: auto;\n    position: relative;\n    z-index: 1000;\n    float: right;\n    left: 1px;\n    background:#3c2a2a;\n    opacity: 0.7;\n    border-top-left-radius: 18px;\n    border-bottom-left-radius: 20px;\n    color: white;\n    top:-26px;\n    font-size: 16px;\n    padding: 16px;\n    position: fixed;\n    top: 80px;\n    left: auto;\n    right: 0;\n    background: #170a0b;\n    border: solid 1px #black;\n    color: #fff;\n    padding: 10px 22px;\n}\n#message-status[data-v-40be661b]{\n   float: left;padding-left: 5px;padding-right: 10px\n}\n.msg-icon[data-v-40be661b]{\n  float: left;\n}\n.msg-icon svg[data-v-40be661b]{\n  margin-right: 8px;\n}\n#message-data[data-v-40be661b]{\n   float: left;\n   text-align: left;\n   line-height: 20px\n}\n   ", ""]);
+exports.push([module.i, "\n#display-message[data-v-40be661b]{\r\n    border: 1px solid;\r\n    min-width: 200px;\r\n    max-width: 500px;\r\n    height: auto;\r\n    position: relative;\r\n    z-index: 1000;\r\n    float: right;\r\n    left: 1px;\r\n    background:#3c2a2a;\r\n    opacity: 0.7;\r\n    border-top-left-radius: 18px;\r\n    border-bottom-left-radius: 20px;\r\n    color: white;\r\n    top:-26px;\r\n    font-size: 16px;\r\n    padding: 16px;\r\n    position: fixed;\r\n    top: 80px;\r\n    left: auto;\r\n    right: 0;\r\n    background: #170a0b;\r\n    border: solid 1px #black;\r\n    color: #fff;\r\n    padding: 10px 22px;\n}\n#message-status[data-v-40be661b]{\r\n   float: left;padding-left: 5px;padding-right: 10px\n}\n.msg-icon[data-v-40be661b]{\r\n  float: left;\n}\n.msg-icon svg[data-v-40be661b]{\r\n  margin-right: 8px;\n}\n#message-data[data-v-40be661b]{\r\n   float: left;\r\n   text-align: left;\r\n   line-height: 20px\n}\r\n   ", ""]);
 
 // exports
 
@@ -57739,8 +57739,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONFIG = {
-  // ROOT_URL: 'http://localhost:8000/',
-  ROOT_URL: 'https://thebloggersclub.com/'
+  ROOT_URL: 'http://localhost:8000/' // ROOT_URL: 'https://thebloggersclub.com/',
+
 };
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 
@@ -58389,7 +58389,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/blog/resources/assets/js/landing-page.js */"./resources/assets/js/landing-page.js");
+module.exports = __webpack_require__(/*! C:\blog\resources\assets\js\landing-page.js */"./resources/assets/js/landing-page.js");
 
 
 /***/ })

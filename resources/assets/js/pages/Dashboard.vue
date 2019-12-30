@@ -28,7 +28,7 @@
                    <a href="" class="appreciate"><i>
                         <LikeCheck :likes="initialState.userliked" :code="eachBlog.code"></LikeCheck>
                       
-                    </i> {{eachBlog.likes_count}} like</a>
+                    </i> {{eachBlog.likes_count}} appreciate</a>
                    <a href=""><i class="ti-eye"></i> {{eachBlog.views}} view</a>
                     </div>
                 </div>

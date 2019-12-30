@@ -18,7 +18,7 @@
                   <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a>
                    <a href="" class="appreciate"><i>
                         <LikeCheck :likes="userliked" :code="eachBlog.code"></LikeCheck>
-                    </i> {{eachBlog.likes_count}} like</a>
+                    </i> {{eachBlog.likes_count}} appreciate</a>
                    <a href=""><i class="ti-eye"></i> {{eachBlog.views}} view</a>
                     </div>
                 </div>

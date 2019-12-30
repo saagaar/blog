@@ -127,9 +127,12 @@ class HomeController extends FrontendController
     public function blogDetail($code,$slug,Request $request){
 
       $this->blogVisit = app()->make('App\Repository\BlogVisitInterface');
-      $blogDetails = $this->blog->getBlogByCode($code);
-      $prev = $this->blog->getAll()->where('id', '>',$blogDetails['id'])->where(['save_method'=>2,'show_in_home'=>1])->orderBy('id','asc')->first();
-      $next = $this->blog->getAll()->where('id', '<', $blogDetails['id'])->where(['save_method'=>2,'show_in_home'=>1])->orderBy('id','desc')->first();
+       $this->share = app()->make('App\Repository\ShareInterface');
+       $totalShare = $this->share->getTotalShare($code);
+      $blogDetails = $this->blog->getActiveBlogByCode($code);
+      $prev = $this->blog->getAll()->where('id', '<',$blogDetails['id'])->where(['save_method'=>2])->orderBy('id','desc')->first();
+
+      $next = $this->blog->getAll()->where('id', '>', $blogDetails['id'])->where(['save_method'=>2])->orderBy('id')->first();
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $relatedBlog = $this->blog->relatedBlogBycode($code);
       $navCategory=$this->category->getCategoryByShowInHome();
@@ -158,7 +161,7 @@ class HomeController extends FrontendController
 
           $this->blog->updateBlogViewCount($blogDetails);
         }
-        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory));
+        return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory,'totalShare'=>$totalShare));
     }
 
     public function resizeImage($code,$width,$name)

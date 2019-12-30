@@ -114,6 +114,9 @@ Class Blog implements BlogInterface
   public function getBlogByCode($blogCode){
     return $this->blog->where('code', $blogCode)->with('tags','user')->withCount('likes','comments')->first();
   }
+  public function getActiveBlogByCode($blogCode){
+    return $this->blog->where(['save_method'=>2,'code'=>$blogCode])->with('tags','user')->withCount('likes','comments')->first();
+  }
    /**
    * Get  Blog by user id
    *

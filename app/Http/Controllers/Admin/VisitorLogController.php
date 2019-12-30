@@ -79,5 +79,31 @@ class VisitorLogController extends AdminController
             }
         }
     }
+    public function blockIp(BlocklistInterface $blockList,$ip)
+    {
+        $adminId = auth()->user()->id;  
+        $ip_address=$blockList->getByIp($ip);
+             
+            if($ip_address)
+            {
+                if($ip_address->status=='black')
+                {
+                        return redirect()->route('blocklist.list')
+                        ->with('error','Ip is already Blocked');
+                }
+                else
+                    {
+                     return redirect()->route('blocklist.list');
+                    }
+            }
+            
+            else {
+                
+                $data = array('ip_address'=>$ip,'message'=>'Blocked By admin','status'=>'black','admin_id'=>$adminId);
+                $blockList->create($data);
+                return redirect()->route('blocklist.list')
+                        ->with('success','Block List updated successfully.');
+            }
+    }
     
 }

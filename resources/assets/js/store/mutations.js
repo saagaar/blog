@@ -43,9 +43,15 @@ export const DECREMENT_FOLLOWERS_COUNT = (state, count) => {
 export const DECREMENT_FOLLOWING_COUNT = (state, count) => {
     state.me.followingCount -= count;
 }
+export const LIKES_COUNT = (state, likes) => {
+    state.likes = likes;
+}
 export const TOGGLE_LOADING = state => 
 {
     state.isLoading = !state.isLoading;
+}
+export const TOGGLE_LIKED_CURRENT_BLOG = (state, isLikedCurrentBlog) => {
+    state.isLikedCurrentBlog = isLikedCurrentBlog;
 }
 
 export const SETFLASHMESSAGE = (state, flashdata)=> 

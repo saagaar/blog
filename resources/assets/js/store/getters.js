@@ -8,6 +8,8 @@ export const user = state => state.user
 // Get user feed
 export const feed = state => state.feed
 
+export const likes = state => state.likes
+
 // Get user profile page
 export const categoryPage = state => state.categoryPage
 
@@ -22,6 +24,9 @@ export const openTweetDetails = state => state.openTweetDetails
 
 // Get toggle status of loading
 export const isLoading = state => state.isLoading
+
+//get Liked Status in current blog
+export const isLikedCurrentBlog = state => state.isLikedCurrentBlog
 
 // Get the app name
 export const appName = state => state.appName

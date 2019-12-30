@@ -28,7 +28,6 @@ Route::get('/logincheck', function () {
 Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
 
 
->>>>>>> avi
 Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
 Route::get('/updatelog/cron','Frontend\CronController@updateLogCron')->name('updatelog.cron');
 
@@ -249,7 +248,11 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::match(['get','post'],'/create/permission','Admin\PermissionController@create')->name('permission.create');
 	Route::match(['get','post'],'/edit/permission/{id}','Admin\PermissionController@edit')->name('permission.edit');
 	Route::get('/delete/permission/{id}','Admin\PermissionController@delete')->name('permission.delete');
-	
+	// audit
+	Route::get('/list/audit','Admin\AuditController@list')->name('audit.list');
+
+
+	//audit
 	//Route for Cms
 	Route::get('/list/cms','Admin\CmsController@list')->name('cms.list');
 	Route::match(['get','post'],'/create/cms','Admin\CmsController@create')->name('cms.create');
@@ -333,6 +336,7 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::get('/view/websitelog/{id}','Admin\VisitorLogController@view')->name('websitelog.view');
 	Route::get('/block/websitelog/{id}','Admin\VisitorLogController@block')->name('websitelog.block');
 
+	Route::get('/block/ip/{ip}','Admin\VisitorLogController@blockIp')->name('ip.block');
 	//Route for IP Block List
 	Route::get('/list/blocklist','Admin\BlockListController@list')->name('blocklist.list');
 	Route::match(['get','post'],'/create/blocklist','Admin\BlockListController@create')->name('blocklist.create');
