@@ -27,12 +27,13 @@
                             @endif
                         </div>
                         <div class="blog_details" >
-                            <h2>{{ $blogDetails->title }}</h2>
-                            <ul class="blog-info-link mt-3 mb-4">
-                                <li><a href="#"><i class="far fa-user"></i> 
+                            <div class="meta-top d-flex"><a href="#"><i class="far fa-user"></i> 
                                 @php
                                echo  ($blogDetails->anynomous=='2') ? (isset($blogDetails->user->name)  ? '<a href="/profile/'.$blogDetails->user->username.'"> '. $blogDetails->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
-                                @endphp  </a></li>
+                                @endphp  </a></div>
+                            <h2>{{ $blogDetails->title }}</h2>
+                            <ul class="blog-info-link mt-3 mb-4">
+                                
                                 <li><p class="like-info"><span class="align-middle">
                                 @if(!auth()->user())
                                 <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :text="' appreciate'"></likes>
