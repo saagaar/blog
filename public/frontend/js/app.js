@@ -7654,7 +7654,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7669,10 +7668,21 @@ var action = '';
   },
   data: function data() {
     return {
-      isChecked: '',
+      isChecked: false,
       isLoading: false,
-      count: ''
+      count: '',
+      faClass: 'fa',
+      setClass: 'fa-bookmark'
     };
+  },
+  watch: {
+    isChecked: function isChecked(newval) {
+      if (newval) {
+        this.setClass = ' fa-clipboard-check';
+      } else {
+        this.setClass = ' fa-bookmark';
+      }
+    }
   },
   mounted: function mounted() {
     if (this.saves) {
@@ -47046,10 +47056,11 @@ var render = function() {
         }
       },
       [
-        _vm.isChecked
-          ? _c("i", { staticClass: "fa fa-clipboard-check" })
-          : _c("i", { staticClass: "fa fa-bookmark" }),
-        _vm._v(" \n\t\t" + _vm._s(_vm.isChecked ? "Saved" : "Save") + " ")
+        _c("i", {
+          staticClass: "fa",
+          class: _vm.isChecked ? "fa-clipboard-check" : "fa-bookmark"
+        }),
+        _vm._v("\n\t\t" + _vm._s(_vm.isChecked ? "Saved" : "Save") + " ")
       ]
     )
   ])
@@ -47842,7 +47853,7 @@ var render = function() {
                             attrs: {
                               type: "checkbox",
                               name: "remember",
-                              id: "password1"
+                              id: "re-password"
                             },
                             domProps: {
                               checked: Array.isArray(_vm.loginForm.remember)
@@ -69928,8 +69939,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONFIG = {
-  ROOT_URL: 'http://localhost:8000/' // ROOT_URL: 'https://thebloggersclub.com/',
-
+  // ROOT_URL: 'http://localhost:8000/',
+  ROOT_URL: 'https://thebloggersclub.com/'
 };
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 

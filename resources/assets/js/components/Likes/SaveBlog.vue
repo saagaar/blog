@@ -1,8 +1,7 @@
 <template>
 	<div>
-		<a href="" @click.prevent="toggleSave" class="book_mark">
-			<i v-if="isChecked" class="fa fa-clipboard-check"></i>
-			<i v-else class="fa fa-bookmark"></i> 
+		<a href="" @click.prevent="toggleSave" class="book_mark" >
+			<i class="fa" :class="isChecked ? 'fa-clipboard-check' : 'fa-bookmark'"></i>
 		{{ isChecked ? 'Saved' : 'Save'}} </a>
    	</div>
 </template>
@@ -19,12 +18,24 @@ let action='';
 
         data: function() {
             return {
-                isChecked:'',
+                isChecked:false,
                 isLoading:false,
-                count:''
+                count:'',
+                faClass:'fa',
+                setClass:'fa-bookmark'
             }
         },
-
+        watch:{
+            isChecked:function(newval){
+                if(newval)
+                {
+                    this.setClass=' fa-clipboard-check';
+                }
+                else{
+                    this.setClass=' fa-bookmark';
+                }
+            }
+        },
         mounted() {
             if(this.saves){
                 var indexval=(this.saves.indexOf(this.blogcode));

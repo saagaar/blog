@@ -31,12 +31,12 @@
     <section class="header-top">
         <div class="container">
             <div class="row align-items-center justify-content-between">
-                <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-3 logo-wrapper">
                     <a href="/blog" class="logo">
                         <img src="{{asset('uploads/sitesettings-images/'. config('settings.image') )}}" alt='logo' >
                     </a>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-9  search-trigger">
                     <div class="right-button">
                         @if(!auth()->user())
                         <ul>
@@ -55,7 +55,7 @@
                             <em >{{ auth()->user()->unreadNotifications()->count() }}</em>
                             @endif
                             </a>
-                               <notification-loading :notificationList="[]" :loadtype="'fullload'" :type="'nav'" ></notification-loading>
+                               
                                 
                         </li>
                    

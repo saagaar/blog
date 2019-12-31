@@ -112,7 +112,7 @@
               </div>
             </div> 
             <div class="form-group">
-              <input type="checkbox" name="remember" id="password1" v-model.trim="loginForm.remember">  Remember Me
+              <input type="checkbox" name="remember" id="re-password" v-model.trim="loginForm.remember">  Remember Me
             </div>
             <button type="submit" @click.prevent="submitLoginForm"  class="btn btn-primary btn-round"><Loader></Loader> Login</button>
           </form>

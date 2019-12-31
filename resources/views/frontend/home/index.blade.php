@@ -69,7 +69,7 @@
                 <div class="col-lg-6 col-md-6">
                 	@foreach($featuredBlog as $eachFeaturedBlog)
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12 bg-color">
+                        <div class="thumb col-md-4 col-sm-5 col-4 bg-color">
                             <figure>
                                 <a >
 
@@ -86,7 +86,7 @@
                                 </a>
                             </figure>
                         </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
+                        <div class="short_details col-md-8 col-sm-7 col-8">
                              <div class="meta-top d-flex">
                            @php
                                 echo   ($eachFeaturedBlog->anynomous=='2') ? (isset($eachFeaturedBlog->user->name)  ? '<a href="/profile/'.$eachFeaturedBlog->user->username.'"> By '.$eachFeaturedBlog->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
@@ -253,7 +253,7 @@
                 <div class="col-lg-6 col-md-6">
                     @foreach($featuredForMember as $eachFeaturedForMember)
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12 bg-color">
+                        <div class="thumb col-md-4 col-sm-5 col-4 bg-color">
                             <figure>
                                 <a >
                                  
@@ -270,7 +270,7 @@
                                 </a>
                             </figure>
                         </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
+                        <div class="short_details col-md-8 col-sm-7 col-8">
                             <div class="meta-top d-flex">
                                 @php
                                     echo   ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? '<a href="/profile/'.$eachFeaturedForMember->user->username.'"> By '.$eachFeaturedForMember->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
@@ -382,7 +382,7 @@
                 <div class="col-lg-6 col-md-6">
                 	@foreach($popular as $eachPopular)
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12 bg-color bg-color">
+                        <div class="thumb col-md-4 col-sm-5 col-4 bg-color bg-color">
                             <figure>
                                     
                                 <a >
@@ -398,7 +398,7 @@
                                 </a>
                             </figure>
                         </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
+                        <div class="short_details col-md-8 col-sm-7 col-8">
 
                            <div class="meta-top d-flex">
                             @php
@@ -465,7 +465,7 @@
             	@foreach($latest as $eachLatest)
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-12 bg-color">
+                        <div class="thumb col-md-4 col-sm-5 col-4 bg-color">
                             <figure>
                                 <a >
 
@@ -481,7 +481,7 @@
                                 </a>
                             </figure>
                         </div>
-                        <div class="short_details col-md-8 col-sm-7 col-12">
+                        <div class="short_details col-md-8 col-sm-7 col-8">
                           <div class="meta-top d-flex">
                             @php
                                 echo   ($eachLatest->anynomous=='2') ? (isset($eachLatest->user->name)  ? '<a href="/profile/'.$eachLatest->user->username.'"> By '.$eachLatest->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'

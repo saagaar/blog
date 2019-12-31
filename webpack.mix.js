@@ -50,6 +50,8 @@ const mix = require('laravel-mix');
     'resources/assets/vendors/popup/magnific-popup.css',
     'resources/assets/css/style.css',
     'resources/assets/css/responsive.css',
+    'resources/assets/css/responsive.min.css',
+
     ], 'public/frontend/css/app.css')
 	.copyDirectory('resources/assets/font', 'public/frontend/fonts');
 

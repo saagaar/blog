@@ -21,7 +21,7 @@
             	@foreach($blogs as $eachBlog)
             	   <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-lg-4 col-md-5 col-sm-12">
+                        <div class="thumb col-lg-4 col-md-5 col-sm-4">
                         	@if($eachBlog->image)
                                 @php
                                     $img=array();
@@ -32,7 +32,7 @@
                             	<img class="img-fluid" src="/frontend/images/elements/default-post.jpg" alt="{{ $eachBlog->title }}">
                             @endif
                         </div>
-                        <div class="short_details col-lg-8 col-md-7 col-sm-12">
+                        <div class="short_details col-lg-8 col-md-7 col-sm-8">
                             <div class="meta-top d-flex">
                             	@php
                           echo   ($eachBlog->anynomous=='2') ? (isset($eachBlog->user->name)  ? '<a href="/profile/'.$eachBlog->user->username.'">By '. $eachBlog->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
