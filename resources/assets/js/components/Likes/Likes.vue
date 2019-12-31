@@ -1,12 +1,9 @@
 <template>
-	<div>
          <a href="" @click.prevent="toggleLike" class="appreciate">
                 <img v-if="this.$store.getters.isLikedCurrentBlog" src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
                 <img v-else src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
-         	
-   		</a>
-   		<span>{{ this.$store.getters.likes }} {{text}}</span>
-   	</div>
+       		<span>{{ this.$store.getters.likes }} {{text}}</span>
+        </a>
 </template>
 
 <script>

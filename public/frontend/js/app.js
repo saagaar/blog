@@ -7556,9 +7556,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -45841,7 +45838,7 @@ var render = function() {
                 "div",
                 { staticClass: "single-blog video-style small row m_b_30 " },
                 [
-                  _c("div", { staticClass: "thumb col-md-4 col-sm-5 col-12" }, [
+                  _c("div", { staticClass: "thumb col-md-4 col-sm-5 col-4" }, [
                     _c("figure", [
                       _c("a", { attrs: { href: "#" } }, [
                         items.image
@@ -45866,7 +45863,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "short_details col-md-8 col-sm-7 col-12" },
+                    { staticClass: "short_details col-md-8 col-sm-7 col-8" },
                     [
                       _c(
                         "a",
@@ -46179,7 +46176,7 @@ var render = function() {
                 "div",
                 { staticClass: "single-blog video-style small row m_b_30 " },
                 [
-                  _c("div", { staticClass: "thumb col-md-4 col-sm-5 col-12" }, [
+                  _c("div", { staticClass: "thumb col-md-4 col-sm-5 col-4" }, [
                     _c("figure", [
                       _c("a", { attrs: { href: "#" } }, [
                         items.image
@@ -46204,7 +46201,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "short_details col-md-8 col-sm-7 col-12" },
+                    { staticClass: "short_details col-md-8 col-sm-7 col-8" },
                     [
                       _c("div", { staticClass: "meta-top d-flex" }, [
                         items.anynomous == 1
@@ -46981,44 +46978,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "a",
-      {
-        staticClass: "appreciate",
-        attrs: { href: "" },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.toggleLike($event)
-          }
+  return _c(
+    "a",
+    {
+      staticClass: "appreciate",
+      attrs: { href: "" },
+      on: {
+        click: function($event) {
+          $event.preventDefault()
+          return _vm.toggleLike($event)
         }
-      },
-      [
-        this.$store.getters.isLikedCurrentBlog
-          ? _c("img", {
-              staticClass: "img-fluid",
-              attrs: {
-                src: "/frontend/images/elements/appreciate.png",
-                width: "25",
-                height: "25"
-              }
-            })
-          : _c("img", {
-              staticClass: "img-fluid",
-              attrs: {
-                src: "/frontend/images/elements/inactive-appreciate.png",
-                width: "25",
-                height: "25"
-              }
-            })
-      ]
-    ),
-    _vm._v(" "),
-    _c("span", [
-      _vm._v(_vm._s(this.$store.getters.likes) + " " + _vm._s(_vm.text))
-    ])
-  ])
+      }
+    },
+    [
+      this.$store.getters.isLikedCurrentBlog
+        ? _c("img", {
+            staticClass: "img-fluid",
+            attrs: {
+              src: "/frontend/images/elements/appreciate.png",
+              width: "25",
+              height: "25"
+            }
+          })
+        : _c("img", {
+            staticClass: "img-fluid",
+            attrs: {
+              src: "/frontend/images/elements/inactive-appreciate.png",
+              width: "25",
+              height: "25"
+            }
+          }),
+      _vm._v(" "),
+      _c("span", [
+        _vm._v(_vm._s(this.$store.getters.likes) + " " + _vm._s(_vm.text))
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

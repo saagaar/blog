@@ -2,7 +2,7 @@
 <div class="row">
     <div  v-if="lists.length>0" v-for="items in lists"  class="col-lg-6 col-md-6">
         <div class="single-blog video-style small row m_b_30 ">
-            <div class="thumb col-md-4 col-sm-5 col-12">
+            <div class="thumb col-md-4 col-sm-5 col-4">
                 <figure>
                     <a href="#">
                          <img v-if="items.image" class="img-fluid" :src="getImageurl(items.code,items.image)" :alt="items.title">
@@ -10,7 +10,7 @@
                     </a>
                 </figure>
             </div>
-            <div class="short_details col-md-8 col-sm-7 col-12">
+            <div class="short_details col-md-8 col-sm-7 col-8">
             <div class="meta-top d-flex">
             <a v-if="items.anynomous==1" href="#">By Anynomyous</a>
             <a v-else-if="items.user==null" href="#">By Admin</a>

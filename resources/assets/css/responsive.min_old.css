@@ -1,0 +1,66 @@
+/*New Responsive CSS By: Bikash Bhandari*/
+.sidenav .closebtn{z-index: 9;}
+@media (min-width:992px) and ( max-width: 1199px){
+    .single-blog.video-style.small .meta-bottom {
+        display: block !important;
+    }
+}
+@media (max-width:1199px){
+.single-blog.video-style.big .thumb{min-height: 320px;}
+.single-blog.video-style .thumb.bg-color{height: 320px;}
+.single-blog.video-style .thumb img{max-height: 320px;}
+.single-blog.video-style.small .thumb figure, 
+.single-blog.video-style.small .thumb img{min-height: 135px; max-height: 135px;}
+.single-blog.small.video-style .thumb.bg-color{height: 135px;}
+.single-blog.video-style.small h4{font-size: 16px !important; max-height: 25px; 
+    overflow: hidden; margin-bottom: 2px;}
+.single-blog.video-style .short_details p{max-height: 20px;}
+.b_all{margin-top: 0px;}
+.area-padding-top{padding-top: 30px;}
+.fullwidth-block, .area-padding-bottom{padding-bottom: 30px;}
+.area-padding{padding:30px 0px;}
+.open_btn{z-index: 999;}
+.area-heading h3:after{left: 6%;}
+}
+
+@media (max-width:991px){
+.single-blog.video-style.small .short_details{padding-top: 10px;}
+.single-blog.video-style.small .thumb{padding-left: 0px;}
+.single-blog.video-style.small .meta-bottom a{margin-right: 5px; max-height: 25px;
+overflow: hidden;}
+.logo-wrapper{text-align: left !important;}
+.single-blog.video-style.big .thumb{min-height: 290px;}
+.single-blog.video-style .thumb.bg-color{height: 290px;}
+}
+
+@media (max-width:960px){
+    .header-top .search-trigger{display: block;}
+}
+@media (max-width:768px){
+    .single-blog.video-style .short_details p{text-align: left;}
+}
+@media (max-width:767px){
+    .single-blog{margin-bottom: 30px;}
+    .area-heading h3:after{left: 10%;}
+    .single-blog.video-style.small .thumb{padding-left: 15px;}
+}
+@media (max-width:686px){
+    .single-blog{margin-bottom: 15px;}
+    .area-padding-top{padding-top: 15px;}
+    .fullwidth-block, .area-padding-bottom{padding-bottom: 15px;}
+    .b_all{margin-top: -15px;}
+}
+@media (max-width:420px){
+.header-top .right-button ul li a, .single-blog.video-style.small h4{font-size: 14px;}
+.single-blog.video-style .short_details p{font-size: 13px;}
+.single-blog.video-style.small .meta-top{margin-bottom: 1px;}
+.single-blog.video-style.small h4{max-height: 22px;}
+.single-blog.video-style .short_details p{max-height: 18px; margin-bottom: 5px;}
+.single-blog.video-style.small .thumb figure, 
+.single-blog.video-style.small .thumb img { min-height: 120px; max-height: 120px;}
+.single-blog.small.video-style .thumb.bg-color{height: 120px;}
+}
+
+@media (max-width:386px){
+.header-top .right-button ul li a{padding-left: 10px; padding-right: 10px;}
+}
