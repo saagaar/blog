@@ -83,14 +83,12 @@ class HomeController extends FrontendController
     public function index(Request $request)
     {
         $savedBlog = array();
-         $data=array();
-         $limit=$this->perPage;
-         $homeLimit = 4;
+        $data=array();
+        $limit=$this->perPage;
+        $homeLimit = 4;
         $featuredBlog = $this->blog->getAllFeaturedBlog($homeLimit);
         $websiteLogo=$this->websiteLogo;
         $popular =$this->blog->getPopularBlog($homeLimit);
-        // echo "<pre>";
-        // print_r($popular);exit;
         $featuredForMember = $this->blog->getAllFeaturedForMember($homeLimit);
         $latest =$this->blog->getLatestAllBlog($limit);
         $navCategory=$this->category->getCategoryByShowInHome();
@@ -127,8 +125,8 @@ class HomeController extends FrontendController
     public function blogDetail($code,$slug,Request $request){
 
       $this->blogVisit = app()->make('App\Repository\BlogVisitInterface');
-       $this->share = app()->make('App\Repository\ShareInterface');
-       $totalShare = $this->share->getTotalShare($code);
+      $this->share = app()->make('App\Repository\ShareInterface');
+      $totalShare = $this->share->getTotalShare($code);
       $blogDetails = $this->blog->getActiveBlogByCode($code);
       $prev = $this->blog->getAll()->where('id', '<',$blogDetails['id'])->where(['save_method'=>2])->orderBy('id','desc')->first();
 
@@ -158,7 +156,6 @@ class HomeController extends FrontendController
         $ip = $_SERVER['REMOTE_ADDR'];
         $ipCheckForDailyViewCount = $this->blogVisit->getIpByBlog($blogDetails,$ip);
         if($ipCheckForDailyViewCount){
-
           $this->blog->updateBlogViewCount($blogDetails);
         }
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory,'totalShare'=>$totalShare));
@@ -183,8 +180,6 @@ class HomeController extends FrontendController
       $user=array();
       $categories=array();
       $allCategories= $this->category->getAllCategories();
-      // echo "<pre>";
-      // print_r($allCategories);exit;
       $navCategory=$this->category->getCategoryByShowInHome();
       if(\Auth::check())
         {
@@ -220,10 +215,10 @@ class HomeController extends FrontendController
          if($cat)
           $categories[]=$cat->slug;
       }
-      $navCategory=$this->category->getCategoryByShowInHome();
+       $navCategory=$this->category->getCategoryByShowInHome();
        $user ='';
        $likes='';
-         if(\Auth::check())
+        if(\Auth::check())
         {
           $savedBlogId = $this->blog->getSaveBlogByUser($this->authUser);
             $savedBlog = $this->blog->getBlogCodeBySave($savedBlogId);
@@ -313,8 +308,8 @@ class HomeController extends FrontendController
         return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteUrl,'savedBlog'=>$savedBlog,'userLiked'=>$liked));
     }
     public function getBlogListBySlug($slug=false,Request $request){
-      try
-      {
+     try
+     {
         if(!$slug)
             throw new Exception("No Categories Selected", 1);
           $limit=$this->perPage;
@@ -330,11 +325,9 @@ class HomeController extends FrontendController
             $blog = $this->blog->getAllFeaturedForMember($limit,$offset);
           }
           return array('status'=>true,'data'=>$blog,'message'=>'');
-        
       }
       catch(Exception $e)
       {
-
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
@@ -352,7 +345,8 @@ class HomeController extends FrontendController
     //     // return view('frontend.layouts.app');
     // }
     public function share(Request $request,ShareInterface $share){
-      try{
+    try
+      {
         $blogCode = $request->code;
         $media=$request->media;
         if($media=='facebook'){
@@ -363,7 +357,8 @@ class HomeController extends FrontendController
           $share->incrementTwShare($blogCode);
           return array('status'=>true,'data'=>'','message'=>'Shared successfully');
         }
-      }catch(Exception $e)
+      }
+      catch(Exception $e)
       {
           return array('status'=>false,'message'=>$e->getMessage());
       }
@@ -404,12 +399,11 @@ class HomeController extends FrontendController
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
           $latest = $this->blog->getBlogOfFollowingUser($this->authUser,$limit,$offset);
-          
           return array('status'=>true,'data'=>$latest,'message'=>'');
       }
       catch(Exception $e)
       {
-          return array('status'=>false,'message'=>$e->getMessage());
+         return array('status'=>false,'message'=>$e->getMessage());
       }
     }
     public function getFollowSuggestions($limit=1,$offset=0)
@@ -418,7 +412,7 @@ class HomeController extends FrontendController
     }
     public function getTagName(TagInterface $tag,Request $request)
     {
-         $search=$request->post('name');             
+        $search=$request->post('name');             
         if($search)
         {
           $searchedTags=$tag->getTag($search);
@@ -431,28 +425,26 @@ class HomeController extends FrontendController
     }
     public function services()
     {
-
       $serviceInterface = app()->make('App\Repository\ServiceInterface');
       $service=$serviceInterface->getServicesDetails();
       return $service;
     }
-   public function testimonialDetails()
+    public function testimonialDetails()
     { 
-      $testimonial = app()->make('App\Repository\TestimonialInterface');
-      $testimonialDetails= $testimonial->getActiveTestimonial();
-      return $testimonialDetails;
-   }  
-  
-   public function client()
-   {
-     $client= app()->make('App\Repository\ClientInterface');
-     $clientDetails=$client->getClients();
-     return $clientDetails;
-   }
-   public function bannerTagLine()
-   {
-     $banner= app()->make('App\Repository\BannerInterface');
-     $bannerDetails=$banner->getBannerTagLine();
-     return $bannerDetails;
-   }
+        $testimonial = app()->make('App\Repository\TestimonialInterface');
+        $testimonialDetails= $testimonial->getActiveTestimonial();
+        return $testimonialDetails;
+    }  
+    public function client()
+    {
+       $client= app()->make('App\Repository\ClientInterface');
+       $clientDetails=$client->getClients();
+       return $clientDetails;
+    }
+    public function bannerTagLine()
+    {
+       $banner= app()->make('App\Repository\BannerInterface');
+       $bannerDetails=$banner->getBannerTagLine();
+       return $bannerDetails;
+    }
 } 
