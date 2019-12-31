@@ -12693,3 +12693,61 @@ box-shadow:0px 2px 2px 2px rgba(172, 189, 199, 0.42);
   padding-top: 30px;
   display: block;
 }
+/*!
+ *Responsive CSS By: Bikash Bhandari (bhandaribikash.com.np)(bikash.433@gmail.com)
+ */
+ 
+/* Start Responsive CSS Landing Page*/
+@media (max-width: 1024px) {
+  .hero-section, .section-lg{padding-top: 150px; padding-bottom: 150px;}
+  .hero-section h1, h2, .h2{font-size: 36px;}
+  .hero-section h1, .hero-section p{width: 70%;}
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse{background: #fff; transition: all 300ms linear 0s;
+    -moz-box-shadow: 0px 1px 3px -1px #999;
+    -webkit-box-shadow: 0px 1px 3px -1px #999;
+    box-shadow: 0px 1px 3px -1px #999;}
+    .hero-section, .section-lg{padding-top: 100px; padding-bottom: 100px;}
+    .hero-section h1, .hero-section p{width: 70%;}
+    .hero-section h1{font-size: 30px;}
+    .hero-section p, p, .paragraph{font-size: 14px;}
+    .footer-copyright{margin-top: 30px;}
+    .btn{padding: 10px 45px;}
+}
+@media (max-width: 768px) {
+  .hero-section, .section-lg{padding-top: 80px; padding-bottom: 80px;}
+  .mb-5, .my-5{margin-bottom: 2rem;}
+  .newsletter-form{height: 60px;}
+  .newsletter-btn{font-size: 16px;}
+  .hero-section h1, .hero-section p{width: 90%;}
+  }
+@media (max-width: 767px) {
+  .footer-copyright .text-right{text-align:center !important;}
+  .btn{padding: 7px 30px;}
+  }
+@media (max-width: 686px) {
+  .hero-section h1, h2, .h2{font-size: 24px;}
+  .hero-section, .section-lg{padding-top: 60px; padding-bottom: 60px;}
+  .mb-5, .my-5{margin-bottom: 1.5rem;}
+  .newsletter-form{height: 45px;}
+  .newsletter-btn{font-size: 14px;}
+}
+@media (max-width: 575px) {
+  .footer .col-sm-8 h4, .footer .col-sm-8 p, .footer .col-sm-8 a{
+    text-align: center; display: block;}
+  .contact-form-footer .form-group:last-child{text-align: center;}
+  .contact-form-footer .btn{text-align: center;
+      margin-left: auto; margin-right: auto;}
+  .section-title{margin-bottom: 20px;}
+  .mb-5, .my-5{margin-bottom: 1rem;}
+  }
+
+  @media (max-width: 420px) {
+    .hero-section h1{padding-top: 60px;}
+    .hero-section h1, h2, .h2, h4, .h4 {font-size: 18px;}
+    .hero-section, .section-lg{padding-top: 45px; padding-bottom: 45px;}
+    .section-title{margin-bottom: 15px;}
+    .hero-section h1, .hero-section p{width: 100%;}
+  }

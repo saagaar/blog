@@ -34,5 +34,18 @@ class AuditController extends AdminController
         }         
         return view('admin.audit.list')->with(array('audits'=>$audits,'breadcrumb'=>$breadcrumb,'primary_menu'=>'adminaudit'));
     }
+    public function revert(Request $request,$id){
+            $audits = \OwenIt\Auditing\Models\Audit::with('user')->where('id',$id)->first();
+            if($audits->event=='created'){
+                // print_r($audits->auditable_type);exit;
+                $audits->auditable_type::find($audits->auditable_id)->delete();
+            }elseif ($audits->event=='updated') {
+                $audits->auditable_type::find($audits->auditable_id)->update($audits->old_values);
+            }elseif ($audits->event=='deleted') {
+                $audits->auditable_type::create($audits->old_values);
+            }
+            return redirect()->route('audit.list')
+                        ->with('success','Action reverted successfully.');
+    }
     
 }

@@ -61,6 +61,8 @@ const mix = require('laravel-mix');
     'resources/assets/landing-page/css/slick.css',
     'resources/assets/landing-page/animate.css',
     'resources/assets/landing-page/css/styles.css',
+    'resources/assets/landing-page/css/responsive-landing.css',
+
     ], 'public/frontend/css/landing-page.css')
 
      mix.styles([

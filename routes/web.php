@@ -250,6 +250,7 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::get('/delete/permission/{id}','Admin\PermissionController@delete')->name('permission.delete');
 	// audit
 	Route::get('/list/audit','Admin\AuditController@list')->name('audit.list');
+	Route::get('/revert/audit/{id}','Admin\AuditController@revert')->name('audit.revert');
 
 
 	//audit
@@ -337,6 +338,9 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::get('/block/websitelog/{id}','Admin\VisitorLogController@block')->name('websitelog.block');
 
 	Route::get('/block/ip/{ip}','Admin\VisitorLogController@blockIp')->name('ip.block');
+
+
+	Route::get('/test','Admin\VisitorLogController@test')->name('test.list');
 	//Route for IP Block List
 	Route::get('/list/blocklist','Admin\BlockListController@list')->name('blocklist.list');
 	Route::match(['get','post'],'/create/blocklist','Admin\BlockListController@create')->name('blocklist.create');

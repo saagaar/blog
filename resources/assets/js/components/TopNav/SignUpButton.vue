@@ -10,7 +10,7 @@ import LoginMixin from './../../mixins/Login.mixins';
         //    LoginSignupModal 
         // },
         props: {
-            text:{type:String,default:'Get Started'},
+            text:{type:String,default:'Sign Up'},
           },
         data() {
         	return {

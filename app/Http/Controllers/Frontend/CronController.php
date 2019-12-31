@@ -52,6 +52,7 @@ class CronController extends FrontendController
         foreach ($emptyLog as $key => $value) {
             VisitorLog::dispatch($value->ip_address)
                 ->delay(now()->addSeconds($count));
+                $count++;
         }
     }
 }

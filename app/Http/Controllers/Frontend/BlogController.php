@@ -177,7 +177,7 @@ class BlogController extends FrontendController
                         }
                         $form['short_description']=$request->short_description;
                         $form['save_method']=$request->save_method?$request->save_method:'1';
-                        $form['anynomous'] = ($request->isAnynomous=='true') ? '1' : '2';
+                         $form['anynomous'] = ($request->isAnynomous===true) ? '1' : '2';
                         $form['featured'] = '2';
                         $this->blog->updateByCode($postId,$form);
                         $tagid = $tag->getTagByName($request->tags);

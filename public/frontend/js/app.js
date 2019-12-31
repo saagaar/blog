@@ -8022,7 +8022,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     text: {
       type: String,
-      "default": 'Get Started'
+      "default": 'Sign Up'
     }
   },
   data: function data() {
@@ -47061,9 +47061,9 @@ var render = function() {
         }
       },
       [
-        _vm.isChecked
-          ? _c("i", { staticClass: "fa fa-clipboard-check" })
-          : _c("i", { staticClass: "fa fa-bookmark" }),
+        !_vm.isChecked
+          ? _c("i", { staticClass: "fa fa-bookmark" })
+          : _c("i", { staticClass: "fa fa-clipboard-check" }),
         _vm._v(" \n\t\t" + _vm._s(_vm.isChecked ? "Saved" : "Save") + " ")
       ]
     )
