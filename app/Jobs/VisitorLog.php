@@ -23,7 +23,6 @@ class VisitorLog implements ShouldQueue
      */
     public function __construct($ip)
     {
-        // dd($ipAddress);
         $this->ipAddress=$ip;
         $this->visitorInfo =  new visitorInfo();
         $this->VisitorLogInterface=$this->VisitorLogInterface = app()->make('App\Repository\VisitorLogInterface');

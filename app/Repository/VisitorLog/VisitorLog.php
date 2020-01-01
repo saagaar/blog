@@ -17,7 +17,7 @@ Class  VisitorLog implements VisitorLogInterface
 	{
 		$this->log=$websiteLog;
         $this->users=$users;
-         $this->visitor=$visitor;
+        $this->visitor=$visitor;
                
 	}
 
@@ -26,8 +26,8 @@ Class  VisitorLog implements VisitorLogInterface
     {
       return $this->log->where('id', $log_id)->first();
     }
-    public function getUnupdateLog(){
-        return  $this->log->where('country',Null)->get();
+    public function getUnupdateLog($limit=20){
+        return  $this->log->where('country',Null)->orderBy('id','desc')->limit($limit)->get();
     }
     /**
      * Get's all log.

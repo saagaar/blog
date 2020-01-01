@@ -68,7 +68,7 @@ class AdminController extends BaseController
         $dashboard['todayPublishedBlogs']=$blog->countTodaysPublishedBlogs();
         $dashboard['publishedBlogsThisMonth']=$blog->countPublishedBlogsThisMonth();
                           
-        return view('admin.dashboard',compact('breadcrumb','dashboard'))->with(array('primary_menu'=>'dashboard.list'));
+        return view('admin.dashboard-report',compact('breadcrumb','dashboard'))->with(array('primary_menu'=>'dashboard.list'));
     } 
    
     public function ImportModules()

@@ -7,10 +7,7 @@ Class VisitorInfo
 	public function visitorsIp($ipAddress){
      try{
 		if($ipAddress){
-            delay(1);
 			$ip_api = json_decode(file_get_contents("http://ip-api.io/json/{$ipAddress}"));
-
-
 			if($ip_api && !array_key_exists('status_message', $ip_api)){
 				$data = array(
 						'country_code' 			=>$ip_api->country_code,
