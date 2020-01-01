@@ -45,6 +45,13 @@
                 @endif
                 </div>
                 <div class="form-group">
+                  <label for="meta_title">Meta Title</label>
+                  <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ $seoData->meta_title }}" placeholder="Enter meta title">
+                  @if ($errors->has('meta_title'))
+                <div class="alert alert-danger">{{ $errors->first('meta_title') }}</div>
+                @endif
+                </div>
+                <div class="form-group">
                   <label for="meta_key">Meta Key</label>
                   <input type="text" class="form-control" name="meta_key" id="meta_key" value="{{ $seoData->meta_key }}" placeholder="Enter meta key">
                   @if ($errors->has('meta_key'))

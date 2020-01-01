@@ -26,7 +26,7 @@
                   <p>{{eachBlog.short_description}}</p>
                   <div class="meta-bottom d-flex"> <a href="#"><i class="ti-time"></i> {{eachBlog.created_at | moment("MMM DD") }} </a>
                    <a href="" class="appreciate"><i>
-                        <img src="/frontend/images/elements/inactive-appreciate.png" class="img-fluid">
+                        <LikeCheck :likes="initialState.userliked" :code="eachBlog.code"></LikeCheck>
                     </i> {{eachBlog.likes_count}} appreciate</a>
                    <a href=""><i class="ti-eye"></i> {{eachBlog.views}} view</a>
                    <SaveBlog :saves="initialState.savedBlogCode" :blogcode="eachBlog.code" ></SaveBlog>
@@ -53,6 +53,7 @@ import mixin  from './../mixins/LoadData.mixin.js';
 import FollowSuggestionsList from './../components/Follows/FollowSuggestionsList';
 import SavedBlogLoading from './../components/InfiniteLoading/SavedBlogLoading';
 import SaveBlog from './../components/Likes/SaveBlog';
+import LikeCheck from './../components/Likes/LikeCheck';
     export default {
         mixins: [ mixin ],  
         data:function(){
@@ -103,7 +104,8 @@ import SaveBlog from './../components/Likes/SaveBlog';
             SavedBlogLoading,
             FollowSuggestionsList,
             PlaceHolderDashboardFeed,
-            SaveBlog
+            SaveBlog,
+            LikeCheck
         },
     }
 

@@ -294,7 +294,9 @@ class UserController extends FrontendController
           $savedBlogId = $blog->getSaveBlogByUser($this->authUser);
           $savedBlogData = $blog->getSavedBlog($savedBlogId);
           $savedBlogCode = $blog->getBlogCodeBySave($savedBlogId);
-          
+          $likes=$blog->getLikesOfBlogByUser($this->authUser);
+          $liked = $blog->getBlogCodeByLike($likes);
+          $data['userliked'] = $liked;
           $data['saved'] = $savedBlogData;
           $data['savedBlogCode'] = $savedBlogCode;
           if($routeName=='api')

@@ -19,7 +19,9 @@ Class  Seo implements SeoInterface
       return $this->seo->where('id', $seoId)->first();
     }
 
-    
+    public function getSeoBySlug($slug){
+      return $this->seo->where('page_slug', $slug)->first();
+    }
 
       /**
      * Get's all posts.

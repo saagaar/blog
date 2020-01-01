@@ -2,7 +2,7 @@
 	<i>
         <img v-if="isChecked" src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
         <img v-else src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid"> 
-        </i>        	
+        &nbsp;</i>     	
 </template>
 
 <script>
