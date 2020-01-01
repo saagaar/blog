@@ -12,6 +12,7 @@
                       <FollowButton  @clicked="userFollowed" :following="following" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
                     </div>
                    </div>
+                   <div class="text-center"><router-link :to="'/following/suggestion'">See more</router-link></div>
                    </div>
                     <div v-else-if="this.$store.getters.isLoading===true" class="follow-user">
                         <PlaceHolderDashboardFeed></PlaceHolderDashboardFeed>

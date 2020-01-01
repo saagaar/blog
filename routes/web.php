@@ -129,6 +129,10 @@ Route::get('api/blog/deleteBlog/{code}', 'Frontend\BlogController@delete');
  * for user
  */
 
+Route::get('api/following/suggestion','Frontend\UserController@followingSuggestion')->name('api');
+Route::get('/following/suggestion','Frontend\UserController@followingSuggestion')->name('following/suggestion');
+Route::get('/api/getfollowing/suggestion','Frontend\UserController@getFollowingSuggestion')->name('getfollowingsuggestion');
+
 Route::get('api/followings','Frontend\UserController@followings')->name('api');
 Route::get('/followings','Frontend\UserController@followings')->name('followings');
 	
