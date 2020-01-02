@@ -55,7 +55,7 @@
                             <em >{{ auth()->user()->unreadNotifications()->count() }}</em>
                             @endif
                             </a>
-                               
+                                <notification-loading :notificationList="[]" :loadtype="'fullload'" :type="'nav'" ></notification-loading>
                                 
                         </li>
                    

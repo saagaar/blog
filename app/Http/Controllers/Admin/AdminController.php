@@ -49,14 +49,20 @@ class AdminController extends BaseController
     public function dashboard(VisitorLogInterface $visitor, AccountInterface $user,BlogInterface $blog)
     {
        
-        $breadcrumb=['breadcrumbs' => [
-                    'current_menu' => 'Dashboard',                       
-                      ]];
+        $breadcrumb=[
+                        'breadcrumbs' => [
+                        'current_menu' => 'Dashboard',                       
+                    ]];
         $dashboard=array(); 
         $dashboard['allLoggedInVisitors']=$visitor->countTodayLoggedInVisitors();
         $dashboard['allVisitors']=$visitor->countAllVisitors();
+        $allvisitorsbyCountry=$visitor->getCountryCodeOfVisitors()->toArray();
+        $collection=collect($allvisitorsbyCountry);
+        $plucked = $collection->pluck('count', 'country_code');
+        $dashboard['allvisitorsbyCountry']=collect($plucked->all())->toJson();
+       
         $dashboard['allRegisteredVisitors']=$visitor->countTodaysPageVisitors();             
-        $dashboard['allRegisteredUsers']=$user->countAllTodaysRegisteredUsers();
+        $dashboard['allRegisteredUsers']=$user->countAllUsers();
         $dashboard['allUsers']=$user->countAllUsers();    
         $dashboard['loggedinUsers']=$user->countAllTodayLoggedInUsers();
         $dashboard['activeUsers']=$user->countActiveUsers();

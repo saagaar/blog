@@ -16,8 +16,9 @@
   <link rel="stylesheet" href="{{ asset('admin/dist/css/bootstrap2-toggle.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/bower_components/datetime/css/bootstrap-datetimepicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/dist/css/AdminLTE.min.css') }}">
-   <link rel="stylesheet" href="{{ asset('admin/dist/plugins/iCheck/all.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/dist/plugins/iCheck/all.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/dist/css/skins/skin-blue.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/dist/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/dist/plugins/wysihtml5/bootstrap3-wysihtml5.min.css') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <link rel="stylesheet" href="{{ asset('admin/dist/css/style.css') }}">
@@ -66,6 +67,9 @@
 <script src="{{ asset('admin/dist/plugins/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('admin/dist/plugins/wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script src="{{ asset('admin/dist/plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ asset('admin/dist/js/simple-lightbox.min.js') }}"></script>
+<script src="{{ asset('admin/dist/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
+<script src="{{ asset('admin/dist/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
 <!-- <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script> -->
 
 <script src="{{ asset('admin/dist/js/select2.min.js') }}"></script>
@@ -73,7 +77,7 @@
 <script src="{{ asset('admin/dist/js/app.js') }}"></script>
 <script src="{{ asset('admin/dist/js/bootstrap2-toggle.min.js') }}"></script>
 <script src="{{ asset('admin/bower_components/datetime/js/bootstrap-datetimepicker.min.js') }}"></script>
-<script src="{{ asset('admin/dist/js/simple-lightbox.min.js') }}"></script>
+
 <!-- <script>
   $(function () {
     //Date picker
@@ -168,6 +172,36 @@ window.setTimeout(function() {
 </script>
 <script>
   $(function(){
+   var visitorsData= JSON.parse('<?php echo $dashboard["allvisitorsbyCountry" ];?>');
+  // World map by jvectormap
+  $('#world-map').vectorMap({
+    map              : 'world_mill_en',
+    backgroundColor  : 'transparent',
+    regionStyle      : {
+      initial: {
+        fill            : '#e4e4e4',
+        'fill-opacity'  : 1,
+        stroke          : 'none',
+        'stroke-width'  : 0,
+        'stroke-opacity': 1
+      }
+    },
+    series           : {
+      regions: [
+        {
+          values           : visitorsData,
+          scale            : ['#92c1dc', '#ebf4f9'],
+          normalizeFunction: 'polynomial'
+        }
+      ]
+    },
+    onRegionLabelShow: function (e, el, code) {
+      if (typeof visitorsData[code] != 'undefined')
+        el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
+    }
+  });
+
+
     var $gallery = $('.gallery a').simpleLightbox();
 
     $gallery.on('show.simplelightbox', function(){

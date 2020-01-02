@@ -43,21 +43,19 @@ Class  VisitorLog implements VisitorLogInterface
      {
          return $this->users->whereDate('last_login_date','=',date('Y-m-d'))->count();
      }
-     
-
-    public function countAllVisitors()
+     public function countAllVisitors()
      {
          return $this->log->get()->count();
      }
+     public function getCountryCodeOfVisitors()
+     {
+         return $this->log->selectRaw('country_code,count(id) as count')->groupBy('country_code')->get();
+     }
 
-      public function countTodaysPageVisitors()
+     public function countTodaysPageVisitors()
      {
          return $this->visitor->whereDate('visit_date','=',date('Y-m-d'))->count(); 
      }
-
-
-         
-    
     /**
      * create user logs
      */

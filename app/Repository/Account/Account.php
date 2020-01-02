@@ -35,10 +35,10 @@ Class Account implements AccountInterface
      }
 
     public function countActiveUsers(){
-        return $this->account->where('is_login','=','1')->whereDate('created_at','=',date('Y-m-d'))->count();   
+        return $this->account->where('status','=','1')->count();   
      }
     public function countInActiveUsers(){
-        return $this->account->where('is_login','=','2')->whereDate('created_at','=',date('Y-m-d'))->count();   
+        return $this->account->where('is_login','=','2')->count();   
      }
     
     public function getUserByUsername($username){
