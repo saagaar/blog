@@ -20,7 +20,7 @@
                 <thead>
                 <tr>
                    <th>id</th>
-                  <th>Page Id</th>
+                  <th>Meta Title</th>
                   <th>Page Slug</th>
                   <th>Meta key</th>
                   <th>Created at</th>
@@ -34,7 +34,7 @@
                 
                 <tr>
                   <td>{{ ++$i }}</td>
-                  <td>{{ $eachseo->pageid }}</td>
+                  <td>{{ $eachseo->meta_title }}</td>
                   <td>{{ $eachseo->page_slug }}</td>
                   <td>{{ $eachseo->meta_key }}</td>
                   <td>{{$eachseo->created_at}}</td>

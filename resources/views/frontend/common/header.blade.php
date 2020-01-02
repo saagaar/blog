@@ -41,7 +41,7 @@
     <meta name="title" content="@yield('meta_title','The Bloggers Club-an online blogging platform for independent voices.')">
     <meta name="url" content="{{config('settings.site_name')}}">
     <meta name="description" content="@yield('meta_description','Bloggers Club is an online blogging platform for posting your unique,creative articles in different categories and for those who loves to learn innovative things and express their words in order to link with the world.')">   
-    <meta name="author" content="@{{ config('settings.site_name')}}">
+    <meta name="author" content="{{ config('settings.site_name')}}">
     <meta name="robots" content="index,follow">
     <link rel="cannonical" href="{{config('settings.site_name')}}">
 

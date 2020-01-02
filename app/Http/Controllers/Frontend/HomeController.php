@@ -76,16 +76,24 @@ class HomeController extends FrontendController
         $testimonialDetails=$this->testimonialDetails();
         $client=$this->client();
         $banner=$this->bannerTagLine(); 
-
-        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'siteName'=>$siteName,'contactNumber'=>$contactNumber,'address'=>$address,'CategoryByWeight'=>$CategoryByWeight,'client'=>$client,'banner'=>$banner,'websiteLogo'=>$websiteLogo,'facebookId'=>$facebookId,'twitterId'=>$twitterId,'linkedinId'=>$linkedinId,'websiteUrl'=>$websiteUrl,'city'=>$city));
+        $this->seo = app()->make('App\Repository\SeoInterface');
+        
+         $seo =array();
+          $seo = $this->seo->getSeoBySlug('landing-page');
+        return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'siteName'=>$siteName,'contactNumber'=>$contactNumber,'address'=>$address,'CategoryByWeight'=>$CategoryByWeight,'client'=>$client,'banner'=>$banner,'websiteLogo'=>$websiteLogo,'facebookId'=>$facebookId,'twitterId'=>$twitterId,'linkedinId'=>$linkedinId,'websiteUrl'=>$websiteUrl,'city'=>$city,'seo'=>$seo));
     }
 
     public function index(Request $request)
     {
-        $savedBlog = array();
-        $data=array();
-        $limit=$this->perPage;
-        $homeLimit = 4;
+
+       $this->seo = app()->make('App\Repository\SeoInterface');
+        
+         $seo =array();
+          $seo = $this->seo->getSeoBySlug('home');
+          $savedBlog = array();
+         $data=array();
+         $limit=$this->perPage;
+         $homeLimit = 4;
         $featuredBlog = $this->blog->getAllFeaturedBlog($homeLimit);
         $websiteLogo=$this->websiteLogo;
         $popular =$this->blog->getPopularBlog($homeLimit);
@@ -117,7 +125,7 @@ class HomeController extends FrontendController
         }
 
         
-        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo,'savedBlog'=>$savedBlog,'userLiked'=>$liked));
+        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo,'savedBlog'=>$savedBlog,'userLiked'=>$liked,'seo'=>$seo));
     }
     public function test(Request $request){
       $this->category->subs(5);

@@ -23,6 +23,9 @@
               <h3 class="box-title">RECENT ACTIVITY</h3>                        
           </div>
           <div class="box-body">
+              <div id="world-map" style="height: 250px; width: 100%;"></div>
+            </div>
+          <div class="box-body">
                
                 <h3><strong>Visitors</strong></h3>
                 <hr style="border-color:#E3E3E3;">                          

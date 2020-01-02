@@ -53,6 +53,13 @@ let routes=[
 						
 				},
 				{
+						name:'following-suggestion',
+						path:'/following/suggestion',
+						components:require('./pages/FollowingSuggestion'),
+						meta:{layout:"timeline"}
+						
+				},
+				{
 						path:'/categories',
 						components:require('./pages/InterestCategory')
 				},

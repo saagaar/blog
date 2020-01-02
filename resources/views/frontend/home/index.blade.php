@@ -2,8 +2,14 @@
 @section('content')
  
 <section class="fullwidth-block area-padding-bottom">
-
-
+    @if($seo)
+        @section('meta_url',config('settings.url').'/home')
+        @section('meta_description',$seo->meta_description)
+        @section('meta_title',$seo->meta_title)
+        @section('meta_keyword',$seo->meta_key)
+        @section('schema1',$seo->schema1)
+        @section('schema2',$seo->schema2)
+    @endif
  <div class="spinner-border text-primary" role="status">
   <span class="sr-only">Loading...</span>
 </div>
@@ -109,7 +115,7 @@
                                     
                                         <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                     @endif
-                                </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} like</a>
+                                </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
                                 @if(auth()->user())
                                 <save-blog :isLoggedIn="true" :blogcode="'{{$eachFeaturedBlog->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
@@ -236,7 +242,7 @@
                                     
                                         <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                     @endif
-                                </i>&nbsp;{{$featuredForMember['0']->likes_count }} like</a>
+                                </i>&nbsp;{{$featuredForMember['0']->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$featuredForMember['0']->views }} view</a>
                                 @if(auth()->user())
                                 <save-blog :isLoggedIn="true" :blogcode="'{{$featuredForMember['0']->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
@@ -293,7 +299,7 @@
                                     
                                         <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                     @endif
-                                &nbsp;</i>{{$eachFeaturedForMember->likes_count }} like</a>
+                                &nbsp;</i>{{$eachFeaturedForMember->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachFeaturedForMember->views }} view</a>
                                 @if(auth()->user())
                                 <save-blog :isLoggedIn="true" :blogcode="'{{$eachFeaturedForMember->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
@@ -364,7 +370,7 @@
                                     
                                         <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                     @endif
-                                &nbsp;</i>{{$popular['0']->likes_count }} like</a>
+                                &nbsp;</i>{{$popular['0']->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
                                 @if(auth()->user())
                                 <save-blog :isLoggedIn="true" :blogcode="'{{$popular['0']->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
@@ -423,7 +429,7 @@
                                     
                                         <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                     @endif
-                                &nbsp;</i>{{$eachPopular->likes_count }} like</a>
+                                &nbsp;</i>{{$eachPopular->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
                                 @if(auth()->user())
                                 <save-blog :isLoggedIn="true" :blogcode="'{{$eachPopular->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>
@@ -505,7 +511,7 @@
                                     
                                         <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                     @endif
-                                &nbsp;</i>{{$eachLatest->likes_count }} like</a>
+                                &nbsp;</i>{{$eachLatest->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
                                 @if(auth()->user())
                                 <save-blog :isLoggedIn="true"  :blogcode="'{{$eachLatest->code}}'" v-bind:saves="{{ $savedBlog }}"></save-blog>

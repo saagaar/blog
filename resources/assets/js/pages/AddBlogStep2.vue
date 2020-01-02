@@ -57,7 +57,7 @@
                       </div>
                       <div class="tgl-group">
                           <span><i class="fa fa-globe">&nbsp;</i> Post As Anonymous</span>
-                          <input class="tgl tgl-light"  name="isAnynomous" id="display-address" type="checkbox" v-model="form.isAnynomous">
+                          <input class="tgl tgl-light"  name="isAnynomous" id="display-address" type="checkbox"  v-model="form.isAnynomous" >
                           <label class="tgl-btn" for="display-address"></label>
                       </div>
                       <hr/>
@@ -110,7 +110,7 @@ import Form from './../services/Form.js';
                     short_description:'',
                     image:'',
                     tags:[],
-                    isAnynomous:false,
+                    isAnynomous:'2',
                     file:true,
                     save_method:'1'
                 }),
@@ -136,10 +136,10 @@ import Form from './../services/Form.js';
         initialState: function (value) {
             this.form.short_description=value.blog.short_description;     
             this.form.tags=value.blog.tags;
-            this.form.isAnynomous=(value.blog.anynomous=='1')?true:false;
+            this.form.isAnynomous=value.blog.anynomous;
+            alert(this.form.isAnynomous);
             if(value.blog.image && value.blog.image!='null')
             this.image='/uploads/blog/'+value.blog.code+'/'+value.blog.image;
-
         },
       },
         computed:{
