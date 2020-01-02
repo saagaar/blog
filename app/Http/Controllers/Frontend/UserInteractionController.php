@@ -135,6 +135,52 @@ class UserInteractionController extends FrontendController
             return redirect()->route('home'); 
          }
     }
+    public function userSubscription(Request $request,SubscriptionManagerInterface $subscribe,BlogInterface $blog){
+            $request->validate([
+            'email' => 'required',
+            ]);
+            $input = $request->all();
+            $blogData= $blog->getBlogByCode($input['code']);
+            if($blogData->user){
+                $date =date_create();
+                if(auth()->user()){
+                    $input['user_id']  =Auth()->user()->id;
+                }
+                else{
+                    return redirect()->route('home')->with('error','Please Login First');
+                }
+                $input['subscribable_type']      ='App\models\Users';
+                $input['subscribable_id']      =$blogData->user->id;
+                $input['type']      ='3';
+                $input['comment']='User Subscription';
+                $input['created_at'] = $date->format('Y-m-d H:i:s');
+                $subscribe->create($input);
+                return array('status'=>true,'message'=>'Subscribed successfully','data'=>'');
+            }
+    }
+    public function categorySubscription(Request $request,SubscriptionManagerInterface $subscribe,CategoryInterface $category){
+            $request->validate([
+            'email' => 'required',
+            ]);
+            $input = $request->all();
+            $categoryData= $category->getCatBySlug($input['slug']);
+            if($categoryData){
+                $date =date_create();
+                if(auth()->user()){
+                    $input['user_id']  =Auth()->user()->id;
+                }
+                else{
+                    return redirect()->route('home')->with('error','Please Login First');
+                }
+                $input['subscribable_type']      ='App\models\Categories';
+                $input['subscribable_id']      =$categoryData->id;
+                $input['type']      ='3';
+                $input['comment']='Category Subscription';
+                $input['created_at'] = $date->format('Y-m-d H:i:s');
+                $subscribe->create($input);
+                return array('status'=>true,'message'=>'Subscribed successfully','data'=>'');
+            }
+    }
     public function testinglike($code){
         $user = app()->make('App\Repository\AccountInterface');
         $blogdata = $this->userInteraction->getLikeByBlog($code);
