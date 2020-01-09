@@ -79,6 +79,8 @@ import SignUpButton from './components/TopNav/SignUpButton';
 import TheLoginSignupModal from './components/TopNav/TheLoginSignupModal';
 import NotificationsLoading  from './components/InfiniteLoading/NotificationsLoading';
 import Newsletter from './components/LandingPage/Newsletter';
+import UserSubscribe from './components/LandingPage/UserSubscribe';
+import CategorySubscribe from './components/LandingPage/CategorySubscribe';
 // import UserDashboard from './pages/UserDashboard';
 const default_layout="default";
 const app = new Vue({
@@ -117,7 +119,9 @@ const app = new Vue({
             'success-error-message':SuccessErrorMessage,
             'favorite':Favorite,
             'newsletter':Newsletter,
-            'save-blog':SaveBlog
+            'save-blog':SaveBlog,
+            'user-subscribe':UserSubscribe,
+            'category-subscribe':CategorySubscribe
           
         }
     

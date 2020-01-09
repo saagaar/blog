@@ -32,12 +32,15 @@
 
                                 <div class="author">
                                     <div class="meta-author-content">
-                                        <h6>
+                                        <!-- <h6>
                                             <a href="#">Added By Admin</a>
-                                        </h6>
+                                        </h6> -->
                                         <a href="#"><i class="ti-time"></i> {{ $category->created_at }}</a>
                                         <a href="#"><i class="ti-list"></i> {{ $totalBlogsCount}} blogs</a>
                                     </div>
+                                </div>
+                                <div>
+                                    <category-subscribe :slug="'{{ $category->slug }}'"></category-subscribe>
                                 </div>
                                 <div class="clearfix"></div>
                                <!--  <a href="#" class="btn btn-round btn-light">

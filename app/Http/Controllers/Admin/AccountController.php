@@ -131,8 +131,15 @@ class AccountController extends AdminController{
                 'All Accounts' => route('account.list'),
                 'current_menu'=> 'Members Details',
                   ]];
-        $accounts =$this->account->getById($id);       
-        return view('admin.account.detail')->with(array('account'=>$accounts,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
+                  $countries = Countries::All();
+        $accounts =$this->account->getByUserId($id);  
+        $this->blog = app()->make('App\Repository\BlogInterface');     
+        $timeline =$this->blog->getBlogOfFollowingUser($accounts);
+        $allRoles = $this->roles->getAll()->get();
+        $notification =$this->account->getUsersNotification($accounts);
+        // echo "<pre>";
+        // print_r($notification[0]);exit;
+        return view('admin.account.detail')->with(array('account'=>$accounts,'countries'=>$countries,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list','timeline'=>$timeline,'roles'=>$allRoles,'notification'=>$notification));
     }
     public function delete($id)
     {

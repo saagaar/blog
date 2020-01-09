@@ -47,7 +47,7 @@ Class Blog implements BlogInterface
   }
   public function getSavedBlog($blogIds,$limit=10,$offset=0)
   {
-    return $this->blog->whereIn('id', $blogIds)->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    return $this->blog->whereIn('id', $blogIds)->withCount('likes','comments')->with('user')->take($limit)->skip($offset)->get();
   }
   /**
    * get blog for featured =1
@@ -87,7 +87,7 @@ Class Blog implements BlogInterface
   public function getBlogOfFollowingUser($user,$limit=10,$offset=0){
     $listofFollowings=$user->followings()->select('follow_id')->get()->pluck('follow_id')->toArray();
     // print_r($listofFollowings);exit;
-    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->whereIn('user_id', $listofFollowings)->with('user')->orderBy('created_at','DESC')->withCount('likes')->latest()->take($limit)->skip($offset)->get()->toArray();
+    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->whereIn('user_id', $listofFollowings)->with('user')->orderBy('created_at','DESC')->withCount('likes','comments')->latest()->take($limit)->skip($offset)->get()->toArray();
   }
   public function getBlogOfFollowingUserDaily($user,$limit=10,$offset=0){
     $listofFollowings=$user->followings()->select('follow_id')->get()->pluck('follow_id')->toArray();

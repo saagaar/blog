@@ -16,7 +16,10 @@ class SiteoptionSeeder extends Seeder
         'contact_name'      =>'abhishek',
         'contact_email'     =>'abhishekgiri49@hotmail.com',
         'contact_number'    =>'9843425748',
-        'maintainence'      =>Str::random(6),
+        'maintainence_message'=>'currently in maintainence mode',
+        'maintainence_duration'=>10,
+        'maintainence_code'      =>Str::random(6),
+        'maintainence_start_date'=>date("Y-m-d H:i:s"),
         'facebook_id'       =>'www.facebook.com/idata',
         'linkedin_id'       =>'www.linkedin.com/idata',
         'twitter_id'        =>'www.twitter.com/idata',
@@ -32,8 +35,6 @@ class SiteoptionSeeder extends Seeder
         'url'               =>'https://idata.com.np/',
         'image'             =>'',
         'created_at'        => date("Y-m-d H:i:s"),
-        'message'           =>'',
-        'duration'          =>''
         ]);
     }
 }
