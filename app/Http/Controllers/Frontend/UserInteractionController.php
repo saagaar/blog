@@ -176,7 +176,7 @@ class UserInteractionController extends FrontendController
                 }
                 $input['subscribable_type']      ='App\models\Categories';
                 $input['subscribable_id']      =$categoryData->id;
-                $input['type']      ='3';
+                $input['type']      ='2';
                 $input['comment']='Category Subscription';
                 $input['created_at'] = $date->format('Y-m-d H:i:s');
                 $subscribe->create($input);

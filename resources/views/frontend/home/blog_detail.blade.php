@@ -47,6 +47,7 @@
                                     <fb-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></fb-share>
                                     <tw-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></tw-share>    
                                 </li>
+                                <li>{{$blogDetails->views}} Views</li>
                             </ul>
                             <p class="excert">
                             	{!! $blogDetails->content !!}

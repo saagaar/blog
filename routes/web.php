@@ -30,6 +30,8 @@ Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('
 
 Route::get('/newblog/email','Frontend\CronController@dailyBlogAddEmail')->name('email.newblog');
 Route::get('/updatelog/cron','Frontend\CronController@updateLogCron')->name('updatelog.cron');
+Route::get('/newblog/category/cron','Frontend\CronController@newsletterCategory')->name('newblog.category');
+Route::get('/newblog/author/cron','Frontend\CronController@newsletterBlogCron')->name('newblog.author');
 
 
 Route::get('/image/{code}/{width}/{name}', 'Frontend\BlogController@resizeImage')->name('image.resize');

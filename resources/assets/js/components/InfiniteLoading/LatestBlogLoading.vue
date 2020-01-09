@@ -24,7 +24,7 @@
                     <a href="#"><i class="ti-time"></i>&nbsp;{{ items.created_at | moment("from", "now")}}</a>
                     <a href="#" class="appreciate"><i>
                       <LikeCheck v-if="isLoggedIn" :likes="userliked" :code="items.code"></LikeCheck>
-                      <img v-else src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                      <img v-else src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                     </i>&nbsp; {{items.likes_count}} appreciate</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <SaveBlog v-if="isLoggedIn" :saves="saves" :blogcode="items.code" ></SaveBlog>

@@ -36,8 +36,19 @@ Class Blog implements BlogInterface
    
     return $blogByCategoryTags;
   }
-
-
+public function getDailyPublishedBlogByAuthor($user,$limit=10,$offset=0){
+  $today = Carbon::today()->toDateString();
+    return  $user->blogs()->where(['save_method'=>2,'show_in_home'=>1])->whereDate('created_at','=',$today)->take($limit)->skip($offset)->get();
+  }
+  public function getBlogByCategoryDaily($tagsIds,$limit=10,$offset=0){
+    $today = Carbon::today()->toDateString();
+    $blogByCategoryTags =$this->blog->whereHas('tags', function ($q) use ($tagsIds) {
+    return $q->whereIn('tags_id', $tagsIds); 
+    })
+    ->where(['save_method'=>2,'show_in_home'=>1])->whereDate('created_at','=',$today)->orderBy('created_at','DESC')->take($limit)->skip($offset)->get();
+   
+    return $blogByCategoryTags;
+  }
   public function getBlogCountByCategory($tagsIds,$limit=10,$offset=0){
     $blogsCount =$this->blog->whereHas('tags', function ($q) use ($tagsIds) {
     return $q->whereIn('tags_id', $tagsIds); 

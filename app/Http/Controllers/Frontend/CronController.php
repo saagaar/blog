@@ -34,7 +34,7 @@ class CronController extends FrontendController
     	foreach ($user as $eachUser) {
     		$blog = $this->blog->getBlogOfFollowingUserDaily($eachUser);
     		if($blog){
-	    		$code='blog_registration';
+	    		$code='blog_notification';
 		        $data=['NAME'=>$eachUser->name,'SITENAME'=>config('settings.site_name')];
                 $receiverInfo = ['email'=>$eachUser->email];
 		        $eachUser->notify(new Notifications($code,$data,$blog,$receiverInfo));
@@ -53,6 +53,54 @@ class CronController extends FrontendController
             VisitorLog::dispatch($value->ip_address)
                 ->delay(now()->addSeconds($count));
                 $count++;
+        }
+    }
+    public function newsletterCategory()
+    {
+        $this->subs = app()->make('App\Repository\SubscriptionManagerInterface');
+        $this->category = app()->make('App\Repository\CategoryInterface');
+        $subsData = $this->subs->getActiveSubsByCategory();
+        if($subsData){
+            foreach ($subsData as $value) {
+                $catData = $this->category->getCatById($value->subscribable_id);
+                if($catData){
+                    $tagsId = $this->category->getTagsIdByCatSlug($catData->slug);
+                    if($tagsId){
+                        $blog = $this->blog->getBlogByCategoryDaily($tagsId);
+                        if($blog){
+                            $userData =  $this->user->getById($value->user_id);
+                            $code='blog_notification';
+                            $data=['NAME'=>$userData->name,'SITENAME'=>config('settings.site_name')];
+                            $receiverInfo = ['email'=>$userData->email];
+                            $userData->notify(new Notifications($code,$data,$blog,$receiverInfo));
+                            echo "success";
+                        }else{
+                            echo "no blog";
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public function newsletterBlogCron()
+    {
+        $this->subs = app()->make('App\Repository\SubscriptionManagerInterface');
+        $subsData = $this->subs->getActiveSubsByAuthor();
+        if ($subsData) {
+            foreach ($subsData as  $value) {
+                $subscribedUser = $this->user->getById($value->subscribable_id);
+                $blog = $this->blog->getDailyPublishedBlogByAuthor($subscribedUser);
+                if($blog){
+                    $userData =  $this->user->getById($value->user_id);
+                    $code='blog_notification';
+                    $data=['NAME'=>$userData->name,'SITENAME'=>config('settings.site_name')];
+                    $receiverInfo = ['email'=>$userData->email];
+                    $userData->notify(new Notifications($code,$data,$blog,$receiverInfo));
+                    echo "success";
+                }else{
+                    echo "no blog";
+                }
+            }
         }
     }
 }

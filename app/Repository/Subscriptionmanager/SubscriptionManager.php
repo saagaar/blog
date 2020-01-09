@@ -23,6 +23,18 @@ Class SubscriptionManager implements SubscriptionManagerInterface
     public function getSubscribeIdById($subscribable_id){
      return $this->Subscription->where(['subscribable_id'=>$subscribable_id,'comment'=>'Follow Subscription','type'=>3])->first();
     }
+    /**
+     * get active subs by category
+     */
+    public function getActiveSubsByCategory(){
+     return $this->Subscription->where(['subscribable_type'=>'App\models\Categories','comment'=>'Category Subscription','type'=>2,'status'=>1])->get();
+    }
+    /**
+     * get active subs by blog author
+     */
+    public function getActiveSubsByAuthor(){
+     return $this->Subscription->where(['subscribable_type'=>'App\models\Users','comment'=>'User Subscription','type'=>3,'status'=>1])->get();
+    }
       /**
      * Get's all posts.
      *

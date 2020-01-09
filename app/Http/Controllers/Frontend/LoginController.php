@@ -72,7 +72,7 @@ class LoginController extends FrontendController
             $infoUsername = str_replace(".", "", $randUsername);
         }
           $userData = $this->account->create([
-             'name'     => $getInfo->name,
+             'name'     => ucwords($getInfo->name),
              'email'    => $getInfo->email,
              'username'     =>$infoUsername,
              'activation_code'=>mt_rand(100000,999999),
@@ -130,6 +130,7 @@ class LoginController extends FrontendController
             $randUsername = $username.$random;
             $input['username'] = str_replace(".", "", $randUsername);
         }
+        $input['name'] = ucwords($input['name']);
         $input['activation_code']= mt_rand(100000,999999);
         $input['activation_date'] = date('Y-m-d H:i:s', strtotime('+1 days'));
         if($this->userRequiresActivation=='Y'){

@@ -46214,7 +46214,7 @@ var render = function() {
                                         staticClass: "img-fluid",
                                         attrs: {
                                           src:
-                                            "frontend/images/elements/inactive-appreciate.png",
+                                            "/frontend/images/elements/inactive-appreciate.png",
                                           width: "25",
                                           height: "25"
                                         }
@@ -46393,7 +46393,7 @@ var render = function() {
                                         staticClass: "img-fluid",
                                         attrs: {
                                           src:
-                                            "frontend/images/elements/inactive-appreciate.png",
+                                            "/frontend/images/elements/inactive-appreciate.png",
                                           width: "25",
                                           height: "25"
                                         }
@@ -46573,7 +46573,7 @@ var render = function() {
                                         staticClass: "img-fluid",
                                         attrs: {
                                           src:
-                                            "frontend/images/elements/inactive-appreciate.png",
+                                            "/frontend/images/elements/inactive-appreciate.png",
                                           width: "25",
                                           height: "25"
                                         }
