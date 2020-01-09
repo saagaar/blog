@@ -17,6 +17,12 @@ Class SubscriptionManager implements SubscriptionManagerInterface
       return $this->Subscription->where('id', $memberid)->first();
     }
 
+    /**
+     * get subs data for unfollow
+     */
+    public function getSubscribeIdById($subscribable_id){
+     return $this->Subscription->where(['subscribable_id'=>$subscribable_id,'comment'=>'Follow Subscription','type'=>3])->first();
+    }
       /**
      * Get's all posts.
      *

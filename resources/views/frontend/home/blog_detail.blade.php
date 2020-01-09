@@ -17,8 +17,6 @@
                     <div class="white-box single-post">
                         <div class="feature-img">
                             @if($blogDetails->image)
-                                  <!-- <img class="img-fluid " src="{{ asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}"  alt=""> -->
-
                                    <img class="img-fluid  image-placeholder blur" src="{{ '/image/'.$blogDetails->code.'/10/'.$blogDetails->image }}" data-src="{{ '/image/'.$blogDetails->code.'/500/'.$blogDetails->image }}" alt="" style="min-width: 100%">
 
                             @else
@@ -72,10 +70,6 @@
                     
                                 <fb-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></fb-share>
                                 <tw-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></tw-share>    
-                                <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
-                                <!-- <li><a href="{{url('https://twitter.com/intent/tweet?url='.$url.'&text='.$blogDetails->title)}}"><i class="fab fa-twitter"></i></a></li> -->
-                                <!-- <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fab fa-instagram"></i></a></li> -->
                             </ul>
                         </div>
 
@@ -151,57 +145,9 @@
                             </div>
                     </div>
                     @endif
-                    <!-- <div class="comments-area white-box">
-                        <h4>{{ $blogDetails->comments_count}} Comments</h4>
-                        <list-comment  v-bind:allComment="{{ $blogComment }}"></list-comment>
-                    </div>
-                    <add-comment v-bind:blog="{{ $blogDetails }}"></add-comment> -->
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
-
-                        <!-- <aside class="single_sidebar_widget post_category_widget">
-                            <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Category</h4>
-                            <ul class="list cat-list">
-                                <li>
-                                    <a href="#">
-                                        <span>Resaurant food</span>
-                                        <span>(37)</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Travel news</span>
-                                        <span>(10)</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Modern technology</span>
-                                        <span>(03)</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Product</span>
-                                        <span>(11)</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Inspiration</span>
-                                        <span>(21)</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Health Care</span>
-                                        <span>(21)</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </aside> -->
-
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title"><i class="fa fa-star">&nbsp;</i> Related Post</h3>
                             @foreach($relatedBlog as $eachRelatedBlog)
@@ -231,14 +177,12 @@
                                 @endforeach
                             </ul>
                         </aside>
-                        @if($blogDetails->user_id)
                         <aside class="single_sidebar_widget newsletter_widget">
                             <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Newsletter</h4>
                             
                            <user-subscribe :code="'{{$blogDetails->code}}'"></user-subscribe>
                            
                         </aside>
-                        @endif
                     </div>
                 </div>
             </div>

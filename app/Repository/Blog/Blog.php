@@ -19,6 +19,12 @@ Class Blog implements BlogInterface
   public function getBlogById($blogId){
     return  $this->blog->where('id', $blogId)->first();
   }
+  public function getPublishedBlogByUser($user){
+    return  $user->blogs()->where(['save_method'=>2,'show_in_home'=>1])->withCount('likes','comments')->get();
+  }
+  public function getUnPublishedBlogByUser($user){
+    return  $user->blogs()->where(['save_method'=>1,'show_in_home'=>1])->withCount('likes','comments')->get();
+  }
   /**
    * get blog by category
    */

@@ -23,10 +23,10 @@ class UserInteractionController extends FrontendController
 
     use AuthorizesRequests;
 
-    function __construct(UserInteractionInterface $userInteraction)
+    function __construct()
     {
         parent::__construct();
-        $this->userInteraction=$userInteraction;
+        $this->userInteraction=app()->make('App\Repository\UserInteractionInterface');
     }
     public function likeBlog($code)
     {
@@ -145,13 +145,15 @@ class UserInteractionController extends FrontendController
                 $date =date_create();
                 if(auth()->user()){
                     $input['user_id']  =Auth()->user()->id;
+                    $input['subscribable_type']      ='App\models\Users';
+                    $input['subscribable_id']      =$blogData->user->id;
+                    $input['type']      ='3';
                 }
                 else{
-                    return redirect()->route('home')->with('error','Please Login First');
+                    $input['user_id']  =Null;
+                    $input['type']      ='1';
                 }
-                $input['subscribable_type']      ='App\models\Users';
-                $input['subscribable_id']      =$blogData->user->id;
-                $input['type']      ='3';
+                
                 $input['comment']='User Subscription';
                 $input['created_at'] = $date->format('Y-m-d H:i:s');
                 $subscribe->create($input);

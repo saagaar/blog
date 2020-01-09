@@ -270,6 +270,7 @@ class UserController extends FrontendController
         $userdata=$this->user->getUserByUsername($username);
         $data=['NAME'=>'<a href="'.route('profile',$this->authUser->username).'">'.$this->authUser->name.'</a>'];
         $userdata->notify(new Notifications($code,$data,array(),$this->authUser));
+        $this->followSubscription($username);
          return array('status'=>true,'message'=>$this->getFollowSuggestions($this->authUser,1,$offset));
     }
     public function unFollowUser($username,$offset=false)
@@ -278,12 +279,47 @@ class UserController extends FrontendController
          if(($isFollowing))
          {
             $this->followerList->unfollowUser($this->authUser,$username);
+            $this->unfollowSubscription($username);
          }  
         return array('status'=>true,'message'=>'');
     }
     public function getFollowSuggestions($user,$limit=1,$offset=0)
     {
        return $this->followerList->getFollowUserSuggestions($user,$limit,$offset);
+    }
+    public function followSubscription($username){
+        $subscribe = app()->make('App\Repository\SubscriptionManagerInterface');
+        $userdata=$this->user->getUserByUsername($username);
+        $subsData = $subscribe->getSubscribeIdById($userdata->id);
+        if(!$subsData){
+          if(auth()->user()){
+              $input['user_id']  =Auth()->user()->id;
+              $input['subscribable_type']      ='App\models\Users';
+              $input['subscribable_id']      =$userdata->id;
+              $input['type']      ='3';
+          }
+          else{
+              $input['user_id']  =Null;
+              $input['type']      ='1';
+          }
+          $input['email'] = $userdata->email;
+          $input['comment']='Follow Subscription';
+          $date =date_create();
+          $input['created_at'] = $date->format('Y-m-d H:i:s');
+          $subscribe->create($input);
+        }else{
+          $subscribe->update($subsData->id,array('status'=>1));
+        }
+        return array('status'=>true,'message'=>'Subscribed successfully','data'=>'');
+    }
+    public function unfollowSubscription($username){
+        $subscribe = app()->make('App\Repository\SubscriptionManagerInterface');
+        $userdata=$this->user->getUserByUsername($username);
+        $subsData = $subscribe->getSubscribeIdById($userdata->id);
+        if($subsData){
+          $subscribe->update($subsData->id,array('status'=>2));
+        }
+        return array('status'=>true,'message'=>'Unsubscribed successfully','data'=>'');
     }
     public function savedBlogList(BlogInterface $blog,Request $request)
     { $data= array();

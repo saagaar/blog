@@ -32,7 +32,7 @@
                 </li> -->
               </ul>
               <p class="text-muted text-center">
-                 <a href="{{route('account.edit',$account->id)}}"> <span class="label label-default label-many">Edit Profile</span></a>
+                 <a href="#settings" data-toggle="tab"> <span class="label label-default label-many">Edit Profile</span></a>
               <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
             </div>
             <!-- /.box-body -->
@@ -88,8 +88,8 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-              <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+              <li class="active"><a href="#activity" data-toggle="tab">Published</a></li>
+              <li><a href="#timeline" data-toggle="tab">Unpublished</a></li>
               <li><a href="#settings" data-toggle="tab">Settings</a></li>
             </ul>
             <div class="tab-content">
@@ -98,7 +98,7 @@
                 @if($timeline)
                 @foreach($timeline as $eachPost)
                 <div class="post">
-                  <div class="user-block">
+                  <!-- <div class="user-block">
                     @if($eachPost['user']['image'])
                       <img class="profile-user-img img-responsive img-circle" src="{{ asset('uploads/user-images/'.$eachPost['user']['image']) }}" alt="User profile picture">
                       @else
@@ -109,7 +109,8 @@
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description">{{ $eachPost['created_at'] }}</span>
-                  </div>
+                  </div> -->
+                  <h4><b>{{ str_limit($eachPost['title'], $limit = 150, $end = '...') }}</b></h4>
                   <!-- /.user-block -->
                   <p>
                     {{ str_limit($eachPost['short_description'], $limit = 150, $end = '...') }}
@@ -142,33 +143,52 @@
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="timeline">
-                <!-- The timeline -->
-                <ul class="timeline timeline-inverse">
-                  <!-- timeline time label -->
-                  <!-- <li class="time-label">
-                        <span class="bg-red">
-                          10 Feb. 2014
+                <!-- Post -->
+                @if($unPublishedBlog)
+                @foreach($unPublishedBlog as $eachPost)
+                <div class="post">
+                  <!-- <div class="user-block">
+                    @if($eachPost['user']['image'])
+                      <img class="profile-user-img img-responsive img-circle" src="{{ asset('uploads/user-images/'.$eachPost['user']['image']) }}" alt="User profile picture">
+                      @else
+                      <img class="profile-user-img img-responsive img-circle" src="{{ asset('uploads/default-profile-icon-24.jpg/') }}" alt="User profile picture">
+                     @endif
+                        <span class="username">
+                          <a href="#">{{$eachPost['user']['name']}}</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
-                  </li> -->
-                  <!-- /.timeline-label -->
-                  <!-- timeline item -->
-                  @if($notification)
-                  @foreach($notification as $eachNotification)
-                  <li>
-                    <i class="fa fa-bell-o bg-blue"></i>
+                    <span class="description">{{ $eachPost['created_at'] }}</span>
+                  </div> -->
+                  <h4><b>{{ str_limit($eachPost['title'], $limit = 150, $end = '...') }}</b></h4>
+                  <!-- /.user-block -->
+                  <p>
+                    {{ str_limit($eachPost['short_description'], $limit = 150, $end = '...') }}
+                  </p>
+                  <ul class="list-inline">
+                    <!-- <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li> -->
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>{{$eachPost['likes_count']}} Appreciate</a>
+                    </li>
+                    <li class="pull-right">
+                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                        ({{$eachPost['comments_count']}})</a></li>
+                  </ul>
 
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i>{{$eachNotification->created_at->diffForHumans()}}</span>
+                  <!-- <input class="form-control input-sm" type="text" placeholder="Type a comment"> -->
+                </div>
+                @endforeach
+                @else
+                <div class="post">
+                  <!-- /.user-block -->
+                  <p class="text-center">
+                    <b>No Post in timeline</b>
+                  </p>
 
-                      <h3 class="timeline-header">{!! $eachNotification->data['message'] !!}</h3>
+                  <!-- <input class="form-control input-sm" type="text" placeholder="Type a comment"> -->
+                </div>
+                @endif
+                <!-- /.post -->
 
-                    </div>
-                  </li>
-                  @endforeach
-                  @endif
-                 
-                  </li>
-                </ul>
+               
               </div>
               <!-- /.tab-pane -->
 

@@ -134,12 +134,13 @@ class AccountController extends AdminController{
                   $countries = Countries::All();
         $accounts =$this->account->getByUserId($id);  
         $this->blog = app()->make('App\Repository\BlogInterface');     
-        $timeline =$this->blog->getBlogOfFollowingUser($accounts);
+        $timeline =$this->blog->getPublishedBlogByUser($accounts);
+
         $allRoles = $this->roles->getAll()->get();
-        $notification =$this->account->getUsersNotification($accounts);
+        $unPublishedBlog =$this->blog->getUnPublishedBlogByUser($accounts);
         // echo "<pre>";
-        // print_r($notification[0]);exit;
-        return view('admin.account.detail')->with(array('account'=>$accounts,'countries'=>$countries,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list','timeline'=>$timeline,'roles'=>$allRoles,'notification'=>$notification));
+        // print_r($unPublishedBlog);exit;
+        return view('admin.account.detail')->with(array('account'=>$accounts,'countries'=>$countries,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list','timeline'=>$timeline,'roles'=>$allRoles,'unPublishedBlog'=>$unPublishedBlog));
     }
     public function delete($id)
     {
