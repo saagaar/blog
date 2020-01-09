@@ -17,6 +17,7 @@ class CreateSeosTable extends Migration
             $table->bigIncrements('id');
             $table->integer('pageid');
             $table->string('page_slug');
+            $table->string('meta_title');
             $table->string('meta_key');
             $table->string('meta_description');
             $table->string('schema1');

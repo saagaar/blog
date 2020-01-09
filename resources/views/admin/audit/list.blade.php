@@ -27,7 +27,7 @@
                   <th width="2%">Url</th>
                   <th width="3%">Ip_adrress</th>
                   <th width="10%">Agent</th>
-                  <th width="2%">Action</th>
+                  <th colspan="3" width="2%">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,7 +47,45 @@
                   @endphp
                   <td title="{{$audit->user_agent}}">{{ $agent[0].'/'.$agent[1] }}</td>
                   <td><a href="{{route('ip.block',$audit->ip_address)}}" title='Block IP' class="block"><i class="fa fa-ban" aria-hidden="true"></i></a></td>
+                  <td> <a href="{{route('audit.revert',$audit->id)}}" title='Block IP' class="block"><i class="fa fa-undo" aria-hidden="true"></i></a></td>
+                  <td><button type="button"  class="btnview btn btn-primary btn-sm" data-toggle="modal" data-target="#AuditModal{{$audit->id}}">
+                    <i class="fa fa-eye" ></i>
+                  </button></td>
                 </tr>
+                <div class="modal fade" id="AuditModal{{$audit->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Audit Changes</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                            <ul style="list-style: none;"><strong>Old Values</strong>
+                              @foreach($audit->old_values as $attribute  => $value) 
+                                            <li><b>{{ $attribute  }}</b></li>
+                                            <li>@if($value)
+                                            {{ $value }}
+                                            @else
+                                            ----
+                                            @endif
+                                          </li>
+                                    @endforeach
+                              </ul>
+                              <ul style="list-style: none;"><strong>New values</strong>
+                              @foreach($audit->new_values as  $attribute  => $data)
+                                            <li><b>{{  $attribute  }}</b></li>
+                                            <li>{{ $data }}</li>
+                                    @endforeach
+                         </ul>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 @endforeach
                 @else
                     <tr>

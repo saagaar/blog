@@ -146,6 +146,37 @@ class UserController extends FrontendController
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
         }
     }
+    public function followingSuggestion(){
+        $routeName= ROUTE::currentRouteName();
+        $suggestion=$this->getFollowSuggestions($this->authUser,$this->perPage);
+        $authFollowing = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
+        $data['followSuggestion']=$suggestion;
+        $data['authFollowing'] = $authFollowing;
+        if($routeName=='api')
+        {
+            return ($data);
+        }
+        else
+        {
+            $data['path']='/followings/suggestion';
+            $initialState=json_encode($data);
+            $user=$this->user_state_info();
+            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+        }
+    }
+    public function getFollowingSuggestion(Request $request){
+      try{
+          $limit=$this->perPage;
+
+          $offset=$request->get('page')*$limit;
+          // print_r($offset);exit;
+          $allFollowingSuggestion = $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
+          return array('status'=>true,'data'=>$allFollowingSuggestion,'message'=>'');
+      }
+      catch(Exception $e){
+          return array('status'=>false,'message'=>$e->getMessage());
+      }
+    }
     public function followers($username=false)
     {
         $followings = [];
@@ -260,7 +291,9 @@ class UserController extends FrontendController
           $savedBlogId = $blog->getSaveBlogByUser($this->authUser);
           $savedBlogData = $blog->getSavedBlog($savedBlogId);
           $savedBlogCode = $blog->getBlogCodeBySave($savedBlogId);
-          
+          $likes=$blog->getLikesOfBlogByUser($this->authUser);
+          $liked = $blog->getBlogCodeByLike($likes);
+          $data['userliked'] = $liked;
           $data['saved'] = $savedBlogData;
           $data['savedBlogCode'] = $savedBlogCode;
           if($routeName=='api')

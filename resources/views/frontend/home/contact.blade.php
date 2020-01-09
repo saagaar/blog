@@ -1,5 +1,13 @@
 @extends('frontend.layouts.app')
 @section('content')
+@if($seo)
+  @section('meta_url',config('settings.url').'/contact-us')
+  @section('meta_title',$seo->meta_title)
+  @section('meta_description',$seo->meta_description)
+  @section('meta_keyword',$seo->meta_key)
+  @section('schema1',$seo->schema1)
+  @section('schema2',$seo->schema2)
+@endif
 <section class="contact-section area-padding">
     <div class="container">
 

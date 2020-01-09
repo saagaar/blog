@@ -26,6 +26,7 @@ class SeoRequest extends FormRequest
         return [
             'pageid'                        =>'required',
             'page_slug'                     =>'required',
+            'meta_title'                     =>'required',
             'meta_key'                      =>'required|min:5',
             'meta_description'              =>'required|min:5',
             'schema1'                       =>'required|min:5',

@@ -7651,6 +7651,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -46953,7 +46959,8 @@ var render = function() {
             width: "25",
             height: "25"
           }
-        })
+        }),
+    _vm._v(" \n         ")
   ])
 }
 var staticRenderFns = []
@@ -47033,35 +47040,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "a",
-      {
-        staticClass: "book_mark",
-        attrs: { href: "" },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.toggleSave($event)
-          }
-        }
-      },
-      [
-        _c("i", {
-          staticClass: "fa",
-          class: _vm.isChecked ? "fa-clipboard-check" : "fa-bookmark"
-        }),
-        _vm._v("\n\t\t" + _vm._s(_vm.isChecked ? "Saved" : "Save") + " ")
-      ]
-    )
-  ])
-}
+var render = function () {}
 var staticRenderFns = []
-render._withStripped = true
 
 
 

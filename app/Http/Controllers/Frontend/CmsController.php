@@ -53,7 +53,10 @@ class CmsController extends FrontendController
     }
     public function contactUs(Request $request)
     {
-      
+         $this->seo = app()->make('App\Repository\SeoInterface');
+        
+         $seo =array();
+          $seo = $this->seo->getSeoBySlug('contact-us');
          $data=array();
         $navCategory=$this->category->getCategoryByShowInHome();
         $user ='';
@@ -74,6 +77,6 @@ class CmsController extends FrontendController
         }
 
         
-        return view('frontend.home.contact',['initialState'=>$data,'user'=>$user])->with(array('navCategory'=>$navCategory));
+        return view('frontend.home.contact',['initialState'=>$data,'user'=>$user])->with(array('navCategory'=>$navCategory,'seo'=>$seo));
     }
 }

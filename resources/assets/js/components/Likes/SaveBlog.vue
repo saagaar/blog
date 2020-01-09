@@ -1,7 +1,13 @@
 <template>
 	<div>
+<<<<<<< HEAD
 		<a href="" @click.prevent="toggleSave" class="book_mark" >
 			<i class="fa" :class="isChecked ? 'fa-clipboard-check' : 'fa-bookmark'"></i>
+=======
+		<a href="" @click.prevent="toggleSave" class="book_mark">
+			<i v-if="!isChecked" class="fa fa-bookmark"></i>
+			<i v-else class="fa fa-clipboard-check"></i> 
+>>>>>>> avi
 		{{ isChecked ? 'Saved' : 'Save'}} </a>
    	</div>
 </template>
