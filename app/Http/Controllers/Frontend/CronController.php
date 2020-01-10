@@ -33,7 +33,7 @@ class CronController extends FrontendController
     	$user=$this->user->getActiveAccounts();
     	foreach ($user as $eachUser) {
     		$blog = $this->blog->getBlogOfFollowingUserDaily($eachUser);
-    		if($blog){
+    		if(!$blog->isEmpty()){
 	    		$code='blog_notification';
 		        $data=['NAME'=>$eachUser->name,'SITENAME'=>config('settings.site_name')];
                 $receiverInfo = ['email'=>$eachUser->email];
@@ -67,7 +67,7 @@ class CronController extends FrontendController
                     $tagsId = $this->category->getTagsIdByCatSlug($catData->slug);
                     if($tagsId){
                         $blog = $this->blog->getBlogByCategoryDaily($tagsId);
-                        if($blog){
+                        if(!$blog->isEmpty()){
                             $userData =  $this->user->getById($value->user_id);
                             $code='blog_notification';
                             $data=['NAME'=>$userData->name,'SITENAME'=>config('settings.site_name')];
@@ -86,11 +86,11 @@ class CronController extends FrontendController
     {
         $this->subs = app()->make('App\Repository\SubscriptionManagerInterface');
         $subsData = $this->subs->getActiveSubsByAuthor();
-        if ($subsData) {
+        if (!$subsData->isEmpty()) {
             foreach ($subsData as  $value) {
                 $subscribedUser = $this->user->getById($value->subscribable_id);
                 $blog = $this->blog->getDailyPublishedBlogByAuthor($subscribedUser);
-                if($blog){
+                if(!$blog->isEmpty()){
                     $userData =  $this->user->getById($value->user_id);
                     $code='blog_notification';
                     $data=['NAME'=>$userData->name,'SITENAME'=>config('settings.site_name')];
