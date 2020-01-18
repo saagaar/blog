@@ -145,7 +145,7 @@ class LoginController extends FrontendController
         $roles=$this->role->getDefaultRoleId();
         $user->assignRole($roles);  
         if($this->userRequiresActivation=='Y'){
-            $user->notify(new Notifications($code,$data));
+            $user->notify(new Notifications($code,$data,array(),array('email'=>$user->email)));
         }
         $ip = $_SERVER['REMOTE_ADDR']; 
         $ipinsert = $this->account->insertIp($user->username,$ip);

@@ -61,6 +61,16 @@ Class  Follower implements FollowerInterface
      public function getAllFollowingsWithUserId($userid,$limit=10,$offset=0){
         return $this->user->find($userid)->followings()->withCount('followers')->take($limit)->skip($offset)->get();
      }
+    /**
+     * Check if current user is followed by another user
+     *
+     * @param 1 object
+     * @param 2 array
+     * @return mixed
+     */
+      public function isFollowedByUser($followBy,$followTo){
+        return $followBy->followings()->where('username',$followTo['username'])->get();
+     }
  	  /**
      * Insert follower
      * @param 1 : integer

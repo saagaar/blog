@@ -47,7 +47,8 @@ Route::post('/like/blog/{code}', 'Frontend\UserInteractionController@likeBlog')-
 Route::post('/save/blog/{code}', 'Frontend\UserInteractionController@saveBlog')->name('save.blog');
 Route::post('/newsletter/subscribe', 'Frontend\UserInteractionController@newsletter')->name('newsletter');
 Route::get('/newsletter/unsubscribe/{email}', 'Frontend\UserInteractionController@newsletterUnsuscribe')->name('newsletter.unsubscribe');
-
+Route::post('/user/subscribe', 'Frontend\UserInteractionController@userSubscription')->name('user.subscription');
+Route::post('/category/subscribe', 'Frontend\UserInteractionController@categorySubscription')->name('category.subscription');
 Route::get('/saved/blog','Frontend\UserController@savedBlogList')->name('saved.blog');
 Route::get('api/saved/blog','Frontend\UserController@savedBlogList')->name('api');
 Route::get('/getsavedblog','Frontend\UserController@getSavedBlogLoader')->name('infinity');

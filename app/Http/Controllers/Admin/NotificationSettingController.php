@@ -6,6 +6,7 @@ use App\Repository\NotificationSettingInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\NotificationRequest;
 use Illuminate\Support\Facades\File;
+use App\Mail\EmailClass;
 use App;
 class NotificationSettingController extends AdminController
 {
@@ -77,13 +78,17 @@ class NotificationSettingController extends AdminController
         ->with('success', 'Notification has been deleted!');
     }
 
-       public function changeStatus(Request $request)
+    public function changeStatus(Request $request)
     {
         $notification = $this->notification->getNotificationById($request->id);
         $active = $request->status;
         $notification->update(array('active'=>$active));  
         return redirect()->route('notification.list')
                         ->with('success','Status change successfully.');
+    }
+    Public function sendEmail(Request $request)
+    {
+       
     }
 
 

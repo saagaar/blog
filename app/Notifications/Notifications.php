@@ -49,6 +49,7 @@ class Notifications extends Notification implements ShouldQueue
       $this->receiverInfo=$receiverInfo;
 
       $this->contactEmail=config('settings.contact_email');
+      $this->siteName=config('settings.site_name');
     }
 
     /**
@@ -78,7 +79,7 @@ class Notifications extends Notification implements ShouldQueue
         return (new MailMessage)
         ->view('emailTemplate.'.$this->notification->view, ['body' => $body,'data'=>$this->additionalData,'receiverInfo'=>$this->receiverInfo])
         ->subject($this->notification->subject)
-        ->from($this->contactEmail);
+        ->from($this->contactEmail,$this->siteName);
     }
     /**
      * Get the array representation of the notification.

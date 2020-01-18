@@ -172,7 +172,6 @@ window.setTimeout(function() {
 </script>
 <script>
   $(function(){
-   var visitorsData= JSON.parse('<?php echo $dashboard["allvisitorsbyCountry" ];?>');
   // World map by jvectormap
   $('#world-map').vectorMap({
     map              : 'world_mill_en',

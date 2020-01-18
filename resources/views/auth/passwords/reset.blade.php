@@ -38,7 +38,7 @@
                 <!--Login-->
                 <div class="tab-pane active" id="login">
                   <h3>Reset Pasword</h3>
-                  <p class="text-muted">Use Your email to reset password.</p>
+                  <p class="text-muted">Use Your email to reset passwords.</p>
                   
                   <!--Login Form-->
                   <form method="POST" action="{{ route('password.request') }}" name="Login_form" id='Login_form'>
@@ -51,6 +51,7 @@
                             <p class="help is-danger">{{ $errors->first('email') }}</p>
                         @endif
                       </div> -->
+                      <input type="hidden" name="token" value="{{$token}}">
                       <input type="hidden" name="email" value="{{$email}}">
                       <div class="form-group col-sm-12">
                         <label for="my-email" class="sr-only">New Password</label>

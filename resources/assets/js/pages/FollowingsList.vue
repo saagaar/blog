@@ -18,7 +18,8 @@
                 <div class="friend-info">
                   <h5> <a :href="'/profile/'+eachFollowings.username" class="profile-link">{{eachFollowings.name}}</a></h5>
                  <!--  <a href="#" class="float-right text-green btn">Unfollow</a> -->
-                 <FollowButton  @clicked="userFollowed"  :followings="initialState.authFollowing" :Buttonclass="'float-right'" :username="eachFollowings.username" :followSuggestionHead="followSuggestion.length" ></FollowButton>
+                 <FollowButton  @clicked="userFollowed"  :followings="initialState.authFollowing" :Buttonclass="'float-right'" :username="eachFollowings.username" :followSuggestionHead="followSuggestion.length" >
+                 </FollowButton>
                   <p>{{eachFollowings.followers_count}}  Followers</p>
                 </div>
               </div>
@@ -108,25 +109,23 @@
         }
       },
       created(){
-        console.log(this.initialState.authFollowing);
+        // console.log(this.initialState.authFollowing);
       },
         watch:{
-        initialState: function (val) {
-          this.followSuggestion=this.initialState.followSuggestion;
-        },
+          initialState: function (val) {
+            this.followSuggestion=this.initialState.followSuggestion;
+            this.$store.commit('AUTH_FOLLOWING',this.initialState.authFollowing);
+          },
       },
-       methods:{
+       
+      methods:{
           userFollowed:function(user){
            var index=this.initialState.followings.filter(p => p.username == user);
-               // remove after 1 second
-                // (this.initialState.followings.splice(index, 1));
-            
           },
-          infiniteHandler($state) {
+          infiniteHandler($state){
             let username=this.$route.params.username;
             if(username===undefined)
-              username='';
-
+             username='';
             this.form.get('/api/getfollowings/'+username+'?page='+this.offset).then(response => 
             {
                    if(response.data.data.length)
@@ -143,17 +142,17 @@
                   {
                      this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
                   });
-            },
+          },
           getProfileUrl(url){
               return this.$helpers.getProfileUrl(url);
-           },
+          },
           
-        },
-        components:{
+      },
+      components:{
           FollowButton,
           FollowSuggestionsList,
           PlaceHolderFollowings,
           InfiniteLoading
-        },
+      },
     }
 </script>

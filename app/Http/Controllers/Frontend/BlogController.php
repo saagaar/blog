@@ -175,9 +175,10 @@ class BlogController extends FrontendController
                                 return response()->json(['status'=>false,'data'=>'','message'=>'The image file type must be:jpeg,png,jpg,gif,svg'], 401);
                             }
                         }
+                        $checkAnynomous=$request->isAnynomous;
                         $form['short_description']=$request->short_description;
                         $form['save_method']=$request->save_method?$request->save_method:'1';
-                         $form['anynomous'] = ($request->isAnynomous===true) ? '1' : '2';
+                        $form['anynomous'] = ($checkAnynomous==='true') ? '1' : '2';
                         $form['featured'] = '2';
                         $this->blog->updateByCode($postId,$form);
                         $tagid = $tag->getTagByName($request->tags);

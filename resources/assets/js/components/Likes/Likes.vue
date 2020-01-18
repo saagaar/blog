@@ -19,7 +19,6 @@ let action='';
                 isLoading:false,
             }
         },
-
         mounted() {
             if(this.likes){
                 var indexval=(this.likes.indexOf(this.blogid));
@@ -47,7 +46,6 @@ let action='';
                     curObject.$store.commit('TOGGLE_LOADING');
                     curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:'You must login first'});
                     return;
-
                 }
                 this.isLoading=true;
                 action='/like/blog/'+this.blogcode;

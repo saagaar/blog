@@ -189,8 +189,14 @@
             <table role="presentation" cellspacing="0" cellpadding="0" 
             border="0" align="center" width="100%" style="max-width: 600px; background:url(https://thebloggersclub.com/frontend/images/elements/white-pattern.png); border-bottom: 1px solid #dbdbdb;">
                 <tr>
-                    <td style="padding: 2px 0; text-align: center">
-                       <a href="{{config('settings.url')}}" target="_blank" title="{{config('settings.site_name')}}"> <img src="{{config('settings.url')}}/uploads/sitesettings-images/{{config('settings.image')}}" width="205" height="72" alt="thebloggersclub.com" border="0" style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 100%; color: #4cb748;"></a>
+                    <td style="padding: 5px 0 0 10px; text-align: left;width: 70px" >
+                       <a href="{{config('settings.url')}}" target="_blank" title="{{config('settings.site_name')}}"> <img src="{{config('settings.url')}}/uploads/sitesettings-images/{{config('settings.image')}}" width="50" height="15" alt="thebloggersclub.com" border="0" style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 100%; color: #4cb748;"></a>
+                    </td>
+                    <td style="padding: 5px 0; text-align: left">
+                     <h1 style="color: #01b875">   {{config('settings.site_name')}}</h1>
+                    </td>
+                    <td>
+
                     </td>
                 </tr>
             </table>
@@ -220,7 +226,7 @@
                     <td style="padding: 5px 10px; width: 100%; font-family: sans-serif; font-size: 12px; line-height: 100%; text-align: center; color: #999999;" class="x-gmail-data-detectors">
                         <webversion style="color: #999999; text-decoration: underline; font-weight: bold; display: block; width: 100%; padding-bottom: 10px;">
                             <a href="{{config('settings.url')}}/blog" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Home</a> |
-                            <a href="{{config('settings.url')}}/privacy-policy" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Privacy Policy </a> |
+                            <a href="{{config('settings.url')}}/page/privacy-policy" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Privacy Policy </a> |
                             <a href="{{config('settings.url')}}/contact" target="_blank" style="font-family: sans-serif; color:#cccccc; font-size: 11px; text-align: center; text-decoration: none; display: inline-block; position:relative;">Contact Us</a>
                         </webversion>
                     </td>
@@ -228,7 +234,7 @@
                      <tr>
                     <td style="padding: 5px 10px; width: 100%; font-family: sans-serif; font-size: 12px; line-height: 100%; text-align: center; color: #999999;" class="x-gmail-data-detectors">
                         <webversion style="color: #999999; text-decoration: underline;  display: block; width: 100% font-size:11px; padding: 0px 60px; line-height: 18px; color: #bbb;">
-                            Sent by {{config('settings.site_name')}} · 44600 Kumaripati Kathmandu, Nepal
+                            Sent by {{config('settings.site_name')}} 
                         </webversion>
                     </td>
                     </tr>

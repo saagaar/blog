@@ -44,8 +44,6 @@ class AdminController extends BaseController
         $this->middleware('check_user_permission');
     }
 
-    
-    
     public function dashboard(VisitorLogInterface $visitor, AccountInterface $user,BlogInterface $blog)
     {
        
@@ -60,7 +58,6 @@ class AdminController extends BaseController
         $collection=collect($allvisitorsbyCountry);
         $plucked = $collection->pluck('count', 'country_code');
         $dashboard['allvisitorsbyCountry']=collect($plucked->all())->toJson();
-       
         $dashboard['allRegisteredVisitors']=$visitor->countTodaysPageVisitors();             
         $dashboard['allRegisteredUsers']=$user->countAllUsers();
         $dashboard['allUsers']=$user->countAllUsers();    
@@ -112,9 +109,4 @@ class AdminController extends BaseController
         echo 'Import Successfull';
 
     }
-    public function test()
-    {
-        echo 'here';
-    }
-  
 }

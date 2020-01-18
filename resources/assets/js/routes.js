@@ -34,7 +34,8 @@ let routes=[
 						name:'profile',
 						path:'/profile/:username?',
 						components:require('./pages/Timeline'),
-						meta:{layout:"timeline"}
+						meta:{layout:"timeline"},
+						 props: true
 						
 				},
 			

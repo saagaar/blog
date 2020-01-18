@@ -125,9 +125,7 @@ import ProfileImage from './../components/Profile/ProfileImage';
            }
         },
         mixin,
-        
         computed:{
-
             me:function(){
               return this.$store.getters.me
             },
@@ -137,42 +135,39 @@ import ProfileImage from './../components/Profile/ProfileImage';
             authFollowing(){
               return this.$store.getters.authFollowing;
             } 
-            
         },
         mounted(){
-          // console.log(this.authFollowing);
         },
         created(){
           this.username=this.$route.params.username;
         },
         methods:{
-          checkFollow:function(){
-            
-            if (this.authFollowing) {
-            var indexval=(this.authFollowing.indexOf(this.$route.params.username));
-            // console.log(indexval);
-            if(indexval==-1)
+          checkFollow:function()
+          {
+            if (this.authFollowing) 
             {
+              var indexval=(this.authFollowing.indexOf(this.$route.params.username));
+              if(indexval==-1)
+              {
                 return false;
-                
-                
-            }else
-            {
-               return true;
-            }
-          }
+              }
+              else
+              {
+                 return true;
+              }
+           }
           },
           addUserFollowed(username){
             this.authFollowing.push(username);
           },
-           clickImageChange(){
+          clickImageChange(){
             this.enableProfileChangePopup=true
-            },
-            updatePopupClosed(newval){
+          },
+          updatePopupClosed(newval){
               this.enableProfileChangePopup=newval
-            },
-            changeImage:function() 
-            {
+          },
+          changeImage:function() 
+          {
               let curObject=this;
               const file = this.$refs.file.files[0];
               if (file.size > 5 * 1024 * 1024) {

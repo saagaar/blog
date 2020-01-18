@@ -20,7 +20,9 @@ Class Account implements AccountInterface
     public function getById($memberId){
       return $this->account->where('id', $memberId)->first();
     }
-
+    public function getByUserId($memberId){
+      return $this->account->where('id', $memberId)->withCount('followers','followings')->first();
+    }
     public function countAllTodayLoggedInUsers()
     {
       return $this->account->whereDate('last_login_date','=',date('Y-m-d'))->count();

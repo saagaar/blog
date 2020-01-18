@@ -101,7 +101,7 @@
           <!-- /.nav-tabs-custom -->
 
           <!-- Chat box -->
-          <div class="box box-success">
+          <!-- <div class="box box-success">
             <div class="box-header">
               <i class="fa fa-comments-o"></i>
 
@@ -116,7 +116,6 @@
               </div>
             </div>
             <div class="box-body chat" id="chat-box">
-              <!-- chat item -->
               <div class="item">
                 <img src="dist/img/user4-128x128.jpg" alt="user image" class="online">
 
@@ -140,10 +139,7 @@
                     <button type="button" class="btn btn-primary btn-sm btn-flat">Open</button>
                   </div>
                 </div>
-                <!-- /.attachment -->
               </div>
-              <!-- /.item -->
-              <!-- chat item -->
               <div class="item">
                 <img src="dist/img/user3-128x128.jpg" alt="user image" class="offline">
 
@@ -157,8 +153,6 @@
                   best themes on the market
                 </p>
               </div>
-              <!-- /.item -->
-              <!-- chat item -->
               <div class="item">
                 <img src="dist/img/user2-160x160.jpg" alt="user image" class="offline">
 
@@ -172,9 +166,7 @@
                   best themes on the market
                 </p>
               </div>
-              <!-- /.item -->
             </div>
-            <!-- /.chat -->
             <div class="box-footer">
               <div class="input-group">
                 <input class="form-control" placeholder="Type message...">
@@ -184,11 +176,11 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
           <!-- /.box (chat box) -->
 
           <!-- TO DO List -->
-          <div class="box box-primary">
+          <!--<div  class="box box-primary">
             <div class="box-header">
               <i class="ion ion-clipboard"></i>
 
@@ -204,23 +196,16 @@
                 </ul>
               </div>
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
-              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
               <ul class="todo-list">
                 <li>
-                  <!-- drag handle -->
                   <span class="handle">
                         <i class="fa fa-ellipsis-v"></i>
                         <i class="fa fa-ellipsis-v"></i>
                       </span>
-                  <!-- checkbox -->
                   <input type="checkbox" value="">
-                  <!-- todo text -->
                   <span class="text">Design a nice theme</span>
-                  <!-- Emphasis label -->
                   <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                  <!-- General tools such as edit or delete-->
                   <div class="tools">
                     <i class="fa fa-edit"></i>
                     <i class="fa fa-trash-o"></i>
@@ -293,11 +278,10 @@
                 </li>
               </ul>
             </div>
-            <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
               <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
             </div>
-          </div>
+          </div> -->
           <!-- /.box -->
 
           <!-- quick email widget -->
@@ -315,15 +299,15 @@
               <!-- /. tools -->
             </div>
             <div class="box-body">
-              <form action="#" method="post">
+              <form action="/admin/sendemail" method="post">
                 <div class="form-group">
-                  <input type="email" class="form-control" name="emailto" placeholder="Email to:">
+                  <input type="email" class="form-control" name="email"  placeholder="Email to:">
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control" name="subject" placeholder="Subject">
                 </div>
                 <div>
-                  <textarea class="textarea" placeholder="Message"
+                  <textarea class="textarea" id="contenteditor" placeholder="Message" name="emailbody" 
                             style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                 </div>
               </form>

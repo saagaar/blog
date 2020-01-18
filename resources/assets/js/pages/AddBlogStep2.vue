@@ -110,7 +110,7 @@ import Form from './../services/Form.js';
                     short_description:'',
                     image:'',
                     tags:[],
-                    isAnynomous:'2',
+                    isAnynomous:false,
                     file:true,
                     save_method:'1'
                 }),
@@ -136,7 +136,7 @@ import Form from './../services/Form.js';
         initialState: function (value) {
             this.form.short_description=value.blog.short_description;     
             this.form.tags=value.blog.tags;
-            this.form.isAnynomous=value.blog.anynomous;
+            this.form.isAnynomous=(value.blog.anynomous == '1') ? true :false;
             if(value.blog.image && value.blog.image!='null')
             this.image='/uploads/blog/'+value.blog.code+'/'+value.blog.image;
         },
@@ -147,33 +147,30 @@ import Form from './../services/Form.js';
           // }
         },
         methods:{
-
-          searchTags(searchQuery){
-            let curObject=this;
-            this.searchTagform.name=searchQuery;
-            if(searchQuery.length>2)
-            {
-             curObject.isLoading=true;
-             curObject.searchTagform.post('blog/getTagName').then(response => {
-              if(response.data.status){
-                 curObject.isLoading = false;
-                 curObject.options=response.data.data;
-               }
-               else{
+            searchTags(searchQuery){
+              let curObject=this;
+              this.searchTagform.name=searchQuery;
+              if(searchQuery.length>2)
+              {
+               curObject.isLoading=true;
+               curObject.searchTagform.post('blog/getTagName').then(response => {
+                if(response.data.status){
                    curObject.isLoading = false;
-                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.status});
-               }
-              }).catch(e => {
-                 curObject.isLoading = false;
-                  if(e.status===false)
+                   curObject.options=response.data.data;
+                 }
+                 else{
+                     curObject.isLoading = false;
+                     this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.status});
+                 }
+                }).catch(e => {
+                   curObject.isLoading = false;
+                    if(e.status===false)
+                       this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                      else
                      this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
-                    else
-                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
-              });
-            }
-            // 
-         // alert('here');
-          },
+                });
+              }
+            },
         
           // next() {
           //   this.$v.form.$touch();
@@ -182,8 +179,7 @@ import Form from './../services/Form.js';
           //     this.step++;
           //   }
           // },
-          previewImage:function(){
-            
+           previewImage:function(){
              var reader = new FileReader();
               var imageField = document.getElementById("image-field")
               reader.onload = function () {
@@ -193,40 +189,39 @@ import Form from './../services/Form.js';
               }
               this.form.image = this.$refs.file.files[0];
               reader.readAsDataURL(event.target.files[0]);
-              
-            },
+            },  
             preview:function(){
               this.$router.push('/blog/preview/'+this.$route.params.blogId)
             },
             close:function(){
               this.$router.push('/blog/list')
             },
-          submitForm:function(save_method='1'){
-            this.form.save_method=save_method;
-            let curObject=this;
-            curObject.$store.commit('TOGGLE_LOADING');
-            this.$v.form.$touch();
-            if(!this.$v.form.$invalid)
-            {
-              this.form.post('/blog/edit/'+this.$route.params.blogId+'/step2').then(response => {
-               if(response.data.status){
-                 curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
-                 curObject.$store.commit('TOGGLE_LOADING');
-                 this.$router.push({path : '/blog/list'});
-               }
-               else{
-                 curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
-                  curObject.$store.commit('TOGGLE_LOADING');
-               }
-              }).catch(e => {
+            submitForm:function(save_method='1'){
+              this.form.save_method=save_method;
+              let curObject=this;
+              curObject.$store.commit('TOGGLE_LOADING');
+              this.$v.form.$touch();
+              if(!this.$v.form.$invalid)
+              {
+                this.form.post('/blog/edit/'+this.$route.params.blogId+'/step2').then(response => {
+                 if(response.data.status){
+                   curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                    curObject.$store.commit('TOGGLE_LOADING');
-                  if(e.status===false)
+                   this.$router.push({path : '/blog/list'});
+                 }
+                 else{
+                   curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
+                    curObject.$store.commit('TOGGLE_LOADING');
+                 }
+                }).catch(e => {
+                     curObject.$store.commit('TOGGLE_LOADING');
+                    if(e.status===false)
+                       curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
+                      else
                      curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
-                    else
-                   curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
-              });
+                });
+              }
             }
-          }
         },
     }
 

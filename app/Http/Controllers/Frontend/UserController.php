@@ -70,7 +70,7 @@ class UserController extends FrontendController
     { 
       $authFollowing=[];
        $routeName= Route::currentRouteName();
-        if($username)
+         if($username)
          {
             $user=$this->user_state_info($username);
          }
@@ -78,10 +78,11 @@ class UserController extends FrontendController
          {
             $user=$this->user_state_info();
          }      
-         
-        $authFollowing = $this->followerList->getAllFollowingsWithUserid($user['userid'])->pluck('username');
-        $data['authFollowing'] = $authFollowing; 
-          
+         if($this->authUser)
+         {
+            $following = $this->followerList->isFollowedByUser($this->authUser,$user)->pluck('username');
+            $data['authFollowing'] = $following; 
+         }
        if(!$user)
           return redirect()->route('home')
                         ->with('error','No user found!!'); 
@@ -114,19 +115,23 @@ class UserController extends FrontendController
          if($username)
          {
             $userdata=$this->user->getUserByUsername($username);
-            $authFollowing = $this->followerList->getAllFollowings($userdata)->pluck('username');
+         }
+         else if($this->authUser)
+         {
+            $userdata=$this->authUser;
          }
          else
          {
-            $userdata=$this->authUser;
-            $authFollowing = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
-         }
-        if(!$userdata){
-          if($routeName=='api')
-            return array('status'=>false,'message'=>'No user found!!');
-          else
-          return redirect()->route('home')
+            if($routeName=='api')
+              return array('status'=>false,'message'=>'No user found!!');
+            else
+            return redirect()->route('home')
                         ->with('error','No user found!!');     
+         }
+
+        if($this->authUser)
+        {
+          $authFollowing = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
         }
         $routeName= ROUTE::currentRouteName();
         $suggestion=$this->getFollowSuggestions($userdata,3);
@@ -141,6 +146,45 @@ class UserController extends FrontendController
         else
         {
             $data['path']='/followings';
+            $initialState=json_encode($data);
+            $user=$this->user_state_info($username);
+            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+        }
+    }
+    public function followers($username=false)
+    {
+       $authFollowing = [];
+       if($username){
+            $userdata=$this->user->getUserByUsername($username);
+       }
+       else if($this->authUser)
+       {
+            $userdata=$this->authUser;
+       }
+       else
+       {
+          if($routeName=='api')
+            return array('status'=>false,'message'=>'No user found!!');
+          else
+          return redirect()->route('home')
+                      ->with('error','No user found!!');     
+       }
+        if($this->authUser)
+        {
+          $authFollowing = $this->followerList->getAllFollowings($this->authUser)->pluck('username');
+        }
+        $data['userdata'] = $userdata;
+        $routeName = ROUTE::currentRouteName();
+        $followers = $this->followerList->getAllFollowers($userdata);
+        $data['followers'] = $followers;
+        $data['authFollowing'] = $authFollowing;
+        if($routeName=='api')
+        {
+          return ($data);
+        }
+        else
+        {
+            $data['path']='/followers';
             $initialState=json_encode($data);
             $user=$this->user_state_info($username);
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
@@ -177,42 +221,7 @@ class UserController extends FrontendController
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
-    public function followers($username=false)
-    {
-        $followings = [];
-        if($username){
-            $userdata=$this->user->getUserByUsername($username);
-            $followings = $this->followerList->getAllFollowings($userdata)->pluck('username');
-        }
-        else{
-            $userdata=$this->authUser;
-            $followings = $this->followerList->getAllFollowings($userdata)->pluck('username');
-        }
-        $data['userdata'] = $userdata;
-        if(!$userdata )
-        {
-          if($routeName=='api')
-            return array('status'=>false,'message'=>'No user found!!');
-          else
-            return redirect()->route('home')
-                        ->with('error','No user found!!');        
-        }
-        $routeName = ROUTE::currentRouteName();
-        $followers = $this->followerList->getAllFollowers($userdata);
-        $data['followers'] = $followers;
-        $data['followings'] = $followings;
-        if($routeName=='api')
-        {
-          return ($data);
-        }
-        else
-        {
-            $data['path']='/followers';
-            $initialState=json_encode($data);
-            $user=$this->user_state_info($username);
-            return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-        }
-    }
+   
     public function getFollowers($user=false,Request $request){
       try{
           if($user){
@@ -235,24 +244,23 @@ class UserController extends FrontendController
     public function getFollowings($user=false,Request $request){
       try
       {
-           if($user)
-            {
-              $userdata=$this->user->getUserByUsername($user);
-            }
-            else{
-              $userdata=$this->authUser;
-            }
+         if($user)
+          {
+            $userdata=$this->user->getUserByUsername($user);
+          }
+          else{
+            $userdata=$this->authUser;
+          }
           if(!$userdata)
            throw new Exception("No User Found!!", 1);
           $limit=10;
           $offset=$request->get('page')*$limit;
-          $allFollowings = $this->followerList->getAllFollowingsWithUserid($userdata,$limit,$offset);
+          $allFollowings = $this->followerList->getAllFollowingsWithUserid($userdata['id'],$limit,$offset);
           return array('status'=>true,'data'=>$allFollowings,'message'=>'');
           
       }
       catch(Exception $e)
       {
-
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
@@ -363,7 +371,7 @@ class UserController extends FrontendController
         {
               return redirect()->route('home'); 
         }
-    }
+  }
   public function changeAddress(Request $request)
   {
     $this->authorize('updateProfile', $this->authUser);
@@ -381,7 +389,6 @@ class UserController extends FrontendController
   }
   public function changeBio(Request $request)
   {
-    
     if(\Auth::check())
     {
       $this->authorize('updateProfile', $this->authUser);

@@ -1,11 +1,8 @@
 import Form  from './../services/Form.js';
 
 let getData = function(to,store) {
-    
- // 
     return new Promise((resolve, reject) => {
     let initialState = JSON.parse(window.__INITIAL_STATE__) || {};
-
     if (!initialState.path || to.path !== initialState.path) 
     {
      let form=new Form();
@@ -37,6 +34,7 @@ export default {
     {
 
       this.$store.commit('TOGGLE_LOADING');
+      console.log(data);
       this.$data.initialState=data;
     });
   }

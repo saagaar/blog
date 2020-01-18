@@ -9,7 +9,7 @@
 
   gtag('config', 'UA-80347372-2');
 </script>
-
+<script data-ad-client="ca-pub-9412996680861033" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <meta name="google-site-verification" content="Z0avWmdSYKivNtZkEucKSG1uK9pKgJ14fNdgUP7qncA" />
     <!-- Required meta tags -->
     <meta charset="utf-8">

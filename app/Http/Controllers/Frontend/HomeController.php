@@ -89,8 +89,8 @@ class HomeController extends FrontendController
        $this->seo = app()->make('App\Repository\SeoInterface');
         
          $seo =array();
-          $seo = $this->seo->getSeoBySlug('home');
-          $savedBlog = array();
+         $seo = $this->seo->getSeoBySlug('home');
+         $savedBlog = array();
          $data=array();
          $limit=$this->perPage;
          $homeLimit = 4;
@@ -137,7 +137,6 @@ class HomeController extends FrontendController
       $totalShare = $this->share->getTotalShare($code);
       $blogDetails = $this->blog->getActiveBlogByCode($code);
       $prev = $this->blog->getAll()->where('id', '<',$blogDetails['id'])->where(['save_method'=>2])->orderBy('id','desc')->first();
-
       $next = $this->blog->getAll()->where('id', '>', $blogDetails['id'])->where(['save_method'=>2])->orderBy('id')->first();
       $blogComment = $this->userInteraction->getCommentByBlogId($blogDetails['id']);
       $relatedBlog = $this->blog->relatedBlogBycode($code);
@@ -168,7 +167,6 @@ class HomeController extends FrontendController
         }
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory,'totalShare'=>$totalShare));
     }
-
     public function resizeImage($code,$width,$name)
     {
         $imagePath=public_path(). '/uploads/blog/'.$code.'/'.$name;
@@ -213,8 +211,6 @@ class HomeController extends FrontendController
       $blogCountinCategory = $this->blog->getBlogCountByCategory($tagsIds);
       $category =$this->category->getCatBySlug($slug);
       $liked=array();
-      // echo "<pre>";
-      // print_r($category);exit;
       $websiteUrl=$this->websiteUrl;
       $categories=array();
       if($this->authUser)

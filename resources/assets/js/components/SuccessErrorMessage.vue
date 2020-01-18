@@ -23,16 +23,16 @@
            }
         },  
         computed:{
-              flashMessage() { 
+              flashMessage(){ 
                 return this.$store.state.flashMessage 
               },
             },
         watch: {
-          flashMessage(newValue) {
-           this.message=newValue.message;
-           if(newValue.status) this.status='success';
-           else this.status='error';
-            this.removeFlashMessageData();
+          flashMessage(newValue){
+             this.message=newValue.message;
+             if(newValue.status) this.status='success';
+             else this.status='error';
+             this.removeFlashMessageData();
           }
         },
         methods:{
@@ -44,10 +44,8 @@
              },5000);
           }
         }
-
     }
 </script>
-
 <style type="text/css" scoped>
 #display-message{
     border: 1px solid;

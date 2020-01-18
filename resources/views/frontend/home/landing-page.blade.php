@@ -10,31 +10,39 @@
 
   gtag('config', 'UA-80347372-2');
 </script>
+<script data-ad-client="ca-pub-9412996680861033" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script type="text/javascript">
    window.__allCategory__ = '{!! addslashes(json_encode($CategoryByWeight)) !!}'
 </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Free mobile app HTML landing page template to help you build a great online presence for your app which will convert visitors into users">
-    <meta name="author" content="Inovatik">
-     <meta name="csrf-token" content="{{ csrf_token()}}">
-    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+    <meta name="csrf-token" content="{{ csrf_token()}}">
+    <meta name="author" content="{{config('settings.site_name')}}">
+
+
     @if($seo)
+    <meta name="description" content="{{$seo->meta_description}}">
+    <meta name="author" content="Thebloggersclub.com">
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+  
     <meta name="keywords" content="{{$seo->meta_key}}">
-    <meta property="og:site_name" content="{{ config('settings.site_name')}}" /> <!-- website name -->
-  <meta property="og:site" content="{{config('settings.url')}}" /> <!-- website link -->
+    <meta property="og:site_name" content="{{ config('settings.site_name')}}"/> <!-- website name -->
+    <meta property="og:site" content="{{config('settings.url')}}" /> <!-- website link -->
     <meta property="og:title" content="{{$seo->meta_title}}"/> <!-- title shown in the actual shared post -->
     <meta property="og:description" content="{{$seo->meta_description}}" /> <!-- description shown in the actual shared post -->
-    <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+    <meta property="og:image" content=""/> <!-- image link, make sure it's jpg -->
     <meta property="og:url" content="{{config('settings.url')}}" /> <!-- where do you want your post to link to -->
     <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{$seo->meta_title}}"/> <!-- title shown in the actual shared post -->
+    <meta property="og:description" content="{{$seo->meta_description}}" /> <!-- description shown in the actual shared post -->
+    <meta property="og:image" content="{{$seo->image}}" /> <!-- image link, make sure it's jpg -->
+
+
+
     @else
+     <meta name="description" content="">
     <meta property="og:site_name" content="{{ config('settings.site_name')}}" /> <!-- website name -->
-  <meta property="og:site" content="{{config('settings.url')}}" /> <!-- website link -->
-    <meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
-    <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
-    <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+    <meta property="og:site" content="{{config('settings.url')}}" /> <!-- website link -->
     <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
     <meta property="og:type" content="article" />
     @endif
@@ -292,6 +300,7 @@
     <div class="col-12">
       <div class="team-slider">
         <!-- team-member -->
+        @if(is_object($testimonialDetails && count($testimonialDetails)>0))
         @foreach ($testimonialDetails as $eachDetails)
         <div class="team-member">        
           <div class="d-flex mb-4">
@@ -306,6 +315,7 @@
           <p>{{$eachDetails->description}}</p>        
         </div>
         @endforeach
+        @endif
         <!-- team-member -->       
       </div>
     </div>

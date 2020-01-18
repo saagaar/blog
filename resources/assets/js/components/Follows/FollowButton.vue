@@ -1,5 +1,5 @@
 <template>
-  <a v-if="$gate.allow('viewFollowButton', 'profile', loggedInUser)" href="" class="btn btn-sm  btn-round" :class="[Buttonclass,buttonDesign]"  @click.prevent="toggleFollow" ><i  
+  <a v-if="$gate.allow('viewFollowButton', 'profile', loggedInUser) && username!=loggedInUser.username" href="" class="btn btn-sm  btn-round" :class="[Buttonclass,buttonDesign]"  @click.prevent="toggleFollow" ><i  
   :class="isLoading ? ' fa fa-circle-notch fa-spin' : ' fa fa-user-plus'"></i>  
   {{ isFollowing ? 'Unfollow' : 'Follow'}} 
   </a>
@@ -26,8 +26,6 @@ let action='';
                 fa:"fa",
                 faClass:"fa fa-user-plus",
                 buttonDesign:" text-green",
-
-
            }
         },
         computed:{
@@ -38,13 +36,21 @@ let action='';
               return this.$store.getters.me
             },
             
-          },
+        },
         watch:{
-            isFollowing: function (val) {
+          isFollowing: function (val) {
               if(val==true)
                this.buttonDesign='text-green'
               else 
-               this.buttonDesign='btn-success'   
+              {
+                var indexval=(this.followings.indexOf(this.username));
+                this.buttonDesign='btn-success';
+                this.followings.pop(indexval)  ;
+              }
+          },
+          following:function(val)
+          {
+            this.isFollowing=val;
           },
           username:function(val)
           {
@@ -60,20 +66,18 @@ let action='';
           }
         },
         mounted() {
-          if (this.followings) {
+          // if (this.followings) {
             var indexval=(this.followings.indexOf(this.username));
             if(indexval==-1)
             {
                 this.isFollowing=false;
                 this.buttonDesign='btn-success'   
-                
-                
             }else
             {
                 this.isFollowing=true;
                 this.buttonDesign='text-green'
             }
-          }
+          // }
             
         },
          beforeUpdate() {

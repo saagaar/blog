@@ -20,6 +20,7 @@ class CreateSeosTable extends Migration
             $table->string('meta_title');
             $table->string('meta_key');
             $table->string('meta_description');
+            $table->string('image');
             $table->string('schema1');
             $table->string('schema2');
             $table->timestamps();

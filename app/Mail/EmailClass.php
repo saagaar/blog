@@ -32,10 +32,16 @@ class EmailClass extends MailMessage implements ShouldQueue
      *
      * @return $this
      */
-    public function build($view='emailTemplate.default',$data)
+    public function build($view='emailTemplate.default',array $data)
     {
-        return $this->view('emailTemplate.default', $data)
-        ->subject('test subject')
+        $cc='';
+        if(isset($data['cc']))
+            $cc=$data['cc'];
+        return $this->view($view, $data)
+        ->to($data['to'])
+        ->cc($cc)
+        ->subject($data['subject'])
+        ->body($data['body'])
         ->from($this->from);
     }
 

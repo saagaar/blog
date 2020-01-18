@@ -46,6 +46,7 @@
                   <td>{{ $eachNotification->subject }}</td>
                   <td>{{ $eachNotification->view }}</td>
                   <td>
+                     @if(is_array($eachNotification->notification_type))
                         @if(in_array('mail',$eachNotification->notification_type))
                        <span class="label label-warning label-large">Mail</span>
                        @endif
@@ -55,6 +56,7 @@
                         @if(in_array('sms',$eachNotification->notification_type))
                          <span class="label label-info label-large">Sms</span>
                         @endif
+                      @endif
                   </td>
                   <td>{{$eachNotification->created_at}}</td>
                   <td><a href="{{route('notification.edit', $eachNotification->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>

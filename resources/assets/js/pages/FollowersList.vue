@@ -16,7 +16,7 @@
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">
                   <h5><a :href="'/profile/'+eachFollowers.username"  class="profile-link">{{eachFollowers.name}} </a></h5>
-                  <FollowButton  @clicked="userFollowed" :followings="initialState.followings" :Buttonclass="'float-right'" :username="eachFollowers.username" :followSuggestionHead="3"></FollowButton>
+                  <FollowButton  @clicked="userFollowed" :followings="initialState.authFollowing" :Buttonclass="'float-right'" :username="eachFollowers.username"  :followSuggestionHead="3"></FollowButton>
                   <p>{{eachFollowers.followers_count}} Followers</p>
                 </div>
               </div>
@@ -38,7 +38,6 @@
 </div>
 </template>
 <script>
-
   import mixin  from './../mixins/LoadData.mixin.js';
   import FollowButton from './../components/Follows/FollowButton';
   import PlaceHolderFollowers  from './../components/ContentPlaceholder/PlaceHolderFollowers';
@@ -54,11 +53,14 @@
             form:new Form()
           }
       },
-      
+     watch:{
+          initialState: function (val) {
+            this.$store.commit('AUTH_FOLLOWING',this.initialState.authFollowing);
+          },
+      },
        methods:{
           userFollowed:function(user){
            var index=this.initialState.followers.filter(p => p.username == user);
-               // remove after 1 second
           },
           infiniteHandler($state) {
               let username=this.$route.params.username;

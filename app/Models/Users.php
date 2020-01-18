@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as Auditables;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\ResetPasswords;
+
 class Users extends Authenticatable implements Auditable
 {
     use HasApiTokens;
@@ -95,6 +97,13 @@ class Users extends Authenticatable implements Auditable
     public function saved_blogs()
     {
         return $this->hasMany(SaveBlogs::class,'user_id');
+    }
+    /**
+    Password reset customize email
+    */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswords('password_reset',$token));
     }
 }
     

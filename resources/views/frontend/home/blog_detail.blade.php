@@ -58,8 +58,6 @@
                                     </ul>
                                 </div>
                             </div>
-
-                           
                             <p class="excert">
                             	{!! $blogDetails->content !!}
                             </p>
@@ -241,16 +239,14 @@
                                 @endforeach
                             </ul>
                         </aside>
+                        @if($blogDetails->user_id)
                         <aside class="single_sidebar_widget newsletter_widget">
                             <h4 class="widget_title"><i class="fa fa-star">&nbsp;</i> Newsletter</h4>
-
-                            <form action="#">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Enter email" required>
-                                </div>
-                                <button class="button primary-bg text-white w-100 btn-round" type="submit">Subscribe</button>
-                            </form>
+                            
+                           <user-subscribe :code="'{{$blogDetails->code}}'"></user-subscribe>
+                           
                         </aside>
+                        @endif
                     </div>
                 </div>
             </div>

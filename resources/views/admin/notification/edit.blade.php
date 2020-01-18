@@ -63,15 +63,15 @@
                   <label for="notification_type">Notification Type:</label>
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" @if(in_array('mail',$notification->notification_type)) checked @endif name="notification_type[]" value="mail">
+                      <input type="checkbox" @if(is_array($notification->notification_type) && in_array('mail',$notification->notification_type)) checked @endif name="notification_type[]" value="mail">
                       Mail
                     </label>
                     <label>
-                      <input type="checkbox" @if(in_array('database',$notification->notification_type)) checked @endif name="notification_type[]" value="database"  id="myCheck"  onclick="showFunction()">
+                      <input type="checkbox" @if(is_array($notification->notification_type) && in_array('database',$notification->notification_type)) checked @endif name="notification_type[]" value="database"  id="myCheck"  onclick="showFunction()">
                       Database
                     </label>
                     <label>
-                      <input type="checkbox" @if(in_array('sms',$notification->notification_type)) checked @endif name="notification_type[]" value="sms" id="myChecksms"  onclick="showSmsFunction()">
+                      <input type="checkbox" @if(is_array($notification->notification_type) &&  in_array('sms',$notification->notification_type)) checked @endif name="notification_type[]" value="sms" id="myChecksms"  onclick="showSmsFunction()">
                       Sms
                     </label>
                   </div>
