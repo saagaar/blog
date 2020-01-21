@@ -40,9 +40,9 @@
                                                 <li>
                                                 <span class="align-middle">
                                                 @if(!auth()->user())
-                                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :text="' appreciate'"></likes>
+                                                <likes v-bind:currentblog="{{$blogDetails}}"  :blogCode="'{{$blogDetails->code}}'" :text="' appreciate'"></likes>
                                                 @else
-                                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :text="' appreciate'" :likes="{{$likes}}"></likes>
+                                                <likes v-bind:currentblog="{{$blogDetails}}"  :blogCode="'{{$blogDetails->code}}'" :text="' appreciate'" :likes="{{$likes}}"></likes>
                                                 @endif
                                                 </span></li>
                                                 <li><icon-comments-count></icon-comments-count></li>
@@ -58,6 +58,8 @@
                                     </ul>
                                 </div>
                             </div>
+
+                           
                             <p class="excert">
                             	{!! $blogDetails->content !!}
                             </p>
@@ -67,9 +69,9 @@
                         <div class="d-sm-flex justify-content-between text-center">
                             <p class="like-info"><span class="align-middle">
                                 @if(!auth()->user())
-                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :text="'people appreciate this'"></likes>
+                                <likes v-bind:currentblog="{{$blogDetails}}"  :blogCode="'{{$blogDetails->code}}'" :text="'people appreciate this'"></likes>
                                 @else
-                                <likes v-bind:currentblog="{{$blogDetails}}" :blogid="{{$blogDetails->id}}" :blogCode="'{{$blogDetails->code}}'" :text="'people appreciate this'" :likes="{{$likes}}"></likes>
+                                <likes v-bind:currentblog="{{$blogDetails}}"  :blogCode="'{{$blogDetails->code}}'" :text="'people appreciate this'" :likes="{{$likes}}"></likes>
                                 @endif
                             </span></p>
                             <div class="col-sm-4 text-center my-2 my-sm-0">
@@ -151,7 +153,7 @@
                             </div>
                         </div>
                     </div> -->
-                    <comment v-bind:blog="{{ $blogDetails }}" :allComment="{{ $blogComment }}"></comment>
+                    <comment v-bind:blog="{{ $blogDetails }}" :allComment="{{ json_encode($blogComment) }}"></comment>
                     @if(!auth()->user())
                     <div class="area-padding">
                     <div class="d-flex justify-content-center text-center">

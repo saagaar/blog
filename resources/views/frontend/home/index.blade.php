@@ -17,7 +17,6 @@
  <!--================Fullwidth block Area =================-->
     <section class="fullwidth-block area-padding-bottom area-padding-top">
         <div class="container"> 
-            
             <div class="row">
             	@if($featuredBlog['0'])
                 <div class="col-lg-6 col-md-6">
@@ -46,16 +45,11 @@
                             <div class="meta-bottom d-flex">
                                 <a ><i class="ti-time"></i>&nbsp;{{ $featuredBlog['0']->created_at->diffForHumans() }} </a>
                                 <a  class="appreciate"><i>
-                                @if(auth()->user())
-                                    @if(in_array($featuredBlog['0']->id,$likes->toArray()))
+                                    @if(auth()->user() && in_array($featuredBlog['0']->code,$likes->toArray()))
                                         <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
                                     @else
                                         <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                     @endif
-                                @else
-                                
-                                    <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
-                                @endif
                                 </i>&nbsp;&nbsp;{{$featuredBlog['0']->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$featuredBlog['0']->views }} view</a>
                                 
@@ -105,16 +99,12 @@
                             <div class="meta-bottom d-flex">
                                 <a ><i class="ti-time"></i>&nbsp;{{ $eachFeaturedBlog->created_at->diffForHumans() }}</a>
                                 <a  class="appreciate"><i>
-                                    @if(auth()->user())
-                                        @if(in_array($eachFeaturedBlog->id,$likes->toArray()))
+                                        @if(auth()->user() && in_array($eachFeaturedBlog->code,$likes->toArray()))
                                             <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
                                         @else
                                             <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                         @endif
-                                    @else
-                                    
-                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
-                                    @endif
+                                 
                                 </i>&nbsp; &nbsp;{{$eachFeaturedBlog->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachFeaturedBlog->views }} view</a>
                                 @if(auth()->user())
@@ -360,16 +350,12 @@
                             <div class="meta-bottom d-flex">
                                 <a ><i class="ti-time"></i>&nbsp;{{ $popular['0']->created_at->diffForHumans() }} </a>
                                 <a  class="appreciate"><i>
-                                    @if(auth()->user())
-                                        @if(in_array($popular['0']->id,$likes->toArray()))
+                                        @if(auth()->user() && in_array($popular['0']->code,$likes->toArray()))
                                             <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
                                         @else
                                             <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                         @endif
-                                    @else
                                     
-                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
-                                    @endif
                                 &nbsp;</i>{{$popular['0']->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$popular['0']->views }} view</a>
                                 @if(auth()->user())
@@ -419,16 +405,11 @@
                                 <a ><i class="ti-time"></i>&nbsp;
                                 {{ $eachPopular->created_at->diffForHumans() }} </a>
                                 <a  class="appreciate"><i>
-                                    @if(auth()->user())
-                                        @if(in_array($eachPopular->id,$likes->toArray()))
+                                        @if(auth()->user() &&  in_array($eachPopular->code,$likes->toArray()))
                                             <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
                                         @else
                                             <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                         @endif
-                                    @else
-                                    
-                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
-                                    @endif
                                 &nbsp;</i>{{$eachPopular->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>&nbsp;{{$eachPopular->views }} view</a>
                                 @if(auth()->user())
@@ -501,16 +482,11 @@
                                 <a ><i class="ti-time"></i>&nbsp;
                                 {{ $eachLatest->created_at->diffForHumans() }} </a>
                                 <a  class="appreciate"><i>
-                                    @if(auth()->user())
-                                        @if(in_array($eachLatest->id,$likes->toArray()))
+                                        @if(auth()->user() && in_array($eachLatest->code,$likes->toArray()))
                                             <img src="/frontend/images/elements/appreciate.png" width="25" height="25" class="img-fluid">
                                         @else
                                             <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                                         @endif
-                                    @else
-                                    
-                                        <img src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
-                                    @endif
                                 &nbsp;</i>{{$eachLatest->likes_count }} appreciate</a>
                                 <a ><i class="ti-eye"></i>{{$eachLatest->views }} view</a>
                                 @if(auth()->user())

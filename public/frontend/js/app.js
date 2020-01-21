@@ -6353,7 +6353,9 @@ __webpack_require__.r(__webpack_exports__);
     allcomment: Array
   },
   created: function created() {
-    this.$store.commit('LIST_COMMENTS', this.allcomment);
+    if (this.allcomment.length > 0) {
+      this.$store.commit('LIST_COMMENTS', this.allcomment);
+    }
   },
   data: function data() {
     return {
@@ -7115,6 +7117,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-infinite-loading */ "./node_modules/vue-infinite-loading/dist/vue-infinite-loading.js");
 /* harmony import */ var vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
+/* harmony import */ var _TopNav_ProfileImageNotification__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../TopNav/ProfileImageNotification */ "./resources/assets/js/components/TopNav/ProfileImageNotification.vue");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -7152,15 +7155,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     notificationList: {
-      type: Array,
-      "default": function _default() {
-        return [];
-      }
+      type: Array
     },
     type: {
       type: String,
@@ -7172,24 +7174,26 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     }
   },
   components: {
-    InfiniteLoading: vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0___default.a
+    InfiniteLoading: vue_infinite_loading__WEBPACK_IMPORTED_MODULE_0___default.a,
+    ProfileImageNotification: _TopNav_ProfileImageNotification__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
       offset: 1,
-      allNotifications: this.notificationList,
-      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"]()
+      allNotifications: [],
+      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_1__["default"](),
+      image: this.$helpers.getProfileUrl(),
+      name: ''
     };
   },
-  created: function created() {
+  mounted: function mounted() {
     if (window.__NOTIFICATION__ !== undefined) {
-      var notifications = JSON.parse(window.__NOTIFICATION__) || {};
+      var notifications = JSON.parse(window.__NOTIFICATION__) || [];
       this.allNotifications = notifications;
     }
   },
   watch: {
-    notificationList: function notificationList(newValue) {
-      this.allNotifications = newValue;
+    type: function type(newValue) {// alert(type);
     }
   },
   methods: {
@@ -7199,11 +7203,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var cur = this;
       cur.form.get('/api/users/notifications?page=' + this.offset).then(function (response) {
         if (response.data.data.notifications.length > 0) {
-          var _cur$$data$allNotific;
+          var _this$allNotification;
 
           _this.offset += 1;
 
-          (_cur$$data$allNotific = cur.$data.allNotifications).push.apply(_cur$$data$allNotific, _toConsumableArray(response.data.data.notifications));
+          (_this$allNotification = _this.allNotifications).push.apply(_this$allNotification, _toConsumableArray(response.data.data.notifications));
 
           _this.$store.commit('UPDATE_UNREAD_NOTIFICATION_COUNT', response.data.data.unReadNotificationsCount);
 
@@ -7218,14 +7222,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         });
       });
     },
-    notifications: function notifications() {
-      var notifications = JSON.parse(window.__NOTIFICATION__) || {};
-      return notifications;
-    },
-    getProfileUrl: function getProfileUrl(user) {
-      // console.log(user);
-      var url = user.image;
-      return this.$helpers.getProfileUrl(url);
+    notifications: function notifications() {// let notifications=JSON.parse(window.__NOTIFICATION__) || {};
+      // return notifications;
     }
   }
 });
@@ -7758,7 +7756,7 @@ __webpack_require__.r(__webpack_exports__);
 var action = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'likes',
-  props: ['currentblog', 'blogid', 'likes', 'blogcode', 'text'],
+  props: ['currentblog', 'likes', 'blogcode', 'text'],
   data: function data() {
     return {
       isChecked: '',
@@ -7767,7 +7765,7 @@ var action = '';
   },
   mounted: function mounted() {
     if (this.likes) {
-      var indexval = this.likes.indexOf(this.blogid);
+      var indexval = this.likes.indexOf(this.blogcode);
 
       if (indexval == -1) {
         this.$store.commit('TOGGLE_LIKED_CURRENT_BLOG', false);
@@ -8011,11 +8009,11 @@ var action = '';
         autoLogAppEvents: true,
         xfbml: true,
         version: 'v5.0'
+      }); //This function should be here, inside window.fbAsyncInit
+
+      FB.getLoginStatus(function (response) {
+        console.log(response);
       });
-      console.log(FB); //This function should be here, inside window.fbAsyncInit
-      //  FB.getLoginStatus(function(response) {
-      //    console.log(response);
-      // });
     };
 
     (function (d, s, id) {
@@ -8042,7 +8040,6 @@ var action = '';
       var left = screen.width / 2 - w / 2;
       var top = screen.height / 2 - h / 2;
       window.open(pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=yes, scrollbars=no, resizable=no, copyhistory=no, width=' + 800 + ', height=' + 650 + ', top=' + top + ', left=' + left);
-      console.log(FB);
       FB.ui({
         method: 'share',
         href: this.url
@@ -8201,6 +8198,56 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   mixins: [_mixins_Login_mixins__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _services_Form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../services/Form.js */ "./resources/assets/js/services/Form.js");
+//
+//
+//
+//
+//
+//
+// import TheLoginSignupModal from './TheLoginSignupModal';
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    username: String
+  },
+  data: function data() {
+    return {
+      usernme: this.username,
+      image: this.$helpers.getProfileUrl(),
+      form: new _services_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"]()
+    };
+  },
+  created: function created() {
+    this.getProfileUrl(this.username);
+  },
+  methods: {
+    getProfileUrl: function getProfileUrl(user) {
+      var _this = this;
+
+      this.form.get('/api/getUserDetail/' + this.username).then(function (response) {
+        _this.image = _this.$helpers.getProfileUrl(response.data.image);
+      })["catch"](function (e) {
+        _this.$store.commit('SETFLASHMESSAGE', {
+          status: false,
+          message: e.message
+        });
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -45855,91 +45902,67 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.comments.length > 0
-      ? _c(
+    _c(
+      "div",
+      { staticClass: "comment-list" },
+      _vm._l(_vm.comments, function(eachComment) {
+        return _c(
           "div",
-          { staticClass: "comment-list" },
-          _vm._l(_vm.comments, function(eachComment) {
-            return _c(
-              "div",
-              { staticClass: "single-comment justify-content-between d-flex" },
-              [
-                _c(
-                  "div",
-                  { staticClass: "user justify-content-between d-flex" },
-                  [
-                    _c("div", { staticClass: "thumb" }, [
-                      _c("img", {
-                        attrs: {
-                          src: _vm.getProfileUrl(eachComment.user.image)
-                        }
-                      })
+          { staticClass: "single-comment justify-content-between d-flex" },
+          [
+            _c("div", { staticClass: "user justify-content-between d-flex" }, [
+              _c("div", { staticClass: "thumb" }, [
+                _c("img", {
+                  attrs: { src: _vm.getProfileUrl(eachComment.user.image) }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "desc" }, [
+                _c("p", { staticClass: "comment" }, [
+                  _vm._v(
+                    "\n\t\t                " +
+                      _vm._s(eachComment.comment) +
+                      " \n\t\t            "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex justify-content-between" }, [
+                  _c("div", { staticClass: "d-flex align-items-center" }, [
+                    _c("h5", [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href: "/profile/" + eachComment.user.username
+                          }
+                        },
+                        [_vm._v(_vm._s(eachComment.user.name) + " ")]
+                      )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "desc" }, [
-                      _c("p", { staticClass: "comment" }, [
-                        _vm._v(
-                          "\n\t\t                " +
-                            _vm._s(eachComment.comment) +
-                            " \n\t\t            "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-flex justify-content-between" },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "d-flex align-items-center" },
-                            [
-                              _c("h5", [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _vm._v(_vm._s(eachComment.user.name) + " ")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "date" }, [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm._f("moment")(
-                                      eachComment.created_at,
-                                      "dddd, MMMM YYYY, h:mm:ss a"
-                                    )
-                                  ) + " "
-                                )
-                              ])
-                            ]
+                    _c("p", { staticClass: "date" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("moment")(
+                            eachComment.created_at,
+                            "from",
+                            "now"
                           )
-                        ]
+                        ) + " "
                       )
                     ])
-                  ]
-                )
-              ]
-            )
-          }),
-          0
+                  ])
+                ])
+              ])
+            ])
+          ]
         )
-      : _c("div", { staticClass: "comment-list" }, [_vm._m(0)])
+      }),
+      0
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "single-comment justify-content-between d-flex" },
-      [
-        _c("div", { staticClass: "user justify-content-between d-flex" }, [
-          _vm._v("\n\t\t        No Comments Found\n\t\t    ")
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -46663,65 +46686,62 @@ var render = function() {
       _c("li", [
         _c(
           "ul",
-          { staticClass: "allnotificationlist " },
+          { staticClass: "allnotificationlist" },
           [
             _vm._l(_vm.allNotifications, function(eachNotifications) {
-              return _vm.allNotifications
-                ? _c(
-                    "li",
+              return _c(
+                "li",
+                {
+                  staticClass: "media",
+                  class: [eachNotifications.read_at ? "" : "unreadnotification"]
+                },
+                [
+                  _c(
+                    "a",
+                    { attrs: { href: "#" } },
+                    [
+                      _c("ProfileImageNotification", {
+                        attrs: {
+                          username: eachNotifications.data.user.username
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _c(
+                    "p",
                     {
-                      staticClass: "media",
-                      class: [
-                        eachNotifications.read_at ? "" : "unreadnotification"
-                      ]
+                      staticClass: "media-body",
+                      domProps: {
+                        innerHTML: _vm._s(eachNotifications.data.message)
+                      }
                     },
                     [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("img", {
-                          staticClass: "mr-3",
-                          attrs: {
-                            src: _vm.getProfileUrl(eachNotifications.data.user),
-                            alt: "Generic placeholder image"
-                          }
-                        })
-                      ]),
-                      _c(
-                        "p",
-                        {
-                          staticClass: "media-body",
-                          domProps: {
-                            innerHTML: _vm._s(eachNotifications.data.message)
-                          }
-                        },
-                        [
-                          _c("b", { staticClass: "mt-0 mb-1" }, [
-                            _vm._v("2 days ago")
-                          ])
-                        ]
-                      )
+                      _c("b", { staticClass: "mt-0 mb-1" }, [
+                        _vm._v("2 days ago")
+                      ])
                     ]
                   )
-                : _c("li", [_vm._m(1)])
+                ]
+              )
             }),
             _vm._v(" "),
-            _vm.allNotifications.length > 0
-              ? _c(
-                  "InfiniteLoading",
-                  {
-                    attrs: { spinner: "spiral" },
-                    on: { infinite: _vm.infiniteHandler }
-                  },
-                  [
-                    _c("div", { attrs: { slot: "no-more" }, slot: "no-more" }),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { attrs: { slot: "no-results" }, slot: "no-results" },
-                      [_vm._v("-------------")]
-                    )
-                  ]
+            _c(
+              "InfiniteLoading",
+              {
+                attrs: { spinner: "spiral" },
+                on: { infinite: _vm.infiniteHandler }
+              },
+              [
+                _c("div", { attrs: { slot: "no-more" }, slot: "no-more" }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { attrs: { slot: "no-results" }, slot: "no-results" },
+                  [_vm._v("-------------")]
                 )
-              : _vm._e()
+              ]
+            )
           ],
           2
         )
@@ -46756,14 +46776,6 @@ var staticRenderFns = [
         _c("i", { staticClass: "fa fa-bell" }),
         _vm._v(" All Notifications ")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c("p", { staticClass: "media-body" }, [_vm._v("No Notifications")])
     ])
   }
 ]
@@ -47792,6 +47804,33 @@ var render = function() {
     _c("i", { staticClass: "fas fa-user-circle" }, [_vm._v(" ")]),
     _vm._v(" Sign In")
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=template&id=eaddc652&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=template&id=eaddc652& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("img", {
+    staticClass: "mr-3",
+    attrs: { src: _vm.image, alt: "Profile Picture" }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -70493,6 +70532,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/TopNav/ProfileImageNotification.vue":
+/*!****************************************************************************!*\
+  !*** ./resources/assets/js/components/TopNav/ProfileImageNotification.vue ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ProfileImageNotification_vue_vue_type_template_id_eaddc652___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfileImageNotification.vue?vue&type=template&id=eaddc652& */ "./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=template&id=eaddc652&");
+/* harmony import */ var _ProfileImageNotification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfileImageNotification.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ProfileImageNotification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ProfileImageNotification_vue_vue_type_template_id_eaddc652___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ProfileImageNotification_vue_vue_type_template_id_eaddc652___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/TopNav/ProfileImageNotification.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileImageNotification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProfileImageNotification.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileImageNotification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=template&id=eaddc652&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=template&id=eaddc652& ***!
+  \***********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileImageNotification_vue_vue_type_template_id_eaddc652___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProfileImageNotification.vue?vue&type=template&id=eaddc652& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/TopNav/ProfileImageNotification.vue?vue&type=template&id=eaddc652&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileImageNotification_vue_vue_type_template_id_eaddc652___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfileImageNotification_vue_vue_type_template_id_eaddc652___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/TopNav/SignUpButton.vue":
 /*!****************************************************************!*\
   !*** ./resources/assets/js/components/TopNav/SignUpButton.vue ***!
@@ -71301,6 +71409,7 @@ var createComments = function createComments(_ref2, data) {
         'name': getters.me.name,
         'image': getters.me.image
       };
+      res.type = 'newComment';
       commit('LIST_COMMENTS', res);
     }
   })["catch"](function (e) {
@@ -71505,7 +71614,13 @@ var SETFLASHMESSAGE = function SETFLASHMESSAGE(state, flashdata) {
   state.flashMessage = flashdata;
 };
 var LIST_COMMENTS = function LIST_COMMENTS(state, comments) {
-  if (state.listComments.length < 1) state.listComments = comments;else state.listComments.push(comments);
+  if (state.listComments.length < 1 && comments.type == 'newComment') {
+    state.listComments = [comments];
+  } else if (state.listComments.length < 1 && comments.type === undefined) {
+    state.listComments = comments;
+  } else {
+    state.listComments.push(comments);
+  }
 };
 
 /***/ }),

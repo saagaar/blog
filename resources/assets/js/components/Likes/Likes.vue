@@ -11,7 +11,7 @@ import Form from './../../services/Form.js'
 let action='';
     export default {
         name: 'likes',
-        props: ['currentblog','blogid', 'likes','blogcode','text'],
+        props: ['currentblog', 'likes','blogcode','text'],
 
         data: function() {
             return {
@@ -21,7 +21,7 @@ let action='';
         },
         mounted() {
             if(this.likes){
-                var indexval=(this.likes.indexOf(this.blogid));
+                var indexval=(this.likes.indexOf(this.blogcode));
                 if(indexval==-1)
                 {
                     this.$store.commit('TOGGLE_LIKED_CURRENT_BLOG',false);
@@ -31,7 +31,7 @@ let action='';
             }
             this.$store.commit('LIKES_COUNT',this.currentblog.likes_count);
         },
-       computed:{
+        computed:{
             me(){
               return this.$store.getters.me
             },

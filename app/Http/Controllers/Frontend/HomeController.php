@@ -86,52 +86,47 @@ class HomeController extends FrontendController
     public function index(Request $request)
     {
 
-       $this->seo = app()->make('App\Repository\SeoInterface');
-        
+         $this->seo = app()->make('App\Repository\SeoInterface');
          $seo =array();
          $seo = $this->seo->getSeoBySlug('home');
          $savedBlog = array();
          $data=array();
          $limit=$this->perPage;
          $homeLimit = 4;
-        $featuredBlog = $this->blog->getAllFeaturedBlog($homeLimit);
-        $websiteLogo=$this->websiteLogo;
-        $popular =$this->blog->getPopularBlog($homeLimit);
-        $featuredForMember = $this->blog->getAllFeaturedForMember($homeLimit);
-        $latest =$this->blog->getLatestAllBlog($limit);
-        $navCategory=$this->category->getCategoryByShowInHome();
-        $liked=array();
-        $likes=array();
-        $user ='';
-        $data['path']='/home';
-         if(\Auth::check())
-        {
-           $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
-            $liked = $this->blog->getBlogCodeByLike($likes);
-           // print_r($liked);exit;
-            $savedBlogId = $this->blog->getSaveBlogByUser($this->authUser);
-            $savedBlog = $this->blog->getBlogCodeBySave($savedBlogId);
-           $routeName= ROUTE::currentRouteName();
-          if($routeName=='api')
+          $featuredBlog = $this->blog->getAllFeaturedBlog($homeLimit);
+          $websiteLogo=$this->websiteLogo;
+          $popular =$this->blog->getPopularBlog($homeLimit);
+          $featuredForMember = $this->blog->getAllFeaturedForMember($homeLimit);
+          $latest =$this->blog->getLatestAllBlog($limit);
+          $navCategory=$this->category->getCategoryByShowInHome();
+          $liked=array();
+          $likes=array();
+          $user ='';
+          $data['path']='/home';
+           if(\Auth::check())
           {
-            return ($data);
+              $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+              $liked = $this->blog->getBlogCodeByLike($likes);
+              $savedBlogId = $this->blog->getSaveBlogByUser($this->authUser);
+              $savedBlog = $this->blog->getBlogCodeBySave($savedBlogId);
+              $routeName= ROUTE::currentRouteName();
+              if($routeName=='api')
+              {
+                return ($data);
+              }
+              else
+              {
+                  $data['path']='/home';
+                  $initialState=json_encode($data);
+                  $user=$this->user_state_info();
+              }
           }
-          else
-          {
-              $data['path']='/home';
-              $initialState=json_encode($data);
-              $user=$this->user_state_info();
-          }
-        }
-
-        
         return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo,'savedBlog'=>$savedBlog,'userLiked'=>$liked,'seo'=>$seo));
     }
     public function test(Request $request){
       $this->category->subs(5);
     }
     public function blogDetail($code,$slug,Request $request){
-
       $this->blogVisit = app()->make('App\Repository\BlogVisitInterface');
       $this->share = app()->make('App\Repository\ShareInterface');
       $totalShare = $this->share->getTotalShare($code);
@@ -147,7 +142,7 @@ class HomeController extends FrontendController
       $likes='';
         if(\Auth::check())
         {
-          $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+          $likes=$this->blog->doUserLikesBlog($this->authUser,$code);
           $routeName= ROUTE::currentRouteName();
           if($routeName=='api')
           {
@@ -178,7 +173,7 @@ class HomeController extends FrontendController
             });
           return $img->response('jpg'); 
         }
-       abort(404);
+        abort(404);
     }
     public function categoryListing(UserInterestInterface $userInterest)
     {
@@ -265,17 +260,15 @@ class HomeController extends FrontendController
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
           $latest = $this->blog->getLatestAllBlog($limit,$offset);
-          
           return array('status'=>true,'data'=>$latest,'message'=>'');
       }
-      catch(Exception $e)
-      {
+      catch(Exception $e){
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
     public function blogListBySlug($slug,Request $request)
     {
-      $savedBlog=array();
+        $savedBlog=array();
         $data=array();
         $blog=array();
         if($slug=='all-featured')
@@ -289,7 +282,7 @@ class HomeController extends FrontendController
         $user ='';
         $liked=array();
         $data['path']='/home';
-         if(\Auth::check())
+        if(\Auth::check())
         {
           $savedBlogId = $this->blog->getSaveBlogByUser($this->authUser);
             $savedBlog = $this->blog->getBlogCodeBySave($savedBlogId);
@@ -335,43 +328,28 @@ class HomeController extends FrontendController
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
-    // public function test(ShareInterface $share)
-    // {
-    //    // $blogCode='5da95a60500cc2da';
-    //    // $data = $share->incrementFbShare($blogCode);
-    //    //  print_r($data);
-
-    //    $code='user_registration';
-    //     $data=['USERNAME'=>$this->authUser->name,'SITENAME'=>$this->siteName];
-    //     // print_r($data);exit;
-    //     $this->authUser->notify(new Notifications($code,$data));
-    //     echo "Success";
-    //     // return view('frontend.layouts.app');
-    // }
     public function share(Request $request,ShareInterface $share){
-    try
-      {
-        $blogCode = $request->code;
-        $media=$request->media;
-        if($media=='facebook'){
-          $share->incrementFbShare($blogCode);
-          return array('status'=>true,'data'=>'','message'=>'Shared successfully');
+      try
+        {
+          $blogCode = $request->code;
+          $media=$request->media;
+          if($media=='facebook'){
+            $share->incrementFbShare($blogCode);
+            return array('status'=>true,'data'=>'','message'=>'Shared successfully');
+          }
+          if($media=='twitter'){
+            $share->incrementTwShare($blogCode);
+            return array('status'=>true,'data'=>'','message'=>'Shared successfully');
+          }
         }
-        if($media=='twitter'){
-          $share->incrementTwShare($blogCode);
-          return array('status'=>true,'data'=>'','message'=>'Shared successfully');
+        catch(Exception $e)
+        {
+            return array('status'=>false,'message'=>$e->getMessage());
         }
-      }
-      catch(Exception $e)
-      {
-          return array('status'=>false,'message'=>$e->getMessage());
-      }
     }
-
     public function dashboard()
     {
-        if(\Auth::check())
-        {
+        if(\Auth::check()){
             $routeName= ROUTE::currentRouteName();
             $suggestion=$this->getFollowSuggestions(3);
             $data['followSuggestion']=$suggestion;
@@ -380,20 +358,17 @@ class HomeController extends FrontendController
             $liked = $this->blog->getBlogCodeByLike($likes);
             $data['userliked'] = $liked;
             $data['blogByFollowing'] = $blogByFollowing;
-          if($routeName=='api')
-          {
-            return ($data);
-          }
-          else
-          {
-              $data['path']='/dashboard';
-              $initialState=json_encode($data);
-              $user=$this->user_state_info();
-              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
-          }
+            if($routeName=='api'){
+              return ($data);
+            }
+            else{
+                $data['path']='/dashboard';
+                $initialState=json_encode($data);
+                $user=$this->user_state_info();
+                return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+            }
         }
-        else
-        {
+        else{
              return redirect()->route('home'); 
         }
     }
@@ -451,4 +426,6 @@ class HomeController extends FrontendController
        $bannerDetails=$banner->getBannerTagLine();
        return $bannerDetails;
     }
+
+   
 } 

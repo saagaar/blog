@@ -18,6 +18,7 @@ export const createComments = ({ commit,getters},data) => {
       {
           var res=response.data.data;
           res.user={'name':getters.me.name,'image':getters.me.image};
+          res.type='newComment';
 
           commit('LIST_COMMENTS',res);
       }

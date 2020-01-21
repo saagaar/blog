@@ -1,6 +1,6 @@
 <template>
 <div>
-	<div class="comment-list" v-if="comments.length>0">
+	<div class="comment-list" >
 		<div class="single-comment justify-content-between d-flex" v-for="eachComment in comments">
 		    <div class="user justify-content-between d-flex">
 		        <div class="thumb">
@@ -14,9 +14,9 @@
 		            <div class="d-flex justify-content-between">
 		                <div class="d-flex align-items-center">
 		                    <h5>
-		                        <a href="#">{{ eachComment.user.name }} </a>
+		                        <a :href="'/profile/'+ eachComment.user.username ">{{ eachComment.user.name }} </a>
 		                    </h5>
-		                    <p class="date">{{ eachComment.created_at | moment("dddd, MMMM YYYY, h:mm:ss a") }} </p>
+		                    <p class="date">{{ eachComment.created_at | moment("from", "now") }} </p>
 		                </div>
 
 		            </div>
@@ -25,13 +25,13 @@
 		    </div>
 		</div>
 	</div>
-	<div class="comment-list" v-else>
+	<!-- <div class="comment-list" v-else>
 		<div class="single-comment justify-content-between d-flex">
 		    <div class="user justify-content-between d-flex">
 		        No Comments Found
 		    </div>
 		</div>
-	</div>
+	</div> -->
 </div>
 </template>
 <script>

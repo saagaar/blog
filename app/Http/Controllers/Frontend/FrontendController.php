@@ -47,6 +47,7 @@ class FrontendController extends BaseController
     Protected $apiPerPage=8;
     public function __construct()
     {
+
         $this->VisitorLogInterface=$this->VisitorInterface = app()->make('App\Repository\VisitorLogInterface');
         $this->permission=$this->PermissionInterface = app()->make('App\Repository\PermissionInterface');
         $this->visitorInfo =  new visitorInfo();
@@ -77,7 +78,7 @@ class FrontendController extends BaseController
         $this->maintainence_duration=config('settings.maintainence_duration');
 
 
-        $this->save_visitor_info();
+        // $this->save_visitor_info();
        
         date_default_timezone_set('Asia/Kathmandu');
         
@@ -148,11 +149,11 @@ class FrontendController extends BaseController
             $user->followersCount=$followerList->getFollowersCount($this->authUser);
             $user->followingCount=$followerList->getFollowingsCount($this->authUser);
             $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
-            $user->notifications=$account->getUsersNotification($this->authUser,$this->apiPerPage);
             $user->blogCount=$this->authUser->blogs()->count();
             $user->websiteLogo=$this->websiteLogo;
             $user->root_url=url('/');
             $user=$user->toArray();
+            $user['notifications']=$account->getUsersNotification($this->authUser,$this->apiPerPage);
             $user['permissions']= $this->getAllPermissionsAttribute($this->authUser);  
 
             // $user['roles']=$this->authUser->roles->first()->name;
@@ -209,6 +210,6 @@ class FrontendController extends BaseController
                 );
             $logcreate->visitordetails()->create($logdata);
         }
-        VisitorLog::dispatch($ipAddress);
+        VisitorLog::dispatch($ipAddress)->onQueue("low");
     }
 }

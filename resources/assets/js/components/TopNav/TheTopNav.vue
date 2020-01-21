@@ -25,7 +25,7 @@
                             <a  href="javascript:void(0)" class="dropdown-toggle top_icon" 
                             data-toggle="dropdown" role="button" aria-haspopup="true" 
                             aria-expanded="false" title="Notifications"><i class="fas fa-bell"></i> <span></span> <em>{{ me.unReadNotificationsCount }}</em></a>
-                               <NotificationsLoading :notificationList="topnotifications" :type="'nav'" ></NotificationsLoading>
+                               <NotificationsLoading  :type="'nav'" ></NotificationsLoading>
                                 
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -87,7 +87,7 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
        
         data() {
            return {
-            topnotifications:[],
+            topnotifications:{type:Array,default:[]},
             readNotification:false
            }
         },
@@ -102,7 +102,6 @@ import NotificationsLoading  from './../../components/InfiniteLoading/Notificati
                return this.$store.getters.config;
             },
             me:function(){
-              this.topnotifications=this.$store.getters.me.notifications
               return this.$store.getters.me
             },
            

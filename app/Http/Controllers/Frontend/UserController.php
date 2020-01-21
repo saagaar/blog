@@ -418,8 +418,9 @@ class UserController extends FrontendController
           else
           {
               $limit=$this->perPage;
-              $data['notifications']=$this->user->getUsersNotification($this->authUser,$limit);
-              $this->user->markNotificationsToRead($data['notifications']);
+              $notifications=$this->user->getUsersNotification($this->authUser,$limit);
+              $data['notifications']=$notifications->toArray();
+              $this->user->markNotificationsToRead($notifications);
               $data['path']='/users/notifications';
               $initialState=json_encode($data);
               $user=$this->user_state_info();
@@ -528,5 +529,10 @@ class UserController extends FrontendController
     else{
       return redirect()->route('home'); 
     }
+  }
+
+  public function getUserByUsername($username)
+  {
+      return $this->user->getUserByUsername($username);
   }
 }

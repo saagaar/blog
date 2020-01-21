@@ -23,7 +23,7 @@ class Notifications extends Model
         'type','notifiable_type','notifiable_id','data'
         ];
     protected $hidden=[
-        'id','notifiable_id','type'
+        'id','notifiable_id','type','notifiable_type'
     ];
 
   

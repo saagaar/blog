@@ -60,8 +60,15 @@ export const SETFLASHMESSAGE = (state, flashdata)=>
 }
 
 export const LIST_COMMENTS = (state, comments) => {
-	if(state.listComments.length<1)
-		state.listComments=comments;
-	else
-    state.listComments.push(comments);
+    if( state.listComments.length<1 && comments.type=='newComment')
+    {
+        state.listComments=[comments];
+    }
+    else if(state.listComments.length<1 && comments.type===undefined)
+    {
+        state.listComments= comments;
+    }
+    else{
+      state.listComments.push(comments);
+    }
 }

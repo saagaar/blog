@@ -66,7 +66,7 @@ let action='';
           }
         },
         mounted() {
-          // if (this.followings) {
+          if (this.followings) {
             var indexval=(this.followings.indexOf(this.username));
             if(indexval==-1)
             {
@@ -77,7 +77,7 @@ let action='';
                 this.isFollowing=true;
                 this.buttonDesign='text-green'
             }
-          // }
+          }
             
         },
          beforeUpdate() {

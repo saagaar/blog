@@ -16,8 +16,10 @@ import AddComment from './AddComment';
     		allcomment:Array
     	},
         created() {
-
-            this.$store.commit('LIST_COMMENTS',this.allcomment);
+            if(this.allcomment.length>0)
+            {
+                this.$store.commit('LIST_COMMENTS',this.allcomment);
+            }
         },
         data:function(){
           return {

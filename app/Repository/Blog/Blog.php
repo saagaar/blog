@@ -49,11 +49,13 @@ Class Blog implements BlogInterface
   {
     return $this->blog->whereIn('id', $blogIds)->withCount('likes','comments')->with('user')->take($limit)->skip($offset)->get();
   }
-  /**
-   * get blog for featured =1
-   */
-  public function getLikesOfBlogByUser($user){
-    return $user->likes()->pluck('blog_id');
+  
+  public function getLikesOfBlogByUser($user,$blogcode=false){
+    return $user->likes()->pluck('code');
+  }
+
+   public function doUserLikesBlog($user,$blogcode=false){
+    return $user->likes()->where('code',$blogcode)->pluck('code');
   }
   public function getBlogCodeByLike($blogIds)
   {

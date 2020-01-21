@@ -28,11 +28,10 @@ let action='';
               xfbml            : true,
               version          : 'v5.0'
             });
-            console.log(FB);
             //This function should be here, inside window.fbAsyncInit
-           //  FB.getLoginStatus(function(response) {
-           //    console.log(response);
-           // });
+            FB.getLoginStatus(function(response) {
+              console.log(response);
+           });
           };
 
           (function(d, s, id){
@@ -53,7 +52,6 @@ let action='';
       		    var left = (screen.width / 2) - (w / 2);
       		    var top = (screen.height / 2) - (h / 2);
       		    window.open(pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=yes, scrollbars=no, resizable=no, copyhistory=no, width=' + 800 + ', height=' + 650 + ', top=' + top + ', left=' + left)
-              console.log(FB);
       		     FB.ui({
                       method:'share',
                       href: this.url,
