@@ -136,9 +136,8 @@ class LoginController extends FrontendController
             $input['status']    ='2';
             $code='user_registration';
             $data=['NAME'=>$input['name'],'URL'=>url('/blog/useractivation/'.$input['username'].'/'.$input['activation_code']),'SITENAME'=>$this->siteName];
-            
-       
-        }else{
+        }else
+        {
             $input['status']    ='1';
         }
         $user = $this->account->create($input);

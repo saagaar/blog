@@ -20,10 +20,10 @@
                 <thead>
                 <tr>
                    <th>id</th>
-                  <th>Meta Title</th>
+                  <th>Page Name</th>
                   <th>Page Slug</th>
-                  <th>Meta key</th>
-                  <th>Created at</th>
+                  <th>Title</th>
+                  <th>Meta Description</th>
                   <th colspan="2">Action</th>
                 </tr>
                 </thead>
@@ -34,10 +34,10 @@
                 
                 <tr>
                   <td>{{ ++$i }}</td>
-                  <td>{{ $eachseo->meta_title }}</td>
+                  <td>{{ $eachseo->pageid }}</td>
                   <td>{{ $eachseo->page_slug }}</td>
-                  <td>{{ $eachseo->meta_key }}</td>
-                  <td>{{$eachseo->created_at}}</td>
+                  <td>{{ $eachseo->meta_title }}</td>
+                  <td>{{ $eachseo->meta_description }}</td>
                       
                       <td><a href="{{route('seo.edit',$eachseo->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
                       <td>

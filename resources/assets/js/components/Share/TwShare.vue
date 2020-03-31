@@ -1,6 +1,6 @@
 <template>
 	<li>
-		<a target="_blank" @click="tw_share" :href="'https://twitter.com/intent/tweet?url='+url+'&text='+blog.title"><i class="fab fa-twitter"></i></a>
+		<a target="_blank"  style="display: inline-block;" @click="tw_share" :href="'https://twitter.com/intent/tweet?url='+url+'&text='+blog.title"><i class="fab fa-twitter"></i></a>
    	</li>
 </template>
 
@@ -23,19 +23,18 @@ import Form from './../../services/Form.js'
         	
             tw_share:function(){
                 let current= this;
-                    $.getScript("http://platform.twitter.com/widgets.js", function(){
+                    $.getScript("https://platform.twitter.com/widgets.js", function(){
                        function handleTweetEvent(event){
                          if (event) {
                            current.form.post('/blog/detail/share').then(response => {
                                if(response.data.status){
-                                
                                }
                                else{
-                                  
+                                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:'Some Error Occured.Please try again in a while.'});
                                }
                               }).catch(e => {
                             
-                              console.log(e);
+                                this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
                               });
                          }
                        }

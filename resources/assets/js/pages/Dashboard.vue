@@ -1,20 +1,20 @@
-
+  
 <template>
 
-<div class="col-md-9 col-sm-9">
+<div class="col-lg-9 col-md-7 col-sm-12">
       <div class="row">
-        <div class="col-md-9 col-sm-9">
-
+        <div class="col-lg-9 col-md-12 col-sm-12">
+         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true">
                  <PlaceHolderDashboardFeed></PlaceHolderDashboardFeed>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogByFollowing &&initialState.blogByFollowing.length>0">
               <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogByFollowing">
-                <div class="thumb col-lg-3 col-md-4 col-sm-5">
+                <div class="thumb col-lg-4 col-md-4 col-sm-5 col-4">
                  <img  v-if="eachBlog.image" class="img-fluid" :src="getImageurl(eachBlog.code,eachBlog.image)" :alt="eachBlog.title">
                  <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="eachBlog.title">
                   </div>
-                <div class="short_details col-lg-9 col-md-8 col-sm-7"> 
+                <div class="short_details col-lg-8 col-md-8 col-sm-7 col-8"> 
                   <div class="meta-top d-flex">
                     <a v-if="eachBlog.anynomous==1" href="#">By Anynomyous</a>
                     <a v-else-if="eachBlog.user==null" href="#">By Admin</a>
@@ -42,8 +42,9 @@
                 </div>
               </div>
             </div>
+            </div>
         </div>
-        <div class="col-md-3 col-sm-3 pad-left-0">
+        <div class="col-lg-3 col-md-12 col-sm-12 pad-left-0 recommended_sec ">
             <div class="white-box mb20">
                 <FollowSuggestionsList   :followSuggestion="followSuggestion"></FollowSuggestionsList>
             </div>

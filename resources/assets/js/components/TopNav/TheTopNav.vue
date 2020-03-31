@@ -3,12 +3,12 @@
  <section class="header-top">
         <div class="container">
             <div class="row align-items-center justify-content-between">
-                <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-3 logo-wrapper">
                     <a href="/blog" class="logo">
                         <img :src="'/uploads/sitesettings-images/'+me.websiteLogo" alt="">
                     </a>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-8 search-trigger">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-9 search-trigger">
                     <div class="right-button">
 
                         <ul v-if="!isUserloggedIn" >
@@ -30,7 +30,7 @@
                         </li>
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <small>Welcome !</small>
-                            <figure><img :src="getProfileUrl()"></figure> {{ getFirstName() }}</a>
+                            <figure><img :src="getProfileUrl()"></figure><b class="u_name"> {{ getFirstName() }}</b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/dashboard">My Dashboard</a></li>
                             

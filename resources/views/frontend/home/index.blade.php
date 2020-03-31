@@ -72,10 +72,8 @@
                         <div class="thumb col-md-4 col-sm-5 col-4 bg-color">
                             <figure>
                                 <a >
-
                             @if($eachFeaturedBlog->image)
                                     @php
-
                                         $img=explode('.',$eachFeaturedBlog->image);
                                     @endphp
                                  <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$eachFeaturedBlog->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
@@ -431,7 +429,40 @@
             </div>
         </div>
     </section>
-                @endif
+    @endif
+   <section class="first_block area-padding-top area-padding-bottom" style="width: 100%; max-height: 30px !important">
+      <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Home Horizontal Ads -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9412996680861033"
+                         data-ad-slot="8840445990"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                  <div class="col-lg-6 col-md-6">
+                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Home Horizontal Ads -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9412996680861033"
+                         data-ad-slot="8840445990"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                  </div>
+            </div>
+        </div>
+</section>
+
 
     <!--================ First block section end =================-->       
 

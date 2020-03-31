@@ -23,6 +23,7 @@ class CreateSiteOptionsTable extends Migration
             $table->enum('log_admin_activity', ['Y', 'N']);
             $table->enum('log_admin_invalid_login', ['Y', 'N']);
             $table->string('contact_email', 100);
+            $table->string('noreply_email', 100);
             $table->string('contact_name', 100);
             $table->string('contact_number', 100);
             $table->enum('mode', ['1', '2','3'])->comment('1=live,2=down,3=maintenance');

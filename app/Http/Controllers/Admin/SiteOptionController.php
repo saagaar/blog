@@ -8,6 +8,7 @@ use App\Http\Requests\SiteoptionsRequest;
 use Illuminate\Support\Facades\File;
 use Image;
 use App;
+use DB;
 
 class SiteOptionController extends AdminController
 {
@@ -88,7 +89,6 @@ class SiteOptionController extends AdminController
                {
                  $validatedData['image'] = $site->image;
                }
-             
                $this->siteOptions->update($validatedData);
                return redirect()->route('sitesetting')
                             ->with('success','Site Settings Updated Successfully.');

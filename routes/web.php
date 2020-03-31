@@ -13,10 +13,11 @@
 Route::get('/','Frontend\HomeController@landingPage')->name('landing.page');
 Route::post('/check','Frontend\FrontendController@index')->name('check.maintainence');
 Route::get('/logincheck', function () {
-    return response()->json([
-   'status'=> \Auth::check(),
-   'data'=>Auth::user()
-]);
+	    return response()->json
+	    ([
+		   'status'=> \Auth::check(),
+		   'data'=>Auth::user()
+		]);
 });
 
 
@@ -45,10 +46,12 @@ Route::get('/api/blog/preview/{code}', 'Frontend\BlogController@preview')->name(
 Route::post('/create/comment/{code}', 'Frontend\UserInteractionController@createComment')->name('create.comment');
 Route::post('/like/blog/{code}', 'Frontend\UserInteractionController@likeBlog')->name('like.blog');
 Route::post('/save/blog/{code}', 'Frontend\UserInteractionController@saveBlog')->name('save.blog');
+
 Route::post('/newsletter/subscribe', 'Frontend\UserInteractionController@newsletter')->name('newsletter');
 Route::get('/newsletter/unsubscribe/{email}', 'Frontend\UserInteractionController@newsletterUnsuscribe')->name('newsletter.unsubscribe');
 Route::post('/user/subscribe', 'Frontend\UserInteractionController@userSubscription')->name('user.subscription');
 Route::post('/category/subscribe', 'Frontend\UserInteractionController@categorySubscription')->name('category.subscription');
+
 Route::get('/saved/blog','Frontend\UserController@savedBlogList')->name('saved.blog');
 Route::get('api/saved/blog','Frontend\UserController@savedBlogList')->name('api');
 Route::get('/getsavedblog','Frontend\UserController@getSavedBlogLoader')->name('infinity');
@@ -235,6 +238,9 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::match(['get','post'],'/edit/blog/{id}/{slug}','Admin\BlogController@edit')->name('blog.edit');
 	Route::get('/delete/blog/{id}','Admin\BlogController@delete')->name('blog.delete');
 	Route::get('blog/changesavemethod', 'Admin\BlogController@changeSaveMethod')->name('blog.changemethod');
+	Route::get('blog/updateBlogIsFeatured', 'Admin\BlogController@updateBlogIsFeatured')->name('blog.updateBlogIsFeatured');
+	Route::get('blog/updateShowInHome', 'Admin\BlogController@updateShowInHome')->name('blog.updateShowInHome');
+
 
 	// route for user account
 	Route::get('/list/account','Admin\AccountController@list')->name('account.list');
@@ -242,6 +248,7 @@ Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.d
 	Route::match(['get','post'],'/edit/account/{id}','Admin\AccountController@edit')->name('account.edit');
 	Route::get('/view/account/{id}','Admin\AccountController@view')->name('account.view');
 	Route::get('/delete/account/{id}','Admin\AccountController@delete')->name('account.delete');
+    Route::get('/resend-activation/account/{username}', 'Admin\AccountController@resendActivation')->name('admin.resend_activation');
 
 	//Route for user Account roles
 	Route::get('/list/roles','Admin\RoleController@list')->name('roles.list');

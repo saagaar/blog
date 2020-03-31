@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
 
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -37,13 +38,12 @@ const mix = require('laravel-mix');
         'resources/assets/js/theme.js',
     ], 'public/frontend/js/common.js');
 
-   mix.sass('resources/assets/sass/style.scss', 'public/frontend/css')
-     .copyDirectory('resources/assets/images', 'public/frontend/images');
+   // mix.sass('resources/assets/sass/style.scss', 'public/frontend/css')
+   //   .copyDirectory('resources/assets/images', 'public/frontend/images');
  
     mix.styles([
     // 'resources/assets/vendors/fontawesome/css/all.min.css',
 	'resources/assets/css/bootstrap.css',  
-    
     'resources/assets/css/themify-icons.css',
     'resources/assets/css/flaticon.css',
     'resources/assets/vendors/animate-css/animate.css',
@@ -58,7 +58,6 @@ const mix = require('laravel-mix');
     mix.styles([
     'resources/assets/landing-page/css/bootstrap.css',
     'resources/assets/vendors/fontawesome/css/all.min.css',
-    
     'resources/assets/landing-page/css/themify-icons.css',
     'resources/assets/landing-page/css/slick.css',
     'resources/assets/landing-page/animate.css',
@@ -75,5 +74,3 @@ const mix = require('laravel-mix');
     'resources/assets/maintainence-mode/css/main.css',
     ], 'public/frontend/css/maintainence-mode.css')
 
-
-   

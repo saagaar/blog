@@ -23,14 +23,17 @@ class SeoRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'pageid'                        =>'required',
-            'page_slug'                     =>'required',
-            'meta_title'                     =>'required',
-            'meta_key'                      =>'required|min:5',
-            'meta_description'              =>'required|min:5',
-            'schema1'                       =>'required|min:5',
-            'schema2'                       =>'required|min:5'
-        ];
+       
+            $image = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+            return [
+                'pageid'                        =>'',
+                'page_slug'                     =>'required|unique:seos,page_slug,'.request()->id,
+                'meta_title'                     =>'required|max:90',
+                'meta_key'                      =>'min:5|max:250',
+                'meta_description'              =>'required|min:5|max:180',
+                'schema1'                       =>'min:1',
+                'schema2'                       =>'min:1',
+                'image'                         =>$image
+            ];
     }
 }

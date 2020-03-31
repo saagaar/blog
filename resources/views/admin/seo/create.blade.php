@@ -31,10 +31,17 @@
               @csrf
               <div class="box-body">
                 <div class="form-group">
-                  <label for="pageid">Page id</label>
-                  <input type="text" class="form-control" name="pageid" id="pageid" value="{{ old('pageid') }}" placeholder="Enter Page Id">
+                  <label for="pageid">Page Name</label>
+                  <input type="text" class="form-control" name="pageid" id="pageid" value="{{ old('pageid') }}" placeholder="Enter Page Name">
                   @if ($errors->has('pageid'))
                 <div class="alert alert-danger">{{ $errors->first('pageid') }}</div>
+                @endif
+                </div>
+                  <div class="form-group">
+                  <label for="page_slug">Page Slug</label>
+                  <input type="text" class="form-control" name="page_slug" id="page_slug" value="{{  old('page_slug') }}" placeholder="Enter Page Slug">
+                  @if ($errors->has('page_slug'))
+                <div class="alert alert-danger">{{ $errors->first('page_slug') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
@@ -44,13 +51,7 @@
                 <div class="alert alert-danger">{{ $errors->first('meta_title') }}</div>
                 @endif
                 </div>
-                <div class="form-group">
-                  <label for="page_slug">Page Slug</label>
-                  <input type="text" class="form-control" name="page_slug" id="page_slug" value="{{ old('page_slug') }}" placeholder="Enter Page Slug">
-                  @if ($errors->has('page_slug'))
-                <div class="alert alert-danger">{{ $errors->first('page_slug') }}</div>
-                @endif
-                </div>
+              
                 <div class="form-group">
                   <label for="meta_key">Meta Key</label>
                   <input type="text" class="form-control" name="meta_key" id="meta_key" value="{{ old('meta_key') }}" placeholder="Enter Meta Key">
@@ -79,6 +80,13 @@
                   @if ($errors->has('schema2'))
                 <div class="alert alert-danger">{{ $errors->first('schema2') }}</div>
                 @endif
+                </div>
+                 <div class="form-group">                  
+                  <label for="image">Image Upload</label>                  
+                  <input type="file" class="form-control" name="image" id="image">
+                  @if ($errors->has('image'))
+                    <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                  @endif
                 </div>
                 
               </div>

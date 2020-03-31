@@ -6,7 +6,7 @@
                 <figure>
                     <a href="#">
                          <img v-if="items.image" class="img-fluid" :src="getImageurl(items.code,items.image)" :alt="items.title">
-                       <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="items.title">
+                         <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="items.title">
                     </a>
                 </figure>
             </div>
@@ -23,8 +23,8 @@
                 <div class="meta-bottom d-flex">
                     <a href="#"><i class="ti-time"></i>{{ items.created_at | moment("from", "now")}}</a>
                     <a href="" class="appreciate"><i>
-                         <LikeCheck v-if="isLoggedIn" :likes="userliked" :code="items.code"></LikeCheck>
-                      <img v-else src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                      <LikeCheck v-if="isLoggedIn" :likes="userliked" :code="items.code"></LikeCheck>
+                      <img v-else src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                     </i> {{items.likes_count}} appreciate</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <SaveBlog v-if="isLoggedIn" :saves="saves" :blogcode="items.code" ></SaveBlog>
@@ -33,10 +33,12 @@
             </div>
         </div>
         </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
         <InfiniteLoading @infinite="infiniteHandler" spinner="spiral">
           <div slot="no-more"></div>
           <div slot="no-results"><hr></div>
         </InfiniteLoading>
+        </div>
 </div>
 </template>
 

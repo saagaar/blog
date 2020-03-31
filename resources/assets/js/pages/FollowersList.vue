@@ -9,15 +9,16 @@
       <div class="col-md-6 col-sm-12"  v-for="eachFollowers in initialState.followers">
         <div class="friend-card">
             <div class="row card-info">
-              <div class="col-lg-3 col-md-4">
+              <div class="col-lg-3 col-md-4 col-sm-4 col-4">
                 <img :src="getProfileUrl(eachFollowers.image)" alt="user" class="profile-photo-lg" />
               </div>
               
-              <div class="col-lg-9 col-md-8">
+              <div class="col-lg-9 col-md-8 col-sm-8 col-8">
                 <div class="friend-info">
                   <h5><a :href="'/profile/'+eachFollowers.username"  class="profile-link">{{eachFollowers.name}} </a></h5>
-                  <FollowButton  @clicked="userFollowed" :followings="initialState.authFollowing" :Buttonclass="'float-right'" :username="eachFollowers.username"  :followSuggestionHead="3"></FollowButton>
                   <p>{{eachFollowers.followers_count}} Followers</p>
+
+                  <FollowButton  @clicked="userFollowed" :followings="initialState.authFollowing" :Buttonclass="'float-right'" :username="eachFollowers.username"  :followSuggestionHead="3"></FollowButton>
                 </div>
               </div>
             </div>
@@ -32,9 +33,17 @@
     </div> 
    
     </div>
-    <div class="friend-list fn_list_2" v-else>
-     Sorry No followers yet!!
-    </div>               
+   <div class="col-lg-9 col-md-8 col-sm-7 col-12 follow_list pad-left-0" v-else>
+      <div class="friend-list">
+          <div class="friend-card">
+            <div class="row card-info">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <h4 style="color: red">No Followers Yet !!</h4>
+            </div>
+            </div>
+          </div>
+        </div>
+    </div>            
 </div>
 </template>
 <script>

@@ -65,19 +65,18 @@ $factory->define(ModulePermission::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(ModuleRolePermissions::class, function (Faker $faker) use ($factory){
-    $moduleids = App\Models\ModulePermissions::pluck('id');
+$factory->define(AdminRolePermissions::class, function (Faker $faker) use ($factory){
+    $moduleids = App\Models\AdminPermissions::pluck('id');
     $module=[];
    // foreach($moduleids as $eachids)
    // {
      return [
-                 'module_id'=>$moduleids->random(),
+                 'permission_id'=>$moduleids->random(),
                  'role_id'=>1
             ];
    // }
     // return  $module;
 });
-
 
 
 // factory(ModulePermissions::class, 20)->create()->each(

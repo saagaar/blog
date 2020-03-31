@@ -208,5 +208,4 @@
 
 @script
    var visitorsData= JSON.parse('<?php echo $dashboard["allvisitorsbyCountry" ];?>');
-
 @endscript

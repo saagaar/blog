@@ -88,7 +88,6 @@ Class Blog implements BlogInterface
    */
   public function getBlogOfFollowingUser($user,$limit=10,$offset=0){
     $listofFollowings=$user->followings()->select('follow_id')->get()->pluck('follow_id')->toArray();
-    // print_r($listofFollowings);exit;
     return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->whereIn('user_id', $listofFollowings)->with('user')->orderBy('created_at','DESC')->withCount('likes','comments')->latest()->take($limit)->skip($offset)->get()->toArray();
   }
   public function getBlogOfFollowingUserDaily($user,$limit=10,$offset=0){
@@ -106,6 +105,7 @@ Class Blog implements BlogInterface
     return $q->whereIn('name', $blogData->tags()->pluck('name')); 
     })
     ->where('id', '!=', $blogData->id)
+    ->where('save_method','==','2')
     ->orderBy('created_at','DESC') // So you won't fetch same post
     ->get();
     return $related;
@@ -162,6 +162,10 @@ Class Blog implements BlogInterface
      */
   public function getAll(){
    return	$this->blog->latest();
+  }
+
+  public function getAllBlogsWithUser(){
+   return $this->blog::with('user:id,username,name')->latest();
   }
  	
  	  /**

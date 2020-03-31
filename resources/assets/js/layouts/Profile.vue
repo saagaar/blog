@@ -41,13 +41,13 @@
                   <li><router-link :to="{name:'profile',params:{username:username}}">Timeline</router-link></li>
                   <li><router-link :to="{name:'followings',params:{username:username}}">Followings({{ me.followingCount}} )</router-link></a></li>
                   <li><router-link :to="{name:'followers',params:{username:username}}">Followers({{ me.followersCount}} )</router-link></a></li>
-                  <li class="lifollow"><FollowButton v-if="this.$route.params.username && loggedIn" :following="checkFollow()" :followings="authFollowing" :Buttonclass="'float-right'" :username="this.$route.params.username" :followSuggestionHead="3"></FollowButton></li>
+                  <li class="lifollow" v-if="this.$route.params.username && loggedIn"><FollowButton  :following="checkFollow()" :followings="authFollowing" :Buttonclass="'float-right'" :username="this.$route.params.username" :followSuggestionHead="3"></FollowButton></li>
                 </ul>
-                <ul class="follow-me list-inline">
+                <!-- <ul class="follow-me list-inline">
                   <li>
-                    <!-- <button class="btn-primary">Edit Profile</button> -->
+                    <button class="btn-primary">Edit Profile</button>
                   </li>
-                </ul>
+                </ul> -->
               </div>
             </div>
           </div>
@@ -56,14 +56,21 @@
         </div>
         <div id="page-contents">
           <div class="row">
-            <div class="col-md-3 col-sm-3">
+            <div class=" col-lg-3 col-md-12 col-sm-12">
               <!-- <div id="sideba3">
               <TheDashboardSideMenu></TheDashboardSideMenu>
               </div> -->
                 <div class="bio">
-                <Bio></Bio>
-                <hr/>
-                <Address></Address>
+                <div class="row">
+                  <div class="col-lg-12 col-md-6 col-sm-6"><Bio></Bio></div> 
+                   <div class="col-lg-12 col-md-12 col-sm-12 h_line">
+                    <hr/>
+                   </div>
+
+                  <div class="col-lg-12 col-md-6 col-sm-6"><Address></Address></div> 
+                 <div class="clearfix"></div>
+                </div>
+
                  </div>
               <!-- <div id="chat-block" class="" style="">
                 <div class="title">Chat online</div>
@@ -80,7 +87,7 @@
                 </ul>
               </div> -->
             </div>
-             <div class="col-md-9 col-sm-9">
+             <div class="col-lg-9 col-md-12 col-sm-12">
                <router-view></router-view>
              </div>
           </div>

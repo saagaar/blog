@@ -35,14 +35,14 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" name="name" id="name" value="{{$accounts->name}}" >
+                  <input type="text" class="form-control" name="name" id="name" value="{{ old('name',$accounts->name)}}" >
                 @if ($errors->has('name'))
                 <div class="active">{{ $errors->first('name') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="text" class="form-control" name="email" id="email" value="{{$accounts->email}}">
+                  <input type="text" class="form-control" name="email" id="email" value="{{ old('email',$accounts->email)}}">
                 @if ($errors->has('email'))
                 <div class="active">{{ $errors->first('email') }}</div>
                 @endif
@@ -81,7 +81,7 @@
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone number</label>
-                    <input type="text" class="form-control" name="phone" value="{{$accounts->phone}}" id="phone" placeholder="Phone Number">
+                    <input type="text" class="form-control" name="phone" value="{{old('phone',$accounts->phone)}}" id="phone" placeholder="Phone Number">
                     @if ($errors->has('phone'))
                   <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
                   @endif
@@ -97,7 +97,7 @@
                     </div>                
                   <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" value="{{$accounts->address}}" id="address"  placeholder="Enter Address">
+                    <input type="text" class="form-control" name="address" value="{{old('address',$accounts->address)}}" id="address"  placeholder="Enter Address">
                     @if ($errors->has('address'))
                   <div class="alert alert-danger">{{ $errors->first('address') }}</div>
                   @endif
@@ -107,7 +107,7 @@
                     <select name="country" class="form-control">
                       @if($accounts->country)
                        @foreach ($accounts->country()->get() as $country)
-                                        <option value="{{ $country->id }}">{{ $country->country }}</option>
+                                        <option value="{{ old('country',$country->id) }}">{{ $country->country }}</option>
                                     @endforeach
                         @else
                     <option value="">--Select--</option>
@@ -128,7 +128,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" value="{{$accounts->dob}}" name="dob" class="form-control pull-right" id="datepicker">
+                  <input type="text" value="{{old('dob',$accounts->dob)}}" name="dob" class="form-control pull-right" id="datepicker">
 
                 </div>
                 @if ($errors->has('dob'))

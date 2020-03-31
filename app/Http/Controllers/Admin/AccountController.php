@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
 use Illuminate\Support\Facades\File;
 use App\Models\Countries;
+use App\Notifications\Notifications;
 use App;
 
 /** user account 
@@ -24,7 +25,6 @@ class AccountController extends AdminController{
         $this->account=$account;
         $this->roles=$roles;
         $this->middleware('auth:admin')->except('logout');
-       
     }
     public function list(Request $request)
     {
@@ -36,15 +36,14 @@ class AccountController extends AdminController{
 
          $search = $request->get('search');
         if($search){
-            $account = $this->account->getAll()
+            $account = $this->account->getAllUserWithBlogCount()
                     ->where('name', 'like', '%' . $search . '%')
                      ->orWhere('email', 'like', '%' . $search . '%')
                     ->paginate($this->PerPage)
                     ->withPath('?search=' . $search);
         }else{
-            $account = $this->account->getAll()->paginate($this->PerPage);
+            $account = $this->account->getAllUserWithBlogCount()->paginate($this->PerPage);
         }         
-        
         return view('admin.account.list')->with(array('account'=>$account,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
     public function create(Request $request)
@@ -83,6 +82,8 @@ class AccountController extends AdminController{
         $countries = Countries::All();
         return view('admin.account.create')->with(array('countries'=>$countries,'roles'=>$allRoles,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
     }
+
+ 
     public function edit(Request $request,$id)// normal user list
     {
       $breadcrumb=['breadcrumbs' => [
@@ -131,7 +132,7 @@ class AccountController extends AdminController{
                 'All Accounts' => route('account.list'),
                 'current_menu'=> 'Members Details',
                   ]];
-                  $countries = Countries::All();
+          $countries = Countries::All();
         $accounts =$this->account->getByUserId($id);  
         $this->blog = app()->make('App\Repository\BlogInterface');     
         $timeline =$this->blog->getBlogOfFollowingUser($accounts);
@@ -155,4 +156,26 @@ class AccountController extends AdminController{
         return redirect()->route('account.list')
         ->with('success', 'User has been deleted!!');
     }
+
+   public function resendActivation($username){
+    $activation_code= mt_rand(100000,999999);
+    $user=$this->account->getUserByUsername($username);
+    if(!$user)
+    {
+         return redirect()->route('account.list')
+                    ->with('error','User not Found.');
+    }
+    if($user->status=='1')
+    {
+          return redirect()->route('account.list')
+                    ->with('error','User is already Active.');
+    }
+    $activation_date = date('Y-m-d H:i:s', strtotime('+1 days'));
+    $this->account->update($user->id,array('activation_code'=>$activation_code,'activation_date'=>$activation_date));
+    $code='user_registration';
+    $data=['NAME'=>$user->name,'URL'=>url('/blog/useractivation/'.$user->username.'/'.$activation_code),'SITENAME'=>config('settings.site_name')];
+    $user->notify(new Notifications($code,$data,array(),array('email'=>$user->email)));
+     return redirect()->route('account.list')
+                    ->with('success','Activation Link Sent successfully.');
+}
 }

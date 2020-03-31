@@ -17,6 +17,10 @@ Class Tag implements TagInterface
     public function getTagById($tagsid){
       return $this->tag->where('id', $tagsid)->first();
     }
+
+    public function countActiveTags(){
+      return $this->tag->where('status',1)->count();
+    }
     
     public function getTagWithBlog(){
         return $this->tag::has('blogs')->get()->toArray();

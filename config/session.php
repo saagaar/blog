@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'connection' => 'blog',//env('SESSION_CONNECTION', 'blog'),
+    'connection' => env('SESSION_CONNECTION', 'blog'),
 
     /*
     |--------------------------------------------------------------------------

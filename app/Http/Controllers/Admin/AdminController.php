@@ -36,7 +36,7 @@ class AdminController extends BaseController
     *Page limit Global
     *@var int
     */
-    protected $PerPage=10;
+    protected $PerPage=20;
 
     public function __construct()
     {
@@ -73,6 +73,7 @@ class AdminController extends BaseController
                           
         return view('admin.dashboard-report',compact('breadcrumb','dashboard'))->with(array('primary_menu'=>'dashboard.list'));
     } 
+   
    
     public function ImportModules()
     {

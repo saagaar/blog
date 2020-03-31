@@ -60,6 +60,10 @@ Class Account implements AccountInterface
         return $user->usersIpaddress()->create($ipad);
       }
     }
+
+    public function getAllUserWithBlogCount(){
+      return $this->account->withCount('published_blogs')->latest();
+    }
       /**
      * Get's all posts.
      *

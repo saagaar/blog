@@ -86,7 +86,6 @@
 <script>
 import mixin  from './../mixins/LoadData.mixin.js';
 
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Loader from './../components/Loader';
 import Multiselect from 'vue-multiselect'
 import { required, between ,email , minLength,maxLength } from 'vuelidate/lib/validators';
@@ -100,7 +99,6 @@ import Form from './../services/Form.js';
       data:function(){
           return {
                 isLoading: false,
-                editor: ClassicEditor,
                 max:3,
                 image:'/frontend/images/elements/upload.png',
                 optionsLimit:5,

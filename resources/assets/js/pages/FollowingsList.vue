@@ -1,26 +1,27 @@
-
+  
 <template>
 <div class="row">
-  <div class="col-md-9 col-sm-9 pad-left-0" v-if="this.$store.getters.isLoading===true">
+  <div class="col-lg-9 col-md-8 col-sm-7 col-12 follow_list pad-left-0" v-if="this.$store.getters.isLoading===true">
       <PlaceHolderFollowings></PlaceHolderFollowings>
   </div>
-  <div class="col-md-9 col-sm-9 pad-left-0" v-else-if="Object.entries(initialState.followings).length>0">
+  <div class="col-lg-9 col-md-8 col-sm-7 col-12 follow_list pad-left-0" v-else-if="Object.entries(initialState.followings).length>0">
         <div class="friend-list" v-for="eachFollowings in initialState.followings">
           <div class="friend-card">
             <div class="row card-info">
-              <div class="col-lg-3 col-md-4" v-if="eachFollowings.image">
+              <div class="col-lg-3 col-md-4 col-sm-4 col-4 " v-if="eachFollowings.image">
                 <img :src="getProfileUrl(eachFollowings.image)" alt="user" class="profile-photo-lg" />
               </div>
-              <div class="col-lg-3 col-md-4"v-else>
+              <div class="col-lg-3 col-md-4 col-sm-4 col-4" v-else>
                 <img src="/frontend/images/elements/default-profile.png" alt="user" class="profile-photo-lg" />
               </div>
-              <div class="col-lg-9 col-md-8">
+              <div class="col-lg-9 col-md-8 col-sm-8 col-8">
                 <div class="friend-info">
                   <h5> <a :href="'/profile/'+eachFollowings.username" class="profile-link">{{eachFollowings.name}}</a></h5>
                  <!--  <a href="#" class="float-right text-green btn">Unfollow</a> -->
+                 <p>{{eachFollowings.followers_count}}  Followers</p>
                  <FollowButton  @clicked="userFollowed"  :followings="initialState.authFollowing" :Buttonclass="'float-right'" :username="eachFollowings.username" :followSuggestionHead="followSuggestion.length" >
                  </FollowButton>
-                  <p>{{eachFollowings.followers_count}}  Followers</p>
+                  
                 </div>
               </div>
             </div>
@@ -31,16 +32,18 @@
             <div slot="no-results"><hr></div>
           </InfiniteLoading>
     </div>
-    <div class="col-md-9 col-sm-9 pad-left-0" v-else>
+    <div class="col-lg-9 col-md-8 col-sm-7 col-12 follow_list pad-left-0" v-else>
       <div class="friend-list">
           <div class="friend-card">
             <div class="row card-info">
-             No Followings yet!!
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <h4 style="color: red">No Followings Yet !!</h4>
+            </div>
             </div>
           </div>
         </div>
     </div>
-    <div class="col-md-3 col-sm-3 pad-left-0">
+    <div class="col-lg-3 col-md-4 col-sm-5 col-12 suggestion_list pad-left-0">
       <div class="white-box mb20">
           <FollowSuggestionsList   :followSuggestion="followSuggestion"></FollowSuggestionsList>
               </div>

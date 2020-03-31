@@ -17,11 +17,11 @@ Class Blocklist implements BlocklistInterface
      
   public function getIpById($ipaddress_id){
       return $this->blockList->where('id', $ipaddress_id)->first();
-    }
+  }
 
-public function getByIp($ipaddress){
+  public function getByIp($ipaddress){
       return $this->blockList->where('ip_address', $ipaddress)->first();
-    }
+  }
       /**
      * Get's all posts.
      *

@@ -690,3 +690,6 @@
     </div>
 </div> -->
 @endsection
+<script type="text/javascript">
+   var visitorsData= JSON.parse('<?php echo $dashboard["allvisitorsbyCountry" ];?>');
+</script>

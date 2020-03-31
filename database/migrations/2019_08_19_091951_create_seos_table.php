@@ -15,14 +15,14 @@ class CreateSeosTable extends Migration
     {
         Schema::create('seos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('pageid');
+            $table->integer('pageid')->nullable();
             $table->string('page_slug');
             $table->string('meta_title');
             $table->string('meta_key');
-            $table->string('meta_description');
-            $table->string('image');
-            $table->string('schema1');
-            $table->string('schema2');
+            $table->string('meta_description')->nullable();
+            $table->string('image')->nullable();
+            $table->string('schema1')->nullable();
+            $table->string('schema2')->nullable();
             $table->timestamps();
         });
     }

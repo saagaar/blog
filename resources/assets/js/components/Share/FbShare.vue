@@ -30,7 +30,6 @@ let action='';
             });
             //This function should be here, inside window.fbAsyncInit
             FB.getLoginStatus(function(response) {
-              console.log(response);
            });
           };
 
@@ -45,18 +44,11 @@ let action='';
         methods: {
             fb_share:function(url,title){
               let current= this;
-            	var app_id = '671302589946860';
-      		    var pageURL="https://www.facebook.com/dialog/feed?app_id=" + app_id + "&link=" + url;
-      		    var w = 600;
-      		    var h = 400;
-      		    var left = (screen.width / 2) - (w / 2);
-      		    var top = (screen.height / 2) - (h / 2);
-      		    window.open(pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=yes, scrollbars=no, resizable=no, copyhistory=no, width=' + 800 + ', height=' + 650 + ', top=' + top + ', left=' + left)
       		     FB.ui({
                       method:'share',
                       href: this.url,
                       }, function(response){
-                          console.log(response);
+                        
                           if(response!==undefined)
                           {
                               current.increment();
@@ -66,14 +58,14 @@ let action='';
             increment:function(){
                 this.form.post('/blog/detail/share').then(response => {
                    if(response.data.status){
-                    // console.log(response);
+                      
                    }
                    else{
+                       this.$store.commit('SETFLASHMESSAGE',{status:false,message:'Some Error Occured.Please try again in a while.'});
                       
                    }
                   }).catch(e => {
-                
-                  console.log(e);
+                       this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
                   });
             },
            

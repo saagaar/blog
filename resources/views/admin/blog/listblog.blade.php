@@ -23,33 +23,42 @@
                   <th>Title</th>
                   <th width="20%">Short description</th>
                   <th>Save/Publish</th>
+                  <th>Featured </th>
+                  <th>Show in Home </th>
+                  <th>Published By</th>   
                   <th>Image</th>
-                  <th>Language Name</th>
-                  <th>Created at</th>
-                  <th>Updated at</th>
                   <th colspan="2">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php  $i = 0; ?>
+                <?php  $i = 0; 
+
+                ?>
                 @if (!$blogs->isEmpty())
                 @foreach ($blogs as $eachblog)
+
+
                 <tr>
                   <td>{{ ++$i }}</td>
                   <td>{{ $eachblog->title }}</td>
-                   <td>{{strip_tags($eachblog->short_description) }}</td>
+                  <td>{{strip_tags($eachblog->short_description) }}</td>
                   <td>
-                   <input data-id="{{$eachblog->id}}" data-url="{{route('blog.changemethod')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Publish" data-off="Save"{{$eachblog->save_method==2 ? 'checked' : '' }}>
+                   <input data-id="{{$eachblog->id}}" data-url="{{route('blog.changemethod')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" name="save_method" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Publish" data-off="Draft"{{$eachblog->save_method==2 ? 'checked' : '' }}>
                   </td> 
-                  <td><img src="{{ asset('uploads/blog/'.$eachblog->code.'/'.$eachblog->image) }}" alt="Blog Image" height="42" width="42"></td>
-                  <td>
-                     @foreach ($eachblog->locale()->pluck('lang_name') as $lang)
-                                        <span class="label label-info label-many">{{ $lang }}</span>
-                                    @endforeach
+                  <td> 
+                    <input data-id="{{$eachblog->id}}" data-url="{{route('blog.updateBlogIsFeatured')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="On" data-off="Off"{{$eachblog->featured==1 ? 'checked' : '' }}>
                   </td>
-                  <td>{{$eachblog->created_at}}</td>
-                  <td>{{$eachblog->updated_at}}</td>
+                  <td>
+                     <input data-id="{{$eachblog->id}}" data-url="{{route('blog.updateShowInHome')}}" style="size: 12px;" data-width="80" data-height="25" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No"{{$eachblog->show_in_home==1 ? 'checked' : '' }}>
+                  </td>
+                  <td>
+                     <a href="/admin/view/account/{{$eachblog['user']['id']}}">{{ ($eachblog['user']['name']) }}
+                  </td>
+                   <td><img src="{{ asset('uploads/blog/'.$eachblog->code.'/'.$eachblog->image) }}" alt="Blog Image" height="42" width="42"></td>
+                
+
                   <td><a href="{{route('blog.edit',[ $eachblog->id,str_slug($eachblog->title)])}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+
                   <td><a onClick="return ConfirmDelete();" href="{{route('blog.delete', $eachblog->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 @endforeach

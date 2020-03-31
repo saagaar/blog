@@ -38,12 +38,8 @@ import AddComment from './AddComment';
             commentsCount:function(){
                 return this.$store.getters.listComments.length;
             }
-          
-           
         },
         methods :{
-        	
-           
         },
  
     }

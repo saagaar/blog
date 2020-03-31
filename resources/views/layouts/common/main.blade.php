@@ -153,7 +153,6 @@ window.setTimeout(function() {
   $(function(){
     $('.toggle-class').change(function() {
         var status = $(this).prop('checked') == true ? 1 : 2;
-        var showInHome = $(this).prop('checked') == true ? 1 : 2;
         var paymentmode = $(this).prop('checked') == true ? 1 : 0;
         var savemethod = $(this).prop('checked') == true ? 2 : 1;
         var id = $(this).data('id');
@@ -162,9 +161,10 @@ window.setTimeout(function() {
             type: "GET",
             dataType: "json",
             url: url,
-            data: {'status': status,'mode': paymentmode,'save_method':savemethod,'display':status,'show_in_home':showInHome,'id': id},
+            data: {'status': status,'mode': paymentmode,'save_method':savemethod,'display':status
+            ,'id': id},
              success: function(data){
-              console.log(data.success)
+              // $('.alert').
             }           
         });
     })
@@ -172,32 +172,31 @@ window.setTimeout(function() {
 </script>
 <script>
   $(function(){
-  // World map by jvectormap
   $('#world-map').vectorMap({
-    map              : 'world_mill_en',
-    backgroundColor  : 'transparent',
-    regionStyle      : {
-      initial: {
-        fill            : '#e4e4e4',
-        'fill-opacity'  : 1,
-        stroke          : 'none',
-        'stroke-width'  : 0,
-        'stroke-opacity': 1
-      }
-    },
-    series           : {
-      regions: [
-        {
-          values           : visitorsData,
-          scale            : ['#92c1dc', '#ebf4f9'],
-          normalizeFunction: 'polynomial'
+      map              : 'world_mill_en',
+      backgroundColor  : 'transparent',
+      regionStyle      : {
+        initial: {
+          fill            : '#e4e4e4',
+          'fill-opacity'  : 1,
+          stroke          : 'none',
+          'stroke-width'  : 0,
+          'stroke-opacity': 1
         }
-      ]
-    },
-    onRegionLabelShow: function (e, el, code) {
-      if (typeof visitorsData[code] != 'undefined')
-        el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
-    }
+      },
+      series           : {
+        regions: [
+          {
+            values           : visitorsData,
+            scale            : ['#92c1dc', '#ebf4f9'],
+            normalizeFunction: 'polynomial'
+          }
+        ]
+      },
+      onRegionLabelShow: function (e, el, code) {
+        if (typeof visitorsData[code] != 'undefined')
+          el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
+      }
   });
 
 

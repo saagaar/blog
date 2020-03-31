@@ -1,33 +1,33 @@
 
 <template>
-            <div>
-
-              <div  class="">
-                <div class="white-box create-post"  v-if="$gate.allow('viewUserDashboard', 'profile', loggedIn)">
-                <form>
-                  <div class="row">
-                         <div class="col-md-11 col-sm-10 blog-src">
-                           <input type="text"  class="form-control" v-model.trim="search" cols="45" placeholder="Search Post">
-                           <button class="btn btn-primary pull-right" @click.prevent="searchPost" type="submit"><i class="fa fa-search"></i></button> 
-                         </div>
-                         <div  class="col-md-1 col-sm-2 pad-left-0">
-                           
-                         </div>
-                         <div class="clearfix"></div>
-                  </div>
-                  </form>                
-                </div>
+              <div class="row">
+                  <div class="col-lg-12 col-lg-12 col-sm-12">
+                      <div class="white-box create-post"  v-if="$gate.allow('viewUserDashboard', 'profile', loggedIn)">
+                      <form>
+                        <div class="row">
+                               <div class="col-md-11 col-sm-10 blog-src">
+                                 <input type="text"  class="form-control" v-model.trim="search" cols="45" placeholder="Search Post">
+                                 <button class="btn btn-primary pull-right" @click.prevent="searchPost" type="submit"><i class="fa fa-search"></i></button> 
+                               </div>
+                               <div  class="col-md-1 col-sm-2 pad-left-0">
+                                 
+                               </div>
+                               <div class="clearfix"></div>
+                        </div>
+                        </form>                
+                      </div>
+                    </div>
 
                   <div class="col-lg-12 col-md-12 col-sm-12" v-if="this.$store.getters.isLoading===true">
                            <PlaceHolderTimeline></PlaceHolderTimeline>
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12" v-else-if="initialState.blogList.data.length>0">
                     <div class="single-blog video-style small row m_b_30" v-for="eachBlog in initialState.blogList.data">
-                      <div class="thumb col-lg-3 col-md-4 col-sm-5">
+                      <div class="thumb col-lg-3 col-md-4 col-sm-5 col-4">
                        <img v-if="eachBlog.image" class="img-fluid" :src="getImageurl(eachBlog.code,eachBlog.image)" :alt="eachBlog.title">
                        <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="eachBlog.title">
                       </div>
-                      <div class="short_details col-lg-9 col-md-8 col-sm-7"> <a class="d-block" :href="url(eachBlog)">
+                      <div class="short_details col-lg-9 col-md-8 col-sm-7 col-8"> <a class="d-block" :href="url(eachBlog)">
                         <h4>{{eachBlog.title}}</h4>
                         </a>
                         <p v-if="eachBlog.short_description && eachBlog.short_description==='NULL'"> ---- </p>
@@ -55,7 +55,6 @@
                     </div>
                   </div>
 
-              </div>
               <div class="clearfix"></div>
               </div>
 </template>

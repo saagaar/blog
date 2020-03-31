@@ -33,7 +33,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Title</label>
-                  <input type="text" class="form-control" name="title" id="name"  placeholder="Enter Title" value="{{$blog->title}}">
+                  <input type="text" class="form-control" name="title" id="name"  placeholder="Enter Title" value="{{old('title',$blog->title)}}">
                   @if ($errors->has('title'))
                 <div class="alert alert-danger">{{ $errors->first('title') }}</div>
                 @endif
@@ -56,7 +56,7 @@
                 
                 <div class="form-group">
                   <label for="Content">Content: </label>
-                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here..">{{$blog->content}}</textarea>
+                    <textarea name="content" class="form-control" id="contenteditor" placeholder="Blog Content here..">{{old('content',$blog->content)}}</textarea>
                   @if ($errors->has('content'))
                 <div class="alert alert-danger">{{ $errors->first('content') }}</div>
                 @endif

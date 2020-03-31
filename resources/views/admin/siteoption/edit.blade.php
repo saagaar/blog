@@ -12,6 +12,7 @@
                 <small>All basic default settings</small>
               </h3>
               <!-- tools box -->
+             
               <div class="pull-right box-tools">
                 <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
@@ -26,7 +27,7 @@
                 <div class="box-body pad">
                       <div class="form-group col-md-4">
                         <label for="site_name">Site Name</label>
-                        <input type="text" class="form-control" name="site_name" id="site_name" value="{{ $site->site_name}}" placeholder="Site Name">
+                        <input type="text" class="form-control" name="site_name" id="site_name" value="{{ old('site_name',$site->site_name)}}" placeholder="Site Name">
                         @if ($errors->has('site_name'))
                         <div class="alert alert-danger">{{ $errors->first('site_name') }}</div>
                         @endif
@@ -34,7 +35,7 @@
 
                    <div class="form-group col-md-4">
                     <label for="url">Site URL</label>
-                    <input type="text" class="form-control" name="url" id="url" value="{{ $site->url}}" placeholder="Site Name">
+                    <input type="text" class="form-control" name="url" id="url" value="{{ old('url',$site->url)}}" placeholder="Site Name">
                     @if ($errors->has('url'))
                     <div class="alert alert-danger">{{ $errors->first('url') }}</div>
                     @endif
@@ -52,49 +53,56 @@
 
                   <div class="form-group col-md-4">
                     <label for="contact_email">Contact Email</label>
-                    <input type="text" class="form-control" name="contact_email" id="contact_email" value="{{ $site->contact_email}}" placeholder="Contact Email">
+                    <input type="text" class="form-control" name="contact_email" id="contact_email" value="{{ old('contact_email',$site->contact_email)}}" placeholder="Contact Email">
                     @if ($errors->has('contact_email'))
                   <div class="alert alert-danger">{{ $errors->first('contact_email') }}</div>
                   @endif
                   </div>
+                   <div class="form-group col-md-4">
+                    <label for="contact_email">No Reply  Email</label>
+                    <input type="text" class="form-control" name="noreply_email" id="noreply_email" value="{{ old('noreply_email',$site->noreply_email)}}" placeholder="No Reply Email">
+                    @if ($errors->has('noreply_email'))
+                  <div class="alert alert-danger">{{ $errors->first('noreply_email') }}</div>
+                  @endif
+                  </div>
                   <div class="form-group col-md-4">
                     <label for="contact_name">Contact name</label>
-                    <input type="text" class="form-control" name="contact_name" id="contact_name" value="{{ $site->contact_name}}" placeholder="Contact Name">
+                    <input type="text" class="form-control" name="contact_name" id="contact_name" value="{{ old('contact_name',$site->contact_name)}}" placeholder="Contact Name">
                     @if ($errors->has('contact_name'))
                   <div class="alert alert-danger">{{ $errors->first('contact_name') }}</div>
                   @endif
                   </div>
                   <div class="form-group col-md-4">
                     <label for="contact_number">Contact number</label>
-                    <input type="text" class="form-control" name="contact_number" id="contact_number" value="{{ $site->contact_number}}" placeholder="Contact Number">
+                    <input type="text" class="form-control" name="contact_number" id="contact_number" value="{{ old('contact_number',$site->contact_number)}}" placeholder="Contact Number">
                     @if ($errors->has('contact_number'))
                   <div class="alert alert-danger">{{ $errors->first('contact_number') }}</div>
                   @endif
                   </div>
                    <div class="form-group col-md-4">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" id="address" value="{{ $site->address}}" placeholder="Enter Address">
+                    <input type="text" class="form-control" name="address" id="address" value="{{ old('address',$site->address)}}" placeholder="Enter Address">
                     @if ($errors->has('address'))
                   <div class="alert alert-danger">{{ $errors->first('address') }}</div>
                   @endif
                   </div>
                    <div class="form-group col-md-4">
                     <label for="city">City</label>
-                    <input type="text" class="form-control" name="city" id="city" value="{{ $site->city}}" placeholder="Enter City">
+                    <input type="text" class="form-control" name="city" id="city" value="{{ old('city',$site->city)}}" placeholder="Enter City">
                     @if ($errors->has('city'))
                   <div class="alert alert-danger">{{ $errors->first('city') }}</div>
                   @endif
                   </div>
                    <div class="form-group col-md-4">
                     <label for="state">State</label>
-                    <input type="text" class="form-control" name="state" id="state" value="{{ $site->state}}" placeholder="Enter State">
+                    <input type="text" class="form-control" name="state" id="state" value="{{ old('state',$site->state)}}" placeholder="Enter State">
                     @if ($errors->has('state'))
                   <div class="alert alert-danger">{{ $errors->first('state') }}</div>
                   @endif
                   </div>
                    <div class="form-group col-md-4">
                     <label for="country">Country</label>
-                    <input type="text" class="form-control" name="country" id="country" value="{{ $site->country}}" placeholder="Select Country">
+                    <input type="text" class="form-control" name="country" id="country" value="{{ old('country',$site->country)}}" placeholder="Select Country">
                     @if ($errors->has('country'))
                   <div class="alert alert-danger">{{ $errors->first('country') }}</div>
                   @endif
@@ -129,7 +137,7 @@
                         </div>
                       <div class="form-group col-md-4">
                       <label for="maintainence">Maintainence Key</label>
-                      <input type="text" class="form-control" name="maintainence" id="maintainence" value="{{ $site->maintainence}}" placeholder="Enter Google Analytics">
+                      <input type="text" class="form-control" name="maintainence" id="maintainence" value="{{ old('maintainence',$site->maintainence)}}" placeholder="Enter Google Analytics">
                       @if ($errors->has('maintainence'))
                     <div class="alert alert-danger">{{ $errors->first('maintainence') }}</div>
                     @endif
@@ -137,7 +145,7 @@
 
                    <div class="form-group col-md-4">
                     <label for="message">Message: </label>
-                    <textarea name="message" class="form-control" rows="5" placeholder="Enter Your Message here..">{{ $site->message}}</textarea>
+                    <textarea name="message" class="form-control" rows="5" placeholder="Enter Your Message here..">{{ old('message',$site->message)}}</textarea>
                      @if ($errors->has('message'))
                     <div class="alert alert-danger">{{ $errors->first('message') }}
                     </div>
@@ -146,7 +154,7 @@
                  
                  <div class="form-group col-md-4">
                       <label for="duration">Duration</label>
-                      <input type="text" class="form-control" name="duration" id="duration" value="{{ $site->duration}}" placeholder="Enter Duration">
+                      <input type="text" class="form-control" name="duration" id="duration" value="{{ isset($site->duration)?$site->duration:0}}" placeholder="Enter Duration">
                       @if ($errors->has('duration'))
                     <div class="alert alert-danger">{{ $errors->first('duration') }}</div>
                     @endif
@@ -308,8 +316,8 @@
                 </div>
               
                   <div class="box-footer pull-right" >
-                  <button type="submit" class="btn btn-primary">Edit</button>
-                </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                  </div>
         </div>
         <!-- /.col-->
       </div>

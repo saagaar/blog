@@ -25,12 +25,25 @@
     "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^12.4.0",
+    "@ckeditor/ckeditor5-alignment": "^16.0.0",
+    "@ckeditor/ckeditor5-basic-styles": "^16.0.0",
+    "@ckeditor/ckeditor5-block-quote": "^16.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^16.0.0",
+    "@ckeditor/ckeditor5-dev-utils": "^12.0.6",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^8.0.6",
+    "@ckeditor/ckeditor5-editor-classic": "^16.0.0",
+    "@ckeditor/ckeditor5-essentials": "^16.0.0",
+    "@ckeditor/ckeditor5-heading": "^16.0.0",
+    "@ckeditor/ckeditor5-link": "^16.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^16.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^16.0.0",
     "@ckeditor/ckeditor5-vue": "^1.0.1",
     "bootstrap": "^4.4.1",
     "circular-json": "^0.5.9",
     "font-awesome": "^4.7.0",
     "laravel-vue-pagination": "^2.3.1",
+    "postcss-loader": "^3.0.0",
+    "raw-loader": "^0.5.1",
     "vue-advanced-cropper": "^0.15.1",
     "vue-content-loader": "^0.2.2",
     "vue-content-loading": "^1.6.0",
@@ -41,6 +54,8 @@
     "vuejs-datepicker": "^1.6.2",
     "vuelidate": "^0.7.4",
     "vuewordcloud": "^18.7.11",
-    "vuex": "^3.1.2"
+    "vuex": "^3.1.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   }
 }

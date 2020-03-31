@@ -78,8 +78,8 @@ class HomeController extends FrontendController
         $banner=$this->bannerTagLine(); 
         $this->seo = app()->make('App\Repository\SeoInterface');
         
-         $seo =array();
-          $seo = $this->seo->getSeoBySlug('landing-page');
+        $seo =array();
+        $seo = $this->seo->getSeoBySlug('landing-page');
         return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'siteName'=>$siteName,'contactNumber'=>$contactNumber,'address'=>$address,'CategoryByWeight'=>$CategoryByWeight,'client'=>$client,'banner'=>$banner,'websiteLogo'=>$websiteLogo,'facebookId'=>$facebookId,'twitterId'=>$twitterId,'linkedinId'=>$linkedinId,'websiteUrl'=>$websiteUrl,'city'=>$city,'seo'=>$seo));
     }
 

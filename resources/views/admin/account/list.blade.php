@@ -13,6 +13,7 @@
               </div>
               
             </div>
+
             <!-- /.box-header -->
             <div class="box-body no-padding">
               @component('layouts.components.search' )
@@ -25,13 +26,14 @@
                   <th>Email</th>
                   <th>Roles</th>
                   <th>Status</th>
+                  <th>Published blog Count </th>
                   <th>Created at</th>
-                  <th>Updated at</th>
                   <th colspan="3">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php  $i = 0; ?>
+                <?php 
+                 $i = 0; ?>
                 @if(!$account->isEmpty())
                 @foreach ($account as $user)
                 
@@ -55,10 +57,12 @@
                     <span class="label label-default label-large">Suspended</span>
                     @endif
                   </td>
-                  <td>{{$user->created_at}}</td>
-                  <td>{{$user->updated_at}}</td>
+                  <td><a href="/admin/view/account/{{$user->id}}">{{$user->published_blogs_count}}</a></td>
+                  <td>{{$user->created_at->diffForHumans()}}</td>
                   <td><a href="{{route('account.view',$user->id)}}"><i class="fa fa-eye"  aria-hidden="true"></i></a></td>
                    <td><a href="{{route('account.edit',$user->id)}}"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></a></td>
+                    <td><a title="Resend Activation Link" href="{{route('admin.resend_activation',$user->username)}}"><i class="fa fa-share-square-o"  aria-hidden="true"></i></a>
+                    </td>
                     <td><a onClick="return ConfirmDelete();" href="{{route('account.delete', $user->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                      </td>
                       

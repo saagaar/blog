@@ -2,15 +2,15 @@
 <div class="row">
     <div  v-if="lists.length>0" v-for="items in lists"  class="col-lg-6 col-md-6">
         <div class="single-blog video-style small row m_b_30 ">
-            <div class="thumb col-md-4 col-sm-5 col-4">
+            <div class="thumb col-lg-4 col-md-4 col-sm-5 col-4 ">
                 <figure>
-                    <a href="#">
+                 <a>
                          <img v-if="items.image" class="img-fluid" :src="getImageurl(items.code,items.image)" :alt="items.title">
                        <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="items.title">
-                    </a>
+                   </a>
                 </figure>
             </div>
-            <div class="short_details col-md-8 col-sm-7 col-8">
+            <div class="short_details col-lg-8 col-md-8 col-sm-7 col-8">
                 <a class="d-block" :href="url(items)">
                     <h4>{{items.title}}</h4>
                 </a>
@@ -19,7 +19,7 @@
                     <a href="#"><i class="ti-time"></i>{{ items.created_at | moment("from", "now")}}</a>
                     <a href="#" class="appreciate"><i>
                         <LikeCheck v-if="isLoggedIn" :likes="userliked" :code="items.code"></LikeCheck>
-                      <img v-else src="frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
+                      <img v-else src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
                     </i> {{items.likes_count}} appreciate</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <SaveBlog v-if="isLoggedIn" :saves="saves" :blogcode="items.code" ></SaveBlog>
@@ -27,10 +27,12 @@
             </div>
         </div>
         </div>
+       <div class="col-lg-12 col-md-12 col-sm-12 col-12">
         <InfiniteLoading @infinite="infiniteHandler" spinner="spiral">
           <div slot="no-more"></div>
           <div slot="no-results"><hr></div>
         </InfiniteLoading>
+      </div>
 </div>
 </template>
 

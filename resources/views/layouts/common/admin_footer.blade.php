@@ -2,7 +2,7 @@
  <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Anything you want
+     Idata Solutions Pvt. Ltd.
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; <?php echo date('Y'); ?> <a href="{{route('home')}}">Company</a>.</strong> All rights reserved.

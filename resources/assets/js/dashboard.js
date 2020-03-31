@@ -22,7 +22,6 @@ Vue.use({
 
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
-Vue.use( CKEditor );
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(require('vue-moment'));
 import store from './store/index'
@@ -32,6 +31,7 @@ import Profile from './layouts/Profile';
 Vue.component('default-layout',UserDashboard);
 Vue.component('timeline-layout', Profile);
 import Gate from './services/Gate.js';
+Vue.use( CKEditor );
 
 const default_layout="default";
 const app = new Vue({

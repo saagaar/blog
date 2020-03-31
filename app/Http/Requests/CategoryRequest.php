@@ -53,20 +53,20 @@ class CategoryRequest extends FormRequest
           }
         
         return [
-                'parent_id'   => '',
-                'name'      => 'required|min:2|max:255',
-                'status'   => 'required',
-                'slug'      => $slug,
-                'tags'      =>$tags,
-                'banner_image' => $banner,
-                'show_in_home'  =>'required',
-                'priority'  =>'required',
-                'description'  =>'required',
-                'meta_title'                    =>'required|min:5',
-                'meta_keyword'                      =>'required|min:5',
-                'meta_description'              =>'required|min:5',
-                'schema1'                       =>'required|min:5',
-                'schema2'                       =>'required|min:5'
+                'parent_id'       => '',
+                'name'            => 'required|min:2|max:255',
+                'status'          => 'required',
+                'slug'            => $slug,
+                'tags'            => $tags,
+                'banner_image'    => $banner,
+                'show_in_home'    =>'required',
+                'priority'        =>'required',
+                'description'     =>'max:100',
+                'meta_title'                    =>'max:90',
+                'meta_keyword'                  =>'max:180',
+                'meta_description'              =>'max:190',
+                'schema1'                       =>'max:1000',
+                'schema2'                       =>'max:1000'
               
         ];
     }

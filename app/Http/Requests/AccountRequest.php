@@ -52,7 +52,7 @@ class AccountRequest extends FormRequest
             'status'                =>'required',
             'password'              => $password,
             'password_confirmation' => $password_confirmation,
-            'phone'                 =>  $phone,
+            'phone'                 => $phone,
             'address'               =>'',
             'country'               =>'',
             'dob'                   =>'',

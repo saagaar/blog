@@ -70,6 +70,11 @@ class Users extends Authenticatable implements Auditable
     {
         return $this->hasMany(Blogs::class,'user_id');
     }
+
+    public function published_blogs()
+    {
+        return $this->hasMany(Blogs::class,'user_id')->where('save_method', '2');
+    }
     public function userInterests()
     {
         return $this->belongsToMany(Categories::class,'user_interests','user_id','category_id');

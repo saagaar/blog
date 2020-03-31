@@ -31,36 +31,36 @@
               @csrf
               <div class="box-body">
                 <div class="form-group">
-                  <label for="pageid">Page id</label>
-                  <input type="text" class="form-control" name="pageid" id="pageid" value="{{ $seoData->pageid }}" placeholder="Enter pageid">
+                  <label for="pageid">Page Name</label>
+                  <input type="text" class="form-control" name="pageid" id="pageid" value="{{  old('pageid',$seoData->pageid) }}" placeholder="Enter Page name">
                   @if ($errors->has('pageid'))
                 <div class="alert alert-danger">{{ $errors->first('pageid') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="page_slug">Page Slug</label>
-                  <input type="text" class="form-control" name="page_slug" id="page_slug" value="{{ $seoData->page_slug }}" placeholder="Enter page_slug">
+                  <input type="text" class="form-control" name="page_slug" id="page_slug" value="{{  old('page_slug',$seoData->page_slug) }}" placeholder="Enter Unique Slug ">
                   @if ($errors->has('page_slug'))
                 <div class="alert alert-danger">{{ $errors->first('page_slug') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="meta_title">Meta Title</label>
-                  <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ $seoData->meta_title }}" placeholder="Enter meta title">
+                  <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{  old('meta_title',$seoData->meta_title) }}" placeholder="Enter meta title">
                   @if ($errors->has('meta_title'))
                 <div class="alert alert-danger">{{ $errors->first('meta_title') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
-                  <label for="meta_key">Meta Key</label>
-                  <input type="text" class="form-control" name="meta_key" id="meta_key" value="{{ $seoData->meta_key }}" placeholder="Enter meta key">
+                  <label for="meta_key">Meta Keywords</label>
+                  <input type="text" class="form-control" name="meta_key" id="meta_key" value="{{  old('meta_key',$seoData->meta_key) }}" placeholder="Enter meta keywords">
                   @if ($errors->has('meta_key'))
                 <div class="alert alert-danger">{{ $errors->first('meta_key') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="meta_description">Meta Description: </label>
-                    <textarea name="meta_description" class="form-control" rows="5" placeholder="Meta Description here..">{{ $seoData->meta_description }}</textarea>
+                    <textarea name="meta_description" class="form-control" rows="5" placeholder="Meta Description here..">{{  old('meta_description',$seoData->meta_description) }}</textarea>
 
                   @if ($errors->has('meta_description'))
                   <div class="alert alert-danger">{{ $errors->first('meta_description') }}</div>
@@ -68,19 +68,26 @@
                 </div>
                 <div class="form-group">
                   <label for="schema1">schema1</label>
-                  <textarea name="schema1" class="form-control" rows="8" placeholder="Schema1 here..">{{ $seoData->schema1 }}</textarea>
+                  <textarea name="schema1" class="form-control" rows="8" placeholder="Schema1 here..">{{  old('schema1',$seoData->schema1) }}</textarea>
                   @if ($errors->has('schema1'))
                 <div class="alert alert-danger">{{ $errors->first('schema1') }}</div>
                 @endif
                 </div>
                 <div class="form-group">
                   <label for="schema2">schema2</label>
-                  <textarea name="schema2" class="form-control" rows="8" placeholder="Schema2 here..">{{ $seoData->schema2 }}</textarea>
+                  <textarea name="schema2" class="form-control" rows="8" placeholder="Schema2 here..">{{  old('schema2',$seoData->schema2) }}</textarea>
                   @if ($errors->has('schema2'))
                 <div class="alert alert-danger">{{ $errors->first('schema2') }}</div>
                 @endif
                 </div>
-                
+                <div class="form-group">                  
+                  <label for="image">Image Upload</label>                  
+                  <input type="file" class="form-control" name="image" id="image">
+                   <img src="{{asset('uploads/seo/'.$seoData->image) }}" alt="SEO Image" height="42" width="42">
+                  @if ($errors->has('image'))
+                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                @endif
+                </div>
               </div>
               <!-- /.box-body -->
 

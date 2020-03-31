@@ -54,7 +54,7 @@ class BlogController extends FrontendController
                     $part2=substr($code, 7,-1);
                     $created['code']= $part1.$part2;
                     $created->save();
-                    return response()->json(['status'=>true,'blogId'=>$created['code'],'message'=>'Blog saved successfully']);
+                    return response()->json(['status'=>true,'blogId'=>$created['code'],'message'=>'Blog saved succeessfully']);
                 }
             } 
           }

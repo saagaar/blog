@@ -62,5 +62,8 @@ Class Roles implements RoleInterface
     public function delete($id){
       return	$this->userrole->find($id)->delete();
     }
+    public function countAllRoles(){
+      return $this->userrole->count();
+    }
 }
 ?>

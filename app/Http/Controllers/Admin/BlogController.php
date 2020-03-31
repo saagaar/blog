@@ -28,9 +28,9 @@ class BlogController extends AdminController
                       ]];
         $search = $request->get('search');
         if($search){
-            $blogs = $this->blog->getAll()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
+            $blogs = $this->blog->getAllBlogsWithUser()->where('title', 'like', '%' . $search . '%')->paginate($this->PerPage)->withPath('?search=' . $search);
         }else{
-            $blogs = $this->blog->getAll()->paginate($this->PerPage);
+            $blogs = $this->blog->getAllBlogsWithUser()->paginate($this->PerPage);
         }
         return view('admin.blog.listblog')->with(array('blogs'=>$blogs,'breadcrumb'=>$breadcrumb,'menu'=>'Blog List','primary_menu'=>'blog.list'));
     }
@@ -180,12 +180,26 @@ class BlogController extends AdminController
         ->with('success', 'Blog has been deleted!!');
     }
 
-     public function changeSaveMethod(Request $request)
+    public function changeSaveMethod(Request $request)
     {
         $blog = $this->blog->GetBlogById($request->id);
         $changeMethod= $request->save_method;  
         $blog->update(array('save_method'=>$changeMethod));  
-        return redirect()->route('blog.list')
-                        ->with('success','Status change successfully.');
+        return ['status'=>true,'message'=>'Blog Updated Successfully'];
+       
+    }
+    public function updateBlogIsFeatured(Request $request)
+    {
+        $blog = $this->blog->GetBlogById($request->id);
+        $featured= $request->status;  
+        $blog->update(array('featured'=>$featured));  
+        return ['status'=>true,'message'=>'Blog Updated Successfully'];
+    }
+    public function updateShowInHome(Request $request)
+    {
+        $blog = $this->blog->GetBlogById($request->id);
+        $show_in_home= $request->status;  
+        $blog->update(array('show_in_home'=>$show_in_home));  
+        return ['status'=>true,'message'=>'Blog Updated Successfully'];
     }
 }

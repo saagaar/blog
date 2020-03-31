@@ -1,8 +1,6 @@
 
 <template>
-
         <div class="col-md-9 col-sm-9">
-                <div id="main" class="">
               <div class="white-box add_blog">
                 <form method="post">
                   <div>
@@ -35,15 +33,14 @@
                         </div>
                         <div class="clearfix"></div>
                       </div>
-                  
-                      <div class="form-group">
+                    
+                       <div class="form-group">
                         <ckeditor :editor="editor"  @blur="$v.form.content.$touch()"  v-model="form.content"></ckeditor>
                            <div v-if="$v.form.content.$anyDirty">
                                 <div class="error" v-if="!$v.form.content.required">This Field is required</div>
                                 <div class="error" v-if="!$v.form.content.minLength">Content must be at least {{ $v.form.content.$params.minLength.min }} letters.</div>
                               </div>
                        </div>
-                       
 
                       <button @click.prevent="next()" class="btn btn-primary ml-30">Continue</button>
                     </div>
@@ -51,21 +48,39 @@
                   </form>
               </div>
 
-          </div>
         </div>
 </template>
 
 <script>
 import mixin  from './../mixins/LoadData.mixin.js';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { required, minLength, maxLength } from 'vuelidate/lib/validators';
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+// import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
+// import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
+// import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+// import UnderLine from '@ckeditor/ckeditor5-basic-styles/src/underline';
+
+
+
+// import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
+// // import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
+// import Heading from '@ckeditor/ckeditor5-heading/src/heading';
+// import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+
+// import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+// import Link from '@ckeditor/ckeditor5-link/src/link';
+
 import Form from './../services/Form.js';
     export default {
       
         mixins:[mixin],
+        
         data() {
           return {
+
                 editor: ClassicEditor,
+             
                 initialState:{},
                 form:new Form({
                     title:'',
@@ -73,6 +88,8 @@ import Form from './../services/Form.js';
                 }),
             }
          },
+         mounted(){
+        },
         validations: {
           form:{
             title: {
@@ -119,6 +136,14 @@ import Form from './../services/Form.js';
               }
               reader.readAsDataURL(event.target.files[0]);
             },
+
+             onReady( editor )  {
+                // Insert the toolbar before the editable area.
+                editor.ui.getEditableElement().parentElement.insertBefore(
+                    editor.ui.view.toolbar.element,
+                    editor.ui.getEditableElement()
+                );
+            },
           //          addTag (newTag) {
           //   const tag = {
           //     name: newTag,
@@ -152,7 +177,7 @@ import Form from './../services/Form.js';
                     
                  }
                 }).catch(e => {
-                    console.log(e);
+                   this.$store.commit('SETFLASHMESSAGE','Some error Occured .Please try again in a while');
                 });
             }
           }
