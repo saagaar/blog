@@ -116,6 +116,7 @@ class FrontendController extends BaseController
     public function user_state_info($username=false){
        $followerList = app()->make('App\Repository\FollowerInterface');
        $account = app()->make('App\Repository\AccountInterface');
+       $blog = app()->make('App\Repository\BlogInterface');
         if($username)
         {
             $accUser=$account->getUserByUsername($username);
@@ -131,7 +132,7 @@ class FrontendController extends BaseController
             $user->notifications=$account->getUsersNotification($this->authUser,$this->apiPerPage);
             }
 
-            $user->blogCount=$accUser->blogs()->count();
+            $user->blogCount=$accUser->published_blogs()->count();
             $user->root_url=url('/');
             $user->websiteLogo=$this->websiteLogo;
             $userid=$user->id;
@@ -149,7 +150,7 @@ class FrontendController extends BaseController
             $user->followersCount=$followerList->getFollowersCount($this->authUser);
             $user->followingCount=$followerList->getFollowingsCount($this->authUser);
             $user->unReadNotificationsCount=$this->authUser->unreadNotifications()->count() ;
-            $user->blogCount=$this->authUser->blogs()->count();
+            $user->blogCount=$this->authUser->published_blogs()->count();
             $user->websiteLogo=$this->websiteLogo;
             $user->root_url=url('/');
             $user=$user->toArray();

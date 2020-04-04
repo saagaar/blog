@@ -1,5 +1,5 @@
 <template>
-<a href="#" @click="openSignUpModal"> &nbsp;<i class="fas fa-sign-in-alt">&nbsp;</i> {{text}}</a>
+<a href="#" @click="openSignUpModal" @click.prevent="validateform"> &nbsp;<i class="fas fa-sign-in-alt">&nbsp;</i> {{text}}</a>
 </template>
 <script>
 import LoginMixin from './../../mixins/Login.mixins';

@@ -103,7 +103,7 @@ class HomeController extends FrontendController
           $likes=array();
           $user ='';
           $data['path']='/home';
-           if(\Auth::check())
+          if(\Auth::check())
           {
               $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
               $liked = $this->blog->getBlogCodeByLike($likes);
@@ -123,10 +123,10 @@ class HomeController extends FrontendController
           }
         return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo,'savedBlog'=>$savedBlog,'userLiked'=>$liked,'seo'=>$seo));
     }
-    public function test(Request $request){
-      $this->category->subs(5);
-    }
     public function blogDetail($code,$slug,Request $request){
+     $this->seo = app()->make('App\Repository\SeoInterface');
+     $seo =array();
+     $seo = $this->seo->getSeoBySlug('blog-details');
       $this->blogVisit = app()->make('App\Repository\BlogVisitInterface');
       $this->share = app()->make('App\Repository\ShareInterface');
       $totalShare = $this->share->getTotalShare($code);
@@ -177,6 +177,9 @@ class HomeController extends FrontendController
     }
     public function categoryListing(UserInterestInterface $userInterest)
     {
+      $this->seo = app()->make('App\Repository\SeoInterface');
+      $seo =array();
+      $seo = $this->seo->getSeoBySlug('category-listing');
       $data=array();
       $user=array();
       $categories=array();
@@ -199,6 +202,9 @@ class HomeController extends FrontendController
         return view('frontend.home.category',['initialState'=>$data,'user'=>$user])->with(array('allCategory'=>$allCategories,'navCategory'=>$navCategory));
     }
     public function blogByCategory($slug,UserInterestInterface $userInterest){
+       $this->seo = app()->make('App\Repository\SeoInterface');
+      $seo =array();
+      $seo = $this->seo->getSeoBySlug('blog-category');
       $savedBlog = array();
       $data=array();
       $tagsIds = $this->category->getTagsIdByCatSlug($slug);
@@ -271,12 +277,23 @@ class HomeController extends FrontendController
         $savedBlog=array();
         $data=array();
         $blog=array();
+        $this->seo = app()->make('App\Repository\SeoInterface');
+        $seo =array();
         if($slug=='all-featured')
+        {
+          $seo = $this->seo->getSeoBySlug('all-featured');
           $blog = $this->blog->getAllFeaturedBlog();
+        }
         elseif($slug=='popular')
+        {
+          $seo = $this->seo->getSeoBySlug('popular');
           $blog =$this->blog->getPopularBlog();
+        }
         elseif($slug=='featured-for-member')
+        {
+          $seo = $this->seo->getSeoBySlug('featured-for-member');
           $blog = $this->blog->getAllFeaturedForMember();
+        }
         $navCategory=$this->category->getCategoryByShowInHome();
         $likes='';
         $user ='';
@@ -302,7 +319,7 @@ class HomeController extends FrontendController
           }
 
         }
-        return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteUrl,'savedBlog'=>$savedBlog,'userLiked'=>$liked));
+        return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteUrl,'savedBlog'=>$savedBlog,'userLiked'=>$liked,'seo'=>$seo));
     }
     public function getBlogListBySlug($slug=false,Request $request){
      try

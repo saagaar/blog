@@ -28,11 +28,11 @@ class SeoRequest extends FormRequest
             return [
                 'pageid'                        =>'',
                 'page_slug'                     =>'required|unique:seos,page_slug,'.request()->id,
-                'meta_title'                     =>'required|max:90',
+                'meta_title'                    =>'required|max:90',
                 'meta_key'                      =>'min:5|max:250',
                 'meta_description'              =>'required|min:5|max:180',
-                'schema1'                       =>'min:1',
-                'schema2'                       =>'min:1',
+                'schema1'                       =>'',
+                'schema2'                       =>'',
                 'image'                         =>$image
             ];
     }

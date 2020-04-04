@@ -1,24 +1,26 @@
 @extends('frontend.layouts.app')
 @section('content')
  
-<section class="fullwidth-block area-padding-bottom">
+<section class="fullwidth-block area-padding-bottom"> 
     @if($seo)
         @section('meta_url',config('settings.url').'/home')
         @section('meta_description',$seo->meta_description)
         @section('meta_title',$seo->meta_title)
         @section('meta_keyword',$seo->meta_key)
-        @section('schema1',$seo->schema1)
-        @section('schema2',$seo->schema2)
+        @if($seo->meta_image!='')
+         @section('meta_image',$seo->meta_image)
+        @endif
     @endif
  <div class="spinner-border text-primary" role="status">
   <span class="sr-only">Loading...</span>
 </div>
+
  @if(count($featuredBlog) >=4)
  <!--================Fullwidth block Area =================-->
     <section class="fullwidth-block area-padding-bottom area-padding-top">
         <div class="container"> 
             <div class="row">
-            	@if($featuredBlog['0'])
+                @if($featuredBlog['0'])
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style big">
                         <div class="thumb bg-color">
@@ -67,7 +69,7 @@
                 <?php unset($featuredBlog['0']); ?>
                
                 <div class="col-lg-6 col-md-6">
-                	@foreach($featuredBlog as $eachFeaturedBlog)
+                    @foreach($featuredBlog as $eachFeaturedBlog)
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-md-4 col-sm-5 col-4 bg-color">
                             <figure>
@@ -189,7 +191,7 @@
             </div>
            
             <div class="row">
-            	@if($featuredForMember['0'])
+                @if($featuredForMember['0'])
                <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style big">
                         <div class="thumb bg-color">
@@ -370,7 +372,7 @@
                 ?>
                 @if(count($popular)>0)
                 <div class="col-lg-6 col-md-6">
-                	@foreach($popular as $eachPopular)
+                    @foreach($popular as $eachPopular)
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-md-4 col-sm-5 col-4 bg-color bg-color">
                             <figure>
@@ -480,7 +482,7 @@
 
             <div class="row">
                 
-            	@foreach($latest as $eachLatest)
+                @foreach($latest as $eachLatest)
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style small row m_b_30">
                         <div class="thumb col-md-4 col-sm-5 col-4 bg-color">
@@ -491,11 +493,11 @@
                                      @php
                                         $img=explode('.',$eachLatest->image);
                                     @endphp
-	                                <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$eachLatest->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
-	                            @else
-	                                <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
+                                    <img class="img-fluid plain-bg" data-src="{{ asset('uploads/blog/'.$eachLatest->code.'/'.$img[0].'-thumbnail.'.$img[1]) }}" alt="">
+                                @else
+                                    <img class="img-fluid" src="{{ asset('frontend/images/elements/default-post.jpg') }}" alt="">
 
-	                            @endif
+                                @endif
                                 </a>
                             </figure>
                         </div>

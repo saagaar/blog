@@ -37,7 +37,7 @@
                       </div>
                     </div>
                     <div class="align-right">
-                      <pagination :data="initialState.blogList"  :limit="-1" :show-disabled="true"  @pagination-change-page="getResults">
+                      <pagination :data="initialState.blogList"  :limit="1" :show-disabled="false"  @pagination-change-page="getResults" >
                    <span slot="prev-nav"><li>
                       <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
                     </li></span>
@@ -110,7 +110,8 @@
         getResults(page = 1) {
           this.initialState.blogList={};
           this.$store.commit('TOGGLE_LOADING');
-          this.form.get('api/profile?page='+page+'&search='+this.search+'&sort_by='+this.sort_by).then(response => {
+           let username=this.$route.params.username;
+          this.form.get('api/profile/'+username+'?page='+page+'&search='+this.search+'&sort_by='+this.sort_by).then(response => {
                this.$store.commit('TOGGLE_LOADING');
                if(response.data)
                {
@@ -123,6 +124,7 @@
               }).catch(e => 
               {
                  this.$store.commit('TOGGLE_LOADING');
+                  alert('hhere');
                   // console.log(e);
               });
         },

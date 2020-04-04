@@ -99,8 +99,8 @@ class AccountController extends AdminController{
           $validatedData = $requestObj->validated();
           $validatedData['dob']=date("Y-m-d", strtotime($validatedData['dob']));
           $validatedData['password']= (Hash::make($validatedData['password']));
-            if ($request->hasFile('image')) 
-            {
+                if ($request->hasFile('image')) 
+                {
                     $dir = 'uploads/user-images/';
                     if ($accounts->image != '' && File::exists($dir . $accounts->image)){
                     File::delete($dir . $accounts->image);}
@@ -109,15 +109,16 @@ class AccountController extends AdminController{
                     request()->image->move(public_path('uploads/user-images'), $imageName);
                     $validatedData['image'] = $imageName;
                 }
-            else 
+                else 
                 {
                     $validatedData['image'] = $accounts->image;
                 }
+            print_r($validatedData);exit;
             $accounts->update($validatedData);
             $roles = $request->input('roles') ? $request->input('roles') : [];
             $accounts->syncRoles($roles);  
             return redirect()->route('account.list')
-                        ->with('success','account edited successfully.');
+                        ->with('success','Account Updated successfully.');
         }
         $countries = Countries::All();
         return view('admin.account.edit')->with(array('countries'=>$countries,'accounts'=>$accounts,'roles'=>$allRoles,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list'));
@@ -138,8 +139,6 @@ class AccountController extends AdminController{
         $timeline =$this->blog->getBlogOfFollowingUser($accounts);
         $allRoles = $this->roles->getAll()->get();
         $notification =$this->account->getUsersNotification($accounts);
-        // echo "<pre>";
-        // print_r($notification[0]);exit;
         return view('admin.account.detail')->with(array('account'=>$accounts,'countries'=>$countries,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list','timeline'=>$timeline,'roles'=>$allRoles,'notification'=>$notification));
     }
     public function delete($id)

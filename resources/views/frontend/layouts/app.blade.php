@@ -188,25 +188,6 @@ window.setTimeout(function() {
     });
     
 </script>
- <!-- Default Statcounter code for Social Networking
-  http://thebloggersclub.com -->
-  <script type="text/javascript">
-  var sc_project=12189981; 
-  var sc_invisible=0; 
-  var sc_security="8adfd47c"; 
-  var sc_https=1; 
-  var scJsHost = "https://";
-  document.write("<sc"+"ript type='text/javascript' src='" +
-  scJsHost+
-  "statcounter.com/counter/counter.js'></"+"script>");
-  </script>
-  <noscript><div class="statcounter"><a title="Web Analytics
-  Made Easy - StatCounter" href="https://statcounter.com/"
-  target="_blank"><img class="statcounter"
-  src="https://c.statcounter.com/12189981/0/8adfd47c/0/"
-  alt="Web Analytics Made Easy -
-  StatCounter"></a></div></noscript>
-  <!-- End of Statcounter Code -->
 
 </body>
 </html>

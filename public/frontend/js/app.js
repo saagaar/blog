@@ -9294,7 +9294,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loginForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_5__["default"]({
         email: '',
         password: '',
-        remember: ''
+        remember: '',
+        formReset: false
       }),
       signUpForm: new _services_Form_js__WEBPACK_IMPORTED_MODULE_5__["default"]({
         email: '',
@@ -9398,8 +9399,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             window.location.href = "/home";
           } else {
             curObject.$store.commit('TOGGLE_LOADING');
-
-            _this.closeAllPopups();
 
             _this.$store.commit('SETFLASHMESSAGE', {
               status: false,
@@ -47965,11 +47964,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a", { attrs: { href: "#" }, on: { click: _vm.openSignUpModal } }, [
-    _vm._v("  "),
-    _c("i", { staticClass: "fas fa-sign-in-alt" }, [_vm._v(" ")]),
-    _vm._v(" " + _vm._s(_vm.text))
-  ])
+  return _c(
+    "a",
+    {
+      attrs: { href: "#" },
+      on: {
+        click: [
+          _vm.openSignUpModal,
+          function($event) {
+            $event.preventDefault()
+            return _vm.validateform($event)
+          }
+        ]
+      }
+    },
+    [
+      _vm._v("  "),
+      _c("i", { staticClass: "fas fa-sign-in-alt" }, [_vm._v(" ")]),
+      _vm._v(" " + _vm._s(_vm.text))
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -70897,8 +70911,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONFIG = {
-  // ROOT_URL: 'http://localhost:8000/',
-  ROOT_URL: 'https://thebloggersclub.com/'
+  ROOT_URL: 'http://localhost:8000/' // ROOT_UR	L: 'https://thebloggersclub.com/',
+
 };
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 
@@ -71197,6 +71211,7 @@ function () {
     }
 
     this.errors = {};
+    this.formReset = data.formReset;
   }
   /**
    * Reset the form fields.
@@ -71404,7 +71419,7 @@ function () {
   }, {
     key: "onSuccess",
     value: function onSuccess(data) {
-      if (data.status) {
+      if (data.status && this.formReset) {
         this.reset();
       }
     }

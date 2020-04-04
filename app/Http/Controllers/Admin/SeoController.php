@@ -95,7 +95,6 @@ class SeoController extends AdminController
         {
             $requestObj=app(SeoRequest::class);
             $validatedData = $requestObj->validated();
-
             if(request()->image)
             {
                 $extension = request()->image->getClientOriginalExtension();

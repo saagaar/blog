@@ -23,7 +23,7 @@
           </div>
             </div>
             
-           <router-view></router-view>
+            <router-view></router-view>
             <div class="clearfix"></div>
 
         </div>

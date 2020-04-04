@@ -1,5 +1,15 @@
 @extends('frontend.layouts.app')
 @section('content')
+
+    @if($seo)
+        @section('meta_url',config('settings.url').'/home')
+        @section('meta_description',$seo->meta_description)
+        @section('meta_title',$seo->meta_title)
+        @section('meta_keyword',$seo->meta_key)
+        @if($seo->meta_image!='')
+             @section('meta_image',$seo->meta_image)
+        @endif
+    @endif
 <section class="fullwidth-block area-padding-bottom area-padding-top">
 	<div class="container">
 		<section class="category-page category-list">

@@ -5,9 +5,22 @@
 @endphp
 	<div class="mid_part">
         @section('meta_url',config('settings.url').'/blog/detail/'. $blogDetails->code.'/'.str_slug($blogDetails->title))
-        @section('meta_title',$blogDetails->title.' | By '.$author  )
+        @section('meta_title',$blogDetails->title.' | By '.$author. ' | ' .config('settings.site_name') )
         @section('meta_description',$blogDetails->short_description)
         @section('meta_image',asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image))
+        @if(isset($seo))
+            @section('schema1',$seo->schema1)
+            @section('schema2',$seo->schema2)
+        @endif
+     @php 
+     $keywords=$blogDetails->title;
+     if(isset($blogDetails->tags) && count($blogDetails->tags)>0):
+         foreach($blogDetails->tags as $eachTags):
+            $keywords=$eachTags->name.',';
+         endforeach;
+     endif;
+     @endphp   
+     @section('meta_keyword',trim($keywords,','))
         <meta type="hidden" name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
         <!--================Blog Area =================-->
     <section class="blog_area single-post-area">
@@ -246,7 +259,7 @@
                                 @endif
                                 <div class="media-body">
                                     <a href="{{ route('blog.detail' , [$eachRelatedBlog->code,str_slug($eachRelatedBlog->title)])}}">
-                                        <h3>{{ str_limit($eachRelatedBlog->title, $limit = 25, $end = '...') }}</h3>
+                                        <h3>{{ str_limit($eachRelatedBlog->title, $limit = 35, $end = '...') }}</h3>
                                     </a>
                                     <p>{{ $eachRelatedBlog->created_at->diffForHumans() }}</p>
                                 </div>

@@ -13,7 +13,7 @@ class CreateSiteOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('site_options', function (Blueprint $table) {
+       Schema::create('site_options', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('site_name', 100);
             $table->string('url');
@@ -23,21 +23,24 @@ class CreateSiteOptionsTable extends Migration
             $table->enum('log_admin_activity', ['Y', 'N']);
             $table->enum('log_admin_invalid_login', ['Y', 'N']);
             $table->string('contact_email', 100);
-            $table->string('noreply_email', 100);
             $table->string('contact_name', 100);
             $table->string('contact_number', 100);
             $table->enum('mode', ['1', '2','3'])->comment('1=live,2=down,3=maintenance');
             $table->string('maintainence_code', 100)->nullable();
             $table->datetime('maintainence_start_date')->nullable();
-            $table->string('facebook_id', 100);
-            $table->string('linkedin_id', 100);
-            $table->string('twitter_id', 100);
-            $table->string('instagram_id', 100);
-            $table->string('youtube', 100);
+            $table->string('facebook_url', 100);
+            $table->string('linkedin_url', 100);
+            $table->string('twitter_url', 100);
+            $table->string('instagram_url', 100);
+            $table->string('youtube_url', 100);
+            $table->string('github_url', 100);
+            $table->string('skype_url', 100);
+            $table->string('fb_page_id', 100);
+            $table->string('fb_app_id', 100);
             $table->string('timezone', 100);
             $table->string('currency_sign', 100);
             $table->string('currency_code', 100);
-            $table->string('google_analytics_code', 100)->nullable();;
+            $table->text('google_analytics_code')->nullable();;
             $table->string('address', 100);
             $table->string('city', 100);
             $table->string('state', 100);

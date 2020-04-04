@@ -19,6 +19,6 @@ class Seos extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'pageid','meta_title','page_slug','meta_key','meta_description','schema1','schema2'
+        'pageid','meta_title','page_slug','meta_key','meta_description','schema1','schema2','meta_image'
     ];
 }

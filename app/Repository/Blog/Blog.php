@@ -99,14 +99,14 @@ Class Blog implements BlogInterface
   /**
    * get retaled blog
    */
-  public function relatedBlogBycode($blogCode){
+  public function relatedBlogBycode($blogCode,$limit=5){
     $blogData=$this->blog->where('code', $blogCode)->first();
     $related =$this->blog->whereHas('tags', function ($q) use ($blogData) {
-    return $q->whereIn('name', $blogData->tags()->pluck('name')); 
+      $q->whereIn('name', $blogData->tags()->pluck('name')); 
     })
     ->where('id', '!=', $blogData->id)
-    ->where('save_method','==','2')
-    ->orderBy('created_at','DESC') // So you won't fetch same post
+    ->where('save_method','2')
+    ->orderBy('created_at','DESC')->limit($limit) // So you won't fetch same post
     ->get();
     return $related;
   }
@@ -118,6 +118,10 @@ Class Blog implements BlogInterface
   }
   public function getActiveBlogByCode($blogCode){
     return $this->blog->where(['save_method'=>2,'code'=>$blogCode])->with('tags','user')->withCount('likes','comments')->first();
+  }
+
+  public function getPublishedBlogCountByUser($userid){
+    return $this->blog->where(['save_method'=>2,'user_id'=>$userid])->count();
   }
    /**
    * Get  Blog by user id

@@ -15,6 +15,7 @@ export default class Form {
                     this.originalData='';
                 }
                 this.errors={};
+                this.formReset=data.formReset;
              }
 
             /**
@@ -209,7 +210,7 @@ export default class Form {
              * @param {object} data
              */
             onSuccess(data) {
-                if(data.status){
+                if(data.status && this.formReset){
                     this.reset();
                 }
             }

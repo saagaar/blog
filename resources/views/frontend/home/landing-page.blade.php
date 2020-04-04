@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80347372-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    @if($seo)
+        @section('meta_url',config('settings.url').'/home')
+        @section('meta_description',$seo->meta_description)
+        @section('meta_title',$seo->meta_title)
+        @section('meta_keyword',$seo->meta_key)
+        @section('schema1',$seo->schema1)
+        @section('schema2',$seo->schema2)
+        @section('image',$seo->meta_image)
+    @endif
 
-  gtag('config', 'UA-80347372-2');
-</script>
+
+{!! config('settings.google_analytics_code') !!}
 <script data-ad-client="ca-pub-9412996680861033" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script type="text/javascript">
    window.__allCategory__ = '{!! addslashes(json_encode($CategoryByWeight)) !!}'
@@ -21,33 +25,74 @@
 
 
     @if($seo)
-    <meta name="description" content="{{$seo->meta_description}}">
-    <meta name="author" content="Thebloggersclub.com">
-    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+      <meta name="title" content="{{ $seo->meta_title}}">
+      <meta name="keywords" content="{{$seo->meta_key}}">
+
+      <meta name="url" content="{{config('settings.url')}}">
+      <meta name="description" content="{{$seo->meta_description}}">   
+      <meta name="image" content="{{$seo->meta_image}}">   
+      <meta name="author" content="{{ config('settings.site_name')}}">
+      <meta name="robots" content="index,follow">
+      <link rel="cannonical" href="{{config('settings.site_name')}}">
+      <title>{{ $seo->meta_title}}</title>
+      <meta property="og:locale" content="en_US" />
+      <meta property="og:site_name" content="{{ config('settings.site_name')}}" /> <!-- website name -->
+      <meta property="og:site" content="{{config('settings.url')}}" /> <!-- website link -->
+      <meta property="og:title" content="{{$seo->meta_title}}"/>
+      
+      <meta property="og:description" content="{{$seo->meta_description}}" /> 
+    
+      <meta property="og:image" content="{{$seo->meta_image}}" /> 
+      <meta property="og:url" content="{{config('settings.site_name')}}" /> 
+      <meta property="og:type" content="article" />
+      <meta property="fb:page_id" content="{{ config('settings.fb_page_id')}}" />
+      <meta property="fb:app_id" content="{{ config('settings.fb_app_id')}}" />
+      
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:site" content="{{config('settings.meta_url')}}" />
+      <meta name="twitter:creator" content="{{ config('settings.site_name')}}" />
+      <meta name="twitter:title" content="{{$seo->meta_title}}"/>
+      <meta name="twitter:description" content="{{$seo->meta_description}}" /> 
+      <meta name="twitter:image:src" content="{{$seo->meta_image}}" /> 
+        
   
-    <meta name="keywords" content="{{$seo->meta_key}}">
-    <meta property="og:site_name" content="{{ config('settings.site_name')}}"/> <!-- website name -->
-    <meta property="og:site" content="{{config('settings.url')}}" /> <!-- website link -->
-    <meta property="og:title" content="{{$seo->meta_title}}"/> <!-- title shown in the actual shared post -->
-    <meta property="og:description" content="{{$seo->meta_description}}" /> <!-- description shown in the actual shared post -->
-    <meta property="og:image" content=""/> <!-- image link, make sure it's jpg -->
-    <meta property="og:url" content="{{config('settings.url')}}" /> <!-- where do you want your post to link to -->
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="{{$seo->meta_title}}"/> <!-- title shown in the actual shared post -->
-    <meta property="og:description" content="{{$seo->meta_description}}" /> <!-- description shown in the actual shared post -->
-    <meta property="og:image" content="{{$seo->image}}" /> <!-- image link, make sure it's jpg -->
-
-
+    <script type="application/ld+json">
+      {!! $seo->schema1 !!}
+    </script>
+    <script type="application/ld+json">
+      {!! $seo->schema2 !!}
+    </script>
 
     @else
-     <meta name="description" content="">
-    <meta property="og:site_name" content="{{ config('settings.site_name')}}" /> <!-- website name -->
-    <meta property="og:site" content="{{config('settings.url')}}" /> <!-- website link -->
-    <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
-    <meta property="og:type" content="article" />
+   <meta name="title" content="">
+      <meta name="keywords" content="">
+
+      <meta name="url" content="{{config('settings.site_name')}}">
+      <meta name="description" content="">   
+      <meta name="author" content="{{ config('settings.site_name')}}">
+      <meta name="robots" content="index,follow">
+      <link rel="cannonical" href="{{config('settings.site_name')}}">
+      <title>{{config('settings.site_name')}}</title>
+
+      <meta property="og:locale" content="en_US" />
+      <meta property="og:site_name" content="{{ config('settings.site_name')}}" /> <!-- website name -->
+      <meta property="og:site" content="{{config('settings.url')}}" /> <!-- website link -->
+      <meta property="og:title" content=""/>
+      <meta property="og:description" content="" /> 
+      <meta property="og:image" content="" /> 
+      <meta property="og:url" content="{{config('settings.site_name')}}" /> 
+      <meta property="og:type" content="article" />
+      <meta property="fb:page_id" content="{{ config('settings.fb_page_id')}}" />
+      <meta property="fb:app_id" content="{{ config('settings.fb_app_id')}}" />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:site" content="{{config('settings.meta_url')}}" />
+      <meta name="twitter:creator" content="{{ config('settings.site_name')}}" />
+      <meta name="twitter:title" content=""/>
+      <meta name="twitter:description" content="" /> 
+      <meta name="twitter:image:src" content="" /> 
     @endif
     <!-- Website Title -->
-    <title>For all Blog writers|Share your knowledge and Story|theBloggersClub.com</title>    
+   
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
@@ -391,17 +436,17 @@
       <!-- footer social icon -->
       <nav class="col-lg-3 col-md-12">
         <ul class="list-inline text-lg-right text-center social-icon">
-        @if(config('settings.facebook_id'))
+        @if(config('settings.facebook_url'))
           <li class="list-inline-item">
             <a target="_blank" class="facebook" href="{{config('settings.facebook_id')}}"><i class="ti-facebook"></i></a>
           </li>
         @endif
-        @if(config('settings.twitter_id'))
+        @if(config('settings.twitter_url'))
           <li class="list-inline-item">
             <a target="_blank" class="twitter" href="{{config('settings.twitter_id')}}"><i class="ti-twitter-alt"></i></a>
           </li>
         @endif
-        @if(config('settings.linkedin_id'))
+        @if(config('settings.linkedin_url'))
           <li class="list-inline-item">
             <a target="_blank" class="linkedin" href="{{config('settings.linkedin_id')}}"><i class="ti-linkedin"></i></a>
           </li>
@@ -414,7 +459,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 text-center">Copyright @TheBloggersClub.com</div>
-      <div class="col-md-6 text-right">Powered By: <a href="#">Idata solutions Pvt. Ltd.</a></div>
+      <div class="col-md-6 text-right">Powered By: <a href="https://idata.com.np">Idata solutions Pvt. Ltd.</a></div>
       <div class="clearfix"></div>
     </div>
   </div>
@@ -429,23 +474,5 @@
     <!-- Scripts -->
     <script src="{{ asset('landing-page/assets/js/slick.min.js')}}"></script> 
     <script src="{{ asset('frontend/js/landing.support.js')}}"></script> 
-
-
-  <script type="text/javascript">
-  var sc_project=12189981; 
-  var sc_invisible=0; 
-  var sc_security="8adfd47c"; 
-  var sc_https=1; 
-  var scJsHost = "https://";
-  document.write("<sc"+"ript type='text/javascript' src='" +
-  scJsHost+
-  "statcounter.com/counter/counter.js'></"+"script>");
-  </script>
-  <noscript><div class="statcounter"><a title="Web Analytics
-  Made Easy - StatCounter" href="https://statcounter.com/"
-  target="_blank"><img class="statcounter"
-  src="https://c.statcounter.com/12189981/0/8adfd47c/0/"
-  alt="Web Analytics Made Easy -
-  StatCounter"></a></div></noscript>
 </body>
 </html>

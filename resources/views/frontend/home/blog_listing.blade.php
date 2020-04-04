@@ -1,12 +1,15 @@
 @extends('frontend.layouts.app')
 @section('content')
-{{--   @section('meta_url','https://thebloggersclub.com/category/{{ $category->slug }}')
-
-    @section('meta_title',$category->meta_title)
-    @section('schema1',$category->schema1)
-    @section('meta_keyword',$category->meta_keyword)
-    @section('meta_description',$category->meta_description)
-    @section('meta_image',asset('/uploads/categories-images/'.$category->banner_image)) --}}
+   @if($seo)
+        @section('meta_url',config('settings.url').'/home')
+        @section('meta_description',$seo->meta_description)
+        @section('meta_title',$seo->meta_title)
+        @section('meta_keyword',$seo->meta_key)
+      
+        @if($seo->meta_image!='')
+                 @section('meta_image',$seo->meta_image)
+        @endif
+    @endif
 <section class="fullwidth-block area-padding-bottom area-padding-top">
         <div class="container">
             <div class="row">

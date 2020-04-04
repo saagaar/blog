@@ -164,7 +164,8 @@ import Loader from './../../components/Loader';
             loginForm:new Form({
                 email: '',
                 password: '',
-                remember:''
+                remember:'',
+                formReset:false
               }),
             signUpForm:new Form({
                 email: '',
@@ -235,16 +236,15 @@ import Loader from './../../components/Loader';
               curObject.$store.commit('TOGGLE_LOADING');
               this.loginForm.post('blog/login').then(response => {
                if(response.data.status){
-                curObject.$store.commit('TOGGLE_LOADING');
+                  curObject.$store.commit('TOGGLE_LOADING');
                   window.location.href="/home"
                }
                else{
-                curObject.$store.commit('TOGGLE_LOADING');
-                this.closeAllPopups();
+                  curObject.$store.commit('TOGGLE_LOADING');
                   this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message})
                }
               }).catch(e => {
-                curObject.$store.commit('TOGGLE_LOADING');
+                   curObject.$store.commit('TOGGLE_LOADING');
                    this.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message})
               });
             }

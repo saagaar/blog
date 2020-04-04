@@ -24,7 +24,7 @@
                       <!-- <input  type="file" ref="file" name="image" id="file1" class="upload" @change="changeImage();"> -->
 
                      <ProfileImage :profileChangeEnable="enableProfileChangePopup" @clicked="updatePopupClosed" >
-                   </ProfileImage>
+                     </ProfileImage>
                       <!-- <input type="file"  name="image" id="file1" class="upload" @change="changeImage()" > -->
                       </span> 
                     </div>
@@ -38,7 +38,7 @@
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li v-if="$gate.allow('viewUserDashboard', 'profile', loggedIn)"><router-link to="/dashboard">Dashboard</router-link></li>
-                  <li><router-link :to="{name:'profile',params:{username:username}}">Timeline</router-link></li>
+                  <li><router-link :to="{name:'profile',params:{username:username}}">Published({{ me.blogCount}})</router-link></li>
                   <li><router-link :to="{name:'followings',params:{username:username}}">Followings({{ me.followingCount}} )</router-link></a></li>
                   <li><router-link :to="{name:'followers',params:{username:username}}">Followers({{ me.followersCount}} )</router-link></a></li>
                   <li class="lifollow" v-if="this.$route.params.username && loggedIn"><FollowButton  :following="checkFollow()" :followings="authFollowing" :Buttonclass="'float-right'" :username="this.$route.params.username" :followSuggestionHead="3"></FollowButton></li>
