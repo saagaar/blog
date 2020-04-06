@@ -284,9 +284,6 @@
                            
                         </aside>
                         @endif
-
-
-
                      <!-- 
                             Google ads section
                      -->
@@ -294,7 +291,6 @@
                         <aside class=" googleads single_sidebar_widget newsletter_widget">
                        
                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                <!-- Blog Details square -->
                                 <ins class="adsbygoogle"
                                      style="display:block"
                                      data-ad-client="ca-pub-9412996680861033"
@@ -309,7 +305,6 @@
                         <aside class=" googleads single_sidebar_widget newsletter_widget">
 
                             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                <!-- Blog Details square -->
                                 <ins class="adsbygoogle"
                                      style="display:block"
                                      data-ad-client="ca-pub-9412996680861033"
@@ -322,7 +317,6 @@
                         </aside>
                         <aside class=" googleads single_sidebar_widget newsletter_widget">    
                             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                <!-- Blog Details square -->
                                 <ins class="adsbygoogle"
                                      style="display:block"
                                      data-ad-client="ca-pub-9412996680861033"

@@ -91,11 +91,13 @@ const app = new Vue({
     store,
     beforeCreate() 
     {
-        let userState = JSON.parse(window.__USER_STATE__) || {};
-        if (userState) {
-           this.$store.commit('ADD_ME', userState)
+       
+       if(window.__USER_STATE__!==undefined)
+       {
+            let userState = JSON.parse(window.__USER_STATE__) || {};
+            this.$store.commit('ADD_ME', userState)
             Vue.prototype.$gate = new Gate(userState);
-        }
+       }
     },
     components:{
             // 'the-top-nav':TheTopNav,

@@ -78,11 +78,13 @@
                     </div>
                 </div>
                 @endforeach
-                @if(auth()->user())
-                    <blog-slug-loading v-bind:is-logged-in="true" v-bind:saves="{{ $savedBlog }}"  v-bind:userliked="{{$userLiked}}" :slug="'{{ $slug }}'"></blog-slug-loading>
-                @else
-                    <blog-slug-loading :slug="'{{ $slug }}'"></blog-slug-loading>
-                @endif
+                <div class="col-md-12">
+                    @if(auth()->user())
+                        <blog-slug-loading v-bind:is-logged-in="true" v-bind:saves="{{ $savedBlog }}"  v-bind:userliked="{{$userLiked}}" :slug="'{{ $slug }}'"></blog-slug-loading>
+                    @else
+                        <blog-slug-loading :slug="'{{ $slug }}'"></blog-slug-loading>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

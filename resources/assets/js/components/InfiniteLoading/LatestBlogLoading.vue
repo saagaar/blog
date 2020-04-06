@@ -33,7 +33,7 @@
         </div>
         </div>
       
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
         <InfiniteLoading @infinite="infiniteHandler" spinner="spiral">
           <div slot="no-more"></div>
           <div slot="no-results"><hr></div>
@@ -71,7 +71,7 @@ export default {
   {
     users:function(newval){
 
-     alert(newval);
+     
     }
   },
   methods: {

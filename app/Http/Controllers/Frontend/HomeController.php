@@ -242,7 +242,7 @@ class HomeController extends FrontendController
               // return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'totalBlogsCount'=>$blogCountinCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteLogo,'userCategory'=>$categories,,'likes'=>$likes));
           }
         }
-       return view('frontend.home.blog_listing',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'totalBlogsCount'=>$blogCountinCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteLogo,'userCategory'=>$categories,'likes'=>$likes,'savedBlog'=>$savedBlog,'userLiked'=>$liked));
+       return view('frontend.home.blog_listing_by_category',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'totalBlogsCount'=>$blogCountinCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteLogo,'userCategory'=>$categories,'likes'=>$likes,'savedBlog'=>$savedBlog,'userLiked'=>$liked,'seo'=>false));
     }
     public function getBlogByCategory($slug=false,Request $request){
       try

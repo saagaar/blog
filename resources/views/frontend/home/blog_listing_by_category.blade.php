@@ -1,15 +1,12 @@
 @extends('frontend.layouts.app')
 @section('content')
-   @if($seo)
-        @section('meta_url',config('settings.url').'/home')
-        @section('meta_description',$seo->meta_description)
-        @section('meta_title',$seo->meta_title)
-        @section('meta_keyword',$seo->meta_key)
-      
-        @if($seo->meta_image!='')
-                 @section('meta_image',$seo->meta_image)
-        @endif
-    @endif
+  
+        @section('meta_url',url()->current())
+        @section('meta_description',$category->meta_description)
+        @section('meta_title',$category->meta_title)
+        @section('meta_keyword',$category->meta_keyword)
+        @section('meta_image',$category->banner_image)
+  
 <section class="fullwidth-block area-padding-bottom area-padding-top">
         <div class="container">
             <div class="row">
@@ -114,11 +111,13 @@
                     </div>
                 </div>
                 @endforeach
+            <div class="col-md-12">
                 @if(auth()->user())
                     <blog-loading v-bind:is-logged-in="true" v-bind:saves="{{ $savedBlog }}"  v-bind:userliked="{{$userLiked}}" :category="'{{ $category->slug }}'"></blog-loading>
                 @else
                     <blog-loading :category="'{{ $category->slug }}'"></blog-loading>
                 @endif
+            </div>
             </div>
         </div>
     </div>

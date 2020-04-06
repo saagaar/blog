@@ -7,8 +7,8 @@
         @section('meta_description',$seo->meta_description)
         @section('meta_title',$seo->meta_title)
         @section('meta_keyword',$seo->meta_key)
-        @if($seo->meta_image!='')
-         @section('meta_image',$seo->meta_image)
+        @if($seo->image!='')
+         @section('meta_image',$seo->image)
         @endif
     @endif
  <div class="spinner-border text-primary" role="status">
@@ -437,7 +437,6 @@
             <div class="row">
                 <div class="col-md-6">
                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Home Horizontal Ads -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-9412996680861033"
@@ -450,7 +449,6 @@
                 </div>
                   <div class="col-lg-6 col-md-6">
                   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Home Horizontal Ads -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-9412996680861033"
@@ -485,10 +483,9 @@
                 @foreach($latest as $eachLatest)
                 <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-md-4 col-sm-5 col-4 bg-color">
+                        <div class="thumb col-lg-4 col-md-4 col-sm-5 col-4 ">
                             <figure>
                                 <a >
-
                                 @if($eachLatest->image)
                                      @php
                                         $img=explode('.',$eachLatest->image);
@@ -501,7 +498,7 @@
                                 </a>
                             </figure>
                         </div>
-                        <div class="short_details col-md-8 col-sm-7 col-8">
+                        <div class="short_details col-lg-8 col-md-8 col-sm-7 col-8">
                           <div class="meta-top d-flex">
                             @php
                                 echo   ($eachLatest->anynomous=='2') ? (isset($eachLatest->user->name)  ? '<a href="/profile/'.$eachLatest->user->username.'"> By '.$eachLatest->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
@@ -533,11 +530,11 @@
                 @endforeach
              
                 <div class="col-md-12">
-                 @if(auth()->user())
-                <latest-blog-loading v-bind:is-logged-in="true" v-bind:saves="{{$savedBlog}}" v-bind:userliked="{{$userLiked}}"></latest-blog-loading>
-                @else
-                    <latest-blog-loading></latest-blog-loading>
-                @endif
+                     @if(auth()->user())
+                    <latest-blog-loading v-bind:is-logged-in="true" v-bind:saves="{{$savedBlog}}" v-bind:userliked="{{$userLiked}}"></latest-blog-loading>
+                    @else
+                        <latest-blog-loading></latest-blog-loading>
+                    @endif
                 </div>
             </div>
         </div>
