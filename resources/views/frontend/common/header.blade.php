@@ -62,12 +62,12 @@
       <meta name="twitter:description" content="@yield('meta_description','Bloggers Club is an online blogging platform for posting your unique,creative articles in different categories and for those who loves to learn innovative things and express their words in order to link with the world.')" /> 
       <meta name="twitter:image:src" content="@yield('meta_image')" /> 
         
-    @if(isset($seo) && is_array($seo) && count($seo)>0 && $seo->schema1!='')
+    @if($seo && isset($seo) && is_array($seo) && count($seo)>0 && $seo->schema1!='')
       <script type="application/ld+json">
         {!! $seo->schema1 !!}
       </script>
     @endif
-    @if(isset($seo) &&  is_array($seo) && count($seo)>0 && $seo->schema2!='')
+    @if($seo &&  isset($seo) &&  is_array($seo) && count($seo)>0 && $seo->schema2!='')
       <script type="application/ld+json">
         {!! $seo->schema2 !!}
       </script>

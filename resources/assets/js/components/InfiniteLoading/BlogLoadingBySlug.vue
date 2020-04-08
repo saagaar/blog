@@ -21,11 +21,11 @@
                 </a>
                 <p>{{items.short_description}}</p>
                 <div class="meta-bottom d-flex">
-                    <a href="#"><i class="ti-time"></i>{{ items.created_at | moment("from", "now")}}</a>
+                    <a href="#"><i class="ti-time"></i> {{ items.created_at | moment("from", "now")}}</a>
                     <a href="" class="appreciate"><i>
                       <LikeCheck v-if="isLoggedIn" :likes="userliked" :code="items.code"></LikeCheck>
                       <img v-else src="/frontend/images/elements/inactive-appreciate.png" width="25" height="25" class="img-fluid">
-                    </i> {{items.likes_count}} appreciate</a>
+                    </i>  {{items.likes_count}} appreciate</a>
                     <a href="#"><i class="ti-eye"></i> {{items.views}} view</a>
                     <SaveBlog v-if="isLoggedIn" :saves="saves" :blogcode="items.code" ></SaveBlog>
                     <!-- <a href="#" class="book_mark"><i class="fa fa-bookmark"></i> Bookmark</a> -->

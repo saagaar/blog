@@ -179,7 +179,7 @@ class HomeController extends FrontendController
     {
       $this->seo = app()->make('App\Repository\SeoInterface');
       $seo =array();
-      $seo = $this->seo->getSeoBySlug('category-listing');
+      $seo = $this->seo->getSeoBySlug('all-category');
       $data=array();
       $user=array();
       $categories=array();
@@ -199,7 +199,7 @@ class HomeController extends FrontendController
               $user=$this->user_state_info();
           }
         }
-        return view('frontend.home.category',['initialState'=>$data,'user'=>$user])->with(array('allCategory'=>$allCategories,'navCategory'=>$navCategory));
+        return view('frontend.home.category',['initialState'=>$data,'user'=>$user])->with(array('allCategory'=>$allCategories,'navCategory'=>$navCategory,'seo'=>$seo));
     }
     public function blogByCategory($slug,UserInterestInterface $userInterest){
        $this->seo = app()->make('App\Repository\SeoInterface');

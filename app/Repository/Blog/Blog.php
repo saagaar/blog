@@ -77,11 +77,11 @@ Class Blog implements BlogInterface
    * get latest blog 
    */
   public function getLatestAllBlog($limit=10,$offset=0){
-    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('user','likes')->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    return $this->blog::with('user:id,username')->where(['save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('user','likes')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
 
   public function getPopularBlog($limit=10,$offset=0){
-    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->orderBy('likes_count','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    return $this->blog::with('user:id,username')->where(['save_method'=>2,'show_in_home'=>1])->orderBy('likes_count','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
   /**
    * get blog bye following
@@ -93,7 +93,6 @@ Class Blog implements BlogInterface
   public function getBlogOfFollowingUserDaily($user,$limit=10,$offset=0){
     $listofFollowings=$user->followings()->select('follow_id')->get()->pluck('follow_id')->toArray();
     $today = Carbon::today()->toDateString();
-    // print_r($today);exit;
     return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->whereDate('created_at','=',$today)->whereIn('user_id', $listofFollowings)->with('user')->orderBy('created_at','DESC')->withCount('likes')->latest()->take($limit)->skip($offset)->get()->toArray();
   }
   /**

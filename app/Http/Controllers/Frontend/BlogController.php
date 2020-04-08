@@ -37,9 +37,6 @@ class BlogController extends FrontendController
             'title' => 'required', 
             'content' => 'required', 
             ]);
-            if($this->blogRequiresActivation=='N'){
-                return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
-            }else{
                 if ($validator->fails()) {
                     return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
                 }
@@ -56,7 +53,6 @@ class BlogController extends FrontendController
                     $created->save();
                     return response()->json(['status'=>true,'blogId'=>$created['code'],'message'=>'Blog saved succeessfully']);
                 }
-            } 
           }
           $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
           $initialState=json_encode($data);
@@ -98,9 +94,7 @@ class BlogController extends FrontendController
                 'title' => 'required', 
                 'content' => 'required', 
                 ]);
-                if($this->blogRequiresActivation=='N'){
-                    return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
-                }else{
+                
                     if ($validator->fails()) {
                         return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
                     }else{
@@ -109,7 +103,6 @@ class BlogController extends FrontendController
                             return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'Blog Saved!']);
                     }
                     } 
-            }
             $initialState=json_encode($data);
             $user=$this->user_state_info();
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
@@ -137,10 +130,7 @@ class BlogController extends FrontendController
                 'tags'              =>'required' ,
                 // 'image'             => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
-                if($this->blogRequiresActivation=='N'){
-                    return response()->json(['status'=>false,'data'=>'','message'=>'Blog cannot be created for now. Please try again later'], 401);
-                }
-                else{
+                
                     if ($validator->fails()) {
                         return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
                     }else{
@@ -180,12 +170,14 @@ class BlogController extends FrontendController
                         $form['save_method']=$request->save_method?$request->save_method:'1';
                         $form['anynomous'] = ($checkAnynomous==='true') ? '1' : '2';
                         $form['featured'] = '2';
+                        $form['show_in_home'] = '2';
+                        if($this->blogRequiresActivation=='N')
+                            $form['show_in_home'] = '1';
                         $this->blog->updateByCode($postId,$form);
                         $tagid = $tag->getTagByName($request->tags);
                         $this->blog->addTag($postId,$tagid);  
                         return response()->json(['status'=>true,'blogId'=>$postId,'message'=>'Blog updated successfully']);                
                     }
-                } 
             }
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
         }
