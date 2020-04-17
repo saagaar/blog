@@ -57,6 +57,14 @@
                   <div class="alert alert-danger">{{ $errors->first('contact_email') }}</div>
                   @endif
                   </div>
+
+                   <div class="form-group col-md-4">
+                    <label for="contact_email">NoReply Email</label>
+                    <input type="text" class="form-control" name="noreply_email" id="noreply_email" value="{{ $site->noreply_email}}" placeholder="NoReply Email">
+                    @if ($errors->has('noreply_email'))
+                  <div class="alert alert-danger">{{ $errors->first('noreply_email') }}</div>
+                  @endif
+                  </div>
                   <div class="form-group col-md-4">
                     <label for="contact_name">Contact name</label>
                     <input type="text" class="form-control" name="contact_name" id="contact_name" value="{{ $site->contact_name}}" placeholder="Contact Name">
@@ -308,7 +316,7 @@
                 </div>
               
                   <div class="box-footer pull-right" >
-                  <button type="submit" class="btn btn-primary">Edit</button>
+                  <button type="submit" class="btn btn-primary">Update</button>
                 </div>
         </div>
         <!-- /.col-->

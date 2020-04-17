@@ -34,8 +34,8 @@ class AccountRequest extends FormRequest
             }
             // Update operation, exclude the record with id from the validation:
             $email_rule            = 'required|email|unique:users,email,' . $this->id;
-            $phone                 = 'required|unique:users,phone,' . $this->id;
-             $image                ='';
+            $phone                 = '';
+            $image                ='';
             
           }
           else

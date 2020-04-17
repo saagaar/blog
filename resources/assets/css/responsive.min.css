@@ -1,4 +1,6 @@
 /*New Responsive CSS By: Bikash Bhandari*/
+.area-padding-top{padding-top: 30px;}
+.area-padding-bottom{padding-bottom: 30px;}
 .single-post-area .blog_details{padding-top: 15px;}
 .blog_details .meta-top a{padding-right: 5px; padding-bottom: 5px; color: #999;}
 .blog-info-link ul.top-social{ text-align: right;}
@@ -13,11 +15,21 @@ ul.blog-info-link.top-social li svg, ul.blog-info-link.top-social li span,
 .sidenav .closebtn{z-index: 9;}
 .blog-info-link li, .blog-info-link li a, .sidenav p, .sidenav ul li, 
 .sidenav ul li a, .sidenavr .footer-text, .footer-text a{font-size: 12px;}
+.header-top .right-button ul li a em{font-style: normal !important;}
+#sidebar{width: 100% !important;}
+.profile-card{padding: 10px 15px;}
+.first_block, .three-block {border-bottom: 1px solid #ddd;}
+.profile-card, ul.nav-news-feed{margin-bottom: 0px !important;}
+.profile-card h6{font-family: "Open Sans", sans-serif; font-weight: 400; 
+margin-bottom: 0px;}
+.single-blog.video-style.big .thumb.bg-color{background: #c3c3c3;}
+.friend-list .friend-card .card-info p{float: left;}
 
 @media (min-width:992px) and ( max-width: 1199px){
     .single-blog.video-style.small .meta-bottom {
         display: block !important;
     }
+    .profile-card h6{display: block; width: 100%; clear: both; margin-top:0px;}
 }
 @media (max-width:1199px){
 .single-blog.video-style.big .thumb{min-height: 320px;}
@@ -25,21 +37,23 @@ ul.blog-info-link.top-social li svg, ul.blog-info-link.top-social li span,
 .single-blog.video-style .thumb img{max-height: 320px;}
 .single-blog.video-style.small .thumb figure, 
 .single-blog.video-style.small .thumb img{min-height: 135px; max-height: 135px;}
-.single-blog.small.video-style .thumb.bg-color figure{height: 135px;}
+.single-blog.small.video-style .thumb.bg-color figure {height: 135px;}
 .single-blog.video-style.small h4{font-size: 16px !important; max-height: 25px; 
     overflow: hidden; margin-bottom: 2px;}
 .single-blog.video-style .short_details p{max-height: 20px; text-align: left;}
 .b_all{margin-top: 0px;}
-.area-padding-top{padding-top: 30px;}
-.fullwidth-block, .area-padding-bottom{padding-bottom: 30px;}
-.area-padding{padding:30px 0px;}
+.area-padding-top{padding-top: 20px;}
+.fullwidth-block, .area-padding-bottom{padding-bottom: 20px;}
+.area-padding{padding:20px 0px;}
 .open_btn{z-index: 999;}
 .area-heading h3:after{left: 6%;}
 .single-blog h4{line-height: 20px;}
+.single-blog.video-style .short_details{padding-bottom: 10px !important;}
+.timeline-quote p{font-size: 22px; line-height: 30px;}
 }
 @media (max-width:991px){
 .single-blog.video-style.small .short_details{padding-top: 10px;}
-.single-blog.video-style.small .thumb{padding-left: 0px;}
+/*.single-blog.video-style.small .thumb{padding-left: 0px;}*/
 .single-blog.video-style.small .meta-bottom a{margin-right: 5px; max-height: 25px;
 overflow: hidden;}
 .logo-wrapper{text-align: left !important;}
@@ -48,6 +62,14 @@ overflow: hidden;}
 .single-blog.video-style .thumb.bg-color figure{height: 290px;}
 .area-padding-top h1{font-size: 24px; padding-left: 15px;}
 .category-page.category-list .area-heading h3:after {left: 7% !important;}
+.single-blog.video-style.small .meta-top{margin-bottom: 0px !important; line-height: 11px;}
+.single-blog.video-style.small h4{margin-bottom: 0px !important;}
+.single-blog.video-style.small .short_details{padding-bottom: 5px !important;}
+.h_line, .recommended_sec{display: none;}
+.timeline-quote p{font-size: 18px; line-height: 25px;}
+#sidebar3, .bio{margin: 0 0 15px 0;}
+.timeline-cover .timeline-nav-bar ul.profile-menu{float: right;}
+.timeline-cover .timeline-nav-bar .profile-menu li{padding: 10px;}
 }
 
 @media (max-width:960px){
@@ -55,14 +77,37 @@ overflow: hidden;}
 }
 @media (max-width:768px){
     .single-blog.video-style .short_details p{text-align: left;}
+    .header-top {line-height: 50px;}
+    .header-top .right-button ul li a{line-height: 70px;}
+    .notifications_list li p{font-size: 13px;}
+    .header-top .right-button ul.dropdown-menu:after{right: 20px;}
 }
 @media (max-width:767px){
-    .single-blog{margin-bottom: 30px;}
+    .single-blog, .profile_left{margin-bottom: 30px;}
     .area-heading h3:after{left: 10%;}
     .single-blog.video-style.small .thumb{padding-left: 15px;}
     .dtl_share_area .col-md-4.text-right, .single-post-area .blog_details p
     {text-align: left !important;}
     .category-page.category-list .area-heading h3:after {left: 10% !important;}
+    .header-top .right-button li.nitify ul.dropdown-menu{right: -145px !important;
+        margin-left: auto !important; margin-right: auto !important;}
+    .header-top .right-button li.nitify ul.dropdown-menu:after{right: 35%;}
+
+    .timeline-cover .timeline-nav-bar .profile-info figure, 
+    .timeline-cover .timeline-nav-bar .profile-info img.profile-photo{height: 100px;
+        width: 100px;}
+    .timeline-cover .timeline-nav-bar .profile-info figure, 
+    .timeline-cover .timeline-nav-bar .profile-info h3{display: inline-block;
+        position: relative; vertical-align: bottom;}
+    .profile_img_change{min-height: 30px;}
+    .profile_pic_upload .btn-file{padding-top: 5px; top: 0;}
+    .timeline-cover .timeline-nav-bar .profile-info h3{font-size: 18px;}
+    .profile_img_change svg{font-size: 16px;}
+    .timeline-quote .collen{width: 60%;}
+    #page-contents{margin-top: 0px;}
+    .timeline-cover .timeline-nav-bar ul.profile-menu{float: none !important;
+text-align: center; margin-left: auto; margin-right: auto;}
+
 }
 @media (max-width:686px){
     .single-blog, .single-post-area .navigation-area .nav-left
@@ -74,6 +119,7 @@ overflow: hidden;}
     .single-blog.video-style.big .thumb, .single-blog.video-style .thumb img
     {min-height: 250px;}
     .category-page.category-list .area-heading h3{font-size: 18px !important;}
+    .timeline-cover .timeline-nav-bar .profile-menu li.lifollow a{padding: 2px 10px;}
 }
 @media (max-width:575px){
     .single-blog.video-style .short_details{margin-top: -25px; right: -3%;
@@ -82,17 +128,30 @@ overflow: hidden;}
 .single-post-area .navigation-top .like-info span, 
 .single-post-area .navigation-top .comment-count svg, 
 .single-post-area .navigation-top .comment-count span{font-size: 14px;}
+ .timeline-cover .timeline-nav-bar .profile-menu li a{font-size: 13px;}
+.header-top .right-button li.nitify ul.dropdown-menu{right: -115px !important;}
+.header-top .right-button li.nitify ul.dropdown-menu{ min-width: 460px;}
+.header-top .right-button li.nitify ul.dropdown-menu:after{right: 35%;}
+.pad-right-0{padding-right: 15px !important;}
 }
 @media (max-width:481px){
     .category-page.category-list .area-heading h3:after{left: 13% !important;}
     .category-page.category-list .col-lg-3.col-md-4.col-sm-6.col-6 
     {display: block !important; width: 100% !important; 
     max-width: 100% !important; flex: 0 0 100%; text-align: center;}
+    .header-top .right-button li.nitify ul.dropdown-menu {right: -150px !important;}
+    .header-top .right-button li.nitify ul.dropdown-menu{ min-width: 400px;}
+    .header-top .right-button li.nitify ul.dropdown-menu:after {right: 45%;}
+    .notifications_list li p {width: 75% !important; font-size: 12px;}
+    .header-top .right-button ul li a{padding-left: 10px; padding-right: 10px;}
+    .header-top .right-button ul li a figure img {max-height: 45px; 
+        max-width: 45px;}
+    .timeline-quote .collen{width: 75%; padding-top: 20px;}
+    .timeline-cover .timeline-nav-bar .profile-menu li a{font-size: 12px;}
 }
 @media (max-width:420px){
-.single-post-area .navigation-area h4{font-size: 16px;}
-.header-top .right-button ul li a, .single-blog.video-style.small h4
-{font-size: 14px;}
+.single-post-area .navigation-area h4, .timeline-quote p{font-size: 16px;}
+.header-top .right-button ul li a, .single-blog.video-style.small h4,
 .single-blog.video-style .short_details p, 
 .single-post-area .blog_details p,
 .single-post-area .navigation-top .like-info svg, 
@@ -107,6 +166,9 @@ overflow: hidden;}
 .single-blog.video-style.small .thumb img { min-height: 120px; max-height: 120px;}
 .single-blog.small.video-style .thumb.bg-color figure{height: 120px;}
 .category-page.category-list .area-heading h3:after{left: 14% !important;}
+.header-top .right-button li.nitify ul.dropdown-menu {min-width: 375px;}
+.timeline-cover .timeline-nav-bar .profile-menu li{padding: 6px;}
+
 }
 @media (max-width:386px){
 .header-top .right-button ul li a{padding-left: 10px; padding-right: 10px;}
@@ -114,9 +176,31 @@ overflow: hidden;}
 .blog-info-link li::after{padding-left: 2px; padding-right: 2px;}
 .blog-info-link li svg, .blog-info-link li span{margin-right: 0px;}
 .category-page.category-list .area-heading h3:after{left: 17% !important;}
+.header-top .right-button li.nitify ul.dropdown-menu {min-width: 340px;}
+.header-top .right-button li.nitify ul.dropdown-menu {right: -132px !important;}
+.header-top {line-height: 40px;}
+.header-top .right-button ul li a{line-height: 50px;}
+.timeline-cover .timeline-nav-bar .profile-info figure, 
+.timeline-cover .timeline-nav-bar .profile-info img.profile-photo
+{width: 75px; height: 75px;}
+.timeline-cover .timeline-nav-bar .profile-info{top: -75px;}
+.timeline-quote p{font-weight:normal !important; line-height: 15px;}
+.timeline-quote .collen::before, 
+.timeline-quote .collen::after{background-size: 100% 40px;}
+.timeline-cover .timeline-nav-bar .profile-menu li a{font-size: 11px;}
+.timeline-cover{min-height: 220px;}
+.timeline-cover .timeline-nav-bar .profile-menu li{padding:5px;}
+.friend-list .friend-card .card-info .friend-info a.btn, 
+.friend-list .friend-card .card-info p{float: none !important;}
 }
 @media (max-width:320px){
+.header-top .right-button ul li a small,
+.header-top .right-button ul li a b.u_name{display: none !important;}
 .single-blog.video-style .meta-bottom a{margin-right: 5px;}
 .blog-info-link li, .blog-info-link li a, 
 .blog-info-link li svg, .blog-info-link li span{font-size: 11px;}
+.header-top .right-button li.nitify ul.dropdown-menu {right: -85px !important;}
+.header-top .right-button li.nitify ul.dropdown-menu {min-width: 285px;}
+.header-top .right-button li.nitify ul.dropdown-menu:after {right: 40%;}
+.notifications_list li p {width: 60% !important; font-size: 12px;}
 }

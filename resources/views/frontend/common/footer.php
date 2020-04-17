@@ -68,4 +68,5 @@ Copyright &copy;2019 All rights reserved | Powered By --- <a href="https://idata
         </div>
     </div>
 </footer>
+
 <!-- ================ End footer Area ================= -->

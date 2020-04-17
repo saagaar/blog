@@ -30,7 +30,7 @@
             	@foreach($blogs as $eachBlog)
             	   <div class="col-lg-6 col-md-6">
                     <div class="single-blog video-style small row m_b_30">
-                        <div class="thumb col-lg-4 col-md-4 col-sm-5 col-4">
+                        <div class="thumb col-lg-4 col-md-4 col-sm-5 col-4 bg-color">
                         <figure>
                             <a>
                         	@if($eachBlog->image)

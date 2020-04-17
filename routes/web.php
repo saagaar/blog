@@ -128,7 +128,6 @@ Route::match(['get','post'],'api/blog/edit/{postid}', 'Frontend\BlogController@u
 Route::match(['get','post'],'blog/edit/{postid}/step2', 'Frontend\BlogController@updateBlogDetail');
 Route::match(['get','post'],'/blog/edit/{postid}', 'Frontend\BlogController@update');
 Route::match(['get','post'],'api/blog/add', 'Frontend\BlogController@create')->name('api');
-Route::match(['get','post'],'api/blog/add', 'Frontend\BlogController@create')->name('api');
 Route::get('api/blog/deleteBlog/{code}', 'Frontend\BlogController@delete');
 /**
  * for user

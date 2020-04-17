@@ -1,7 +1,7 @@
 <template>
 <div>
               <div class="single-blog video-style small row m_b_30" v-for="eachBlog in lists">
-                <div class="thumb col-lg-3 col-md-4 col-sm-5">
+                <div class="thumb col-lg-3 col-md-4 col-sm-5 bg-color">
                  <img  v-if="eachBlog.image" class="img-fluid" :src="getImageurl(eachBlog.code,eachBlog.image)" :alt="eachBlog.title">
                  <img v-else class="img-fluid" :src="'/frontend/images/elements/default-post.jpg'" :alt="eachBlog.title">
                   </div>

@@ -182,6 +182,11 @@ window.setTimeout(function() {
  
 });
 </script>
+<script>
+    document.querySelectorAll( 'oembed[url]' ).forEach( element => {
+        iframely.load( element, element.attributes.url.value );
+    } );
+</script>
 <script type="text/javascript">
     $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip()

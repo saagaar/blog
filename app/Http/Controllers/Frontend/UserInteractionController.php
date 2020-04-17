@@ -71,7 +71,7 @@ class UserInteractionController extends FrontendController
             if($blogData->user_id){
                 $code='comment_notification';
                 $userdata=$this->user->getUserByUsername($blogData->user->username);
-                $data=['NAME'=>'<a href="'.route('profile',$this->authUser->username).'">'.$this->authUser->name.'</a>','POST'=>'<a href="'. route('blog.detail' , [$code,str_slug($blogData->title)]).'"> POST </a>'];
+                $data=['NAME'=>'<a href="'.route('profile',$this->authUser->username).'">'.$this->authUser->name.'</a>','POST'=>'<a href="'. route('blog.detail' , [$blogData->code,str_slug($blogData->title)]).'"> POST </a>'];
                 $userdata->notify(new Notifications($code,$data,array(),$this->authUser));
             }
              return array('status'=>true,'message'=>'success','data'=>array('comment'=>$input['comment'],'created_at'=>$input['created_at']));

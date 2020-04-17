@@ -88,7 +88,7 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
+              <li class="active"><a href="#activity" data-toggle="tab">Published Articles ({{ $timeline->total()}})</a></li>
               <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
               <li><a href="#settings" data-toggle="tab">Settings</a></li>
             </ul>
@@ -99,16 +99,16 @@
                 @foreach($timeline as $eachPost)
                 <div class="post">
                   <div class="user-block">
-                    @if($eachPost['user']['image'])
-                      <img class="profile-user-img img-responsive img-circle" src="{{ asset('uploads/user-images/'.$eachPost['user']['image']) }}" alt="User profile picture">
-                      @else
+                    @if($eachPost->image)
+                      <img class="profile-user-img img-responsive img-circle" src="{{ asset('uploads/blog/'.$eachPost->code.'/'.$eachPost->image) }}" alt="Blog image">
+                    @else
                       <img class="profile-user-img img-responsive img-circle" src="{{ asset('uploads/default-profile-icon-24.jpg/') }}" alt="User profile picture">
-                     @endif
+                    @endif
                         <span class="username">
-                          <a href="#">{{$eachPost['user']['name']}}</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                          <a href="#">{{$eachPost->title}}</a>
+                          <a href="{{route('blog.edit',[ $eachPost->id,str_slug($eachPost->title)])}}" class="pull-right btn-box-tool"><i class="fa fa-edit"></i></a>
                         </span>
-                    <span class="description">{{ $eachPost['created_at'] }}</span>
+                         <span class="description">{{ $eachPost->created_at->diffForHumans() }}</span>
                   </div>
                   <!-- /.user-block -->
                   <p>
@@ -118,9 +118,12 @@
                     <!-- <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li> -->
                     <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i>{{$eachPost['likes_count']}} Appreciate</a>
                     </li>
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-eye margin-r-5"></i>{{$eachPost['views']}} Views</a>
+                    </li>
                     <li class="pull-right">
                       <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                        ({{$eachPost['comments_count']}})</a></li>
+                        ({{$eachPost['comments_count']}})</a>
+                    </li>
                   </ul>
 
                   <!-- <input class="form-control input-sm" type="text" placeholder="Type a comment"> -->
@@ -128,16 +131,18 @@
                 @endforeach
                 @else
                 <div class="post">
-                  <!-- /.user-block -->
                   <p class="text-center">
                     <b>No Post in timeline</b>
                   </p>
-
                   <!-- <input class="form-control input-sm" type="text" placeholder="Type a comment"> -->
                 </div>
                 @endif
                 <!-- /.post -->
-
+                    <div class="box-footer clearfix">
+                      <ul class="pagination pagination-sm no-margin pull-right">
+                      {!! $timeline->links() !!}
+                      </ul>
+                    </div>
                
               </div>
               <!-- /.tab-pane -->

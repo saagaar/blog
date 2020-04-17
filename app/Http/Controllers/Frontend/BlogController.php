@@ -24,6 +24,7 @@ class BlogController extends FrontendController
         $this->blog=$blog;
     }
    	public function create(Request $request,TagInterface $tag){
+     try{
         $routeName= Route::currentRouteName();
         if($routeName=='api')
            {
@@ -32,26 +33,41 @@ class BlogController extends FrontendController
            }
            else
            {
-            if($request->method()=='POST'){
-            $validator = Validator::make($request->all(), [ 
-            'title' => 'required', 
-            'content' => 'required', 
-            ]);
-                if ($validator->fails()) {
-                    return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
-                }
-                else{
-                    $input = $request->all();
-                    $input['locale_id']='1';
-                    $input['user_id']=Auth()->user()->id;
-                    $input['anynomous'] = '2';
-                    $created = $this->blog->create($input);
-                    $code= uniqid();
-                    $part1=substr($code,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
-                    $part2=substr($code, 7,-1);
-                    $created['code']= $part1.$part2;
-                    $created->save();
-                    return response()->json(['status'=>true,'blogId'=>$created['code'],'message'=>'Blog saved succeessfully']);
+                if($request->method()=='POST'){
+                        $input = $request->all();
+                        $blogCode=$request->code;
+                        if(($request->code==null || $request->code==''))
+                        {
+
+                            $input['locale_id']='1';
+                            $input['user_id']=Auth()->user()->id;
+                            $input['anynomous'] = '2';
+                            $created = $this->blog->create($input);
+                            $code= uniqid();
+                            $part1=substr($code,0, 7).str_pad($created->id,4,0,STR_PAD_BOTH);
+                            $part2=substr($code, 7,-1);
+                            $created['code']= $part1.$part2;
+                            $created->save();
+                            $blogCode=$created['code'];
+                           
+                        }
+                        if($request->media=='yes')
+                        {
+                            $response=$this->uploadOnlyMediaForBlog(request()->image,$blogCode);
+                            return $response;
+                        }
+                        
+                           $validator = Validator::make($request->all(), [ 
+                                'title' => 'required|max:150', 
+                                'content' => 'required', 
+                            ]);
+                            if ($validator->fails()) {
+                                return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+                            }
+                            $this->blog->updateByCode($input['code'],['title'=>$input['title'],'content'=>$input['content']]);
+                        
+                 return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'BlogblogCode saved succeessfully']);
+
                 }
           }
           $data['options'] = $tag->getAll()->where('status',1)->get(['name'])->toArray();
@@ -59,6 +75,10 @@ class BlogController extends FrontendController
           $user=$this->user_state_info();
           return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
        }
+      catch(Exception $e)
+      {
+          return response()->json(['status'=>false,'message'=>'Some Error Occured.\n Please try again in a while!!']);
+      }
    	}
 
     public function resizeImage($code,$width,$name)
@@ -90,19 +110,21 @@ class BlogController extends FrontendController
            {
             if($request->method()=='POST')
             {
-                $validator = Validator::make($request->all(), [ 
-                'title' => 'required', 
-                'content' => 'required', 
+                $validator = Validator::make($request->all(), 
+                [ 
+                    'title' => 'required', 
+                    'content' => 'required', 
                 ]);
                 
-                    if ($validator->fails()) {
-                        return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
-                    }else{
-                            $input = $request->all();
-                            $this->blog->updateByCode($blogCode,$input);
-                            return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'Blog Saved!']);
-                    }
-                    } 
+                if ($validator->fails()) {
+                    return response()->json(['status'=>false,'data'=>'','message'=>$validator->errors()], 401);            
+                }
+                else{
+                        $input = $request->all();
+                        $this->blog->updateByCode($blogCode,['title'=>$input['title'],'content'=>$input['content']]);
+                        return response()->json(['status'=>true,'blogId'=>$blogCode,'message'=>'Blog Saved!']);
+                }
+            } 
             $initialState=json_encode($data);
             $user=$this->user_state_info();
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
@@ -143,15 +165,14 @@ class BlogController extends FrontendController
                             if($check)
                             {
                                 $dir=public_path().'/uploads/blog/'.$postId.'/';
-                                if ($blogData->image != '' && File::exists($dir,$blogData->image))
+                                if(!is_dir($dir))
                                 {
-                                     File::deleteDirectory($dir);
+                                    File::makeDirectory($dir, 0777, true, true);
                                 }
-                                File::makeDirectory($dir, 0777, true, true);
                                 $tmpImg =request()->image->move($dir,$imageName);
                                 $img = Image::make($tmpImg);
                                 list($width,$height) = getimagesize($tmpImg);       
-                                    $img->resize(1000,null, function ($constraint) 
+                                    $img->resize(700,null, function ($constraint) 
                                     {
                                     $constraint->aspectRatio();
                                      })->save($dir.'/'.$uniq.'.'.$extension);            
@@ -160,6 +181,7 @@ class BlogController extends FrontendController
                                  $constraint->aspectRatio();
                                 }
                                 )->save($dir.'/'.$uniq.'-thumbnail.'.$extension);
+
                                 $form['image'] = $imageName;
                             }else{
                                 return response()->json(['status'=>false,'data'=>'','message'=>'The image file type must be:jpeg,png,jpg,gif,svg'], 401);
@@ -176,6 +198,14 @@ class BlogController extends FrontendController
                         $this->blog->updateByCode($postId,$form);
                         $tagid = $tag->getTagByName($request->tags);
                         $this->blog->addTag($postId,$tagid);  
+                        if($blogData->image!=null || $blogData->image!='' )
+                        {
+                            $partsOldImage=explode('.',$blogData->image);
+                            @$thumbimage=$partsOldImage[0].'-thumbnail.'.$partsOldImage[1];
+                            @unlink($dir.'/'.$blogData->image);
+                            @unlink($dir.'/'.$thumbimage);
+                        }
+                        
                         return response()->json(['status'=>true,'blogId'=>$postId,'message'=>'Blog updated successfully']);                
                     }
             }
@@ -200,10 +230,9 @@ class BlogController extends FrontendController
     }
 
     public function delete($blogCode){
-       
         $blogData = $this->blog->getBlogByCode($blogCode);
         $data['blog'] = $blogData;
-         $this->authorize('deleteBlog', $data['blog']);
+        $this->authorize('deleteBlog', $data['blog']);
         if( $blogData)
         {
             $dir = public_path(). '/uploads/blog/'.$blogData->code.'/';
@@ -214,7 +243,61 @@ class BlogController extends FrontendController
             $blogData->delete();
             return response()->json(['status'=>true,'data'=>'','message'=>'Blog Deleted successfully']);
         }
-        return response()->json(['status'=>false,'data'=>'','message'=>'Something went wrong!!']);
+       return response()->json(['status'=>false,'data'=>'','message'=>'Something went wrong!!']);
+    }
 
+    private function uploadOnlyMediaForBlog($image,$code)
+    {
+        try
+        {
+             if(!($image || $code) ) throw new Exception("Error Processing Request", 1);
+                $uniqId = time();
+                $extension = $image->getClientOriginalExtension();
+                $imageName = $uniqId.'.'.$extension; 
+                $allowedFileExtension=['jpg','png','jpeg','gif','svg'];
+                $check=in_array($extension,$allowedFileExtension);
+                if($check)
+                {
+                    $dir=public_path().'/uploads/blog/'.$code.'/';
+                    if(!is_dir($dir))
+                    {
+                        File::makeDirectory($dir, 0777, true, true);
+                    }
+                    $tmpImg =$image->move($dir,$imageName);
+                    $img = Image::make($tmpImg);
+                    list($width,$height) = getimagesize($tmpImg);    
+                    if($width > 1000 && $height < 1000)
+                    {                  
+                        $img->resize(700,null, function ($constraint) 
+                        {
+                        $constraint->aspectRatio();
+                         })->save($dir.'/'.$uniqId.'.'.$extension);            
+                    }
+                    else if($width < 1000 && $height > 1000)
+                    {
+                         $img->resize(null,600, function ($constraint) 
+                        {
+                        $constraint->aspectRatio();
+                         })->save($dir.'/'.$uniqId.'.'.$extension);
+                    } 
+                    else if($width < 1000 && $height > 1000)
+                    {
+                         $img->resize(null,600, function ($constraint) 
+                        {
+                        $constraint->aspectRatio();
+
+                         })->save($dir.'/'.$uniqId.'.'.$extension);
+                    }       
+                    $form['image'] = $imageName;
+                    return response()->json(['status'=>true,'url'=>url('/uploads/blog/'.$code.'/'.$imageName),'code'=>$code]);
+                }
+                else{
+                    return response()->json(['status'=>false,'data'=>'','message'=>'The image file type must be:jpeg,png,jpg,gif,svg'], 401);
+                }
+        }
+        catch(Exception $e)
+        {
+             return response()->json(['status'=>false,'data'=>'','message'=>'Something went wrong!! while uploading file']);
+        }
     }
 }

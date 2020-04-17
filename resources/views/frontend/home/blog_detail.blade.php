@@ -5,7 +5,7 @@
 @endphp
 	<div class="mid_part">
         @section('meta_url',config('settings.url').'/blog/detail/'. $blogDetails->code.'/'.str_slug($blogDetails->title))
-        @section('meta_title',$blogDetails->title.' | By '.$author. ' | ' .config('settings.site_name') )
+        @section('meta_title',$blogDetails->title.' | By '.$author) )
         @section('meta_description',$blogDetails->short_description)
         @section('meta_image',asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image))
         @if(isset($seo))
@@ -23,23 +23,24 @@
      @section('meta_keyword',trim($keywords,','))
         <meta type="hidden" name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
         <!--================Blog Area =================-->
-    <section class="blog_area single-post-area">
+    <section class="blog_area single-post-area ">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 posts-list pad-right-0">
-                    <div class="white-box single-post">
+                    <div class="white-box single-post ">
+                    <div class="row ck-content">
+                     <div class="col-lg-12">
                         <div class="feature-img">
                             @if($blogDetails->image)
                                   <!-- <img class="img-fluid " src="{{ asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image) }}"  alt=""> -->
 
                                    <img class="img-fluid  image-placeholder blur" src="{{ '/image/'.$blogDetails->code.'/10/'.$blogDetails->image }}" data-src="{{ '/image/'.$blogDetails->code.'/500/'.$blogDetails->image }}" alt="" style="min-width: 100%">
-
                             @else
                                  <img class="img-fluid" src="{{ asset('/frontend/images/elements/default-post.jpg') }}" alt="">
 
                             @endif
                         </div>
-                        <div class="blog_details" >
+                        <div class="blog_details " >
                             <div class="meta-top d-flex"><a href="#"><i class="far fa-user"></i>  
                                 @php
                                echo  ($blogDetails->anynomous=='2') ? (isset($blogDetails->user->name)  ? '<a href="/profile/'.$blogDetails->user->username.'"> '. $blogDetails->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
@@ -77,6 +78,8 @@
                             	{!! $blogDetails->content !!}
                             </p>
                         </div>
+                        </div>
+                    </div>
                     </div>
                     <div class="white-box  navigation-top">
                         <div class="d-sm-flex justify-content-between text-center">

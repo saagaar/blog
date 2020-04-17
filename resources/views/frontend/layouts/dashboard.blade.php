@@ -6,10 +6,18 @@
 </script>
 @if(auth()->user() && isset($user))
 <script type="text/javascript">
-     window.__USER_STATE__ = '{!! addslashes(json_encode($user)) !!}'
      window.__NOTIFICATION__ = '{!! addslashes(json_encode($user["notifications"])) !!}'
 </script>
+
 @endif
+
+    @if($user)    
+        @section('meta_url',url()->current())
+        @section('meta_description',$user['bio'])
+        @section('meta_title','Profile: '.$user['name'].'- TheBloggersClub.com')
+        @section('meta_image',asset('uploads/user-images/'.$user['image']))
+    @endif
+
 <!--================ Start Meta Elements and includes=================-->
 @include('frontend.common.header')
 <!--================ End of Meta Elements and includes=================-->
@@ -31,7 +39,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip()
+         $('[data-toggle="tooltip"]').tooltip()
     });
 </script>
 </body>

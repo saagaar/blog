@@ -85,7 +85,6 @@ class HomeController extends FrontendController
 
     public function index(Request $request)
     {
-
          $this->seo = app()->make('App\Repository\SeoInterface');
          $seo =array();
          $seo = $this->seo->getSeoBySlug('home');
@@ -123,6 +122,7 @@ class HomeController extends FrontendController
           }
         return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo,'savedBlog'=>$savedBlog,'userLiked'=>$liked,'seo'=>$seo));
     }
+
     public function blogDetail($code,$slug,Request $request){
      $this->seo = app()->make('App\Repository\SeoInterface');
      $seo =array();
@@ -162,6 +162,7 @@ class HomeController extends FrontendController
         }
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory,'totalShare'=>$totalShare));
     }
+
     public function resizeImage($code,$width,$name)
     {
         $imagePath=public_path(). '/uploads/blog/'.$code.'/'.$name;
@@ -175,6 +176,7 @@ class HomeController extends FrontendController
         }
         abort(404);
     }
+
     public function categoryListing(UserInterestInterface $userInterest)
     {
       $this->seo = app()->make('App\Repository\SeoInterface');
@@ -201,6 +203,7 @@ class HomeController extends FrontendController
         }
         return view('frontend.home.category',['initialState'=>$data,'user'=>$user])->with(array('allCategory'=>$allCategories,'navCategory'=>$navCategory,'seo'=>$seo));
     }
+
     public function blogByCategory($slug,UserInterestInterface $userInterest){
        $this->seo = app()->make('App\Repository\SeoInterface');
       $seo =array();
@@ -244,6 +247,7 @@ class HomeController extends FrontendController
         }
        return view('frontend.home.blog_listing_by_category',['initialState'=>$data,'user'=>$user])->with(array('blogByCategory'=>$blogByCategory,'totalBlogsCount'=>$blogCountinCategory,'category'=>$category,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteLogo,'userCategory'=>$categories,'likes'=>$likes,'savedBlog'=>$savedBlog,'userLiked'=>$liked,'seo'=>false));
     }
+    
     public function getBlogByCategory($slug=false,Request $request){
       try
       {

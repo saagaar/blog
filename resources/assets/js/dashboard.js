@@ -19,7 +19,7 @@ Vue.use({
     }
 });
 
-
+ 
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
 Vue.component('pagination', require('laravel-vue-pagination'));

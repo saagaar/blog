@@ -29,10 +29,12 @@
       <link rel="apple-touch-icon" sizes="152x152" href="{{url('frontend/images/fav-ico')}}/apple-icon-152x152.png">
       <link rel="apple-touch-icon" sizes="180x180" href="{{url('frontend/images/fav-ico')}}/apple-icon-180x180.png">
   
-    <link rel="stylesheet" href="{{ asset('frontend/css/app.css') }}">    
-    <link rel="stylesheet" href="{{ asset('landing-page/assets/css/fontawesome-all.css') }}">    
+      <link rel="stylesheet" href="{{ asset('frontend/css/app.css') }}">  
+       <link rel="stylesheet" href="{{ asset('frontend/css/ckeditor-styles.css') }}">    
+      <link rel="stylesheet" href="{{ asset('landing-page/assets/css/fontawesome-all.css') }}">    
 
-
+      <script charset="utf-8" src="//cdn.iframe.ly/embed.js?api_key=19eb991771c7d0f944828f"></script>
+       
       <meta name="keywords" content="@yield('meta_keyword','Blogs,bloggers blog,Bloggers Club,Online Blogging Platform,Categories for blog posts,Categories for blog,Blog with categories')">
       <meta name="title" content="@yield('meta_title','The Bloggers Club-an online blogging platform for independent voices.')">
       <meta name="url" content="@yield('meta_url',config('settings.url'))">
@@ -61,13 +63,13 @@
       <meta name="twitter:title" content="@yield('meta_title','The Bloggers Club-an online blogging platform for independent voices.')"/>
       <meta name="twitter:description" content="@yield('meta_description','Bloggers Club is an online blogging platform for posting your unique,creative articles in different categories and for those who loves to learn innovative things and express their words in order to link with the world.')" /> 
       <meta name="twitter:image:src" content="@yield('meta_image')" /> 
-        
-    @if($seo && isset($seo) && is_array($seo) && count($seo)>0 && $seo->schema1!='')
+  
+    @if(isset($seo) && is_array($seo) && count($seo)>0 && $seo->schema1!='')
       <script type="application/ld+json">
         {!! $seo->schema1 !!}
       </script>
     @endif
-    @if($seo &&  isset($seo) &&  is_array($seo) && count($seo)>0 && $seo->schema2!='')
+    @if(isset($seo) &&  is_array($seo) && count($seo)>0 && $seo->schema2!='')
       <script type="application/ld+json">
         {!! $seo->schema2 !!}
       </script>

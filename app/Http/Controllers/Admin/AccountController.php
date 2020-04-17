@@ -113,7 +113,6 @@ class AccountController extends AdminController{
                 {
                     $validatedData['image'] = $accounts->image;
                 }
-            print_r($validatedData);exit;
             $accounts->update($validatedData);
             $roles = $request->input('roles') ? $request->input('roles') : [];
             $accounts->syncRoles($roles);  
@@ -133,10 +132,12 @@ class AccountController extends AdminController{
                 'All Accounts' => route('account.list'),
                 'current_menu'=> 'Members Details',
                   ]];
-          $countries = Countries::All();
+        $countries = Countries::All();
         $accounts =$this->account->getByUserId($id);  
+      
         $this->blog = app()->make('App\Repository\BlogInterface');     
-        $timeline =$this->blog->getBlogOfFollowingUser($accounts);
+        $timeline =$this->blog->getBlogByUserId($id)->paginate(10);
+    
         $allRoles = $this->roles->getAll()->get();
         $notification =$this->account->getUsersNotification($accounts);
         return view('admin.account.detail')->with(array('account'=>$accounts,'countries'=>$countries,'breadcrumb'=>$breadcrumb,'primary_menu'=>'account.list','timeline'=>$timeline,'roles'=>$allRoles,'notification'=>$notification));

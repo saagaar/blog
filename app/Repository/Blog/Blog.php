@@ -62,10 +62,10 @@ Class Blog implements BlogInterface
     return $this->blog->whereIn('id', $blogIds)->get()->pluck('code');
   }
   public function getAllFeaturedBlog($limit=10,$offset=0){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('tags')->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    return $this->blog->where(['featured'=> 1,'save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('tags','user')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
   public function getAllFeaturedForMember($limit=10,$offset=0){
-    return $this->blog->where(['featured'=> 1,'save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('tags')->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    return $this->blog->where(['featured'=> 1,'save_method'=>2,'show_in_home'=>1])->with('tags','user')->orderBy('created_at','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
    /**
    * get blog for most view
@@ -77,11 +77,11 @@ Class Blog implements BlogInterface
    * get latest blog 
    */
   public function getLatestAllBlog($limit=10,$offset=0){
-    return $this->blog::with('user:id,username')->where(['save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('user','likes')->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->orderBy('created_at','DESC')->with('user','likes')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
 
   public function getPopularBlog($limit=10,$offset=0){
-    return $this->blog::with('user:id,username')->where(['save_method'=>2,'show_in_home'=>1])->orderBy('likes_count','DESC')->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->orderByRaw('2*likes_count+views Desc')->with('user')->withCount('likes','comments')->take($limit)->skip($offset)->get();
   }
   /**
    * get blog bye following
@@ -128,7 +128,7 @@ Class Blog implements BlogInterface
    * @param int
    */
   public function getBlogByUserId($userid){
-    return  $this->blog::with('user:id,username')->withCount('likes','comments')->where('user_id', $userid)->orderByDesc('id');
+    return  $this->blog::with('user:id,username,name')->withCount('likes','comments')->where('user_id', $userid)->orderByDesc('id');
   }
 
   public function countAllBlogUser(){

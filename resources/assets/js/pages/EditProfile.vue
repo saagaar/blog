@@ -169,7 +169,7 @@ import Form from './../services/Form.js';
             EmailEdit,
             ChangePassword,
             DobEdit,
-            ProfileImage
+            // ProfileImage
         },
     }
 </script>
