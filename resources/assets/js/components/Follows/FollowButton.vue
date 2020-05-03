@@ -93,7 +93,6 @@ let action='';
           
         	toggleFollow:function(){
               this.isLoading=true;
-              console.log(this.isFollowing);
         		if(!this.isFollowing)
         			action='api/followuser/'+this.username+'/'+this.followSuggestionHead;
         		else 
@@ -116,7 +115,6 @@ let action='';
                               this.$store.commit('DECREMENT_FOLLOWING_COUNT', 1);
                             }
                               this.isFollowing=false;
-                              console.log(this.isFollowing);
 
                           }
 		               	        this.$emit('clicked',this.username,response.data.message);

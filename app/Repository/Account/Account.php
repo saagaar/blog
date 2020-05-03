@@ -101,16 +101,16 @@ Class Account implements AccountInterface
     }
 
     public function getUsersNotification($user,$limit=10,$offset=0){
-        return $user->unreadNotifications()->orderBy('id','DESC')->union($user->readNotifications())->limit($limit)->offset($offset)->get();
+       return $user->Notifications()->orderBy('created_at','DESC')->limit($limit)->offset($offset)->get();
     }
 
 
 
     public function markNotificationsToRead($notifications){
-        return $notifications->markAsRead();
+        // return $notifications->markAsRead();
     }
     public function countUnreadNotifications($user){
-        return $user->unreadNotifications()->count();
+        // return $user->unreadNotifications()->count();
     }
 }
 ?>

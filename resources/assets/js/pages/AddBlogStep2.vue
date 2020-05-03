@@ -201,14 +201,21 @@ import Form from './../services/Form.js';
               this.$v.form.$touch();
               if(!this.$v.form.$invalid)
               {
-                this.form.post('/blog/edit/'+this.$route.params.blogId+'/step2').then(response => {
+                 this.form.post('/blog/edit/'+this.$route.params.blogId+'/step2').then(response => {
                  if(response.data.status){
                    curObject.$store.commit('SETFLASHMESSAGE',{status:true,message:response.data.message});
                    curObject.$store.commit('TOGGLE_LOADING');
-                   this.$router.push({path : '/blog/list'});
+                   if(this.form.save_method=='2')
+                   {
+                      this.$router.push({path:'/profile'});
+                   }
+                   else
+                   {
+                      this.$router.push({path : '/blog/list'});
+                   }
                  }
                  else{
-                   curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
+                    curObject.$store.commit('SETFLASHMESSAGE',{status:false,message:response.data.message});
                     curObject.$store.commit('TOGGLE_LOADING');
                  }
                 }).catch(e => {

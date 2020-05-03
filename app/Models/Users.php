@@ -42,7 +42,7 @@ class Users extends Authenticatable implements Auditable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-     public function setPasswordAttribute($input)
+    public function setPasswordAttribute($input)
     {
         if ($input)
             $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
@@ -103,6 +103,7 @@ class Users extends Authenticatable implements Auditable
     {
         return $this->hasMany(SaveBlogs::class,'user_id');
     }
+
     /**
     Password reset customize email
     */

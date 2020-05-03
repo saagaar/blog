@@ -1539,7 +1539,9 @@ body.mobile-nav-active #mobile-nav-toggle {
   .blog_details p {
     margin-bottom: 30px; }
   .blog_details a {
-    color: #2a2a2a; }
+    color: #1b6ca2; 
+    font-weight: 600
+  }
     .blog_details a:hover {
       color: #008dec; }
   .blog_details h2 {

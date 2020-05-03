@@ -34,7 +34,6 @@ export default {
     {
 
       this.$store.commit('TOGGLE_LOADING');
-      console.log(data);
       this.$data.initialState=data;
     });
   }

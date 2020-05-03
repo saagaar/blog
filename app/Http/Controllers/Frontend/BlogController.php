@@ -149,7 +149,7 @@ class BlogController extends FrontendController
             if($request->method()=='POST'){
                 $validator = Validator::make($request->all(), [ 
                 'short_description' => 'required',
-                'tags'              =>'required' ,
+                'tags'              =>'' ,
                 // 'image'             => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
                 

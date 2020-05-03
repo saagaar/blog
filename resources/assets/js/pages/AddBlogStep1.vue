@@ -225,7 +225,6 @@ import Form from './../services/Form.js';
                             'superscript',
                             'subscript',
                             'undo',
-                            'redo',
                             'NumberedList',
                             'bulletedList',
                             'blockquote',
@@ -237,7 +236,8 @@ import Form from './../services/Form.js';
                             'alignment',
                             'imageUpload',
                             'mediaEmbed',
-                            'insertTable'
+                            'insertTable',
+                            'link'
                         ]
                     },
                      blockToolbar: [

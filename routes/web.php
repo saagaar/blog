@@ -101,12 +101,11 @@ Route::get('/api/getfollowings/{user}','Frontend\UserController@getFollowings')-
 
 
 Route::get('/test/{code}', 'Frontend\UserInteractionController@testinglike')->name('test');
-Route::get('/blog','Frontend\HomeController@index')->name('home');
 Route::post('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
 Route::post('/blog/detail/share','Frontend\HomeController@share')->name('share');
 
 // Route::get('/tests', 'Frontend\UserInteractionController@testinglike')->name('test');
-Route::get('/blogs','Frontend\HomeController@index')->name('home');
+Route::get('/home','Frontend\HomeController@index')->name('home');
 
 
 Route::get('/dashboard/{provider}','Frontend\LoginController@dashboard')->name('dashboard');
@@ -152,22 +151,12 @@ Route::get('/followers/{username}','Frontend\UserController@followers')->name('f
 Route::get('users/notifications','Frontend\UserController@notifications')->name('user.notification');
 Route::get('api/users/notifications','Frontend\UserController@notifications')->name('api');
 Auth::routes();
-
 Route::get('/logout/{guard}', 'Controller@logout')->name('logout');
-
 Auth::routes(['register' => false]);
-
-
 Route::get('/admin/dashboard', 'Admin\AdminController@dashboard')->name('admin.dashboard');
-
-
-
-    Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
-	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
+Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
+Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
     //admin users
-
-
-
 	Route::get('admin/login', 'Admin\AdminLoginController@ShowLoginForm')->name('admin.login');
 	Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 

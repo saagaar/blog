@@ -20,10 +20,10 @@ class Notifications extends Model
      * @var array
      */
     protected $fillable = [
-        'type','notifiable_type','notifiable_id','data'
-        ];
+        'type','notifiable_type','notifiable_id','data','sender_id'
+    ];
     protected $hidden=[
-        'id','notifiable_id','type','notifiable_type'
+        'id','notifiable_id','type','notifiable_type','sender_id'
     ];
 
   

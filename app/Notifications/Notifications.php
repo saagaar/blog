@@ -18,7 +18,7 @@ class Notifications extends Notification implements ShouldQueue
 
     protected $systemEmail;
     protected $receiverInfo;
-    protected$additionalData;
+    protected $additionalData;
     /**
      * All notification Channels to list
      * 
@@ -92,11 +92,10 @@ class Notifications extends Notification implements ShouldQueue
         $body=$this->parseNotificationBody($this->notification->database_body);
         return 
         [
-             'message'=>$body,
-             'user'    =>$this->receiverInfo
+             'message'  =>$body,
+             'user'     =>$this->receiverInfo,
         ];
     }
-
     public function toSms($notifiable)
     {
         $body=$this->parseNotificationBody($this->notification->database_body);
@@ -105,7 +104,6 @@ class Notifications extends Notification implements ShouldQueue
              'message'=>$body
         ];
     }
-
      //to parse the the email which is available in the
     private function parseNotificationBody($text_string)
     {

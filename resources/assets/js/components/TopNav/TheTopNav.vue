@@ -4,8 +4,8 @@
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-3 logo-wrapper">
-                    <a href="/blog" class="logo">
-                        <img :src="'/uploads/sitesettings-images/'+me.websiteLogo" alt="">
+                    <a href="/home" class="website-logo">
+                        <img :src="'/uploads/sitesettings-images/'+me.websiteLogo" alt="website-logo">
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 col-9 search-trigger">

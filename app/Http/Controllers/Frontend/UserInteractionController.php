@@ -79,10 +79,10 @@ class UserInteractionController extends FrontendController
     }
     public function contactForm(Request $request,ContactInterface $contact){
             $request->validate([
-            'name' => 'required',
-            'email'=>'required',
-            'phone'=>'required',
-            'message'=>'required'
+                'name' => 'required',
+                'email'=>'required',
+                'phone'=>'required',
+                'message'=>'required'
             ]);
             $input = $request->all();
             $date =date_create();
@@ -181,10 +181,5 @@ class UserInteractionController extends FrontendController
                 return array('status'=>true,'message'=>'Subscribed successfully','data'=>'');
             }
     }
-    public function testinglike($code){
-        $user = app()->make('App\Repository\AccountInterface');
-        $blogdata = $this->userInteraction->getLikeByBlog($code);
-        echo "<pre>";
-    	print_r($blogdata->user->username);
-    }
+   
 }

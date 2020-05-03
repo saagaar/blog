@@ -6,8 +6,8 @@
                 <li>
                   <ul class="allnotificationlist" >
                       <li  v-for="eachNotifications in allNotifications" class="media" :class="[eachNotifications.read_at ? '':'unreadnotification']" >
-                      <a href="#"><ProfileImageNotification :username="eachNotifications.data.user.username"></ProfileImageNotification> </a><p class="media-body" v-html="eachNotifications.data.message">
-                      <b class="mt-0 mb-1">2 days ago</b></p>
+                        <a href="#">  <img class="mr-3" :src="getProfileUrl(eachNotifications.data.user.image)" alt="Profile Picture"> </a><p class="media-body" v-html="eachNotifications.data.message">
+                        <b class="mt-0 mb-1">2 days ago</b></p>
                       </li>
 
                       <!--  <li v-else>
@@ -85,10 +85,10 @@ export default {
                  this.$store.commit('SETFLASHMESSAGE',{status:false,message:e.message});
               });
         },
-        notifications(){
-          // let notifications=JSON.parse(window.__NOTIFICATION__) || {};
-          // return notifications;
-        },
+         getProfileUrl(url){
+              
+              return this.$helpers.getProfileUrl(url);
+           },
        
 
     },

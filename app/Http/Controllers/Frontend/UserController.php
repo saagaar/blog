@@ -265,7 +265,7 @@ class UserController extends FrontendController
       }
     }
     public function followUser($username,$offset=false)
-    {
+    { 
         $isFollowing=$this->followerList->isFollowingByUsername($this->authUser,$username);
          if(!($isFollowing))
          {
@@ -410,7 +410,6 @@ class UserController extends FrontendController
             $limit=$this->apiPerPage;;
             $offset=$limit*$request->post('page');
             $data['notifications']=$this->user->getUsersNotification($this->authUser,$limit,$offset);
-           
             $this->user->markNotificationsToRead($data['notifications']);
             $data['unReadNotificationsCount']=$this->user->countUnreadNotifications($this->authUser) ;
             return array('status'=>true,'data'=>$data,'message'=>'Success');
