@@ -52,14 +52,14 @@ class AdminLoginController extends Controller
         $this->validate($request,[
         		'email'	=>	'required',
         		'password'=>'required|min:6'
-        	]);
+        ]);
          $data = $this->admin->getByEmail($request->email); 
      //Attempt for user login
     if(Auth::guard('admin')->attempt(['email'=>$request->email,'password'=>$request->password,'status'=>'1'],$request->remember))
     {
       $data->where('email',$request->email)->update(array('invalid_login'=>'0'));
     	return redirect()->intended(route('admin.dashboard'));
-	 }
+	  }
     if($data->status=='1'){
       if($data->invalid_login<4){
             $count = $data->invalid_login;

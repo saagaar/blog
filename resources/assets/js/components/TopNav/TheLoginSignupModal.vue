@@ -17,6 +17,7 @@
         </div>
         <div class="d-flex flex-column text-center">
           <form method="post">
+          @csrf
            <div class="form-group"  :class="{ 'form-group--error': $v.signUpForm.email.$error }" >
               <input type="email" class="form-control form__input"  @blur="$v.signUpForm.email.$touch()" v-model.trim="signUpForm.email"  placeholder="Your email address...">
               <div v-if="$v.signUpForm.email.$anyDirty">

@@ -16,9 +16,10 @@ class AdminPermissions extends Model
     protected $fillable = [
         'name','controller','namespace','status','display_order','method','route_name'
     ];
+   
     public function adminRoles()
     {
-        return $this->belongsToMany(AdminRoles::class)->using(AdminRolePermissions::class);
+         return $this->belongsToMany(AdminRoles::class,'admin_role_permissions','role_id','permission_id');
     }
  
 }

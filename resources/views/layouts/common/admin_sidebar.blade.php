@@ -28,6 +28,8 @@
   <!-- /.search form -->
   @inject('viewService', 'App\Services\ViewService')
 
+
+
   <!-- Sidebar Menu -->
   <ul class="sidebar-menu" data-widget="tree">
     <li @if($primary_menu=="dashboard.list") class="header" @endif>Dashboard</li>
@@ -82,9 +84,9 @@
                   <small class="label pull-right bg-red">{{$viewService->getGeneralCount()['activeTagsCount']}}</small>
               </span>
             </a>
-         
+             </li>
           </ul>
-      </li>
+     
       <li @if($primary_menu=="seo.list") class="active" @endif><a href="{{route('seo.list')}}"><i class="fa fa-search"></i> <span>SEO</span></a>   
     </li>
       <li @if($primary_menu=="cms.list") class="active" @endif><a href="{{route('cms.list')}}"><i class="fa fa-chain"  aria-hidden="true"></i> <span>CMS</span></a></li> 
@@ -103,26 +105,26 @@
         <li @if($primary_menu=="client.list") class="active" @endif><a href="{{route('client.list')}}"><i class="fa fa-user"  aria-hidden="true"></i> <span>Client</span></a>  </li> 
          
           <li @if($primary_menu=="language.list") class="active" @endif><a href="{{route('language.list')}}"><i class="fa fa-language"  aria-hidden="true"></i> <span>Language</span></a>    </li> 
-    <li @if($primary_menu=="category.list") class="active" @endif><a href="{{route('adminblogcategory.list')}}"><i class="fa  fa-paint-brush"></i><span>Category</span></a></li>
+        <li @if($primary_menu=="category.list") class="active" @endif><a href="{{route('adminblogcategory.list')}}"><i class="fa  fa-paint-brush"></i><span>Category</span></a></li>
 
      
-    <li @if($primary_menu=="websitelog.list") class="active" @endif><a href="{{route('websitelog.list')}}"><i class="fa fa-history"></i> <span>Website Logs</span></a>
+       <li @if($primary_menu=="websitelog.list") class="active" @endif><a href="{{route('websitelog.list')}}"><i class="fa fa-history"></i> <span>Website Logs</span></a>
   
      
-    <li @if($primary_menu=="audit.list") class="active" @endif><a href="{{route('audit.list')}}"><i class="fa fa-search"></i> <span>Audit Management</span></a>   
+       <li @if($primary_menu=="audit.list") class="active" @endif><a href="{{route('audit.list')}}"><i class="fa fa-search"></i> <span>Audit Management</span></a>   
     </li>
 
-   <li  class="treeview">
-      <a href=""><i class="fa fa-image"></i> <span>Gallery</span>
-      <span class="pull-right-container">
-      <i class="fa fa-angle-left pull-right"></i>
-      </span>
-      </a>
-          <ul class="treeview-menu">
-            <li  @if($primary_menu=="gallerycat.list") class="active" @endif><a href="{{route('gallerycategory.list')}}"><i class="fa fa-folder"></i> Gallery Category</a></li>
-            <li  @if($primary_menu=="gallery.list") class="active" @endif><a href="{{route('gallery.list')}}"><i class="fa fa-image"></i> Gallery</a></li>
-         
-          </ul>
+     <li  class="treeview">
+        <a href=""><i class="fa fa-image"></i> <span>Gallery</span>
+        <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+        </span>
+        </a>
+            <ul class="treeview-menu">
+              <li  @if($primary_menu=="gallerycat.list") class="active" @endif><a href="{{route('gallerycategory.list')}}"><i class="fa fa-folder"></i> Gallery Category</a></li>
+              <li  @if($primary_menu=="gallery.list") class="active" @endif><a href="{{route('gallery.list')}}"><i class="fa fa-image"></i> Gallery</a></li>
+           
+            </ul>
       </li>
         <li @if($primary_menu=="blocklist.list") class="active" @endif><a href="{{route('blocklist.list')}}"><i class="fa fa-server"></i> <span>IP Block List</span></a>   
     </li>

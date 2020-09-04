@@ -14,11 +14,11 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function logout($guard='backenduser')
+    public function logout($guard='admin')
     {
         Auth::logout();
         Session::flush();
-        if($guard=='backenduser')
+        if($guard=='admin')
        	 return (redirect()->route('admin.login'));
         else 
             return 

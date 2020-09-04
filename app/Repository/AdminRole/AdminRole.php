@@ -53,5 +53,9 @@ Class  AdminRole implements AdminRoleInterface
     public function delete($id){
       return	$this->role->find($id)->delete();
     }
+
+    public function getPermissionsByRole($roleid){
+      return $this->role->with('adminPermissions')->where('id',$roleid)->first();
+    }
 }
 ?>

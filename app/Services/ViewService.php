@@ -21,4 +21,14 @@ class ViewService
                         'activeRolesCount'     => $rolesCount
                    ];
     }
+
+    public function getAdminPermissions()
+    {
+         $roleInterface = app()->make('App\Repository\AdminRoleInterface');
+         $roleId=Auth::guard('admin')->user()->role_id;
+         $role= $roleInterface->getPermissionsByRole($roleId)->toArray();
+         $permissions=($role['admin_permissions']);
+         $filtered = array_pluck($permissions,'route_name');
+         return $filtered;
+    }
 }

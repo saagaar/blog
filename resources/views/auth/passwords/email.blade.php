@@ -39,8 +39,8 @@
                         <label for="my-email" class="sr-only">Email</label>
                         <input id="my-email" class="form-control input-group-lg" type="text" name="email" title="Enter Email" placeholder="Your Email" value="{{ old('email') }}"/>
                         @if ($errors->has('email'))
-                                        <p class="help is-danger">{{ $errors->first('email') }}</p>
-                                    @endif
+                            <p class="help is-danger">{{ $errors->first('email') }}</p>
+                        @endif
                       </div>
                     </div>
                   

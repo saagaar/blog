@@ -23,9 +23,10 @@ class AdminRoles extends Model implements Auditable
     public function adminUser(){
         return $this->belongsTo(AdminUsers::class);
     }
+  
     public function adminPermissions()
     {
-        return $this->belongsToMany(AdminPermissions::class)->using(AdminRolePermissions::class);
+        return $this->belongsToMany(AdminPermissions::class,'admin_role_permissions','role_id','permission_id');
     }
    
 }

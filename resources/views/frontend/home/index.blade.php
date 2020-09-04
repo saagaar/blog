@@ -1,6 +1,5 @@
 @extends('frontend.layouts.app')
 @section('content')
- 
 <section class="fullwidth-block area-padding-bottom"> 
     @if($seo)
         @section('meta_url',config('settings.url').'/home')
@@ -15,7 +14,6 @@
   <span class="sr-only">Loading...</span>
 </div>
 
- @if(count($featuredBlog) >=4)
  <!--================Fullwidth block Area =================-->
     <section class="fullwidth-block area-padding-bottom area-padding-top">
         <div class="container"> 
@@ -126,54 +124,8 @@
            
         </div>
     </section>
-    {{--
-    Section when blog count is less then 4
-    --}}
- @else
- <section class="hero-section" id="home" style="background-image: url(landing-page/assets/images/hero-area/banner-bg.png);">
-  <div class="container">
-    <div class="row">
-    
-         <div class="col-lg-12 text-center">        
-        <h1 class="mb-3">It's So easy to get started</h1>
-        <p class="mb-4"> </p>
-        @if(\Auth::check()):
-        <a href="/blog/add" class="btn btn-secondary btn-lg mb-5">Create a post</a>
-        @else
-        <login-button class="btn btn-secondary btn-lg mb-5"></login-button>
-        <!-- <a href="/blog/add" class="btn btn-secondary btn-lg mb-5">Login</a> -->
-        @endif
+   
 
-         <h2 class="section-title">Share your story to the world.</h2>
-        <p class="mb-4"> <b style="font-weight: 300px">One</b> small story has potential to change  <b style="font-weight: 300px">Millions </b> of people.</p>
-        <!-- banner image -->
-        <h4> Select one of 100s topics you are enthusiast about!!</h4>
-         <newsletter></newsletter>
-         <div class="clearfix"></div>
-      </div>
-      <!-- <img class="img-fluid" src="landing-page/assets/images/hero-area/banner.png" alt="banner-img">    -->
-    </div>
-  </div>
-</section>
-<section class="section-lg seo" id="about-us">
-  <div class="container">
-    <div class="row"> 
-        <div class=" col-md-8 offset-md-2 offset-md-2 order-2 order-md-1">
-       
-     
-        <!-- <p> It is easy to use and manage your blog without any specific technical skills. You can reach an existing online community of people with similar interests and build a fan base.</p> -->
-      </div>
-     
-    </div>
-  </div>
-  <!-- background image -->
-  
-  <!-- background-shape -->
-  <img class="seo-bg-shape-1" src="landing-page/assets/images/background-shape/seo-ball-1.png" alt="bg-shape">
-  <img class="seo-bg-shape-2" src="landing-page/assets/images/background-shape/seo-half-cycle.png" alt="bg-shape">
-  <img class="seo-bg-shape-3" src="landing-page/assets/images/background-shape/seo-ball-2.png" alt="bg-shape">
-</section>
- @endif
 
 
     <!--================Fullwidth block Area end =================-->
@@ -436,7 +388,7 @@
       <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                      <!--   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-9412996680861033"
@@ -445,10 +397,10 @@
                          data-full-width-responsive="true"></ins>
                     <script>
                          (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                    </script> -->
                 </div>
                   <div class="col-lg-6 col-md-6">
-                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                 <!--  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-9412996680861033"
@@ -457,7 +409,7 @@
                          data-full-width-responsive="true"></ins>
                     <script>
                          (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                    </script> -->
                   </div>
             </div>
         </div>

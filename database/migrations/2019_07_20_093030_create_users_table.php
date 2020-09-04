@@ -35,6 +35,8 @@ class CreateUsersTable extends Migration
             $table->date('dob')->nullable();
             $table->string('image',300)->nullable();
             $table->string('token',1000)->nullable();
+            $table->double('point',10,2);
+            $table->double('point_previous',10,2);
             $table->rememberToken();
             $table->timestamps();
         });

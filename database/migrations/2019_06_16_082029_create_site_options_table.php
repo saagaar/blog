@@ -45,6 +45,11 @@ class CreateSiteOptionsTable extends Migration
             $table->string('city', 100);
             $table->string('state', 100);
             $table->string('country', 100);
+            $table->float('like_weightage',5,2);
+            $table->float('view_weightage',5,2);
+            $table->float('comment_weightage',5,2);
+            $table->float('share_weightage',5,2);
+            $table->string('country', 100);
             $table->enum('blog_requires_activation', ['Y','N']);
             $table->enum('user_requires_activation', ['Y','N']);
             $table->timestamps();
