@@ -41,12 +41,16 @@ class UserInteractionController extends FrontendController
             if($blog->user_id){
                 $code='like_notification';
                 $userdata=$this->user->getUserByUsername($blog->user->username);
+
+                //increment of point with user like
+                $this->user->pointIncrement($blog->user_id,$this->like_weightage*1);
                 $data=['NAME'=>'<a href="'.route('profile',$this->authUser->username).'">'.$this->authUser->name.'</a>','POST'=>'<a href="'. route('blog.detail' , [$blog->code,str_slug($blog->title)]).'"> POST </a>'];
                 $userdata->notify(new Notifications($code,$data,array(),$this->authUser));
-            }
-
+        }
          }else{
          	$this->userInteraction->unlikeBlog($this->authUser,$code);
+            //decrement of point with user unlike
+            $this->user->pointDecrement($blog->user_id,$this->like_weightage*1);
             $return = $this->userInteraction->getLikeByBlog($code);
          }
          return array('status'=>true,'message'=>'success','likes'=>$return);

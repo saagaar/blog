@@ -5,7 +5,7 @@
 @endphp
 	<div class="mid_part">
         @section('meta_url',config('settings.url').'/blog/detail/'. $blogDetails->code.'/'.str_slug($blogDetails->title))
-        @section('meta_title',$blogDetails->title.' | By '.$author) )
+        @section('meta_title',$blogDetails->title.' | By '.$author) 
         @section('meta_description',$blogDetails->short_description)
         @section('meta_image',asset('/uploads/blog/'.$blogDetails->code.'/'.$blogDetails->image))
         @if(isset($seo))

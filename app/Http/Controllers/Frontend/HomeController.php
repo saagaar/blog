@@ -85,42 +85,42 @@ class HomeController extends FrontendController
 
     public function index(Request $request)
     {
-         $this->seo = app()->make('App\Repository\SeoInterface');
-         $seo =array();
-         $seo = $this->seo->getSeoBySlug('home');
-         $savedBlog = array();
-         $data=array();
-         $limit=$this->perPage;
-         $homeLimit = 4;
-          $featuredBlog = $this->blog->getAllFeaturedBlog($homeLimit);
-          $websiteLogo=$this->websiteLogo;
-          $popular =$this->blog->getPopularBlog($homeLimit);
-          $featuredForMember = $this->blog->getAllFeaturedForMember($homeLimit);
-          $latest =$this->blog->getLatestAllBlog($limit);
-          $navCategory=$this->category->getCategoryByShowInHome();
-          $liked=array();
-          $likes=array();
-          $user ='';
-          $data['path']='/home';
-          if(\Auth::check())
-          {
-              $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
-              $liked = $this->blog->getBlogCodeByLike($likes);
-              $savedBlogId = $this->blog->getSaveBlogByUser($this->authUser);
-              $savedBlog = $this->blog->getBlogCodeBySave($savedBlogId);
-              $routeName= ROUTE::currentRouteName();
-              if($routeName=='api')
-              {
-                return ($data);
-              }
-              else
-              {
-                  $data['path']='/home';
-                  $initialState=json_encode($data);
-                  $user=$this->user_state_info();
-              }
-          }
-        return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo,'savedBlog'=>$savedBlog,'userLiked'=>$liked,'seo'=>$seo));
+       $this->seo = app()->make('App\Repository\SeoInterface');
+       $seo =array();
+       $seo = $this->seo->getSeoBySlug('home');
+       $savedBlog = array();
+       $data=array();
+       $limit=$this->perPage;
+       $homeLimit = 4;
+        $featuredBlog = $this->blog->getAllFeaturedBlog($homeLimit);
+        $websiteLogo=$this->websiteLogo;
+        $popular =$this->blog->getPopularBlog($homeLimit);
+        $featuredForMember = $this->blog->getAllFeaturedForMember($homeLimit);
+        $latest =$this->blog->getLatestAllBlog($limit);
+        $navCategory=$this->category->getCategoryByShowInHome();
+        $liked=array();
+        $likes=array();
+        $user ='';
+        $data['path']='/home';
+        if(\Auth::check())
+        {
+            $likes=$this->blog->getLikesOfBlogByUser($this->authUser);
+            $liked = $this->blog->getBlogCodeByLike($likes);
+            $savedBlogId = $this->blog->getSaveBlogByUser($this->authUser);
+            $savedBlog = $this->blog->getBlogCodeBySave($savedBlogId);
+            $routeName= ROUTE::currentRouteName();
+            if($routeName=='api')
+            {
+              return ($data);
+            }
+            else
+            {
+                $data['path']='/home';
+                $initialState=json_encode($data);
+                $user=$this->user_state_info();
+            }
+        }
+      return view('frontend.home.index',['initialState'=>$data,'user'=>$user])->with(array('featuredBlog'=>$featuredBlog,'latest'=>$latest,'popular'=>$popular,'featuredForMember'=>$featuredForMember,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$websiteLogo,'savedBlog'=>$savedBlog,'userLiked'=>$liked,'seo'=>$seo));
     }
 
     public function blogDetail($code,$slug,Request $request){
@@ -158,6 +158,8 @@ class HomeController extends FrontendController
         $ip = $_SERVER['REMOTE_ADDR'];
         $ipCheckForDailyViewCount = $this->blogVisit->getIpByBlog($blogDetails,$ip);
         if($ipCheckForDailyViewCount){
+          $account = app()->make('App\Repository\AccountInterface');
+          $account->pointIncrement($blogDetails->user_id,$this->view_weightage*1);
           $this->blog->updateBlogViewCount($blogDetails);
         }
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory,'totalShare'=>$totalShare));

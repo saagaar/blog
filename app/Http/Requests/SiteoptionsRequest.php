@@ -54,7 +54,10 @@ class SiteoptionsRequest extends FormRequest
             'url'                           =>'required',
             'maintainence'                  =>'',
             'message'                       =>'',
-            'duration'                      =>'' 
+            'duration'                      =>'',
+            'enable_point_system'           =>'required',
+            'like_weightage'                =>'required|numeric',
+            'view_weightage'                =>'required|numeric',
             
         ];
     }

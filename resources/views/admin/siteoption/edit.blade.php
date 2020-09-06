@@ -43,7 +43,7 @@
                <div class="form-group col-md-4">
                   <label for="image">Image Upload</label>
                   <input type="file" class="form-control" name="image" id="image">
-                  <img src='/uploads/sitesettings-images/{{$site->image}}' width="50"/>
+                  <img src="{{asset('/uploads/sitesettings-images/'.$site->image)}}" width="50"/>
                   @if ($errors->has('image'))
                   <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                   @endif  
@@ -158,7 +158,7 @@
                       @if ($errors->has('duration'))
                     <div class="alert alert-danger">{{ $errors->first('duration') }}</div>
                     @endif
-                    </div>     
+               </div>     
                </div>
              </div>
           <!-- /.box -->
@@ -207,6 +207,51 @@
                         <div class="alert alert-danger">{{ $errors->first('blog_requires_activation') }}</div>
                         @endif
                     </div>
+               </div>
+          </div>
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Point Settings
+                <small></small>
+              </h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                  <i class="fa fa-minus"></i></button>
+               <!--  <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button> -->
+              </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+                <div class="box-body pad">
+
+
+                     <div class="form-group col-md-4">
+                          <label class="log_admin_activity">Enable Point System: </label>
+                            <input type="radio"  class="flat-red log_admin_activity" name="enable_point_system"  value="1" {{ $site->enable_point_system == '1' ? 'checked' : ''}}>Yes 
+                          <label><input type="radio" class="flat-red"  name="enable_point_system" value="2"  {{ $site->enable_point_system == '2' ? 'checked' : ''}}>No</label>
+                          @if ($errors->has('enable_point_system'))
+                        <div class="alert alert-danger">{{ $errors->first('enable_point_system') }}</div>
+                        @endif
+                     </div>
+                     <div class="form-group col-md-4">
+                        <label for="duration">Like Weightage(Point)</label>
+                        <input type="text" class="form-control" name="like_weightage" id="like_weightage" value="{{ $site->like_weightage}}" placeholder="Enter Weightage of Like">
+                        @if ($errors->has('like_weightage'))
+                      <div class="alert alert-danger">{{ $errors->first('like_weightage') }}</div>
+                      @endif
+                 </div> 
+                  <div class="form-group col-md-4">
+                        <label for="duration">View Weightage(Point)</label>
+                        <input type="text" class="form-control" name="view_weightage" id="view_weightage" value="{{ $site->view_weightage}}" placeholder="Enter Weightage of Like">
+                        @if ($errors->has('view_weightage'))
+                      <div class="alert alert-danger">{{ $errors->first('view_weightage') }}</div>
+                      @endif
+                 </div>  
+
                </div>
           </div>
 

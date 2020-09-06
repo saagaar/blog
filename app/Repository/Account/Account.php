@@ -103,9 +103,12 @@ Class Account implements AccountInterface
     public function getUsersNotification($user,$limit=10,$offset=0){
        return $user->Notifications()->orderBy('created_at','DESC')->limit($limit)->offset($offset)->get();
     }
-
-
-
+    public function pointIncrement($id,$point){
+      return $this->account->find($id)->increment('point',$point);
+    }
+    public function pointDecrement($id,$point){
+        return $this->account->find($id)->where('point','>',0)->decrement('point',$point);
+    }
     public function markNotificationsToRead($notifications){
         // return $notifications->markAsRead();
     }

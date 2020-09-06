@@ -25,6 +25,7 @@
                   <th>Name</th>
                   <th>Email</th>
                   <th>Roles</th>
+                  <th>Points</th>
                   <th>Status</th>
                   <th>Published blog Count </th>
                   <th>Created at</th>
@@ -45,7 +46,11 @@
                                     @foreach ($user->roles()->pluck('name') as $role)
                                         <span class="label label-info label-large">{{ $role }}</span>
                                     @endforeach
-                                </td>
+                  </td>
+                  <td>
+                    <span class="label label-warning"> {{$user->point}}</span>
+                  </td>
+
                   <td>
                     @if($user->status=='1')
                     <span class="label label-success label-large">Active</span>
