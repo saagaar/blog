@@ -49,6 +49,7 @@ class CreateSiteOptionsTable extends Migration
             $table->float('view_weightage',5,2);
             $table->float('comment_weightage',5,2);
             $table->float('share_weightage',5,2);
+            $table->integer('sharing_amount');
             $table->string('country', 100);
             $table->enum('blog_requires_activation', ['Y','N']);
             $table->enum('user_requires_activation', ['Y','N']);

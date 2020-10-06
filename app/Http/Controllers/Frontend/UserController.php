@@ -108,7 +108,6 @@ class UserController extends FrontendController
           return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
        }
     }
-
     public function followings($username=false)
     {
          $authFollowing=[];
@@ -139,20 +138,17 @@ class UserController extends FrontendController
         $data['followSuggestion']=$suggestion;
         $data['followings'] = $followings;
         $data['authFollowing'] = $authFollowing;
-        if($routeName=='api')
-        {
+        if($routeName=='api'){
             return ($data);
         }
-        else
-        {
+        else{
             $data['path']='/followings';
             $initialState=json_encode($data);
             $user=$this->user_state_info($username);
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
         }
     }
-    public function followers($username=false)
-    {
+    public function followers($username=false){
        $authFollowing = [];
        if($username){
             $userdata=$this->user->getUserByUsername($username);
@@ -207,6 +203,54 @@ class UserController extends FrontendController
             $user=$this->user_state_info();
             return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
         }
+    }
+    public function payment(Request $request)
+    { 
+      if(\Auth::check())
+        {
+            $data=array();
+            $routeName= Route::currentRouteName();
+            error_reporting(E_ALL);
+            ini_set('display_errors',1);
+            $transaction=$this->authUser->transaction()->paginate(2);
+            $arr=['amount'=>$this->authUser->amount,'paid_amount'=>$this->authUser->paid_amount,'point'=>$this->authUser->point,'point_previous'=>$this->authUser->point_previous,'collection'=>$this->authUser->point_collection];
+
+           if($routeName=='api')
+           {
+
+             $data['transaction']=$transaction;
+             $data['all']=$arr;
+
+              return ($data);
+           }
+           else
+           {
+
+              $data['transaction']=$transaction;
+              $data['all']=$arr;
+              $data['path']='/payment';
+              $initialState=json_encode($data);
+              $user=$this->user_state_info();
+              return view('frontend.layouts.dashboard',['initialState'=>$data,'user'=>$user]);
+           }
+        }else{
+           return redirect()->route('home'); 
+        } 
+    }
+    public function requestForPayment(Request $request){
+      if($this->authUser){
+         $amount=$request->post('withdraw_amount');
+         if($amount<1) 
+            return array('status'=>false,'data'=>'','message'=>'Amount Must be Valid');
+          if($amount>$this->authUser->amount)
+            return array('status'=>false,'data'=>'','message'=>'You dont have the amount on your wallet!!');
+            $this->authUser->paymentRequest()->where('status','1')->delete();
+            $this->authUser->paymentRequest()->create(['amount'=>$amount,'status'=>'1']);
+            return array('status'=>true,'data'=>'','message'=>'Your Payment Request has been set.');
+       }
+       else{
+          return array('status'=>false,'data'=>'','message'=>'You are not logged in .Please login');
+       }
     }
     public function getFollowingSuggestion(Request $request){
       try{

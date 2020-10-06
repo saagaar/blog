@@ -131,7 +131,7 @@
         <ul class="navbar-nav ml-auto">
          
           <li class="nav-item">
-            <a class="nav-link" href="/home"><b>Blog</b></a>
+            <a class="nav-link" href=""><b>Blog</b></a>
           </li>
           <li class="nav-item">
             <a class="nav-link page-scroll" href="#about-us"><b>Feature  </b></a>
@@ -146,7 +146,7 @@
             <a class="nav-link" href="login.html"><b>Login</b></a>
           </li> -->
         </ul>
-        <a href="/home" class="btn btn-primary ml-lg-3 primary-shadow">Get Started</a>
+        <a href="" class="btn btn-primary ml-lg-3 primary-shadow">Get Started</a>
       </div>
     </nav>
   </div>

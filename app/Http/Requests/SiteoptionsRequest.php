@@ -58,6 +58,7 @@ class SiteoptionsRequest extends FormRequest
             'enable_point_system'           =>'required',
             'like_weightage'                =>'required|numeric',
             'view_weightage'                =>'required|numeric',
+            'sharing_amount'                =>'numeric'
             
         ];
     }

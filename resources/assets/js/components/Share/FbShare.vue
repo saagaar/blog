@@ -47,8 +47,8 @@ let action='';
       		     FB.ui({
                       method:'share',
                       href: this.url,
+                      name:'social-share',
                       }, function(response){
-                        
                           if(response!==undefined)
                           {
                               current.increment();
@@ -56,7 +56,7 @@ let action='';
                       });
                   },
             increment:function(){
-                this.form.post('/blog/detail/share').then(response => {
+                this.form.post('/blog/share').then(response => {
                    if(response.data.status){
                       
                    }

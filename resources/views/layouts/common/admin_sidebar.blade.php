@@ -58,6 +58,7 @@
               </span>
             </a>
             </li>
+
             <li @if($primary_menu=="permission.list") class="active" @endif><a href="{{route('permission.list')}}"><i class="glyphicon glyphicon-lock"></i> User Permissions</a></li>
           </ul>
       </li>
@@ -86,7 +87,18 @@
             </a>
              </li>
           </ul>
-     
+      <li  class="treeview">
+        <a href=""><i class="fa fa-credit-card"></i> <span>Payment</span>
+        <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+        </span>
+        </a>
+            <ul class="treeview-menu">
+              <li  @if($primary_menu=="gallerycat.list") class="active" @endif><a href="{{route('paymentrequest.list')}}"><i class="fa fa-bank"></i>Payment Request</a></li>
+           <!--    <li  @if($primary_menu=="gallery.list") class="active" @endif><a href="{{route('transaction.list')}}"><i class="fa fa-list"></i> User Transaction</a></li> -->
+           
+            </ul>
+      </li>
       <li @if($primary_menu=="seo.list") class="active" @endif><a href="{{route('seo.list')}}"><i class="fa fa-search"></i> <span>SEO</span></a>   
     </li>
       <li @if($primary_menu=="cms.list") class="active" @endif><a href="{{route('cms.list')}}"><i class="fa fa-chain"  aria-hidden="true"></i> <span>CMS</span></a></li> 
@@ -101,10 +113,10 @@
 
 
          <li @if($primary_menu=="subscription.list" ) class="active" @endif><a href="{{route('subscription.list')}}"><i class="fa fa-flag-checkered"  aria-hidden="true"></i> <span>Subscription Manager</span></a>  </li> 
-        <li @if($primary_menu=="paymentgateway.list" ) class="active" @endif><a href="{{route('paymentgateway.list')}}"><i class="fa  fa-credit-card"  aria-hidden="true"></i> <span>Payment Gateway</span></a> </li>
-        <li @if($primary_menu=="client.list") class="active" @endif><a href="{{route('client.list')}}"><i class="fa fa-user"  aria-hidden="true"></i> <span>Client</span></a>  </li> 
-         
-          <li @if($primary_menu=="language.list") class="active" @endif><a href="{{route('language.list')}}"><i class="fa fa-language"  aria-hidden="true"></i> <span>Language</span></a>    </li> 
+       <!--  <li @if($primary_menu=="paymentgateway.list" ) class="active" @endif><a href="{{route('paymentgateway.list')}}"><i class="fa  fa-credit-card"  aria-hidden="true"></i> <span>Payment Gateway</span></a> </li> -->
+       <!--  <li @if($primary_menu=="client.list") class="active" @endif><a href="{{route('client.list')}}"><i class="fa fa-user"  aria-hidden="true"></i> <span>Client</span></a>  </li> 
+          -->
+        <!--   <li @if($primary_menu=="language.list") class="active" @endif><a href="{{route('language.list')}}"><i class="fa fa-language"  aria-hidden="true"></i> <span>Language</span></a>    </li>  -->
         <li @if($primary_menu=="category.list") class="active" @endif><a href="{{route('adminblogcategory.list')}}"><i class="fa  fa-paint-brush"></i><span>Category</span></a></li>
 
      

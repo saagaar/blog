@@ -72,6 +72,8 @@ use App\Repository\ShareInterface;
 use App\Repository\Share\Share;
 use App\Repository\BlogVisitInterface;
 use App\Repository\BlogVisit\BlogVisit;
+use App\Repository\PaymentRequestInterface;
+use App\Repository\Account\PaymentRequest;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -126,5 +128,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(UserInteractionInterface::class, UserInteraction::class);
         $this->app->singleton(ShareInterface::class, Share::class);
         $this->app->singleton(BlogVisitInterface::class, BlogVisit::class);
+        $this->app->singleton(PaymentRequestInterface::class, PaymentRequest::class);
     }
 }

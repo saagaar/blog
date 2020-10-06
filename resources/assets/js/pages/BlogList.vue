@@ -11,7 +11,7 @@
       <div class="inbox-head">
         <div class="row">
             <div class="col-sm-6">
-                <h3> <i class="fa fa-mail-bulk">&nbsp;</i> All Posts &nbsp;&nbsp;&nbsp; <router-link to="/blog/add" v-if="$gate.allow('create')"><i class="fa fa-plus-circle"></i></router-link></h3>
+                <h3> <i class="fa fa-mail-bulk">&nbsp;</i> All Post &nbsp;&nbsp;&nbsp; <router-link :to="config.ROOT_URL+'/blog/add'" v-if="$gate.allow('create')"><i class="fa fa-plus-circle"></i></router-link></h3>
             </div>
             <div class="col-sm-6">
                 <form class="position text-right">
@@ -141,7 +141,7 @@
 </div>
 </template>
 <script>
-
+import config from '../config/config.js';
 import mixin  from './../mixins/LoadData.mixin.js';
 import Form  from './../services/Form.js';
 import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolderBlogList';
@@ -184,8 +184,11 @@ import PlaceHolderBlogList  from './../components/ContentPlaceholder/PlaceHolder
             }        
           }
       },
-     mounted: function(){
-     },
+     computed:{
+        config:function(){
+         return this.$store.getters.config;
+        },
+      },
      methods: {
         getResults(page = 1) 
         {

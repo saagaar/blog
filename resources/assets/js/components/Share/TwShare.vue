@@ -26,7 +26,7 @@ import Form from './../../services/Form.js'
                     $.getScript("https://platform.twitter.com/widgets.js", function(){
                        function handleTweetEvent(event){
                          if (event) {
-                           current.form.post('/blog/detail/share').then(response => {
+                           current.form.post('/blog/share').then(response => {
                                if(response.data.status){
                                }
                                else{

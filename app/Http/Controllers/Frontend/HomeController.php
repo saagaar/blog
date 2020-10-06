@@ -44,8 +44,7 @@ class HomeController extends FrontendController
      * @return void
      */
    
-    function __construct(FollowerInterface $followInterface,BlogInterface $blog,CategoryInterface $category,UserInteractionInterface $userInteraction)
-    {
+    function __construct(FollowerInterface $followInterface,BlogInterface $blog,CategoryInterface $category,UserInteractionInterface $userInteraction){
          parent::__construct();
          $this->followerList=$followInterface;
          $this->blog=$blog;
@@ -58,8 +57,7 @@ class HomeController extends FrontendController
      *
      * @return \Illuminate\Http\Response
      */
-    public function landingPage()
-    {
+    public function landingPage(){
         $address= $this->address;
         $websiteLogo= $this->websiteLogo;
         $siteName=$this->siteName;
@@ -82,9 +80,7 @@ class HomeController extends FrontendController
         $seo = $this->seo->getSeoBySlug('landing-page');
         return view('frontend.home.landing-page')->with(array('services'=>$services,'testimonialDetails'=>$testimonialDetails,'siteName'=>$siteName,'contactNumber'=>$contactNumber,'address'=>$address,'CategoryByWeight'=>$CategoryByWeight,'client'=>$client,'banner'=>$banner,'websiteLogo'=>$websiteLogo,'facebookId'=>$facebookId,'twitterId'=>$twitterId,'linkedinId'=>$linkedinId,'websiteUrl'=>$websiteUrl,'city'=>$city,'seo'=>$seo));
     }
-
-    public function index(Request $request)
-    {
+    public function index(Request $request){
        $this->seo = app()->make('App\Repository\SeoInterface');
        $seo =array();
        $seo = $this->seo->getSeoBySlug('home');
@@ -124,9 +120,9 @@ class HomeController extends FrontendController
     }
 
     public function blogDetail($code,$slug,Request $request){
-     $this->seo = app()->make('App\Repository\SeoInterface');
-     $seo =array();
-     $seo = $this->seo->getSeoBySlug('blog-details');
+      $this->seo = app()->make('App\Repository\SeoInterface');
+      $seo =array();
+      $seo = $this->seo->getSeoBySlug('blog-details');
       $this->blogVisit = app()->make('App\Repository\BlogVisitInterface');
       $this->share = app()->make('App\Repository\ShareInterface');
       $totalShare = $this->share->getTotalShare($code);
@@ -157,16 +153,17 @@ class HomeController extends FrontendController
         }
         $ip = $_SERVER['REMOTE_ADDR'];
         $ipCheckForDailyViewCount = $this->blogVisit->getIpByBlog($blogDetails,$ip);
-        if($ipCheckForDailyViewCount){
+        $displayType=$request->get('name');
+        if($ipCheckForDailyViewCount && $displayType!='social-share'){
           $account = app()->make('App\Repository\AccountInterface');
-          $account->pointIncrement($blogDetails->user_id,$this->view_weightage*1);
+          if($this->enable_point_system=='1'){
+            $account->pointIncrement($blogDetails->user_id,$this->view_weightage*1);
+          }
           $this->blog->updateBlogViewCount($blogDetails);
         }
         return view('frontend.home.blog_detail',['initialState'=>$data,'user'=>$user])->with(array('blogDetails'=>$blogDetails,'blogComment'=>$blogComment,'prev'=>$prev,'next'=>$next,'relatedBlog'=>$relatedBlog,'websiteLogo'=>$this->websiteLogo,'likes'=>$likes,'navCategory'=>$navCategory,'totalShare'=>$totalShare));
     }
-
-    public function resizeImage($code,$width,$name)
-    {
+    public function resizeImage($code,$width,$name){
         $imagePath=public_path(). '/uploads/blog/'.$code.'/'.$name;
         if(File::exists($imagePath))
         {
@@ -178,7 +175,6 @@ class HomeController extends FrontendController
         }
         abort(404);
     }
-
     public function categoryListing(UserInterestInterface $userInterest)
     {
       $this->seo = app()->make('App\Repository\SeoInterface');
@@ -251,8 +247,7 @@ class HomeController extends FrontendController
     }
     
     public function getBlogByCategory($slug=false,Request $request){
-      try
-      {
+      try{
         if(!$slug)
             throw new Exception("No Categories Selected", 1);
           $limit=$this->perPage;
@@ -267,8 +262,7 @@ class HomeController extends FrontendController
       }
     }
     public function getLatestBlog(Request $request){
-      try
-      {
+      try{
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
           $latest = $this->blog->getLatestAllBlog($limit,$offset);
@@ -278,8 +272,7 @@ class HomeController extends FrontendController
           return array('status'=>false,'message'=>$e->getMessage());
       }
     }
-    public function blogListBySlug($slug,Request $request)
-    {
+    public function blogListBySlug($slug,Request $request){
         $savedBlog=array();
         $data=array();
         $blog=array();
@@ -328,8 +321,7 @@ class HomeController extends FrontendController
         return view('frontend.home.blog_listingbyfeature',['initialState'=>$data,'user'=>$user])->with(array('blogs'=>$blog,'slug'=>$slug,'likes'=>$likes,'navCategory'=>$navCategory,'websiteLogo'=>$this->websiteUrl,'savedBlog'=>$savedBlog,'userLiked'=>$liked,'seo'=>$seo));
     }
     public function getBlogListBySlug($slug=false,Request $request){
-     try
-     {
+     try{
         if(!$slug)
             throw new Exception("No Categories Selected", 1);
           $limit=$this->perPage;
@@ -352,8 +344,7 @@ class HomeController extends FrontendController
       }
     }
     public function share(Request $request,ShareInterface $share){
-      try
-        {
+      try{
           $blogCode = $request->code;
           $media=$request->media;
           if($media=='facebook'){
@@ -370,8 +361,7 @@ class HomeController extends FrontendController
             return array('status'=>false,'message'=>$e->getMessage());
         }
     }
-    public function dashboard()
-    {
+    public function dashboard(){
         if(\Auth::check()){
             $routeName= ROUTE::currentRouteName();
             $suggestion=$this->getFollowSuggestions(3);
@@ -396,8 +386,7 @@ class HomeController extends FrontendController
         }
     }
     public function getBlogOfFollowing(Request $request){
-      try
-      {
+      try{
           $limit=$this->perPage;
           $offset=$request->get('page')*$limit;
           $latest = $this->blog->getBlogOfFollowingUser($this->authUser,$limit,$offset);
@@ -408,12 +397,10 @@ class HomeController extends FrontendController
          return array('status'=>false,'message'=>$e->getMessage());
       }
     }
-    public function getFollowSuggestions($limit=1,$offset=0)
-    {
+    public function getFollowSuggestions($limit=1,$offset=0){
        return $this->followerList->getFollowUserSuggestions($this->authUser,$limit,$offset);
     }
-    public function getTagName(TagInterface $tag,Request $request)
-    {
+    public function getTagName(TagInterface $tag,Request $request){
         $search=$request->post('name');             
         if($search)
         {
@@ -425,30 +412,24 @@ class HomeController extends FrontendController
           return response()->json(['status'=>false,'message'=>'No Tags found']);    
         }
     }
-    public function services()
-    {
+    public function services(){
       $serviceInterface = app()->make('App\Repository\ServiceInterface');
       $service=$serviceInterface->getServicesDetails();
       return $service;
     }
-    public function testimonialDetails()
-    { 
+    public function testimonialDetails(){ 
         $testimonial = app()->make('App\Repository\TestimonialInterface');
         $testimonialDetails= $testimonial->getActiveTestimonial();
         return $testimonialDetails;
     }  
-    public function client()
-    {
+    public function client(){
        $client= app()->make('App\Repository\ClientInterface');
        $clientDetails=$client->getClients();
        return $clientDetails;
     }
-    public function bannerTagLine()
-    {
+    public function bannerTagLine(){
        $banner= app()->make('App\Repository\BannerInterface');
        $bannerDetails=$banner->getBannerTagLine();
        return $bannerDetails;
     }
-
-   
 } 

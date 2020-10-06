@@ -197,7 +197,7 @@ import Loader from './../../components/Loader';
                async isUnique(value) {
                 if (value === '') return true
                     
-                        const response = await fetch('/blog/isemailregistered/'+value)
+                        const response = await fetch('blog/isemailregistered/'+value)
                        return Boolean(await response.json())
                     
               }
@@ -226,7 +226,12 @@ import Loader from './../../components/Loader';
                 SignUpButton,
                 LoginButton,
                 Loader,
-            },
+        },
+        computed:{
+           config:function(){
+             return this.$store.getters.config;
+           }
+        },
         methods:{
 
           submitLoginForm:function(){
@@ -238,7 +243,7 @@ import Loader from './../../components/Loader';
               this.loginForm.post('blog/login').then(response => {
                if(response.data.status){
                   curObject.$store.commit('TOGGLE_LOADING');
-                  window.location.href="/home"
+                  window.location.href=this.config.ROOT_URL+"/home"
                }
                else{
                   curObject.$store.commit('TOGGLE_LOADING');

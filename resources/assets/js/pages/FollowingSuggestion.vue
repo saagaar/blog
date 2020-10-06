@@ -15,7 +15,7 @@
               
               <div class="col-lg-9 col-md-8">
                 <div class="friend-info">
-                  <h5><a :href="'/profile/'+eachFollowingSuggestion.username"  class="profile-link">{{eachFollowingSuggestion.name}} </a></h5>
+                  <h5><a :href="config.ROOT_URL+'profile/'+eachFollowingSuggestion.username"  class="profile-link">{{eachFollowingSuggestion.name}} </a></h5>
                   <FollowButton :followings="initialState.authFollowing" :Buttonclass="'float-right'" :username="eachFollowingSuggestion.username" :followSuggestionHead="3"></FollowButton>
                   <p>{{eachFollowingSuggestion.followers_count}} Followers</p>
                 </div>
@@ -54,8 +54,12 @@
             form:new Form()
           }
       },
-      
-       methods:{
+      computed:{
+        config:function(){
+         return this.$store.getters.config;
+        },
+      },
+      methods:{
           infiniteHandler($state) {
               let username=this.$route.params.username;
               if(username===undefined)

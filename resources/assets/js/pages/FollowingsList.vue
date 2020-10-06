@@ -16,7 +16,7 @@
               </div>
               <div class="col-lg-9 col-md-8 col-sm-8 col-8">
                 <div class="friend-info">
-                  <h5> <a :href="'/profile/'+eachFollowings.username" class="profile-link">{{eachFollowings.name}}</a></h5>
+                  <h5> <a :href="config.ROOT_URL+'profile/'+eachFollowings.username" class="profile-link">{{eachFollowings.name}}</a></h5>
                  <!--  <a href="#" class="float-right text-green btn">Unfollow</a> -->
                  <p>{{eachFollowings.followers_count}}  Followers</p>
                  <FollowButton  @clicked="userFollowed"  :followings="initialState.authFollowing" :Buttonclass="'float-right'" :username="eachFollowings.username" :followSuggestionHead="followSuggestion.length" >
@@ -114,7 +114,12 @@
       created(){
         // console.log(this.initialState.authFollowing);
       },
-        watch:{
+      computed:{
+        config:function(){
+         return this.$store.getters.config;
+        },
+      },
+      watch:{
           initialState: function (val) {
             this.followSuggestion=this.initialState.followSuggestion;
             this.$store.commit('AUTH_FOLLOWING',this.initialState.authFollowing);

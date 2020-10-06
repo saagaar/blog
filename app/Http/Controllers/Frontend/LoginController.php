@@ -94,7 +94,7 @@ class LoginController extends FrontendController
         
     }
     public function login(){
-        if(auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'),'status'=>1],request('remember')))
+        if(auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password'),'status'=>'1'],request('remember')))
         { 
             $user = auth()->user()->toArray();
             $ip = $_SERVER['REMOTE_ADDR']; 
@@ -103,6 +103,7 @@ class LoginController extends FrontendController
         } 
         else
         {
+             $this->guard()->logout();
              return array('status'=>false,'message'=>'Your Email or Password is incorrect'); 
         } 
     }

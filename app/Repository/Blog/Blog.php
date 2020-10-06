@@ -81,7 +81,9 @@ Class Blog implements BlogInterface
   }
 
   public function getPopularBlog($limit=10,$offset=0){
-    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->orderByRaw('2*likes_count+views Desc')->with('user')->withCount('likes','comments')->take($limit)->skip($offset)->get();
+    $fromDate = Carbon::now()->subMonth()->startOfMonth()->toDateString();
+    $tillDate = Carbon::now()->subMonth()->endOfMonth()->toDateString();
+    return $this->blog->where(['save_method'=>2,'show_in_home'=>1])->orderByRaw('2*likes_count+views Desc')->with('user')->withCount('likes','comments')->whereBetween('created_at',[$fromDate,$tillDate])->take($limit)->skip($offset)->get();
   }
   /**
    * get blog bye following

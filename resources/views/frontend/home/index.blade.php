@@ -33,7 +33,7 @@
                         <div class="short_details">
                              <div class="meta-top d-flex">
                             @php
-                          echo   ($featuredBlog['0']->anynomous=='2') ? (isset($featuredBlog['0']->user->name)  ? '<a href="/profile/'.$featuredBlog['0']->user->username.'">By '. $featuredBlog['0']->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
+                          echo   ($featuredBlog['0']->anynomous=='2') ? (isset($featuredBlog['0']->user->name)  ? '<a href="'.url('profile/'.$featuredBlog['0']->user->username).'">By '. $featuredBlog['0']->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' ,[$featuredBlog['0']->code,str_slug($featuredBlog['0']->title)])}}">
@@ -87,7 +87,7 @@
                         <div class="short_details col-md-8 col-sm-7 col-8">
                              <div class="meta-top d-flex">
                            @php
-                                echo   ($eachFeaturedBlog->anynomous=='2') ? (isset($eachFeaturedBlog->user->name)  ? '<a href="/profile/'.$eachFeaturedBlog->user->username.'"> By '.$eachFeaturedBlog->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
+                                echo   ($eachFeaturedBlog->anynomous=='2') ? (isset($eachFeaturedBlog->user->name)  ? '<a href="'.url('profile/'.$eachFeaturedBlog->user->username).'">By '. $eachFeaturedBlog->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , [$eachFeaturedBlog->code,str_slug($eachFeaturedBlog->title)] )}}">
@@ -162,7 +162,7 @@
                         <div class="short_details">
                              <div class="meta-top d-flex">
                             @php
-                                echo   ($featuredForMember['0']->anynomous=='2') ? (isset($featuredForMember['0']->user->name)  ? '<a href="/profile/'.$featuredForMember[0]->user->username.'"> By '.$featuredForMember['0']->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
+                                echo   ($featuredForMember['0']->anynomous=='2') ? (isset($featuredForMember['0']->user->name)  ? '<a href="'.url('profile/'.$featuredForMember['0']->user->username).'">By '. $featuredForMember['0']->user->name.'</a>'  : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' ,  [$featuredForMember['0']->code,str_slug($featuredForMember['0']->title)] )}}">
@@ -221,7 +221,7 @@
                         <div class="short_details col-md-8 col-sm-7 col-8">
                             <div class="meta-top d-flex">
                                 @php
-                                    echo   ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? '<a href="/profile/'.$eachFeaturedForMember->user->username.'"> By '.$eachFeaturedForMember->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
+                                    echo   ($eachFeaturedForMember->anynomous=='2') ? (isset($eachFeaturedForMember->user->name)  ? '<a href="'.url('profile/'.$eachFeaturedForMember->user->username).'">By '. $eachFeaturedForMember->user->name.'</a>'  : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' ,  [$eachFeaturedForMember->code,str_slug($eachFeaturedForMember->title)] )}}">
@@ -290,7 +290,7 @@
                         <div class="short_details">
                           <div class="meta-top d-flex">
                             @php
-                                echo   ($popular['0']->anynomous=='2') ? (isset($popular['0']->user->name)  ? '<a href="/profile/'.$popular[0]->user->username.'"> By '.$popular['0']->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
+                                echo   ($popular['0']->anynomous=='2') ? (isset($popular['0']->user->name)  ? '<a href="'.url('profile/'.$popular['0']->user->username).'">By '. $popular['0']->user->name.'</a>'  : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                            </div>
                             <a class="d-block"  href="{{ route('blog.detail' , [$popular[0]->code,str_slug($popular[0]->title)] )}}">
@@ -346,7 +346,7 @@
 
                            <div class="meta-top d-flex">
                             @php
-                                    echo   ($eachPopular->anynomous=='2') ? (isset($eachPopular->user->name)  ? '<a href="/profile/'.$eachPopular->user->username.'"> By '.$eachPopular->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
+                                    echo   ($eachPopular->anynomous=='2') ? (isset($eachPopular->user->name)  ?  '<a href="'.url('profile/'.$eachPopular->user->username).'">By '. $eachPopular->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , [$eachPopular->code,str_slug($eachPopular->title)])}}">
@@ -453,7 +453,7 @@
                         <div class="short_details col-lg-8 col-md-8 col-sm-7 col-8">
                           <div class="meta-top d-flex">
                             @php
-                                echo   ($eachLatest->anynomous=='2') ? (isset($eachLatest->user->name)  ? '<a href="/profile/'.$eachLatest->user->username.'"> By '.$eachLatest->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
+                                echo   ($eachLatest->anynomous=='2') ? (isset($eachLatest->user->name)  ? '<a href="'.url('profile/'.$eachLatest->user->username).'">By '. $eachLatest->user->name.'</a>' : '<a >By Admin</a>'):'<a >By  Anynomous </a>'
                             @endphp
                             </div>
                             <a class="d-block"  href="{{ route('blog.detail' , [$eachLatest->code,str_slug($eachLatest->title)])}}">

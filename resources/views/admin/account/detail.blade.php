@@ -90,6 +90,7 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Published Articles ({{ $timeline->total()}})</a></li>
               <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+              <li><a href="#transactions" data-toggle="tab">Transaction</a></li>
               <li><a href="#settings" data-toggle="tab">Settings</a></li>
             </ul>
             <div class="tab-content">
@@ -176,6 +177,46 @@
                 </ul>
               </div>
               <!-- /.tab-pane -->
+               <div class=" tab-pane" id="transactions">
+                 <table id="example2" class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Reference</th>
+                  <th>Amount</th>
+                  <th>Debit /Credit</th>
+                  <th>Remarks</th>
+                  <th>Created at</th>
+                 </tr>
+                </thead>
+                <tbody>
+                <?php  $i = 0; ?>
+                @if (!$transaction->isEmpty())
+                @foreach ($transaction as $data)
+                <tr>
+                  <td>{{ ++$i }}</td>
+                  <td>
+                   {{$data->reference}}
+                  </td>
+                  <td>{{$data->amount}}</td>   
+                  <td>{{$data->debit_credit}}</td>   
+                   <td>
+                      {{$data->remarks}}
+                   </td>                                        
+                  <td>{{$data->created_at->diffforhumans()}}</td>
+                 
+                </tr> 
+                @endforeach
+                @else
+                    <tr>
+                    <td colspan="10" align="center" style="background-color: #d2d6de;"> No Transactions Found </td>
+                  </tr>
+                  @endif
+                </tbody>
+              </table>
+               
+               
+              </div>
 
               <div class="tab-pane" id="settings">
                 <form class="form-horizontal" action="{{ route('account.edit' , $account->id)}}" method="POST"  enctype="multipart/form-data">

@@ -8,7 +8,9 @@
               <h3 class="box-title">All users Account</h3>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
+                
                   <a href="{{route('account.create')}}" class="btn btn-primary">Add users account</a>
+                
                 </div>
               </div>
               
@@ -18,6 +20,8 @@
             <div class="box-body no-padding">
               @component('layouts.components.search' )
              @endcomponent  
+
+             <a href="{{route('reset.point')}}#point-setting" class="btn btn-success right">Reset Point Value</a>
               <table id="example2" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
@@ -25,7 +29,9 @@
                   <th>Name</th>
                   <th>Email</th>
                   <th>Roles</th>
-                  <th>Points</th>
+                  <!-- <th>Total Points</th> -->
+                  <th>Points Current</th>
+                  <th>Amount</th>
                   <th>Status</th>
                   <th>Published blog Count </th>
                   <th>Created at</th>
@@ -47,10 +53,15 @@
                                         <span class="label label-info label-large">{{ $role }}</span>
                                     @endforeach
                   </td>
-                  <td>
-                    <span class="label label-warning"> {{$user->point}}</span>
+                   <!--  <td>
+                      <span class="label label-success"> {{$user->point}}</span>
+                    </td> -->
+                   <td>
+                    <span class="label label-warning"> {{$user->point-$user->point_previous}}</span>
                   </td>
-
+                  <td>
+                    <span class="label label-warning"> {{$user->amount}}</span>
+                  </td>
                   <td>
                     @if($user->status=='1')
                     <span class="label label-success label-large">Active</span>
@@ -75,8 +86,9 @@
                 @endforeach
                 @else
                     <tr>
-                    <td colspan="8" align="center" style="background-color: #d2d6de;"> No Users Found </td>
-                  </tr>
+                      <td colspan="8" align="center" style="background-color: #d2d6de;"> No Users Found 
+                      </td>
+                    </tr>
                   @endif
                 </tbody>
               </table>

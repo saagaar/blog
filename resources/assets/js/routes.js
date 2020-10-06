@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-
+import config from './config/config.js';
 let routes=[
 				{
 						path:'/home',
@@ -80,6 +80,10 @@ let routes=[
 						path:'/blog/preview/:blogId/',
 						components:require('./pages/BlogPreview')
 				},
+				{
+						path:'/payment',
+						components:require('./pages/Payment')
+				},
 				
 				
 
@@ -87,7 +91,7 @@ let routes=[
 
 export default new VueRouter({
 	routes,
-
+	base:'/',
 	linkActiveClass: 'active',
 	mode: 'history',
 	hash: false,

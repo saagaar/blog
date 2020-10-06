@@ -76,6 +76,7 @@ class FrontendController extends BaseController
         $this->websiteUrl=config('settings.url');
         $this->maintainence_message=config('settings.maintainence_message');
         $this->maintainence_duration=config('settings.maintainence_duration');
+        $this->enable_point_system=config('settings.enable_point_system');
         $this->like_weightage=config('settings.like_weightage');
         $this->view_weightage=config('settings.view_weightage');
 

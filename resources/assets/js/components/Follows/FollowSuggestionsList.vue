@@ -8,7 +8,7 @@
 
                     <img :src="getProfileUrl(eachsuggestion.image)" alt="Profile Picture" class="profile-photo-sm pull-left" />
                     <div>
-                      <h5><a :href="'/profile/'+eachsuggestion.username" class="profile-link">{{eachsuggestion.name}}</a></h5>
+                      <h5><a :href="config.ROOT_URL+'profile/'+eachsuggestion.username" class="profile-link">{{eachsuggestion.name}}</a></h5>
                       <FollowButton  @clicked="userFollowed" :following="following" :Buttonclass="'btn btn-sm btn-round btn-success'" :username="eachsuggestion.username" :followSuggestionHead="followSuggestion.length"></FollowButton>
                     </div>
                    </div>
@@ -45,6 +45,11 @@ import PlaceHolderDashboardFeed  from './../ContentPlaceholder/PlaceHolderDashbo
             deep: true
           }         
         },
+        computed:{
+        config:function(){
+         return this.$store.getters.config;
+        },
+       },
         methods:{
           userFollowed:function(toRemoveUser,toAddUser){
 

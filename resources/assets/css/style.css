@@ -5667,6 +5667,57 @@ color:#4cb748;}
     color: #fff;
   }
 
+  .header-top .right-button ul li a svg {
+    color: #4cb748;
+    font-size: 18px;
+  }
+  
+  .top_icon svg {
+    display: inline-block;
+    position: relative;
+  }
+  
+  /* some missed of above ends */
+  .payment_process {
+    padding: 30px;
+  }
+
+  @media (max-width: 767px) {
+    .topic-description {
+      display: none;
+    }
+  }
+  
+  .pay-bill-summary-table tbody tr td {
+    vertical-align: middle;
+  }
+  
+  .pay-bill-summary-table .thead-dark tr th {
+    background: #4cb748;
+    text-transform: uppercase;
+    border-color: #fff;
+    border-bottom-color: #dee2e6;
+  }
+  
+  .pay-bill-summary-table .thead-dark tr th:first-child {
+    border-left-color: #dee2e6;
+  }
+  .pay-bill-summary-table .thead-dark tr th:last-child {
+    border-right-color: #dee2e6;
+  }
+  
+  .pay-bill-summary-table tfoot tr td h5 {
+    margin-bottom: 0;
+  }
+  
+  .pay-bill-summary-table tbody h5 {
+    margin-bottom: 0;
+  }
+  
+  .payment_process .area-heading h3:after {
+    left: 6.5%;
+  }
+
 @-webkit-keyframes passing-reverse{0%{-webkit-transform:translateX(50%);
 transform:translateX(50%);opacity:0}50%{-webkit-transform:translateX(0%);
 transform:translateX(0%);opacity:1}100%{-webkit-transform:translateX(-50%);

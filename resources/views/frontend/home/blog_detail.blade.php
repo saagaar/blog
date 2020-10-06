@@ -43,7 +43,7 @@
                         <div class="blog_details " >
                             <div class="meta-top d-flex"><a href="#"><i class="far fa-user"></i>  
                                 @php
-                               echo  ($blogDetails->anynomous=='2') ? (isset($blogDetails->user->name)  ? '<a href="/profile/'.$blogDetails->user->username.'"> '. $blogDetails->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
+                               echo  ($blogDetails->anynomous=='2') ? (isset($blogDetails->user->name)  ? '<a href="'.url('profile/'.$blogDetails->user->username).'">By '. $blogDetails->user->name.'</a>' : '<a >Admin</a>'):'<a > Anynomous </a>'
                                 @endphp  </a></div>
                             <h2>{{ $blogDetails->title }}</h2>
 
@@ -61,11 +61,14 @@
                                                 </span></li>
                                                 <li><icon-comments-count></icon-comments-count></li>
                                                 <li>{{$totalShare['total_share']}} Share</li>
+                                                <li>{{$blogDetails->views}} Views</li>
                                         </ul>
                                 </div>
                                 <div class="col-md-4 text-right"> 
                                     <ul class="blog-info-link mt-2 mb-2 top-social">
-                                            @php($url=url('https://thebloggersclub.com/blog/detail/'.$blogDetails->code.'/'.str_slug($blogDetails->title)))
+                                            @php
+                                            $url=url('blog/detail/'.$blogDetails->code.'/'.str_slug($blogDetails->title).'?share=social');
+                                            @endphp
                                             <fb-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></fb-share>
                                             <tw-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></tw-share>    
                                         
@@ -94,7 +97,9 @@
                                 <p class="comment-count"><span class="align-middle"></span> <icon-comments-count></icon-comments-count></p>
                             </div>
                             <ul class="social-icons">
-                                @php($url=url('https://thebloggersclub.com/blog/detail/'.$blogDetails->code.'/'.str_slug($blogDetails->title)))
+                                @php
+                                $url=url('blog/detail/'.$blogDetails->code.'/'.str_slug($blogDetails->title).'?share=social');
+                                @endphp
                     
                                 <fb-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></fb-share>
                                 <tw-share :url="'{{$url}}'" :blog="{{$blogDetails}}"></tw-share>    

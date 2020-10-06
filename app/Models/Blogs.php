@@ -43,20 +43,17 @@ class Blogs extends Model implements Auditable
     public function tags(){
        return $this->belongsToMany(Tags::class,'blog_tags');
     }
-    public function user()
-    {
-         return $this->belongsTo(Users::class,'user_id');
+    public function user(){
+      return $this->belongsTo(Users::class,'user_id');
     }
     public function getTagListAttribute(){
-       return $this->tags->lists('id');
+      return $this->tags->lists('id');
     }
-    public function likes()
-    {
-        return $this->hasMany(Likes::class,'blog_id');
+    public function likes(){
+      return $this->hasMany(Likes::class,'blog_id');
     }
-    public function comments()
-    {
-        return $this->hasMany(Comments::class,'blog_id');
+    public function comments(){
+      return $this->hasMany(Comments::class,'blog_id');
     }
     public function categories()
     {

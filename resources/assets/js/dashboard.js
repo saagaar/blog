@@ -26,6 +26,7 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(require('vue-moment'));
 import store from './store/index'
 import config from './config/config.js';
+Vue.prototype.$config=config;
 import UserDashboard from './layouts/UserDashboard';
 import Profile from './layouts/Profile';
 Vue.component('default-layout',UserDashboard);

@@ -1,2 +1,6 @@
 ALTER TABLE `users` ADD `amount` DOUBLE(10,2) NOT NULL AFTER `point_previous`;
 ALTER TABLE `users` ADD `paid_amount` DOUBLE(10,2) NOT NULL AFTER `point_previous`
+
+
+
+ALTER TABLE `site_options` ADD `sharing_amount` INT NOT NULL AFTER `enable_point_system`;

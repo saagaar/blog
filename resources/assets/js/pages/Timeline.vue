@@ -78,9 +78,13 @@
       computed:{
          loggedIn(){
               return this.$store.getters.user.loggedInUser;
-            }  
+            },
+        config:function(){
+         return this.$store.getters.config;
+        },
       },
        created(){
+       
         // console.log(this.initialState.blogList.data);
        },
       watch: {
@@ -124,21 +128,21 @@
               }).catch(e => 
               {
                  this.$store.commit('TOGGLE_LOADING');
-                  alert('hhere');
                   // console.log(e);
               });
         },
-        searchPost(){
+     
+       searchPost(){
          this.getResults();
-        },
-        getImageurl:function(code,image){
+       },
+       getImageurl:function(code,image){
           var img = image.split('.');
           var url = '/uploads/blog/'+code+'/'+img[0]+'-thumbnail.'+img[1];
           return url;
         },
         url(items){
           var blogslug= this.blogslug(items.title);
-          var url = '/blog/detail/'+items.code+'/'+blogslug;
+          var url = this.config.ROOT_URL+'/blog/detail/'+items.code+'/'+blogslug;
           return url;
         },
         blogslug: function(title) {
@@ -147,18 +151,18 @@
         },
         sanitizeTitle: function(title) {
               var slug = "";
-              // alert(sl);
+            
               // Change to lower case
               var titleLower = title.toLowerCase();
-              // Letter "e"
+            
               slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
-              // Letter "a"
+           
               slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
-              // Letter "o"
+             
               slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
-              // Letter "u"
+             
               slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
-              // Letter "d"
+             
               slug = slug.replace(/đ/gi, 'd');
               // Trim the last whitespace
               slug = slug.replace(/\s*$/g, '');

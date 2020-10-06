@@ -39,6 +39,7 @@ class CreateUsersTable extends Migration
             $table->double('point_previous',10,2);
             $table->double('amount',10,2);
             $table->double('paid_amount',10,2);
+            $table->json('point_collection')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

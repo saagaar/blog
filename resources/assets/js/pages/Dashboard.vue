@@ -72,15 +72,21 @@ import LikeCheck from './../components/Likes/LikeCheck';
           this.followSuggestion=this.initialState.followSuggestion;
         },
       },
+      computed:{
+        config:function(){
+         return this.$store.getters.config;
+        },
+      },
       methods:{
         getImageurl:function(code,image){
           var img = image.split('.');
           var url = '/uploads/blog/'+code+'/'+img[0]+'-thumbnail.'+img[1];
           return url;
         },
+        
         url(items){
           var blogslug= this.blogslug(items.title);
-          var url = '/blog/detail/'+items.code+'/'+blogslug;
+          var url = this.config.ROOT_URL+'blog/detail/'+items.code+'/'+blogslug;
           return url;
         },
         blogslug: function(title) {

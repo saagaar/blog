@@ -62,7 +62,11 @@ import LikeCheck from './../components/Likes/LikeCheck';
             followSuggestion:'',
           }
         },
-       watch: {
+      
+       computed:{
+        config:function(){
+         return this.$store.getters.config;
+        },
       },
       methods:{
         getImageurl:function(code,image){
@@ -72,7 +76,7 @@ import LikeCheck from './../components/Likes/LikeCheck';
         },
         url(items){
           var blogslug= this.blogslug(items.title);
-          var url = '/blog/detail/'+items.code+'/'+blogslug;
+          var url = this.config.ROOT_URL+'blog/detail/'+items.code+'/'+blogslug;
           return url;
         },
         blogslug: function(title) {

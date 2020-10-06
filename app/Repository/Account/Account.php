@@ -5,7 +5,7 @@ namespace App\Repository\Account;
 use App\Models\Users;
 use Spatie\Permission\Traits\HasRoles;
 use App\Repository\AccountInterface;
-
+use DB;
 Class Account implements AccountInterface
 {
 	protected $user;
@@ -107,13 +107,52 @@ Class Account implements AccountInterface
       return $this->account->find($id)->increment('point',$point);
     }
     public function pointDecrement($id,$point){
-        return $this->account->find($id)->where('point','>',0)->decrement('point',$point);
+        return $this->account->find($id)->whereRaw("(point-point_previous)>$point")->decrement('point',$point);
     }
     public function markNotificationsToRead($notifications){
         // return $notifications->markAsRead();
     }
     public function countUnreadNotifications($user){
         // return $user->unreadNotifications()->count();
+    }
+    public function getTotalCurrentPoint(){
+    return  $this->account->selectRaw(('sum(point-point_previous) as sum'))->where('status','1')->first();
+    }
+
+    public function processPointForEarning($pointWeightage){
+      return $this->account
+        ->where('status','1')
+        ->update([
+            'amount'  =>  DB::raw("amount+((point-point_previous)*$pointWeightage)"),
+            'point_previous'=>DB::raw("point"),
+            'point_collection'=>json_encode([
+                                  'current_point'=>DB::raw("point"),
+                                  'current_amount'=>DB::raw("amount")+DB::raw("(point-point_previous)*$pointWeightage)"),
+                                  'sharing_amount'=>config('settings.sharing_amount'),
+                                  'total_points'=>$this->getTotalCurrentPoint()->sum,
+                                  'date'=>date('Y-m-d')
+                                ])
+        ]);
+    }
+
+    public function getUserTransaction(){
+      return $this->account->transaction();
+    }
+
+    public function increaseWalletBalance($id,$amount){
+        return $this->account
+        ->where('id',$id)
+        ->update([
+            'amount'  =>  DB::raw("amount+$amount"),
+        ]);
+    }
+     public function decreaseWalletBalance($id,$amount){
+        return $this->account
+        ->where('id',$id)
+        ->update([
+            'amount'  =>  DB::raw("amount-$amount"),
+            'paid_amount'=>DB::raw("paid_amount+$amount")
+        ]);
     }
 }
 ?>

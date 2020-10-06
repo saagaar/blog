@@ -1,13 +1,117 @@
   
  $(function () {
 
+        $(document).on('click', '#completepaymentclose', function (e) {
+        e.preventDefault();
+        var userid=$(this).data('userid');
+        var amount=$(this).data('amount');
+        var paymentrequestid=$(this).data('paymentrequestid');
+        var token=$('meta[name="csrf-token"]').attr('content');
+        $('#modal-accept').modal('show');
+        $('.img-loader').removeClass('hidden');
+      
+
+         $(document).on('click', '#submitcompleterequest', function (e) {
+             e.preventDefault();
+             var remarks=$('#reference_payment').val();
+             if(remarks=='')
+             {
+                $('#message').removeClass('hidden')
+                return false;
+             }
+              $('#message').addClass('hidden')
+               $.ajax({
+                url: APP_URL + '/admin/complete/payment-request' , 
+                data:{id:userid,amount:amount,payment_request_id:paymentrequestid,remarks:remarks,_token:token },
+                type: "POST",
+                dataType: 'json',
+                success: function (data) 
+                {
+                    // JSON.stringify(data);
+                    if (data.error_message)
+                    {
+                        $('.overlay_alert').removeClass('hidden');
+                        $('.overlay_alert').addClass('success');
+                        $('.overlay_alert').html(data.error_message);
+                    } else
+                    {
+                        $('.overlay_alert').removeClass('hidden');
+                        $('.overlay_alert').addClass('success');
+                        $('.overlay_alert').html(data.success_message);
+                        $('#modal-accept').modal('hide');
+                        window.location.reload();
+                    }
+                    $('.img-loader').addClass('hidden');
+                    setTimeout(function () {
+                        $('.overlay_alert').addClass('hidden');
+                        $('.overlay_alert').removeClass('error');
+                        $('.overlay_alert').removeClass('success');
+                    }, 5000);
+                    
+                }
+             });
+             })
+   });
     	
+        $(document).on('click', '#rejectpaymentrequestbtn', function (e) {
+        e.preventDefault();
+        var userid=$(this).data('userid');
+        var amount=$(this).data('amount');
+        var paymentrequestid=$(this).data('paymentrequestid');
+        var token=$('meta[name="csrf-token"]').attr('content');
+        $('#modal-reject').modal('show');
+        $('.img-loader').removeClass('hidden');
+      
+
+         $(document).on('click', '#submitrejectrequest', function (e) {
+             e.preventDefault();
+             var remarks=$('#reject_reason_text').val();
+             if(remarks=='')
+             {
+                $('#message').removeClass('hidden')
+                return false;
+             }
+              $('#message').addClass('hidden')
+               $.ajax({
+                url: APP_URL + '/admin/reject/payment-request' , 
+                data:{id:userid,amount:amount,payment_request_id:paymentrequestid,remarks:remarks,_token:token },
+                type: "POST",
+                dataType: 'json',
+                success: function (data) 
+                {
+                    // JSON.stringify(data);
+                    if (data.error_message)
+                    {
+                        $('.overlay_alert').removeClass('hidden');
+                        $('.overlay_alert').addClass('success');
+                        $('.overlay_alert').html(data.error_message);
+                    } else
+                    {
+                        $('.overlay_alert').removeClass('hidden');
+                        $('.overlay_alert').addClass('success');
+                        $('.overlay_alert').html(data.success_message);
+                        $('#modal-reject').modal('hide');
+                        window.location.reload();
+                    }
+                    $('.img-loader').addClass('hidden');
+                    setTimeout(function () {
+                        $('.overlay_alert').addClass('hidden');
+                        $('.overlay_alert').removeClass('error');
+                        $('.overlay_alert').removeClass('success');
+                    }, 5000);
+                    
+                }
+             });
+             })
+       
+       
+   });
+
 
 		$(document).on('click', '.viewipdetail', function (e) {
         e.preventDefault();
         var ipaddressdetailid = $(this).data('parentid');
         $('.img-loader').removeClass('hidden');
-        // alert(APP_URL + '/' + ipaddressdetailid);
         $.ajax({
             url: APP_URL + '/' + ipaddressdetailid, 
 
@@ -51,6 +155,7 @@
             }
         });
     })
+
 
 $(document).on('click', '.logdetail', function (e) {
         e.preventDefault();

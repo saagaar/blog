@@ -32,7 +32,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-3 logo-wrapper">
-                    <a href="/home" class="logo">
+                    <a href="{{url('home')}}" class="logo">
                         <img src="{{asset('uploads/sitesettings-images/'. config('settings.image') )}}" alt='logo' >
                     </a>
                 </div>
@@ -81,18 +81,18 @@
                                 </b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="/dashboard"> My Dashboard</a></li>
-                                <li><a href="/profile"> Profile</a></li>
-                                <li><a href="/categories">Choose your interest</a></li>
-                                <li><a href="/saved/blog">Saved</a></li>
+                                <li><a href="{{url('dashboard')}}"> My Dashboard</a></li>
+                                <li><a href="{{url('profile')}}"> Profile</a></li>
+                                <li><a href="{{url('categories')}}">Choose your interest</a></li>
+                                <li><a href="{{url('saved/blog')}}">Saved</a></li>
                                   <hr/>
-                                <li><a href="/blog/add">New Article</a></li>
-                                <li><a href="/blog/list">My Articles</a></li>
+                                <li><a href="{{url('blog/add')}}">New Article</a></li>
+                                <li><a href="{{url('blog/list')}}">My Articles</a></li>
                                   <hr/>
-                                <li><a href="/settings">Settings</a></li>
+                                <li><a href="{{url('settings')}}">Settings</a></li>
                                 <!-- <li><a href="#">Help</a></li> -->
                                 <!-- <li><a href="#">Change Password</a></li> -->
-                                <li><a href="/logout/user">Log Out</a></li>
+                                <li><a href="{{url('logout/user')}}">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>

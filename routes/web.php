@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/','Frontend\HomeController@landingPage')->name('landing.page');
+Route::get('/','Frontend\HomeController@index')->name('landing.page');
 Route::post('/check','Frontend\FrontendController@index')->name('check.maintainence');
 Route::get('/logincheck', function () {
 	    return response()->json
@@ -75,11 +75,15 @@ Route::post('/user/change/bio', 'Frontend\UserController@changeBio');
 Route::post('/user/change/details', 'Frontend\UserController@changeDetails');
 Route::post('/user/change/password', 'Frontend\UserController@changePassword');
 
+Route::get('api/payment','Frontend\UserController@payment')->name('api');
+Route::get('/payment','Frontend\UserController@payment')->name('payment');
+Route::post('/request/payment','Frontend\UserController@requestForPayment')->name('payment.request');
 
 Route::get('/dashboard','Frontend\HomeController@dashboard')->name('dashboard');
 Route::get('/getblogoffollowing','Frontend\HomeController@getBlogOfFollowing')->name('getblogoffollowing');
 
 Route::get('/blog/list','Frontend\UserController@myBlogs')->name('my.blog');
+
 
 Route::get('/categories', 'Frontend\UserInterestController@categories')->name('categories');
 Route::get('/api/categories', 'Frontend\UserInterestController@categories')->name('api');
@@ -102,7 +106,7 @@ Route::get('/api/getfollowings/{user}','Frontend\UserController@getFollowings')-
 
 Route::get('/test/{code}', 'Frontend\UserInteractionController@testinglike')->name('test');
 Route::post('/blog/getTagName','Frontend\HomeController@getTagName')->name('getTagName');
-Route::post('/blog/detail/share','Frontend\HomeController@share')->name('share');
+Route::post('/blog/share','Frontend\HomeController@share')->name('share');
 
 // Route::get('/tests', 'Frontend\UserInteractionController@testinglike')->name('test');
 Route::get('/home','Frontend\HomeController@index')->name('home');
@@ -236,6 +240,7 @@ Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.logi
 	Route::match(['get','post'],'/edit/account/{id}','Admin\AccountController@edit')->name('account.edit');
 	Route::get('/view/account/{id}','Admin\AccountController@view')->name('account.view');
 	Route::get('/delete/account/{id}','Admin\AccountController@delete')->name('account.delete');
+	Route::get('/reset/point/','Admin\AccountController@resetPoint')->name('reset.point');
     Route::get('/resend-activation/account/{username}', 'Admin\AccountController@resendActivation')->name('admin.resend_activation');
 
 	//Route for user Account roles
@@ -300,6 +305,13 @@ Route::post('admin/login', 'Admin\AdminLoginController@login')->name('admin.logi
 	Route::match(['get','post'],'/edit/banner/{id}','Admin\BannerController@edit')->name('banner.edit');
 	Route::get('/delete/banner/{id}','Admin\BannerController@delete')->name('banner.delete');
 	Route::get('changestatus/banner', 'Admin\BannerController@changeStatus')->name('banner.changestatus');
+
+	// Route for payment 
+	Route::get('/list/transaction','Admin\TransactionController@list')->name('transaction.list');
+	Route::get('/list/payment-request','Admin\TransactionController@listPaymentRequest')->name('paymentrequest.list');
+	Route::match(['get','post'],'/update/payment-request','Admin\TransactionController@updateStatus')->name('paymentrequest.status');
+	Route::post('/complete/payment-request','Admin\TransactionController@completePaymentRequest')->name('paymentrequest.complete');
+	Route::post('/reject/payment-request','Admin\TransactionController@rejectPaymentRequest')->name('paymentrequest.reject');
 
 
 	// Route for payment gateway

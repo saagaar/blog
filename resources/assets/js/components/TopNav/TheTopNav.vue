@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-3 logo-wrapper">
-                    <a href="/home" class="website-logo">
+                    <a :href="config.ROOT_URL+'home'" class="website-logo">
                         <img :src="'/uploads/sitesettings-images/'+me.websiteLogo" alt="website-logo">
                     </a>
                 </div>
@@ -32,20 +32,20 @@
                             <small>Welcome !</small>
                             <figure><img :src="getProfileUrl()"></figure><b class="u_name"> {{ getFirstName() }}</b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/dashboard">My Dashboard</a></li>
+                                <li><a :href="config.ROOT_URL+'dashboard'">My Dashboard</a></li>
                             
-                                <li><a href="/profile/">Profile</a></li>
-                                <li><router-link to="/categories">Choose your interest</router-link></li>
-                                <li><router-link to="/saved/blog">Saved</router-link></li>
+                                <li><a :href="config.ROOT_URL+'profile/'">Profiles</a></li>
+                                <li><router-link :to="'/categories/'">Choose your interest</router-link></li>
+                                <li><router-link :to="'/saved/blog/'">Saved</router-link></li>
                                 <hr>
-                                <li><router-link to="/blog/add">New Articles</router-link></li>
+                                <li><router-link :to="'/blog/add/'">New Articles</router-link></li>
 
-                                <li><router-link to="/blog/list">My Articles</router-link></li>
+                                <li><router-link :to="'/blog/list/'">My Articles</router-link></li>
                                 <!-- <li><a href="#">Bookmarks</a></li> -->
                                 <!-- <li><a href="#">Publications</a></li> -->
                              
                                 <hr>
-                                <li><router-link to="/settings">Settings</router-link></li>
+                                <li><router-link :to="'/settings/'">Settings</router-link></li>
                                 <!-- <li><a href="#">Help</a></li> -->
                                 <!-- <li><a href="#">Change Password</a></li> -->
                                 <li><a v-bind:href="config.ROOT_URL+'logout/user'">Log Out</a></li>

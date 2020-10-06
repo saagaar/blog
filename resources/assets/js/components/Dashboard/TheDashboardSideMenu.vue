@@ -2,12 +2,12 @@
     <ul class="nav-news-feed">
               <li>
                   <i class="fa fa-newspaper"></i>
-                  <div><router-link to="/dashboard">Followers Posts</router-link></div>
+                  <div><router-link :to="'/dashboard'">Followers Posts</router-link></div>
               </li>
               <li>
                   <i class="fa fa-list-ol"></i>
                   <div>
-                   <router-link to="/blog/list">No of Post <span>{{me.blogCount}}</span></router-link>
+                   <router-link :to="'/blog/list'">No of Post <span>{{me.blogCount}}</span></router-link>
                  
                  </div>
               </li>
@@ -18,15 +18,21 @@
                   </div>
               </li> -->
               <li>
-                  <i class="fa fa-list-ul"></i>
+                  <i class="fa fa-user"></i>
                   <div>
-                     <router-link to="/profile">Profile</router-link>
+                     <router-link :to="'/profile'">Profile</router-link>
                   </div>
               </li>
               <li>
-                  <i class="fa fa-list-ul"></i>
+                  <i class="fa fa-user-check"></i>
                   <div>
-                     <router-link to="/categories">Customize Interests</router-link>
+                     <router-link :to="'/categories'">Customize Interests</router-link>
+                  </div>
+              </li>
+              <li>
+                  <i class="fa fa-credit-card"></i>
+                  <div>
+                     <router-link :to="'/payment'">Payment</router-link>
                   </div>
               </li>
              
@@ -37,7 +43,7 @@
               <li>
                   <i class="fa fa-cog" aria-hidden="true"></i>
                   <div>
-                     <router-link to="/settings">Settings</router-link>
+                     <router-link :to="'/settings'">Settings</router-link>
                   </div>
               </li>
             </ul>
@@ -53,9 +59,12 @@
             me:function(){
               return this.$store.getters.me
             },
+           config:function(){
+             return this.$store.getters.config;
+           }
             
            
         },
-       
+
         }
       </script>

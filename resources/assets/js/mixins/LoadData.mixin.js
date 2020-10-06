@@ -1,5 +1,6 @@
 import Form  from './../services/Form.js';
 
+
 let getData = function(to,store) {
     return new Promise((resolve, reject) => {
     let initialState = JSON.parse(window.__INITIAL_STATE__) || {};

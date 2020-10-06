@@ -209,7 +209,7 @@
                     </div>
                </div>
           </div>
-          <div class="box box-info">
+          <div id="point-setting" class="box box-info">
             <div class="box-header">
               <h3 class="box-title">Point Settings
                 <small></small>
@@ -251,6 +251,13 @@
                       <div class="alert alert-danger">{{ $errors->first('view_weightage') }}</div>
                       @endif
                  </div>  
+                 <div class="form-group col-md-4">
+                        <label for="duration">Sharing Amount</label>
+                        <input type="text" class="form-control" name="sharing_amount" id="sharing_amount" value="{{ $site->sharing_amount}}" placeholder="Enter Amount of Money to Share">
+                        @if ($errors->has('sharing_amount'))
+                      <div class="alert alert-danger">{{ $errors->first('sharing_amount') }}</div>
+                      @endif
+                 </div> 
 
                </div>
           </div>
